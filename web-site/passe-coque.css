@@ -268,8 +268,14 @@ div.tooltip:hover span {
     background: rgba(0, 255, 4, 0.25);
 } */
 
-.data-header-div {
+.data-header-div-1 {
     margin: 0 100px 0 100px;
+    padding: 40px 60px 40px 60px; 
+    text-align: center;
+}
+.data-header-div-2 {
+    margin: 0 100px 0 100px;
+    padding: 80px 60px 40px 60px;
     text-align: center;
 }
 .data-div {
@@ -1124,6 +1130,20 @@ span.expand-collapse:hover {
     .fleet-slides {
         grid-template-columns: 33% 33% 33%; 
     }
+    .txt-img-div {
+        display: grid; grid-template-columns: 100%;
+        margin: 60px 0 40px 0;
+    }    
+    .data-header-div-1 {
+        margin: 0 10px 0 10px;
+        padding: 40px 20px 10px 20px; 
+        text-align: center;
+    }
+    .data-header-div-2 {
+        margin: 0 10px 0 10px;
+        padding: 80px 10px 10px 10px;
+        text-align: center;
+    }    
 }
 
 /* @media screen and (max-width: calc(var(--small-screen-width))) { */
