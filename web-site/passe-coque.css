@@ -220,7 +220,7 @@ div.tooltip:hover span {
     border-radius: 5px;
     /* background-color: rgba(161, 156, 156, 0.65); */
     background: white;
-    height: 388px;
+    height: auto;  /*388px;*/
 }
 .boat-image-plus-text:hover {
     /* box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan; */
@@ -1007,12 +1007,10 @@ span.expand-collapse:hover {
     margin-top: -10px; 
     width: 100%;
 }
-
 .main-bottom {
     display: grid;
     grid-template-columns: 25% 50% 25%;
 }
-
 .scrolling-menu {
     display: block;
 }
@@ -1025,6 +1023,10 @@ span.expand-collapse:hover {
 	z-index: 2;
     background: rgba(255, 255, 255, 0.85);
     display: none;
+}
+.logo-image {
+    width: 280px;
+    height: auto;
 }
 
 /* On smaller screens, decrease text size */
@@ -1103,14 +1105,15 @@ span.expand-collapse:hover {
         --slide-height: 250px;  
     }
     .boat-image-plus-text {
-        height: 210px;
+        height: auto;
     }
     .boat-image-plus-text span {
         padding: 4px;
     }
     .badge {
-        bottom: 220px;
-        left: 86px;
+        /* bottom: 220px; */
+        /* left: 86px; */
+        display: none;
     }    
     .background-container {
         width: 86%;
@@ -1149,12 +1152,14 @@ span.expand-collapse:hover {
         padding: 80px 10px 10px 10px;
         text-align: center;
     }    
-
     .main-bottom {
         display: grid;
         grid-template-columns: 98%;
     }
-    
+    .logo-image {
+        width: 180px;
+        height: auto;
+    }    
 }
 
 /* @media screen and (max-width: calc(var(--small-screen-width))) { */
@@ -1169,13 +1174,16 @@ span.expand-collapse:hover {
     .sidenav {
         padding-top: 15px;
         font-size: 20px;
-      }  
-      .sidenav * {
+    }  
+    .sidenav * {
         font-size: 20px;
-      }
-      .pcc-dialog {
-          width: 400px; 
-      }
+    }
+    .pcc-dialog {
+        width: 400px; 
+    }
+    .project-slides {
+        grid-template-columns: 50% 50%; 
+    }    
 }
 
 /* @media screen and (height <= 450px) or (width <= 450px) {
