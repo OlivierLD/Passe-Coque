@@ -147,7 +147,6 @@ div.tooltip:hover span {
 .white-outlined {
     color: black;
     text-shadow: 1px 0 0 silver, 0 -1px 0 silver, 0 1px 0 silver, -1px 0 0 silver; /* Character outline */
-    /* color: black; */
     /* -webkit-text-fill-color: white; Will override color (regardless of order) */
     /* -webkit-text-stroke: 0.5px black; */
 
