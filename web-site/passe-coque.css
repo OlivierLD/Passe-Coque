@@ -1015,7 +1015,7 @@ span.expand-collapse:hover {
     display: block;
 }
 .hamburger-menu {
-    width: 90%; /*100%;*/
+    width: 100%;
 	top: 0; 
     margin-left: -8px;
     height: 66px;
@@ -1184,6 +1184,11 @@ span.expand-collapse:hover {
     .project-slides {
         grid-template-columns: 50% 50%; 
     }    
+    .hamburger-menu {
+        display: block;
+        width: 90%;
+    }
+
 }
 
 /* @media screen and (height <= 450px) or (width <= 450px) {
