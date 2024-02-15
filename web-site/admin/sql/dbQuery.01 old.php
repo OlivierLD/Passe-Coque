@@ -1,7 +1,8 @@
 <html lang="en">
   <!--
-   ! A Form to insert into the NL_SUBSCRIBERS table
+   ! A Form to insert into the nl-subscribers table
    ! Good doc at https://www.w3schools.com/php/php_mysql_insert.asp
+   ! @Deprecated, use NL_SUBSCRIBERS instead.
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -20,7 +21,7 @@
     </style>
   </head>
   <body>
-    <h1>Create News Letter Subscriber</h1>
+    <h1>Create News Letter subscriber</h1>
     <?php
 // phpinfo();
 
@@ -54,7 +55,7 @@ if (isset($_POST['operation'])) {
         }
       }
     
-      $sql = 'INSERT INTO NL_SUBSCRIBERS(NAME, EMAIL, SUBSCRIPTION_DATE) VALUES (\'' . $name . '\', \'' . $email . '\', CURRENT_TIMESTAMP());'; 
+      $sql = 'INSERT INTO `nl-subscribers`(`name`, `email`) VALUES (\'' . $name . '\', \'' . $email . '\');'; 
       
       if ($VERBOSE) {
         echo('Performing instruction <code>'.$sql.'</code><br/>');

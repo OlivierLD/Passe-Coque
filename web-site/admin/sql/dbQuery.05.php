@@ -1,6 +1,6 @@
 <html lang="en">
   <!--
-   ! A Form to query the nl-subscribers table, to get the HelloAsso card
+   ! A Form to query the PC_MEMBERS table, to get the HelloAsso card
    +-->
   <head>
     <!--meta charset="UTF-8">

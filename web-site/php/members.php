@@ -83,7 +83,7 @@ if (isset($_POST['operation'])) {
         // echo("Connected.<br/>");
       }
     
-      $sql = "SELECT PASSWORD FROM PC_USERS WHERE USERNAME = '$form_username';"; 
+      $sql = "SELECT PASSWORD, DISPLAY_NAME, ADMIN_PRIVILEGES FROM PC_USERS WHERE USERNAME = '$form_username';"; 
       
       // echo('Performing query <code>'.$sql.'</code><br/>');
     
@@ -120,11 +120,15 @@ if (isset($_POST['operation'])) {
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
           // echo "table contains ". count($table) . " entry(ies).<br/>";
           $db_password = $table[0];
+          $display_name = $table[1];
+          $admin_privileges = $table[2];
         }
         if ($db_password == sha1($form_password)) { // Valid.
 
           $_SESSION['USER_NAME'] = $form_username;
           // $_SERVER['PHP_AUTH_PW'] = $form_password;
+          $_SESSION['DISPLAY_NAME'] = $display_name;
+          $_SESSION['ADMIN'] = $admin_privileges;
           // Welcome !
           // If arrives here, is a valid user.
           // $mess = ($current_lang == "FR") ? "Bienvenue" : "Welcome";
@@ -133,7 +137,7 @@ if (isset($_POST['operation'])) {
           } else {
             echo "<p>Congratulation, you are now into the system.</p>" . PHP_EOL;
           }
-          echo "<p>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['USER_NAME'] . ".</p>" . PHP_EOL;
+          echo "<p>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . ".</p>" . PHP_EOL;
           ?>
           <a href="members.02.php"><?php echo ($current_lang == "FR") ? "On continue..." : "Further..." ?></a>
           <hr/>

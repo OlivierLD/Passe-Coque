@@ -1,6 +1,7 @@
 <html lang="en">
   <!--
-   ! A Form to query the NL_SUBSCRIBERS table
+   ! A Form to query the nl-subscribers table
+   ! @Deprecated, use NL_SUBSCRIBERS instead.
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -47,7 +48,12 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      $sql = 'SELECT ID, NAME, EMAIL, SUBSCRIPTION_DATE, ACTIVE FROM NL_SUBSCRIBERS WHERE EMAIL LIKE \'%' . $email . '%\'' . ';'; 
+      // $sql = 'SELECT COUNT(`nl-subscribers`.*) '
+      //         . ' FROM `nl-subscribers`'
+      //         . ' ORDER BY `nl-subscribers`.`name` ASC LIMIT 0, 30 '; 
+    
+      // $sql = 'SELECT COUNT(*) FROM `nl-subscribers`;'; 
+      $sql = 'SELECT `name`, `email` FROM `nl-subscribers` WHERE `email` LIKE \'%' . $email . '%\'' . ';'; 
       
       echo('Performing query <code>'.$sql.'</code><br/>');
     
@@ -57,15 +63,10 @@ if (isset($_POST['operation'])) {
     
       echo("<h2>News Letter Subscribers</h2>");
       echo "<table>";
-      echo("<tr><th></th><th>ID</th><th>NAME</th><th>EMAIL</th><th>SINCE</th><th>ACTIVE</th></tr>" . PHP_EOL); 
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         // echo "table contains ". count($table) . " entry(ies).<br/>";
-        $active = ($table[4]/* === true*/) ? "Yes" : "No";
-        $nl_id = $table[0];
-        echo ("<tr>");
-          echo ("<td><a href='./dbQuery.02.02.php?nl-id=$nl_id'>Edit</a></td>"); //  target='updateNLS'
-          echo ("<td>" . $nl_id . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td><td>" . $table[3] . "</td><td align='center'>" . $active . "</td>");
-        echo ("</tr>" . PHP_EOL); 
+        // echo("id:" . $table[0] . ", name:" . $table[1] . ", email:" . $table[2] . "<br/>");    // print the table that was returned on that row.
+        echo("<tr><td>" . $table[0] . "</td><td>" . $table[1] . "</td></tr>"); 
       }
       echo "</table>";
       

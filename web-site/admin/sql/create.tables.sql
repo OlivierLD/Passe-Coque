@@ -7,7 +7,7 @@
 -- For MySQL Data Types, see https://www.w3schools.com/mysql/mysql_datatypes.asp
 --
 
-CREATE TABLE contacts(
+CREATE TABLE contacts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(320) NOT NULL
@@ -132,11 +132,31 @@ CREATE TABLE IF NOT EXISTS PC_TRACKER (
 
 SELECT COUNT(CLIENT_IP) AS NB_HIT, MIN(EVENT_DATE) AS SINCE, PLATFORM, BROWSER_LANGUAGE from PC_TRACKER GROUP BY CLIENT_IP ORDER BY 1 DESC;
 
+-- 
+-- For username and password, provate spaces, etc
+--
 CREATE TABLE IF NOT EXISTS PC_USERS (
     USERNAME VARCHAR(64) PRIMARY KEY,
+    DISPLAY_NAME VARCHAR(64),
     PASSWORD VARCHAR(64),
+    ADMIN_PRIVILEGES BOOLEAN DEFAULT FALSE,
     SOME_CONTENT VARCHAR(512) COMMENT 'Whatever you want goes here'
 );
 
 INSERT INTO PC_USERS (USERNAME, PASSWORD, SOME_CONTENT) VALUES ('olivier@lediouris.net', sha1('c2h5oh'), 'Akeu Coucou!');
 INSERT INTO PC_USERS (USERNAME, PASSWORD, SOME_CONTENT) VALUES ('admin@passe-coque.com ', sha1('manager'), 'For tests');
+
+CREATE TABLE IF NOT EXISTS NL_SUBSCRIBERS (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    NAME varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'First and Last Name of the Subscriber',
+    EMAIL varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Email of the Subscriber',
+    SUBSCRIPTION_DATE TIMESTAMP,
+    ACTIVE  boolean default TRUE,
+    CONSTRAINT UK_email UNIQUE (EMAIL)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT = 'News Letter Subscribers';
+
+-- Migration
+BEGIN;
+INSERT INTO NL_SUBSCRIBERS (NAME, EMAIL, SUBSCRIPTION_DATE, ACTIVE) 
+SELECT `name`, `email`, CURRENT_TIMESTAMP(), `active` FROM `nl-subscribers`;
+COMMIT;

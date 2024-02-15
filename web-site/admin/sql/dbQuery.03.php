@@ -1,6 +1,7 @@
 <html lang="en">
   <!--
-   ! A Form to query the nl-subscribers table
+   ! A Form to query the pc-members table
+   ! @Deprecated, use PC_MEMBERS instead.
    +-->
   <head>
     <!--meta charset="UTF-8">

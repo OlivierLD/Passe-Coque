@@ -44,11 +44,14 @@ if (isset($_GET['lang'])) {
     }
 }
 $userName = $_SESSION['USER_NAME'];
+$displayName = $_SESSION['DISPLAY_NAME'];
+$adminPrivileges = $_SESSION['ADMIN'];
 
 if ($current_lang == "FR") {
-  echo "<h2>Bienvenue [$userName] dans votre espace priv&eacute;.</h2><br/>" . PHP_EOL;
+  echo "<h2>Bienvenue [$displayName] dans votre espace priv&eacute;.</h2><br/>" . PHP_EOL;
+  // echo "Admin: [$adminPrivileges] .<br/>" . PHP_EOL;
 } else {
-  echo "<h2>Welcome [$userName] to your private space.</h2><br/>" . PHP_EOL;
+  echo "<h2>Welcome [$displayName] to your private space.</h2><br/>" . PHP_EOL;
 }
 // echo "Info: We'll speak $current_lang .<br/>" . PHP_EOL;
 
@@ -65,6 +68,16 @@ if ($current_lang == "FR") {
       <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
     </ul>
     <?php
+    if ($adminPrivileges) {
+      ?>
+      En tant qu'adminstrateur, vous pouvez aussi :
+      <ul>
+        <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
+      </ul>  
+      <?php
+    }
+    ?>
+    <?php
 } else {
   echo "<div style='font-size: 3em; line-height: 1em;'>This page is being developped. Available soon...</div>" . PHP_EOL;
     ?>
@@ -74,6 +87,16 @@ if ($current_lang == "FR") {
       <li><a href="#" onclick="alert('Later');">Book a boat</a></li>
       <li><a href="#" onclick="alert('Later');">. . . </a></li>
     </ul>
+    <?php
+    if ($adminPrivileges) {
+      ?>
+      As an administrator, you can also:
+      <ul>
+        <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
+      </ul>  
+      <?php
+    }
+    ?>
     <?php
 }
     ?>
