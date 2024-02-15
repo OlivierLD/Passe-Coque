@@ -314,7 +314,7 @@ div.tooltip:hover span {
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
     background:  url("./images/the.shipyard.jpg"); /*  url("./images/coraxy.jpg"); */
 
-    background-size: 130%; /* auto; */ /* cover; */
+    background-size: 100%; /* 130%;*/ /* auto; */ /* cover; */
     background-repeat: no-repeat;
     background-attachment: fixed; /* <= This one */
     background-position: 0 200px;  /* 300px; */
