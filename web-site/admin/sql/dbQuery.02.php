@@ -65,6 +65,9 @@ if (isset($_POST['operation'])) {
         echo ("<tr>");
           echo ("<td><a href='./dbQuery.02.02.php?nl-id=$nl_id'>Edit</a></td>"); //  target='updateNLS'
           echo ("<td>" . $nl_id . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td><td>" . $table[3] . "</td><td align='center'>" . $active . "</td>");
+          if ($table[4]) {
+            echo ("<td><a href='../../php/unsubscribe.php?subscriber-id=$nl_id' target='unsub'>Unsubscribe</a></td>");
+          }
         echo ("</tr>" . PHP_EOL); 
       }
       echo "</table>";
