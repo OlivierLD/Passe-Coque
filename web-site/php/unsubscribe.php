@@ -1,6 +1,7 @@
 <html lang="en">
   <!--
    ! News-Letter unsubscribe
+   ! Call it like https://passe-coque.com/php/unsubscribe.php?subscriber-id=194
    +-->
   <head>
     <!--meta charset="UTF-8">
