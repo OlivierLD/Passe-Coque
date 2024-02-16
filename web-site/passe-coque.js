@@ -1469,6 +1469,7 @@ let onSubscriptionResponse = (iframe) => {
     let message = '';
     try {
         message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        // console.log(`Response message: ${message}`);
         if (message.startsWith("OK")) {
             message = "Votre Souscription a bien &eacute;t&eacute; enregistr&eacute;e.";
             if (currentLang == 'EN') {
