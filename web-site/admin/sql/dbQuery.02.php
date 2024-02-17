@@ -86,7 +86,7 @@ if (isset($_POST['operation'])) {
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>
-          <td valign="top">Email (part of):</td><td><input type="text" name="email" size="40"></td>
+          <td valign="top">Email (part of):</td><td><input type="email" name="email" size="40"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>

@@ -86,7 +86,7 @@ if (isset($_POST['operation'])) {
           <td valign="top">Name:</td><td><input type="text" name="name" size="40"></td>
         </tr>
         <tr>
-          <td valign="top">Email:</td><td><input type="text" name="email" size="40"></td>
+          <td valign="top">Email:</td><td><input type="email" name="email" size="40"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Create"></td>

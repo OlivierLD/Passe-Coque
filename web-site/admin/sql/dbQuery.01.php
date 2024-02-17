@@ -104,7 +104,7 @@ if (isset($_POST['operation'])) {
           <td valign="top"><?php echo ($lang == "FR") ? "Nom :" : "Name:" ?></td><td><input type="text" name="name" size="40"></td>
         </tr>
         <tr>
-          <td valign="top"><?php echo ($lang == "FR") ? "Email :" : "Email:" ?></td><td><input type="text" name="email" size="40"></td>
+          <td valign="top"><?php echo ($lang == "FR") ? "Email :" : "Email:" ?></td><td><input type="email" name="email" size="40"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="<?php echo ($lang == "FR") ? "Souscrire" : "Create" ?>"></td>

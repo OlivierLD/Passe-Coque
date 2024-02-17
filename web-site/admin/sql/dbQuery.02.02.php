@@ -118,7 +118,7 @@ if (!isset($_GET['nl-id'])) {
           <td valign="top">Name:</td><td><input type="text" name="name" size="40" value="<?php echo $name ?>"></td>
         </tr>
         <tr>
-          <td valign="top">Email:</td><td><input type="text" name="email" size="40" value="<?php echo $email ?>"></td>
+          <td valign="top">Email:</td><td><input type="email" name="email" size="40" value="<?php echo $email ?>"></td>
         </tr>
         <tr>
           <td valign="top">Active:</td><td><input type="checkbox" name="active" value="1" <?php echo $active ? 'checked' : '' ?>></td>

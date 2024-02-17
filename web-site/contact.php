@@ -76,7 +76,7 @@ echo($_POST['commentArea']);
       <table width="98%" border="0">
         <tr>
           <td valign="top" align="right">Your email address:</td>
-          <td><input type="text" name="email" size="40"></td>
+          <td><input type="email" name="email" size="40"></td>
         </tr>
         <tr>  
           <td colspan="2" valign="top" width="100%" align="center">
