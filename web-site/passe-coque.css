@@ -1183,7 +1183,7 @@ span.expand-collapse:hover {
         font-size: 20px;
     }
     .pcc-dialog {
-        width: 400px; 
+        width: 300px; 
     }
     .project-slides {
         grid-template-columns: 50% 50%; 
@@ -1192,7 +1192,6 @@ span.expand-collapse:hover {
         display: block;
         width: 90%;
     }
-
 }
 
 /* @media screen and (height <= 450px) or (width <= 450px) {
