@@ -78,7 +78,6 @@ if (isset($_POST['operation'])) {
     } catch (Throwable $e) {
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
-    
   }
 } else { // Then display the form
     ?>
