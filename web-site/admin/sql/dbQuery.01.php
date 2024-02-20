@@ -91,7 +91,7 @@ if (isset($_POST['operation'])) {
   }
 } else { // Then display the form
   if ($lang == "FR") {
-    echo "<h1>Creation d'une souscription a la news-letter.</h1>" . PHP_EOL;
+    echo "<h1>Cr&eacute;ation d'une souscription &agrave; la news-letter.</h1>" . PHP_EOL;
   } else {
     echo "<h1>News Letter Subscriber creation</h1>" . PHP_EOL;
   }

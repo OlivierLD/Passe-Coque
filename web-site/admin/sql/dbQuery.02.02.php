@@ -74,6 +74,39 @@ if (!isset($_GET['nl-id'])) {
     } catch (Throwable $e) {
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
+  } else if ($operation == 'delete') {
+    try {
+      $id =  $_POST['nl-id'];
+      // echo("Will connect on ".$database." ...<br/>");
+      $link = new mysqli($dbhost, $username, $password, $database);
+    
+      if ($link->connect_errno) {
+        echo("Oops, errno:".$link->connect_errno."...<br/>");
+        die("Connection failed: " . $conn->connect_error);
+      } else {
+        // echo("Connected.<br/>");
+      }
+
+      if (true) { // Do the delete
+        $sql = "DELETE FROM NL_SUBSCRIBERS WHERE ID = $id;"; 
+        // echo('Performing update <code>'.$sql.'</code><br/>');
+        if (true) { // Do perform
+          if ($link->query($sql) === TRUE) {
+            echo "OK. Record deleted successfully<br/>" . PHP_EOL;
+          } else {
+            echo "ERROR: " . $sql . "<br/>" . $link->error . "<br/>";
+          }
+        }
+        ?>
+        <a href="dbQuery.02.php">Back to Query</a>
+        <?php
+      }
+      // On ferme !
+      $link->close();
+      // echo("Closed DB<br/>".PHP_EOL);
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }    
   } else {
     echo "Unknown situation...<br/>" . PHP_EOL;
   }
@@ -110,6 +143,7 @@ if (!isset($_GET['nl-id'])) {
     }      
     // Display form here
     ?>
+    <!-- Update form -->
     <form action="dbQuery.02.02.php" method="post">
       <input type="hidden" name="operation" value="update">
       <input type="hidden" name="nl-id" value="<?php echo $nl_id ?>">
@@ -127,6 +161,12 @@ if (!isset($_GET['nl-id'])) {
           <td colspan="2" style="text-align: center;"><input type="submit" value="Update"></td>
         </tr>
       </table>
+    </form>
+    <!-- Delete form -->
+    <form action="dbQuery.02.02.php" method="post">
+      <input type="hidden" name="operation" value="delete">
+      <input type="hidden" name="nl-id" value="<?php echo $nl_id ?>">
+      <input type="submit" value="Delete">
     </form>
     <a href="dbQuery.02.php">Back to Query</a>
     <?php
