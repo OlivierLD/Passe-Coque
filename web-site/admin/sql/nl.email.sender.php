@@ -64,7 +64,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	  
 		$sql = 'SELECT ID, NAME, EMAIL, SUBSCRIPTION_DATE, ACTIVE ' . 
 		       'FROM NL_SUBSCRIBERS ' . 
-			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here...
+			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here, and below...
 			   '      AND (NAME LIKE \'%Le Diouris%\' ' .
 			   '        OR NAME LIKE \'%Guy%Gab%\' ' . 
 			   '        OR NAME LIKE \'%Allais%\' ' . 

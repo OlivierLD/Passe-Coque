@@ -73,6 +73,7 @@ if ($current_lang == "FR") {
       En tant qu'adminstrateur, vous pouvez aussi :
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
+        <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
       </ul>  
       <?php
     }
