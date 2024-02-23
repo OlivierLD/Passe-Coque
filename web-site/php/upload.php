@@ -1,6 +1,7 @@
 <?php
 // Raw result of the upload operation
 // The name "fileToUpload" comes from the submitted form.
+// From https://www.w3schools.com/php/php_file_upload.asp
 $array = $_FILES["fileToUpload"];
 // echo "Received: [" . $_FILES["fileToUpload"] . "]<br/>" . PHP_EOL;
 echo 'Received:<br/>' . PHP_EOL;
