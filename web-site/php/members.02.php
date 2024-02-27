@@ -4,7 +4,7 @@
    ! Crendentials stored in DB.
    ! Member space, once identified.
    !
-   ! TODO:
+   ! Also:
    ! - Admin privileges
    +-->
   <head>
@@ -70,7 +70,7 @@ if ($current_lang == "FR") {
     <?php
     if ($adminPrivileges) {
       ?>
-      En tant qu'adminstrateur, vous pouvez aussi :
+      En tant qu'adminstrateur, vous pouvez aussi utiliser :
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
@@ -82,7 +82,7 @@ if ($current_lang == "FR") {
 } else {
   echo "<div style='font-size: 3em; line-height: 1em;'>This page is being developped. Available soon...</div>" . PHP_EOL;
     ?>
-    Youy want to:
+    You want to:
     <ul>
       <li><a href="#" onclick="alert('Later');">Manage your subscriptions</a></li>
       <li><a href="#" onclick="alert('Later');">Book a boat</a></li>
@@ -91,9 +91,10 @@ if ($current_lang == "FR") {
     <?php
     if ($adminPrivileges) {
       ?>
-      As an administrator, you can also:
+      As an administrator, you can also use:
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
+        <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
       </ul>  
       <?php
     }
