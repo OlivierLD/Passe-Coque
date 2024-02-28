@@ -1176,6 +1176,17 @@ span.expand-collapse:hover {
     .actu-container {
         margin: 5px;
     }
+    .tab button {
+        /* background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer; */
+        padding: 10px 12px;
+        /* transition: 0.3s; */
+        font-size: 12px;
+    }
+    
 }
 
 /* @media screen and (max-width: calc(var(--small-screen-width))) { */

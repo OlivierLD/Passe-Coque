@@ -678,6 +678,15 @@ let aboutPartner = (from) => {
     }
 };
 
+let onMouseOverImage = (origin) => {
+    console.log(`onMouseOverImage : ${origin}`);
+};
+
+let onImageClick = (origin) => {
+    console.log(`onImageClick : ${JSON.stringify(origin)}`);
+    window.open(origin.src);
+};
+
 const NONE = 1;
 const CLUB = 2;
 const EX_BOAT = 3;
