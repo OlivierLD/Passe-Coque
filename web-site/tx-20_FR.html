@@ -1,12 +1,28 @@
 <div style="max-height: 600px; overflow-y: scroll;">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <!--img src="./images/mad_scientist.png" width="100%"-->
-        <iframe src="https://akirodic.com/p/jellyfish/" style="width: 300px; height: 400px;"></iframe>
-        <div style="padding: 14px;">
+
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'low-tech-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'low-tech-02');">Ressources</button>
+        <button class="tablinks" onclick="openTab(event, 'low-tech-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="low-tech-01" class="tab-section" style="display: block;">
+
             <div style="vertical-align: middle;"><img src="./images/construction.cone.png" height="26"> <b>Projets Low Tech&nbsp;!</b> <img src="./images/construction.cone.png" height="30"></div>
-            Cette section est en d&eacute;veloppement...<br/> 
-            &Agrave; terme nous aurons ici un catalogue de formations 
-            et des liens vers des r&eacute;f&eacute;rentiels Github, pour le code impliqu&eacute; dans les projets (Arduino, Raspberry Pi, 3D printing, etc).
+            <div class="txt-img-div-2">
+                <iframe src="https://akirodic.com/p/jellyfish/" style="width: 80%; height: 100%;"></iframe>
+                <div style="padding: 14px;">
+                    
+                    Cette section est en d&eacute;veloppement...<br/> 
+                    &Agrave; terme nous aurons ici un catalogue de formations 
+                    et des liens vers des r&eacute;f&eacute;rentiels Github, pour le code impliqu&eacute; dans les projets (Arduino, Raspberry Pi, 3D printing, etc).
+                </div>
+            </div>
+        </div>
+
+        <div id="low-tech-02" class="tab-section" style="display: none;">
+            <h2>Ressources</h2>
             <ul>
                 <li><a href="https://olivierld.github.io/web.stuff/nse/index.html" target="NSE">Naviguer sans &eacute;lectricit&eacute;</a></li>
                 <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a> (en anglais)</li>
@@ -17,17 +33,19 @@
                         <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README.md" target="BG">In English</a></li>
                     </ul-->
                 </li>
-                <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/index.html#3d-stuff" target="GH">Pour une imprimante 3D</a>...</li>
-                <li>Et plus bient&ocirc;t&nbsp;!</li>
+                <li>Fabriquer son accastillage avec <a href="https://olivierld.github.io/web.stuff/boat.stuff/index.html#3d-stuff" target="GH">une imprimante 3D</a>...</li>
+                <li>Projet <a href="https://github.com/OlivierLD/raspberry-coffee/blob/master/Project-Trunk/SunFlower-v2/README.md">Sun Flower</a> (en anglais)</li>
+                <li>Un <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/RESTNavServer/README.md">serveur de navigation</a> sur un Raspberry Pi (en anglais)</li>
+                <li>. . . Et plus bient&ocirc;t&nbsp;!</li>
             </ul>
+        </div>
+
+        <div id="low-tech-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            Plus ici, bient&ocirc;t...
+            <br/><br/>
+            Contact : <a href="mailto:olivier@lediouris.net">olivier@lediouris.net</a>
         </div>
     </div>
 
-    <div>
-        <h2>Plus d'infos...</h2>
-        Plus ici, bient&ocirc;t...
-        <!--
-        T&eacute;l : . . .<br/>
-        Email : . . . -->
-    </div>
 </div>
