@@ -286,7 +286,13 @@ div.tooltip:hover span {
     margin: 40px 100px 40px 100px;
 }
 .txt-img-div {
-    display: grid; grid-template-columns: 50% 50%;
+    display: grid; 
+    grid-template-columns: 50% 50%;
+    margin: 60px 0 40px 0;
+}
+.txt-img-div-2 {
+    display: grid; 
+    grid-template-columns: 50% 50%;
     margin: 60px 0 40px 0;
 }
 .txt-div {
@@ -959,7 +965,7 @@ span.expand-collapse:hover {
 }
 
 .tab {
-    overflow: hidden;
+    overflow: scroll;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: rgba(241, 241, 241, 0.5);
@@ -1099,7 +1105,7 @@ span.expand-collapse:hover {
         margin-right: 20px;
     }    
     .pcc-dialog {
-        width: 400px; 
+        width: 75%; 
         margin-top: 40px; 
         z-index: 3; 
         position: absolute; 
@@ -1152,8 +1158,14 @@ span.expand-collapse:hover {
         grid-template-columns: 33% 33% 33%; 
     }
     .txt-img-div {
-        display: grid; grid-template-columns: 100%;
+        display: grid; 
+        grid-template-columns: 100%;
         margin: 60px 0 40px 0;
+    }    
+    .txt-img-div-2 {
+        display: grid; 
+        grid-template-columns: 100%;
+        margin: 30px 0 20px 0;
     }    
     .data-header-div-1 {
         margin: 0 10px 0 10px;
@@ -1182,7 +1194,7 @@ span.expand-collapse:hover {
         border: none;
         outline: none;
         cursor: pointer; */
-        padding: 10px 12px;
+        padding: 8px 8px;
         /* transition: 0.3s; */
         font-size: 12px;
     }
@@ -1206,7 +1218,7 @@ span.expand-collapse:hover {
         font-size: 20px;
     }
     .pcc-dialog {
-        width: 300px; 
+        width: 75%; 
     }
     .project-slides {
         grid-template-columns: 50% 50%; 

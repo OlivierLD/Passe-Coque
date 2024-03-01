@@ -53,7 +53,10 @@ if (isset($_POST['operation'])) {
               \' \',
               PCM.MEMBER_LAST_NAME
           ) AS NAME,
-          PCM.CARD_URL 
+          PCM.CARD_URL,
+          PCM.CITY,
+          PCM.SAILING_EXPERIENCE,
+          PCM.BOAT_BUILDING_EXP
       FROM 
           PC_MEMBERS PCM
       WHERE 
@@ -69,8 +72,14 @@ if (isset($_POST['operation'])) {
     
       echo("<h2>Members, and their card</h2>");
       echo "<table>";
+      echo "<tr><th>Name</th><th>Card</th><th>City</th><th>Sailing Exp.</th><th>Boat Building Exp.</th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-        echo("<tr><td>" . urldecode($table[0]) . "</td><td> <a href='" . $table[1] . "' target='HA'>HelloAsso Card</a> </td></tr>\n"); 
+        echo(
+          "<tr><td>" . 
+            urldecode($table[0]) . "</td><td> <a href='" . $table[1] . "' target='HA'>HelloAsso Card</a> " . 
+            "<td>" . urldecode($table[2]) . "</td><td>" . urldecode($table[3]) . "</td><td>" . urldecode($table[4]) . 
+          "</td></tr>\n"
+        ); 
       }
       echo "</table>";
       
