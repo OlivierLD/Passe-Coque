@@ -17,14 +17,16 @@
 	<link rel="stylesheet" href="../passe-coque.menu.css">
 	<link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
 	<style type="text/css">
-		* {
+		.ts {
 			text-shadow: 4px 4px 4px black, 0 0 25px white, 0 0 7px cyan;
 		}
     </style>
+	<script type="text/javascript" src="../passe-coque.js"></script>
+
 </head>
 	
 <body style="background: silver;">
-	<div style="z-index: -10; display: grid; grid-template-columns: 33% 33% 33%;">
+	<div style="position: fixed; top: 0; z-index: -10; display: grid; grid-template-columns: 33% 33% 33%;">
 		<img src="../images/boats/anao.jpeg" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/atlantide.sq.png" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/avel.mad.jpeg" style="width: 100%; height: auto; opacity: 0.5;">
@@ -32,16 +34,110 @@
 		<img src="../images/boats/birvidic.jpg" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/coraxy.png" style="width: 100%; height: auto; opacity: 0.5;">
 	</div>
-	<div style="position: fixed; top: 0;">
-		<h1>Passe-Coque Boat-Club</h1>
+	<div> <!-- style="position: fixed; top: 0;"> -->
 
-		<div style="font-size: 4em;">
-			En d&eacute;veloppement !
+		<!-- Content goes here -->
+		<div style="width: 100%;">
+			<h1 class="ts">Passe-Coque Boat-Club</h1>
+
+			<div class="ts" style="font-size: 4em;">
+				En d&eacute;veloppement !
+			</div>
+			<div style="/*min-height: 400px; overflow-x: scroll;*/">
+				<div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+					<button class="tablinks tab-active" onclick="openTab(event, 'boat-club-01');" title="La Charte">La Charte</button>
+					<button class="tablinks" onclick="openTab(event, 'boat-club-02');" title="Section 1">Section 1</button>
+					<button class="tablinks" onclick="openTab(event, 'boat-club-03');" title="Section 2">Section 2</button>
+				</div>
+			
+				<div style="height: 500px; overflow: scroll;">
+					<div id="boat-club-01" class="tab-section" style="display: block;">
+						<div style="text-align: left; padding: 20px; background: rgba(255, 255, 255, 0.8); overflow: scroll;">
+							<h1>La charte du Passe&#8209;Coque Club</h1>
+							<div style="display: grid; grid-template-columns: auto; width: 100%;">
+								<div style="text-align: center; border: 5px dotted navy; border-radius: 5px; padding: 10px; width: 50%; margin: auto;">
+									La charte est en cours d'&eacute;laboration avec les r&eacute;f&eacute;rents de chaque bateau mis &agrave; disposition du Club, 
+									leur liste n'&eacute;tant pas encore d&eacute;finitive....
+								</div>
+							</div>
+
+							<h2>L'adh&eacute;rent participe &agrave; la vie du boat club associatif social et solidaire&nbsp;:</h2>
+							<p>
+								Le tarif d'adh&eacute;sion au boat-club&nbsp;: 
+								<ul>
+									<li>s'adapte aux ressources de l'adh&eacute;rent (sur pr&eacute;sentation volontaire de la feuille d'imp&ocirc;t),</li>
+									<li>pourra &ecirc;tre adapt&eacute; en fonction du temps consacr&eacute; par l'adh&eacute;rent &agrave; la vie de l'association et du boat-club (minimum 2 jours de chantiers participatifs dans l'ann&eacute;e).</li>
+								</ul>
+							</p>
+							<p>
+								L'adh&eacute;rent b&eacute;n&eacute;ficie de l'assurance de l'association lors de l'usage d'un bateau du club. 
+							</p>          
+							<p>
+								L'adh&eacute;rent s'engage &agrave;&nbsp;: 
+								<ul>
+									<li>respecter le mat&eacute;riel, rendre le bateau dans le m&ecirc;me &eacute;tat technique qu'&agrave; sa prise en main, propre et rang&eacute;.</li>
+									<li>apporter son avitaillement, son linge, ses consommables, ses produits d'entretien</li>
+									<li>remettre &agrave; niveau les consommables (eau & carburant) apr&egrave;s la navigation,</li> 
+									<li>respecter le r&eacute;f&eacute;rent qui investit son temps toute l'ann&eacute;e pour permettre des navigations dans les meilleures conditions.</li>
+									<li>participer aux activit&eacute;s collectives, &agrave; faire b&eacute;n&eacute;ficier le club de ses connaissances, partager du temps avec des 
+										membres du club pour apprendre ou faire apprendre, contribuer &agrave; la convivialit&eacute;, cr&eacute;er du lien, et ainsi rendre la navigation accessible &agrave; tous.</li>
+								</ul>
+							</p>        
+							 
+							<h2>En bon marin, l'adh&eacute;rent respecte les imp&eacute;ratifs de s&eacute;curit&eacute; :</h2>
+							<p>
+								L'adh&eacute;rent s'engage &agrave;&nbsp;: 
+								<ul>
+									<li>communiquer son exp&eacute;rience en toute transparence au r&eacute;f&eacute;rent lors de la r&eacute;servation,</li>
+									<li>&eacute;tablir le programme de navigation en fonction des conditions de mer, de l'&eacute;quipage et des capacit&eacute;s du voilier arm&eacute;. 
+										Il est le seul ma&icirc;tre &agrave; bord et chef de bord m&ecirc;me en pr&eacute;sence du r&eacute;f&eacute;rent (les exceptions seront pr&eacute;cis&eacute;es au cas par cas sur la r&eacute;servation),</li>
+									<li>respecter et faire respecter les r&egrave;gles de s&eacute;curit&eacute; &agrave; bord pour la s&eacute;curit&eacute; des membres de l'&eacute;quipage, des usagers de la mer et du mat&eacute;riel. 
+										Le port du gilet de sauvetage est obligatoire.</li>
+								</ul>
+							</p>         
+							
+							<h2>L'adh&eacute;rent respecte les principes d'Eco&#8209;navigation&nbsp;:</h2>
+							<p>
+								L'adh&eacute;rent s'engage &agrave;&nbsp;: 
+								<ul>
+									<li>prendre soin des bateaux lors de leur usage, contribuant ainsi &agrave; allonger leur dur&eacute;e de vie,</li>
+									<li>utiliser les WC marins loin des lieux de baignade,</li>
+									<li>utiliser les &eacute;quipements portuaires (douches, lavabos, &eacute;viers, WC),</li>
+									<li>utiliser des produits &eacute;cologiques en petite quantit&eacute; et d'origine v&eacute;g&eacute;tale pour la vie &agrave; bord,</li>
+									<li>limiter les emballages et d&eacute;chets autant que possible, trier les d&eacute;chets, ne jeter aucun d&eacute;chet par-dessus bord,</li>
+									<li>&eacute;conomiser l'utilisation de l'eau &agrave; bord, y compris en ne rinçant pas la coque &agrave; l'eau douce,</li>
+									<li>privil&eacute;gier l'utilisation de la godille au moteur pour les petites unit&eacute;s de navigation, dans le cas de man&oelig;uvres de port et au mouillage,</li>
+									<li>choisir un fond sablonneux pour mouiller l'ancre du bateau afin de prot&eacute;ger les zost&egrave;res.</li>
+									<li>observer les animaux sans les nourrir ni les d&eacute;ranger.</li>
+								</ul>
+							</p>
+						</div>
+					</div>
+					<div id="boat-club-02" class="tab-section" style="display: none;">
+						<h1>Blah blah blah</h1>
+
+					</div>
+
+					<div id="boat-club-03" class="tab-section" style="display: none; line-height: 1.2em;">
+						<h1>Yada yada yada</h1>
+
+					</div>
+				</div>
+			</div>
 		</div>
-		<div style="margin: 20px;">
-			&Ccedil;a vient !
+
+		<hr/>
+		<div style="margin: 50px;">
+			<b style="font-weight: bold;">Association Passe&#8209;Coque</b>
+			<br/>
+			12<sup><small>bis</small></sup> Z.A. de Kerran
+			<br/>
+			56470 Saint&#8209;Philibert
 		</div>
 	</div>
+
+	
+
 </body>    
 <script type="text/javascript">
 
