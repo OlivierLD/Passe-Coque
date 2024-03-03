@@ -1,5 +1,6 @@
 # Passe-Coque
-![Passe-Coque](./web-site/logos/LOGO_PC_rvb.png)
+![Passe-Coque](./web-site/logos/logo.02.png)
+![Passe-Coque](./web-site/logos/LOGO_PC_txt_only.png)
 
 Web site of the Passe-Coque association, and some code repo too.
 
