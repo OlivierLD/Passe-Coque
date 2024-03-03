@@ -159,6 +159,8 @@ let clack = (origin) => {
                                 if (originId === "21") {
                                     window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
                                 }
+                                fillOutTheTeam(); // For the random order
+
                                 // console.log("Now scrolling.")
                             // } else if (originId === "31" || originId === "32" || originId === "33") {
                             //     const overflow = document.getElementById('action-container');
@@ -187,7 +189,8 @@ let clack = (origin) => {
                                     window.setTimeout(() => {
                                         fillOutFleet(CLUB, "share-container", false); // Populate PCC boat list
                                     }, 500);
-                                } 
+                                } // 21, fill out team ?
+
                                 window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
                             }
 						}
@@ -1008,6 +1011,98 @@ const THE_FLEET = [
     }
 ];
 
+const THE_TEAM = [
+    {
+        id: "pj",
+        boss: true,
+        image: "./images/the.team/pj.png",
+        label: {
+            fr: "Pierre-Jean<br/>Pr&eacute;sident",
+            en: "Pierre-Jean<br/>CEO"
+        }
+    }, {
+        id: "regis",
+        boss: false,
+        image: "./images/the.team/regis.2.jpg",
+        label: {
+            fr: "R&eacute;gis<br/>Administrateur / p&eacute;dagogie, relation avec les lyc&eacute;es et les GRETA",
+            en: "R&eacute;gis<br/>Administrator / pedagogy, relationship with high schools and GRETA"
+        }
+    }, {
+        id: "catherine",
+        boss: false,
+        image: "./images/catherine.png",
+        label: {
+            fr: "Catherine<br/>Tr&eacute;sori&egrave;re",
+            en: "Catherine<br/>CFO"
+        }
+    }, {
+        id: "olivier",
+        boss: false,
+        image: "./images/olivier.png",
+        label: {
+            fr: "Olivier<br/>Web / High &amp; Low-Tech",
+            en: "Olivier<br/>Web / High &amp; Low-Tech"
+        }
+    }, {
+        id: "jeff",
+        boss: false,
+        image: "./images/the.team/jeff.png",
+        label: {
+            fr: "Jeff<br/>D&eacute;veloppement",
+            en: "Jeff<br/>Development"
+        }
+    }, {
+        id: "alain",
+        boss: false,
+        image: "./images/the.team/alain.2.jpg",
+        label: {
+            fr: "Alain<br/>Directeur technique",
+            en: "Alain<br/>CTO"
+        }
+    }, {
+        id: "michel",
+        boss: false,
+        image: "./images/the.team/michel.jpeg",
+        label: {
+            fr: "Michel<br/>Photos",
+            en: "Michel<br/>Photography"
+        }
+    }, {
+        id: "anne",
+        boss: false,
+        image: "./images/anne.png",
+        label: {
+            fr: "Anne<br/>Communication",
+            en: "Anne<br/>Communication"
+        }
+    }, {
+        id: "stephane",
+        boss: false,
+        image: "./images/stephane.jpeg",
+        label: {
+            fr: "St&eacute;phane<br/>Monde Sportif, Course au large : FFV",
+            en: "St&eacute;phane<br/>Sports World, Offshore racing: FFV"
+        }
+    }, {
+        id: "bernard",
+        boss: false,
+        image: "./images/the.team/bernard.jpeg",
+        label: {
+            fr: "Expert Grand Large, et r&eacute;f&eacute;rent de \"La Cardinale\"",
+            en: "Bernard<br/>High seas expert, and referent of \"La Cardinale\""
+        }
+    }, {
+        id: "gng",
+        boss: false,
+        image: "./images/the.team/gag.jpg",
+        label: {
+            fr: "Gabrielle et Guy<br/>D&eacute;veloppement du Boat Club",
+            en: "Gabrielle et Guy<br/>Boat Club development"
+        }
+    }
+];
+
 const INFO_SECTION = [
     {
         section: "agenda",
@@ -1214,6 +1309,72 @@ let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true) =
         container.appendChild(div);
     });
     console.log("Done with fillOutFleet");
+};
+
+let fillOutTheTeam = (containerId = 'team-container') => {
+
+    let container = document.getElementById(containerId); // 'fleet-container');
+    // drop all children
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+    // Build new list
+    let newList = [];
+    let listToSort = [];
+    // 1 - The boss on top
+    THE_TEAM.forEach(member => {
+        if (member.boss === true) {
+            newList.push(member); 
+        } else {
+            member.rnd = Math.random();
+            listToSort.push(member);
+        }
+    });
+
+    // Sort by rnd id
+    listToSort.sort((a, b) => {
+        if (a.rnd > b.rnd) {
+            return 1;
+        } else if (a.rnd < b.rnd) {
+            return -1;
+        }
+        return 0;
+    });
+    listToSort.forEach(member => {
+        newList.push(member);
+    });
+    console.log("Team is built!");
+    // newList.forEach(tm => console.log(`Team: ${tm.label.fr}`));
+    console.log(`Displaying ${newList.length} members.`);
+
+    // <div class="pix-strip">
+    let pixStrip = document.createElement("div");
+    pixStrip.classList.add("pix-strip");
+    container.appendChild(pixStrip);
+
+    // Populate. based on newly sorted list
+    newList.forEach(tm => {
+        let div = document.createElement('div');
+
+        div.id = tm.id;  // Team member div
+        div.classList.add("image-plus-text");
+        // div.title = boat.name;
+        div.onclick = function() { aboutSomeone(this); }; 
+
+        let img = document.createElement('img');
+        img.src = tm.image;
+        img.classList.add("board-image");
+        div.appendChild(img);
+
+        // Label
+        let div2 = document.createElement('div'); 
+        div2.style = "line-height: 1.2em;";
+        div2.innerHTML =  currentLang === 'FR' ? tm.label.fr : tm.label.en;
+        div.appendChild(div2);
+
+        pixStrip.appendChild(div);
+    });
+    console.log("Done with fillOutTheTeam");
 };
 
 let updateInfoFilter = radio => {
