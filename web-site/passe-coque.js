@@ -333,7 +333,7 @@ let clack_pcc = (origin) => {
 						} else */ 
                         if (true) {
 							contentPlaceHolder.innerHTML = doc;
-                            if (originId === "2") {
+                            if (originId === "3") {
                                 window.setTimeout(() => {
                                     fillOutFleet(CLUB, "share-container", false, '../'); // Populate PCC boat list
                                 }, 500);
@@ -359,16 +359,17 @@ let clack_pcc = (origin) => {
 }
 
 let updateMenuPCC = () => { // Multilang aspect.
-    document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Charte" : "The Chart"));
-	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Flotte&nbsp;" : "The Fleet&nbsp;"));
+    document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
+	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Charte&nbsp;" : "The Chart&nbsp;"));
+	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Flotte&nbsp;" : "The Fleet&nbsp;"));
 
-	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer&nbsp;" : "Enroll&nbsp;"));
-	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Pour quoi faire" : "What for"));
-	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adhesion" : "Enrollment"));
+	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer&nbsp;" : "Enroll&nbsp;"));
+	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Pour quoi faire" : "What for"));
+	document.querySelectorAll("#_42").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adhesion" : "Enrollment"));
 
-	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;server&nbsp;" : "Reserve&nbsp;"));
-	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Comment &ccedil;a marche" : "How it works"));
-	document.querySelectorAll("#_42").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;servations" : "Reservations"));
+	document.querySelectorAll("#_5").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;server&nbsp;" : "Reserve&nbsp;"));
+	document.querySelectorAll("#_51").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Comment &ccedil;a marche" : "How it works"));
+	document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;servations" : "Reservations"));
 };
 
 let switchLanguagePCC = () => {
