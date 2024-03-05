@@ -273,7 +273,7 @@ let switchLanguage = () => {
 	el.id = newId;
 	clack(el);
 
-    clack(el);
+    // clack(el);
 };
 
 let generateFetchMessage = (contentName, response) => {
@@ -299,6 +299,139 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
     let content = `<div style='margin: 10px;'><pre>Fetch Error for ${contentName}: ${(error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - ')} </pre><div style='border: 3px solid red; border-radius: 10px; text-align: center;'><b>${text}</b></div></div>`;
     return content;
 };
+
+let clack_pcc = (origin) => {
+    let originId = '';
+    if (typeof(origin) === 'string') {
+        originId = origin.replace('_', '');
+    } else {
+        console.log(`Click on ${origin.innerText}, id ${origin.id}`);
+        originId = origin.id.replace('_', '');
+    }
+    currentContext = originId;
+
+    let path = (document.location.pathname ? document.location.pathname + "/" : "");
+
+	let contentName = `${path}${originId}_${currentLang}.html`;
+    // Specific content rule(s)
+	if (originId === "22" || originId === "23") { // Menu 2, special management, see below (ONE page only)
+        contentName = `21_${currentLang}.html`; // 21, 22 & 23, same doc, different anchor (hashtag).
+	// } else if (originId === "32" || originId === "33") {
+    //    contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
+    }
+	let contentPlaceHolder = document.getElementById("current-content");
+    
+	fetch(contentName)
+            .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+				if (response.status !== 200) { // There is a problem...
+					contentPlaceHolder.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+				} else {
+					response.text().then(doc => {
+						console.log(`Code data loaded, length: ${doc.length}.`);
+						// Some specific cases here
+						/* if (origin.id === "1") { // Move this higher. No need to load 1_xx.html ?..
+							document.location.reload();
+						} else */ 
+                        if (true) {
+							contentPlaceHolder.innerHTML = doc;
+                            if (originId === "21" || originId === "22" || originId === "23") { // Menu 2, One page only, with anchors.
+                                // let nbTry = 0;
+                                let scrollToAnchor = () => {
+                                    const overflow = document.getElementById('action-container-2');
+                                    let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : '03');
+                                    const anchor = document.querySelector(`a[name='${hashtag}']`);
+                                    
+                                    const rectOverflow = overflow.getBoundingClientRect();
+                                    const rectAnchor = anchor.getBoundingClientRect();
+    
+                                    let scroll_top = rectAnchor.top - rectOverflow.top;
+                                    console.log(`rectAnchor.top: ${rectAnchor.top}, rectOverflow.top: ${rectOverflow.top} => ${scroll_top}`);
+                                    // Set the scroll position of the overflow container
+                                    overflow.scrollTop = scroll_top; // .toFixed(0);  // If remains to zero, check div's height
+                                    console.log(`>>> Origin: ${originId}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
+                                };
+                                window.setTimeout(scrollToAnchor, 100);
+                                // 2e couche
+                                if (originId === "21") {
+                                    window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                                }
+                            } else {
+                                if (originId === "4") {
+                                    window.setTimeout(() => {
+                                        fillOutFleet(null); // Populate default (full) boat list
+                                    }, 500);
+                                } else if (originId === "62") {
+                                    window.setTimeout(() => {
+                                        fillOutActu(null); // Populate default (full) news list
+                                    }, 500);
+                                } else if (originId === "33") { // Partager, PCC
+                                    window.setTimeout(() => {
+                                        fillOutFleet(CLUB, "share-container", false); // Populate PCC boat list
+                                    }, 500);
+                                } // 21, fill out team ?
+
+                                window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                            }
+						}
+					});
+				}
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+				// Plus tard...
+				contentPlaceHolder.innerHTML = generateFetchErrorMessage(contentName, error, errmess);
+            });
+}
+
+let updateMenuPCC = () => { // Multilang aspect.
+    document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Charte" : "The Chart"));
+	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Flotte&nbsp;" : "The Fleet&nbsp;"));
+
+	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer&nbsp;" : "Enroll&nbsp;"));
+	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Pour quoi faire" : "What for"));
+	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adhesion" : "Enrollment"));
+
+	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;server&nbsp;" : "Reserve&nbsp;"));
+	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Comment &ccedil;a marche" : "How it works"));
+	document.querySelectorAll("#_42").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;servations" : "Reservations"));
+};
+
+let switchLanguagePCC = () => {
+    if (currentLang === "FR") { // Then switch to EN
+        document.querySelectorAll("#lang-flag").forEach(flagElement => {
+            flagElement.src = "../france.gif";
+            flagElement.alt = "Drapeau français";
+            flagElement.title = "En français";
+        });
+        currentLang = "EN";
+    } else {
+        document.querySelectorAll("#lang-flag").forEach(flagElement => {
+            flagElement.src = "../us_uk_flag.png"; // "./usa.gif";
+            flagElement.alt = "US Flag";
+            flagElement.title = "Switch to English";
+        });
+        currentLang = "FR";
+    }
+	// Le reste...
+	updateMenuPCC();
+
+    // Update currently displayed content
+    let newId = `_${currentContext}`;
+    let el = document.createElement("div");
+	el.id = newId;
+	clack_pcc(el);
+};
+
+
 
 const BG_IMAGES = 
 /*[
