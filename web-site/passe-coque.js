@@ -310,14 +310,24 @@ let clack_pcc = (origin) => {
     }
     currentContext = originId;
 
+
     let path = (document.location.pathname ? document.location.pathname + "/" : "");
 
 	let contentName = `${path}${originId}_${currentLang}.html`;
     // Specific content rule(s)
-	// if (originId === "22" || originId === "23") { // Menu 2, special management, see below (ONE page only)
-    //     contentName = `21_${currentLang}.html`; // 21, 22 & 23, same doc, different anchor (hashtag).
-    // }
-	let contentPlaceHolder = document.getElementById("current-content");
+	if (originId === "21" || originId === "22") { // Menu 2, special management, see below (ONE page only)
+        contentName = `${path}2_${currentLang}.html`; // 21 & 22, same doc, different anchor (hashtag).
+    } else if  (originId === "41" || originId === "42") { 
+        contentName = `${path}4_${currentLang}.html`; 
+    } else if  (originId === "43") { 
+        contentName = `${path}6_${currentLang}.html`;  // Member Space
+    } else if  (originId === "51" || originId === "52") { 
+        contentName = `${path}5_${currentLang}.html`; 
+    } else if  (originId === "53") { 
+        contentName = `${path}6_${currentLang}.html`;   // Member Space
+    }
+
+    let contentPlaceHolder = document.getElementById("current-content");
     
 	fetch(contentName)
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
@@ -327,19 +337,40 @@ let clack_pcc = (origin) => {
 				} else {
 					response.text().then(doc => {
 						console.log(`Code data loaded, length: ${doc.length}.`);
+                        contentPlaceHolder.innerHTML = doc;
 						// Some specific cases here
-						/* if (origin.id === "1") { // Move this higher. No need to load 1_xx.html ?..
-							document.location.reload();
-						} else */ 
-                        if (true) {
-							contentPlaceHolder.innerHTML = doc;
-                            if (originId === "3") {
-                                window.setTimeout(() => {
-                                    fillOutFleet(CLUB, "share-container", false, '../'); // Populate PCC boat list
-                                }, 500);
+						if (originId === "21" || originId === "22") { // Menu 2, One page only, with anchors.
+                            // let nbTry = 0;
+                            let scrollToAnchor = () => {
+                                const overflow = document.getElementById('pcc-2');
+                                let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX'); 
+                                const anchor = document.querySelector(`a[name='${hashtag}']`);
+                                
+                                const rectOverflow = overflow.getBoundingClientRect();
+                                const rectAnchor = anchor.getBoundingClientRect();
+
+                                let scroll_top = rectAnchor.top - rectOverflow.top;
+                                console.log(`rectAnchor.top: ${rectAnchor.top}, rectOverflow.top: ${rectOverflow.top} => ${scroll_top}`);
+                                // Set the scroll position of the overflow container
+                                overflow.scrollTop = scroll_top; // .toFixed(0);  // If remains to zero, check div's height
+                                console.log(`>>> Origin: ${originId}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
+                            };
+                            window.setTimeout(scrollToAnchor, 200); // Timeout to wait for the load of the fetch...
+                            // 2e couche
+                            if (originId === "21") {
+                                window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
                             }
-                            window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
-						}
+                        } else {
+                            if (true) {
+                                contentPlaceHolder.innerHTML = doc;
+                                if (originId === "3") {
+                                    window.setTimeout(() => {
+                                        fillOutFleet(CLUB, "share-container", false, '../'); // Populate PCC boat list
+                                    }, 500);
+                                }
+                                window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                            }
+                        }
 					});
 				}
             },
@@ -360,16 +391,23 @@ let clack_pcc = (origin) => {
 
 let updateMenuPCC = () => { // Multilang aspect.
     document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
-	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Charte&nbsp;" : "The Chart&nbsp;"));
-	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Flotte&nbsp;" : "The Fleet&nbsp;"));
+	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Le Club&nbsp;" : "The Club&nbsp;"));
+	document.querySelectorAll("#_21").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Fonctionnement" : "How it works"));
+	document.querySelectorAll("#_22").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Charte" : "The Charter"));
+
+	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Les Bases&nbsp;" : "The Bases&nbsp;"));
 
 	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer&nbsp;" : "Enroll&nbsp;"));
 	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Pour quoi faire" : "What for"));
 	document.querySelectorAll("#_42").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adhesion" : "Enrollment"));
+	document.querySelectorAll("#_43").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 
-	document.querySelectorAll("#_5").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;server&nbsp;" : "Reserve&nbsp;"));
+	document.querySelectorAll("#_5").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;server&nbsp;" : "Reservations&nbsp;"));
 	document.querySelectorAll("#_51").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Comment &ccedil;a marche" : "How it works"));
-	document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;servations" : "Reservations"));
+	document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Faire une r&eacute;servation" : "Make a reservation"));
+	document.querySelectorAll("#_53").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+
+    document.querySelectorAll("#members-space").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 };
 
 let switchLanguagePCC = () => {

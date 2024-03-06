@@ -25,28 +25,34 @@
 
 </head>
 	
-<body style="background: silver;">
-	<div style="position: fixed; top: 0; z-index: -10; display: grid; grid-template-columns: 33% 33% 33%;">
+<body style="background: white;">
+
+	<!--div style="position: fixed; top: 0; z-index: -10; display: grid; grid-template-columns: 33% 33% 33%;">
 		<img src="../images/boats/anao.jpeg" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/atlantide.sq.png" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/avel.mad.jpeg" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/babou.sq.png" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/birvidic.jpg" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="../images/boats/coraxy.png" style="width: 100%; height: auto; opacity: 0.5;">
-	</div>
+	</div-->
 
 	<!--
 		** Structure du menu **
 		▼ = &#9660;
 		- Accueil           - 1
-		- La charte         - 2
-		- La flotte         - 3
+		- Le club           - 2
+			- Fonctionnement                 (21)
+			- La Charte     				 (22)
+		- Les bases         - 3
 		- Adherer           - 4
-			- Pour quoi faire                  41
-			- Adhesion                         42
+			- Pour quoi faire                 (41)
+			- Adhesion                        (42)
+			- Espace membres                  (43)
 		- Reserver          - 5
-			- Comment ca marche                51
-			- Reservation                      52
+			- Comment ca marche               (51)
+			- Reservation                     (52)
+			- Espace membres                  (53)
+		- Espace Membres (icone) - 6
 	-->
 	<div id="nav-menu" class="scrolling-menu" style="margin-left: -8px;">
 		<div style="float: left; display: grid; grid-template-columns: auto auto;">
@@ -62,29 +68,39 @@
 			<ul id="navigation" style="display: grid; grid-template-columns: auto auto auto auto auto auto 80px; width: fit-content;"> <!-- Columns must match the menu below... -->
 				<li>
 					<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1"><span id="home-label">Accueil</span></a>
-					<!--ul>
-						<li><a href="javascript:void(0)" onclick="clack(this);" id="_11">QR Code</a></li>
-					</ul-->
 				</li>
 				<li>
-					<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_2">La Charte</a>
+					<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_2">Le Club</a>
+					<ul>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_21">Fonctionnement</a></li>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_22">La Charte</a></li>
+					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_3" onclick="clack_pcc(this);">La Flotte</a>
+					<a href="javascript:void(0)" id="_3" onclick="clack_pcc(this);">Les Bases</a>
 				</li>
 				<li>
 					<a href="javascript:void(0)" id="_4">Adh&eacute;rer</a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_41">Pour quoi faire</a></li>
-						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_42">Adh&eacute;rer</a></li>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_42">Adh&eacute;rer au Boat-Club</a></li>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_43">Espace Membres</a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_5">R&eacute;server&nbsp;</a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_51">Comment &ccedil;a marche</a></li>
-						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_52">R&eacute;servations</a></li>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_52">Faire une R&eacute;servation</a></li>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_53">Espace Membres</a></li>
 					</ul>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="_6" onclick="clack_pcc(this);" title="Espace Membres">
+						<svg style="margin: 5px;" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg><span id="members-space" style="display: none;">Espace Membres</span>
+					</a>
 				</li>
 				<li><a href="javascript:void(0)" onclick="switchLanguagePCC();"><image id="lang-flag" src="../us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>
 			</ul>
@@ -118,31 +134,43 @@
 		<!--h1 style="width: 100%;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; <img src="./logo.transp.png" style="width: 48px; padding: 14px 10px;" title="Passe&#8209;Coque"/></span> <span id="my-name">Passe&#8209;Coque </span></h1-->
 		
 		<div id="side-nav" class="sidenav" onmouseleave="closeNav()"> <!-- Restored... -->
-			<div style="width: 100%; display: grid; grid-template-columns: auto auto;">
+			<div style="width: 100%; display: grid; grid-template-columns: auto auto; margin-bottom: 20px;">
 				<a href="javascript:void(0)" class="active-link switch-lang" style="text-align: left;" onclick="switchLanguagePCC()"><image id="lang-flag" src="../us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a>
 				<a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav();">&times;</a>
 			</div>
 			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_1"><span id="home-label">Accueil</span></a>
 
-			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_2">La Charte</a>
+			<div>
+				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_2">Le Club</span></a>
+				<div id="section-1" class="sub-section">
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_21">Fonctionnement</i></a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_22">La Charte</a>
+				</div>
+			</div>
 
-			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_3"><span id="fleet-label">La Flotte</span></a>
+			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_3">Les Bases</a>
 
 			<div>
 				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">Adh&eacute;rer</span></a>
 				<div id="section-2" class="sub-section">
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_41">Pour quoi faire</i></a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_42">Adh&eacute;sion</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_43">Espace Membres</a>
 				</div>
 			</div>
 
 			<div>
 				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_5">R&eacute;server</span></a>
 				<div id="section-3" class="sub-section">
-					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this);" id="_51">Comment &ccedil;a marche</a>
-					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this);" id="_52">R&eacute;servation</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_51">Comment &ccedil;a marche</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_52">Faire une r&eacute;servation</a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_53">Espace Membres</a>
 				</div>
 			</div>
+
+			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_6"><span id="fleet-label">
+				<span id="members-space">Espace Membres</span>
+			</a>
 
 		</div>
 	</div>

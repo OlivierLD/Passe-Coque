@@ -129,7 +129,10 @@ div.tooltip:hover span {
 .top-container {
     margin-top: -65px;
 }
-  
+.top-container-2 {
+    margin-top: 65px;
+}
+    
   /* Bottom right text */
 .text-block {
     position: absolute;
@@ -829,6 +832,11 @@ span.expand-collapse:hover {
     height: auto;
 }
 
+.you-tube-video {
+    width: 560px; 
+    height: 315px;
+}
+
 @-webkit-keyframes fade {
     from {
       opacity: .4
@@ -1226,6 +1234,10 @@ span.expand-collapse:hover {
     .hamburger-menu {
         display: block;
         width: 90%;
+    }
+    .you-tube-video {
+        width: 280px; 
+        height: 158px;
     }
 }
 
