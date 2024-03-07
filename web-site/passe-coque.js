@@ -339,11 +339,25 @@ let clack_pcc = (origin) => {
 						console.log(`Code data loaded, length: ${doc.length}.`);
                         contentPlaceHolder.innerHTML = doc;
 						// Some specific cases here
-						if (originId === "21" || originId === "22") { // Menu 2, One page only, with anchors.
+                        let hashtag = null;
+                        let overflow = null;
+
+                        if (originId === "21" || originId === "22") { 
+                            hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX'); 
+                            overflow = document.getElementById('pcc-2');
+                        } else if (originId === "41" || originId === "42") { 
+                            hashtag = (originId === "41") ? '01' : ((originId === "42") ? '02' : 'XX'); 
+                            overflow = document.getElementById('pcc-4');
+                        } else if (originId === "51" || originId === "52") { 
+                            hashtag = (originId === "51") ? '01' : ((originId === "52") ? '02' : 'XX'); 
+                            overflow = document.getElementById('pcc-5');
+                        }
+
+						if (hashtag !== null && overflow !== null) { // Menu 2, One page only, with anchors.
                             // let nbTry = 0;
                             let scrollToAnchor = () => {
-                                const overflow = document.getElementById('pcc-2');
-                                let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX'); 
+                                // const overflow = document.getElementById('pcc-2');
+                                // let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX'); 
                                 const anchor = document.querySelector(`a[name='${hashtag}']`);
                                 
                                 const rectOverflow = overflow.getBoundingClientRect();
@@ -353,11 +367,11 @@ let clack_pcc = (origin) => {
                                 console.log(`rectAnchor.top: ${rectAnchor.top}, rectOverflow.top: ${rectOverflow.top} => ${scroll_top}`);
                                 // Set the scroll position of the overflow container
                                 overflow.scrollTop = scroll_top; // .toFixed(0);  // If remains to zero, check div's height
-                                console.log(`>>> Origin: ${originId}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
+                                console.log(`>>> Origin: ${originId} #${hashtag}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
                             };
                             window.setTimeout(scrollToAnchor, 200); // Timeout to wait for the load of the fetch...
                             // 2e couche
-                            if (originId === "21") {
+                            if (originId === "21" || originId === "41" || originId === "51") {
                                 window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
                             }
                         } else {
@@ -705,11 +719,12 @@ let mouseOnTxPix = (origin) => {
 let mouseOnRftPix = (origin) => {
 };
 
-let clickOnBoatPix = (origin) => {
+let clickOnBoatPix = (origin, pathPrefix = '') => {
     console.log(`Click on ${origin.id}`);
     // TODO Set the content
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
-    let contentName = `${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
+    let contentName = `${pathPrefix}${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
+    console.log(`onclick, loading ${contentName}`);
     fetch(contentName)
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
@@ -1411,7 +1426,7 @@ let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true, p
         // div.style = "padding: 10px; z-index: 1; max-height: 420px; max-width: 300px;"; // See below. Make this class
         div.classList.add("boat-frame");
         // div.title = boat.name;
-        div.onclick = function() { clickOnBoatPix(this); }; 
+        div.onclick = function() { clickOnBoatPix(this, pathPrefix); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
         let imgContainer = document.createElement('div');
         imgContainer.classList.add("boat-image-container");

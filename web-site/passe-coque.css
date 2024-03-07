@@ -1026,6 +1026,10 @@ span.expand-collapse:hover {
     grid-template-columns: 25% 25% 25% 25%; 
     background: white;
 }
+.fleet-and-filters {
+    display: grid;
+    grid-template-columns: 70% 30%; 
+}
 .home-width {
     margin-top: -10px; 
     width: 100%;
@@ -1165,6 +1169,9 @@ span.expand-collapse:hover {
     .fleet-slides {
         grid-template-columns: 33% 33% 33%; 
     }
+    .fleet-and-filters {
+        grid-template-columns: 100%; 
+    }    
     .txt-img-div {
         display: grid; 
         grid-template-columns: 100%;
@@ -1230,6 +1237,12 @@ span.expand-collapse:hover {
     }
     .project-slides {
         grid-template-columns: 50% 50%; 
+    }    
+    .fleet-slides {
+        grid-template-columns: 50% 50%; 
+    }
+    .fleet-and-filters {
+        grid-template-columns: 100%; 
     }    
     .hamburger-menu {
         display: block;
