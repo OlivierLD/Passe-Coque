@@ -321,7 +321,7 @@ div.tooltip:hover span {
 .background-container:after {
     content: '';
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
-    background:  url("./images/the.shipyard.jpg"); /*  url("./images/coraxy.jpg"); */
+    /*background:  url("./images/the.shipyard.jpg");*/ /*  url("./images/coraxy.jpg"); */
 
     background-size: 100%; /* 130%;*/ /* auto; */ /* cover; */
     background-repeat: no-repeat;
@@ -1252,6 +1252,9 @@ span.expand-collapse:hover {
         width: 280px; 
         height: 158px;
     }
+    .text-block {
+        font-size: 1.5em;
+    }    
 }
 
 /* @media screen and (height <= 450px) or (width <= 450px) {

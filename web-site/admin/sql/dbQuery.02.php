@@ -1,6 +1,7 @@
 <html lang="en">
   <!--
    ! A Form to query the NL_SUBSCRIBERS table
+   ! Editable form: dbQuery.02.02.php
    +-->
   <head>
     <!--meta charset="UTF-8">

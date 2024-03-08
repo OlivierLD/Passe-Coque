@@ -409,7 +409,9 @@ let updateMenuPCC = () => { // Multilang aspect.
 	document.querySelectorAll("#_21").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Fonctionnement" : "How it works"));
 	document.querySelectorAll("#_22").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Charte" : "The Charter"));
 
-	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Les Bases&nbsp;" : "The Bases&nbsp;"));
+	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "O&ugrave; sont nos bateaux" : "Where are our boats"));
+	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Les ports" : "The harbors"));
+	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La flotte" : "The fleet"));
 
 	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer&nbsp;" : "Enroll&nbsp;"));
 	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Pour quoi faire" : "What for"));

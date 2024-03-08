@@ -57,15 +57,15 @@
 	<div id="nav-menu" class="scrolling-menu" style="margin-left: -8px;">
 		<div style="float: left; display: grid; grid-template-columns: auto auto;">
 			<div>
-				<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1" style="text-decoration: none;"><img src="../logos/logo.02.png" style="height: 80px; padding: 0px 20px;" title="Passe&#8209;Coque Boat-Club"/></a>
+				<!--a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1" style="text-decoration: none;"><img src="../logos/logo.02.png" style="height: 80px; padding: 0px 20px;" title="Passe&#8209;Coque Boat-Club"/></a-->
+				<a href="http://passe-coque.com" style="text-decoration: none;"><img src="../logos/logo.02.png" style="height: 80px; padding: 0px 20px;" title="Passe&#8209;Coque"/></a>
 			</div>
-			<div style="height: 100%; padding: 20px 0px;">
+			<!-- div style="height: 100%; padding: 20px 0px;">
 				<span style="font-weight: bold;">Passe&#8209;Coque Boat&#8209;Club</span>
-				<!--img src="../logos/LOGO_PC_txt_only.png" style="height: 38px; margin: 4px 0 -2px 0;" title="Passe&#8209;Coque"/-->
-			</div>
+			</div -->
 		</div>
-		<div style="/*margin-left: -50px; float: right;*/ margin-right: 20px;">  <!-- Touchy ! (Tablets, etc) -->
-			<ul id="navigation" style="display: grid; grid-template-columns: auto auto auto auto auto auto 80px; width: fit-content;"> <!-- Columns must match the menu below... -->
+		<div style="margin-right: 20px;">  <!-- Touchy ! (Tablets, etc) -->
+			<ul id="navigation" style="/*display: grid; grid-template-columns: auto auto auto auto auto auto 80px;*/ width: fit-content;"> <!-- Columns must match the menu below... -->
 				<li>
 					<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1"><span id="home-label">Accueil</span></a>
 				</li>
@@ -77,7 +77,11 @@
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_3" onclick="clack_pcc(this);">Les Bases</a>
+					<a href="javascript:void(0)" id="_3">O&ugrave; sont nos bateaux</a>
+					<ul>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_31">Les ports</a></li>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_32">La flotte</a></li>
+					</ul>
 				</li>
 				<li>
 					<a href="javascript:void(0)" id="_4">Adh&eacute;rer</a>
@@ -104,7 +108,12 @@
 				</li>
 				<li><a href="javascript:void(0)" onclick="switchLanguagePCC();"><image id="lang-flag" src="../us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>
 			</ul>
+			<div style="/*height: 100%;*/ padding: 20px 0px; /*margin-left: -50px;*/ float: right;">
+				<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1" style="text-decoration: none;"><span style="font-weight: bold;" title="Passe&#8209;Coque Boat-Club">Passe&#8209;Coque Boat&#8209;Club</span></a>
+				<!--img src="../logos/LOGO_PC_txt_only.png" style="height: 38px; margin: 4px 0 -2px 0;" title="Passe&#8209;Coque"/-->
+			</div>
 		</div>
+
 	</div>
 
 	<br/>
@@ -123,9 +132,12 @@
 			<div style="margin-top: 0px;">
 				<!--h1 id="my-name" style="margin-top: 50px; font-size: 3em;">Passe&#8209;Coque </h1-->
 				<!--img src="./logos/LOGO_PC_no_txt.png" style="width: 50px; margin-top: -40px; margin-left: -30px;" title="Passe&#8209;Coque"/-->
-				<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1" style="text-decoration: none;"><img src="../logos/logo.02.png" style="width: 50px;" title="Passe&#8209;Coque"/></a>
+				<!--a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1" style="text-decoration: none;"><img src="../logos/logo.02.png" style="width: 50px;" title="Passe&#8209;Coque"/></a-->
+				<a href="http://passe-coque.com" style="text-decoration: none;"><img src="../logos/logo.02.png" style="width: 50px;" title="Passe&#8209;Coque"/></a>
 				<!--img src="../logos/LOGO_PC_txt_only.png" style="width: 100px;" title="Passe&#8209;Coque"/-->
-				<span style="color: #16696d; font-size: 1.2em; float: right; margin-left: 20px; margin-top: 18px;">Passe-Coque<br/>Boat-Club</span>
+				<!--span style="color: #16696d; font-size: 1.2em; float: right; margin-left: 20px; margin-top: 18px;">Passe-Coque<br/>Boat-Club</span-->
+				<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_1" style="text-decoration: none;"><span style="color: #16696d; font-size: 1.2em; float: right; margin-left: 20px; margin-top: 18px;">Passe-Coque<br/>Boat-Club</span></a>
+
 			</div>
 			<a id="hamburger" style="cursor: pointer;" onclick="openNav();" title="Hamburger Menu"> <!-- onmouseover="openNav();" <= onmouseover (si present avec onclick) fout la merde sur cell-phones et tablettes -->
 				<span style="color: #16696d; font-size: 2em; float: right; margin-right: 20px; margin-top: 18px;">Menu&nbsp;&#8801;</span>
@@ -141,18 +153,25 @@
 			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_1"><span id="home-label">Accueil</span></a>
 
 			<div>
-				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-1');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_2">Le Club</span></a>
-				<div id="section-1" class="sub-section">
+				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_2">Le Club</span></a>
+				<div id="section-2" class="sub-section">
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_21">Fonctionnement</i></a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_22">La Charte</a>
 				</div>
 			</div>
 
-			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_3">Les Bases</a>
+			<!--a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_3">Les Bases</a-->
+			<div>
+				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_3">O&ugrave; sont nos bateaux</span></a>
+				<div id="section-3" class="sub-section">
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_31">Les Ports</i></a>
+					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_32">La Flotte</a>
+				</div>
+			</div>
 
 			<div>
-				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-2');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">Adh&eacute;rer</span></a>
-				<div id="section-2" class="sub-section">
+				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-4');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">Adh&eacute;rer</span></a>
+				<div id="section-4" class="sub-section">
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_41">Pour quoi faire</i></a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_42">Adh&eacute;sion</a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_43">Espace Membres</a>

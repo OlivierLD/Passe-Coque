@@ -3,6 +3,7 @@
    ! After Custom Authentication.
    ! Crendentials stored in DB.
    ! Member space, once identified.
+   ! -> Invoked from members.php
    !
    ! Also:
    ! - Admin privileges
