@@ -377,7 +377,7 @@ let clack_pcc = (origin) => {
                         } else {
                             if (true) {
                                 contentPlaceHolder.innerHTML = doc;
-                                if (originId === "3") {
+                                if (originId === "31" || originId === "32") {
                                     window.setTimeout(() => {
                                         fillOutFleet(CLUB, "share-container", false, '../'); // Populate PCC boat list
                                     }, 500);
