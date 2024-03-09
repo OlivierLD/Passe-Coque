@@ -300,6 +300,123 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
     return content;
 };
 
+
+function makeMarker(markerData) {
+    L.marker([markerData.position.lat, markerData.position.lng])
+     .addTo(markerData.map)
+     .bindPopup(markerData.title);
+}
+function decToSex(val, ns_ew) {
+    let absVal = Math.abs(val);
+    let intValue = Math.floor(absVal);
+    let dec = absVal - intValue;
+    let i = intValue;
+    dec *= 60;
+    let min = dec.toFixed(4);
+    while (min.length < 7) {
+        min = '0' + min;
+    }
+    let s = i + "°" + min + "'";
+
+    if (val < 0) {
+        s += (ns_ew === 'NS' ? 'S' : 'W');
+    } else {
+        s += (ns_ew === 'NS' ? 'N' : 'E');
+    }
+    return s;
+}
+
+let initBoatClubBases = () => {
+
+    const homeBelz     = new L.LatLng(47.677667, -3.135667);
+    const labOcean     = new L.LatLng(47.591886, -3.028032);
+    const etel         = new L.LatLng(47.659253, -3.208115);
+    const laTrinite    = new L.LatLng(47.589018, -3.025789);
+    const lesSables    = new L.LatLng(46.501142, -1.794205);
+    const laRochelle   = new L.LatLng(46.146335, -1.166267);
+    const concarneau   = new L.LatLng(47.870353, -3.914394);
+    const kerran       = new L.LatLng(47.598399, -2.981517);
+
+    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+    let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+                // 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+    const base_layer = L.tileLayer(mbUrl, {
+        id: 'mapbox.streets', 
+        attribution: mbAttr, 
+        opacity: 1.0
+    }).addTo(map);
+
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        opacity: 0.5
+    }).addTo(map);
+    // map.setView([37.748890, -122.51138198], 15); SF. 48th Ave.
+    map.setView([47.677667, -3.135667], 10); // Belz
+
+    if (false) {
+        makeMarker({
+            position: homeBelz,
+            map: map,
+            title: 'Beg er Lann, Belz'});
+    }
+    makeMarker({
+        position: labOcean,
+        map: map,
+        title: 'Lab Ocean'});
+    makeMarker({
+        position: etel,
+        map: map,
+        title: '&Eacute;tel'});
+    makeMarker({
+        position: laTrinite,
+        map: map,
+        title: 'La Trinit&eacute;'});
+    makeMarker({
+        position: lesSables,
+        map: map,
+        title: 'Les Sables d\'Olonne'});
+    makeMarker({
+        position: laRochelle,
+        map: map,
+        title: 'La Rochelle'});
+    makeMarker({
+        position: concarneau,
+        map: map,
+        title: 'Concarneau'});
+    makeMarker({
+        position: kerran,
+        map: map,
+        title: 'ZA de Kerran'});                                                                                        
+
+    let tooltip = null;
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        if (tooltip != null) {
+            map.removeLayer(tooltip);
+        }
+        tooltip = L.tooltip()
+                        .setLatLng(L.latLng([lat, lng]))
+                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                        .addTo(map);
+
+    });
+
+};
+
 let clack_pcc = (origin) => {
     let originId = '';
     if (typeof(origin) === 'string') {
@@ -377,9 +494,14 @@ let clack_pcc = (origin) => {
                         } else {
                             if (true) {
                                 contentPlaceHolder.innerHTML = doc;
-                                if (originId === "31" || originId === "32") {
+                                if (originId === "32") {
                                     window.setTimeout(() => {
                                         fillOutFleet(CLUB, "share-container", false, '../'); // Populate PCC boat list
+                                    }, 500);
+                                } else if (originId === "31") {
+                                    // Initialize Leaflet
+                                    window.setTimeout(() => {
+                                        initBoatClubBases();
                                     }, 500);
                                 }
                                 window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
