@@ -321,7 +321,7 @@ div.tooltip:hover span {
 .background-container:after {
     content: '';
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
-    /*background:  url("./images/the.shipyard.jpg");*/ /*  url("./images/coraxy.jpg"); */
+    /*background:  url("/images/the.shipyard.jpg");*/ /*  url("./images/coraxy.jpg"); */
 
     background-size: 100%; /* 130%;*/ /* auto; */ /* cover; */
     background-repeat: no-repeat;
@@ -348,7 +348,7 @@ div.tooltip:hover span {
 
 .background-container-2:after {
     content: '';
-    background: url("./images/roof.evasion.jpg");
+    background: url("/images/roof.evasion.jpg");
 
     background-size: 100%; /* cover; */
     background-repeat: repeat-y; /* no-repeat; */
@@ -374,7 +374,7 @@ div.tooltip:hover span {
 
 .background-container-3:after {
     content: '';
-    background: url("./images/the.shipyard.jpg");
+    background: url("/images/the.shipyard.jpg");
 
     background-size: 100%;
     background-repeat: no-repeat; /* repeat-y; */
@@ -402,7 +402,7 @@ div.tooltip:hover span {
 
 .background-container-4:after {
     content: '';
-    background: url("./images/back.home.1500.jpg");
+    background: url("/images/back.home.1500.jpg");
 
     background-size: auto;
     background-repeat: repeat;

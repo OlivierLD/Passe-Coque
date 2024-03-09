@@ -280,9 +280,9 @@ let generateFetchMessage = (contentName, response) => {
     let mess = (currentLang === 'FR') ? 'Cette page est en cours de d&eacute;veloppement...<br/>Disponible prochainement.' : 
                                         'This page is being developped...<br/>Available soon.';
     let message = `<div style='margin: 10px;'><div style='display: none;'>Message :<br/> Fetching ${contentName}...<br/>Data Response: ${response.status} - ${response.statusText}</div>` + 
-    `<div style="width: 100%; text-align: center;"><img src="./images/the.shipyard.jpg" width="100%"></div>` + 
+    `<div style="width: 100%; text-align: center;"><img src="/images/the.shipyard.jpg" width="100%"></div>` + 
     `<div style='border: 3px solid orange; border-radius: 10px; text-align: center; display: grid; grid-template-columns: auto auto auto;'>` + 
-    `<div style="display: flex; align-items: center; margin: auto;"><img src="./images/construction.cone.png" height="52"></div> <div><b>${mess}</b></div> <div style="display: flex; align-items: center; margin: auto;"><img src="./images/construction.cone.png" height="52"></div></div></div>`;
+    `<div style="display: flex; align-items: center; margin: auto;"><img src="/images/construction.cone.png" height="52"></div> <div><b>${mess}</b></div> <div style="display: flex; align-items: center; margin: auto;"><img src="/images/construction.cone.png" height="52"></div></div></div>`;
     return message;
 };
 
@@ -468,15 +468,15 @@ const BG_IMAGES =
 //   "./photos.michel.02/02.jpg",
 //   "./photos.michel.02/03.jpg" ];  
 
-[ "./images/houat.jpg",
-  "./images/mouillage.01.jpg",
-  "./images/mouillage.02.jpg",
-  "./images/sunset.jpg",
-  "./images/evo.png",
-  "./images/slideshow.01.png",
-  "./images/slideshow.02.png",
-  "./images/slideshow.03.png",
-  "./images/slideshow.04.png" ];  
+[ "/images/houat.jpg",
+  "/images/mouillage.01.jpg",
+  "/images/mouillage.02.jpg",
+  "/images/sunset.jpg",
+  "/images/evo.png",
+  "/images/slideshow.01.png",
+  "/images/slideshow.02.png",
+  "/images/slideshow.03.png",
+  "/images/slideshow.04.png" ];  
 
 const BG_INTERVAL = 5000; // in ms
 
@@ -853,7 +853,7 @@ const THE_FLEET = [
     {
         name: "Eh'Tak",
         id: "eh-tak",
-        pix: "./images/boats/eh-tak.jpg",
+        pix: "/images/boats/eh-tak.jpg",
         type: "Shipman 28",
         category: CLUB,
         base: "&Eacute;tel"
@@ -861,7 +861,7 @@ const THE_FLEET = [
     {
         name: "Pordin-Nancq",
         id: "pordin-nancq",
-        pix: "./images/boats/pordin.jpg",
+        pix: "/images/boats/pordin.jpg",
         type: "Carter 37",
         category: NONE,
         base: "Locmiqu&eacute;lic"
@@ -869,7 +869,7 @@ const THE_FLEET = [
     {
         name: "Coraxy",
         id: "coraxy",
-        pix: "./images/boats/coraxy.png",
+        pix: "/images/boats/coraxy.png",
         type: "Cognac",
         category: NONE,
         base: "Saint&#8209;Philibert"
@@ -877,7 +877,7 @@ const THE_FLEET = [
     {
         name: "Manu Oviri",
         id: "manu-oviri",
-        pix: "./images/boats/manu-aviri.jpg",
+        pix: "/images/boats/manu-aviri.jpg",
         type: "Comanche",
         category: CLUB,
         base: "&Eacute;tel"
@@ -885,7 +885,7 @@ const THE_FLEET = [
     // {
     //     name: "Pen Duick",
     //     id: "pen-duick",
-    //     pix: "./images/boats/pen.duick.jpg",
+    //     pix: "/images/boats/pen.duick.jpg",
     //     type: "W. Fife",
     //     category: NONE,
     //     base: "Lorient"
@@ -893,7 +893,7 @@ const THE_FLEET = [
     { 
         name: "Wanita Too",
         id: "wanita",
-        pix: "./images/boats/wanita.too.sq.png",
+        pix: "/images/boats/wanita.too.sq.png",
         type: "First Class 12",
         category: NONE,
         base: "Saint-Malo"
@@ -901,7 +901,7 @@ const THE_FLEET = [
     { 
         name: "Atlantide",
         id: "atlantide",
-        pix: "./images/boats/atlantide.sq.png",
+        pix: "/images/boats/atlantide.sq.png",
         type: "Gib'Sea&nbsp;33",
         category: EX_BOAT,
         base: "--"
@@ -909,7 +909,7 @@ const THE_FLEET = [
     { 
         name: "Iapyx",
         id: "iapyx",
-        pix: "./images/boats/iapyx.sq.png",
+        pix: "/images/boats/iapyx.sq.png",
         type: "Offshore&nbsp;35",
         category: EX_BOAT,
         base: "--"
@@ -917,7 +917,7 @@ const THE_FLEET = [
     { 
         name: "Ar Mor Van",
         id: "ar-mor-van",
-        pix: "./images/boats/kelt620.jpeg",
+        pix: "/images/boats/kelt620.jpeg",
         type: "Ketl 620",
         category: NONE,
         base: "&Eacute;tel"
@@ -925,7 +925,7 @@ const THE_FLEET = [
     { 
         name: "Twist Again",
         id: "twist-again",
-        pix: "./images/boats/twist.again.sq.png",
+        pix: "/images/boats/twist.again.sq.png",
         type: "JOD 35",
         category: EX_BOAT,
         base: "Saint&#8209;Philibert"
@@ -933,7 +933,7 @@ const THE_FLEET = [
     { 
         name: "Ia Orana",
         id: "ia-orana",
-        pix: "./images/boats/ia.orana.sq.png",
+        pix: "/images/boats/ia.orana.sq.png",
         type: "Milord",
         category: EX_BOAT,
         base: "--"
@@ -941,7 +941,7 @@ const THE_FLEET = [
     {
         name: "Melkart",
         id: "melkart",
-        pix: "./images/boats/melkart/melkart.00.jpg",
+        pix: "/images/boats/melkart/melkart.00.jpg",
         type: "Evasion 32",
         category: NONE,
         base: "&Eacute;tel"
@@ -949,7 +949,7 @@ const THE_FLEET = [
     {
         name: "Babou",
         id: "babou",
-        pix: "./images/boats/babou.sq.png",
+        pix: "/images/boats/babou.sq.png",
         type: "Flying Phantom",
         category: NONE,
         base: "Saint&#8209;Philibert"
@@ -957,7 +957,7 @@ const THE_FLEET = [
     {
         name: "Mirella",
         id: "mirella",
-        pix: "./images/boats/mirella.png",
+        pix: "/images/boats/mirella.png",
         type: "Maica 12,50",
         category: NONE,
         base: "Saint&nbsp;Brieuc"
@@ -965,7 +965,7 @@ const THE_FLEET = [
     { 
         name: "Tri Yann",
         id: "tri-yann",
-        pix: "./images/boats/tri.yann.png",
+        pix: "/images/boats/tri.yann.png",
         type: "Trimaran Allegro",
         category: CLUB,
         base: "Saint&#8209;Philibert"
@@ -973,7 +973,7 @@ const THE_FLEET = [
     { 
         name: "Rozen an Avel",
         id: "rozen-an-avel",
-        pix: "./images/boats/rozen.an.avel.jpeg",
+        pix: "/images/boats/rozen.an.avel.jpeg",
         type: "Arp&egrave;ge",
         category: NONE,
         base: "Saint&#8209;Philibert"
@@ -981,7 +981,7 @@ const THE_FLEET = [
     { 
         name: "Avel Mad",
         id: "avel-mad",
-        pix: "./images/boats/avel.mad.sq.png",
+        pix: "/images/boats/avel.mad.sq.png",
         type: "Mousquetaire",
         category: EX_BOAT,
         base: "Le&nbsp;Bono"
@@ -989,7 +989,7 @@ const THE_FLEET = [
     { 
         name: "F&eacute;licie",
         id: "felicie",
-        pix: "./images/boats/felicie.sq.png",
+        pix: "/images/boats/felicie.sq.png",
         type: "One off Presles",
         category: EX_BOAT,
         base: "Dakar"
@@ -997,7 +997,7 @@ const THE_FLEET = [
     { 
         name: "La R&ecirc;veuse",
         id: "la.reveuse",
-        pix: "./images/boats/la.reveuse.sq.png",
+        pix: "/images/boats/la.reveuse.sq.png",
         type: "Damien 40",
         category: NONE,
         base: "Arzal"
@@ -1005,7 +1005,7 @@ const THE_FLEET = [
     { 
         name: "Tokad 2",
         id: "tokad-2",
-        pix: "./images/boats/tokad.2.sq.png",
+        pix: "/images/boats/tokad.2.sq.png",
         type: "Neptune 99",
         category: NONE,
         base: "Le&nbsp;Crouesty"
@@ -1013,7 +1013,7 @@ const THE_FLEET = [
     { 
         name: "Taapuna",
         id: "taapuna",
-        pix: "./images/boats/taapuna.png",
+        pix: "/images/boats/taapuna.png",
         type: "Edel 660",
         category: CLUB,
         base: "Rivi&egrave;re de Saint&#8209;Philibert"
@@ -1021,7 +1021,7 @@ const THE_FLEET = [
     { 
         name: "L'heure bleue",
         id: "heure-bleue",
-        pix: "./images/boats/lheure.bleue.jpeg",
+        pix: "/images/boats/lheure.bleue.jpeg",
         type: "Arp&egrave;ge",
         category: NONE,
         base: "Golfe&nbsp;du&nbsp;Morbihan"
@@ -1029,7 +1029,7 @@ const THE_FLEET = [
     { 
         name: "Jolly Jumper",
         id: "jolly-jumper",
-        pix: "./images/boats/jolly.jumper.01.jpg",
+        pix: "/images/boats/jolly.jumper.01.jpg",
         type: "First 325",
         category: NONE,
         base: "Les&nbsp;Sables&nbsp;d'Olonne"
@@ -1037,7 +1037,7 @@ const THE_FLEET = [
     { 
         name: "Passpartout",
         id: "passpartout",
-        pix: "./images/boats/passpartout.sq.png",
+        pix: "/images/boats/passpartout.sq.png",
         type: "One off",
         category: NONE,
         base: "Lorient"
@@ -1045,7 +1045,7 @@ const THE_FLEET = [
     { 
         name: "Melvan",
         id: "melvan",
-        pix: "./images/boats/melvan.sq.png",
+        pix: "/images/boats/melvan.sq.png",
         type: "Karat&eacute;&nbsp;33",
         category: NONE,
         base: "Toulon"
@@ -1053,7 +1053,7 @@ const THE_FLEET = [
     { 
         name: "Saigane",
         id: "saigane",
-        pix: "./images/boats/saigane/saigane.jpg",
+        pix: "/images/boats/saigane/saigane.jpg",
         type: "Dufour 2800",
         category: CLUB,
         base: "Port&nbsp;Blanc"
@@ -1061,7 +1061,7 @@ const THE_FLEET = [
     { 
         name: "Anao",
         id: "anao",
-        pix: "./images/boats/anao.jpeg",
+        pix: "/images/boats/anao.jpeg",
         type: "Folie Douce",
         category: EX_BOAT,
         base: "&Eacute;tel"
@@ -1069,7 +1069,7 @@ const THE_FLEET = [
     { 
         name: "Trehudal",
         id: "trehudal",
-        pix: "./images/boats/trehudal.png",
+        pix: "/images/boats/trehudal.png",
         type: "Nicholson 33",
         category: NONE,
         base: "La&nbsp;Trinit&eacute;"
@@ -1077,7 +1077,7 @@ const THE_FLEET = [
     { 
         name: "Jules Verne",
         id: "jules-verne",
-        pix: "./images/boats/jules.verne.sq.png",
+        pix: "/images/boats/jules.verne.sq.png",
         type: "Sir 520",
         category: CLUB,
         base: "Locmariaquer"
@@ -1085,7 +1085,7 @@ const THE_FLEET = [
     { 
         name: "Remora",
         id: "remora",
-        pix: "./images/boats/remora.sq.png",
+        pix: "/images/boats/remora.sq.png",
         type: "Arcachonnais",
         category: TO_GRAB,
         base: "Saint&#8209;Philibert"
@@ -1093,7 +1093,7 @@ const THE_FLEET = [
     { 
         name: "Stiren ar Mor",
         id: "stiren",
-        pix: "./images/boats/stiren.er.mor.png",
+        pix: "/images/boats/stiren.er.mor.png",
         type: "Ghibli",
         category: NONE,
         base: "La&nbsp;Trinit&eacute;"
@@ -1101,7 +1101,7 @@ const THE_FLEET = [
     { 
         name: "Coevic 2",
         id: "coevic-2",
-        pix: "./images/boats/coevic-2.png",
+        pix: "/images/boats/coevic-2.png",
         type: "Mirage 28",
         category: NONE,
         base: "Kernevel"
@@ -1109,7 +1109,7 @@ const THE_FLEET = [
     { 
         name: "Ma Enez",
         id: "ma-enez",
-        pix: "./images/boats/ma.enez.png",
+        pix: "/images/boats/ma.enez.png",
         type: "Symphonie",
         category: NONE,
         base: "La&nbsp;Trinit&eacute;"
@@ -1117,7 +1117,7 @@ const THE_FLEET = [
     { 
         name: "Saudade",
         id: "saudade",
-        pix: "./images/boats/saudade.png",
+        pix: "/images/boats/saudade.png",
         type: "Super Arlequin",
         category: NONE,
         base: "Le&nbsp;Bono"
@@ -1125,7 +1125,7 @@ const THE_FLEET = [
     { 
         name: "Imagine",
         id: "imagine",
-        pix: "./images/boats/selection.png",
+        pix: "/images/boats/selection.png",
         type: "Selection&nbsp;37",
         category: NONE,
         base: "Ouistreham"
@@ -1133,7 +1133,7 @@ const THE_FLEET = [
     { 
         name: "Gwenillig",
         id: "gwenillig",
-        pix: "./images/boats/gwenillig.png",
+        pix: "/images/boats/gwenillig.png",
         type: "Eygthene 24",
         category: CLUB,
         base: "--"
@@ -1141,7 +1141,7 @@ const THE_FLEET = [
     { 
         name: "Lohengrin",
         id: "lohengrin",
-        pix: "./images/boats/lohengrin/lohengrin.png",
+        pix: "/images/boats/lohengrin/lohengrin.png",
         type: "Ketch en Acier",
         category: TO_GRAB,
         base: "Arzal"
@@ -1149,7 +1149,7 @@ const THE_FLEET = [
     { 
         name: "Nomadict",
         id: "nomadict",
-        pix: "./images/boats/nomadict/nomadict.00.jpg",
+        pix: "/images/boats/nomadict/nomadict.00.jpg",
         type: "Gin Fizz",
         category: TO_GRAB,
         base: "Concarneau"
@@ -1157,7 +1157,7 @@ const THE_FLEET = [
     { 
         name: "Velona",
         id: "velona",
-        pix: "./images/boats/velona/velona.00.jpg",
+        pix: "/images/boats/velona/velona.00.jpg",
         type: "Classic Old Gaffer",
         category: TO_GRAB,
         base: "Hennebont"
@@ -1168,7 +1168,7 @@ const THE_TEAM = [
     {
         id: "pj",
         boss: true,
-        image: "./images/the.team/pj.png",
+        image: "/images/the.team/pj.png",
         label: {
             fr: "Pierre-Jean<br/>Pr&eacute;sident",
             en: "Pierre-Jean<br/>CEO"
@@ -1176,7 +1176,7 @@ const THE_TEAM = [
     }, {
         id: "regis",
         boss: false,
-        image: "./images/the.team/regis.2.jpg",
+        image: "/images/the.team/regis.2.jpg",
         label: {
             fr: "R&eacute;gis<br/>Administrateur / p&eacute;dagogie, relation avec les lyc&eacute;es et les GRETA",
             en: "R&eacute;gis<br/>Administrator / pedagogy, relationship with high schools and GRETA"
@@ -1184,7 +1184,7 @@ const THE_TEAM = [
     }, {
         id: "catherine",
         boss: false,
-        image: "./images/catherine.png",
+        image: "/images/catherine.png",
         label: {
             fr: "Catherine<br/>Tr&eacute;sori&egrave;re",
             en: "Catherine<br/>CFO"
@@ -1192,7 +1192,7 @@ const THE_TEAM = [
     }, {
         id: "olivier",
         boss: false,
-        image: "./images/olivier.png",
+        image: "/images/olivier.png",
         label: {
             fr: "Olivier<br/>Web / High &amp; Low-Tech",
             en: "Olivier<br/>Web / High &amp; Low-Tech"
@@ -1200,7 +1200,7 @@ const THE_TEAM = [
     }, {
         id: "jeff",
         boss: false,
-        image: "./images/the.team/jeff.png",
+        image: "/images/the.team/jeff.png",
         label: {
             fr: "Jeff<br/>D&eacute;veloppement",
             en: "Jeff<br/>Development"
@@ -1208,7 +1208,7 @@ const THE_TEAM = [
     }, {
         id: "alain",
         boss: false,
-        image: "./images/the.team/alain.2.jpg",
+        image: "/images/the.team/alain.2.jpg",
         label: {
             fr: "Alain<br/>Directeur technique",
             en: "Alain<br/>CTO"
@@ -1216,7 +1216,7 @@ const THE_TEAM = [
     }, {
         id: "michel",
         boss: false,
-        image: "./images/the.team/michel.jpeg",
+        image: "/images/the.team/michel.jpeg",
         label: {
             fr: "Michel<br/>Photos",
             en: "Michel<br/>Photography"
@@ -1224,7 +1224,7 @@ const THE_TEAM = [
     }, {
         id: "anne",
         boss: false,
-        image: "./images/anne.png",
+        image: "/images/anne.png",
         label: {
             fr: "Anne<br/>Communication",
             en: "Anne<br/>Communication"
@@ -1232,7 +1232,7 @@ const THE_TEAM = [
     }, {
         id: "stephane",
         boss: false,
-        image: "./images/stephane.jpeg",
+        image: "/images/stephane.jpeg",
         label: {
             fr: "St&eacute;phane<br/>Monde Sportif, Course au large : FFV",
             en: "St&eacute;phane<br/>Sports World, Offshore racing: FFV"
@@ -1240,7 +1240,7 @@ const THE_TEAM = [
     }, {
         id: "bernard",
         boss: false,
-        image: "./images/the.team/bernard.jpeg",
+        image: "/images/the.team/bernard.jpeg",
         label: {
             fr: "Expert Grand Large, et r&eacute;f&eacute;rent de \"La Cardinale\"",
             en: "Bernard<br/>High seas expert, and referent of \"La Cardinale\""
@@ -1248,7 +1248,7 @@ const THE_TEAM = [
     }, {
         id: "gng",
         boss: false,
-        image: "./images/the.team/gag.jpg",
+        image: "/images/the.team/gag.jpg",
         label: {
             fr: "Gabrielle et Guy<br/>D&eacute;veloppement du Boat Club",
             en: "Gabrielle et Guy<br/>Boat Club development"
@@ -1262,7 +1262,7 @@ const INFO_SECTION = [
         content: [{
             date: "Jan-2024",
             title: "Agenda 2024",
-            content: "./actu/agenda2024.html"
+            content: "/actu/agenda2024.html"
         }]
     },
     {
@@ -1270,11 +1270,11 @@ const INFO_SECTION = [
         content: [{
             date: "Jan-2024",
             title: "Early 2024",
-            content: "./actu/2024/bpgo.html"
+            content: "/actu/2024/bpgo.html"
         }, {
             date: "Jan-2024",
             title: "Early 2024",
-            content: "./actu/2024/new.site.html"
+            content: "/actu/2024/new.site.html"
         }]
     },
     { 
@@ -1283,23 +1283,23 @@ const INFO_SECTION = [
             {
                 date: "Oct-2023",
                 title: "Festival des aventuriers",
-                content: "./actu/2023/fam.html"
+                content: "/actu/2023/fam.html"
             },{
                 date: "Sep-2023",
                 title: "Forum Asso",
-                content: "./actu/2023/forum.html"
+                content: "/actu/2023/forum.html"
             },{
                 date: "Sep-2023",
                 title: "Assises de la mer",
-                content: "./actu/2023/assises.html"
+                content: "/actu/2023/assises.html"
             },{
                 date: "Aug-2023",
                 title: "Carter Cup",
-                content: "./actu/2023/carter.cup.html"
+                content: "/actu/2023/carter.cup.html"
             },{
                 date: "Chepakan",
                 title: "Passe-Coque Trophy",
-                content: "./actu/2023/passe-coque.trophy.html"
+                content: "/actu/2023/passe-coque.trophy.html"
             }
         ]
     },
@@ -1309,12 +1309,12 @@ const INFO_SECTION = [
             {
                 date: "2022",
                 title: "2022",
-                content: "./actu/2022/news.01.html"
+                content: "/actu/2022/news.01.html"
             },
             {
                 date: "2022",
                 title: "2022",
-                content: "./actu/2022/news.02.html"
+                content: "/actu/2022/news.02.html"
             }
         ]
     },
@@ -1324,7 +1324,7 @@ const INFO_SECTION = [
             {
                 date: "2021",
                 title: "2021",
-                content: "./actu/2021/year.html"
+                content: "/actu/2021/year.html"
             }
         ]
     },
@@ -1334,7 +1334,7 @@ const INFO_SECTION = [
             {
                 date: "2020",
                 title: "2020",
-                content: "./actu/2020/year.html"
+                content: "/actu/2020/year.html"
             }
         ]
     },
@@ -1344,7 +1344,7 @@ const INFO_SECTION = [
             {
                 date: "2019",
                 title: "2019",
-                content: "./actu/2019/year.html"
+                content: "/actu/2019/year.html"
             }
         ]
     },
@@ -1354,7 +1354,7 @@ const INFO_SECTION = [
             {
               date: "",
               title: "All news letters",
-              content: "./actu/newsletters.html"
+              content: "/actu/newsletters.html"
             }
         ]
     },
@@ -1364,7 +1364,7 @@ const INFO_SECTION = [
             {
                 date: "",
                 title: "All Communications",
-                content: "./actu/communications.html"
+                content: "/actu/communications.html"
               }
           ]
     }
@@ -1601,7 +1601,7 @@ let fillOutActu = filter => {
         // Now loop on sub-elements in the section
         section.content.forEach(event => {
             // title: "Passe-Coque Trophy"
-            // content: "./actu/2023/passe-coque.trophy.html"
+            // content: "/actu/2023/passe-coque.trophy.html"
             console.log(`Adding event ${event.title}`);
             let eventDiv = document.createElement('div');
             eventDiv.style = "margin: 20px;";
