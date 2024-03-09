@@ -300,6 +300,8 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
     return content;
 };
 
+let ZOOM_POSITIONS = [];
+var map;
 
 function makeMarker(markerData) {
     L.marker([markerData.position.lat, markerData.position.lng])
@@ -326,6 +328,13 @@ function decToSex(val, ns_ew) {
     return s;
 }
 
+function flyToZoom(idx) {
+    // map.panTo(ZOOM_POSITIONS[idx]);
+    // map.setView(ZOOM_POSITIONS[idx], 18);
+    map.flyTo(ZOOM_POSITIONS[idx]);
+}
+
+
 let initBoatClubBases = () => {
 
     const homeBelz     = new L.LatLng(47.677667, -3.135667);
@@ -337,7 +346,18 @@ let initBoatClubBases = () => {
     const concarneau   = new L.LatLng(47.870353, -3.914394);
     const kerran       = new L.LatLng(47.598399, -2.981517);
 
-    let map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
+    ZOOM_POSITIONS = [
+        homeBelz,
+        labOcean,
+        etel,
+        laTrinite,
+        lesSables,
+        laRochelle,
+        concarneau,
+        kerran
+    ];
+
+    map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
 
     let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
     let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
@@ -354,8 +374,7 @@ let initBoatClubBases = () => {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         opacity: 0.5
     }).addTo(map);
-    // map.setView([37.748890, -122.51138198], 15); SF. 48th Ave.
-    map.setView([47.677667, -3.135667], 10); // Belz
+    map.setView([47.598399, -2.981517], 14); // Kerran
 
     if (false) {
         makeMarker({
