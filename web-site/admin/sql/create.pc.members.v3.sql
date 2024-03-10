@@ -9,7 +9,7 @@
 --
 -- yves-aumont@club-internet.fr has no name...
 --
--- To check: didier-de.puyraimond@tactiques.fr, 'Didier De Puyraymond', unjourdaout@gmail.com
+-- To check: didier-de.puyraimond@tactiques.fr, 'Didier De Puyraymond', => unjourdaout@gmail.com
 --
 CREATE TABLE IF NOT EXISTS PASSE_COQUE_MEMBERS (
     EMAIL VARCHAR(64) PRIMARY KEY,
@@ -19,7 +19,10 @@ CREATE TABLE IF NOT EXISTS PASSE_COQUE_MEMBERS (
     AMOUNT INT,
     TELEPHONE VARCHAR(32),
     FIRST_ENROLLED TIMESTAMP,
-    NEWS_LETTER_OK BOOLEAN DEFAULT TRUE
+    NEWS_LETTER_OK BOOLEAN DEFAULT TRUE,
+    PASSWORD VARCHAR(64),
+    ADMIN_PRIVILEGES BOOLEAN DEFAULT FALSE,
+    SOME_CONTENT VARCHAR(512) COMMENT 'Whatever you want goes here'
 );
 
 CREATE TABLE IF NOT EXISTS MEMBER_FEES (
@@ -674,3 +677,10 @@ INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, AMOUNT, TE
 INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, AMOUNT, TELEPHONE, FIRST_ENROLLED) VALUES( 'ken.woehrle@gmail.com', 'Woehrle', 'Ken', 'Skipper référent', 200, '06 65 64 42 26', '2021-08-22 00:00:00');
 INSERT INTO MEMBER_FEES (EMAIL, YEAR) VALUES ('ken.woehrle@gmail.com', 2021);
 INSERT INTO MEMBER_FEES (EMAIL, YEAR) VALUES ('ken.woehrle@gmail.com', 2022);
+--
+-- Extra
+SELECT * FROM PASSE_COQUE_MEMBERS WHERE EMAIL = 'admin@passe-coque.com';
+DELETE FROM PASSE_COQUE_MEMBERS WHERE EMAIL = 'admin@passe-coque.com';
+INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, ADMIN_PRIVILEGES, PASSWORD, SOME_CONTENT) VALUES ('admin@passe-coque.com', 'Administrator', 'The big boss', 'N/A', TRUE, sha1('manager'), 'Created to mess with the DB and other touchy stuff.');
+SELECT * FROM PASSE_COQUE_MEMBERS WHERE EMAIL = 'admin@passe-coque.com';
+--
