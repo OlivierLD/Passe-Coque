@@ -70,8 +70,10 @@ if (isset($_POST['operation'])) {
     try {
       // $link = mysqli_init();  // Mandatory ?
 
-      $form_username = $_POST['username'];
+      $form_username = $_POST['username'];  // Aka email
       $form_password = $_POST['password'];
+
+      echo ("looking for credentials for $form_username .<br/>");
     
       // echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
@@ -83,18 +85,27 @@ if (isset($_POST['operation'])) {
         // echo("Connected.<br/>");
       }
     
-      $sql = "SELECT PASSWORD, DISPLAY_NAME, ADMIN_PRIVILEGES FROM PC_USERS WHERE USERNAME = '$form_username';"; 
+      $sql = "SELECT PASSWORD, CONCAT(FIRST_NAME, ' ', LAST_NAME), ADMIN_PRIVILEGES FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$form_username';"; 
       
-      // echo('Performing query <code>'.$sql.'</code><br/>');
+      // echo('Performing query <code>'.$sql.'</code><br/>Pswd Length:' . strlen(trim($form_password)) );
     
       // $result = mysql_query($sql, $link);
       $result = mysqli_query($link, $sql);
       // echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
-      if ($result->num_rows == 0) {
-        if ($current_lang == "FR") {
-          echo "Utilisateur $form_username inconnu.<br/>" . PHP_EOL;
-        } else {
-          echo "No such user $form_username <br/>" . PHP_EOL;
+      if ($result->num_rows == 0 || strlen(trim($form_password)) == 0) {
+        if ($result->num_rows == 0) {
+          if ($current_lang == "FR") {
+            echo "Utilisateur $form_username inconnu.<br/>" . PHP_EOL;
+          } else {
+            echo "No such user $form_username <br/>" . PHP_EOL;
+          }
+        }
+        if (strlen(trim($form_password)) == 0) {
+          if ($current_lang == "FR") {
+            echo "Le password est obligatoire.<br/>" . PHP_EOL;
+          } else {
+            echo "Password is required <br/>" . PHP_EOL;
+          }
         }
         session_destroy();
         ?>
@@ -127,7 +138,7 @@ if (isset($_POST['operation'])) {
 
           $_SESSION['USER_NAME'] = $form_username;
           // $_SERVER['PHP_AUTH_PW'] = $form_password;
-          $_SESSION['DISPLAY_NAME'] = $display_name;
+          $_SESSION['DISPLAY_NAME'] = urldecode($display_name);
           $_SESSION['ADMIN'] = $admin_privileges;
           // Welcome !
           // If arrives here, is a valid user.
