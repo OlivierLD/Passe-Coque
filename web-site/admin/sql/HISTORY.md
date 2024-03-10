@@ -31,3 +31,5 @@ CREATE TABLE IF NOT EXISTS MEMBER_FEES (
 Le traitement du fichier Excel g&eacute;n&egrave;re un script comme [celui-ci](./create.pc.members.v3.sql).  
 L'en t&ecirc;te du ficher rel&egrave;ve des doublons dans les adresses email.  
 L'adresse email est la cl&eacute; primaire de la table `PASSE_COQUE_MEMBERS`.
+
+---
