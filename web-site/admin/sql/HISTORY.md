@@ -22,6 +22,9 @@ CREATE TABLE IF NOT EXISTS MEMBER_FEES (
     CONSTRAINT FEES_FK_MEMBERS FOREIGN KEY (EMAIL) REFERENCES PASSE_COQUE_MEMBERS (EMAIL) ON DELETE CASCADE
 );
 ```
+## TODO
+- Add `password`, `admin`, `comments`.
 
 Le traitement du fichier Excel genere un script comme [celui-ci](./create.pc.members.v3.sql).  
-L'en tete du ficher releve des doublons dans les adresse email.
+L'en t&ecirc;te du ficher rel&egrave;ve des doublons dans les adresses email.  
+L'adresse email est la cl&eacute; primaire de la table `PASSE_COQUE_MEMBERS`.
