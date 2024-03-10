@@ -1,0 +1,27 @@
+# 9 Mars 2024
+Migration d'un fichier Excel vers la base de donn&eacute;es
+
+Deux tables sont créées :
+
+```sql
+CREATE TABLE IF NOT EXISTS PASSE_COQUE_MEMBERS (
+    EMAIL VARCHAR(64) PRIMARY KEY,
+    LAST_NAME VARCHAR(64) NOT NULL,
+    FIRST_NAME VARCHAR(64) NOT NULL,
+    TARIF VARCHAR(64),
+    AMOUNT INT,
+    TELEPHONE VARCHAR(32),
+    FIRST_ENROLLED TIMESTAMP,
+    NEWS_LETTER_OK BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS MEMBER_FEES (
+    EMAIL VARCHAR(64),
+    YEAR INT,
+    CONSTRAINT FEES_PK PRIMARY KEY(EMAIL, YEAR),
+    CONSTRAINT FEES_FK_MEMBERS FOREIGN KEY (EMAIL) REFERENCES PASSE_COQUE_MEMBERS (EMAIL) ON DELETE CASCADE
+);
+```
+
+Le traitement du fichier Excel genere un script comme [celui-ci](./create.pc.members.v3.sql).  
+L'en tete du ficher releve des doublons dans les adresse email.
