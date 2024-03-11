@@ -1,3 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../passe-coque.css">
+	<title>Send NL-Email With Attachment</title>
+    <style type="text/css">
+        h3 {
+            margin: 0 10px;
+        }
+		textarea.form-control {
+			height: 200px;
+		}
+		.form-group {
+			margin-bottom: 1rem
+		}
+		.form-control {
+			display: inline-block;
+			width: 400px;
+			vertical-align: middle
+		}
+		a:link, a:visited {
+			background-color: #f44336;
+			color: white;
+			padding: 14px 25px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 10px;
+		}
+		a:hover, a:active {
+			background-color: red;
+		}
+    </style>
+</head>
+<body>
+
 <?php
 // Original code from https://www.geeksforgeeks.org/php-send-attachment-email/
 
@@ -10,6 +49,7 @@ $dbhost = "passecc128.mysql.db";
 if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 
 	// echo ("Top Loop<br/>");
+	echo ("<h2>Sending process initiated</h2>" . PHP_EOL);
 
 	$from_email		 = 'contact@passeurdecoute.fr'; // 'sender@abc.com';    // from mail, sender email address
 	// Recipient, from DB
@@ -79,6 +119,8 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		// $result = mysql_query($sql, $link);
 		$result = mysqli_query($link, $sql);
 		echo ("Will send " . $result->num_rows . " email(s)<br/>");
+
+		set_time_limit($result->num_rows); // 1 second per email
 	  
 		while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
 		  // echo "table contains ". count($table) . " entry(ies).<br/>";
@@ -108,6 +150,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		  $body .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
 		  $body .= $encoded_content; // Attaching the encoded file with email
 	  
+		  // TODO Bcc in the headers (see https://stackoverflow.com/questions/9525415/php-email-sending-bcc)
 		  $sentMailResult = mail($subscriber_email, $subject, $body, $headers);
 
 		  if ($sentMailResult) {
@@ -127,35 +170,9 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	  }
 	  echo "<hr/>" . PHP_EOL;
 	  // TODO A Button to get back to the page.
+	  echo ("<a href=''>Back !</a><br/>" . PHP_EOL);
 } else {
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../../passe-coque.css">
-	<title>Send NL-Email With Attachment</title>
-    <style type="text/css">
-        h3 {
-            margin: 0 10px;
-        }
-		textarea.form-control {
-			height: 200px;
-		}
-		.form-group {
-			margin-bottom: 1rem
-		}
-		.form-control {
-			display: inline-block;
-			width: 400px;
-			vertical-align: middle
-		}
-    </style>
-</head>
-<body>
 	Choose the pdf containing the news letter, enter a message (the content of the email), and click the button!
 	<div style="display: flex; justify-content: center; margin-top: 10px;">
 		<form enctype="multipart/form-data" method="POST" action="" style="width: 500px;">
@@ -179,11 +196,11 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 			</div>		 
 		</form>
 	</div>
+	<?php
+}
+	?>
 	<hr/>
 	<address>&copy; Passe-Coque, 2024</address>
 </body>
 </html>
-<?php
-}
-?>
 
