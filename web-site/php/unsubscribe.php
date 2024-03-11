@@ -56,8 +56,9 @@ if (isset($_GET['subscriber-id'])) {
             // echo("Connected.<br/>");
         }
 
-        $sql = "SELECT EMAIL, NAME, ACTIVE FROM NL_SUBSCRIBERS WHERE ID = $nl_id;"; 
-        // echo('Performing query <code>'.$sql.'</code><br/>');
+        $sql = "SELECT EMAIL, LAST_NAME, FIRST_NAME, NEWS_LETTER_OK FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$nl_id';"; 
+        
+        echo('Performing query <code>'.$sql.'</code><br/>');
 
         // $result = mysql_query($sql, $link);
         $result = mysqli_query($link, $sql);
@@ -71,8 +72,8 @@ if (isset($_GET['subscriber-id'])) {
             while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
                 // echo "table contains ". count($table) . " entry(ies).<br/>";
                 $email = $table[0];
-                $name = $table[1];
-                $active = $table[2];
+                $name = $table[1] . ' ' . $table[2];
+                $active = $table[3];
             }
             echo "<p>Bienvenue $name.</p>" . PHP_EOL;
             if ($active) {
@@ -102,7 +103,7 @@ if (isset($_GET['subscriber-id'])) {
     if ($operation == 'unsubscribe') {
         if (isset($_POST['nl-id'])) {
             $nl_id = $_POST['nl-id'];
-            $sql = "UPDATE NL_SUBSCRIBERS SET ACTIVE = FALSE WHERE ID = $nl_id;";
+            $sql = "UPDATE PASSE_COQUE_MEMBERS SET NEWS_LETTER_OK = FALSE WHERE EMAIL = '$nl_id';";
             try {
                 // echo("Will connect on ".$database." ...<br/>");
                 $link = new mysqli($dbhost, $username, $password, $database);

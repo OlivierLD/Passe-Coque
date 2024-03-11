@@ -8,6 +8,9 @@ $dbhost = "passecc128.mysql.db";
 
 
 if (isset($_POST['button']) && isset($_FILES['attachment'])) {
+
+	// echo ("Top Loop<br/>");
+
 	$from_email		 = 'contact@passeurdecoute.fr'; // 'sender@abc.com';    // from mail, sender email address
 	// Recipient, from DB
 	// $recipient_email = 'olivier.lediouris@gmail.com'; // 'recipient@xyz.com'; // recipient email address
@@ -62,16 +65,16 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		  // echo("Connected.<br/>");
 		}
 	  
-		$sql = 'SELECT ID, NAME, EMAIL, SUBSCRIPTION_DATE, ACTIVE ' . 
-		       'FROM NL_SUBSCRIBERS ' . 
+		$sql = 'SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK ' . 
+		       'FROM PASSE_COQUE_MEMBERS ' . 
 			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here, and below...
-			   '      AND (NAME LIKE \'%Le Diouris%\' ' .
-			   '        OR NAME LIKE \'%Guy%Gab%\' ' . 
-			   '        OR NAME LIKE \'%Allais%\' ' . 
-			   '        OR NAME LIKE \'%Pierre-Jean%\')' .
-			   '      AND ACTIVE = TRUE;'; 
+//			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\') ' .
+//			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\' ' .
+//			   '        OR LAST_NAME LIKE \'%Allais%\' ' . 
+//			   '        OR FIRST_NAME LIKE \'%Pierre-Jean%\')' .
+			   '      AND NEWS_LETTER_OK = TRUE;'; 
 		
-		// echo('Performing query <code>'.$sql.'</code><br/>');
+		echo('Performing query <code>'.$sql.'</code><br/>');
 	  
 		// $result = mysql_query($sql, $link);
 		$result = mysqli_query($link, $sql);
@@ -79,9 +82,9 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	  
 		while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
 		  // echo "table contains ". count($table) . " entry(ies).<br/>";
-		  $active = ($table[4]/* === true*/) ? "Yes" : "No";
+		  $active = ($table[3]/* === true*/) ? "Yes" : "No";
 		  $nl_id = $table[0];
-		  $subscriber_email = $table[2];
+		  $subscriber_email = $table[0];
 
 		  $footer = "<br/><hr/><p>"; 
 		  $footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
@@ -105,13 +108,13 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		  $body .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
 		  $body .= $encoded_content; // Attaching the encoded file with email
 	  
-
 		  $sentMailResult = mail($subscriber_email, $subject, $body, $headers);
 
 		  if ($sentMailResult) {
 			  echo "Email to $subscriber_email was sent successfully.<br/>" . PHP_EOL;
 			  // unlink($name); // delete the file after attachment sent.
 		  } else {
+			  echo "There was a problem for $subscriber_email ...<br/>";
 			  die("Sorry but the email to $subscriber_email could not be sent. Please go back and try again!");
 		  }	  
 		}
@@ -123,8 +126,8 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
 	  }
 	  echo "<hr/>" . PHP_EOL;
-
-}
+	  // TODO A Button to get back to the page.
+} else {
 ?>
 
 <!DOCTYPE html>
@@ -153,7 +156,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
     </style>
 </head>
 <body>
-	Choose the pdf containing the news letter, enter a message, and click the button!
+	Choose the pdf containing the news letter, enter a message (the content of the email), and click the button!
 	<div style="display: flex; justify-content: center; margin-top: 10px;">
 		<form enctype="multipart/form-data" method="POST" action="" style="width: 500px;">
 			<div class="form-group">
@@ -180,3 +183,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	<address>&copy; Passe-Coque, 2024</address>
 </body>
 </html>
+<?php
+}
+?>
+
