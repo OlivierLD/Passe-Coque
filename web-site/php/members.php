@@ -140,6 +140,7 @@ if (isset($_POST['operation'])) {
           // $_SERVER['PHP_AUTH_PW'] = $form_password;
           $_SESSION['DISPLAY_NAME'] = urldecode($display_name);
           $_SESSION['ADMIN'] = $admin_privileges;
+          $_SESSION['USER_ID'] = $form_username;
           // Welcome !
           // If arrives here, is a valid user.
           // $mess = ($current_lang == "FR") ? "Bienvenue" : "Welcome";
@@ -150,7 +151,7 @@ if (isset($_POST['operation'])) {
           }
           echo "<p>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . ".</p>" . PHP_EOL;
           ?>
-          <a href="members.02.php"><?php echo ($current_lang == "FR") ? "On continue..." : "Further..." ?></a>
+          <a href="members.02.php"><?php echo ($current_lang == "FR") ? "On continue..." : "Further..." ?></a> <!-- LA SUITE ! -->
           <hr/>
           <form action="members.php" method="post">
             <input type="hidden" name="operation" value="logout">
@@ -224,7 +225,7 @@ if (isset($_POST['operation'])) {
       <table>
         <tr>
           <td><?php echo ($current_lang == "FR") ? "Identifiant" : "Username" ?></td>
-          <td><input type="text" name="username" size="30"></td>
+          <td><input type="text" name="username" size="30" placeholder="Email"></td>
         </tr>
         <tr>
           <td><?php echo ($current_lang == "FR") ? "Mot de passe" : "Password" ?></td>

@@ -47,6 +47,7 @@ if (isset($_GET['lang'])) {
 $userName = $_SESSION['USER_NAME'];
 $displayName = $_SESSION['DISPLAY_NAME'];
 $adminPrivileges = $_SESSION['ADMIN'];
+$user_id = $_SESSION['USER_ID'];
 
 if ($current_lang == "FR") {
   echo "<h2>Bienvenue [$displayName] dans votre espace priv&eacute;.</h2><br/>" . PHP_EOL;
@@ -64,6 +65,7 @@ if ($current_lang == "FR") {
     ?>
     Vous voulez :
     <ul>
+      <li><a href="members.03.php">Changer votre mot de passe (pour <?php echo $user_id ?>)</a></li>
       <li><a href="#" onclick="alert('Plus tard');">G&eacute;rer vos cotisations</a></li>
       <li><a href="#" onclick="alert('Plus tard');">R&eacute;server un bateau</a></li>
       <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
@@ -85,6 +87,7 @@ if ($current_lang == "FR") {
     ?>
     You want to:
     <ul>
+      <li><a href="members.03.php">Change your password (for <?php echo $user_id ?>)</a></li>
       <li><a href="#" onclick="alert('Later');">Manage your subscriptions</a></li>
       <li><a href="#" onclick="alert('Later');">Book a boat</a></li>
       <li><a href="#" onclick="alert('Later');">. . . </a></li>
