@@ -66,7 +66,7 @@ if ($current_lang == "FR") {
     Vous voulez :
     <ul>
       <li><a href="members.03.php">Changer votre mot de passe (pour <?php echo $user_id ?>)</a></li>
-      <li><a href="#" onclick="alert('Plus tard');">G&eacute;rer vos cotisations</a></li>
+      <li><a href="members.04.php">Voir vos cotisations</a></li>
       <li><a href="#" onclick="alert('Plus tard');">R&eacute;server un bateau</a></li>
       <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
     </ul>
@@ -88,7 +88,7 @@ if ($current_lang == "FR") {
     You want to:
     <ul>
       <li><a href="members.03.php">Change your password (for <?php echo $user_id ?>)</a></li>
-      <li><a href="#" onclick="alert('Later');">Manage your subscriptions</a></li>
+      <li><a href="members.04.php">See your subscriptions</a></li>
       <li><a href="#" onclick="alert('Later');">Book a boat</a></li>
       <li><a href="#" onclick="alert('Later');">. . . </a></li>
     </ul>
