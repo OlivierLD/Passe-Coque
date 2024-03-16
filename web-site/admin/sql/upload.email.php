@@ -1,6 +1,10 @@
 <?php
 // Original code from https://www.geeksforgeeks.org/php-send-attachment-email/
 // An example of email sending an attached file (uploaded from the page).
+// - Define the file to attach
+// - Define the email content
+// - Loop on the active (NL-active) members, end send emails
+//   - With un-subscribe presonnalized link.
 
 if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	$from_email		 = 'olivier@lediouris.net'; // 'sender@abc.com';    // from mail, sender email address
