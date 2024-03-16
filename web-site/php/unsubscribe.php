@@ -34,10 +34,7 @@
     <!--h1>Espace Membres</h1-->
     <?php
 
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
+require __DIR__ . "/db.cred.php";
 
 // Call it like https://passe-coque.com/php/unsubscribe.php?subscriber-id=194
 

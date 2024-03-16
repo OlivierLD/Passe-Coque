@@ -1,18 +1,19 @@
 <?php
 
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
+require __DIR__ . "/db.cred.php";
 
 $VERBOSE = false;
 
 /*
  * Get users' positions and other stuff from table PC_TRACKER, in JSON format.
  * No HTML involved, absolutely none.
+ * Used as a service, returns a JSON object containing the required positions.
+ * Invoked in a fetch (with a GET), from where.are.they.html.
+ * 
+ * TODO Types enforcements...
  */
 
-function getPositions($dbhost, $username, $password, $database, $verbose) {
+function getPositions(string $dbhost, string $username, string $password, string $database, bool $verbose): string {
     try {
         $link = new mysqli($dbhost, $username, $password, $database);
         

@@ -1,10 +1,7 @@
 <?php
 // phpinfo();
 
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
+require __DIR__ . "/db.cred.php";
 
 $VERBOSE = false;
 

@@ -33,6 +33,10 @@
   <body>
     <!--h1>Espace Membres</h1-->
     <?php
+
+require __DIR__ . "/db.cred.php";
+
+
 $timeout = 60;  // In seconds
 ini_set("session.gc_maxlifetime", $timeout);
 ini_set("session.cookie_lifetime", $timeout);
@@ -45,11 +49,6 @@ if (false) {
   echo "CURRENT_LANG: " . $_SESSION['CURRENT_LANG'] . "<br/>" . PHP_EOL;
   echo "--------------------------------<br/>" . PHP_EOL;
 }
-
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
 
 $current_lang = "FR";
 if (isset($_GET['lang'])) {
