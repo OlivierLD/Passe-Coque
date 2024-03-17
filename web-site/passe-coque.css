@@ -166,7 +166,7 @@ div.tooltip:hover span {
     min-height: 280px;
     background-color: black;
     /* background-image: radial-gradient(white, silver, black); */
-    aspect-ratio : 1 / 1;  /* THAT is a cool one... */
+    aspect-ratio: 1 / 1;  /* THAT is a cool one... */
 }
 
 .image-plus-text {
