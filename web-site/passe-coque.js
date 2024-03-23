@@ -1723,6 +1723,11 @@ let updateInfoFilter = radio => {
     }
 };
 
+function onSlideShowClick(src) {
+    console.log(">> Client side!! Slide " + src + " was clicked.");
+    window.open(src, '_blank'); // This is an example
+}
+
 let fillOutActu = filter => {
     // Populate the div named actu-container
     let container = document.getElementById('actu-container');
@@ -1780,6 +1785,9 @@ let fillOutActu = filter => {
         });
         container.appendChild(sectionDiv);
     });
+
+    // Slideshows, onclick on images...
+    document.getElementById("bpgo-lorient").slideclick = onSlideShowClick;
 
 };
 
