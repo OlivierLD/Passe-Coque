@@ -47,7 +47,7 @@ As the tension of the output is proportionnal to the rotation speed, we will nee
 | ![Picture](./images/bridge.01.jpg) | ![Schema](./images/bridge.02.jpg) |
 
 The AC current enters through the 2 internal pins. Rectified current flows
-the the external pins. Positive on the bevel side, Ground on the other.
+through the external pins. Positive on the bevel side (left here), Ground on the other (on the right here).
 
 > On the diagram above, note that there is only one coil conected. The same can be done with the second one.  
 > Then it is your choice to use a serial or parallel setting.  
