@@ -6,7 +6,7 @@ We want to use the wind energy to store 5V current in a powerbank, or such kind 
 Many such examples exist on the Internet.
 - [All About Converting Stepper Motors To Generators](https://www.youtube.com/watch?v=-zCTggoh994&t=102s)
 - [LowTech lab: Wind Turbine](https://wiki.lowtechlab.org/wiki/L%27%C3%A9olienne/en-gb)
-- [Using Stepper Motors as Generators (Rectifiers, KBP 307 IC, & Alternatives)](https://www.youtube.com/watch?v=58XnKt1BxV0)
+- [Using Stepper Motors as Generators (Rectifiers, KBP 307 IC, & Alternatives)](https://www.youtube.com/watch?v=58XnKt1BxV0) 
 - And more!..
 
 They're all good, but I could not find ALL I was looking for in a single one.  
@@ -21,7 +21,7 @@ Here is the cool thing about those motors:
 - And when you rotate a stepper motor, it will provide current !  
     - This is here what we're interested in.
 
-We will use here a simple stepper motor, made of two coils - hence four wires, that can be represented this way:
+We will use here a simple stepper motor - NEMA 17, made of two coils - hence four wires, that can be represented this way:
 
 ![Stepper - 4 wires](./images/stepper.schema.png)
 
@@ -40,6 +40,15 @@ As the tension of the output is proportionnal to the rotation speed, we will nee
 
 ![Wiring](./images/01_bb.png)
 
+> _Note_: The rectifier bridge (like a `KBP 307 IC`) is **NOT** represented on the diagram above. It looks like this:  
+
+| Picture | Schema |
+|:-------:|:------:|
+| ![Picture](./images/bridge.01.jpg) | ![Schema](./images/bridge.02.jpg) |
+
+The AC current enters through the 2 internal pins. Rectified current flows
+the the external pins. Positive on the bevel side, Ground on the other.
+
 > On the diagram above, note that there is only one coil conected. The same can be done with the second one.  
 > Then it is your choice to use a serial or parallel setting.  
 > Here we'd rather use a parallel one, to keep the voltage to 5V.
@@ -47,6 +56,13 @@ As the tension of the output is proportionnal to the rotation speed, we will nee
 > - [PowerBank](https://www.arrow.com/en/products/1565/adafruit-industries)
 > - [PowerBoost](https://www.adafruit.com/product/1944)
 > - etc...
+
+#### BOM
+Bill of Materials
+- Stepper motor `NEMA 17`
+- Rectifier Bridge, like `KBP 307 IC` (one per coil)
+- A 1000&micro;F 25V capacitor (one per coil)
+- A Voltage regulator, 5V output (one per coil)
 
 ### The turbine itself
 
