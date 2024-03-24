@@ -67,6 +67,7 @@ Bill of Materials
 ### The turbine itself
 
 #### Horizontal axis ? Vertical axis ?
+[Several Options](https://all3dp.com/2/3d-printed-wind-turbines-wind-powered-gadgets/)
 
 #### Transmitting the rotation, or the current ?
 
