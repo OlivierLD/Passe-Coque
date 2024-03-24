@@ -1,3 +1,5 @@
+[French version](./README_fr.md)
+
 # Wind Generator
 ## Based on a stepper motor
 
@@ -21,6 +23,7 @@ Here is the cool thing about those motors:
 - When you provide current to a stepper motor, it will rotate.  
 - And when you rotate a stepper motor, it will provide current !  
     - This is here what we're interested in.
+    - And yes, it's like the dynamo I had on my bike, back in... the days.
 
 We will use here a simple stepper motor - NEMA 17, made of two coils - hence four wires, that can be represented this way:
 
