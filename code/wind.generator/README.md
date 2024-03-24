@@ -1,6 +1,8 @@
 # Wind Generator
 ## Based on a stepper motor
 
+We want to use the wind energy to store 5V current in a powerbank, or such kind of storage.
+
 Many such examples exist on the Internet.
 - [All About Converting Stepper Motors To Generators](https://www.youtube.com/watch?v=-zCTggoh994&t=102s)
 - [LowTech lab: Wind Turbine](https://wiki.lowtechlab.org/wiki/L%27%C3%A9olienne/en-gb)
@@ -34,7 +36,7 @@ As the motor rotation will produce alternative current, we will need and use a _
 
 As the tension of the output is proportionnal to the rotation speed, we will need:
 - A capacitor to smooth it down.
-- A tension regulator to finally get a 5V output (as expecte here).
+- A tension regulator to finally get a 5V output (as expected here).
 
 ![Wiring](./images/01_bb.png)
 
@@ -51,6 +53,8 @@ As the tension of the output is proportionnal to the rotation speed, we will nee
 #### Horizontal axis ? Vertical axis ?
 
 #### Transmitting the rotation, or the current ?
+
+## The final setting
 
 ## Other resources
 - [phileole](https://phileole.com/en/homepage/)
