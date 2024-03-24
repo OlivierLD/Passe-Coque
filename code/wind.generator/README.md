@@ -7,6 +7,7 @@ Many such examples exist on the Internet.
 - [All About Converting Stepper Motors To Generators](https://www.youtube.com/watch?v=-zCTggoh994&t=102s)
 - [LowTech lab: Wind Turbine](https://wiki.lowtechlab.org/wiki/L%27%C3%A9olienne/en-gb)
 - [Using Stepper Motors as Generators (Rectifiers, KBP 307 IC, & Alternatives)](https://www.youtube.com/watch?v=58XnKt1BxV0) 
+- [How to Recycle Soda Cans Into a Wind Turbine!](https://www.instructables.com/How-to-Recycle-Soda-Cans-Into-a-Wind-Turbine-Gener/)
 - And more!..
 
 They're all good, but I could not find ALL I was looking for in a single one.  
@@ -58,20 +59,27 @@ through the external pins. Positive on the bevel side (left here), Ground on the
 > - etc...
 
 #### BOM
-Bill of Materials
+Bill of Materials, for the electronic part.
 - Stepper motor `NEMA 17`
 - Rectifier Bridge, like `KBP 307 IC` (one per coil)
 - A 1000&micro;F 25V capacitor (one per coil)
 - A Voltage regulator, 5V output (one per coil)
 
 ### The turbine itself
+`To come`.
 
-#### Horizontal axis ? Vertical axis ?
+#### Horizontal axis? Vertical axis?
 [Several Options](https://all3dp.com/2/3d-printed-wind-turbines-wind-powered-gadgets/)
 
-#### Transmitting the rotation, or the current ?
+#### Transmitting the rotation, or the current?
+`To come`.
 
 ## The final setting
+`To come`.
 
 ## Other resources
 - [phileole](https://phileole.com/en/homepage/)
+- . . .
+
+---
+
