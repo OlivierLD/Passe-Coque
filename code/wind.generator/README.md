@@ -69,19 +69,47 @@ Bill of Materials, for the electronic part.
 - A Voltage regulator, 5V output (one per coil)
 
 ### 3D printed part - The turbine itself
-We started from the code at <https://www.thingiverse.com/thing:2241699>.
+We started from the code at <https://www.thingiverse.com/thing:2241699>, where the `spiraltest04.scad` comes from.  
+We've created extra parts for hold the turbine in place, see the code in `version.01.scad`.
+
+- [STL](./3D/spiraltest04.stl) for the turbine
+- [STL](./3D/version.01.bottom.stl) for the axis (top and bottom)
 
 ![Just printed](./images/spiral.01.jpeg)
 
-
 #### Horizontal axis? Vertical axis?
+The problem is the following one:  
+- With a vertical axis 
+    - Half the turbine is rotating downwind
+    - The other half _against_ the wind (aka upwind).
+    - The efficiency of the turbine is not at its top...
+    - But the rotation can be directly transmitted to the motor, that can be _fixed_ on the base, as it is independant of the direction of the wind.
+- With an horizontal axis
+    - The turbine will have to be facing the wind to be efficient (like a wind vane), in which case all its blades are generating power (no blade is turning against the wind), its efficiency is on top.
+    - Thus, for the location of the motor to be independant of the direction of the wind, to motor must rotate at the same time as the turbine changes direction, it would be attached to the same segment as the one holding the axis of the turbine.
+    - **_BUT_** a new problem arises: how to transmit the current produced by the motor to the battery (without loosing too much energy)? The battery cannot really be located next to the motor... There must be some kind of "contact", that will prevent wires from wrapping around the pole of the turbine...
+
+In other words:
+- How much wind power do we lose with a vertical axis?
+- How much current to we lose with an horizontal axis?
+
 [Several Options](https://all3dp.com/2/3d-printed-wind-turbines-wind-powered-gadgets/)
 
 #### Transmitting the rotation, or the current?
 `To come`.
 
-## The final setting
-`To come`.
+## Different settings
+Options at work.  
+Never ending job!..
+
+### Very first one
+Now we're talking.  
+![Very first, vertical](./images/first.setting.jpeg)
+
+That one has the stepper at the very bottom - obviously - and there is a ball bearing at the top.  
+The goal here is to see if the turbine can generate enough power to spin the motor fast enough...  
+The wooden frame is here to speed up the tests.  
+More soon!
 
 ## Other resources
 - [phileole](https://phileole.com/en/homepage/)
