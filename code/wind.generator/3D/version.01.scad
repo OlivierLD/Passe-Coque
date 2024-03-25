@@ -7,8 +7,9 @@ use <../../../../3DPrinting/OpenSCAD/mechanical.parts.scad>
  
 STEPPER_AXIS_DIAM = 5; 
  
-SPIRAL_D3 = d3; // from piraltest04.scad
+SPIRAL_D3 = d3; // from spiraltest04.scad
 BASE_HEIGHT = 10;
+SLACK = 0.75; // 0.25;
 
 BOTTOM = 1;
 TOP = 2;
@@ -23,6 +24,26 @@ difference() {
   }
   // To leave the footprint in the base
   the_turbine();
+  // 2 other ones, to get some slack...
+  if (true) {
+    translate([SLACK, 0, 0]) {
+      the_turbine();
+    }
+    translate([-SLACK, 0, 0]) {
+      the_turbine();
+    }
+  }
+  
+  // A "cube" instead of the turbine's blades.
+  if (false) {
+    width = 8;
+    translate([0, 0, 5]) {
+      rotate([0, 0, 10]) {
+        cube([width, 40, 10], center=true);
+      }
+    }
+  }
+  
   // TODO A socket for a ball bearing (top one)
   
   if (TOP_OR_BOTTOM == BOTTOM) {
