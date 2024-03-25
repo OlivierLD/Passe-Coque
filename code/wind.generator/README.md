@@ -69,7 +69,10 @@ Bill of Materials, for the electronic part.
 - A Voltage regulator, 5V output (one per coil)
 
 ### The turbine itself
-`To come`.
+We started from the code at <https://www.thingiverse.com/thing:2241699>.
+
+![Just printed](./images/spiral.01.jpeg)
+
 
 #### Horizontal axis? Vertical axis?
 [Several Options](https://all3dp.com/2/3d-printed-wind-turbines-wind-powered-gadgets/)
