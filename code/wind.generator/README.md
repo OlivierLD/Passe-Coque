@@ -68,7 +68,7 @@ Bill of Materials, for the electronic part.
 - A 1000&micro;F 25V capacitor (one per coil)
 - A Voltage regulator, 5V output (one per coil)
 
-### The turbine itself
+### 3D printed part - The turbine itself
 We started from the code at <https://www.thingiverse.com/thing:2241699>.
 
 ![Just printed](./images/spiral.01.jpeg)
