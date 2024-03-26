@@ -25,7 +25,7 @@ Here is the cool thing about those motors:
     - This is here what we're interested in.
     - And yes, it's like the dynamo I had on my bike, back in... the days.
 
-We will use here a simple stepper motor - NEMA 17, made of two coils - hence four wires, that can be represented this way:
+We will use here a simple stepper motor - NEMA 17, made of two coils - hence the four wires, that can be represented this way:
 
 ![Stepper - 4 wires](./images/stepper.schema.png)
 
@@ -36,7 +36,8 @@ Using a multi-meter, it is very easy to find the couples (`A1`, `A2`) and (`B1`,
 A four-wire stepper motor will provide **_TWO_** AC Outputs.  
 > Those _**two**_ outputs can be used as two sources, serially, or in parallel, as we'll see.
 
-As the motor rotation will produce alternative current, we will need and use a _rectifier_ to make it a positive-only current output.
+As the motor rotation will produce alternative current, we will need and use a _rectifier_ to make it a positive-only current output.  
+The rectifier can be built with four diodes, and it would work fine. But here - in order to make it even easier - we will use a _rectfier bridge_, like a `KBP 307 IC`, or a `B17-18-A-03`.
 
 As the tension of the output is proportionnal to the rotation speed, we will need:
 - A capacitor to smooth it down.
@@ -67,6 +68,8 @@ Bill of Materials, for the electronic part.
 - Rectifier Bridge, like `KBP 307 IC` (one per coil)
 - A 1000&micro;F 25V capacitor (one per coil)
 - A Voltage regulator, 5V output (one per coil)
+
+All those components can be found easily from your favorite providers (Amazon, AliBaba, AllSpectrum, Adafruit, SparkFun, SeeedStudio, Parallax, RobotShop, ServoCity, ...)
 
 ### 3D printed part - The turbine itself
 We started from the code at <https://www.thingiverse.com/thing:2241699>, where the `spiraltest04.scad` comes from.  
