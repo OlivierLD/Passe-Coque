@@ -997,7 +997,7 @@ const THE_FLEET = [
         pix: "/images/boats/eh-tak.jpg",
         type: "Shipman 28",
         category: CLUB,
-        base: "&Eacute;tel"
+        base: "G&acirc;vres"
     },
     {
         name: "Pordin-Nancq",
@@ -1019,7 +1019,7 @@ const THE_FLEET = [
         name: "Manu Oviri",
         id: "manu-oviri",
         pix: "/images/boats/manu-aviri.jpg",
-        type: "Comanche",
+        type: "Comanche 32",
         category: CLUB,
         base: "&Eacute;tel"
     },
@@ -1148,7 +1148,7 @@ const THE_FLEET = [
         id: "tokad-2",
         pix: "/images/boats/tokad.2.sq.png",
         type: "Neptune 99",
-        category: NONE,
+        category: CLUB,
         base: "Le&nbsp;Crouesty"
     },
     { 
@@ -1212,7 +1212,7 @@ const THE_FLEET = [
         id: "trehudal",
         pix: "/images/boats/trehudal.png",
         type: "Nicholson 33",
-        category: NONE,
+        category: CLUB,
         base: "La&nbsp;Trinit&eacute;"
     },
     { 
@@ -1244,8 +1244,8 @@ const THE_FLEET = [
         id: "coevic-2",
         pix: "/images/boats/coevic-2.png",
         type: "Mirage 28",
-        category: NONE,
-        base: "Kernevel"
+        category: CLUB,
+        base: "Lorient"
     },
     { 
         name: "Ma Enez",
