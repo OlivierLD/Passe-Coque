@@ -114,13 +114,8 @@ The goal here is to see if the turbine can generate enough power to spin the mot
 The wooden frame is here to speed up the tests.  
 
 <!-- https://youtube.com/shorts/j9USgp5iNnw -->
-
-<br/>
-<iframe width="315" height="420"
-        src="https://youtube.com/shorts/j9USgp5iNnw">
-</iframe>
-<br/>
-No motor con nected yet.
+See a [video](https://youtube.com/shorts/j9USgp5iNnw)  of the turbine, in the wind.  
+No motor connected yet.
 
 
 More soon!
