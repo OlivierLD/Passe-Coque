@@ -67,7 +67,7 @@ Bill of Materials, for the electronic part.
 - Stepper motor `NEMA 17`
 - Rectifier Bridge, like `KBP 307 IC` (one per coil)
 - A 1000&micro;F 25V capacitor (one per coil)
-- A Voltage regulator, 5V output (one per coil)
+- A Voltage regulator, 5V output, like a `L7805` (one per coil)
 
 All those components can be found easily from your favorite providers (Amazon, AliBaba, AllSpectrum, Adafruit, SparkFun, SeeedStudio, Parallax, RobotShop, ServoCity, ...)
 
@@ -90,7 +90,7 @@ The problem is the following one:
 - With an horizontal axis
     - The turbine will have to be facing the wind to be efficient (like a wind vane), in which case all its blades are generating power (no blade is turning against the wind), its efficiency is on top.
     - Thus, for the location of the motor to be independant of the direction of the wind, to motor must rotate at the same time as the turbine changes direction, it would be attached to the same segment as the one holding the axis of the turbine.
-    - **_BUT_** a new problem arises: how to transmit the current produced by the motor to the battery (without loosing too much energy)? The battery cannot really be located next to the motor... There must be some kind of "contact", that will prevent wires from wrapping around the pole of the turbine...
+    - **_BUT_** a new problem arises: how to transmit the current produced by the motor to the battery (without loosing too much energy)? The battery cannot really be located next to the motor... There must be some kind of "rotating contact", that will prevent wires from wrapping around the pole of the turbine...
 
 In other words:
 - How much wind power do we lose with a vertical axis?
@@ -112,6 +112,17 @@ Now we're talking.
 That one has the stepper at the very bottom - obviously - and there is a ball bearing at the top.  
 The goal here is to see if the turbine can generate enough power to spin the motor fast enough...  
 The wooden frame is here to speed up the tests.  
+
+<!-- https://youtube.com/shorts/j9USgp5iNnw -->
+
+<br/>
+<iframe width="315" height="420"
+        src="https://youtube.com/shorts/j9USgp5iNnw">
+</iframe>
+<br/>
+No motor con nected yet.
+
+
 More soon!
 
 ## Other resources
