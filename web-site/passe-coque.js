@@ -1949,12 +1949,12 @@ let onSubscriptionResponse = (iframe) => {
         if (message.startsWith("OK")) {
             message = "Votre Souscription a bien &eacute;t&eacute; enregistr&eacute;e.";
             if (currentLang == 'EN') {
-                message = "Your subscription was successfull."
+                message = "Your subscription was successfull.";
             }
         } else if (message.startsWith("ERROR")) {
             message = "Cette adresse email est d&eacute;j&agrave; utilis&eacute;e.<br/>Essayez avec une autre...";
             if (currentLang == 'EN') {
-                message = "Email address already in use.<br/>Try another one..."
+                message = "Email address already in use.<br/>Try another one...";
             }
         }
     } catch (err) {
@@ -2003,6 +2003,38 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
         showCustomAlert(message);
     }
 };
+
+let onResetPswdResponse = (iframe) => {
+    // console.log(iframe);
+    let message = '';
+    try {
+        message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        // console.log(`Response message: ${message}`);
+        if (message.startsWith("OK")) {
+            message = "Votre demande a bien &eacute;t&eacute; enregistr&eacute;e. Un email vous a &eacute;t&eacute; envoy&eacute;.";
+            if (currentLang !== 'FR') {
+                message = "Your request was successfull. An email was sent.";
+            }
+        } else if (message.startsWith("ERROR")) {
+            message = "Une erreur s'est produite... " . message;
+            if (currentLang !== 'FR') {
+                message = "An error happened... " . message;
+            }
+        }
+    } catch (err) {
+        console.log("Oops");
+        try {
+            message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        } catch (err2) {
+            console.log("No text, no error...");
+        }
+    }
+    // Display in dialog, or custom alert.
+    if (message.length > 0) {
+        // alert(message);
+        showCustomAlert(message);
+    }
+}
 
 /**
  * For the messages in both 1_xx.html and 61_xx.html

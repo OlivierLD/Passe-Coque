@@ -13,7 +13,32 @@
             </svg><span> Members Space</span>
         </h2>
         <div style="text-align: left; padding: 20px; background: white; color: red;">
-            <i>Note</i>: if you do not have a password yet, you can request a temporary one from <a href="mailto:contact@passeurdecoute.fr">contact@passeurdecoute.fr</a>.
+            <i>Note</i>: Want to reset or create a password? Use the form below.
+            <!-- 
+                Reset or create password for a given email address 
+
+                submit a form that will send you an email, from which you will be able to set or reset the password.
+             +-->
+             <iframe name="reset-response" style="display: none;" onload="onResetPswdResponse(this);"></iframe>
+             <form action="/php/password.01.php" method="post" target="reset-response"> <!-- onsubmit="return checkFields(event);" -->
+                 <div style="display: grid; grid-template-columns: auto auto;">
+                     <div style="display: grid; grid-template-columns: auto auto;">
+                         <input type="hidden" name="lang" value="EN">
+                         <input type="hidden" name="operation" value="send-reset">
+                         <!--input type="hidden" name="commentArea" value="newsletter subscription"-->
+
+                         <div style="display: grid; grid-template-columns: auto auto;">
+                             <span style="color: white; text-align: right; margin: 0 10px 0 0;">Email&nbsp;:&nbsp;</span>
+                             <input type="email" name="email" placeholder="Email Passe-Coque" id="user-email" size="20">
+                         </div>
+                     </div>
+                     <div>
+                         <div style="text-align: left; padding: 10px 0 0 0; vertical-align: top;">
+                             <input type="submit" value="New Password" class="pc-button">
+                         </div>
+                     </div>
+                 </div>
+             </form>
         </div>
         <iframe src="/php/members.php?lang=EN" frameBorder="0" style="width: 98%; height: 400px; border: 1px solid silver; border-radius: 5px;"></iframe>
     </div>
