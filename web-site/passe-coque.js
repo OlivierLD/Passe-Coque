@@ -544,6 +544,11 @@ let clack_pcc = (origin) => {
             });
 }
 
+let to_club_and_clack = (origin) => {
+    // let url = window.location.href;
+    window.open(`/boat-club?clack=${origin}&lang=${currentLang}`);
+}
+
 let updateMenuPCC = () => { // Multilang aspect.
     document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
 	document.querySelectorAll("#_2").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Le Club&nbsp;" : "The Club&nbsp;"));

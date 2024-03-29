@@ -217,12 +217,33 @@
 window.onload = () => {
 	console.log("PCC Loaded!");
 	console.log(`${window.location.href} loaded !`);
-	// More here soon !
 
-	// Load Home Page
-	let el = document.createElement("div");
-	el.id = "_1";
-	clack_pcc(el);
+	let userLang = getQueryParameterByName('lang');
+	if (userLang && userLang === 'EN') {
+		switchLanguagePCC();
+	}
+	let qsLang = getQSPrm('lang');
+	if (qsLang) {
+		if (qsLang === 'EN' || qsLang === 'FR') {
+			currentLang = qsLang;
+		} else {
+			console.log(`Unmanaged lang is query string: ${qsLang}`);
+		}
+	}
+	// QS for 'clack' prm
+	let clack = getQueryParameterByName('clack');
+	if (clack && clack.trim().length > 0) {
+		// Load a given Page
+		let el = document.createElement("div");
+		el.id = clack;
+		clack_pcc(el);
+
+	} else {
+		// Load Home Page
+		let el = document.createElement("div");
+		el.id = "_1";
+		clack_pcc(el);
+	}
 
 };
 

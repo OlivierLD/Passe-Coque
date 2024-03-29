@@ -98,7 +98,7 @@ if (isset($_POST['operation'])) {
           if ($lang == 'FR') {
             echo "OK !<br/> Vous &ecirc;tes maintenant abonn&eacute; &agrave; la news letter.<br/>";
           } else {
-            echo "OK. New record created successfully.<br/> You've subscribed successfully.<br/>";
+            echo "OK. <br/> You've subscribed successfully.<br/>";
           }
         } else {
           echo "ERROR: " . $sql . "<br/>" . $link->error . "<br/>";
