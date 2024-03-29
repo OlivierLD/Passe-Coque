@@ -91,4 +91,14 @@ La suite arrive...
 
 En cas de panne&nbsp;: Envoyez-moi un <a class="mail-box list-link" href="mailto:olivier@lediouris.net?subject=Heeeeelp!&body=Au secours, je suis perdu !" target="email">message</a> !
 
+### DB Export
+```
+- Log into phpMyAdmin.
+- Select the source database on the left pane.
+- Click on the Export tab in the top center pane.
+- Select Quick or Custom export method. ...
+- Choose the format you'd like to save the file as from the dropdown menu. ...
+- Click the Go button to continue.
+```
+
 ---
