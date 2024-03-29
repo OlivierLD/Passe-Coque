@@ -459,8 +459,8 @@ let clack_pcc = (origin) => {
         contentName = `${path}6_${currentLang}.html`;  // Member Space
     } else if  (originId === "51" || originId === "52") { 
         contentName = `${path}5_${currentLang}.html`; 
-    } else if  (originId === "53") { 
-        contentName = `${path}6_${currentLang}.html`;   // Member Space
+    // } else if  (originId === "53") { 
+    //    contentName = `${path}6_${currentLang}.html`;   // Member Space
     }
 
     let contentPlaceHolder = document.getElementById("current-content");
@@ -562,7 +562,7 @@ let updateMenuPCC = () => { // Multilang aspect.
 	document.querySelectorAll("#_5").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;server&nbsp;" : "Reservations&nbsp;"));
 	document.querySelectorAll("#_51").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Comment &ccedil;a marche" : "How it works"));
 	document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Faire une r&eacute;servation" : "Make a reservation"));
-	document.querySelectorAll("#_53").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+	// document.querySelectorAll("#_53").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 
     document.querySelectorAll("#members-space").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 };
@@ -1108,7 +1108,7 @@ const THE_FLEET = [
         id: "tri-yann",
         pix: "/images/boats/tri.yann.png",
         type: "Trimaran Allegro",
-        category: CLUB,
+        category: NONE,
         base: "Saint&#8209;Philibert"
     },
     { 
@@ -1220,7 +1220,7 @@ const THE_FLEET = [
         id: "jules-verne",
         pix: "/images/boats/jules.verne.sq.png",
         type: "Sir 520",
-        category: CLUB,
+        category: NONE,
         base: "Locmariaquer"
     },
     { 
@@ -1244,7 +1244,7 @@ const THE_FLEET = [
         id: "coevic-2",
         pix: "/images/boats/coevic-2.png",
         type: "Mirage 28",
-        category: CLUB,
+        category: NONE,
         base: "Lorient"
     },
     { 
@@ -1276,7 +1276,7 @@ const THE_FLEET = [
         id: "gwenillig",
         pix: "/images/boats/gwenillig.png",
         type: "Eygthene 24",
-        category: CLUB,
+        category: NONE,
         base: "--"
     },
     { 
