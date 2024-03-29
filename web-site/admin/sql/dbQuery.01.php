@@ -42,8 +42,9 @@ if (isset($_POST['operation'])) {
   if ($operation == 'insert') { // Then do the insert
     try {
       $lang = $_POST['lang'];
-      $name = $_POST['name'];
-      $email = $_POST['email'];
+      $firstName = $_POST['first-name'];
+      $lastName = $_POST['last-name'];
+      $email = trim($_POST['email']);
 
       $link = mysqli_init();
     
@@ -61,24 +62,46 @@ if (isset($_POST['operation'])) {
         }
       }
     
-      $sql = 'INSERT INTO NL_SUBSCRIBERS (NAME, EMAIL, SUBSCRIPTION_DATE) VALUES (\'' . $name . '\', \'' . $email . '\', CURRENT_TIMESTAMP());'; 
-      
+      // Update existing record in PASSE_COQUE_MEMBERS, or create a new one.
+      $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$email';";
       if ($VERBOSE) {
         echo('Performing instruction <code>'.$sql.'</code><br/>');
       }
-    
-      // Returned message may be interpreted by the client.
-      // Starts with OK or ERROR.
-      if ($link->query($sql) === TRUE) {
-        if ($lang == 'FR') {
-          echo "OK. Nouveau record dans la base.<br/> Vous recevrez maintenant la news letter.<br/>";
-        } else {
-          echo "OK. New record created successfully.<br/> You've subscribed successfully.<br/>";
-        }
-      } else {
-        echo "ERROR: " . $sql . "<br/>" . $link->error . "<br/>";
+
+      $result = mysqli_query($link, $sql);
+      if ($VERBOSE) {
+        echo ("Returned " . $result->num_rows . " row(s)<br/>");
       }
 
+      if ($result->num_rows == 0) {  // then create record
+        $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK, SOME_CONTENT) VALUES (\'' . $email . '\', \'' . urlencode($firstName) . '\',  \'' . urlencode($lastName) . '\', TRUE, \'News Letter Subscriber\');'; 
+        if ($VERBOSE) {
+          echo('Performing instruction <code>' . $sql . '</code><br/>');
+        }
+        if ($link->query($sql) === TRUE) {
+          if ($lang == 'FR') {
+            echo "OK !<br/> Vous &ecirc;tes maintenant abonn&eacute; &agrave; la news letter.<br/>";
+          } else {
+            echo "OK. New record created successfully.<br/> You've subscribed successfully.<br/>";
+          }
+        } else {
+          echo "ERROR: " . $sql . "<br/>" . $link->error . "<br/>";
+        }
+      } else {
+        $sql = 'UPDATE PASSE_COQUE_MEMBERS SET NEWS_LETTER_OK = TRUE WHERE EMAIL = \'' . $email . '\';'; 
+        if ($VERBOSE) {
+          echo('Performing instruction <code>' . $sql . '</code><br/>');
+        }
+        if ($link->query($sql) === TRUE) {
+          if ($lang == 'FR') {
+            echo "OK !<br/> Vous &ecirc;tes maintenant abonn&eacute; &agrave; la news letter.<br/>";
+          } else {
+            echo "OK. New record created successfully.<br/> You've subscribed successfully.<br/>";
+          }
+        } else {
+          echo "ERROR: " . $sql . "<br/>" . $link->error . "<br/>";
+        }
+      }
       // On ferme !
       $link->close();
       if ($VERBOSE) {
@@ -101,7 +124,10 @@ if (isset($_POST['operation'])) {
       <input type="hidden" name="lang" value="<?php echo $lang; ?>">
       <table>
         <tr>
-          <td valign="top"><?php echo ($lang == "FR") ? "Nom :" : "Name:" ?></td><td><input type="text" name="name" size="40"></td>
+          <td valign="top"><?php echo ($lang == "FR") ? "Prenom :" : "First Name:" ?></td><td><input type="text" name="first-name" size="40"></td>
+        </tr>
+        <tr>
+          <td valign="top"><?php echo ($lang == "FR") ? "Nom :" : "Last Name:" ?></td><td><input type="text" name="last-name" size="40"></td>
         </tr>
         <tr>
           <td valign="top"><?php echo ($lang == "FR") ? "Email :" : "Email:" ?></td><td><input type="email" name="email" size="40"></td>

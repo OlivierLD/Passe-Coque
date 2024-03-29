@@ -2046,10 +2046,14 @@ let onResetPswdResponse = (iframe) => {
 let checkFields = (evt) => {
     let ok = true;
     let errMess = [];
-    let name = document.getElementById('first-last-name').value;
+    let lastName = document.getElementById('last-name').value;
+    let firstName = document.getElementById('first-name').value;
     let email = document.getElementById('user-email').value;
-    if (!name || name.trim().length === 0) {
-        errMess.push(currentLang === 'FR' ? 'On a besoin d\'un nom.' : 'Name is required.');
+    if (!lastName || lastName.trim().length === 0) {
+        errMess.push(currentLang === 'FR' ? 'On a besoin d\'un nom.' : 'Last name is required.');
+    }
+    if (!firstName || firstName.trim().length === 0) {
+        errMess.push(currentLang === 'FR' ? 'On a besoin d\'un pr&eacute;nom.' : 'First name is required.');
     }
     if (!email || email.trim().length === 0) {
         errMess.push(currentLang === 'FR' ? 'On a besoin d\'un email.' : 'Email is required.');
