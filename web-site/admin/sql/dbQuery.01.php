@@ -30,10 +30,12 @@ if (isset($_GET['lang'])) {
   $lang = $_GET['lang'];
 }
 
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
+// Require the db file...
+require __DIR__ . "/../../php/db.cred.php";
+// $username = "passecc128";
+// $password = "zcDmf7e53eTs";
+// $database = "passecc128";
+// $dbhost = "passecc128.mysql.db";
 
 $VERBOSE = false;
 
@@ -124,7 +126,7 @@ if (isset($_POST['operation'])) {
       <input type="hidden" name="lang" value="<?php echo $lang; ?>">
       <table>
         <tr>
-          <td valign="top"><?php echo ($lang == "FR") ? "Prenom :" : "First Name:" ?></td><td><input type="text" name="first-name" size="40"></td>
+          <td valign="top"><?php echo ($lang == "FR") ? "Pr&eacute;nom :" : "First Name:" ?></td><td><input type="text" name="first-name" size="40"></td>
         </tr>
         <tr>
           <td valign="top"><?php echo ($lang == "FR") ? "Nom :" : "Last Name:" ?></td><td><input type="text" name="last-name" size="40"></td>
