@@ -69,8 +69,10 @@ if (isset($_POST['operation'])) {
           fputcsv($f, $fields, $delimiter); 
            
           // Output each row of the data, format line as csv and write to file pointer 
-          while($row = $query->fetch_assoc()){ 
-              $lineData = array($row['ID'], urldecode($row['LAST_NAME']), urldecode($row['FIRST_NAME']), urldecode($row['TARIF']), $row['AMOUNT'], $row['TELEPHONE'], $row['FIRST_ENROLLED'], $row['NEWS_LETTER_OK'], $row['ADMIN_PRIVILEGES'], urldecode($row['SOME_CONTENT'])); 
+          while ($row = $query->fetch_assoc()) { 
+              $nlOk = ($row['NEWS_LETTER_OK'] == 1) ? "yes" : "no";
+              $admin = ($row['ADMIN_PRIVILEGES'] == 1) ? "yes" : "no";
+              $lineData = array($row['ID'], urldecode($row['LAST_NAME']), urldecode($row['FIRST_NAME']), urldecode($row['TARIF']), $row['AMOUNT'], $row['TELEPHONE'], $row['FIRST_ENROLLED'], $nlOk, $admin, urldecode($row['SOME_CONTENT'])); 
               fputcsv($f, $lineData, $delimiter); 
           } 
            
