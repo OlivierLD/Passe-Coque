@@ -951,6 +951,10 @@ span.expand-collapse:hover {
     margin-top: 40px; 
     z-index: 3; 
     position: absolute; 
+    /* max-height: 600px; 
+    overflow: scroll; */
+}
+.pcc-dialog-content {
     max-height: 600px; 
     overflow: scroll;
 }

@@ -912,6 +912,46 @@ let clickOnBoatPix = (origin, pathPrefix = '') => {
     }
 };
 
+let displaySpecific = (docName) => {
+    console.log(`displaySpecific`);
+    // Set the content
+    let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
+    let contentName = `${docName}_${currentLang}.html`; // Like 'tagada_FR.html'
+    console.log(`onclick, loading ${contentName}`);
+    fetch(contentName)
+        .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+            console.log(`Data Response: ${response.status} - ${response.statusText}`);
+            if (response.status !== 200) { // There is a problem...
+                dynamicContentContainer.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+            } else {
+                response.text().then(doc => {
+                    console.log(`${contentName} code data loaded, length: ${doc.length}.`);
+                    dynamicContentContainer.innerHTML = doc;
+                });
+            }
+        },
+        (error, errmess) => {
+            console.log("Ooch");
+            let message;
+            if (errmess) {
+                let mess = JSON.parse(errmess);
+                if (mess.message) {
+                    message = mess.message;
+                }
+            }
+            console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            // Plus tard...
+            dynamicContentContainer.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
+        });
+
+    // dynamicContentContainer.innerHTML = content;
+    if (DIALOG_OPTION) {
+        showInfoTxDialog();
+    } else {
+        dynamicContentContainer.style.display = 'block';
+    }
+};
+
 let showInfoTxDialog = () => {
     let infoTxDialog = document.getElementById("info-tx-dialog");
     window.scrollTo(0, 0); // Scroll on top, for Safari...
