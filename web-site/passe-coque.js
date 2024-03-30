@@ -545,8 +545,13 @@ let clack_pcc = (origin) => {
 }
 
 let to_club_and_clack = (origin) => {
-    // let url = window.location.href;
-    window.open(`/boat-club?clack=${origin}&lang=${currentLang}`);
+    let newUrl = `${window.location.origin}/boat-club/?clack=${origin}&lang=${currentLang}`;
+    // console.log(`Opening PCC target for ${newUrl}`);
+    // https://www.w3schools.com/jsref/met_win_open.asp
+    let ret = window.open(newUrl, "PCC"); // The target prm seems to have a problem, sometimes. Put NO target in the origin href !...
+    if (!ret) {
+        console.log(">>> window.open failed ??");
+    }
 }
 
 let updateMenuPCC = () => { // Multilang aspect.
