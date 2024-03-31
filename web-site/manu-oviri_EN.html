@@ -1,24 +1,55 @@
-<div style="max-height: 600px; overflow-y: scroll;">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/manu-aviri.jpg" width="100%">
-        <div style="padding: 14px;">
-            <h2>Manu Oviri</h2>
-            Comanche, based in &Eacute;tel<br/>
+<!-- Absolute locations for resources like images... -->
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'manu-oviri-01');" title="Summary">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'manu-oviri-02');">Pictures</button>
+        <button class="tablinks" onclick="openTab(event, 'manu-oviri-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="manu-oviri-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/manu-aviri.jpg" width="100%">
+                <div style="padding: 14px;">
+                    <h2>Manu Oviri</h2>
+                    Comanche 32, based in &Eacute;tel<br/>
+                    <ul>
+                        <li>Launched: 1980</li>
+                        <li>LOA: 9.75 m</li>
+                        <li>Beam: 4.20 m</li>
+                        <li>Draft: 0.97 m</li>
+                        <li>8 berths</li>
+                        <li>Engine: 2 x 15hp outboard</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h2>The boat</h2>
+                <div>
+                    . . .
+                </div>
+                <h2>Its story</h2>
+                <div>
+                    . . .
+                </div>
+            </div>
         </div>
-    </div>
-    <div>
-        <h2>The boat</h2>
-        Comanche, catamaran
-        <ul>
-            <li>LOA : 9.75m</li>
-            <li>Year : 1980</li>
-            <li>Material : Fiberglass</li>
-            <li>Berths : 8</li>
-            <li>Engine : 2 x 15hp outboard</li>
-        </ul>
-    </div>
-    <div>
-        <h2>More info...</h2>
-        Referent : R&eacute;gis Germain.<br/>
+
+        <div id="manu-oviri-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="manu-oviri-slide-show"
+                        width="780"
+                        height="400"
+                        style="line-height: 1em;">
+                <slide-show-image src="/images/boats/manu-aviri.jpg" title="Manu Oviri - 1"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="manu-oviri-03" class="tab-section" style="display: none;">
+            <h2>More info...</h2>
+            Referent: R&eacute;gis Germain.<br/>
+            <!-- T&eacute;l : +33 6 35 59 18 80<br/-->
+            Email: germain.regis@orange.fr<br/>
+            Boat Club: YES 
+        </div>
     </div>
 </div>

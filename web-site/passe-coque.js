@@ -1433,7 +1433,7 @@ const THE_TEAM = [
         boss: false,
         image: "/images/the.team/bernard.jpeg",
         label: {
-            fr: "Expert Grand Large, et r&eacute;f&eacute;rent de \"La Cardinale\"",
+            fr: "Bernard<br/>Expert Grand Large, et r&eacute;f&eacute;rent de \"La Cardinale\"",
             en: "Bernard<br/>High seas expert, and referent of \"La Cardinale\""
         }
     }, {
