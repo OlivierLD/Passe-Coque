@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
- ! Send an email to contact@passeurdecoute.fr.
+ ! Send an email to contact@passe-coque.com.
  ! Sender is cc'd.
  ! See doc at https://www.farnell.com/datasheets/1599363.pdf
  !       also https://www.w3docs.com/snippets/php/php-mail-cc-field.html
@@ -14,7 +14,7 @@
     <!--h2>Contact Passe-Coque</h2-->
     <?php
 
-      $sendTo = "contact@passeurdecoute.fr"; //  . "," . "catherine.laguerre@hotmail.com"; // "contact@passeurdecoute.fr"; // "olivier.lediouris@gmail.com"; // 
+      $sendTo = "contact@passe-coque.com"; //  . "," . "catherine.laguerre@hotmail.com"; // "contact@passe-coque.com"; // "olivier.lediouris@gmail.com"; // 
       $messageSubject = "From Passe-Coque Web Site"; // Default
 
       if (isset($_POST['operation'])) {   // POST param
@@ -31,7 +31,7 @@
           // } else {
           //   echo("Defaulting subject");
           }
-          $headers = "From: contact@passeurdecoute.fr\r\n";
+          $headers = "From: contact@passe-coque.com\r\n";
           $headers .= "CC: catherine.laguerre@hotmail.com, olivier.lediouris@gmail.com\r\n";
 
           $messFrom = "??";

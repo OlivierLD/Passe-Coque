@@ -51,7 +51,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	// echo ("Top Loop<br/>");
 	echo ("<h2>Sending process initiated</h2>" . PHP_EOL);
 
-	$from_email		 = 'contact@passeurdecoute.fr'; // 'sender@abc.com';    // from mail, sender email address
+	$from_email		 = 'contact@passe-coque.com'; // 'sender@abc.com';    // from mail, sender email address
 	// Recipient, from DB
 	// $recipient_email = 'olivier.lediouris@gmail.com'; // 'recipient@xyz.com'; // recipient email address
 	

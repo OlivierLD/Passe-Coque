@@ -70,7 +70,7 @@ if (isset($_POST['operation'])) {
         session_destroy();
         ?>
         <p>
-          You can request a logging buy asking <a href="mailto:contact@passeurdecoute.fr">contact@passeurdecoute.fr</a>.
+          You can request a logging buy asking <a href="mailto:contact@passe-coque.com">contact@passe-coque.com</a>.
         </p>
         <a href="dbQuery.08.php">Log in again?</a><br/>
         <?php    

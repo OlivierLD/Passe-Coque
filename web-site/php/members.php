@@ -111,9 +111,9 @@ if (isset($_POST['operation'])) {
         <p>
           <?php
           if ($current_lang == "FR") {
-            echo "Vous pouvez demander une connexion &agrave; <a href=\"mailto:contact@passeurdecoute.fr\">contact@passeurdecoute.fr</a>." . PHP_EOL;
+            echo "Vous pouvez demander une connexion &agrave; <a href=\"mailto:contact@passe-coque.com\">contact@passe-coque.com</a>." . PHP_EOL;
           } else {
-            echo "You can request a logging by asking <a href=\"mailto:contact@passeurdecoute.fr\">contact@passeurdecoute.fr</a>." . PHP_EOL;
+            echo "You can request a logging by asking <a href=\"mailto:contact@passe-coque.com\">contact@passe-coque.com</a>." . PHP_EOL;
           }
           ?>
         </p>

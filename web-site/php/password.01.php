@@ -31,7 +31,7 @@ try {
 
 		// echo ("<h2>Password process initiated</h2>" . PHP_EOL);
 
-		$from_email		 = 'contact@passeurdecoute.fr'; // 'sender@abc.com';    // from mail, sender email address
+		$from_email		 = 'contact@passe-coque.com'; // 'sender@abc.com';    // from mail, sender email address
 		
 		// Load POST data from HTML form
 		$pc_email       = $_POST["email"]; // sender email, it will be used in "reply-to" header

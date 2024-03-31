@@ -777,7 +777,7 @@ function showSlides(n) {
 let sendEmail = (first, last) => {
     console.log(`Sending email from ${first}, ${last}`);
     let sender = `Message from ${first} ${last}\n`;
-    window.open(`mailto:contact@passeurdecoute.fr?subject=${encodeURI(sender)}`);
+    window.open(`mailto:contact@passe-coque.com?subject=${encodeURI(sender)}`);
 };
 
 let getQueryParameterByName = (name, url) => {
