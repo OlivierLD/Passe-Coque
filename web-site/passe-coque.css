@@ -1014,6 +1014,12 @@ span.expand-collapse:hover {
     display: grid; 
     grid-template-columns: 48% 48%;
 }
+
+.equipment-css {
+    display: grid; 
+    grid-template-columns: auto auto auto;
+}
+
 .page-bottom-02 {
     margin: 0 10%; 
     display: grid; 
@@ -1043,7 +1049,8 @@ span.expand-collapse:hover {
     grid-template-columns: 25% 50% 25%;
 }
 .scrolling-menu {
-    display: block;
+    /* display: block; */
+    display: none;
 }
 .hamburger-menu {
     width: 100%;
@@ -1053,7 +1060,8 @@ span.expand-collapse:hover {
     position: fixed; 
 	z-index: 2;
     background: rgba(255, 255, 255, 0.85);
-    display: none;
+    /* display: none; */
+    display: block;
 }
 .logo-image {
     width: 280px;
@@ -1220,7 +1228,21 @@ span.expand-collapse:hover {
     
 }
 
-/* @media screen and (max-width: calc(var(--small-screen-width))) { */
+@media screen and (width > 1300px) { 
+
+    .scrolling-menu {
+        display: block;
+    }
+    .hamburger-menu {
+        display: none;
+    }
+    .equipment-css {
+        display: grid; 
+        grid-template-columns: auto auto auto;
+    }    
+}
+
+ /* @media screen and (max-width: calc(var(--small-screen-width))) { */
 @media screen and (width <= 800px) {
     h1 {
         font-size: 2em;
@@ -1258,6 +1280,10 @@ span.expand-collapse:hover {
     }
     .text-block {
         font-size: 1.5em;
+    }    
+    .equipment-css {
+        display: grid; 
+        grid-template-columns: auto auto;
     }    
 }
 
