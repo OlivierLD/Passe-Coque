@@ -1,25 +1,69 @@
-<div style="max-height: 600px; overflow-y: scroll;">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/neptune.99.jpeg" width="100%">
-        <div style="padding: 14px;">
-            <h2>Tokad 2</h2>
-            Neptune 99
+
+
+<!-- Absolute locations for resources like images... -->
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'taapuna-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'taapuna-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'taapuna-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="taapuna-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/neptune.99.jpeg" width="100%">
+                <div style="padding: 14px;">
+                    <h2>Tokad 2</h2>
+                    Neptune 99 based in Le Crouesty
+                    <ul>
+                        <li>Centerboard</li>
+                        <li>Shipyard Neptune</li>
+                        <li>Launched: 1981</li>
+                        <li>LOA: 9.55 m</li>
+                        <li>BOA: 3.25 m</li>
+                        <li>Draft: 0.80 m / 2.00 m</li>
+                        <li>Couchages: tbd</li>
+                        <li>Engine In Board Volvo 20hp Diesel</li>
+                    </ul>        
+                </div>
+            </div>
+            <div>
+                <h3>Equipement</h3>
+                <div style="display: grid; grid-template-columns: auto auto auto;">
+                    <span>Pilot: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Tracer: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Fridge: <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Stove: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Solar Panel: <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Shower: <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Head: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Speedo: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Depth sounder: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>MHU: <input type="checkbox" style="pointer-events: none;"></span>
+                </div>
+            </div>
+            <div>
+                <h2>The boat</h2>
+                <div>
+                    . . .
+                </div>
+            </div>
         </div>
-    </div>
-    <div>
-        <h2>The boat</h2>
-        <ul>
-            <li>D&eacute;riveur</li>
-            <li>Ann&eacute;e 1981</li>
-            <li>Longeur 9,55</li>
-            <li>Largeur 3,25</li>
-            <li>Tirant d'eau 0,80/ 2m</li>
-            <li>Moteur Volvo 20cv Diesel</li>
-            <li>Bateau bas&eacute; au Crouesty</li>
-        </ul>
-    </div>
-    <div>
-        <h2>More info...</h2>
-        Referent: bmenuet@wanadoo.fr
+
+        <div id="taapuna-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="taapuna-slide-show"
+                        width="780"
+                        height="400"
+                        style="line-height: 1em;">
+                <slide-show-image src="/images/boats/neptune.99.jpeg" title="- 1 -"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="taapuna-03" class="tab-section" style="display: none;">
+            <h2>More info...</h2>
+            Referent: Bernard Menuet<br/>
+            Email: bmenuet@wanadoo.fr<br/>
+            Boat Club availability: YES
+        </div>
     </div>
 </div>

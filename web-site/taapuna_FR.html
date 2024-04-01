@@ -1,47 +1,67 @@
-<div style="max-height: 600px; overflow-y: scroll;">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/taapuna.png" width="100%">
-        <div style="padding: 14px;">
-            <h2>Taapuna</h2>
-            Edel 660, Rivi&egrave;re de Saint&#8209;Philibert<br/>
-            Ann&eacute;e : 1981
+
+<!-- Absolute locations for resources like images... -->
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'taapuna-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'taapuna-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'taapuna-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="taapuna-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/taapuna.png" width="100%">
+                <div style="padding: 14px;">
+                    <h2>Taapuna</h2>
+                    Edel 660, bas&eacute; dans la Rivi&egrave;re de Saint&#8209;Philibert<br/>
+                    <ul>
+                        <li>Chantier Construction Nautique Edel</li>
+                        <li>Date de mise &agrave; l'eau&nbsp;: 1981</li>
+                        <li>Longueur Hors-Tout : 6.65 m</li>
+                        <li>Bau max : 2.50 m</li>
+                        <li>Tirant d'eau : 1.00 m</li>
+                        <li>Couchages: tbd</li>
+                    </ul>        
+                </div>
+            </div>
+            <div>
+                <h3>&Eacute;quipement</h3>
+                <div style="display: grid; grid-template-columns: auto auto auto;">
+                    <span>Pilote : <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Traceur : <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Frigo : <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Cuisini&egrave;re : <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Panneau Solaire : <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Douche : <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Toilettes : <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Speedo : <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Sondeur : <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>An&eacute;mo : <input type="checkbox" style="pointer-events: none;"></span>
+                </div>
+            </div>
+            <div>
+                <h2>Le Bateau</h2>
+                <div>
+                    Lest 400 kg, Voilure 26.45 m2,
+                    Cat&eacute;gorie 3, Moteur HB 6 cv,
+                    Hauteur sous barrots 1.45 m / 1.80 m.
+                </div>
+            </div>
         </div>
-    </div>
-    <div>
-        <h2>Le Bateau</h2>
-        Edel 660. Architecte Maurice Edel.
-        <table border="1" cellpadding="2">
-            <tr>
-                <td>Longueur de la coque</td> <td>6.65 m</td>
-            </tr>
-            <tr>
-                <td>Largeur</td> <td>2.50 m</td>
-            </tr>
-            <tr>
-                <td>Tirant d'eau</td> <td>1.00 m</td>
-            </tr>
-            <tr>
-                <td>Poids</td> <td>1 100 kg</td>
-            </tr>
-            <tr>
-                <td>Lest</td> <td>400 kg</td>
-            </tr>
-            <tr>
-                <td>Voilure</td> <td>26.45 m2</td>
-            </tr>
-            <tr>
-                <td>Cat&eacute;gorie</td> <td>3</td>
-            </tr>
-            <tr>
-                <td>Moteur</td> <td>HB 6 cv</td>
-            </tr>
-            <tr>
-                <td>Hauteur sous barrots</td> <td>1.45 m / 1.80 m</td>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <h2>Plus d'infos...</h2>
-        R&eacute;f&eacute;rent : Guillaume Morisseau.
+
+        <div id="taapuna-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="taapuna-slide-show"
+                        width="780"
+                        height="400"
+                        style="line-height: 1em;">
+                <slide-show-image src="/images/boats/taapuna.png" title="-1-"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="taapuna-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            R&eacute;f&eacute;rent : Guillaume Morisseau.<br/>
+            Disponibilit&eacute; Boat Club&nbsp;: OUI 
+        </div>
     </div>
 </div>

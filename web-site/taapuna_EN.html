@@ -1,47 +1,67 @@
-<div style="max-height: 600px; overflow-y: scroll;">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/taapuna.png" width="100%">
-        <div style="padding: 14px;">
-            <h2>Taapuna</h2>
-            Edel 660, Rivi&egrave;re de Saint&#8209;Philibert<br/>
-            Ann&eacute;e : 1981
+
+<!-- Absolute locations for resources like images... -->
+<div style="height: 600px; overflow-y: scroll;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'taapuna-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'taapuna-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'taapuna-03');">Contact</button>
+    </div>
+
+    <div style="height: 500px; overflow-y: scroll;">
+        <div id="taapuna-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/taapuna.png" width="100%">
+                <div style="padding: 14px;">
+                    <h2>Taapuna</h2>
+                    Edel 660, based in the Rver of Saint&#8209;Philibert<br/>
+                    <ul>
+                        <li>Shipyard Construction Nautique Edel</li>
+                        <li>Launched: 1981</li>
+                        <li>LOA: 6.65 m</li>
+                        <li>BOA: 2.50 m</li>
+                        <li>Draft: 1.00 m</li>
+                        <li>Berths: tbd</li>
+                    </ul>        
+                </div>
+            </div>
+            <div>
+                <h3>Equipement</h3>
+                <div style="display: grid; grid-template-columns: auto auto auto;">
+                    <span>Pilot: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Tracer: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Fridge: <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Stove: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Solar Panel: <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Shower: <input type="checkbox" style="pointer-events: none;"></span>
+                    <span>Head: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Speedo: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>Depth sounder: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    <span>MHU: <input type="checkbox" style="pointer-events: none;"></span>
+                </div>
+            </div>
+            <div>
+                <h2>The boat</h2>
+                <div>
+                    Ballast 400 kg, Sail area 26.45 m2,
+                    Category 3, Engine outboard 6 hp,
+                    Headroom: 1.45 m / 1.80 m.
+                </div>
+            </div>
+        </div>
+
+        <div id="taapuna-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="taapuna-slide-show"
+                        width="780"
+                        height="400"
+                        style="line-height: 1em;">
+                <slide-show-image src="/images/boats/taapuna.png" title="-1-"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="taapuna-03" class="tab-section" style="display: none;">
+            <h2>More info...</h2>
+            Referent: Guillaume Morisseau.<br/>
+            Boat Club availability: YES
         </div>
     </div>
-    <div>
-        <h2>The boat</h2>
-        Edel 660. Designed by Maurice Edel.
-        <table border="1" cellpadding="2">
-            <tr>
-                <td>LOA</td> <td>6.65 m</td>
-            </tr>
-            <tr>
-                <td>Beam</td> <td>2.50 m</td>
-            </tr>
-            <tr>
-                <td>Draft</td> <td>1.00 m</td>
-            </tr>
-            <tr>
-                <td>Displ</td> <td>1 100 kg</td>
-            </tr>
-            <tr>
-                <td>Ballast</td> <td>400 kg</td>
-            </tr>
-            <tr>
-                <td>Sail area</td> <td>26.45 m2</td>
-            </tr>
-            <tr>
-                <td>Category</td> <td>3</td>
-            </tr>
-            <tr>
-                <td>Engine</td> <td>Outboard 6 hp</td>
-            </tr>
-            <tr>
-                <td>Head room</td> <td>1.45 m / 1.80 m</td>
-            </tr>
-        </table>
-    </div>
-<div>
-    <h2>More info...</h2>
-    Referent: Guillaume Morisseau.
-</div>
 </div>
