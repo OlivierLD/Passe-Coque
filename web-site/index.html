@@ -184,7 +184,7 @@
 				<img src="/logos/LOGO_PC_txt_only.png" style="width: 100px;" title="Passe&#8209;Coque"/>
 			</div>
 			<a id="hamburger" style="cursor: pointer;" onclick="openNav();" title="Hamburger Menu"> <!-- onmouseover="openNav();" <= onmouseover (si present avec onclick) fout la merde sur cell-phones et tablettes -->
-				<span style="color: #16696d; font-size: 2em; float: right; margin-right: 20px; margin-top: 18px;">Menu&nbsp;&#8801;</span>
+				<span style="position: relative; color: #16696d; font-size: 2em; float: right; right: 30px; margin-top: 18px;">Menu&nbsp;&#8801;</span>
 			</a>
 		</div>
 		<!--h1 style="width: 100%;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; <img src="/logo.transp.png" style="width: 48px; padding: 14px 10px;" title="Passe&#8209;Coque"/></span> <span id="my-name">Passe&#8209;Coque </span></h1-->
@@ -292,7 +292,7 @@
 
 
 window.onload = () => {
-	console.log("Loaded!");
+	// console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
 	// Increment view counter, keep trach, etc
@@ -389,14 +389,22 @@ window.onload = () => {
 	});
 
 	// makeCode(); // On request only
-
-	// debugger;
-	startBGAnimation();
+	// document.querySelectorAll('meta[name="viewport"]')[0].content = 'width=400';
+    // See matchMedia, https://www.w3schools.com/howto/howto_js_media_queries.asp
+	// window.innerWidth = 400;
+	// document.body.style.width = '800px'; // <= THAT one works.
 
 	console.log(`Width: ${window.innerWidth}, Height: ${window.innerHeight}`);
 	let cellPhoneUI = false;
 
-	if (window.innerWidth < 1000 || window.innerHeight < 500) {
+	// ('meta[name="viewport"]').prop('content', 'width=400');
+
+	// debugger;
+	startBGAnimation();
+
+
+	// TODO Clean this up...
+	if (false && (window.innerWidth < 1000 || window.innerHeight < 500)) {
 		cellPhoneUI = true;
 		// console.log(`Redirecting from Location : ${window.location}`);
 		// let redirected;

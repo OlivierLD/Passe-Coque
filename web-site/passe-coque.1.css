@@ -21,7 +21,7 @@
     font-family: "Montserrat", "Chalkboard", Arial, "Open Sans", "DejaVu Sans", sans-serif;
     /* font-family: "TrueNorth", Arial, "Open Sans", "DejaVu Sans", sans-serif; */
     /* font-weight: 400; */
-    font-size: 12px;
+    font-size: 18px;
     /* font-style: normal; */
     /* color: rgb(0, 64, 92); */ /* darkblue; */
     color: rgba(44,81,85,255);
@@ -124,7 +124,6 @@ div.tooltip:hover span {
 
 .container {
     position: relative;
-    margin-top: -18px;
 }
 
 .top-container {
@@ -164,7 +163,7 @@ div.tooltip:hover span {
 }
 
 .boat-image-container {
-    min-height: 20px;
+    min-height: 280px;
     background-color: black;
     /* background-image: radial-gradient(white, silver, black); */
     aspect-ratio: 1 / 1;  /* THAT is a cool one... */
@@ -228,7 +227,7 @@ div.tooltip:hover span {
     border-radius: 5px;
     /* background-color: rgba(161, 156, 156, 0.65); */
     background: white;
-    min-height: 300px; /*auto;*/  /*388px;*/
+    height: auto;  /*388px;*/
 }
 .boat-image-plus-text:hover {
     /* box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan; */
@@ -247,7 +246,6 @@ div.tooltip:hover span {
 }
 
 .badge {
-    display: none;
     position: relative;
     width: 70px;
     height: 60px;
@@ -255,7 +253,7 @@ div.tooltip:hover span {
     border-radius: 50%;
     bottom: 380px;
     left: 214px;
-    padding-top: 30px;
+    padding-top: 10px;
     line-height: 1.0em;
 }
 .badge span {
@@ -267,11 +265,6 @@ div.tooltip:hover span {
     margin-bottom: 6px;
 }
 
-.boat-card {
-    font-size: 12px;
-    line-height: 1.2em;
-}
-
 /* .badge-pc {
     background: rgba(255, 115, 0, 0.25);
 }
@@ -281,6 +274,49 @@ div.tooltip:hover span {
 .badge-grab {
     background: rgba(0, 255, 4, 0.25);
 } */
+
+.data-header-div-1 {
+    margin: 0 100px 0 100px;
+    padding: 40px 60px 40px 60px; 
+    text-align: center;
+}
+.data-header-div-2 {
+    margin: 0 100px 0 100px;
+    padding: 80px 60px 40px 60px;
+    text-align: center;
+}
+.data-div {
+    margin: 40px 100px 40px 100px;
+}
+.txt-img-div {
+    display: grid; 
+    grid-template-columns: 50% 50%;
+    margin: 60px 0 40px 0;
+}
+.txt-img-div-2 {
+    display: grid; 
+    grid-template-columns: 50% 50%;
+    margin: 60px 0 40px 0;
+}
+.txt-div {
+    /* margin-top: -20px; */
+    /* margin-top: -20px; */
+    margin: 0 20px 0 20px;
+    /* padding: 0 80px 0 20px; */
+    padding: 0 80px 0 20px;
+    /* border: 1px solid silver; */
+    /* border-radius: 5px; */
+}
+.img-div {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.img-legend {
+    font-size: 0.9em;
+    line-height: 1.0;
+}
 
 .background-container:after {
     content: '';
@@ -304,7 +340,7 @@ div.tooltip:hover span {
 .background-container {
     position: relative;
     width: 100%;  /* if 100%, too big for a tablet ?... */
-    padding: 5px;
+    padding: 50px;
     /* font-weight: bold; */
     text-align: center;
     z-index: 0;
@@ -395,7 +431,6 @@ div.tooltip:hover span {
     margin-top: 59px; /* Depends on the menu's thickness */
     color: black; /*blue;*/
     /* font-weight: bold; */
-    /* width: 100%; */
 }
 
 #lang-flag:hover {
@@ -797,6 +832,11 @@ span.expand-collapse:hover {
     height: auto;
 }
 
+.you-tube-video {
+    width: 560px; 
+    height: 315px;
+}
+
 @-webkit-keyframes fade {
     from {
       opacity: .4
@@ -877,16 +917,17 @@ span.expand-collapse:hover {
 }
 
 .title-overlay {
-    position: relative;
     font-style: italic;
-    text-align: right;
+    /* font-size: 2em; */
+    /* z-index: 10; */
+    text-align: left;
+    position: relative;
     top: 80px;
-    left: auto;
-    right: 20px;
+    left: 20px;
     margin-top: -40px;
     /* transform: translate(-5%, 10%); */
     background: transparent;
-}    
+}
 
 .citation-overlay {
     font-style: italic;
@@ -902,17 +943,16 @@ span.expand-collapse:hover {
 
 .pix-strip {
     display: grid; 
-    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;
-    /* grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;  */
+    grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px; 
     margin-right: 20px;
 }
 .pcc-dialog {
-    width: 85%; /*800px; */
+    width: 800px; 
     margin-top: 40px; 
     z-index: 3; 
     position: absolute; 
-    max-height: 550px; 
-    /* overflow: scroll; */
+    /* max-height: 600px; 
+    overflow: scroll; */
 }
 .pcc-dialog-content {
     max-height: 600px; 
@@ -952,7 +992,7 @@ span.expand-collapse:hover {
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    font-size: 12px;
+    font-size: 17px;
 }
 
 /* Change background color of buttons on hover */
@@ -964,11 +1004,7 @@ span.expand-collapse:hover {
 .tab button.tab-active {
     background-color: #ccc;
 }
-/* If laptop is the default 
-.equipment-css {
-    display: grid; 
-    grid-template-columns: auto auto auto;
-}
+
 .home-page-slides-01 {
     margin: 0 10%; 
     display: grid; 
@@ -978,6 +1014,12 @@ span.expand-collapse:hover {
     display: grid; 
     grid-template-columns: 48% 48%;
 }
+
+.equipment-css {
+    display: grid; 
+    grid-template-columns: auto auto auto;
+}
+
 .page-bottom-02 {
     margin: 0 10%; 
     display: grid; 
@@ -987,6 +1029,7 @@ span.expand-collapse:hover {
     display: grid; 
     grid-template-columns: 25% 25% 25% 25%; 
     background: white; 
+    /*margin: 0 50px 0 50px;*/
 }
 .fleet-slides {
     display: grid; 
@@ -1005,6 +1048,21 @@ span.expand-collapse:hover {
     display: grid;
     grid-template-columns: 25% 50% 25%;
 }
+.scrolling-menu {
+    /* display: block; */
+    display: none;
+}
+.hamburger-menu {
+    width: 100%;
+	top: 0; 
+    margin-left: -8px;
+    height: 66px;
+    position: fixed; 
+	z-index: 2;
+    background: rgba(255, 255, 255, 0.85);
+    /* display: none; */
+    display: block;
+}
 .logo-image {
     width: 280px;
     height: auto;
@@ -1014,84 +1072,6 @@ span.expand-collapse:hover {
     background: white; 
     margin: 20px;
 }
-.scrolling-menu {
-    display: none;
-}
-.you-tube-video {
-    width: 560px; 
-    height: 315px;
-}
-*/
-/* End of defaul laptop */
-
-/* If cell-phone is the default */ 
-.project-slides {
-    display: grid;
-    grid-template-columns: 50% 50%; 
-    background: white; 
-}    
-.fleet-slides {
-    display: grid;
-    grid-template-columns: 50% 50%; 
-    background: white; 
-}
-.fleet-and-filters {
-    display: grid;
-    grid-template-columns: 100%; 
-}    
-.you-tube-video {
-    width: 280px; 
-    height: 158px;
-}
-.text-block {
-    font-size: 1.5em;
-    position: absolute;
-    bottom: 50%;
-    right: 50%;
-    background-color: transparent;
-    color: orange;
-    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-}    
-.equipment-css {
-    display: grid; 
-    grid-template-columns: auto auto;
-}    
-
-.hamburger-menu {
-    width: 100%;
-	top: 0; 
-    margin-left: -8px;
-    height: 66px;
-    position: fixed; 
-	z-index: 2;
-    background: rgba(255, 255, 255, 0.85);
-    display: block;
-}
-.txt-img-div {
-    display: grid; 
-    grid-template-columns: 100%;
-    margin: 60px 5px 40px 5px;
-}    
-.txt-img-div-2 {
-    display: grid; 
-    grid-template-columns: 100%;
-    margin: 30px 5px 20px 5px;
-}    
-.data-header-div-1 {
-    margin: 0 10px 0 10px;
-    padding: 40px 20px 10px 20px; 
-    text-align: center;
-}
-.data-header-div-2 {
-    margin: 0 10px 0 10px;
-    padding: 80px 10px 10px 10px;
-    text-align: center;
-}    
-
-
-/**/
-/* End of Default Cell-Phone */
-
 /* On smaller screens, decrease text size */
 /* 
     Doc at https://www.w3schools.com/cssref/css3_pr_mediaquery.php 
@@ -1101,8 +1081,7 @@ span.expand-collapse:hover {
 /* @media only screen and (max-width: var(--small-screen-width)) { */
 /* @media only screen and (max-width: 1000px) { */  /* No var... */
 /* @media screen and (max-width: 1000px) { */
-/* @media screen and (width <= 1300px) { */
-@media screen and (width >= 800px) { 
+@media screen and (width <= 1300px) { 
 
     .scrolling-menu {
         display: none;
@@ -1112,7 +1091,7 @@ span.expand-collapse:hover {
     }
     
     * {
-        font-size: 18px;
+        font-size: 12px;
         line-height: 1.2em;
         /* color: red; */
     }
@@ -1138,30 +1117,15 @@ span.expand-collapse:hover {
         top: -100px;
         left: 5px;
     }
-    /* .title-overlay {
+    .title-overlay {
         text-align: right;
         top: 80px;
         left: auto;
         right: 20px;
-    }     */
-    .title-overlay {
-        font-style: italic;
-        /* font-size: 2em; */
-        /* z-index: 10; */
-        text-align: left;
-        position: relative;
-        top: 80px;
-        left: 20px;
-        right: auto;
-        margin-top: -40px;
-        /* transform: translate(-5%, 10%); */
-        background: transparent;
-    }
-    
+    }    
     .pix-strip {
         display: grid; 
-        /* grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;  */
-        grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px; 
+        grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px; 
         margin-right: 20px;
     }    
     .pcc-dialog {
@@ -1174,11 +1138,8 @@ span.expand-collapse:hover {
         display: none;
     }
     .boat-image-container {
-        /* min-height: 280px; */
-        background-color: black;
-        /* background-image: radial-gradient(white, silver, black); */
-        aspect-ratio: 1 / 1;  /* THAT is a cool one... */
-    }    
+        min-height: 20px;
+    }
     .prev, .next, .text {
         font-size: 11px
     }
@@ -1192,62 +1153,13 @@ span.expand-collapse:hover {
     .boat-image-plus-text span {
         padding: 4px;
     }
-    /* .background-container {
-        width: 86%;
-    } */
+    .badge {
+        /* bottom: 220px; */
+        /* left: 86px; */
+        display: none;
+    }    
     .background-container {
-        position: relative;
-        width: 100%;  /* if 100%, too big for a tablet ?... */
-        padding: 50px;
-        /* font-weight: bold; */
-        text-align: center;
-        z-index: 0;
-    }
-    
-    .data-header-div-1 {
-        margin: 0 100px 0 100px;
-        padding: 40px 60px 40px 60px; 
-        text-align: center;
-    }
-    .data-header-div-2 {
-        margin: 0 100px 0 100px;
-        padding: 80px 60px 40px 60px;
-        text-align: center;
-    }
-    .data-div {
-        margin: 40px 100px 40px 100px;
-    }
-    .txt-img-div {
-        display: grid; 
-        grid-template-columns: 50% 50%;
-        margin: 60px 0 40px 0;
-    }
-    .txt-img-div-2 {
-        display: grid; 
-        grid-template-columns: 50% 50%;
-        margin: 60px 0 40px 0;
-    }
-    .txt-div {
-        /* margin-top: -20px; */
-        /* margin-top: -20px; */
-        margin: 0 20px 0 20px;
-        /* padding: 0 80px 0 20px; */
-        padding: 0 80px 0 20px;
-        /* border: 1px solid silver; */
-        /* border-radius: 5px; */
-    }
-    .img-div {
-        width: 90%;
-        text-align: center;
-        margin: 0 auto;
-    }
-    .img-legend {
-        font-size: 0.9em;
-        line-height: 1.0;
-    }
-    .equipment-css {
-        display: grid; 
-        grid-template-columns: auto auto;
+        width: 86%;
     }
     .home-page-slides-01 {
         /* margin: 0 2%;  */
@@ -1264,29 +1176,24 @@ span.expand-collapse:hover {
         grid-template-columns: 98%;
     } 
     .project-slides {
-        display: grid; 
         grid-template-columns: 33% 33% 33%; 
-        background: white; 
     }    
     .fleet-slides {
-        display: grid; 
         grid-template-columns: 33% 33% 33%; 
-        background: white; 
     }
     .fleet-and-filters {
-        display: grid; 
         grid-template-columns: 100%; 
     }    
-    /* .txt-img-div {
+    .txt-img-div {
         display: grid; 
         grid-template-columns: 100%;
         margin: 60px 0 40px 0;
-    }     */
-    /* .txt-img-div-2 {
+    }    
+    .txt-img-div-2 {
         display: grid; 
         grid-template-columns: 100%;
         margin: 30px 0 20px 0;
-    }     */
+    }    
     .data-header-div-1 {
         margin: 0 10px 0 10px;
         padding: 40px 20px 10px 20px; 
@@ -1316,8 +1223,9 @@ span.expand-collapse:hover {
         cursor: pointer; */
         padding: 8px 8px;
         /* transition: 0.3s; */
-        font-size: 16px;
+        font-size: 12px;
     }
+    
 }
 
 @media screen and (width > 1300px) { 
@@ -1328,104 +1236,9 @@ span.expand-collapse:hover {
     .hamburger-menu {
         display: none;
     }
-    .data-header-div-1 {
-        margin: 0 100px 0 100px;
-        padding: 40px 60px 40px 60px; 
-        text-align: center;
-    }
-    .data-header-div-2 {
-        margin: 0 100px 0 100px;
-        padding: 80px 60px 40px 60px;
-        text-align: center;
-    }
-    .data-div {
-        margin: 40px 100px 40px 100px;
-    }
-    .txt-img-div {
-        display: grid; 
-        grid-template-columns: 50% 50%;
-        margin: 60px 0 40px 0;
-    }
-    .txt-img-div-2 {
-        display: grid; 
-        grid-template-columns: 50% 50%;
-        margin: 60px 0 40px 0;
-    }
-    .txt-div {
-        /* margin-top: -20px; */
-        /* margin-top: -20px; */
-        margin: 0 20px 0 20px;
-        /* padding: 0 80px 0 20px; */
-        padding: 0 80px 0 20px;
-        /* border: 1px solid silver; */
-        /* border-radius: 5px; */
-    }
-    .img-div {
-        width: 90%;
-        text-align: center;
-        margin: 0 auto;
-    }
-    .img-legend {
-        font-size: 0.9em;
-        line-height: 1.0;
-    }
     .equipment-css {
         display: grid; 
         grid-template-columns: auto auto auto;
-    }    
-    .home-page-slides-01 {
-        margin: 0 10%; 
-        display: grid; 
-        grid-template-columns: 33% 33% 33%;
-    }
-    .home-page-slides-02 {
-        display: grid; 
-        grid-template-columns: 48% 48%;
-    }
-    .page-bottom-02 {
-        margin: 0 10%; 
-        display: grid; 
-        grid-template-columns: 50% 50%;
-    }
-    .project-slides {
-        display: grid; 
-        grid-template-columns: 25% 25% 25% 25%; 
-        background: white; 
-        /*margin: 0 50px 0 50px;*/
-    }
-    .fleet-slides {
-        display: grid; 
-        grid-template-columns: 25% 25% 25% 25%; 
-        background: white;
-    }
-    .fleet-and-filters {
-        display: grid;
-        grid-template-columns: 70% 30%; 
-    }
-    .home-width {
-        margin-top: -18px; 
-        width: 100%;
-    }
-    .main-bottom {
-        display: grid;
-        grid-template-columns: 25% 50% 25%;
-    }
-    .logo-image {
-        width: 280px;
-        height: auto;
-    }
-    .actu-container {
-        display: block; 
-        background: white; 
-        margin: 20px;
-    }
-    .you-tube-video {
-        width: 560px; 
-        height: 315px;
-    }    
-    .badge {
-        display: block;
-        padding-top: 30px;
     }    
 }
 
@@ -1438,13 +1251,6 @@ span.expand-collapse:hover {
         font-size: 12px;
         /* color: blue; */
     }
-    .hamburger-menu {
-        display: block;
-        /* width: 90%; */
-    }
-    .scrolling-menu {
-        display: none;
-    }
     .sidenav {
         padding-top: 15px;
         font-size: 20px;
@@ -1452,35 +1258,28 @@ span.expand-collapse:hover {
     .sidenav * {
         font-size: 20px;
     }
-    /* .pcc-dialog {
+    .pcc-dialog {
         width: 75%; 
-    } */
+    }
     .project-slides {
-        display: grid;
         grid-template-columns: 50% 50%; 
-        background: white; 
     }    
     .fleet-slides {
-        display: grid;
         grid-template-columns: 50% 50%; 
-        background: white; 
     }
     .fleet-and-filters {
-        display: grid;
         grid-template-columns: 100%; 
     }    
+    .hamburger-menu {
+        display: block;
+        width: 92%;
+    }
     .you-tube-video {
         width: 280px; 
         height: 158px;
     }
     .text-block {
         font-size: 1.5em;
-        position: absolute;
-        bottom: 50%;
-        right: 50%;
-        background-color: transparent;
-        color: orange;
-        text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; /* Character outline */
     }    
     .equipment-css {
         display: grid; 
