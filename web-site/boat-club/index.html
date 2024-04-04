@@ -216,21 +216,30 @@
 
 
 window.onload = () => {
-	console.log("PCC Loaded!");
+	console.log("PC-BC Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
 	let userLang = getQueryParameterByName('lang');
+	if (userLang) { 
+		if (userLang === 'EN') {
+			switchLanguagePCC();
+		}
+	} else {
+		let browserUserLang = navigator.language || navigator.userLanguage; 
+		console.log("The browser's language is: " + browserUserLang);
+		if (browserUserLang) {
+			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+				userLang = 'FR';
+			} else {
+				userLang = 'EN';
+				console.log("We'll speak english");
+			}
+		}
+	}
 	if (userLang && userLang === 'EN') {
 		switchLanguagePCC();
 	}
-	let qsLang = getQSPrm('lang');
-	if (qsLang) {
-		if (qsLang === 'EN' || qsLang === 'FR') {
-			currentLang = qsLang;
-		} else {
-			console.log(`Unmanaged lang is query string: ${qsLang}`);
-		}
-	}
+
 	// QS for 'clack' prm
 	let clack = getQueryParameterByName('clack');
 	if (clack && clack.trim().length > 0) {
