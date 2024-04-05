@@ -290,6 +290,16 @@ div.tooltip:hover span {
     background: rgba(0, 255, 4, 0.25);
 } */
 
+.pc-history {
+    border: 1px solid rgb(168, 161, 161); 
+    border-radius: 3px; 
+    padding: 10px; 
+    background-color: white; 
+    margin: 0 5px;
+}
+.pc-history:before {
+}
+
 .background-container:after {
     content: '';
     /* background: url("./photos.michel.02/02.jpg") no-repeat center center; */
@@ -1473,6 +1483,25 @@ span.expand-collapse:hover {
         display: block;
         padding-top: 30px;
     }    
+    .pc-history {
+        border: 1px solid rgb(168, 161, 161); 
+        border-radius: 3px; 
+        padding: 10px; 
+        background-color: white; 
+        margin: 0 5px;
+    }
+    .pc-history:before {
+        content: '';
+        background-image: url('./images/boats/bw-boat.jpeg'); /* no-repeat center center; */
+        /* background-size: cover; */
+        background-repeat: no-repeat;
+        top: 50px;
+        left: 150px;
+        width: 90%;
+        height: 90%;
+        position: absolute;
+        opacity: 0.10;
+    }
 }
 
  /* @media screen and (max-width: calc(var(--small-screen-width))) { */
