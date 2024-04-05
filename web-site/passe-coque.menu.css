@@ -152,7 +152,7 @@ ul#navigation ul li a * {
 }
 
 ul#navigation ul li:first-child {
-	margin-top: 36px;  /* Related to padding: 25px 10px; in ul#navigation li a, and #nav-menu font-size */
+	margin-top: 32px;  /* Related to padding: 25px 10px; in ul#navigation li a, and #nav-menu font-size */
 }
 
 /* ul#navigation li a.first {

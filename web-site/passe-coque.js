@@ -144,7 +144,9 @@ let clack = (origin) => {
                                     const overflow = document.getElementById('action-container-2');
                                     let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : '03');
                                     const anchor = document.querySelector(`a[name='${hashtag}']`);
-                                    
+                                    anchor.scrollIntoView();
+                                
+                                    /*
                                     const rectOverflow = overflow.getBoundingClientRect();
                                     const rectAnchor = anchor.getBoundingClientRect();
     
@@ -153,11 +155,19 @@ let clack = (origin) => {
                                     // Set the scroll position of the overflow container
                                     overflow.scrollTop = scroll_top; // .toFixed(0);  // If remains to zero, check div's height
                                     console.log(`>>> Origin: ${originId}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
+                                    */
+                                    // 2e couche
+                                    if (originId === "21") {
+                                        window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                                    }
+                                    window.scrollBy(0, -92); // 92: menu thickness
                                 };
                                 window.setTimeout(scrollToAnchor, 100);
-                                // 2e couche
-                                if (originId === "21") {
-                                    window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                                if (false) {
+                                    // 2e couche
+                                    if (originId === "21") {
+                                        window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                                    }
                                 }
                                 fillOutTheTeam(); // For the random order
 
@@ -446,7 +456,6 @@ let clack_pcc = (origin) => {
     }
     currentContext = originId;
 
-
     let path = (document.location.pathname ? document.location.pathname + "/" : "");
 
 	let contentName = `${path}${originId}_${currentLang}.html`;
@@ -495,7 +504,9 @@ let clack_pcc = (origin) => {
                                 // const overflow = document.getElementById('pcc-2');
                                 // let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX'); 
                                 const anchor = document.querySelector(`a[name='${hashtag}']`);
+                                anchor.scrollIntoView();
                                 
+                                /*
                                 const rectOverflow = overflow.getBoundingClientRect();
                                 const rectAnchor = anchor.getBoundingClientRect();
 
@@ -504,11 +515,21 @@ let clack_pcc = (origin) => {
                                 // Set the scroll position of the overflow container
                                 overflow.scrollTop = scroll_top; // .toFixed(0);  // If remains to zero, check div's height
                                 console.log(`>>> Origin: ${originId} #${hashtag}: scrolltop: ${overflow.scrollTop} vs ${scroll_top}`);
+                                */
+                                // 2e couche
+                                if (originId === "21" || originId === "41" || originId === "51") {
+                                    window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                                }
+                                window.scrollBy(0, -92); // 92: menu thickness
                             };
                             window.setTimeout(scrollToAnchor, 200); // Timeout to wait for the load of the fetch...
-                            // 2e couche
-                            if (originId === "21" || originId === "41" || originId === "51") {
-                                window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                            if (false) {
+                                // 2e couche
+                                if (originId === "21" || originId === "41" || originId === "51") {
+                                    window.scrollTo(0, 0); // Scroll on top, if invoked from a button at the bottom of the page
+                                }
+                                debugger;
+                                // window.scrollTo();
                             }
                         } else {
                             if (true) {
@@ -1459,6 +1480,10 @@ const INFO_SECTION = [
     {
         section: "2024",
         content: [{
+            date: "Avr-2024",
+            title: "2 Avril 2024",
+            content: "/actu/2024/radio.balises.html"
+        },{
             date: "Mar-2024",
             title: "March 2024",
             content: "/actu/2024/ocean.lab.html"
@@ -1474,8 +1499,7 @@ const INFO_SECTION = [
     },
     { 
         section: "2023",
-        content: [
-            {
+        content: [{
                 date: "Oct-2023",
                 title: "Festival des aventuriers",
                 content: "/actu/2023/fam.html"
@@ -1805,7 +1829,7 @@ let fillOutActu = filter => {
             console.log(`Adding event ${event.title}`);
             let eventDiv = document.createElement('div');
             eventDiv.style = "margin: 20px;";
-            sectionDiv.appendChild(eventDiv);
+            // sectionDiv.appendChild(eventDiv);
             console.log(`Now fetching ${event.content}`); // TODO Language !!
             fetch(event.content)
                 .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
@@ -1814,7 +1838,7 @@ let fillOutActu = filter => {
                         eventDiv.innerHTML = generateFetchMessage(event.content, response); // `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
                     } else {
                         response.text().then(doc => {
-                            console.log(`${event.content} code data loaded, length: ${doc.length}.`);
+                            console.log(`${event.content} code data loaded, length: ${doc.length} (${doc}).`);
                             eventDiv.innerHTML = doc;
                         });
                     }
@@ -1832,12 +1856,17 @@ let fillOutActu = filter => {
                     // Plus tard...
                     eventDiv.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
                 });
+            sectionDiv.appendChild(eventDiv);
         });
         container.appendChild(sectionDiv);
     });
 
     // Slideshows, onclick on images...
-    document.getElementById("bpgo-lorient").slideclick = onSlideShowClick;
+    try {
+        document.getElementById("bpgo-lorient").slideclick = onSlideShowClick;
+    } catch (err) {
+        console.log(`SlideClick: ${err}`);
+    }
 
 };
 
