@@ -278,6 +278,8 @@ div.tooltip:hover span {
 .boat-card {
     font-size: 12px;
     line-height: 1.2em;
+    height: 500px; 
+    overflow-y: scroll;
 }
 
 /* .badge-pc {
@@ -929,12 +931,12 @@ span.expand-collapse:hover {
     margin-top: 40px; 
     z-index: 3; 
     position: absolute; 
-    max-height: 550px; 
+    /* max-height: 550px;  */
     /* overflow: scroll; */
 }
 .pcc-dialog-content {
     max-height: 600px; 
-    overflow: scroll;
+    overflow: hidden;
 }
 .page-bottom {
     color: white !important;
@@ -1175,7 +1177,7 @@ span.expand-collapse:hover {
         font-size: 2em;
         text-align: left;
         position: relative; */
-        top: -100px;
+        top: -200px;
         left: 5px;
     }
     /* .title-overlay {
@@ -1209,7 +1211,8 @@ span.expand-collapse:hover {
         margin-top: 40px; 
         z-index: 3; 
         position: absolute; 
-        max-height: 500px; 
+        /* max-height: 500px;  */
+        height: 500px;
         overflow: scroll;
         display: none;
     }
@@ -1228,6 +1231,7 @@ span.expand-collapse:hover {
     }
     .boat-image-plus-text {
         height: auto;
+        aspect-ratio: 1 / 1.2;
     }
     .boat-image-plus-text span {
         padding: 4px;
@@ -1375,7 +1379,7 @@ span.expand-collapse:hover {
     }    
 }
 
-@media screen and (width >= 1300px) { 
+@media screen and (width >= 1350px) { 
 
     .scrolling-menu {
         display: block;
@@ -1502,6 +1506,12 @@ span.expand-collapse:hover {
         position: absolute;
         opacity: 0.10;
     }
+    .boat-card {
+        font-size: 12px;
+        line-height: 1.2em;
+        height: 600px; 
+        overflow-y: scroll;
+    }    
 }
 
  /* @media screen and (max-width: calc(var(--small-screen-width))) { */
