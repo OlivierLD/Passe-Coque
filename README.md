@@ -24,9 +24,13 @@ If `NodeJS` is installed on your dev machine:
 $ cd web-site
 $ npm start
 ```
+There is in the `web-site` folder a `package.json`, used by `npm start`. The server will start on port `8080`, then you can reach
+<http://localhost:8080/> in your browser.
 
 Or using `php`:
 ```
 $ php -S 127.0.0.1:8000    
 ```
+then reach <http://localhost:8000/> in your browser.
+
 ---
