@@ -935,9 +935,14 @@ span.expand-collapse:hover {
     /* overflow: scroll; */
 }
 .pcc-dialog-content {
-    max-height: 600px; 
-    overflow: hidden;
+    max-height: 500px; 
+    overflow: scroll;
 }
+.pcc-dialog-tab-content {
+    height: 400px; 
+    overflow-y: scroll;
+}
+
 .page-bottom {
     color: white !important;
 }
