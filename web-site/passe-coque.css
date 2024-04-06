@@ -1492,7 +1492,7 @@ span.expand-collapse:hover {
     }
     .pc-history:before {
         content: '';
-        background-image: url('./images/boats/bw-boat.jpeg'); /* no-repeat center center; */
+        /* background-image: url('./images/boats/bw-boat.jpeg'); */
         /* background-size: cover; */
         background-repeat: no-repeat;
         top: 50px;
