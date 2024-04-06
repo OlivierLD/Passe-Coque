@@ -116,6 +116,8 @@ let clack = (origin) => {
         contentName = `21_${currentLang}.html`; // 21, 22 & 23, same doc, different anchor (hashtag).
 	// } else if (originId === "32" || originId === "33") {
     //    contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
+    } else if (originId === "67") {
+        contentName = `7_${currentLang}.html`;
     }
 	let contentPlaceHolder = document.getElementById("current-content");
     
@@ -255,8 +257,9 @@ let updateMenu = () => { // Multilang aspect.
 	document.querySelectorAll("#_64").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La boutique" : "The store"));
 	document.querySelectorAll("#_65").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners"));
 	// document.querySelectorAll("#_66").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Charte PCC" : "PCC Chart"));
-	// document.querySelectorAll("#_67").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
-	document.querySelectorAll("#_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+	document.querySelectorAll("#_67").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+	// document.querySelectorAll("#_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+	document.querySelectorAll("#ms_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 };
 
 let switchLanguage = () => {
@@ -463,11 +466,11 @@ let clack_pcc = (origin) => {
     // Specific content rule(s)
 	if (originId === "21" || originId === "22") { // Menu 2, special management, see below (ONE page only)
         contentName = `${path}2_${currentLang}.html`; // 21 & 22, same doc, different anchor (hashtag).
-    } else if  (originId === "41" || originId === "42") { 
+    } else if  (originId === "41" || originId === "42") { // TODO Remove this...
         contentName = `${path}4_${currentLang}.html`; 
-    } else if  (originId === "43") { 
+    } else if  (originId === "43") {                      // TODO Remove this...
         contentName = `${path}6_${currentLang}.html`;  // Member Space
-    } else if  (originId === "51" || originId === "52") { 
+    } else if  (originId === "51" || originId === "52") {  // TODO Remove this...
         contentName = `${path}5_${currentLang}.html`; 
     // } else if  (originId === "53") { 
     //    contentName = `${path}6_${currentLang}.html`;   // Member Space
@@ -582,21 +585,21 @@ let updateMenuPCC = () => { // Multilang aspect.
 	document.querySelectorAll("#_21").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Fonctionnement" : "How it works"));
 	document.querySelectorAll("#_22").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La Charte" : "The Charter"));
 
-	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "O&ugrave; sont nos bateaux" : "Where are our boats"));
+	document.querySelectorAll("#_3").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Nos bateaux" : "Our boats"));
 	document.querySelectorAll("#_31").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Les ports" : "The harbors"));
 	document.querySelectorAll("#_32").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La flotte" : "The fleet"));
 
 	document.querySelectorAll("#_4").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer&nbsp;" : "Enroll&nbsp;"));
-	document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Pour quoi faire" : "What for"));
-	document.querySelectorAll("#_42").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer au boat club" : "Enrollment"));
-	document.querySelectorAll("#_43").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+	// document.querySelectorAll("#_41").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Pour quoi faire" : "What for"));
+	// document.querySelectorAll("#_42").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer au boat club" : "Enrollment"));
+	// document.querySelectorAll("#_43").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 
 	document.querySelectorAll("#_5").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "R&eacute;server&nbsp;" : "Reservations&nbsp;"));
-	document.querySelectorAll("#_51").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Comment &ccedil;a marche" : "How it works"));
-	document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Faire une r&eacute;servation" : "Make a reservation"));
+	// document.querySelectorAll("#_51").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Comment &ccedil;a marche" : "How it works"));
+	// document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Faire une r&eacute;servation" : "Make a reservation"));
 	// document.querySelectorAll("#_53").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 
-    document.querySelectorAll("#members-space").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+    document.querySelectorAll("#members-space").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Membres" : "Members"));
 };
 
 let switchLanguagePCC = () => {

@@ -1375,7 +1375,7 @@ span.expand-collapse:hover {
     }    
 }
 
-@media screen and (width >= 1480px) { 
+@media screen and (width >= 1300px) { 
 
     .scrolling-menu {
         display: block;

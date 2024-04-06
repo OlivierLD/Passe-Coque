@@ -51,13 +51,13 @@
 			- La Charte     				 (22)
 		- Les bases         - 3
 		- Adherer           - 4
-			- Pour quoi faire                 (41)
-			- Adhesion                        (42)
-			- Espace membres                  (43)
+			// - Pour quoi faire                 (41)
+			// - Adhesion                        (42)
+			// - Espace membres                  (43)
 		- Reserver          - 5
-			- Comment ca marche               (51)
-			- Reservation                     (52)
-			- Espace membres                  (53)
+			// - Comment ca marche               (51)
+			// - Reservation                     (52)
+			// - Espace membres                  (53)
 		- Espace Membres (icone) - 6
 	-->
 	<div id="nav-menu" class="scrolling-menu" style="margin-left: -8px;">
@@ -83,33 +83,33 @@
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_3">O&ugrave; sont nos bateaux</a>
+					<a href="javascript:void(0)" id="_3">Nos bateaux</a>
 					<ul>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_31">Les ports</a></li>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_32">La flotte</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_4">Adh&eacute;rer</a>
-					<ul>
+					<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_4">Adh&eacute;rer</a>
+					<!--ul>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_41">Pour quoi faire</a></li>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_42">Adh&eacute;rer au boat club</a></li>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_43">Espace Membres</a></li>
-					</ul>
+					</ul-->
 				</li>
 				<li>
 					<a href="javascript:void(0)" onclick="clack_pcc(this);" id="_5">R&eacute;server&nbsp;</a>
-					<ul>
+					<!--ul>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_51">Comment &ccedil;a marche</a></li>
 						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_52">Faire une R&eacute;servation</a></li>
-						<!--li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_53">Espace Membres</a></li-->
-					</ul>
+						<li><a href="javascript:void(0)" onclick="clack_pcc(this);" id="_53">Espace Membres</a></li>
+					</ul-->
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_6" onclick="clack_pcc(this);" title="Espace Membres">
+					<a href="javascript:void(0)" id="_6" onclick="clack_pcc(this);" title="Espace Membres" style="display: flex; align-items: center;">
 						<svg style="margin: 5px;" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-						</svg><span id="members-space" style="display: none;">Espace Membres</span>
+						</svg><span id="members-space" style="display: block;">Membres</span>
 					</a>
 				</li>
 				<li><a href="javascript:void(0)" onclick="switchLanguagePCC();"><image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>

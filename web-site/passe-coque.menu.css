@@ -94,6 +94,11 @@ ul#navigation li:hover > ul {
 	opacity: 0.85; /* 1; */
 }
 
+svg:hover {
+	/* fill: var(--pc-bg-color); */
+	stroke: var(--pc-bg-color);
+}
+  
 ul#navigation ul, ul#navigation ul li ul {
 	list-style: none;
     margin: 0;	
