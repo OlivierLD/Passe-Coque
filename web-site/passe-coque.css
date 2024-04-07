@@ -517,15 +517,22 @@ input:checked + .slider:before {
 }
   
 .dialog-header {
-      font-size: 24px;
-      font-weight: 700;
+    /* float: left; */
+    height: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: auto auto;
+} 
+.dialog-title {
+    float: left;
+    display: block;
 }
-  
 .dialog-header-close {
-    float: right;
+    /* float: right; */
+    text-align: right;
     margin-right: 10px;
 }
-
 .dialog-header-close:hover {
     color: cyan;
     cursor: pointer;
@@ -936,7 +943,9 @@ span.expand-collapse:hover {
 }
 .pcc-dialog-content {
     max-height: 500px; 
+    /* max-height: 400px;  */
     overflow: scroll;
+    margin-top: 0px;
 }
 .pcc-dialog-tab-content {
     height: 400px; 
@@ -1165,6 +1174,7 @@ span.expand-collapse:hover {
     }
     .dialog-header-close {
         font-size: 48px;
+        margin: -30px 10px 0 0;
     }    
     .data-header-div {
         margin: 0 10px 0 10px;
@@ -1221,6 +1231,12 @@ span.expand-collapse:hover {
         overflow: scroll;
         display: none;
     }
+    .pcc-dialog-content {
+        max-height: 500px; 
+        /* max-height: 400px;  */
+        overflow: scroll;
+        margin-top: 22px;
+    }    
     .boat-image-container {
         /* min-height: 280px; */
         background-color: black;

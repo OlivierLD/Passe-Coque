@@ -897,10 +897,15 @@ let mouseOnTxPix = (origin) => {
 let mouseOnRftPix = (origin) => {
 };
 
-let clickOnBoatPix = (origin, pathPrefix = '') => {
+let clickOnBoatPix = (origin, name = 'Boat Name', pathPrefix = '') => {
     console.log(`Click on ${origin.id}`);
     // TODO Set the content
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
+    let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
+    if (dialogTitle) {
+        dialogTitle[dialogTitle.length - 1].innerText = name; // Can be several dialogs... take the last.
+    }
+
     let contentName = `${pathPrefix}${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
     console.log(`onclick, loading ${contentName}`);
     fetch(contentName)
@@ -1651,7 +1656,7 @@ let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true, p
         // div.style = "padding: 10px; z-index: 1; max-height: 420px; max-width: 300px;"; // See below. Make this class
         div.classList.add("boat-frame");
         // div.title = boat.name;
-        div.onclick = function() { clickOnBoatPix(this, pathPrefix); }; 
+        div.onclick = function() { clickOnBoatPix(this, boat.name, pathPrefix); }; 
         div.onmouseover = function() { mouseOnTxPix(this); };
         let imgContainer = document.createElement('div');
         imgContainer.classList.add("boat-image-container");
