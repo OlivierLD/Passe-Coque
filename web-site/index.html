@@ -75,7 +75,7 @@
 			- Boutique                         64
 			- Partenaires                      65
 			// - Chart PCC                        66 - Moved
-			- Espace Membres                   67 - Moved to 7
+			- Espace Membres                   67 - Moved / Copied to 7
 		- Espace Membres  - 7
 	-->
 	<div id="nav-menu" class="scrolling-menu" style="margin-left: -8px;">
@@ -464,9 +464,17 @@ window.onload = () => {
 		switchLanguage();
 	}
 
-	// Load Home Page
-	let el = document.createElement("div");
-	el.id = "_1";
+	let pageToLoad = "_1"; // Default
+
+	// nav-to Query Parameter, no underscore
+	let navigateTo = getQueryParameterByName('nav-to');
+	if (navigateTo) {
+		pageToLoad = "_" + navigateTo;
+	}
+	
+	// Load Home Page or designated one
+	let el = document.createElement("div"); // Dummy element, with an id for the 'clack'
+	el.id = pageToLoad;
 	clack(el);
 
 	// A Test: Query match ?

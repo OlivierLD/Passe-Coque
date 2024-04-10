@@ -1490,6 +1490,10 @@ const INFO_SECTION = [
         section: "2024",
         content: [{
             date: "Avr-2024",
+            title: "9 Avril 2024",
+            content: "/actu/2024/france-bleue.html"
+        },{
+            date: "Avr-2024",
             title: "2 Avril 2024",
             content: "/actu/2024/radio.balises.html"
         },{
