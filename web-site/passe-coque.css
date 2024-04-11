@@ -532,14 +532,23 @@ input:checked + .slider:before {
     /* float: right; */
     text-align: right;
     margin-right: 10px;
+    aspect-ratio: 1 / 1;
 }
 .dialog-header-close:hover {
-    color: silver;
+    /* color: silver; */
     cursor: pointer;
     /* text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; */
-    text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px silver;
+    /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px silver; */
+    /* font-size: 50px; */
+    border: 1px solid silver;
+    border-radius: 40px;
+    background-color: lightgray;
 }
-  
+.close-place {
+    text-align: right; 
+    /* margin: -36px 0; */
+}
+
 /* html {
     display: table;
     width: 100%;
@@ -1178,6 +1187,17 @@ span.expand-collapse:hover {
     .dialog-header-close {
         font-size: 48px;
         margin: -30px 10px 0 0;
+    }    
+    .dialog-header-close:hover {
+        /* color: silver; */
+        cursor: pointer;
+        /* text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000; */
+        /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px silver; */
+        font-size: 50px;
+    }
+    .close-place {
+        text-align: right; 
+        margin: -36px 0;
     }    
     .data-header-div {
         margin: 0 10px 0 10px;
