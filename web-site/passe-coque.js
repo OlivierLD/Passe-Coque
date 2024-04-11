@@ -317,10 +317,40 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
 let ZOOM_POSITIONS = [];
 var map;
 
+let closeDiv = (el) => {
+    el.style.display = 'none';
+}
+
+function markerOnClick(e) {
+    console.log(e);
+
+    let mess = '';
+    let posIdx = -1;
+    // Find position
+    for (let i=0; i<ZOOM_POSITIONS.length; i++) {
+        if (e.latlng.lat === ZOOM_POSITIONS[i].latlng.lat && e.latlng.lng === ZOOM_POSITIONS[i].latlng.lng) {
+            console.log(`Found position index: ${i}, ${ZOOM_POSITIONS[i].txt}`);
+            mess = ZOOM_POSITIONS[i].txt;
+            posIdx = i;
+            break;
+        }
+    }
+	// alert(`You clicked the marker at ${e.latlng}\n${mess} `);
+    let dataList = document.getElementById("pcc-bases");
+    if (dataList) {
+        // console.log('Ah!');
+        let theDiv = dataList.children[posIdx - 1];
+        let txtDiv = theDiv.querySelectorAll('div')[0];
+        txtDiv.style.display = 'block';
+        window.setTimeout(() => { closeDiv(txtDiv); }, 5000);
+    }
+}
+
 function makeMarker(markerData) {
     L.marker([markerData.position.lat, markerData.position.lng])
+     .on('click', markerOnClick) // TODO Update the page, harbor data, boat list, etc.
      .addTo(markerData.map)
-     .bindPopup(markerData.title);
+     .bindPopup(`<b>${markerData.title}</b>`);
 }
 function decToSex(val, ns_ew) {
     let absVal = Math.abs(val);
@@ -345,7 +375,7 @@ function decToSex(val, ns_ew) {
 function flyToZoom(idx) {
     // map.panTo(ZOOM_POSITIONS[idx]);
     // map.setView(ZOOM_POSITIONS[idx], 18);
-    map.flyTo(ZOOM_POSITIONS[idx]);
+    map.flyTo(ZOOM_POSITIONS[idx].latlng);
 }
 
 
@@ -361,33 +391,33 @@ let initBoatClubBases = () => {
     const kerran       = new L.LatLng(47.598399, -2.981517);
 
     ZOOM_POSITIONS = [
-        homeBelz,
-        labOcean,
-        etel,
-        laTrinite,
-        lesSables,
-        laRochelle,
-        concarneau,
-        kerran
+        { latlng: homeBelz, txt: 'Belz Home' },
+        { latlng: labOcean, txt: 'Lab Ocean, un bureau pour Passe-Coque' },
+        { latlng: etel, txt: 'Etel, Manu Oviri (Commanche 32), Eh\'Tak (Shipman 28)' },
+        { latlng: laTrinite, txt: 'La Trinité, Trehudal (Nichlson 33)' },
+        { latlng: lesSables, txt: 'Les Sables d\'Olonne, Jolly Jumper (First 325)' },
+        { latlng: laRochelle, txt: 'La Rochelle, . . .' },
+        { latlng: concarneau, txt: 'Concarneau, Nomadict (Gin Fizz)' },
+        { latlng: kerran, txt: 'ZA de Kerran, le local.' }
     ];
 
     map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
 
-    let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
-    let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-                // 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+    // let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+    let mbUrl = // 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+                'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 
     const base_layer = L.tileLayer(mbUrl, {
         id: 'mapbox.streets', 
-        attribution: mbAttr, 
+        // attribution: mbAttr, 
         opacity: 1.0
     }).addTo(map);
 
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        opacity: 0.5
-    }).addTo(map);
+    // const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     maxZoom: 19,
+    //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    //     opacity: 0.5
+    // }).addTo(map);
     map.setView([47.598399, -2.981517], 14); // Kerran
 
     if (false) {
@@ -427,26 +457,28 @@ let initBoatClubBases = () => {
 
     let tooltip = null;
 
-    map.addEventListener('mousemove', (event) => {
-        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
-        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
-        let lat = event.latlng.lat;
-        let lng = event.latlng.lng;
-        while (lng > 180) {
-            lng -= 360;
-        }
-        while (lng < -180) {
-            lng += 360;
-        }
-        if (tooltip != null) {
-            map.removeLayer(tooltip);
-        }
-        tooltip = L.tooltip()
-                        .setLatLng(L.latLng([lat, lng]))
-                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
-                        .addTo(map);
+    if (false) { // Position  (lat-lng) of the mouse
+        map.addEventListener('mousemove', (event) => {
+            // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+            // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+            let lat = event.latlng.lat;
+            let lng = event.latlng.lng;
+            while (lng > 180) {
+                lng -= 360;
+            }
+            while (lng < -180) {
+                lng += 360;
+            }
+            if (tooltip != null) {
+                map.removeLayer(tooltip);
+            }
+            tooltip = L.tooltip()
+                            .setLatLng(L.latLng([lat, lng]))
+                            .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                            .addTo(map);
 
-    });
+        });
+    }
 
 };
 

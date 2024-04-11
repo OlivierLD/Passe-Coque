@@ -76,9 +76,10 @@ ul#navigation li a {
 	font-weight: bold;
 }
 
-ul#navigation li a:hover, ul#navigation li a:hover > *, #home-label:hover {
+ul#navigation li a:hover, ul#navigation li, a:hover > *, #home-label:hover {
 	/* background: #f8f8f8; */
 	color: var(--pc-bg-color); /* orange; */
+	stroke: var(--pc-bg-color);
 	font-weight: bold;
 	/* text-decoration: underline; */
 	/* text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 3px cyan; */

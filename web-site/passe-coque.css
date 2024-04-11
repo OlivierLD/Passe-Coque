@@ -1014,9 +1014,10 @@ span.expand-collapse:hover {
     /* text-align: center; */
     width: 95%; 
     height: 90%; 
-    box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;
+    /* box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan; */
     min-height: 400px;
     margin: 0 10px;
+    z-index: 0; /* Enforce */
 }
 /* If laptop is the default 
 .equipment-css {
@@ -1397,7 +1398,7 @@ span.expand-collapse:hover {
     .pcc-base-map {
         width: 95%; 
         height: 90%; 
-        box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;
+        /* box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan; */
         margin: auto;
     }    
 }
