@@ -873,8 +873,12 @@ const DIALOG_OPTION = true;
 // Mouse behavior, on some specific pages (or snippets)
 let clickOnTxPix = (origin) => {
     console.log(`Click on ${origin.id}`);
-    // TODO Set the content
+
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
+    let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
+    if (dialogTitle) {
+        dialogTitle[dialogTitle.length - 1].innerText = ''; // Can be several dialogs... take the last.
+    }
     let contentName = `${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
     fetch(contentName)
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
@@ -978,6 +982,10 @@ let displaySpecific = (docName) => {
     console.log(`displaySpecific`);
     // Set the content
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
+    let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
+    if (dialogTitle) {
+        dialogTitle[dialogTitle.length - 1].innerText = ''; // Can be several dialogs... take the last.
+    }
     let contentName = `${docName}_${currentLang}.html`; // Like 'tagada_FR.html'
     console.log(`onclick, loading ${contentName}`);
     fetch(contentName)
