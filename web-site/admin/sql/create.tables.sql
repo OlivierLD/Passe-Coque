@@ -258,6 +258,7 @@ SELECT * FROM TEST_CHECK;
 
 -- See triggers in MySQL...
 
+-- To populate, see insert.boats.sql
 CREATE TABLE IF NOT EXISTS THE_FLEET (
     BOAT_NAME VARCHAR(64),      -- "Remora",
     ID VARCHAR(64) PRIMARY KEY, -- "remora",

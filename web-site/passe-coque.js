@@ -1670,9 +1670,14 @@ let updateFilter = radio => {
 let getTheBoats = (filter, container, withBadge, pathPrefix) => {
     console.log(`getTheBoats, ${new Date().getTime()} ms`)
     if (THE_BOATS === null) {
-        let boatData = "/the_fleet.json";  // TODO Get that one from the DB (see geo_members.php)
-        fetch(boatData) 
-            .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+        // let boatData = "/the_fleet.json";  // From a local json file
+        let boatData = "/php/get_the_fleet.php"; // From the DB
+        fetch(boatData, {
+			method: "GET",
+			headers: {
+				    "Content-type": "application/json; charset=UTF-8"
+			    }
+		    }).then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
                 if (response.status !== 200) { // There is a problem...
                     try {
