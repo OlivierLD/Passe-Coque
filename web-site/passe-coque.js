@@ -1110,7 +1110,7 @@ const EX_BOAT = "EX_BOAT"; // 3;
 const TO_GRAB = "TO_GRAB"; // 4;
 
 let THE_BOATS = null;
-// This is a backup. Used if the json fetch does not work...
+// This is a backup. Used if the json fetch fails...
 const THE_FLEET = [
     {
         name: "Eh'Tak",
@@ -1670,15 +1670,16 @@ let updateFilter = radio => {
 let getTheBoats = (filter, container, withBadge, pathPrefix) => {
     console.log(`getTheBoats, ${new Date().getTime()} ms`)
     if (THE_BOATS === null) {
-        fetch("/the_fleet.json") // TODO Get that one from the DB
+        let boatData = "/the_fleet.json";  // TODO Get that one from the DB
+        fetch(boatData) 
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
                 if (response.status !== 200) { // There is a problem...
                     try {
                         // Use a custom alert
                         let errContent = (currentLang === 'FR') ? 
-                                        "Boat Data introuvable.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur." : 
-                                        "Boat Data not found.<br/>Using backup data instead.<br/>See your admin.";
+                                        `${boatData} introuvable.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur.` : 
+                                        `${boatData} not found.<br/>Using backup data instead.<br/>See your admin.`;
                         showCustomAlert(errContent);
                     } catch (err) {
                         console.log(err);
