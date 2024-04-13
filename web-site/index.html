@@ -492,6 +492,17 @@ window.onload = () => {
 	el.id = pageToLoad;
 	clack(el);
 
+	if (true) { // Open a dialog ?
+		let qsTx = getQueryParameterByName('tx');  // A project id ?
+		if (qsTx) {
+			// Dummy element, with an id for the 'clickOnTxPix'
+			// It's up to the user to set the page on the right id/nav-to (like 31)
+			let el = document.createElement("div"); 
+			el.id = `tx-${qsTx}`;
+			clickOnTxPix(el);
+		}
+	}
+
 	// A Test: Query match ?
 	let mediaQuery = "(width >= 800px)";
 	// let mediaQuery = "(max-width: 600px)";

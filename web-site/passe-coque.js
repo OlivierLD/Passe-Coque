@@ -96,7 +96,7 @@ let clack = (origin) => {
     if (typeof(origin) === 'string') {
         originId = origin.replace('_', '');
     } else {
-        console.log(`Click on ${origin.innerText}, id ${origin.id}`);
+        console.log(`clack: Click on ${origin.innerText}, id ${origin.id}`);
         originId = origin.id.replace('_', '');
     }
     currentContext = originId;
@@ -487,7 +487,7 @@ let clack_pcc = (origin) => {
     if (typeof(origin) === 'string') {
         originId = origin.replace('_', '');
     } else {
-        console.log(`Click on ${origin.innerText}, id ${origin.id}`);
+        console.log(`clack_pcc: Click on ${origin.innerText}, id ${origin.id}`);
         originId = origin.id.replace('_', '');
     }
     currentContext = originId;
@@ -872,7 +872,7 @@ const DIALOG_OPTION = true;
 
 // Mouse behavior, on some specific pages (or snippets)
 let clickOnTxPix = (origin) => {
-    console.log(`Click on ${origin.id}`);
+    console.log(`clickOnTxPix: Click on ${origin.id}`);
 
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
@@ -934,7 +934,7 @@ let mouseOnRftPix = (origin) => {
 };
 
 let clickOnBoatPix = (origin, name = 'Boat Name', pathPrefix = '') => {
-    console.log(`Click on ${origin.id}`);
+    console.log(`clickOnBoatPix: Click on ${origin.id}`);
     // TODO Set the content
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
@@ -1670,7 +1670,7 @@ let updateFilter = radio => {
 let getTheBoats = (filter, container, withBadge, pathPrefix) => {
     console.log(`getTheBoats, ${new Date().getTime()} ms`)
     if (THE_BOATS === null) {
-        let boatData = "/the_fleet.json";  // TODO Get that one from the DB
+        let boatData = "/the_fleet.json";  // TODO Get that one from the DB (see geo_members.php)
         fetch(boatData) 
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);

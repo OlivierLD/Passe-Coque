@@ -257,3 +257,12 @@ INSERT INTO TEST_CHECK (WACKY_STUFF) VALUES ('POUET');
 SELECT * FROM TEST_CHECK;
 
 -- See triggers in MySQL...
+
+CREATE TABLE IF NOT EXISTS THE_FLEET (
+    BOAT_NAME VARCHAR(64),      -- "Remora",
+    ID VARCHAR(64) PRIMARY KEY, -- "remora",
+    PIX_LOC VARCHAR(128),       -- "/images/boats/remora.sq.png",
+    BOAT_TYPE VARCHAR(32),      -- "Arcachonnais",
+    CATEGORY VARCHAR(16) DEFAULT 'NONE' CHECK (CATEGORY IN ('CLUB', 'TO_GRAB', 'EX_BOAT', 'NONE')),  -- "TO_GRAB",
+    BASE VARCHAR(64)            -- "Saint&#8209;Philibert"
+);
