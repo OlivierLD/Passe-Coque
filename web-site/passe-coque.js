@@ -308,8 +308,8 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
             message = mess.message;
         }
     }
-    let text = (currentLang === 'FR') ? 'Erreur de chargement...<br/>Est-ce que le serveur est en route ?' : 
-                                        'Load error...<br/>Is the server running?';
+    let text = (currentLang === 'FR') ? 'Erreur de chargement...<br/>Est-ce que le serveur est en route ?<br/>Voyez votre administrateur.' : 
+                                        'Load error...<br/>Is the server running?<br/>See your admin.';
     let content = `<div style='margin: 10px;'><pre>Fetch Error for ${contentName}: ${(error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - ')} </pre><div style='border: 3px solid red; border-radius: 10px; text-align: center;'><b>${text}</b></div></div>`;
     return content;
 };
@@ -1104,12 +1104,13 @@ let onImageClick = (origin) => {
     window.open(origin.src);
 };
 
-const NONE = 1;
-const CLUB = 2;
-const EX_BOAT = 3;
-const TO_GRAB = 4;
+const NONE = "NONE"; // 1;
+const CLUB = "CLUB"; // 2;
+const EX_BOAT = "EX_BOAT"; // 3;
+const TO_GRAB = "TO_GRAB"; // 4;
 
-// TODO See if there is a better place for this hard-coded list, like a json to fetch...
+let THE_BOATS = null;
+// This is a backup. Used if the json fetch does not work...
 const THE_FLEET = [
     {
         name: "Eh'Tak",
@@ -1666,31 +1667,75 @@ let updateFilter = radio => {
     }
 };
 
-let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true, pathPrefix = '') => {
-
-    let container = document.getElementById(containerId); // 'fleet-container');
-    // drop all children
-    while (container.hasChildNodes()) {
-        container.removeChild(container.lastChild);
+let getTheBoats = (filter, container, withBadge, pathPrefix) => {
+    console.log(`getTheBoats, ${new Date().getTime()} ms`)
+    if (THE_BOATS === null) {
+        fetch("/the_fleet.json") // TODO Get that one from the DB
+            .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+                console.log(`Data Response: ${response.status} - ${response.statusText}`);
+                if (response.status !== 200) { // There is a problem...
+                    try {
+                        // Use a custom alert
+                        let errContent = (currentLang === 'FR') ? 
+                                        "Boat Data introuvable.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur." : 
+                                        "Boat Data not found.<br/>Using backup data instead.<br/>See your admin.";
+                        showCustomAlert(errContent);
+                    } catch (err) {
+                        console.log(err);
+                    }
+                    THE_BOATS = THE_FLEET; // Using the backup list
+                    populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
+                } else {
+                    response.json().then(json => {
+                        console.log(`data loaded, ${json.length} boat(s).`);
+                        THE_BOATS = json;
+                        populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
+                    });
+                }
+            },
+            (error, errmess) => {
+                console.log("Ooch");
+                let message;
+                if (errmess) {
+                    let mess = JSON.parse(errmess);
+                    if (mess.message) {
+                        message = mess.message;
+                    }
+                }
+                console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+                // Plus tard...
+                THE_BOATS = THE_FLEET;
+                // Using the backup list
+                populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
+            });
+    } else {
+        populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
     }
+};
+
+let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
     // Build new list
     let newList = [];
     // Sort by name ?
-    THE_FLEET.sort((a, b) => {
-        if (a.name > b.name) {
-            return 1;
-        } else if (a.name < b.name) {
-            return -1;
-        }
-        return 0;
-    });
-    // Filter here
-    THE_FLEET.forEach(boat => {
-        if (filter === null || boat.category == filter) {
-            console.log(`Filter ${filter}, adding ${boat.name}`);
-            newList.push(boat);
-        }
-    });
+    if (boatList) {
+        boatList.sort((a, b) => {
+            if (a.name > b.name) {
+                return 1;
+            } else if (a.name < b.name) {
+                return -1;
+            }
+            return 0;
+        });
+        // Filter here
+        boatList.forEach(boat => {
+            if (filter === null || boat.category == filter) {
+                console.log(`Filter ${filter}, adding ${boat.name}`);
+                newList.push(boat);
+            }
+        });
+    } else {
+        console.log("boatList still null!!");
+    }
     console.log(`Displaying ${newList.length} boats.`);
     // Populate. based on new list
     newList.forEach(boat => {
@@ -1733,7 +1778,18 @@ let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true, p
         }
         container.appendChild(div);
     });
-    console.log("Done with fillOutFleet");
+    console.log("Done with populateBoatData");
+}
+
+let fillOutFleet = (filter, containerId = 'fleet-container', withBadge = true, pathPrefix = '') => {
+
+    let container = document.getElementById(containerId); // 'fleet-container');
+    // drop all children
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+    // Display, with the filter
+    getTheBoats(filter, container, withBadge, pathPrefix);
 };
 
 let fillOutTheTeam = (containerId = 'team-container') => {
