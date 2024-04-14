@@ -499,7 +499,11 @@ window.onload = () => {
 			// It's up to the user to set the page on the right id/nav-to (like 31)
 			let el = document.createElement("div"); 
 			el.id = `tx-${qsTx}`;
-			clickOnTxPix(el);
+			let title = '';
+			if (qsTx === '04') { // La reveuse. TODO Something better
+				title = (currentLang === 'FR') ? 'Projet Watter' : 'Project Watter';
+			}
+			clickOnTxPix(el, title);
 		}
 	}
 

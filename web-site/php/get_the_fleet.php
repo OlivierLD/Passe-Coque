@@ -19,7 +19,9 @@ function getBoats(string $dbhost, string $username, string $password, string $da
         
         if ($link->connect_errno) {
             echo("[Oops, errno:".$link->connect_errno."...] ");
-            die("Connection failed: " . $conn->connect_error);
+            // die("Connection failed: " . $conn->connect_error);
+            throw $conn->connect_error;
+
         } else {
             if ($verbose) {
                 echo("[Connected.] ");
@@ -67,6 +69,9 @@ try {
     echo $data;
     http_response_code(200);
 } catch (Throwable $e) {
-    echo "[Captured Throwable for geo_members.php : " . $e . "] " . PHP_EOL;
+    // echo "[Captured Throwable for geo_members.php : " . $e . "] " . PHP_EOL;
+    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error - ' . $e, true, 500);
+    // echo $e;
+    http_response_code(500);
 }
 ?>

@@ -871,13 +871,13 @@ let makeCode = (url) => {
 const DIALOG_OPTION = true;
 
 // Mouse behavior, on some specific pages (or snippets)
-let clickOnTxPix = (origin) => {
+let clickOnTxPix = (origin, title = '') => {
     console.log(`clickOnTxPix: Click on ${origin.id}`);
 
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
     if (dialogTitle) {
-        dialogTitle[dialogTitle.length - 1].innerText = ''; // Can be several dialogs... take the last.
+        dialogTitle[dialogTitle.length - 1].innerText = title; // Can be several dialogs... take the last.
     }
     let contentName = `${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
     fetch(contentName)
@@ -1683,8 +1683,8 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                     try {
                         // Use a custom alert
                         let errContent = (currentLang === 'FR') ? 
-                                        `${boatData} introuvable.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur.` : 
-                                        `${boatData} not found.<br/>Using backup data instead.<br/>See your admin.`;
+                                        `Erreur &agrave; l'ex&eacute;cution de ${boatData}: ${response.statusText}.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur.` : 
+                                        `Error executing ${boatData}: ${response.statusText}.<br/>Using backup data instead.<br/>See your admin.`;
                         showCustomAlert(errContent);
                     } catch (err) {
                         console.log(err);
