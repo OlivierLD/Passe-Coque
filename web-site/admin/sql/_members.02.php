@@ -129,7 +129,7 @@ if (isset($_POST['operation'])) {
     echo("<hr/>" . PHP_EOL);
     // echo("Again ? Click <a href='#'>Here</a>.");
     ?>
-    <form action="#" method="get">
+    <form action="./_members.02.php" method="get">
       <!--input type="hidden" name="operation" value="blank"-->
       <input type="hidden" name="id" value="<?php echo($email) ?>">
       <table>
