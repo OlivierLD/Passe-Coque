@@ -1531,6 +1531,10 @@ const INFO_SECTION = [
         section: "2024",
         content: [{
             date: "Avr-2024",
+            title: "13 Avril 2024",
+            content: "/actu/2024/la.reveuse.01.html"
+        },{
+            date: "Avr-2024",
             title: "9 Avril 2024",
             content: "/actu/2024/france-bleue.html"
         },{
