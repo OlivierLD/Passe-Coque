@@ -21,7 +21,6 @@ function getBoats(string $dbhost, string $username, string $password, string $da
             echo("[Oops, errno:".$link->connect_errno."...] ");
             // die("Connection failed: " . $conn->connect_error);
             throw $conn->connect_error;
-
         } else {
             if ($verbose) {
                 echo("[Connected.] ");
@@ -40,7 +39,7 @@ function getBoats(string $dbhost, string $username, string $password, string $da
         $json_result = "[";
         $first = true;
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-            $next_element = "{ \"name\": \"" . $table[0] . "\", \"id\": \"" . $table[1] . "\", \"pix\": \"" . $table[2] . "\", \"type\": \"" . $table[3] . "\", \"category\": \"" . $table[4] . "\", \"base\": \"" . $table[5] . "\" } ";
+            $next_element = "{ \"name\": \"" . urldecode($table[0]) . "\", \"id\": \"" . $table[1] . "\", \"pix\": \"" . $table[2] . "\", \"type\": \"" . urldecode($table[3]) . "\", \"category\": \"" . urldecode($table[4]) . "\", \"base\": \"" . urldecode($table[5]) . "\" } ";
             // echo $next_element . "<br/>" . PHP_EOL;
             $json_result = $json_result . ($first ? "" : ", ") . $next_element;
             $first = false;

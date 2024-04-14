@@ -65,8 +65,8 @@ if (isset($_POST['operation'])) {
         // echo ("Update for $email ... <br/>");
 
         $sql = 'UPDATE THE_FLEET ' .
-               'SET BOAT_NAME = \'' . urlencode($boat_name) . '\', PIX_LOC = \'' . urlencode($pix_loc) . '\', ' .
-                    'BOAT_TYPE = \'' . urlencode(trim($boat_type)) . '\', ' . 
+               'SET BOAT_NAME = \'' . urlencode($boat_name) . '\', PIX_LOC = \'' . ($pix_loc) . '\', ' .
+                    'BOAT_TYPE = \'' . ($boat_type) . '\', ' . 
                     'CATEGORY = \'' . urlencode($category) . '\', ' . 
                     'BASE = \'' . urlencode(trim($base)) . '\' ' . 
                 'WHERE ID = \'' . $id . '\'';
@@ -76,7 +76,7 @@ if (isset($_POST['operation'])) {
                 WHERE ID = \'' . $id . '\'';
       } else if ($operation === 'insert') {
         $sql = 'INSERT INTO THE_FLEET ' .
-               'VALUES (\'' . urlencode($boat_name) . '\', \'' . urlencode($id) . '\', \'' . urlencode($pix_loc) . '\', ' .
+               'VALUES (\'' . urlencode($boat_name) . '\', \'' . urlencode($id) . '\', \'' . ($pix_loc) . '\', ' .
                        '\'' . urlencode($boat_type) . '\', \'' . urlencode($category) . '\', \'' . urlencode($base) . '\')';
       } else {
         echo "What do you ant ?? <br/>" . PHP_EOL;
@@ -159,17 +159,18 @@ if (isset($_POST['operation'])) {
 
       // echo ("Debug: " . $table[7] . "...");
 
-      echo('<tr><td>Boat Name</td><td><input type="text" name="boat-name" value="' . urldecode($table[0]) . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>ID</td><td><input type="text" name="id" value="' . urldecode($table[1]) . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>Picture Location</td><td><input type="text" name="pix-loc" value="' . urldecode($table[2]) . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>Boat Type</td><td><input type="text" name="boat-type" value="' . urldecode($table[3]) . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Boat Name</td><td><input type="text" name="boat-name" value="' . urldecode($table[0]) . '" size="40"></td></tr>' . PHP_EOL);
+      echo('<tr><td>ID</td><td><input type="text" name="id" value="' . urldecode($table[1]) . '" size="40"></td></tr>' . PHP_EOL);
+      echo('<tr><td>Picture Location</td><td><input type="text" name="pix-loc" value="' . $table[2] . '" size="40"></td></tr>' . PHP_EOL);
+      echo('<tr><td>Boat Type</td><td><input type="text" name="boat-type" value="' . urldecode($table[3]) . '" size="40"></td></tr>' . PHP_EOL);
       echo('<tr><td>Category</td><td><select name="category">'. 
                                    '<option value="NONE"' . ($table[4]=== 'NONE' ? ' selected' : '') . '>NONE</option>' . 
                                    '<option value="CLUB"' . ($table[4]=== 'CLUB' ? ' selected' : '') . '>CLUB</option>' . 
                                    '<option value="EX_BOAT"' . ($table[4]=== 'EX_BOAT' ? ' selected' : '') . '>EX_BOAT</option>' . 
                                    '<option value="TO_GRAB"' . ($table[4]=== 'TO_GRAB' ? ' selected' : '') . '>TO_GRAB</option>' . 
                                  '</select></td><tr>' . PHP_EOL);
-      echo('<tr><td>Base</td><td><input type="text" name="base" value="' . $table[5] . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Base</td><td><input type="text" name="base" value="' . urldecode($table[5]) . '" size="40"></td></tr>' . PHP_EOL);
+      echo('<tr><td>Image (read-only)</td><td><img src="' . $table[2] . '"></td></tr>' . PHP_EOL);
     }
     echo "</table>" . PHP_EOL;
     ?>
@@ -191,7 +192,7 @@ if (isset($_POST['operation'])) {
     <table>
       <tr><td>Boat Name</td><td><input type="text" name="boat-name" size="40"></td><tr>
       <tr><td>ID</td><td><input type="text" name="id" size="40"></td><tr>
-      <tr><td>Picture Location</td><td><input type="text" name="pix-loc" size="40"></td><tr>
+      <tr><td>Picture Location</td><td><input type="text" name="pix-loc" size="40" value="/images/boats/dummy.boat.jpg"></td><tr>
       <tr><td>Boat Type</td><td><input type="text" name="boat-type" size="40"></td><tr>
       <tr>
         <td>Category</td>

@@ -50,6 +50,7 @@ try {
 				
 		try {
 			$footer = "<br/><hr/><p>"; 
+			$footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
 			$footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
 			$footer .= "</p>";
 			$fmt_message = str_replace("\n", "\n<br/>", $message);
