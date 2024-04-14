@@ -108,7 +108,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		$sql = 'SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK ' . 
 		       'FROM PASSE_COQUE_MEMBERS ' . 
 			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here, and below...
-//			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\') ' .
+// 			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\') ' .
 //			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\' ' .
 //			   '        OR LAST_NAME LIKE \'%Allais%\' ' . 
 //			   '        OR FIRST_NAME LIKE \'%Pierre-Jean%\')' .
@@ -129,6 +129,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		  $subscriber_email = $table[0];
 
 		  $footer = "<br/><hr/><p>"; 
+		  $footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
 		  $footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
 		  $footer .= "<a href='http://www.passe-coque.com/php/unsubscribe.php?subscriber-id=$nl_id'>Se d&eacute;sabonner / Unsubscribe</a><br/>"; // Use the real ID
 		  $footer .= "</p>";
@@ -180,7 +181,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 				<input class="form-control" type="text" name="sender_name" placeholder="Sender Name" required value="Passe-Coque Contact"/>
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="email" name="sender_email" placeholder="Recipient's Email Address" required value="contact@passeurdecoutes.fr"/>
+				<input class="form-control" type="email" name="sender_email" placeholder="Recipient's Email Address" required value="contact@passe-coque.com"/>
 			</div>
 			<div class="form-group">
 				<input class="form-control" type="text" name="subject" placeholder="Subject" value="News Letter XXXX"/>
