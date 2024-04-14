@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div id="watt-er-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+        <div id="watt-er-02" class="tab-section" style="display: none; padding-top: 10px;">
             <slide-show id="watt-er-slide-show"
                         width="500"
                         height="400"
@@ -82,15 +82,15 @@
                 <br/>
                 <div style="display: block; text-align: center;">
                     <!-- https://www.w3schools.com/html/html5_video.asp -->
-                    <video width="auto" height="50%" controls>
+                    <video width="auto" height="400" controls>
                         <source src="/WATTer/en.route.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
+                        Your browser does not support the video tag.
                     </video>
                 </div>   
                 C'est parti pour cinq mois d'aventures&nbsp;!<br/>
                 <slide-show id="watt-er-slide-show-2"
-                            width="500"
-                            height="400"
+                            width="280"
+                            height="380"
                             style="line-height: 1em;">
                     <slide-show-image src="/WATTer/depart.01.jpeg" title="01"></slide-show-image>
                     <slide-show-image src="/WATTer/depart.02.jpeg" title="02"></slide-show-image>
@@ -108,7 +108,7 @@
                 <li><a href="https://www.ouest-france.fr/economie/energie/energie-eolienne/ces-jeunes-etudiants-partent-realiser-un-documentaire-sur-leolien-en-mer-0630d5cc-dad4-11ee-97c7-e4301a9e69a2" target="OF">Ouest France</a>, 11 mars 2024.</li>
             </ul>
             <div>
-                <img src="WATTer/escale.technique.01.jpeg" style="width: 100%;"><br/>
+                <img src="WATTer/escale.technique.01.jpeg" style="width: 80%;"><br/>
                 La R&ecirc;veuse va rejoindre son &eacute;l&eacute;ment !
             </div>
 
@@ -116,7 +116,7 @@
                 <h3>15 mars 2024, Matage</a></h3>
                 <div style="display: block; text-align: center;">
                     <!-- https://www.w3schools.com/html/html5_video.asp -->
-                    <video width="100%" height="auto" controls>
+                    <video width="auto" height="400" controls>
                         <source src="/images/boats/la.reveuse/matage.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                     </video>
@@ -124,38 +124,38 @@
 
                 <div style="display: block; text-align: center;">
                     <!-- https://www.w3schools.com/html/html5_video.asp -->
-                    <video width="100%" height="auto" controls>
+                    <video width="auto" height="400" controls>
                         <source src="/images/boats/la.reveuse/en.route.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                     </video>
                 </div>   
                 
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.01.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.01.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.02.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.02.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.04.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.04.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.05.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.05.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.06.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.06.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.07.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.07.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.08.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.08.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.09.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.09.jpeg" style="width: 80%;"><br/>
                 </div>
                 <div>
-                    <img src="/images/boats/la.reveuse/matage.03.jpeg" style="width: 100%;"><br/>
+                    <img src="/images/boats/la.reveuse/matage.03.jpeg" style="width: 80%;"><br/>
                 </div>
 
             </div>
@@ -168,4 +168,6 @@
             R&eacute;f&eacute;rents : Alain Hahusseau, Yann Legrand<br/>
         </div>
     </div>
+    <!-- This is a trick, to trigger the onload. -->
+    <img src="/france.gif" style="display: none;" onload="document.getElementById('watt-er-slide-show').slideclick = onSlideShowClick; document.getElementById('watt-er-slide-show-2').slideclick = onSlideShowClick;">
 </div>
