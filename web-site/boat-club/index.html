@@ -253,20 +253,19 @@ window.onload = () => {
 		switchLanguagePCC();
 	}
 
-	// QS for 'clack' prm
-	let clack = getQueryParameterByName('clack');
-	if (clack && clack.trim().length > 0) {
-		// Load a given Page
-		let el = document.createElement("div");
-		el.id = clack;
-		clack_pcc(el);
+	let pageToLoad = "_1"; // Default
 
-	} else {
-		// Load Home Page
-		let el = document.createElement("div");
-		el.id = "_1";
-		clack_pcc(el);
+	// nav-to Query Parameter, no underscore
+	let navigateTo = getQueryParameterByName('nav-to');
+	if (navigateTo) {
+		pageToLoad = "_" + navigateTo;
 	}
+
+	// Load Home Page or designated one
+	let el = document.createElement("div"); // Dummy element, with an id for the 'clack'
+	el.id = pageToLoad;
+	clack_pcc(el);
+
 };
 
 </script>
