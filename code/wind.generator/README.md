@@ -73,10 +73,10 @@ All those components can be found easily from your favorite providers (Amazon, A
 
 ### 3D printed part - The turbine itself
 We started from the code at <https://www.thingiverse.com/thing:2241699>, where the `spiraltest04.scad` comes from.  
-We've created extra parts for hold the turbine in place, see the code in `version.01.scad`.
+We've created extra parts for hold the turbine in place, see the code in `top.bottom.connector.scad`.
 
 - [STL](./3D/spiraltest04.stl) for the turbine
-- [STL](./3D/version.01.bottom.stl) for the axis (top and bottom)
+- [STL](./3D/top.bottom.connector.stl) for the axis (top and bottom)
 
 ![Just printed](./images/spiral.01.jpeg)
 
@@ -117,6 +117,14 @@ The wooden frame is here to speed up the tests.
 See a [video](https://youtube.com/shorts/j9USgp5iNnw)  of the turbine, in the wind.  
 No motor connected yet.
 
+### Comments
+With the motor connected to the turbine, it seems to be too demanding.  
+One turbine seems not to be enough, lts' try with two.  
+A [connector](./3D/middle.connector.stl) for the axis (top and bottom)
+ has been created.
+
+
+---
 
 More soon!
 

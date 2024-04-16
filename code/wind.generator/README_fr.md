@@ -2,6 +2,7 @@
 
 # &Eacute;olienne !
 
-> &Ccedil;a vient...
+> &Ccedil;a vient...  
+> [En anglais](./README.md) pour le moment.
 
 ---
