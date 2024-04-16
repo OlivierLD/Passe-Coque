@@ -1,12 +1,10 @@
 -- Doc at https://www.mysqltutorial.org/mysql-basics/mysql-auto_increment/
 --        https://www.w3schools.com/php/php_mysql_create_table.asp           <- Good for mySQLi
 --
--- Table structure for tables:
---    `nl-subscribers`, News Letter Subscribers
---    `pc-mebers`
 -- For MySQL Data Types, see https://www.w3schools.com/mysql/mysql_datatypes.asp
 --
-
+-- TABLES, VIEWS, CONSTRAINTS
+--
 
 CREATE TABLE IF NOT EXISTS PC_NUMBERS (
     ID VARCHAR(32) PRIMARY KEY,
