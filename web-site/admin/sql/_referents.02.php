@@ -126,7 +126,6 @@ function getMembers(string $dbhost, string $username, string $password, string $
           echo "Finally, returning $boats";
       }
       return $members;
-
   } catch (Throwable $e) {
       echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
       throw $e;
@@ -155,7 +154,7 @@ if (isset($_GET['task'])) {
 
 if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
-  if ($operation == 'update' || $operation == 'insert' || $operation == 'delete') { // Then do the update/insert...
+  if ($operation == 'update' || $operation == 'insert') { // Then do the update/insert, and delete...
 
     // echo("Update:" . $_POST['update'] . ", Delete:" . $_POST['delete'] . " <br/>" . PHP_EOL); // Two Submit buttons
 
@@ -181,9 +180,9 @@ if (isset($_POST['operation'])) {
 
         $sql = 'UPDATE REFERENTS ' .
                'SET TELEPHONE = \'' . ($telephone) . '\' ' .
-                'WHERE EMAIL = \'' . $ref_email . '\' AND BOAT_ID = \'' . $boat_id . '\'';
+               'WHERE EMAIL = \'' . $ref_email . '\' AND BOAT_ID = \'' . $boat_id . '\'';
         // echo ("Update Stmt: $sql ; <br/>");
-      } else if (isset($_POST['delete'])) {
+      } else if (isset($_POST['delete'])) { // operation = update, delete is set.
         $sql = 'DELETE FROM REFERENTS 
                 WHERE EMAIL = \'' . $ref_email . '\' AND BOAT_ID = \'' . $boat_id . '\'';
       } else if ($operation === 'insert') {
@@ -292,8 +291,6 @@ if (isset($_POST['operation'])) {
     <?php
     // On ferme !
     $link->close();
-
-
   } catch (Throwable $e) {
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
   }

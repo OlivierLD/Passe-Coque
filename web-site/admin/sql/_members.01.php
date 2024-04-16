@@ -85,7 +85,7 @@ if (isset($_POST['operation'])) {
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 
-            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . "<a href='./_members.02.php?id=" . $table[0] . "' target='PCUpdate'>Edit</a>" .
+            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . "<a href='./_members.02.php?id=" . $table[0] . "'>Edit</a>" . //  target='PCUpdate'
           "</td></tr>\n"
         ); 
       }
@@ -100,11 +100,11 @@ if (isset($_POST['operation'])) {
     echo("<hr/>" . PHP_EOL);
     // echo("Again ? Click <a href='#'>Here</a>.");
     ?>
-    <form action="#" method="get">
+    <form action="" method="get">
       <!--input type="hidden" name="operation" value="blank"-->
       <table>
         <tr>
-          <td colspan="2" style="text-align: center;"><input type="submit" value="Again ?"></td>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Query Again ?"></td>
         </tr>
       </table>
     </form>
@@ -113,7 +113,7 @@ if (isset($_POST['operation'])) {
 } else { // Then display the form
     ?>
     <!--form action="dbQuery.03.php" method="post"-->
-    <form action="#" method="post">
+    <form action="" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>

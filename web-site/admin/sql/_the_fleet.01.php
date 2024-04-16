@@ -76,7 +76,7 @@ if (isset($_POST['operation'])) {
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 
-            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . urldecode($table[2]) . "</td><td>" . "<a href='./_the_fleet.02.php?id=" . $table[1] . "' target='PCUpdate'>Edit</a>" .
+            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . urldecode($table[2]) . "</td><td>" . "<a href='./_the_fleet.02.php?id=" . $table[1] . "'>Edit</a>" .  //  target='PCUpdate'
           "</td></tr>\n"
         ); 
       }
@@ -95,7 +95,7 @@ if (isset($_POST['operation'])) {
       <!--input type="hidden" name="operation" value="blank"-->
       <table>
         <tr>
-          <td colspan="2" style="text-align: center;"><input type="submit" value="Again ?"></td>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Query Again ?"></td>
         </tr>
       </table>
     </form>

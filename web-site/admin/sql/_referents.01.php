@@ -90,7 +90,7 @@ if (isset($_POST['operation'])) {
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 
-            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . urldecode($table[2]) . "</td><td>" . urldecode($table[3]) . "</td><td>" . urldecode($table[4]) . "</td><td>" . urldecode($table[5]) . "</td><td>" . ($table[6]) . "</td><td>" . "<a href='./_referents.02.php?email=" . $table[0] . "&boat-id=" . $table[5] . "' target='RefUpdate'>Edit</a>" .
+            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . urldecode($table[2]) . "</td><td>" . urldecode($table[3]) . "</td><td>" . urldecode($table[4]) . "</td><td>" . urldecode($table[5]) . "</td><td>" . ($table[6]) . "</td><td>" . "<a href='./_referents.02.php?email=" . $table[0] . "&boat-id=" . $table[5] . "'>Edit</a>" . //  target='RefUpdate'
           "</td></tr>\n"
         ); 
       }

@@ -138,6 +138,9 @@ if (isset($_POST['operation'])) {
         </tr>
       </table>
     </form>
+    <form action="./_members.01.php" method="get">
+      <input type="submit" value="Query Form">
+    </form>
     <?php
   } else {
     echo ("Operation $operation ...");
@@ -207,6 +210,9 @@ if (isset($_POST['operation'])) {
     echo "</table>" . PHP_EOL;
     ?>
       <input type="submit" value="Update" name="update"> <input type="submit" value="Delete" name="delete">
+    </form>
+    <form action="./_members.01.php" method="get">
+      <input type="submit" value="Query Form">
     </form>
     <?php
     // On ferme !

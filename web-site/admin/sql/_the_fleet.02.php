@@ -65,10 +65,10 @@ if (isset($_POST['operation'])) {
         // echo ("Update for $email ... <br/>");
 
         $sql = 'UPDATE THE_FLEET ' .
-               'SET BOAT_NAME = \'' . urlencode($boat_name) . '\', PIX_LOC = \'' . ($pix_loc) . '\', ' .
+               'SET BOAT_NAME = \'' . ($boat_name) . '\', PIX_LOC = \'' . ($pix_loc) . '\', ' .
                     'BOAT_TYPE = \'' . ($boat_type) . '\', ' . 
-                    'CATEGORY = \'' . urlencode($category) . '\', ' . 
-                    'BASE = \'' . urlencode(trim($base)) . '\' ' . 
+                    'CATEGORY = \'' . ($category) . '\', ' . 
+                    'BASE = \'' . (trim($base)) . '\' ' . 
                 'WHERE ID = \'' . $id . '\'';
         // echo ("Update Stmt: $sql ; <br/>");
       } else if (isset($_POST['delete'])) {
@@ -76,8 +76,8 @@ if (isset($_POST['operation'])) {
                 WHERE ID = \'' . $id . '\'';
       } else if ($operation === 'insert') {
         $sql = 'INSERT INTO THE_FLEET ' .
-               'VALUES (\'' . urlencode($boat_name) . '\', \'' . urlencode($id) . '\', \'' . ($pix_loc) . '\', ' .
-                       '\'' . urlencode($boat_type) . '\', \'' . urlencode($category) . '\', \'' . urlencode($base) . '\')';
+               'VALUES (\'' . ($boat_name) . '\', \'' . ($id) . '\', \'' . ($pix_loc) . '\', ' .
+                       '\'' . ($boat_type) . '\', \'' . ($category) . '\', \'' . ($base) . '\')';
       } else {
         echo "What do you ant ?? <br/>" . PHP_EOL;
         $sql = '';
@@ -94,7 +94,6 @@ if (isset($_POST['operation'])) {
       } else {
         echo "Stby<br/>" . PHP_EOL;
       }
-    
       // On ferme !
       $link->close();
       echo("Closed DB<br/>".PHP_EOL);
@@ -112,6 +111,9 @@ if (isset($_POST['operation'])) {
           <td colspan="2" style="text-align: center;"><input type="submit" value="Re-Query?"></td>
         </tr>
       </table>
+    </form>
+    <form action="./_the_fleet.01.php" method="get">
+      <input type="submit" value="Query Form">
     </form>
     <?php
   } else {
@@ -176,6 +178,9 @@ if (isset($_POST['operation'])) {
     ?>
       <input type="submit" value="Update" name="update"> <input type="submit" value="Delete" name="delete">
     </form>
+    <form action="./_the_fleet.01.php" method="get">
+      <input type="submit" value="Query Form">
+    </form>
     <?php
     // On ferme !
     $link->close();
@@ -190,10 +195,10 @@ if (isset($_POST['operation'])) {
   <form action="#" method="post">
     <input type="hidden" name="operation" value="insert">
     <table>
-      <tr><td>Boat Name</td><td><input type="text" name="boat-name" size="40"></td><tr>
-      <tr><td>ID</td><td><input type="text" name="id" size="40"></td><tr>
-      <tr><td>Picture Location</td><td><input type="text" name="pix-loc" size="40" value="/images/boats/dummy.boat.jpg"></td><tr>
-      <tr><td>Boat Type</td><td><input type="text" name="boat-type" size="40"></td><tr>
+      <tr><td>Boat Name</td><td><input type="text" name="boat-name" size="40"></td></tr>
+      <tr><td>ID</td><td><input type="text" name="id" size="40"></td></tr>
+      <tr><td>Picture Location</td><td><input type="text" name="pix-loc" size="40" value="/images/boats/dummy.boat.jpg"></td></tr>
+      <tr><td>Boat Type</td><td><input type="text" name="boat-type" size="40"></td></tr>
       <tr>
         <td>Category</td>
         <td>
@@ -205,12 +210,11 @@ if (isset($_POST['operation'])) {
           </select>
         </td>
       <tr>
-      <tr><td>Base</td><td><input type="text" name="base" size="40"></td><tr>
+      <tr><td>Base</td><td><input type="text" name="base" size="40"></td></tr>
     </table>
     <input type="submit" value="Create" name="create">
   </form>
   <?php
-
 } else {
   // WHAT ??
   echo "What ??";
