@@ -28,13 +28,11 @@ require __DIR__ . "/../../php/db.cred.php";
 
 if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
-  if ($operation == 'execute') { // Then do the query
+  if ($operation == 'execute') { // Then execute the statement
     try {
       $sql = $_POST['free-sql']; 
 
-      // $link = mysqli_init();  // Mandatory ?
-    
-      echo("Will connect on ".$database." ...<br/>");
+      echo("Will connect on " . $database . " ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
     
       if ($link->connect_errno) {
@@ -51,14 +49,15 @@ if (isset($_POST['operation'])) {
 
       echo("Affected rows: " . $link->affected_rows . "<br/>");
       echo("Errno: " . $link->errno . "<br/>");
-      echo("error: " . $link->error . "<br/>");
+      if ($link->errno != 0) {
+        echo("error: " . $link->error . "<br/>");
+      }
 
       // echo("-- link --<br/>");
       // var_dump($link);
       // echo("<br/>----------<br/>");
 
       if ($result) {
-
         // echo("<pre>" . $result . "</pre>");
         // echo("-- result --<br/>");
         // var_dump($result);
@@ -103,6 +102,7 @@ if (isset($_POST['operation'])) {
 
     ?>
     <form action="" method="get">
+      <input type="hidden" name="stmt" value="<?php echo($sql); ?>">
       <table>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Another one ?"></td>
@@ -112,10 +112,15 @@ if (isset($_POST['operation'])) {
     <?php
   }
 } else { // Then display the form
+  if (isset($_GET['stmt'])) {
+    $previousStmt = $_GET['stmt'];
+  } else {
+    $previousStmt = '';
+  }
     ?>
     <form action="" method="post">
       <input type="hidden" name="operation" value="execute">
-      <textarea id="free-sql" name="free-sql" rows="10" cols="80" placeholder="Your SQL Statement goes here"></textarea>
+      <textarea id="free-sql" name="free-sql" rows="10" cols="80" placeholder="Your SQL Statement goes here"><?php echo($previousStmt); ?></textarea>
       <br/>
       <input type="submit" value="Execute">
     </form>

@@ -418,7 +418,7 @@ let initBoatClubBases = () => {
     //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     //     opacity: 0.5
     // }).addTo(map);
-    map.setView([47.598399, -2.981517], 14); // Kerran
+    map.setView([47.598399, -2.981517], 8); // 14); // Kerran
 
     if (false) {
         makeMarker({

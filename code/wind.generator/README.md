@@ -123,13 +123,17 @@ One turbine seems not to be enough, lts' try with two.
 A [connector](./3D/middle.connector.stl) for the axis (top and bottom)
  has been created.
 
+### Second one
+Two spirals on top of each other, using the connector above:  
+![2 Spirals](./images/spiral.02.jpeg)
 
 ---
 
-More soon!
+More soon, stay tuned!
 
 ## Other resources
 - [phileole](https://phileole.com/en/homepage/)
+- [Low-Tech Lab](https://lowtechlab.org/)
 - . . .
 
 ---

@@ -34,7 +34,14 @@ h1 {
         <li><a href="_the_fleet.01.php" target="MySQL">Passe-Coque Fleet Management</a></li>
         <li><a href="_referents.01.php" target="MySQL">Passe-Coque Referents Management</a></li>
         <li><a href="_members.01.csv.php" target="MySQL">Passe-Coque Members, spreadsheet (WiP)</a></li>
-        <li><a href="_free_sql.php" target="MySQL">Free SQL (Careful! WiP)</a></li>
+        <li>
+            <a href="_free_sql.php" target="MySQL">Free SQL (Careful! WiP)</a>
+            <ul>
+                <li><a href="_free_sql.php?stmt=SELECT+*+FROM+THE_FLEET+F+%0D%0AWHERE+F.ID+NOT+IN+%28SELECT+BOAT_ID+FROM+REFERENTS%29+AND%0D%0A++++++F.CATEGORY+%3C%3E+%27EX_BOAT%27%3B" target="MySQL">Boats with no referent</a></li>
+                <li><a href="_free_sql.php?stmt=SELECT+*+FROM+BOATS_AND_REFERENTS%3B" target="MySQL">Boats and referents</a></li>
+                <li>. . .</li>
+            </ul>
+        </li>
     </ul>
     <h3>Documents</h3>
     <ul>
