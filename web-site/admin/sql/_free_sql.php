@@ -46,34 +46,51 @@ if (isset($_POST['operation'])) {
     
       echo('Executing <code>' . $sql . '</code><br/>');
     
-      // $result = mysql_query($sql, $link);
-      $result = mysqli_query($link, $sql);
+      // $result = mysqli_query($link, $sql);
+      $result = $link->query($sql);
 
+      echo("Affected rows: " . $link->affected_rows . "<br/>");
+      echo("Errno: " . $link->errno . "<br/>");
+      echo("error: " . $link->error . "<br/>");
 
-      // echo("<pre>" . $result . "</pre>");
-      var_dump($result);
+      // echo("-- link --<br/>");
+      // var_dump($link);
+      // echo("<br/>----------<br/>");
 
-      echo("<br/>");
+      if ($result) {
 
-      echo("Returned " . $result->num_rows . " row(s)<br/>");
-    
-      echo("<h2>Execution returned:</h2>");
+        // echo("<pre>" . $result . "</pre>");
+        // echo("-- result --<br/>");
+        // var_dump($result);
+        // echo("<br/>------------<br/>");
 
-      ?> 
-      <!-- Display result. Query ? Update, insert, delete ? -->
-      <?php
+        // echo("<br/>");
 
-      if (true) {
-        $nbFields = $result->field_count;
-        echo "<table>";
-        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-          echo("<tr>" . PHP_EOL);
-          for ($i = 0; $i < $nbFields; $i++) {
-            echo("<td>" . $table[$i] . "</td>" . PHP_EOL);
-          }  
-          echo("</tr>" . PHP_EOL);
+        if ($result->num_rows) { // Query result
+          echo("Returned " . $result->num_rows . " row(s)<br/>");
+        
+          echo("<h2>Execution returned:</h2>");
+
+          if (true) {
+            $nbFields = $result->field_count;
+            echo "<table>";
+            while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+              echo("<tr>" . PHP_EOL);
+              for ($i = 0; $i < $nbFields; $i++) {
+                echo("<td>" . $table[$i] . "</td>" . PHP_EOL);
+              }  
+              echo("</tr>" . PHP_EOL);
+            }
+            echo "</table>";
+          }
         }
-        echo "</table>";
+      } else {
+        echo("Execution failed for <br/>" . $sql . "<br/>");
+        // var_dump($result);
+        // echo "<br/>";
+        // echo "Error:<br/>" . $link->error . "<br/>";
+        // var_dump($link);
+        // echo "<br/>";
       }
       // On ferme !
       $link->close();
