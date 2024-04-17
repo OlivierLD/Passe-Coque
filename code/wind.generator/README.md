@@ -119,7 +119,7 @@ No motor connected yet.
 
 ### Comments
 With the motor connected to the turbine, it seems to be too demanding.  
-One turbine seems not to be enough, lts' try with two.  
+One turbine seems not to be enough, lets' try with two.  
 A [connector](./3D/middle.connector.stl) for the axis (top and bottom)
  has been created.
 
