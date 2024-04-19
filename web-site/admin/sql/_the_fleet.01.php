@@ -79,7 +79,7 @@ if (isset($_POST['operation'])) {
           $stmt .= ("<input type='hidden' name='operation' value='query'>");
           $stmt .= ("<input type='hidden' name='boat-name' value='$id'>");
           $stmt .= ("<input type='hidden' name='ref-name' value=''>");
-          $stmt .= ("<input type='submit' value='$nb'>");
+          $stmt .= ("<input type='submit' value='$nb' title='" . $nb . " referent" . ($nb > 1 ? "s" : "") . "'>");
           $stmt .= ("</form>");
         } else {
           $stmt = $nb;
