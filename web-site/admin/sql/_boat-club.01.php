@@ -46,7 +46,7 @@ if (isset($_POST['operation'])) {
 
 if ($operation != '') {
 
-  echo("Operation [" . $operation . "]");
+  echo("Operation [" . $operation . "]<br/>");
 
   if ($operation == 'query') { // Then do the query
     try {
@@ -96,8 +96,8 @@ if ($operation != '') {
       ?> 
       <!-- Member creation form -->
 
-      <form action="./_boat-club.01.php" method="get"> <!-- TODO !! -->
-        <input type="hidden" name="task" value="create">
+      <form action="./_boat-club.01.php" method="post">
+        <input type="hidden" name="operation" value="new-member">
         <input type="submit" value="Create New Boat Club Member">
       </form> 
 
@@ -274,22 +274,28 @@ if ($operation != '') {
     while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
       echo(
         "<tr>" . 
-          "<td>Email</td><td>" . urldecode($table[0]) . "</td><td>" .  
+          "<td>Email</td><td>" . urldecode($table[0]) . "</td>" .  
         "</tr><tr>" .
-          "<td>Full Name</td><td>" . urldecode($table[1]) . "</td><td>" .  
+          "<td>Full Name</td><td>" . urldecode($table[1]) . "</td>" .  
         "</tr><tr>" .
-          "<td>Enrolled</td><td><input type='date' name='enrolled' value='" . ($table[2]) . "'></td><td>" .  
+          "<td>Enrolled</td><td><input type='date' name='enrolled' value='" . ($table[2]) . "'></td>" .  
         "</tr><tr>" .
-          "<td>Level</td><td><input type='text' name='level' value='" . ($table[3]) . "'></td><td>" .  
+          "<td>Level</td><td>" .
+            "<select name='level'>" .
+              "<option value='CREW'" . ($table[3] == 'CREW' ? ' selected' : '') . ">CREW</option>" .
+              "<option value='SKIPPER'" . ($table[3] == 'SKIPPER' ? ' selected' : '') . ">SKIPPER</option>" .
+              "<option value='NONE'" . ($table[3] == 'NONE' ? ' selected' : '') . ">NONE</option>" .
+            "</select>" . 
+          "</td>" .  
         "</tr><tr>" .
-          "<td>Amount</td><td><input type='number' name='amount' value='" . ($table[4]) . "' min='0' step='0.01'></td><td>" .  
+          "<td>Amount</td><td><input type='number' name='amount' value='" . ($table[4]) . "' min='0' step='0.01'></td>" .  
         "</tr><tr>" .
-          "<td>Renewed</td><td><input type='date' name='renewed' value='" . ($table[5]) . "'></td><td>" .  
+          "<td>Renewed</td><td><input type='date' name='renewed' value='" . ($table[5]) . "'></td>" .  
         "</tr>" . PHP_EOL); 
     }
     ?>
       </table>
-      <input type="submit" value="Update"> <!-- TODO Delete -->
+      <input type="submit" name="update" value="Update"> <input type="submit" name="delete" value="Delete">
     </form>
     <?php
     // On ferme !
@@ -308,8 +314,12 @@ if ($operation != '') {
     <?php
   } else if ($operation == 'update') {
 
-    echo ("It's an update !!");
+    // echo ("It's an update !!");
 
+    $task = 'update';
+    if (isset($_POST['delete'])) {
+      $task = 'delete';
+    }
     // Receive the values, do the insert
     $email = $_POST['email'];
     $enrolled = $_POST['enrolled'];
@@ -328,12 +338,17 @@ if ($operation != '') {
         echo("Connected.<br/>");
       }
     
-      $sql = 'UPDATE BOAT_CLUB_MEMBERS ' .
-              'SET ENROLLED = STR_TO_DATE(\'' .$enrolled . '\', \'%Y-%m-%d\'), ' .
-                  'MEMBER_LEVEL = \'' . $level . '\', ' .
-                  'FEE_AMOUNT = ' . $amount . ', ' . 
-                  'LAST_FEE_UPDATE = ' . (strlen(trim($renewed)) == 0 ? 'NULL' : 'STR_TO_DATE(\'' .$renewed . '\', \'%Y-%m-%d\')') . ' ' .
-            'WHERE EMAIL = \'' . $email . '\';';
+      if ($task == 'update') {
+        $sql = 'UPDATE BOAT_CLUB_MEMBERS ' .
+                'SET ENROLLED = STR_TO_DATE(\'' .$enrolled . '\', \'%Y-%m-%d\'), ' .
+                    'MEMBER_LEVEL = \'' . $level . '\', ' .
+                    'FEE_AMOUNT = ' . $amount . ', ' . 
+                    'LAST_FEE_UPDATE = ' . (strlen(trim($renewed)) == 0 ? 'NULL' : 'STR_TO_DATE(\'' .$renewed . '\', \'%Y-%m-%d\')') . ' ' .
+              'WHERE EMAIL = \'' . $email . '\';';
+      } else if ($task == 'delete') {
+        $sql = 'DELETE FROM BOAT_CLUB_MEMBERS ' .
+              'WHERE EMAIL = \'' . $email . '\';';
+      }
       
       echo('Performing query <code>' . $sql . '</code><br/>');
 
@@ -357,6 +372,15 @@ if ($operation != '') {
     <form action="./_boat-club.01.php" method="get">
       <input type="submit" value="Query Form">
     </form>
+
+    <?php
+  } else if ($operation == 'new-member') {
+    ?>
+      <ol>
+        <li>Go to the <a href="./_members.01.php">Passe-Coque Member List</a></li>
+        <li>choose the Passe-Coque member you want to add to the Boat Club</li>
+        <li>and click 'Subscribe'</li>
+      </ol>
 
     <?php
   }
