@@ -38,8 +38,9 @@ h1 {
         <li>
             <a href="_free_sql.php" target="MySQL">Free SQL (Careful! WiP)</a>
             <ul>
-                <li><a href="_free_sql.php?stmt=SELECT+*+FROM+THE_FLEET+F+%0D%0AWHERE+F.ID+NOT+IN+%28SELECT+BOAT_ID+FROM+REFERENTS%29+AND%0D%0A++++++F.CATEGORY+%3C%3E+%27EX_BOAT%27%3B" target="MySQL">Boats with no referent</a></li>
+                <li><a href="_free_sql.php?stmt=SELECT+*+FROM+THE_FLEET+F+%0D%0AWHERE+F.ID+NOT+IN+%28SELECT+BOAT_ID+FROM+REFERENTS%29+AND%0D%0A+F.CATEGORY+%3C%3E+%27EX_BOAT%27%3B" target="MySQL">Boats with no referent</a></li>
                 <li><a href="_free_sql.php?stmt=SELECT+*+FROM+BOATS_AND_REFERENTS%3B" target="MySQL">Boats and referents</a></li>
+                <li><a href="https://passe-coque.com/admin/sql/_free_sql.php?stmt=SELECT+M.EMAIL%2C+M.FIRST_NAME%2C+M.LAST_NAME%2C%0D%0A+B.BOAT_NAME%2C+B.BOAT_TYPE%2C%0D%0A+R.BOAT_ID%2C+R.TELEPHONE%0D%0AFROM+PASSE_COQUE_MEMBERS+M%2C%0D%0A+THE_FLEET+B%2C%0D%0A+REFERENTS+R%0D%0AWHERE+R.BOAT_ID+%3D+B.ID+AND%0D%0A+B.CATEGORY+%3D+%27CLUB%27+AND%0D%0A+R.EMAIL+%3D+M.EMAIL%3B" target="MySQL">Boats and referents (Boat Club only)</a></li>
                 <li>. . .</li>
             </ul>
         </li>

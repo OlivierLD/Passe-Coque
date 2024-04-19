@@ -51,7 +51,9 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      $sql = 'SELECT BOAT_NAME, ID, BOAT_TYPE FROM THE_FLEET WHERE UPPER(BOAT_NAME) LIKE UPPER(\'%' . $name . '%\') OR UPPER(ID) LIKE UPPER(\'%' . $name . '%\') ORDER BY 1;';
+      $sql = 'SELECT F.BOAT_NAME, F.ID, F.BOAT_TYPE,
+      (SELECT COUNT(*) FROM REFERENTS R WHERE R.BOAT_ID = F.ID) AS NB_REF
+       FROM THE_FLEET F WHERE UPPER(BOAT_NAME) LIKE UPPER(\'%' . $name . '%\') OR UPPER(ID) LIKE UPPER(\'%' . $name . '%\') ORDER BY 1;';
       
       echo('Performing query <code>' . $sql . '</code><br/>');
     
@@ -70,13 +72,30 @@ if (isset($_POST['operation'])) {
 
       <?php
 
+      function generateLink(float $nb, string $id) : string {
+        $stmt= '';
+        if ($nb > 0) {
+          $stmt .= ("<form action='./_referents.01.php' method='post' style='margin: 0;'>");
+          $stmt .= ("<input type='hidden' name='operation' value='query'>");
+          $stmt .= ("<input type='hidden' name='boat-name' value='$id'>");
+          $stmt .= ("<input type='hidden' name='ref-name' value=''>");
+          $stmt .= ("<input type='submit' value='$nb'>");
+          $stmt .= ("</form>");
+        } else {
+          $stmt = $nb;
+        }
+        return $stmt;
+      }
 
       echo "<table>";
-      echo "<tr><th>Boat Name</th><th>ID</th><th>Boat Type</th><th>-</th></tr>";
+      echo "<tr><th>Boat Name</th><th>ID</th><th>Boat Type</th><th>Nb Ref</th><th>-</th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
-          "<tr><td>" . 
-            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . urldecode($table[2]) . "</td><td>" . "<a href='./_the_fleet.02.php?id=" . $table[1] . "'>Edit</a>" .  //  target='PCUpdate'
+          "<tr><td>" . urldecode($table[0]) . 
+          "</td><td>" . urldecode($table[1]) . 
+          "</td><td>" . urldecode($table[2]) . 
+          "</td><td>" . generateLink($table[3], urldecode($table[1])) . 
+          "</td><td>" . "<a href='./_the_fleet.02.php?id=" . $table[1] . "'>Edit</a>" .  //  target='PCUpdate'
           "</td></tr>\n"
         ); 
       }
