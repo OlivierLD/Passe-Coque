@@ -17,6 +17,20 @@
       tr > td {
         border: 1px solid silver;
       }
+
+      a:link, a:visited {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+      }
+
+      a:hover, a:active {
+        background-color: red;
+      }
     </style>
   </head>
   <body>
@@ -24,11 +38,12 @@
 
     <?php
 // phpinfo();
+require __DIR__ . "/../../php/db.cred.php";
 
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
+// $username = "passecc128";
+// $password = "zcDmf7e53eTs";
+// $database = "passecc128";
+// $dbhost = "passecc128.mysql.db";
 
 if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
@@ -54,12 +69,14 @@ if (isset($_POST['operation'])) {
               UPPER(PCM.LAST_NAME),
               \' \',
               PCM.FIRST_NAME
-          ) AS NAME
+          ) AS NAME,
+          (SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC
       FROM 
           PASSE_COQUE_MEMBERS PCM
       WHERE 
            UPPER(PCM.FIRST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
-           UPPER(PCM.LAST_NAME) LIKE UPPER(\'%' . $name . '%\')
+           UPPER(PCM.LAST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
+           UPPER(PCM.EMAIL) LIKE UPPER(\'%' . $name . '%\')
       ORDER BY 1;';
       
       echo('Performing query <code>' . $sql . '</code><br/>');
@@ -81,11 +98,17 @@ if (isset($_POST['operation'])) {
 
 
       echo "<table>";
-      echo "<tr><th>Email</th><th>Name</th><th> - </th></tr>";
+      echo "<tr><th>Email</th><th>Name</th><th>Boat Club</th><th> - </th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 
-            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td>" . "<a href='./_members.02.php?id=" . $table[0] . "'>Edit</a>" . //  target='PCUpdate'
+            urldecode($table[0]) . // Email
+          "</td><td>" .  
+            urldecode($table[1]) . // Name (full)
+          "</td><td>" .  
+            ($table[2] ? 'Member' : "<a href='./_boat-club.01.php?operation=subscribe&email=" . $table[0] . "'>Subscribe</a>") . // already in Boat Club, or subscribe
+          "</td><td>" . 
+            "<a href='./_members.02.php?id=" . $table[0] . "'>Edit</a>" .  // Edit Member //  target='PCUpdate'
           "</td></tr>\n"
         ); 
       }
@@ -117,7 +140,7 @@ if (isset($_POST['operation'])) {
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>
-          <td valign="top">Name (part of):</td><td><input type="text" name="full-name" size="40"></td>
+          <td valign="top">Name (part of fist name, last name, email):</td><td><input type="text" name="full-name" size="40"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>
