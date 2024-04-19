@@ -7,7 +7,9 @@
 <img src="./web-site/logos/LOGO_PC_txt_only.png" width="50%" height="auto">  
 </td>
 <td style="vertical-align: top;">
-Web site of the Passe-Coque association, and some code repo too.
+Web site of the Passe-Coque association, and some code repo too.  
+
+Front-end, back-end, the full stack!  
 
 The code used for the site is in the `web-site` folder.
 </td>

@@ -59,7 +59,7 @@ if ($current_lang == "FR") {
     <hr/>
     <?php
 if ($current_lang == "FR") {
-  echo "<div style='font-size: 3em; line-height: 1em;'>Cette page est en cours de d&eacute;veloppement...</div>" . PHP_EOL;
+  // echo "<div style='font-size: 3em; line-height: 1em;'>Cette page est en cours de d&eacute;veloppement...</div>" . PHP_EOL;
     ?>
     Vous voulez :
     <ul>
@@ -81,7 +81,7 @@ if ($current_lang == "FR") {
     ?>
     <?php
 } else {
-  echo "<div style='font-size: 3em; line-height: 1em;'>This page is being developped...</div>" . PHP_EOL;
+  // echo "<div style='font-size: 3em; line-height: 1em;'>This page is being developped...</div>" . PHP_EOL;
     ?>
     You want to:
     <ul>
