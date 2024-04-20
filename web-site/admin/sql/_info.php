@@ -1,6 +1,7 @@
 <html lang="en">
   <!--
    ! WiP.
+   ! See https://www.php.net/manual/en/language.constants.magic.php
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -20,7 +21,14 @@
   </head>
   <body>
     <h1>PHP / MySQL. Info</h1>
-
+    <div>
+      <?php
+        print "Origin (full, __FILE__): " . __FILE__ . "\n";
+        echo "<br/>";
+        print "Origin (basename(__FILE__)): " . basename(__FILE__) . PHP_EOL;
+        echo "<br/>";
+      ?>
+    </div>
     <?php
 phpinfo();
 

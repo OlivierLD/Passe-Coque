@@ -140,7 +140,7 @@ if (isset($_POST['operation'])) {
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>
-          <td valign="top">Name (part of fist name, last name, email):</td><td><input type="text" name="full-name" size="40"></td>
+          <td valign="top">Name (part of first name, last name, email):</td><td><input type="text" name="full-name" size="40"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>

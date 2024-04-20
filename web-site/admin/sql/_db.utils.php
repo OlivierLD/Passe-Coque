@@ -61,6 +61,54 @@ function getBoats(string $dbhost, string $username, string $password, string $da
     return null;
 }
   
+function getBoatsJSON(string $dbhost, string $username, string $password, string $database, bool $verbose): string {
+    try {
+        $link = new mysqli($dbhost, $username, $password, $database);
+        
+        if ($link->connect_errno) {
+            echo("[Oops, errno:".$link->connect_errno."...] ");
+            // die("Connection failed: " . $conn->connect_error);
+            throw $conn->connect_error;
+        } else {
+            if ($verbose) {
+                echo("[Connected.] ");
+            }
+        }
+        $sql = "SELECT * FROM THE_FLEET;";
+        if ($verbose) {
+            echo('[Performing instruction ['.$sql.']] ');
+        }
+        
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+
+        $json_result = "[";
+        $first = true;
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $next_element = "{ \"name\": \"" . urldecode($table[0]) . "\", \"id\": \"" . $table[1] . "\", \"pix\": \"" . $table[2] . "\", \"type\": \"" . urldecode($table[3]) . "\", \"category\": \"" . urldecode($table[4]) . "\", \"base\": \"" . urldecode($table[5]) . "\" } ";
+            // echo $next_element . "<br/>" . PHP_EOL;
+            $json_result = $json_result . ($first ? "" : ", ") . $next_element;
+            $first = false;
+        }
+        $json_result = $json_result . "]";
+
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("[Closed DB] ".PHP_EOL);
+            echo "Finally, returning $json_result";
+        }
+        return $json_result;
+
+    } catch (Throwable $e) {
+        echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
+        throw $e;
+    }                
+    return null;
+}
+
 function getMembers(string $dbhost, string $username, string $password, string $database, bool $verbose): array {
     try {
         $link = new mysqli($dbhost, $username, $password, $database);

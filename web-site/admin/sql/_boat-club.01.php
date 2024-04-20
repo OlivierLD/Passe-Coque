@@ -369,7 +369,8 @@ if ($operation != '') {
     }
     ?>
 
-    <form action="./_boat-club.01.php" method="get">
+    <!--form action="./_boat-club.01.php" method="get"-->
+    <form action="<?php echo basename(__FILE__); ?>" method="get">
       <input type="submit" value="Query Form">
     </form>
 
@@ -377,7 +378,7 @@ if ($operation != '') {
   } else if ($operation == 'new-member') {
     ?>
       <ol>
-        <li>Go to the <a href="./_members.01.php">Passe-Coque Member List</a></li>
+        <li>Go to the <a href="./_members.01.php">Passe-Coque Members List</a></li>
         <li>choose the Passe-Coque member you want to add to the Boat Club</li>
         <li>and click 'Subscribe'</li>
       </ol>
@@ -386,12 +387,13 @@ if ($operation != '') {
   }
 } else { // Then display the query form
     ?>
-    <!--form action="dbQuery.03.php" method="post"-->
-    <form action="./_boat-club.01.php" method="post">
+    <!--form action="./_boat-club.01.php" method="post"-->
+    <form action="<?php echo basename(__FILE__); ?>" method="post">
+
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>
-          <td valign="top">Name (part of fist name, last name, email):</td><td><input type="text" name="full-name" size="40"></td>
+          <td valign="top">Subscriber's Name (part of first name, last name, email):</td><td><input type="text" name="full-name" size="40"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>
