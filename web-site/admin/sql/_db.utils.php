@@ -155,5 +155,179 @@ function getMembers(string $dbhost, string $username, string $password, string $
     return null;
 }
   
+class Reservation {
+    public $owner;
+    public $boat;
+    public $resDate;
+    public $from;
+    public $to;
+    public $status;
+    public $comment;
+}
+
+function getReservations(string $dbhost, string $username, string $password, string $database, string $boatId, string $from, string $to, bool $verbose) : array {
+    $sql =  "SELECT EMAIL, BOAT_ID, RESERVATION_DATE, DATE_FORMAT(FROM_DATE, '%Y-%b-%d'), DATE_FORMAT(TO_DATE, '%Y-%b-%d')TO_DATE, RESERVATION_STATUS, MISC_COMMENT FROM BC_RESERVATIONS " .
+            "WHERE ((FROM_DATE >= STR_TO_DATE('" . $from . "', '%Y-%m-%d') AND FROM_DATE <= STR_TO_DATE('" . $to . "', '%Y-%m-%d')) OR " . 
+                " (TO_DATE >= STR_TO_DATE('" . $from . "', '%Y-%m-%d') AND TO_DATE <= STR_TO_DATE('" . $to . "', '%Y-%m-%d'))) AND " .
+                "BOAT_ID = '" . $boatId . "' " .
+                "ORDER BY FROM_DATE;";
+    $reservations = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $reservations[$index] = new Reservation();
+            $reservations[$index]->owner = $table[0];
+            $reservations[$index]->boat = $table[1];
+            $reservations[$index]->resDate = $table[2];
+            $reservations[$index]->from = $table[3];
+            $reservations[$index]->to = $table[4];
+            $reservations[$index]->status = $table[5];
+            $reservations[$index]->comment = $table[6];
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $reservations;
+}
+
+function getReservation(string $dbhost, string $username, string $password, string $database, string $boatId, string $from, string $resDate, bool $verbose) : Reservation {
+
+    $sql = "SELECT EMAIL, BOAT_ID, RESERVATION_DATE, FROM_DATE, TO_DATE, RESERVATION_STATUS, MISC_COMMENT FROM BC_RESERVATIONS " .
+        "WHERE EMAIL = '" . $from . "' AND BOAT_ID = '" . $boatId . "' AND RESERVATION_DATE = STR_TO_DATE('$resDate', '%Y-%m-%d %H:%i:%s');";
+
+    $reservation = new Reservation();        
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if (true || $verbose) {
+            echo ("Executing [" . $sql . "]" . PHP_EOL);
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { // Should be only one
+            $reservation->owner = $table[0];
+            $reservation->boat = $table[1];
+            $reservation->resDate = $table[2];
+            $reservation->from = $table[3];
+            $reservation->to = $table[4];
+            $reservation->status = $table[5];
+            $reservation->comment = $table[6];
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+    return $reservation;
+}
+
+// For INSERT, DELETE, UPDATE
+function executeSQL(string $dbhost, string $username, string $password, string $database, string $sql, bool $verbose) : void {
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if (true || $verbose) {
+            echo ("Executing [" . $sql . "]" . PHP_EOL);
+        }
+        if (true) { // Do perform ?
+            if ($link->query($sql) === TRUE) {
+              echo "OK. Statement executed successfully<br/><hr/>" . PHP_EOL;
+            } else {
+              echo "ERROR executing: " . $sql . "<br/>" . $link->error . "<br/>";
+            }
+        } else {
+            echo "Stby<br/>" . PHP_EOL;
+        }
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+}
+
+function isLeapYear(int $year): bool {
+    $ret = false;
+    if ($year % 4 == 0) {
+        $ret = true;
+        if ($year % 100 == 0) {
+            $ret = false;
+            if ($year % 400 == 0) {
+                $ret = true;
+            }
+        }
+    }
+    return $ret;
+}
+
+function getNbDays(int $year, int $month): int {
+    $NB_DAYS = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    $nbDays = $NB_DAYS[$month - 1];
+    if ($month == 2 && isLeapYear($year)) {
+        $nbDays = 29;
+    }
+    return $nbDays;
+}
 
 ?>
