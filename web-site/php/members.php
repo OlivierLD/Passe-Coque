@@ -6,6 +6,7 @@ session_start();
   <!--
    ! Contains Custom Authentication.
    ! Crendentials stored in DB
+   ! PHP Sessions: See https://www.w3schools.com/php/php_sessions.asp
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -151,6 +152,7 @@ if (isset($_POST['operation'])) {
             echo "Password is required.<br/>" . PHP_EOL;
           }
         }
+        session_unset();
         session_destroy();
         ?>
         <p>
@@ -227,6 +229,7 @@ if (isset($_POST['operation'])) {
           unset($_SESSION['USER_NAME']);
           // unset($_SERVER['PHP_AUTH_PW']);
 
+          session_unset();
           session_destroy();
 
           http_response_code(401);
@@ -252,6 +255,7 @@ if (isset($_POST['operation'])) {
     }
     unset($_SESSION['USER_NAME']);
     // unset($_SERVER['PHP_AUTH_PW']);
+    session_unset();
     session_destroy();
     // http_response_code(401);
 
