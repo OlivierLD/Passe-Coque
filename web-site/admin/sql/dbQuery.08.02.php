@@ -1,3 +1,7 @@
+<?php
+// Must be on top
+session_start();
+?>
 <html lang="en">
   <!--
    ! Custom Authentication, act 2.
@@ -30,7 +34,7 @@
     <h1>PHP / MySQL.<br/>Custom Authentication, act 2</h1>
 
     <?php
-    session_start();
+    // session_start();
     $connected_user = 'unknown';
     if (isset($_SESSION['USER_NAME'])) {
       $connected_user = $_SESSION['USER_NAME'];

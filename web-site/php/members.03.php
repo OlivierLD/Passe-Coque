@@ -1,3 +1,7 @@
+<?php
+// Must be on top
+session_start();
+?>
 <html lang="en">
   <!--
    ! After Custom Authentication.
@@ -30,7 +34,7 @@ ini_set("session.gc_maxlifetime", $timeout);
 ini_set("session.cookie_lifetime", $timeout);
 // echo "GC_MaxLifeTime now: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
 
-session_start();
+// session_start();
 
 $current_lang = "FR";
 if (isset($_GET['lang'])) {

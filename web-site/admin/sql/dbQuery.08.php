@@ -1,3 +1,7 @@
+<?php
+// Must be on top
+session_start();
+?>
 <html lang="en">
   <!--
    ! Custom Authentication.
@@ -31,8 +35,6 @@
 
     <?php
 // phpinfo();
-
-session_start();
 
 $username = "passecc128";
 $password = "zcDmf7e53eTs";

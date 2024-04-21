@@ -1,3 +1,7 @@
+<?php
+// Must be on top
+session_start();
+?>
 <html lang="en">
   <!--
    ! After Custom Authentication.
@@ -31,7 +35,7 @@ ini_set("session.gc_maxlifetime", $timeout);
 ini_set("session.cookie_lifetime", $timeout);
 // echo "GC_MaxLifeTime now: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
 
-session_start();
+// session_start();
 
 $current_lang = "FR";
 if (isset($_GET['lang'])) {
@@ -45,6 +49,7 @@ if (isset($_GET['lang'])) {
 $userName = $_SESSION['USER_NAME'];
 $displayName = $_SESSION['DISPLAY_NAME'];
 $adminPrivileges = $_SESSION['ADMIN'];
+$bcMember = $_SESSION['BC_MEMBER'];
 $user_id = $_SESSION['USER_ID'];
 
 if ($current_lang == "FR") {
@@ -65,10 +70,18 @@ if ($current_lang == "FR") {
     <ul>
       <li><a href="members.03.php">Changer votre mot de passe (pour <?php echo $user_id ?>)</a></li>
       <li><a href="members.04.php">Voir vos cotisations</a></li>
-      <li><a href="#" onclick="alert('Plus tard');">R&eacute;server un bateau</a></li>
+      <li><a href="../admin/sql/_reservations.01.php">Voir le planning des r&eacute;servations</a></li>
       <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
     </ul>
     <?php
+    if ($bcMember) {
+      ?>
+      En tant que membre du Boat Club, vous pouvez aussi :
+      <ul>
+        <li><a href="../admin/sql/_reservations.02.php" target="admin">Faire une r&eacute;servation</a></li>
+      </ul>
+      <?php
+    }
     if ($adminPrivileges) {
       ?>
       En tant qu'adminstrateur, vous pouvez aussi utiliser :
@@ -87,10 +100,18 @@ if ($current_lang == "FR") {
     <ul>
       <li><a href="members.03.php">Change your password (for <?php echo $user_id ?>)</a></li>
       <li><a href="members.04.php">See your subscriptions</a></li>
-      <li><a href="#" onclick="alert('Later');">Book a boat</a></li>
+      <li><a href="../admin/sql/_reservations.01.php">See the boat reservation planning</a></li>
       <li><a href="#" onclick="alert('Later');">. . . </a></li>
     </ul>
     <?php
+    if ($bcMember) {
+      ?>
+      As a Boat Club member, you can also:
+      <ul>
+        <li><a href="../admin/sql/_reservations.02.php" target="admin">Make a reservation</a></li>
+      </ul>
+      <?php
+    }
     if ($adminPrivileges) {
       ?>
       As an administrator, you can also use:

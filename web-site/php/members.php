@@ -1,6 +1,10 @@
+<?php
+// Must be on top
+session_start();
+?>
 <html lang="en">
   <!--
-   ! Custom Authentication.
+   ! Contains Custom Authentication.
    ! Crendentials stored in DB
    +-->
   <head>
@@ -41,15 +45,50 @@ $timeout = 60;  // In seconds
 ini_set("session.gc_maxlifetime", $timeout);
 ini_set("session.cookie_lifetime", $timeout);
 
-session_start();
 
 if (false) {
-  echo "Session vars, before everything:<br/>" . PHP_EOL;
+  echo "Session vars, before everything (1):<br/>" . PHP_EOL;
   echo "USER_NAME: " . $_SESSION['USER_NAME'] . "<br/>" . PHP_EOL;
   echo "CURRENT_LANG: " . $_SESSION['CURRENT_LANG'] . "<br/>" . PHP_EOL;
-  echo "--------------------------------<br/>" . PHP_EOL;
+  echo "Full _SESSION Object: <br/>" . PHP_EOL;
+  var_dump($_SESSION);
+  echo "<br/>--------------------------------<br/>" . PHP_EOL;
 }
 
+$operation = null;
+if (isset($_POST['operation'])) {
+  $operation = $_POST['operation'];
+}
+if (!($operation == 'logout')) {
+  if (isset($_SESSION['USER_NAME']) && 
+      isset($_SESSION['DISPLAY_NAME']) &&
+      isset($_SESSION['ADMIN']) && 
+      isset($_SESSION['USER_ID'])) {
+
+    // Redirect to members.02.php
+    if (false) {
+      echo "Session vars, before everything (2):<br/>" . PHP_EOL;
+      echo "USER_NAME: " . $_SESSION['USER_NAME'] . "<br/>" . PHP_EOL;
+      echo "CURRENT_LANG: " . $_SESSION['CURRENT_LANG'] . "<br/>" . PHP_EOL;
+      echo "Full _SESSION Object: <br/>" . PHP_EOL;
+      var_dump($_SESSION);
+      echo "<br/>--------------------------------<br/>" . PHP_EOL;
+    }
+    if (true) { // Redirect
+      // sleep(1);
+      header("Location: members.02.php");
+      exit();
+    } else { // Link for the user to click (will produce the rest of the page...)
+      ?>
+      <?php
+      echo ("From " . __FILE__ . ", line " . __LINE__ . "</br>");
+      ?>
+      <a href="members.02.php"><?php echo ($current_lang == "FR" || $_SESSION['CURRENT_LANG'] == "FR") ? "Acc&egrave;s au menu..." : "Menu access..." ?></a> <!-- LA SUITE ! -->
+      <?php
+      // exit();
+    }
+  }
+}
 $current_lang = "FR";
 if (isset($_GET['lang'])) {
     $current_lang = $_GET['lang'];
@@ -72,7 +111,7 @@ if (isset($_POST['operation'])) {
       $form_username = $_POST['username'];  // Aka email
       $form_password = $_POST['password'];
 
-      echo ("looking for credentials for $form_username .<br/>");
+      // echo ("looking for credentials for $form_username ...<br/>");
     
       // echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
@@ -84,9 +123,15 @@ if (isset($_POST['operation'])) {
         // echo("Connected.<br/>");
       }
     
-      $sql = "SELECT PASSWORD, CONCAT(FIRST_NAME, ' ', LAST_NAME), ADMIN_PRIVILEGES FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$form_username';"; 
+      $sql = "SELECT PCM.PASSWORD, " . 
+             "CONCAT(PCM.FIRST_NAME, ' ', PCM.LAST_NAME), " . 
+             "PCM.ADMIN_PRIVILEGES, " .
+             "(SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC " . 
+             "FROM PASSE_COQUE_MEMBERS PCM " . 
+             "WHERE PCM.EMAIL = '$form_username';"; 
       
       // echo('Performing query <code>'.$sql.'</code><br/>Pswd Length:' . strlen(trim($form_password)) );
+      // echo('Performing query <code>'.$sql.'</code><br/>' . PHP_EOL);
     
       // $result = mysql_query($sql, $link);
       $result = mysqli_query($link, $sql);
@@ -101,9 +146,9 @@ if (isset($_POST['operation'])) {
         }
         if (strlen(trim($form_password)) == 0) {
           if ($current_lang == "FR") {
-            echo "Le password est obligatoire.<br/>" . PHP_EOL;
+            echo "Le mot de passe est obligatoire.<br/>" . PHP_EOL;
           } else {
-            echo "Password is required <br/>" . PHP_EOL;
+            echo "Password is required.<br/>" . PHP_EOL;
           }
         }
         session_destroy();
@@ -132,6 +177,7 @@ if (isset($_POST['operation'])) {
           $db_password = $table[0];
           $display_name = $table[1];
           $admin_privileges = $table[2];
+          $bc_member = $table[3];
         }
         if ($db_password == sha1($form_password)) { // Valid.
 
@@ -140,17 +186,22 @@ if (isset($_POST['operation'])) {
           $_SESSION['DISPLAY_NAME'] = urldecode($display_name);
           $_SESSION['ADMIN'] = $admin_privileges;
           $_SESSION['USER_ID'] = $form_username;
+          $_SESSION['BC_MEMBER'] = $bc_member;
           // Welcome !
           // If arrives here, is a valid user.
           // $mess = ($current_lang == "FR") ? "Bienvenue" : "Welcome";
           if ($current_lang == "FR") {
             echo "<p>Bravo, vous &ecirc;tes maintenant connect&eacute; au syst&egrave;me.</p>" . PHP_EOL;
+            echo "Membre Boat-Club : " . ($bc_member ? "Oui" : "Non") . "<br/>" . PHP_EOL;
+            echo "Admin : " . ($admin_privileges ? "Oui" : "Non") . "<br/>" . PHP_EOL;
           } else {
             echo "<p>Congratulation, you are now into the system.</p>" . PHP_EOL;
+            echo "Boat-Club Member: " . ($bc_member ? "Yes" : "No") . "<br/>" . PHP_EOL;
+            echo "Admin: " . ($admin_privileges ? "Yes" : "No") . "<br/>" . PHP_EOL;
           }
           echo "<p>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . ".</p>" . PHP_EOL;
           ?>
-          <a href="members.02.php"><?php echo ($current_lang == "FR") ? "On continue..." : "Further..." ?></a> <!-- LA SUITE ! -->
+          <a href="members.02.php"><?php echo ($current_lang == "FR") ? "Acc&egrave;s au menu..." : "Menu access..." ?></a> <!-- LA SUITE ! -->
           <hr/>
           <form action="members.php" method="post">
             <input type="hidden" name="operation" value="logout">
@@ -201,14 +252,17 @@ if (isset($_POST['operation'])) {
     }
     unset($_SESSION['USER_NAME']);
     // unset($_SERVER['PHP_AUTH_PW']);
-
     session_destroy();
+    // http_response_code(401);
+
+    // A time out ??
+    // sleep(2);
 
     ?>
     <a href="members.php"><?php echo ($current_lang == "FR") ? "On se reconnecte ?" : "Log in again?" ?></a><br/>
     <?php
   } else {
-    echo "Unsupported operation $operation";
+    echo "Unsupported operation [$operation]";
   }
 } else { // Then display the logging form
     ?>
