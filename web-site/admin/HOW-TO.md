@@ -99,4 +99,8 @@ En cas de panne&nbsp;: Envoyez-moi un <a class="mail-box list-link" href="mailto
 - Choose the format you'd like to save the file as from the dropdown menu (like SQL)
 - Click the Go or Export button to continue.
 
+### REST Services, returning JSON payloads
+Look into the code, for the parts using a `Content-Type: application/json;`.  
+Also see how they're invoked (from a JavaScript `fetch`).
+
 ---
