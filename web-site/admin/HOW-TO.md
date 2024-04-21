@@ -75,6 +75,11 @@ $ php -S 127.0.0.1:8000
 - Home directory path: /home/passecc  
 
 ### php & mySQL
+Les technologies utilis&eacute;es sont "impos&eacute;es" par l'h&eacute;bergeur, ce sont - sans surprise :
+- HTML5 / CSS3 / ES6
+- PHP (voir [php.net](https://www.php.net/))
+- MySQL (voir [mysql.com](https://www.mysql.com/))
+
 Voir dans le r&eacute;pertoire `admin/sql`, il y a des exemples fonctionnels.
 
 ### HelloAsso
