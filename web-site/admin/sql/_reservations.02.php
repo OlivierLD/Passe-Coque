@@ -129,7 +129,7 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
 
         $sql =  "SELECT EMAIL, BOAT_ID, RESERVATION_DATE, DATE_FORMAT(FROM_DATE, '%Y-%b-%d'), DATE_FORMAT(TO_DATE, '%Y-%b-%d'), RESERVATION_STATUS, MISC_COMMENT FROM BC_RESERVATIONS " .
         "WHERE ((STR_TO_DATE('$fromDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE) OR " .
-               "(STR_TO_DATE('$fromDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE)) AND " .
+               "(STR_TO_DATE('$toDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE)) AND " .
             "BOAT_ID = '" . $boatId . "' AND " .
             "RESERVATION_STATUS <> 'CANCELED' " .
             "ORDER BY FROM_DATE;";
