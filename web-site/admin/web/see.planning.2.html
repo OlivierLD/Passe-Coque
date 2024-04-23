@@ -1,0 +1,593 @@
+<html lang="fr">
+<head>
+    <title>Passe&#8209;Coque Boat Club</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="/logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="/css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="/fonts/font.01.css">
+	<link rel="stylesheet" href="/fonts/font.02.css">
+
+	<link rel="stylesheet" href="/passe-coque.menu.css">
+	<link rel="stylesheet" href="/passe-coque.css" type="text/css"/>
+	<script type="text/javascript" src="/passe-coque.js"></script>
+
+    <style>
+:root {
+    --gray-100: #f7fafc;
+    --gray-200: #edf2f7;
+    --gray-300: #e2e8f0;
+    --gray-400: #cbd5e0;
+    --gray-500: #a0aec0;
+    --gray-600: #718096;
+    --gray-700: #4a5568;
+    --gray-800: #2d3748;
+    --gray-900: #1a202c;
+
+    --white: #ffffff;
+}
+
+.container {
+  max-width: 96%;
+  margin: auto;
+  margin-top: 3rem;
+  overflow-x: auto;
+}
+
+table {
+    font-family: "Open Sans", sans-serif;
+    position: relative;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: auto;
+    width: 100%;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    * {
+        border: none;
+    }
+    white-space: nowrap;
+    thead tr {
+        color: var(--gray-800);
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: left;
+
+        th {
+            background: var(--gray-200);
+            padding: 0.75rem 1.5rem 0.75rem 0;
+            vertical-align: middle;
+        }
+    }
+
+    tbody {
+        tr:nth-child(odd) td {
+            background: var(--white);
+        }
+
+        tr:nth-child(even) td {
+            background: var(--gray-200);
+        }
+        td {
+            color: var(--gray-900);
+            text-align: left;
+            padding: 0.25rem 0.25rem;
+            vertical-align: middle;
+            font-size: 1.125rem;
+            font-weight: normal;
+        }
+    }
+
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 0.5rem;
+    }
+
+    th:first-child {
+        border-top-left-radius: 0.5rem;
+        padding: 0.25rem;
+    }
+
+    tr:last-child td:last-child {
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    th:last-child {
+        border-top-right-radius: 0.5rem;
+    }
+  
+  tr>th:first-child,tr>td:first-child {
+    position: sticky;
+    left: 0;
+  }
+}   
+.boat-name {
+    font-weight: bold;
+}
+
+.tentative {
+    background: cyan !important;
+} 
+.confirmed {
+    background-color: orange !important;
+}
+.denied {
+    background-color: red !important;
+}
+.canceled {
+    background-color: silver !important;
+}
+.admin {
+    background-color: violet !important;
+}
+    </style>
+</head>
+<body>
+    <h2>Planning des r&eacute;servations</h2>
+    <!--span>Hard-coded: From April 1, 2024, for 3 months</span-->
+
+    <div>
+      Planning &agrave; partir de 
+      <select id="the-month">
+        <option value="01">Janvier</option>
+        <option value="02">F&eacute;vrier</option>
+        <option value="03">Mars</option>
+        <option value="04" selected>Avril</option>
+        <option value="05">Mai</option>
+        <option value="06">Juin</option>
+        <option value="07">Juillet</option>
+        <option value="08">Ao&ucirc;t</option>
+        <option value="09">Septembre</option>
+        <option value="10">Octobre</option>
+        <option value="11">Novembre</option>
+        <option value="12">D&eacute;cembre</option>
+      </select>
+      <select id="the-year">
+        <option value="2024" selected>2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+      </select>
+      <button onclick="update();">Go!</button>
+    </div>
+
+    <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Bateau</th>
+              <th colspan="30">Avril</th>
+              <th colspan="31">Mai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="boat-name">Et'Tak</td>
+              <td class="admin">1</td>
+              <td class="admin">2</td>
+              <td>3</td>
+              <td>4</td>
+              <td class="tentative">5</td>
+              <td class="tentative">6</td>
+              <td class="tentative">7</td>
+              <td class="tentative">8</td>
+              <td class="tentative">9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td class="admin">29</td>
+              <td class="admin">30</td>
+              <!-- Mai -->
+              <td class="admin">1</td>
+              <td class="admin">2</td>
+              <td>3</td>
+              <td>4</td>
+              <td class="tentative">5</td>
+              <td class="tentative">6</td>
+              <td class="tentative">7</td>
+              <td class="tentative">8</td>
+              <td class="tentative">9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td class="boat-name">Tapuana</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td class="denied">6</td>
+              <td class="denied">7</td>
+              <td class="denied">8</td>
+              <td>9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <!-- Mai -->
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td class="denied">6</td>
+              <td class="denied">7</td>
+              <td class="denied">8</td>
+              <td>9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td class="boat-name">Manu Oviri</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td class="confirmed">10</td>
+              <td class="confirmed">11</td>
+              <td class="confirmed">12</td>
+              <td class="confirmed">13</td>
+              <td class="confirmed">14</td>
+              <td class="confirmed">15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <!-- Mai -->
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td class="confirmed">10</td>
+              <td class="confirmed">11</td>
+              <td class="confirmed">12</td>
+              <td class="confirmed">13</td>
+              <td class="confirmed">14</td>
+              <td class="confirmed">15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td class="boat-name">Trehudal</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td class="canceled">9</td>
+              <td class="canceled">10</td>
+              <td class="canceled">11</td>
+              <td class="canceled">12</td>
+              <td class="canceled">13</td>
+              <td class="canceled">14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <!-- Mai -->
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td class="canceled">9</td>
+              <td class="canceled">10</td>
+              <td class="canceled">11</td>
+              <td class="canceled">12</td>
+              <td class="canceled">13</td>
+              <td class="canceled">14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</body>
+<script type="text/javascript">
+
+const FRENCH_MONTHS = ["Janvier", "F&eacute;vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Ao&ucirc;t", "Septembre", "Octobre", "Novembre", "D&eacute;cembre"];
+const FRENCH_DAYS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+const FRENCH_DAYS_ABBR = ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"];
+
+const lpad = (s, len, w = '0') => {
+    let str = s;
+    while (str.length < len) {
+        str = w + str;
+    }
+    return str;
+};
+
+const update = () => {
+  let year = document.getElementById('the-year');
+  let month = document.getElementById('the-month');
+  fetchAndDisplay(year.value, month.value);
+};
+
+const dayBetween = (day, from ,to) => {
+  let dateFrom = new Date(from);
+  let dateTo = new Date(to);
+  let thisDate = new Date(day);
+
+  return (thisDate >= dateFrom && thisDate <= dateTo);
+};
+
+const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
+
+  // https://passe-coque.com/php/get_bc_reservations.php?year=2024&month=04&span=3
+  let theDocToFetch = "../../php/get_bc_reservations.php"; // "./planning.json";
+  if (fromYear) {
+    theDocToFetch += (theDocToFetch.includes('?') ? '&' : '?') + 'year=' + fromYear;
+  }
+  if (fromMonth) {
+    theDocToFetch += (theDocToFetch.includes('?') ? '&' : '?') + 'month=' + fromMonth;
+  }
+  if (span) {
+    theDocToFetch += (theDocToFetch.includes('?') ? '&' : '?') + 'span=' + span;
+  }
+  console.log(`Document to fetch: ${theDocToFetch}`);
+  fetch(theDocToFetch)   // Requires a server to be running. A protocol like file:// would trigger a CORS error
+    .then(response => {
+        console.log(`Data Response: ${response.status} - ${response.statusText}`);
+        // response.arrayBuffer().then(doc => {
+        response.json().then(doc => {  // TODO see other methods than json() ?
+            let planning = doc;
+            // console.log(`Data loaded, ${doc.length} elements`);
+            // Find the different months and years
+            let differentMonth = [];
+            planning.calendar.days.forEach(element => {
+              let year = element.year;
+              let month = element.month;
+              if (differentMonth.length != 0) {
+                let lastOne = differentMonth[differentMonth.length - 1];
+                if (year != lastOne.year || month != lastOne.month) {
+                  differentMonth.push({ year: year, month: month, lastDay: 0 });  
+                } else {
+                  let day = element.day;
+                  differentMonth[differentMonth.length - 1].lastDay = day;
+                }
+              } else {
+                differentMonth.push({ year: year, month: month, lastDay: 0 });
+              }
+            });
+            // Find the different boats and their name 
+            let boats = [];
+            planning.reservations.forEach(res => {
+              boats.push({ id: res.boat.id, name: res.boat.name });
+            });
+
+            // Generate the UI
+            let theContainer = document.querySelector(".container");
+            theContainer.firstElementChild.remove(); // Drop the table
+
+            const table = document.createElement("table");
+
+            theContainer.appendChild(table);
+            // Headers
+            const tableHead = document.createElement('thead');
+            table.appendChild(tableHead);
+            const tr = document.createElement('tr');
+            tableHead.appendChild(tr);
+            const firstHead = document.createElement('th');
+            firstHead.innerText = 'Bateau'; // in french for now
+            tr.appendChild(firstHead);
+            differentMonth.forEach(m => {
+              const header = document.createElement('th');
+              header.setAttribute('colspan', m.lastDay);
+              header.innerHTML = FRENCH_MONTHS[m.month - 1] + ' ' + m.year; 
+              tr.appendChild(header);
+            });
+
+            // The rows
+            const tableBody = document.createElement('tbody');
+            table.appendChild(tableBody);
+            // Add one row per boat
+            let boatRows = [];
+            boats.forEach(boat => {
+              let row = document.createElement('tr');
+              boatRows.push(row);
+              tableBody.appendChild(row);
+              // Boat name as first column
+              const data = document.createElement('td');
+              data.setAttribute('class', 'boat-name');
+              data.innerHTML = boat.name;
+              row.appendChild(data);
+              // Append one col per day in the planning
+              planning.calendar.days.forEach(day => {
+                const data = document.createElement('td');
+                data.setAttribute('style', 'text-align: center;');
+                data.innerHTML = '<small>' + FRENCH_DAYS_ABBR[day.weekDay] + '</small><br/> ' + day.day; // See with week day name
+                row.appendChild(data);
+              });
+            });
+            console.log('Empty table ready');
+            // Walk thru the planning, set the right class on the columns...
+            planning.reservations.forEach((reservation, index) => {
+              console.log(`${reservation.boat.name}, ${reservation.reservations.length} reservation(s), table row ${index}`);
+              reservation.reservations.forEach((resa, idx) => {
+                console.log(`${reservation.boat.name}, from ${resa.from} to ${resa.to}, ${resa.status}, index ${idx}`);
+                let theRowToUpdate = boatRows[index];
+                // Walk thru all days in the planning
+                let apply = false;
+                planning.calendar.days.forEach((day, dayIdx) => {
+                  let thisDay = `${day.year}-${lpad(day.month.toFixed(0), 2)}-${lpad(day.day.toFixed(0), 2)}`;
+                  // if (thisDay === resa.from) { 
+                  if (dayBetween(thisDay, resa.from, resa.to))  { 
+                    apply = true;
+                  }
+                  if (apply) {
+                    theRowToUpdate.childNodes[dayIdx + 1].setAttribute('class', resa.status.toLowerCase());
+                  }
+                  if (thisDay === resa.to) {
+                    apply = false;
+                    return;
+                  }
+                })
+              });
+            });
+
+          });
+    },
+    (error, errmess) => {
+        console.log("Ooch");
+        let message;
+        if (errmess) {
+            let mess = JSON.parse(errmess);
+            if (mess.message) {
+                message = mess.message;
+            }
+        }
+        console.debug("Failed to get data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+    });
+
+}
+
+window.onload = () => {
+
+  // Fetch the data to populate the reservation planning
+  fetchAndDisplay();
+}; 
+</script>
+</html>

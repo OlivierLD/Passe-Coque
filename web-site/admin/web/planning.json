@@ -1,0 +1,729 @@
+{
+    "calendar": {
+      "from": "2024-04-01",
+      "to": "2024-06-30",
+      "days": [
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 1,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 2,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 3,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 4,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 5,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 6,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 7,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 8,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 9,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 10,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 11,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 12,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 13,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 14,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 15,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 16,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 17,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 18,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 19,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 20,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 21,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 22,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 23,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 24,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 25,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 26,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 27,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 28,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 29,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 4,
+          "day": 30,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 1,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 2,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 3,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 4,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 5,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 6,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 7,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 8,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 9,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 10,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 11,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 12,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 13,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 14,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 15,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 16,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 17,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 18,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 19,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 20,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 21,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 22,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 23,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 24,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 25,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 26,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 27,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 28,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 29,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 30,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 5,
+          "day": 31,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 1,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 2,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 3,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 4,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 5,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 6,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 7,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 8,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 9,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 10,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 11,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 12,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 13,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 14,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 15,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 16,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 17,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 18,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 19,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 20,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 21,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 22,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 23,
+          "weekDay": 0
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 24,
+          "weekDay": 1
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 25,
+          "weekDay": 2
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 26,
+          "weekDay": 3
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 27,
+          "weekDay": 4
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 28,
+          "weekDay": 5
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 29,
+          "weekDay": 6
+        },
+        {
+          "year": 2024,
+          "month": 6,
+          "day": 30,
+          "weekDay": 0
+        }
+      ]
+    },
+    "reservations": [
+      {
+        "boat": {
+          "id": "don-pedro",
+          "name": "Don Pedro",
+          "type": "Cheoy Lee 42",
+          "category": "CLUB"
+        },
+        "reservations": [
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "don-pedro",
+            "resDate": "2024-04-20 16:19:22",
+            "from": "2024-04-27",
+            "to": "2024-04-28",
+            "status": "CONFIRMED",
+            "comment": "From the PHP UI."
+          },
+          {
+            "owner": "olivier@lediouris.net",
+            "boat": "don-pedro",
+            "resDate": "2024-04-21 12:04:25",
+            "from": "2024-04-29",
+            "to": "2024-05-05",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          },
+          {
+            "owner": "olivier@lediouris.net",
+            "boat": "don-pedro",
+            "resDate": "2024-04-22 14:24:09",
+            "from": "2024-06-01",
+            "to": "2024-06-30",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          }
+        ]
+      },
+      {
+        "boat": {
+          "id": "eh-tak",
+          "name": "Eh'Tak",
+          "type": "Shipman 28",
+          "category": "CLUB"
+        },
+        "reservations": [
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 12:01:24",
+            "from": "2024-04-20",
+            "to": "2024-04-21",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          },
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 12:15:38",
+            "from": "2024-04-20",
+            "to": "2024-04-21",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          },
+          {
+            "owner": "jeff.allais@hotmail.fr",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 10:19:30",
+            "from": "2024-04-22",
+            "to": "2024-04-26",
+            "status": "TENTATIVE",
+            "comment": "Jeff goes sailing."
+          },
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "eh-tak",
+            "resDate": "2024-04-18 08:37:02",
+            "from": "2024-05-01",
+            "to": "2024-05-15",
+            "status": "TENTATIVE",
+            "comment": "This is the first reservation ever."
+          },
+          {
+            "owner": "jeff.allais@hotmail.fr",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 10:21:50",
+            "from": "2024-05-18",
+            "to": "2024-05-19",
+            "status": "TENTATIVE",
+            "comment": "Un week end sur l'eau"
+          },
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 12:19:05",
+            "from": "2024-05-20",
+            "to": "2024-05-21",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          },
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 12:59:10",
+            "from": "2024-06-01",
+            "to": "2024-06-02",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          },
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 13:00:38",
+            "from": "2024-06-03",
+            "to": "2024-06-04",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          },
+          {
+            "owner": "olivier.lediouris@gmail.com",
+            "boat": "eh-tak",
+            "resDate": "2024-04-20 12:23:00",
+            "from": "2024-06-20",
+            "to": "2024-06-21",
+            "status": "TENTATIVE",
+            "comment": "From the PHP UI."
+          }
+        ]
+      },
+      {
+        "boat": {
+          "id": "manu-oviri",
+          "name": "Manu Oviri",
+          "type": "Comanche 32",
+          "category": "CLUB"
+        },
+        "reservations": []
+      },
+      {
+        "boat": {
+          "id": "saigane",
+          "name": "Saigane",
+          "type": "Dufour 2800",
+          "category": "CLUB"
+        },
+        "reservations": []
+      },
+      {
+        "boat": {
+          "id": "taapuna",
+          "name": "Taapuna",
+          "type": "Edel 660",
+          "category": "CLUB"
+        },
+        "reservations": []
+      },
+      {
+        "boat": {
+          "id": "tokad-2",
+          "name": "Tokad 2",
+          "type": "Neptune 99",
+          "category": "CLUB"
+        },
+        "reservations": []
+      },
+      {
+        "boat": {
+          "id": "trehudal",
+          "name": "Trehudal",
+          "type": "Nicholson 33",
+          "category": "CLUB"
+        },
+        "reservations": []
+      }
+    ]
+  }

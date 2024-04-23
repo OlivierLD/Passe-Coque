@@ -1,0 +1,406 @@
+<html lang="fr">
+    <!-- This is an HTML test for scrolling tables -->
+<head>
+    <title>Passe&#8209;Coque Boat Club</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="/logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="/css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="/fonts/font.01.css">
+	<link rel="stylesheet" href="/fonts/font.02.css">
+
+	<link rel="stylesheet" href="/passe-coque.menu.css">
+	<link rel="stylesheet" href="/passe-coque.css" type="text/css"/>
+	<script type="text/javascript" src="/passe-coque.js"></script>
+
+    <style>
+:root {
+    --gray-100: #f7fafc;
+    --gray-200: #edf2f7;
+    --gray-300: #e2e8f0;
+    --gray-400: #cbd5e0;
+    --gray-500: #a0aec0;
+    --gray-600: #718096;
+    --gray-700: #4a5568;
+    --gray-800: #2d3748;
+    --gray-900: #1a202c;
+
+    --white: #ffffff;
+}
+
+.container {
+  max-width: 96%;
+  margin: auto;
+  margin-top: 3rem;
+  overflow-x: auto;
+}
+
+table {
+    font-family: "Open Sans", sans-serif;
+    position: relative;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: auto;
+    width: 100%;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    * {
+        border: none;
+    }
+    white-space: nowrap;
+    thead tr {
+        color: var(--gray-800);
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: left;
+
+        th {
+            background: var(--gray-200);
+            padding: 0.75rem 1.5rem 0.75rem 0;
+            vertical-align: middle;
+        }
+    }
+
+    tbody {
+        tr:nth-child(odd) td {
+            background: var(--white);
+        }
+
+        tr:nth-child(even) td {
+            background: var(--gray-200);
+        }
+        td {
+            color: var(--gray-900);
+            text-align: left;
+            padding: 0.25rem 0.25rem;
+            vertical-align: middle;
+            font-size: 1.125rem;
+            font-weight: normal;
+        }
+    }
+
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 0.5rem;
+    }
+
+    th:first-child {
+        border-top-left-radius: 0.5rem;
+        padding: 0.25rem;
+    }
+
+    tr:last-child td:last-child {
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    th:last-child {
+        border-top-right-radius: 0.5rem;
+    }
+  
+  tr>th:first-child,tr>td:first-child {
+    position: sticky;
+    left: 0;
+  }
+}   
+.boat-name {
+    font-weight: bold;
+}
+
+.tentative {
+    background: cyan !important;
+} 
+.confirmed {
+    background-color: orange !important;
+}
+.denied {
+    background-color: red !important;
+}
+.canceled {
+    background-color: silver !important;
+}
+.admin {
+    background-color: violet !important;
+}
+    </style>
+</head>
+<body>
+    <h2>Planning des r&eacute;servations</h2>
+    <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Bateau</th>
+              <th colspan="30">Avril</th>
+              <th colspan="31">Mai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="boat-name">Et'Tak</td>
+              <td class="admin">1</td>
+              <td class="admin">2</td>
+              <td>3</td>
+              <td>4</td>
+              <td class="tentative">5</td>
+              <td class="tentative">6</td>
+              <td class="tentative">7</td>
+              <td class="tentative">8</td>
+              <td class="tentative">9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td class="admin">29</td>
+              <td class="admin">30</td>
+              <!-- Mai -->
+              <td class="admin">1</td>
+              <td class="admin">2</td>
+              <td>3</td>
+              <td>4</td>
+              <td class="tentative">5</td>
+              <td class="tentative">6</td>
+              <td class="tentative">7</td>
+              <td class="tentative">8</td>
+              <td class="tentative">9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td class="boat-name">Tapuana</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td class="denied">6</td>
+              <td class="denied">7</td>
+              <td class="denied">8</td>
+              <td>9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <!-- Mai -->
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td class="denied">6</td>
+              <td class="denied">7</td>
+              <td class="denied">8</td>
+              <td>9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td class="boat-name">Manu Oviri</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td class="confirmed">10</td>
+              <td class="confirmed">11</td>
+              <td class="confirmed">12</td>
+              <td class="confirmed">13</td>
+              <td class="confirmed">14</td>
+              <td class="confirmed">15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <!-- Mai -->
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td class="confirmed">10</td>
+              <td class="confirmed">11</td>
+              <td class="confirmed">12</td>
+              <td class="confirmed">13</td>
+              <td class="confirmed">14</td>
+              <td class="confirmed">15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td class="boat-name">Trehudal</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td class="canceled">9</td>
+              <td class="canceled">10</td>
+              <td class="canceled">11</td>
+              <td class="canceled">12</td>
+              <td class="canceled">13</td>
+              <td class="canceled">14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <!-- Mai -->
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td class="canceled">9</td>
+              <td class="canceled">10</td>
+              <td class="canceled">11</td>
+              <td class="canceled">12</td>
+              <td class="canceled">13</td>
+              <td class="canceled">14</td>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>    <p>
+        <h3>Faire une r&eacute;servation</h3>
+    </p>
+</body>
+</html>

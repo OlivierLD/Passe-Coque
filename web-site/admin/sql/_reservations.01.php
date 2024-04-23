@@ -83,6 +83,7 @@ if (isset($_POST['operation'])) {
                         <option value="CONFIRMED"<?php echo($res->status == 'CONFIRMED' ? ' selected' : ''); ?>>CONFIRMED</option>
                         <option value="REJECTED"<?php echo($res->status == 'REJECTED' ? ' selected' : ''); ?>>REJECTED</option>
                         <option value="CANCELED"<?php echo($res->status == 'CANCELED' ? ' selected' : ''); ?>>CANCELED</option>
+                        <option value="ADMIN"<?php echo($res->status == 'ADMIN' ? ' selected' : ''); ?>>ADMIN</option>
                     </select>
                 </td>
             </tr>
