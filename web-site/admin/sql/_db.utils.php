@@ -286,7 +286,7 @@ function executeSQL(string $dbhost, string $username, string $password, string $
         }
 
         if (true || $verbose) {
-            echo ("Executing [" . $sql . "]" . PHP_EOL);
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         if (true) { // Do perform ?
             if ($link->query($sql) === TRUE) {

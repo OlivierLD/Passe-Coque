@@ -134,7 +134,7 @@ table {
         <option value="01">Janvier</option>
         <option value="02">F&eacute;vrier</option>
         <option value="03">Mars</option>
-        <option value="04" selected>Avril</option>
+        <option value="04">Avril</option>
         <option value="05">Mai</option>
         <option value="06">Juin</option>
         <option value="07">Juillet</option>
@@ -145,13 +145,20 @@ table {
         <option value="12">D&eacute;cembre</option>
       </select>
       <select id="the-year">
-        <option value="2024" selected>2024</option>
+        <option value="2024">2024</option>
         <option value="2025">2025</option>
         <option value="2026">2026</option>
       </select>
       <button onclick="update();">Go!</button>
     </div>
 
+    <div>
+      L&eacute;gende: <span class="tentative">Tentative</span>, <span class="confirmed">Confirmed</span>, <span class="denied">Denied</span>, <span class="canceled">Canceled</span>, <span class="admin">Reserved</span> 
+    </div>
+
+    <!-- TODO
+        One month ahead, one month bckward
+     +-->
     <div class="container">
         <table>
           <thead>
@@ -567,7 +574,6 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
                 })
               });
             });
-
           });
     },
     (error, errmess) => {
@@ -586,8 +592,20 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
 
 window.onload = () => {
 
+  // Set selected date options
+  const today = new Date();
+  let year = today.getFullYear();
+  let month = today.getMonth() + 1;
+
+  let monthSelect = document.getElementById("the-month");
+  let yearSelect = document.getElementById("the-year");
+
+  monthSelect.value = lpad(month.toFixed(0), 2);
+  yearSelect.value = year.toFixed(0);
+
   // Fetch the data to populate the reservation planning
   fetchAndDisplay();
+  // fetchAndDisplay(year, lpad(month.toFixed(0), 2));
 }; 
 </script>
 </html>

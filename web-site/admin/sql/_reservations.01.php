@@ -26,6 +26,7 @@
 
 require __DIR__ . "/../../php/db.cred.php";
 require __DIR__ . "/_db.utils.php";
+require __DIR__ . "/_emails.utils.php";
 
 $VERBOSE = false;
 
@@ -57,6 +58,7 @@ if (isset($_POST['operation'])) {
         $from = $_POST['email'];
         $boatId = $_POST['boat-id'];
         $resDate = $_POST['res-date'];
+
         // Get res details
         echo("Editing reservation from [$from] for [$boatId], made at [$resDate]");
         $res = getReservation($dbhost, $username, $password, $database, $boatId, $from, $resDate, $VERBOSE);
@@ -65,10 +67,11 @@ if (isset($_POST['operation'])) {
         // echo("<br/>");
         ?>
         <form action="<?php echo basename(__FILE__); ?>" method="post">
-          <input type='hidden' name='operation' value='update'>
+          <input type='hidden' name='operation' value='update'>                  <!-- Previous Status -->
           <input type='hidden' name='owner' value='<?php echo $res->owner; ?>'>
           <input type='hidden' name='boat' value='<?php echo $res->boat; ?>'>
           <input type='hidden' name='res-date' value='<?php echo $res->resDate; ?>'>
+          <input type='hidden' name='prev-status' value='<?php echo $res->status; ?>'>
           <table>
             <tr><td>From User</td><td><?php echo $res->owner; ?></td></tr>
             <tr><td>For</td><td><?php echo $res->boat; ?></td></tr>
@@ -105,6 +108,7 @@ if (isset($_POST['operation'])) {
         $boat = $_POST["boat"];
         $resDate = $_POST["res-date"];
         $status = $_POST["status"];
+        $prevStatus = $_POST["prev-status"];
         $comment = $_POST["comment"];
 
         if ($_POST['table-operation'] == 'Update') {
@@ -116,6 +120,11 @@ if (isset($_POST['operation'])) {
                         " BOAT_ID = '$boat' AND " .
                         " RESERVATION_DATE = STR_TO_DATE('$resDate', '%Y-%m-%d %H:%i:%s');";
             executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+            if ($prevStatus != $status) {
+                // Send email to $owner
+                $message = "Votre r&eacute;servation du " . $resDate . " pour le bateau " . $boat . " a &eacute;t&eacute; modifi&eacute;e de " . $prevStatus . " a " . $status . ".";
+                sendEmail($owner, "Boat Club Passe-Coque", $message, "FR");
+            }
         } else if ($_POST['table-operation'] == 'Delete') {
             echo "It's a DELETE<br/>";
             $sql = "DELETE FROM BC_RESERVATIONS " .
