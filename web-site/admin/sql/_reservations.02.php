@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Boat Club reservations</title>
-    <style type="text/css">
+    <!--style type="text/css">
       * {
         font-family: 'Courier New'
       }
@@ -17,7 +17,15 @@
       tr > td {
         border: 1px solid silver;
       }
-    </style>
+    </style-->
+	<link rel="icon" type="image/png" href="/logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="/css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="/fonts/font.01.css">
+	<link rel="stylesheet" href="/fonts/font.02.css">
+
+	<link rel="stylesheet" href="/passe-coque.menu.css">
+	<link rel="stylesheet" href="/passe-coque.css" type="text/css"/>
+	<script type="text/javascript" src="/passe-coque.js"></script>
   </head>
 
   <script type="text/javascript">
@@ -39,9 +47,29 @@
     };
   </script>    
 
-  <body>
-    <h1>PHP / MySQL. Make a reservation</h1>
+  <?php
+    $lang = 'FR';
+    if (isset($_GET['lang'])) {
+        $lang = $_GET['lang'];
+    }
+    $admin = false;
+    if (isset($_GET['admin'])) {
+        $admin = ($_GET['admin'] == 'true');
+    }
+  ?>
 
+  <body>
+    <?php 
+    if ($lang != 'FR') {
+    ?>    
+    <h2>Make a reservation</h2>
+    <?php
+    } else {
+    ?>    
+    <h2>Faire une r&eacute;servation</h2>
+    <?php
+    }
+    ?>
     <?php
 // phpinfo();
 
@@ -185,9 +213,9 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
     return $boatAvailability;
 }
 
-function bookTheBoat(string $dbhost, string $username, string $password, string $database, string $userId, string $boatId, string $fromDate, string $toDate, bool $verbose) : void {
+function bookTheBoat(string $dbhost, string $username, string $password, string $database, string $userId, string $boatId, string $fromDate, string $toDate, string $comments, bool $verbose, string $lang) : void {
     $sql = "INSERT INTO BC_RESERVATIONS (EMAIL, BOAT_ID, FROM_DATE, TO_DATE, MISC_COMMENT) VALUES
-    ('$userId', '$boatId', STR_TO_DATE('$fromDate', '%Y-%m-%d'), STR_TO_DATE('$toDate', '%Y-%m-%d'), 'From the PHP UI.');";
+    ('$userId', '$boatId', STR_TO_DATE('$fromDate', '%Y-%m-%d'), STR_TO_DATE('$toDate', '%Y-%m-%d'), '$comments');";
 
     try {
         if ($verbose) {
@@ -209,7 +237,11 @@ function bookTheBoat(string $dbhost, string $username, string $password, string 
         }
         if (true) { // Do perform ?
             if ($link->query($sql) === TRUE) {
-              echo "OK. Reservation creation performed successfully<br/><hr/>" . PHP_EOL;
+                if ($lang != 'FR') {
+                    echo "OK. Reservation creation performed successfully<br/><hr/>" . PHP_EOL;
+                } else {
+                    echo "OK. R&eacute;servation cr&eacute;e avec succ&egrave;s.<br/><hr/>" . PHP_EOL;
+                }
             } else {
               echo "ERROR executing: " . $sql . "<br/>" . $link->error . "<br/>";
             }
@@ -283,6 +315,7 @@ if (isset($_POST['operation'])) {
         $boatId = $_POST['boat-id'];
         $fromDate = $_POST['from-date'];
         $toDate = $_POST['to-date'];
+        $comments = $_POST['comment-area'];
 
         // 0 - Check chronology
         $dateFrom = strtotime($fromDate);
@@ -290,7 +323,7 @@ if (isset($_POST['operation'])) {
 
         // https://www.geeksforgeeks.org/comparing-two-dates-in-php/
 
-        if (false) {
+        if (false) { // Just a test
             $date1 = "2011-10-26"; 
             $date2 = "2011-10-24"; 
               
@@ -300,21 +333,34 @@ if (isset($_POST['operation'])) {
             $dateTimestamp2 = strtotime($date2); 
               
             // Compare the timestamp date  
-            if ($dateTimestamp1 > $dateTimestamp2) 
+            if ($dateTimestamp1 > $dateTimestamp2) {
                 echo "$date1 is later than $date2 <br/>"; 
-            else
+            } else {
                 echo "$date1 is older than $date2 <br/>"; 
+            }
             echo("<hr/>" . PHP_EOL);
         }
 
-        echo("Checking chronology from " . date('Y-m-d', $dateFrom) . " to " . date('Y-m-d', $dateTo) . "<br/>" . PHP_EOL);
-        if ($dateFrom > $dateTo) {
-            echo "$fromDate after $toDate <br/>";
+        if ($lang != 'FR') {
+            echo("Checking chronology from " . date('Y-m-d', $dateFrom) . " to " . date('Y-m-d', $dateTo) . "<br/>" . PHP_EOL);
         } else {
-            echo "$fromDate before $toDate <br/>";
+            echo("V&eacute;rification des dates, de " . date('Y-m-d', $dateFrom) . " &agrave; " . date('Y-m-d', $dateTo) . "<br/>" . PHP_EOL);
+        }
+        if ($dateFrom > $dateTo) {
+            if ($lang != 'FR') {
+                echo "$fromDate after $toDate <br/>";
+            } else {
+                echo "$fromDate post&eacute;rieur &agrave; $toDate <br/>";
+            }
+        } else {
+            if ($lang != 'FR') {
+                echo "$fromDate before $toDate <br/>";
+            } else {
+                echo "$fromDate ant&eacute;rieur &agrave; $toDate <br/>";
+            }
         }
 
-        echo("From < To : $fromDate < $toDate : $dateFrom < $dateTo : " . (($dateFrom < $dateTo) ? "true" : "false") . ", v2 (needs true to move on): " . (($dateTo >= $dateFrom) ? "true" : "false") . "<br/>");
+        // echo("From < To : $fromDate < $toDate : $dateFrom < $dateTo : " . (($dateFrom < $dateTo) ? "true" : "false") . ", v2 (needs true to move on): " . (($dateTo >= $dateFrom) ? "true" : "false") . "<br/>");
 
         if (($dateTo >= $dateFrom)) {
             // 1 - Check Membership
@@ -331,37 +377,64 @@ if (isset($_POST['operation'])) {
                 $boatAvailability = checkBoatAvailability($dbhost, $username, $password, $database, $boatId, $fromDate, $toDate, $VERBOSE);
                 if ($boatAvailability->status) {
                     // 3 - Proceed, and send emails
-                    echo("Boat availability OK, proceeding.<br/>" . PHP_EOL);
+                    if ($lang != 'FR') {
+                        echo("Boat availability OK, proceeding.<br/>" . PHP_EOL);
+                    } else {
+                        echo("Le bateau est disponible, on continue...<br/>" . PHP_EOL);
+                    }
                     // 3-1 Book
-                    bookTheBoat($dbhost, $username, $password, $database, $userId, $boatId, $fromDate, $toDate, $VERBOSE);
+                    bookTheBoat($dbhost, $username, $password, $database, $userId, $boatId, $fromDate, $toDate, $comments, $VERBOSE, $lang);
                     // 3-2 Emails
                     $details = getBoatDetails($dbhost, $username, $password, $database, $boatId, $VERBOSE);
                     // 3-2-1 Referent(s) and PCC
-                    $message = "$userId Veut r&eacute;server " . $details[0]->boatName . " du " . $fromDate . " au " . $toDate . 
-                            ". En tant que r&eacute;f&eacute;rent du bateau, votre intervention est requise.";
+                    if ($lang != 'FR') {
+                        $message = "$userId wants to reserve " . $details[0]->boatName . " from " . $fromDate . " to " . $toDate . 
+                                ". As a referent of the boat your insight is required.";
+                    } else {
+                        $message = "$userId veut r&eacute;server " . $details[0]->boatName . " du " . $fromDate . " au " . $toDate . 
+                                ". En tant que r&eacute;f&eacute;rent du bateau, votre intervention est requise.";
+                    }
                     foreach ($details as $detail) {
-                        sendEmail($detail->referentEmail, "Reservation Boat Club", $message, 'FR');
+                        sendEmail($detail->referentEmail, "Reservation Boat Club", $message, $lang, false);
                     } 
-                    sendEmail("pcc@passe-coque.com", "Reservation Boat Club", $message, 'FR');
+                    sendEmail("pcc@passe-coque.com", "Reservation Boat Club", $message, $lang, false);
                     // 3-2-2 Requester.
-                    sendEmail($userId, "Reservation Boat Club", 
-                            "Votre demande de reservation pour le " . $details[0]->boatType . "\"" . $details[0]->boatName . "\" bas&eacute; &agrave; " . $details[0]->boatBase . " du $fromDate au $toDate a bien &eacute;t&eacute; enregistr&eacute;e !\n" .
-                                    "Merci de <a href='mailto:pcc@passe-coque.com'>nous recontacter</a> si vous n'avez pas de nos nouvelles dans les prochains jours.", "FR");
-
-                    ?>
-                    <a href="_reservations.01.php">Query Reservation Screen</a>
-                    <?php                                   
-
+                    if ($lang != 'FR') {
+                        sendEmail($userId, "Reservation Boat Club", 
+                                "Your reservation request for the " . $details[0]->boatType . "\"" . $details[0]->boatName . "\" based in " . $details[0]->boatBase . " from $fromDate to $toDate has been recorded successfully!\n" .
+                                        "Please do <a href='mailto:pcc@passe-coque.com'>re-contact us</a> if you do not hear from us within the next days.", $lang, true);
+                    } else {
+                        sendEmail($userId, "Reservation Boat Club", 
+                                "Votre demande de reservation pour le " . $details[0]->boatType . "\"" . $details[0]->boatName . "\" bas&eacute; &agrave; " . $details[0]->boatBase . " du $fromDate au $toDate a bien &eacute;t&eacute; enregistr&eacute;e !\n" .
+                                        "Merci de <a href='mailto:pcc@passe-coque.com'>nous recontacter</a> si vous n'avez pas de nos nouvelles dans les prochains jours.", $lang, true);
+                    }
+                    if ($admin) {
+                        ?>
+                        <a href="_reservations.01.php">Query Reservation Screen</a>
+                        <?php                                   
+                    }
                 } else {
-                    echo ("Reservation conflict:<br/>" . PHP_EOL);
+                    if ($lang != 'FR') {
+                        echo ("Reservation conflict:<br/>" . PHP_EOL);
+                    } else {
+                        echo ("Conflict de r&eacute;servation (pas dispo):<br/>" . PHP_EOL);
+                    }
                     echo ($boatAvailability->message);
                 }
             } else {
                 // Membership problem
-                echo("There is a membership problem for $userId : " . $status->errMess . "<br/>" . PHP_EOL);
+                if ($lang != 'FR') {
+                    echo("There is a membership problem for $userId : " . $status->errMess . ". Subscribe!<br/>" . PHP_EOL); // TODO Add the subscribe link
+                } else {
+                    echo("Probl&egrave;me d'adh&eacute;sion pour $userId : " . $status->errMess . ". Souscrivez !<br/>" . PHP_EOL); // TODO Add the subscribe link
+                }
             }
         } else {
-            echo("Bad chronology: to-date " . $toDate . " ($dateTo)" . " is before from-date " . $fromDate . " ($dateFrom)" . "<br/>" . PHP_EOL);
+            if ($lang != 'FR') {
+                echo("Bad chronology: to-date " . $toDate . " ($dateTo)" . " is before from-date " . $fromDate . " ($dateFrom)" . "<br/>" . PHP_EOL);
+            } else {
+                echo("Mauvaise chronologie dans vos dates : la date de fin " . $toDate . " ($dateTo)" . " est ant&eacute;rieure &agrave; la date de d&eacute;but " . $fromDate . " ($dateFrom)" . "<br/>" . PHP_EOL);
+            }
         }
     } else {
         echo ("Unknown operation [$operation]");
@@ -381,30 +454,48 @@ if (isset($_POST['operation'])) {
         }
     }
 ?>
+<p>
+<?php echo(($lang != 'FR') ? "Please fill out the following form" : "Merci de remplir le formulaire suivant"); ?>
+</p>    
+
 <!-- Booking form -->
 <form action="<?php echo basename(__FILE__); ?>"  onsubmit="return validateForm();" method="post">
     <input type="hidden" name="operation" value="booking">
     <!-- User Name, Boat Id, Date From, Date To -->
     <table>
-        <tr><td>Your Email Address</td><td><input type="email" name="email" size="40" required></td></tr>
+        <tr><td><?php if ($lang != 'FR') { echo"Your Email Address"; } else { echo("Votre adresse email"); } ?></td><td><input type="email" name="email" size="40" required></td></tr>
         <tr>
-            <td>The boat</td>
+            <td><?php echo(($lang != 'FR') ? "The boat" : "Le bateau"); ?></td>
             <td>
                 <select name="boat-id">
                     <?php
                     foreach($boatsOfTheClub as $boat) {
-                        echo ("<option value='" . $boat->id ."'>" . $boat->type . " \"" . $boat->name . "\", " . "(Base will go here)" . "</option>" . PHP_EOL);
+                        if ($lang != 'FR') {
+                            echo ("<option value='" . $boat->id ."'>" . $boat->type . " \"" . $boat->name . "\", " . "(Base will go here)" . "</option>" . PHP_EOL);
+                        } else {
+                            echo ("<option value='" . $boat->id ."'>" . $boat->type . " \"" . $boat->name . "\", " . "(Nom de la base ici...)" . "</option>" . PHP_EOL);
+                        }
                     }
                     ?>
                 </select>    
             </td>
         </tr>
-        <tr><td>From</td><td><input type="date" id="from-date" name="from-date" required></td></tr>
-        <tr><td>To</td><td><input type="date" id="to-date" name="to-date" required></td></tr>
+        <tr><td><?php echo(($lang != 'FR') ? "From" : "Date de d&eacute;but"); ?></td><td><input type="date" id="from-date" name="from-date" required></td></tr>
+        <tr><td><?php echo(($lang != 'FR') ? "To" : "Date de fin"); ?></td><td><input type="date" id="to-date" name="to-date" required></td></tr>
+        <tr>
+            <td style="vertical-align: top;">
+                <?php 
+                echo(($lang != 'FR') ? 
+                    "Project (navigation zone)<br/>Crew list (first and last name of each crew member)<br/>Comments, questions..." : 
+                    "Projet (zone de navigation)<br/>Liste d'&eacute;quipage (nom et prenom de chacun)<br/>Commentaires, questions..."); 
+                 ?>
+            </td>
+            <td><textarea cols="60" rows="10" name="comment-area" style="line-height: normal;"></textarea></td>
+        </tr>
     </table>
     <div id="submit-message"></div>
 
-    <input type="submit" value="Submit reservation">
+    <input type="submit" value="<?php echo(($lang != 'FR') ? "Submit reservation" : "Valider votre r&eacute;servation"); ?>">
 </form>    
 
 <?php

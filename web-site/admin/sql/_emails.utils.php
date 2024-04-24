@@ -1,8 +1,8 @@
 <?php
 
-function sendEmail(string $destinationEmail, string $subject, string $emailContent, string $lang = 'EN') : void {
+function sendEmail(string $destinationEmail, string $subject, string $emailContent, string $lang = 'FR', bool $verbose=false) : void {
     try {
-        $lang = 'EN'; // For now
+        // $lang = 'EN'; // For now
 
         // echo ("<h2>Password process initiated</h2>" . PHP_EOL);
 
@@ -42,10 +42,12 @@ function sendEmail(string $destinationEmail, string $subject, string $emailConte
             $sentMailResult = mail($pc_email, $subject, $body, $headers);
 
             if ($sentMailResult) {
-                if ($lang == "FR") {
-                    echo "Un email pour $pc_email est parti.<br/>" . PHP_EOL;
-                } else {
-                    echo "Email to $pc_email was sent successfully.<br/>" . PHP_EOL;
+                if ($verbose) {
+                    if ($lang == "FR") {
+                        echo "Un email pour $pc_email est parti.<br/>" . PHP_EOL;
+                    } else {
+                        echo "Email to $pc_email was sent successfully.<br/>" . PHP_EOL;
+                    }
                 }
                 // unlink($name); // delete the file after attachment sent.
             } else {
