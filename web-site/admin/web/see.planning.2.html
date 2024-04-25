@@ -126,8 +126,6 @@ table {
 </head>
 <body>
     <h2>Planning des r&eacute;servations</h2>
-    <!--span>Hard-coded: From April 1, 2024, for 3 months</span-->
-
     <div>
       Planning &agrave; partir de 
       <select id="the-month">
@@ -156,8 +154,8 @@ table {
       L&eacute;gende: <span class="tentative">Tentative</span>, <span class="confirmed">Confirmed</span>, <span class="denied">Denied</span>, <span class="canceled">Canceled</span>, <span class="admin">Reserved</span> 
     </div>
 
-    <!-- TODO
-        One month ahead, one month bckward
+    <!-- TODO ?
+        One month ahead, one month backward
      +-->
     <div class="container">
         <table>
@@ -440,11 +438,11 @@ const FRENCH_DAYS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendred
 const FRENCH_DAYS_ABBR = ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"];
 
 const lpad = (s, len, w = '0') => {
-    let str = s;
-    while (str.length < len) {
-        str = w + str;
-    }
-    return str;
+  let str = s;
+  while (str.length < len) {
+      str = w + str;
+  }
+  return str;
 };
 
 const update = () => {
@@ -462,7 +460,6 @@ const dayBetween = (day, from ,to) => {
 };
 
 const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
-
   // https://passe-coque.com/php/get_bc_reservations.php?year=2024&month=04&span=3
   let theDocToFetch = "../../php/get_bc_reservations.php"; // "./planning.json";
   if (fromYear) {
@@ -575,8 +572,7 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
               });
             });
           });
-    },
-    (error, errmess) => {
+    }, (error, errmess) => {
         console.log("Ooch");
         let message;
         if (errmess) {
@@ -587,7 +583,6 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
         }
         console.debug("Failed to get data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
     });
-
 }
 
 window.onload = () => {
@@ -606,6 +601,7 @@ window.onload = () => {
   // Fetch the data to populate the reservation planning
   fetchAndDisplay();
   // fetchAndDisplay(year, lpad(month.toFixed(0), 2));
+  
 }; 
 </script>
 </html>

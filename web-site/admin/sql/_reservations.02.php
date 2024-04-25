@@ -9,15 +9,6 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Boat Club reservations</title>
-    <!--style type="text/css">
-      * {
-        font-family: 'Courier New'
-      }
-
-      tr > td {
-        border: 1px solid silver;
-      }
-    </style-->
 	<link rel="icon" type="image/png" href="/logos/LOGO_PC_no_txt.png">
 	<!--link rel="stylesheet" href="/css/stylesheet.css" type="text/css"/-->
 	<link rel="stylesheet" href="/fonts/font.01.css">
@@ -25,6 +16,21 @@
 
 	<link rel="stylesheet" href="/passe-coque.menu.css">
 	<link rel="stylesheet" href="/passe-coque.css" type="text/css"/>
+    <style type="text/css">
+      a:link, a:visited {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+      }
+
+      a:hover, a:active {
+        background-color: red;
+      }
+    </style>
 	<script type="text/javascript" src="/passe-coque.js"></script>
   </head>
 
@@ -237,10 +243,12 @@ function bookTheBoat(string $dbhost, string $username, string $password, string 
         }
         if (true) { // Do perform ?
             if ($link->query($sql) === TRUE) {
-                if ($lang != 'FR') {
-                    echo "OK. Reservation creation performed successfully<br/><hr/>" . PHP_EOL;
-                } else {
-                    echo "OK. R&eacute;servation cr&eacute;e avec succ&egrave;s.<br/><hr/>" . PHP_EOL;
+                if ($verbose) {
+                    if ($lang != 'FR') {
+                        echo "OK. Reservation creation performed successfully<br/><hr/>" . PHP_EOL;
+                    } else {
+                        echo "OK. R&eacute;servation cr&eacute;e avec succ&egrave;s.<br/><hr/>" . PHP_EOL;
+                    }
                 }
             } else {
               echo "ERROR executing: " . $sql . "<br/>" . $link->error . "<br/>";
@@ -341,22 +349,24 @@ if (isset($_POST['operation'])) {
             echo("<hr/>" . PHP_EOL);
         }
 
-        if ($lang != 'FR') {
-            echo("Checking chronology from " . date('Y-m-d', $dateFrom) . " to " . date('Y-m-d', $dateTo) . "<br/>" . PHP_EOL);
-        } else {
-            echo("V&eacute;rification des dates, de " . date('Y-m-d', $dateFrom) . " &agrave; " . date('Y-m-d', $dateTo) . "<br/>" . PHP_EOL);
-        }
-        if ($dateFrom > $dateTo) {
+        if ($VERBOSE) {
             if ($lang != 'FR') {
-                echo "$fromDate after $toDate <br/>";
+                echo("Checking chronology from " . date('Y-m-d', $dateFrom) . " to " . date('Y-m-d', $dateTo) . "<br/>" . PHP_EOL);
             } else {
-                echo "$fromDate post&eacute;rieur &agrave; $toDate <br/>";
+                echo("V&eacute;rification des dates, de " . date('Y-m-d', $dateFrom) . " &agrave; " . date('Y-m-d', $dateTo) . "<br/>" . PHP_EOL);
             }
-        } else {
-            if ($lang != 'FR') {
-                echo "$fromDate before $toDate <br/>";
+            if ($dateFrom > $dateTo) {
+                if ($lang != 'FR') {
+                    echo "$fromDate after $toDate <br/>";
+                } else {
+                    echo "$fromDate post&eacute;rieur &agrave; $toDate <br/>";
+                }
             } else {
-                echo "$fromDate ant&eacute;rieur &agrave; $toDate <br/>";
+                if ($lang != 'FR') {
+                    echo "$fromDate before $toDate <br/>";
+                } else {
+                    echo "$fromDate ant&eacute;rieur &agrave; $toDate <br/>";
+                }
             }
         }
 
@@ -377,10 +387,12 @@ if (isset($_POST['operation'])) {
                 $boatAvailability = checkBoatAvailability($dbhost, $username, $password, $database, $boatId, $fromDate, $toDate, $VERBOSE);
                 if ($boatAvailability->status) {
                     // 3 - Proceed, and send emails
-                    if ($lang != 'FR') {
-                        echo("Boat availability OK, proceeding.<br/>" . PHP_EOL);
-                    } else {
-                        echo("Le bateau est disponible, on continue...<br/>" . PHP_EOL);
+                    if ($VERBOSE) {
+                        if ($lang != 'FR') {
+                            echo("Boat availability OK, proceeding.<br/>" . PHP_EOL);
+                        } else {
+                            echo("Le bateau est disponible, on continue...<br/>" . PHP_EOL);
+                        }
                     }
                     // 3-1 Book
                     bookTheBoat($dbhost, $username, $password, $database, $userId, $boatId, $fromDate, $toDate, $comments, $VERBOSE, $lang);
@@ -402,11 +414,37 @@ if (isset($_POST['operation'])) {
                     if ($lang != 'FR') {
                         sendEmail($userId, "Reservation Boat Club", 
                                 "Your reservation request for the " . $details[0]->boatType . "\"" . $details[0]->boatName . "\" based in " . $details[0]->boatBase . " from $fromDate to $toDate has been recorded successfully!\n" .
-                                        "Please do <a href='mailto:pcc@passe-coque.com'>re-contact us</a> if you do not hear from us within the next days.", $lang, true);
-                    } else {
+                                "The referent of the boat can be contacted at the following email address: $detail->referentEmail \n" .
+                                "Please do <a href='mailto:pcc@passe-coque.com'>re-contact us</a> if you do not hear from us within the next days.", $lang, true);
+                        ?>
+                        <p>
+                            Your request is recorded. You will receive a
+                            email summarizing the information: date(s), boat, base, number of crew, equipment to be provided and
+                            other information, contact details of the contact person to contact for access, handling and restitution
+                            of the boat.<br/>
+                            If there is no response within 24/48 hours, you can contact us at the address
+                            following email: pcc@passe-coque.com.<br/>
+                            The same AR was sent to the referent to inform him that he must accept or reject the reservation request.
+                        </p>
+                        <a href="<?php echo(basename(__FILE__) . "?lang=EN") ?>">Back</a>.
+                        <?php
+                                    } else {
                         sendEmail($userId, "Reservation Boat Club", 
                                 "Votre demande de reservation pour le " . $details[0]->boatType . "\"" . $details[0]->boatName . "\" bas&eacute; &agrave; " . $details[0]->boatBase . " du $fromDate au $toDate a bien &eacute;t&eacute; enregistr&eacute;e !\n" .
-                                        "Merci de <a href='mailto:pcc@passe-coque.com'>nous recontacter</a> si vous n'avez pas de nos nouvelles dans les prochains jours.", $lang, true);
+                                "Le r&eacute;f&eacute;rent du bateau peut &ecirc;tre contact&eacute; &agrave; l'adresse email suivante : $detail->referentEmail \n" .
+                                "Merci de <a href='mailto:pcc@passe-coque.com'>nous recontacter</a> si vous n'avez pas de nos nouvelles dans les prochains jours.", $lang, true);
+                        ?>
+                        <p>
+                            Votre r&eacute;servation est enregistr&eacute;e. Vous allez recevoir un
+                            mail r&eacute;capitulant les informations : date(s), bateau, base, nombre d'&eacute;quipiers, mat&eacute;riel &agrave; pr&eacute;voir et
+                            autres mentions, coordonn&eacute;es du r&eacute;f&eacute;rent &agrave; contacter pour l'acc&egrave;s, la prise en main et la restitution
+                            du bateau.<br/>
+                            En cas d'absence de r&eacute;ponse sous 24/48 heures, vous pouvez contacter nous contacter &agrave; l'adresse
+                            mail suivante : pcc@passe-coque.com.<br/>
+                            Le m&ecirc;me AR est envoy&eacute; au r&eacute;f&eacute;rent pour l'informer qu'il doit accepter ou refuser la demande de r&eacute;servation.
+                        </p>
+                        <a href="<?php echo(basename(__FILE__) . "?lang=FR") ?>">Retour</a>.
+                        <?php
                     }
                     if ($admin) {
                         ?>
@@ -424,9 +462,17 @@ if (isset($_POST['operation'])) {
             } else {
                 // Membership problem
                 if ($lang != 'FR') {
-                    echo("There is a membership problem for $userId : " . $status->errMess . ". Subscribe!<br/>" . PHP_EOL); // TODO Add the subscribe link
+                    echo("There is a membership problem for $userId : " . $status->errMess . ". Click the button below to subscribe!<br/>" . PHP_EOL); 
+                    ?>
+                    <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Join the boat&nbsp;club</button-->
+                    <a href="https://passe-coque.com/boat-club/?lang=EN&nav-to=4" target="_PARENT">Join the boat&nbsp;club</a>
+                    <?php
                 } else {
-                    echo("Probl&egrave;me d'adh&eacute;sion pour $userId : " . $status->errMess . ". Souscrivez !<br/>" . PHP_EOL); // TODO Add the subscribe link
+                    echo("Probl&egrave;me d'adh&eacute;sion pour $userId : " . $status->errMess . ". Cliquez le bouton pour adh&eacute;rer !<br/>" . PHP_EOL); 
+                    ?>
+                    <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Adh&eacute;rer au boat&nbsp;club</button-->
+                    <a href="https://passe-coque.com/boat-club/?lang=FR&nav-to=4" target="_PARENT">Adh&eacute;rer au boat&nbsp;club</a>
+                    <?php
                 }
             }
         } else {
@@ -455,7 +501,7 @@ if (isset($_POST['operation'])) {
     }
 ?>
 <p>
-<?php echo(($lang != 'FR') ? "Please fill out the following form" : "Merci de remplir le formulaire suivant"); ?>
+<?php echo(($lang != 'FR') ? "Please fill out the following form:" : "Merci de remplir le formulaire suivant :"); ?>
 </p>    
 
 <!-- Booking form -->
@@ -487,7 +533,7 @@ if (isset($_POST['operation'])) {
                 <?php 
                 echo(($lang != 'FR') ? 
                     "Project (navigation zone)<br/>Crew list (first and last name of each crew member)<br/>Comments, questions..." : 
-                    "Projet (zone de navigation)<br/>Liste d'&eacute;quipage (nom et prenom de chacun)<br/>Commentaires, questions..."); 
+                    "Projet (zone de navigation)<br/>Liste d'&eacute;quipage (nom et pr&eacute;nom de chacun)<br/>Commentaires, questions..."); 
                  ?>
             </td>
             <td><textarea cols="60" rows="10" name="comment-area" style="line-height: normal;"></textarea></td>
@@ -495,7 +541,7 @@ if (isset($_POST['operation'])) {
     </table>
     <div id="submit-message"></div>
 
-    <input type="submit" value="<?php echo(($lang != 'FR') ? "Submit reservation" : "Valider votre r&eacute;servation"); ?>">
+    <input type="submit" value="<?php echo(($lang != 'FR') ? "Submit reservation" : "Soumettre votre r&eacute;servation"); ?>">
 </form>    
 
 <?php
