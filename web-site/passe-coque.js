@@ -2111,15 +2111,15 @@ let closeCustomAlert = () => {
 // window.alert = showCustomAlert;  // Not in window.onload !
 
 let subscriptionOKMessage = () => {
-    let mess = "Votre requ&ecirc;te a &eacute;t&eacute; envoy&eacute;e,<br/>vous &ecirc;tes en copie (v&eacute;rifiez vos spams...).";
+    let mess = "Votre requête a été envoyée,\nvous êtes en copie (vérifiez vos spams...).";
     if (currentLang !== 'FR') {
-        mess = "Your request has been sent,<br/>you're cc'd (check your spams...)."
+        mess = "Your request has been sent,\nyou're cc'd (check your spams...)."
     }
     return mess;
 }
 
 let subscriptionErrorMessage = () => {
-    let mess = "Votre requ&ecirc;te a pos&eacute; un probl&egrave;me, elle n'est pas partie.";
+    let mess = "Votre requête a posé un problème, elle n'est pas partie.";
     if (currentLang !== 'FR') {
         mess = "There was a problem posting your request...."
     }
@@ -2203,6 +2203,54 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
     if (message.length > 0) {
         // alert(message);
         showCustomAlert(message);
+    }
+};
+
+let onSubscribeResponse = (iframe, okMess, errorMess) => {
+    let message = '';
+    try {
+        message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        if (message.length > 0) {  // because of the onload on the iframe...
+            // console.log(`onSubscribeResponse: ${message}`);
+            if (message.startsWith("ERROR")) {  // Sent by the email process
+                message = errorMess;
+            } else if (message.startsWith("PROCESS-ERROR:")) {  // Sent by the validation process
+                let innerMess = message.substring("PROCESS-ERROR:".length).trim();
+                if (innerMess.startsWith("SUBSCRIBE-001")) {
+                    if (currentLang == 'FR') {
+                        message = "Vous devez accepter les conditions de la charte.\nRe-essayez !";
+                    } else {
+                        message = "You need to agree with the chart. Try again!";
+                    }
+                } else if (innerMess.startsWith("SUBSCRIBE-002")) {
+                    if (currentLang == 'FR') {
+                        message = "Vous êtes déjà membre du boat-club.";
+                    } else {
+                        message = "You are already a Boat-Club member.";
+                    }
+                } else if (innerMess.startsWith("SUBSCRIBE-003")) {
+                    if (currentLang == 'FR') {
+                        message = "Vous devez être membre de Passe-Coque pour pouvoir être membre du Boat-Club.";
+                    } else {
+                        message = "You need to be a Passe-Coque member to be a Boat-Club member.";
+                    }
+                }
+            } else {
+                message = okMess;
+            }
+        }
+    } catch (err) {
+        console.log("Oops");
+        try {
+            message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
+        } catch (err2) {
+            console.log("No text, no error...");
+        }
+    }
+    // Display in dialog, or custom alert.
+    if (message.length > 0) {
+        alert(decodeURIComponent(message));
+        // showCustomAlert(message);
     }
 };
 

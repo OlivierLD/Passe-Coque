@@ -267,6 +267,73 @@ function getReservation(string $dbhost, string $username, string $password, stri
     return $reservation;
 }
 
+class MemberStatus {
+    public $status;  // bool 
+    public $errNo;   // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club
+    public $errMess; // string
+}
+
+function checkMemberShip(string $dbhost, string $username, string $password, string $database, string $userId, bool $verbose) : MemberStatus {
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        $memberStatus = new MemberStatus();
+
+        $sql = "SELECT PC.EMAIL, (SELECT BC.EMAIL FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PC.EMAIL) FROM PASSE_COQUE_MEMBERS PC WHERE PC.EMAIL = '$userId';";
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]<br/>");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        if ($result->num_rows == 0) {
+            $memberStatus->status = false;
+            $memberStatus->errNo = 1;
+            $memberStatus->errMess = "Not a Passe-Coque Member";
+        } else {
+            // Assume there is only one record returned.
+            $pcEmail = '';
+            $bcEmail = '';
+            while ($table = mysqli_fetch_array($result)) {
+                $pcEmail = $table[0];
+                $bcEmail = $table[1];
+            }
+            if ($bcEmail == null || strlen($bcEmail) == 0) {
+                $memberStatus->status = false;
+                $memberStatus->errNo = 2;
+                $memberStatus->errMess = "Passe-Coque Member, but not Boat Club Member";
+            } else {
+                $memberStatus->status = true;
+                $memberStatus->errNo = 0;
+                $memberStatus->errMess = "";
+            }
+        } 
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+    return $memberStatus;
+}
+
 // For INSERT, DELETE, UPDATE
 function executeSQL(string $dbhost, string $username, string $password, string $database, string $sql, bool $verbose) : void {
 

@@ -10,7 +10,7 @@
                             <h3>L'adh&eacute;sion pr&eacute;alable &agrave; l'association Passe-Coque est obligatoire</h3>
                             Si vous n’êtes pas encore adhérent, rendez-vous sur la page de <a href="http://passe-coque.com?lang=FR&nav-to=51" target="passe-coque">l’association Passe-Coque</a> pour le devenir. 
                             <br/>
-                            <a href="#" onclick="clack_pcc('_21');">Fonctionnement du Passe-Coque club</a>.<br/>
+                            &Agrave; lire absolument : <a href="#" onclick="clack_pcc('_21');">Fonctionnement du Passe-Coque club</a>.<br/>
 
                             <!--
                             L’acceptation de la charte du Passe-Coque club est obligatoire.
@@ -37,8 +37,34 @@
                     <a name="02"><h2>Adh&eacute;rer au Boat-Club</h2></a>
                     <div style="min-height: 100px; border-radius: 10px; /*background: silver;*/">
                         <div style="margin: 10px 0 0 10px;">
-
-                            <h2>Rejoignez le Passe&#8209;Coque Boat Club</h2>
+                            Remplissez le formulaire ci-dessous et soumettez le au Passe-Coque Club.<br/>
+                            Puis acquittez-vous des cotisations (en dessous du formulaire). 
+                            Le Passe-Coque Club vous re-contactera lorsque votre inscription sera finalis&eacute;e.
+                            <p>
+                                <!-- I read the chart, I submit the motivations -->
+                                <iframe name="subscr-response" style="display: none; width: 100%;" onload="onSubscribeResponse(this, subscriptionOKMessage(), subscriptionErrorMessage());"></iframe>
+                                <form action="../admin/sql/_subscribe.php" method="post" target="subscr-response" id="bc-subscription">
+                                    <input type="hidden" name="lang" value="FR">
+                                    <table>
+                                        <tr>
+                                            <td>Adresse email</td>
+                                            <td><input type="email" name="email" size="40" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vous avez lu et accept&eacute; la charte</td>
+                                            <td><input type="checkbox" name="read-the-chart"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align: top;">Vos motivations</td>
+                                            <td>                    
+                                                <textarea style="line-height: normal;" name="motivations" form="bc-subscription" rows="5" cols="80" placeholder="Vos motivations ici..." required></textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <input type="submit" value="Soumettre l'inscription">
+                                </form>
+                            </p>
+                            <!--h2>Rejoignez le Passe&#8209;Coque Boat Club</h2-->
                             <b>&Eacute;quipier, Chef de bord.</b><br/>
                             Votre adh&eacute;sion &agrave; Passe&#8209;Coque Boat Club permet &agrave; l'association de mener &agrave; bien ses projets, vos projets&nbsp;!<br/>
                             <!-- scrolling="auto" onload="window.scroll(0, this.offsetTop)"  -->

@@ -459,6 +459,7 @@ const dayBetween = (day, from ,to) => {
   return (thisDate >= dateFrom && thisDate <= dateTo);
 };
 
+// All the display job is done here
 const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
   // https://passe-coque.com/php/get_bc_reservations.php?year=2024&month=04&span=3
   let theDocToFetch = "../../php/get_bc_reservations.php"; // "./planning.json";
@@ -563,6 +564,7 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
                   }
                   if (apply) {
                     theRowToUpdate.childNodes[dayIdx + 1].setAttribute('class', resa.status.toLowerCase());
+                    theRowToUpdate.childNodes[dayIdx + 1].title = `${resa.owner}\n${resa.comment}`;
                   }
                   if (thisDay === resa.to) {
                     apply = false;
@@ -601,7 +603,7 @@ window.onload = () => {
   // Fetch the data to populate the reservation planning
   fetchAndDisplay();
   // fetchAndDisplay(year, lpad(month.toFixed(0), 2));
-  
+
 }; 
 </script>
 </html>

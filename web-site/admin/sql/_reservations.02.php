@@ -85,12 +85,6 @@ require __DIR__ . "/_emails.utils.php";
 
 $VERBOSE = false;
 
-class MemberStatus {
-    public $status;  // bool
-    public $errNo;   // int
-    public $errMess; // string
-}
-
 class BoatAvailability {
     public $status;
     public $message;
@@ -102,67 +96,6 @@ class BoatDetailRef {
     public $boatName;
     public $boatType;
     public $boatBase;
-}
-
-function checkMemberShip(string $dbhost, string $username, string $password, string $database, string $userId, bool $verbose) : MemberStatus {
-
-    try {
-        if ($verbose) {
-            echo("Will connect on ".$database." ...<br/>");
-        }
-        $link = new mysqli($dbhost, $username, $password, $database);
-    
-        if ($link->connect_errno) {
-            echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
-        } else {
-            if ($verbose) {
-                echo("Connected.<br/>");
-            }
-        }
-
-        $memberStatus = new MemberStatus();
-
-        $sql = "SELECT PC.EMAIL, (SELECT BC.EMAIL FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PC.EMAIL) FROM PASSE_COQUE_MEMBERS PC WHERE PC.EMAIL = '$userId';";
-
-        if ($verbose) {
-            echo ("Executing [" . $sql . "]<br/>");
-        }
-        $result = mysqli_query($link, $sql);
-        if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
-        }
-        if ($result->num_rows == 0) {
-            $memberStatus->status = false;
-            $memberStatus->errNo = 1;
-            $memberStatus->errMess = "Not a Passe-Coque Member";
-        } else {
-            // Assume there is only one record returned.
-            $pcEmail = '';
-            $bcEmail = '';
-            while ($table = mysqli_fetch_array($result)) {
-                $pcEmail = $table[0];
-                $bcEmail = $table[1];
-            }
-            if ($bcEmail == null || strlen($bcEmail) == 0) {
-                $memberStatus->status = false;
-                $memberStatus->errNo = 2;
-                $memberStatus->errMess = "Passe-Coque Member, but not Boat Club Member";
-            } else {
-                $memberStatus->status = true;
-                $memberStatus->errNo = 0;
-                $memberStatus->errMess = "";
-            }
-        } 
-        // On ferme !
-        $link->close();
-        if ($verbose) {
-            echo("Closed DB<br/>".PHP_EOL);
-        }
-    } catch (Throwable $e) {
-      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
-    }
-    return $memberStatus;
 }
 
 function checkBoatAvailability(string $dbhost, string $username, string $password, string $database, string $boatId, string $fromDate, string $toDate, bool $verbose) : BoatAvailability {
@@ -379,7 +312,7 @@ if (isset($_POST['operation'])) {
                 var_dump($status);
             }
             echo "<br/>" . PHP_EOL;
-            if ($status->status) {
+            if ($status->status) { // Passe-Coque AND Boat-Club
                 if ($VERBOSE) {
                     echo ("Status OK, checking $boatId's availability between $fromDate and $toDate .<br/>" . PHP_EOL);
                 }
@@ -395,7 +328,8 @@ if (isset($_POST['operation'])) {
                         }
                     }
                     // 3-1 Book
-                    bookTheBoat($dbhost, $username, $password, $database, $userId, $boatId, $fromDate, $toDate, $comments, $VERBOSE, $lang);
+                    $escapedComment = str_replace("'", "\'", $comments); // Escape !!
+                    bookTheBoat($dbhost, $username, $password, $database, $userId, $boatId, $fromDate, $toDate, $escapedComment, $VERBOSE, $lang);
                     // 3-2 Emails
                     $details = getBoatDetails($dbhost, $username, $password, $database, $boatId, $VERBOSE);
                     // 3-2-1 Referent(s) and PCC
@@ -461,6 +395,7 @@ if (isset($_POST['operation'])) {
                 }
             } else {
                 // Membership problem
+                // TODO check $status->errNo (1 or 2)
                 if ($lang != 'FR') {
                     echo("There is a membership problem for $userId : " . $status->errMess . ". Click the button below to subscribe!<br/>" . PHP_EOL); 
                     ?>
@@ -536,7 +471,19 @@ if (isset($_POST['operation'])) {
                     "Projet (zone de navigation)<br/>Liste d'&eacute;quipage (nom et pr&eacute;nom de chacun)<br/>Commentaires, questions..."); 
                  ?>
             </td>
-            <td><textarea cols="60" rows="10" name="comment-area" style="line-height: normal;"></textarea></td>
+            <td>
+                <textarea cols="60" rows="10" name="comment-area" style="line-height: normal;">
+Projet et Zone de navigation :&#13;
+. . .
+&#13;
+Équipage :&#13;
+- Joe Shmow, toto@laflotte.bzh&#13;
+- . . .&#13;
+&#13;
+Questions & commentaires :&#13;
+On va partir avec la marée, on reviendra si on y pense.                
+               </textarea>
+            </td>
         </tr>
     </table>
     <div id="submit-message"></div>
