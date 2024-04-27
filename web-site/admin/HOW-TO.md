@@ -40,7 +40,7 @@ La traduction (des menus) est assurr&eacute;e par la fonction `updateMenu`, d&ea
 
 **Tout le site** se comporte comme une SPA (Single Page Application). La page `index.html` reste toutjours affich&eacute;e, le contenu 
 de la `div` "`current-content`" est chang&eacute; dynamiquement en fonction des choix de l'utilisateur. Encore une fois,
-voir &agrave; ce sujet le code de la fonction `clack`, dans le fichier `passe-coque.js`.
+voir &agrave; ce sujet le code de la fonction `clack`, dans le fichier `passe-coque.js`. Idem pour le Boat-Club, la fonction s'appelle `clack_pcc`.
 
 Les photos des membres du bureau ont un rapport de 1:1 (genre 400 x 400).
 

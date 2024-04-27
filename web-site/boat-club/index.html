@@ -117,7 +117,7 @@
 					</ul-->
 				</li>
 				<li>
-					<a href="javascript:void(0)" id="_6" onclick="clack_pcc(this);" title="Espace Membres" style="display: flex; align-items: center; border: 1px solid silver; border-radius: 5px; padding: 0; margin: 23px 0 0 0;">
+					<a href="javascript:void(0)" id="_6" onclick="clack('_7'); /*clack_pcc(this);*/" title="Espace Membres" style="display: flex; align-items: center; border: 1px solid silver; border-radius: 5px; padding: 0; margin: 23px 0 0 0;">
 						<svg style="margin: 5px;" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 						</svg><span id="members-space" style="display: block;">Membres </span>
@@ -189,26 +189,28 @@
 				</div>
 			</div>
 
-			<div>
-				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-4');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">Adh&eacute;rer</span></a>
+			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_4"><span id="home-label">Adh&eacute;rer</span></a>
+			<!--div>
+				<a href="javascript:void(0)" onclick="clack_pcc(this); /*showHideSection(this, 'section-4');*/" id="_4"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_4">Adh&eacute;rer</span></a>
 				<div id="section-4" class="sub-section">
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_41">Pour quoi faire</i></a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_42">Adh&eacute;sion</a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_43">Espace Membres</a>
 				</div>
-			</div>
+			</div-->
 
-			<div>
-				<a href="javascript:void(0)" onclick="showHideSection(this, 'section-3');"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_5">R&eacute;server</span></a>
+			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_5"><span id="home-label">R&eacute;server</span></a>
+			<!--div>
+				<a href="javascript:void(0)" onclick="/*showHideSection(this, 'section-3');*/ clack_pcc(this);" id="_5"><span class="expand-collapse">&#9658;&nbsp;</span><span id="_5">R&eacute;server</span></a>
 				<div id="section-3" class="sub-section">
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_51">Comment &ccedil;a marche</a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_52">Faire une r&eacute;servation</a>
 					<a class="active-link" href="javascript:void(0)" onclick="clack_pcc(this); closeNav();" id="_53">Espace Membres</a>
 				</div>
-			</div>
+			</div-->
 
-			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_6"><span id="fleet-label">
-				<span id="members-space">Espace Membres</span>
+			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack('_7'); /*clack_pcc(this);*/ closeNav();" id="_6"><span id="fleet-label">
+				<span id="members-space">Espace&nbsp;Membres</span>
 			</a>
 
 		</div>

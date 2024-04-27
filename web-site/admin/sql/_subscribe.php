@@ -1,20 +1,20 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>BC Subscription</title>
-    <style type="text/css">
-      * {
-        font-family: 'Courier New'
-      }
-
-      tr > td {
-        border: 1px solid silver;
-      }
-    </style>
-  </head>
-  <body>
 <?php 
+/*
+    Boat Club Subscription request backend.
+
+    May return several errors:
+    SUBSCRIBE-001 - Chart not read.
+    SUBSCRIBE-002 - Already Boat-Club member.
+    SUBSCRIBE-003 - Not a Passe-Coque member.
+    SUBSCRIBE-004 - Unknown status returned.
+
+    See the code for details. Also see the errNo returned by the checkMemberShip function.
+
+    Can be invoke directly from a GET request with QS parameters (for tests):
+    https://passe-coque.com/admin/sql/_subscribe.php?lang=FR&email=olivier@lediouris.net&motivations=Duh&read-the-chart=on
+
+    POST is used in prod.
+*/
 
 require __DIR__ . "/../../php/db.cred.php";
 require __DIR__ . "/_db.utils.php";
@@ -120,6 +120,6 @@ if ($check != 'on') {
         echo "ERROR: Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
 }
+// Content-type ?
+header('Content-Type: text/plain; charset=utf-8');
 ?>
-  </body>        
-</html>

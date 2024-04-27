@@ -201,9 +201,11 @@ if (isset($_POST['operation'])) {
             echo "Boat-Club Member: " . ($bc_member ? "Yes" : "No") . "<br/>" . PHP_EOL;
             echo "Admin: " . ($admin_privileges ? "Yes" : "No") . "<br/>" . PHP_EOL;
           }
-          echo "<p>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . ".</p>" . PHP_EOL;
+          echo "<p style='line-height: normal;'>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . "<br/>" . PHP_EOL;    
+          echo(($current_lang == "FR") ? "Vous pouvez maintenant acc&eacute;der au " : "You can now access the ");
           ?>
-          <a href="members.02.php"><?php echo ($current_lang == "FR") ? "Acc&egrave;s au menu..." : "Menu access..." ?></a> <!-- LA SUITE ! -->
+          <a href="members.02.php"><?php echo ($current_lang == "FR") ? "Menu" : "Menu" ?></a> <!-- LA SUITE ! -->
+          </p>
           <hr/>
           <form action="members.php" method="post">
             <input type="hidden" name="operation" value="logout">

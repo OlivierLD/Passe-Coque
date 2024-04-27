@@ -22,7 +22,12 @@
 
                 submit a form that will send you an email, from which you will be able to set or reset the password.
              +-->
-             <div id="pswd-reset-request" style="display: none;">
+             <div id="pswd-reset-request" style="display: none; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+                <div style="width: 100%; background: silver; text-align: right;">
+                    <span style="margin-right: 10px;" 
+                          onmouseover="this.style.cursor='pointer';/* this.style.background='white';*/" 
+                          onclick="document.getElementById('pswd-reset-request').style.display = 'none';">&times;</span>
+                </div>
                 <iframe name="reset-response" style="display: none;" onload="onResetPswdResponse(this);"></iframe>
                 <div>
                     Entrez votre adresse email dans le champ ci-dessous, et cliquez sur le bouton.<br/>

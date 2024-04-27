@@ -1,3 +1,7 @@
+<?php
+// Must be on top
+session_start();
+?>
 <html lang="en">
   <!--
    ! WiP.
@@ -62,6 +66,15 @@
     if (isset($_GET['admin'])) {
         $admin = ($_GET['admin'] == 'true');
     }
+
+    $userId = '';
+    if (isset($_SESSION['USER_NAME'])) {
+        $userId = $_SESSION['USER_NAME'];
+    }
+
+    // echo "-------<br/>";
+    // var_dump($_SESSION);
+    // echo "-------<br/>";
   ?>
 
   <body>
@@ -444,7 +457,10 @@ if (isset($_POST['operation'])) {
     <input type="hidden" name="operation" value="booking">
     <!-- User Name, Boat Id, Date From, Date To -->
     <table>
-        <tr><td><?php if ($lang != 'FR') { echo"Your Email Address"; } else { echo("Votre adresse email"); } ?></td><td><input type="email" name="email" size="40" required></td></tr>
+        <tr>
+            <td><?php if ($lang != 'FR') { echo"Your Email Address"; } else { echo("Votre adresse email, $userId"); } ?></td>
+            <td><input type="email" name="email" size="40" value="<?php echo $userId; ?>" required></td>
+        </tr>
         <tr>
             <td><?php echo(($lang != 'FR') ? "The boat" : "Le bateau"); ?></td>
             <td>

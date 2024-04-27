@@ -105,10 +105,14 @@ let clack = (origin) => {
         makeCode(document.location.href);
         return;
     } else {
-        document.getElementById("qrcode").style.display = 'none'; // Improve this ?..
+        try {
+            document.getElementById("qrcode").style.display = 'none'; // Improve this ?..
+        } catch (err) {
+            console.log(JSON.stringify(err));
+        }
     }
 
-	let contentName = `${originId}_${currentLang}.html`;
+	let contentName = `/${originId}_${currentLang}.html`; // From the origin !!
     // Specific content rule(s)
 	if (false && originId === "62") {  // Not used...
 		contentName = "carrousel.html";
@@ -117,7 +121,7 @@ let clack = (origin) => {
 	// } else if (originId === "32" || originId === "33") {
     //    contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
     } else if (originId === "67") {
-        contentName = `7_${currentLang}.html`;
+        contentName = `/7_${currentLang}.html`;
     }
 	let contentPlaceHolder = document.getElementById("current-content");
     
@@ -504,8 +508,8 @@ let clack_pcc = (origin) => {
         contentName = `${path}6_${currentLang}.html`;  // Member Space
     } else if  (originId === "51" || originId === "52") {  // TODO Remove this...
         contentName = `${path}5_${currentLang}.html`; 
-    // } else if  (originId === "53") { 
-    //    contentName = `${path}6_${currentLang}.html`;   // Member Space
+    // } else if  (originId === "6") { 
+    //   contentName = `${path}6_${currentLang}.html`;   // Member Space
     }
 
     let contentPlaceHolder = document.getElementById("current-content");
