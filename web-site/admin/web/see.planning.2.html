@@ -1,4 +1,5 @@
 <html lang="fr">
+  <!-- TODO Option admin, to see the categories or not -->
 <head>
     <title>Passe&#8209;Coque Boat Club</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
 	<link rel="stylesheet" href="/passe-coque.css" type="text/css"/>
 	<script type="text/javascript" src="/passe-coque.js"></script>
 
-    <style>
+  <style>
 :root {
     --gray-100: #f7fafc;
     --gray-200: #edf2f7;
@@ -127,7 +128,10 @@ table {
 .admin {
     background-color: violet !important;
 }
-    </style>
+.booked {
+    background-color: darkgray !important;
+}
+  </style>
 </head>
 <body>
     <h2>Planning des r&eacute;servations</h2>
@@ -155,7 +159,7 @@ table {
       <button onclick="update();">Go!</button>
     </div>
 
-    <div>
+    <div id="legend">
       L&eacute;gende: <span class="tentative">Tentative</span>, <span class="confirmed">Confirmed</span>, <span class="denied">Denied</span>, <span class="canceled">Canceled</span>, <span class="admin">Reserved</span> 
     </div>
 
@@ -443,6 +447,8 @@ const FRENCH_DAYS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendred
 // const FRENCH_DAYS_ABBR = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 const FRENCH_DAYS_ABBR = ["D", "L", "M", "M", "J", "V", "S"];
 
+let adminOption = false;
+
 const lpad = (s, len, w = '0') => {
   let str = s;
   while (str.length < len) {
@@ -571,7 +577,7 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
                     apply = true;
                   }
                   if (apply) {
-                    theRowToUpdate.childNodes[dayIdx + 1].setAttribute('class', resa.status.toLowerCase());
+                    theRowToUpdate.childNodes[dayIdx + 1].setAttribute('class', (adminOption) ? resa.status.toLowerCase() : 'booked');
                     theRowToUpdate.childNodes[dayIdx + 1].title = `${resa.owner}\n${resa.comment}`;
                   }
                   if (thisDay === resa.to) {
@@ -596,6 +602,15 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
 }
 
 window.onload = () => {
+
+  let admin = getQueryParameterByName('admin');
+  if ("true" === admin) {
+    adminOption = true;
+  }
+
+  if (!adminOption) {
+    document.getElementById('legend').style.display = 'none';
+  }
 
   // Set selected date options
   const today = new Date();
