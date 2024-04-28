@@ -70,7 +70,8 @@ if ($current_lang == "FR") {
     <ul>
       <li><a href="members.03.php">Changer votre mot de passe (pour <?php echo $user_id ?>)</a></li>
       <li><a href="members.04.php">Voir vos cotisations</a></li>
-      <li><a href="../admin/sql/_reservations.01.php">Voir le planning des r&eacute;servations</a></li>
+      <!--li><a href="../admin/sql/_reservations.01.php">Voir le planning des r&eacute;servations</a></li-->
+      <li><a href="../admin/web/see.planning.2.html?admin=false">Voir le planning des r&eacute;servations</a></li>
       <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
     </ul>
     <?php
