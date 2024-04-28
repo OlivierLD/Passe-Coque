@@ -106,7 +106,12 @@ table {
 .boat-name {
     font-weight: bold;
 }
-
+.month {
+  color: darkblue;
+  font-size: 1.25em;
+  padding-left: 10px;
+  border: 1px solid silver;
+}
 .tentative {
     background: cyan !important;
 } 
@@ -161,7 +166,7 @@ table {
         <table>
           <thead>
             <tr>
-              <th>Bateau</th>
+              <th style="padding-top: 30px;">Bateau</th>
               <th colspan="30">Avril</th>
               <th colspan="31">Mai</th>
             </tr>
@@ -435,7 +440,8 @@ table {
 
 const FRENCH_MONTHS = ["Janvier", "F&eacute;vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Ao&ucirc;t", "Septembre", "Octobre", "Novembre", "D&eacute;cembre"];
 const FRENCH_DAYS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
-const FRENCH_DAYS_ABBR = ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"];
+// const FRENCH_DAYS_ABBR = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+const FRENCH_DAYS_ABBR = ["D", "L", "M", "M", "J", "V", "S"];
 
 const lpad = (s, len, w = '0') => {
   let str = s;
@@ -517,10 +523,12 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
             tableHead.appendChild(tr);
             const firstHead = document.createElement('th');
             firstHead.innerText = 'Bateau'; // in french for now
+            firstHead.setAttribute("style", "padding-top: 30px;");
             tr.appendChild(firstHead);
             differentMonth.forEach(m => {
               const header = document.createElement('th');
               header.setAttribute('colspan', m.lastDay);
+              header.setAttribute('class', 'month');
               header.innerHTML = FRENCH_MONTHS[m.month - 1] + ' ' + m.year; 
               tr.appendChild(header);
             });
@@ -542,7 +550,7 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
               // Append one col per day in the planning
               planning.calendar.days.forEach(day => {
                 const data = document.createElement('td');
-                data.setAttribute('style', 'text-align: center;');
+                data.setAttribute('style', 'text-align: center; line-height: normal;');
                 data.innerHTML = '<small>' + FRENCH_DAYS_ABBR[day.weekDay] + '</small><br/> ' + day.day; // See with week day name
                 row.appendChild(data);
               });
