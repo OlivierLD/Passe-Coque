@@ -10,6 +10,26 @@
 -- User olivier@lediouris.net, pswd DonPedro
 -- See it at https://drawsql.app/teams/akeu-coucou/diagrams/passecoque
 
+-- On a local instance, as root:
+CREATE USER 'pc' IDENTIFIED BY 'pc';
+GRANT ALL PRIVILEGES ON *.* TO 'pc' WITH GRANT OPTION;
+-- Then: mysql -u pc -p
+CREATE DATABASE pc;
+USE pc;
+
+-- Execute script
+mysql> source /path/to/script.sql
+-- show tables
+mysql> SHOW TABLES;
+mysql> SHOW TABLES LIKE '%PC%';
+-- shou user
+mysql> SELECT user();
+-- show database
+mysql> select database();
+-- drop DB
+mysql> DROP DATABASE passecc128;
+
+-- All instances
 CREATE TABLE IF NOT EXISTS PC_NUMBERS (
     ID VARCHAR(32) PRIMARY KEY,
     AMOUNT INT DEFAULT 0,

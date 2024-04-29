@@ -108,4 +108,8 @@ En cas de panne&nbsp;: Envoyez-moi un <a class="mail-box list-link" href="mailto
 Look into the code, for the parts using a `Content-Type: application/json;`.  
 Also see how they're invoked (from a JavaScript `fetch`).
 
+### Development Env
+- [Setup MySQL](https://www.prisma.io/dataguide/mysql/setting-up-a-local-mysql-database#setting-up-mysql-on-macos) locally.
+
+
 ---
