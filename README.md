@@ -35,4 +35,8 @@ $ php -S 127.0.0.1:8000
 ```
 then reach <http://localhost:8000/> in your browser.
 
+Installing MySQL will allow you to setup a full development environment locally.  
+[Setup MySQL](https://www.prisma.io/dataguide/mysql/setting-up-a-local-mysql-database#setting-up-mysql-on-macos) locally.  
+See [here](web-site/admin/sql/create.passe-coque.schema.sql) for more details about the DB schema.
+
 ---

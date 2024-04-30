@@ -96,7 +96,7 @@ if ($operation != '') {
       ?> 
       <!-- Member creation form -->
 
-      <form action="./_boat-club.01.php" method="post">
+      <form action="<?php echo basename(__FILE__); ?>" method="post">
         <input type="hidden" name="operation" value="new-member">
         <input type="submit" value="Create New Boat Club Member">
       </form> 
@@ -136,11 +136,18 @@ if ($operation != '') {
     echo("<hr/>" . PHP_EOL);
     // echo("Again ? Click <a href='#'>Here</a>.");
     ?>
-    <form action="./_boat-club.01.php" method="get">
-      <!--input type="hidden" name="operation" value="blank"-->
+    <form action="<?php echo basename(__FILE__); ?>" method="get">
       <table>
         <tr>
-          <td colspan="2" style="text-align: center;"><input type="submit" value="Query Again ?"></td>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Query Boat Club Again ?"></td>
+        </tr>
+      </table>
+    </form>
+    <!-- Query Passe-Coque Member -->
+    <form action="./_members.01.php" method="get">
+      <table>
+        <tr>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Query Asso ?"></td>
         </tr>
       </table>
     </form>
@@ -156,7 +163,7 @@ if ($operation != '') {
     echo("For user $email");
     // Display form
     ?>
-    <form action="./_boat-club.01.php" method="post">
+    <form action="<?php echo basename(__FILE__); ?>" method="post">
       <input type="hidden" name="operation" value="create">
       <input type="hidden" name="email" value="<?php echo $email; ?>">
       <table>
@@ -217,8 +224,12 @@ if ($operation != '') {
     }
     ?>
 
-    <form action="./_boat-club.01.php" method="get">
+    <form action="<?php echo basename(__FILE__); ?>" method="get">
       <input type="submit" value="Query Form">
+    </form>
+    <!-- Query Passe-Coque Member -->
+    <form action="./_members.01.php" method="get">
+         <input type="submit" value="Query Asso ?">
     </form>
 
     <?php
@@ -266,7 +277,7 @@ if ($operation != '') {
   
     ?>
     <h2>Passe-Coque Boat Club Members Update</h2>
-    <form action='./_boat-club.01.php' method='post'>
+    <form action='<?php echo basename(__FILE__); ?>' method='post'>
     <?php  
     echo("<input type='hidden' name='operation' value='update'>");
     echo("<input type='hidden' name='email' value='$email'>");
@@ -307,7 +318,7 @@ if ($operation != '') {
   echo("<hr/>" . PHP_EOL);
     ?>
 
-    <form action="./_boat-club.01.php" method="get">
+    <form action="<?php echo basename(__FILE__); ?>" method="get">
       <input type="submit" value="Back to Query Form">
     </form>
 

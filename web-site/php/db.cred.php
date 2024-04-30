@@ -9,7 +9,7 @@
 // Locally
 $username = "pc";
 $password = "pc";
-$database = "passecc128"; // "pc";
+$database = "pc"; // "passecc128";
 $dbhost = "localhost";
 
 ?>
