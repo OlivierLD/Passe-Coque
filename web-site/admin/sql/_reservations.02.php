@@ -468,9 +468,9 @@ if (isset($_POST['operation'])) {
                     <?php
                     foreach($boatsOfTheClub as $boat) {
                         if ($lang != 'FR') {
-                            echo ("<option value='" . $boat->id ."'>" . $boat->type . " \"" . $boat->name . "\", " . "(Base will go here)" . "</option>" . PHP_EOL);
+                            echo ("<option value='" . $boat->id ."'>" . $boat->type . " \"" . $boat->name . "\", " . "(" . $boat->base . ")" . "</option>" . PHP_EOL);
                         } else {
-                            echo ("<option value='" . $boat->id ."'>" . $boat->type . " \"" . $boat->name . "\", " . "(Nom de la base ici...)" . "</option>" . PHP_EOL);
+                            echo ("<option value='" . $boat->id ."'>" . $boat->type . " \"" . $boat->name . "\", " . "("  . $boat->base . ")" . "</option>" . PHP_EOL);
                         }
                     }
                     ?>

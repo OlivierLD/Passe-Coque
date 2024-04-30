@@ -5,6 +5,7 @@ class Boat {
     public $name;
     public $type;
     public $category;
+    public $base;
 }
   
 class Referent {
@@ -26,7 +27,7 @@ function getBoats(string $dbhost, string $username, string $password, string $da
                 echo("[Connected.] ");
             }
         }
-        $sql = "SELECT ID, BOAT_NAME, BOAT_TYPE, CATEGORY FROM THE_FLEET;";
+        $sql = "SELECT ID, BOAT_NAME, BOAT_TYPE, CATEGORY, BASE FROM THE_FLEET;";
         if ($verbose) {
             echo('[Performing instruction ['.$sql.']] ');
         }
@@ -44,6 +45,7 @@ function getBoats(string $dbhost, string $username, string $password, string $da
             $boats[$boatIndex]->name = $table[1];
             $boats[$boatIndex]->type = $table[2];
             $boats[$boatIndex]->category = $table[3];
+            $boats[$boatIndex]->base = $table[4];
             $boatIndex++;
         }
         // On ferme !
