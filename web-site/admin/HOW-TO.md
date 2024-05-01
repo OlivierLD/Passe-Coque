@@ -110,6 +110,7 @@ Also see how they're invoked (from a JavaScript `fetch`).
 
 ### Development Env
 - [Setup MySQL](https://www.prisma.io/dataguide/mysql/setting-up-a-local-mysql-database#setting-up-mysql-on-macos) locally.
+- [php debugger in Visual Studio](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug)
 
 
 ---

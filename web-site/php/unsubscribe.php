@@ -77,7 +77,7 @@ if (isset($_GET['subscriber-id'])) {
                 echo "Vous souhaitez vous d&eacute;sabonner de la news letter (sur l'email $email) <br/>" . PHP_EOL; 
                 echo "Merci de confirmer en cliquant le bouton ci-dessous. <br/>" . PHP_EOL;
                 ?>
-                <form action="unsubscribe.php" method="post">
+                <form action="<?php echo(basename(__FILE__)); ?>" method="post">
                     <input type="hidden" name="operation" value="unsubscribe">
                     <input type="hidden" name="nl-id" value="<?php echo $nl_id ?>">
                     <input type="submit" value="D&eacute;sabonner">

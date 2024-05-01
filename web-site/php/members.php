@@ -1,6 +1,16 @@
 <?php
 // Must be on top
-session_start();
+$timeout = 60;  // In seconds
+try {
+  if (!isset($_SESSION)) {
+    ini_set("session.gc_maxlifetime", $timeout);
+    ini_set("session.cookie_lifetime", $timeout);
+    session_start();
+  }
+} catch (Throwable $e) {
+  echo "Session settings: Captured Throwable: " . $e->getMessage() . "<br/>" . PHP_EOL;
+}
+
 ?>
 <html lang="en">
   <!--
@@ -42,9 +52,13 @@ session_start();
 require __DIR__ . "/db.cred.php";
 
 
-$timeout = 60;  // In seconds
-ini_set("session.gc_maxlifetime", $timeout);
-ini_set("session.cookie_lifetime", $timeout);
+// $timeout = 60;  // In seconds
+// try {
+//   ini_set("session.gc_maxlifetime", $timeout);
+//   ini_set("session.cookie_lifetime", $timeout);
+// } catch (Throwable $e) {
+//   echo "Sesssion settings: Captured Throwable: " . $e->getMessage() . "<br/>" . PHP_EOL;
+// }
 
 
 if (false) {
@@ -187,7 +201,7 @@ if (isset($_POST['operation'])) {
           // $_SERVER['PHP_AUTH_PW'] = $form_password;
           $_SESSION['DISPLAY_NAME'] = urldecode($display_name);
           $_SESSION['ADMIN'] = $admin_privileges;
-          $_SESSION['USER_ID'] = $form_username;
+          $_SESSION['USER_ID'] = $form_username;  // Same as USER_NAME
           $_SESSION['BC_MEMBER'] = $bc_member;
           // Welcome !
           // If arrives here, is a valid user.
@@ -207,7 +221,7 @@ if (isset($_POST['operation'])) {
           <a href="members.02.php"><?php echo ($current_lang == "FR") ? "Menu" : "Menu" ?></a> <!-- LA SUITE ! -->
           </p>
           <hr/>
-          <form action="members.php" method="post">
+          <form action="<?php echo(basename(__FILE__)); ?>" method="post">
             <input type="hidden" name="operation" value="logout">
             <table>
               <tr>
@@ -270,7 +284,7 @@ if (isset($_POST['operation'])) {
   } else {
     echo "Unsupported operation [$operation]";
   }
-} else { // Then display the logging form
+} else { // No $_POST['operation'], then display the logging form
     ?>
     <?php 
     if ($current_lang == "FR") {
@@ -279,7 +293,7 @@ if (isset($_POST['operation'])) {
       echo "<h3>Please identifiy yourself first</h3>" . PHP_EOL;
     }
     ?>
-    <form action="members.php" method="post">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>

@@ -1,6 +1,15 @@
 <?php
 // Must be on top
-session_start();
+$timeout = 60;  // In seconds
+try {
+  if (!isset($_SESSION)) {
+    ini_set("session.gc_maxlifetime", $timeout);
+    ini_set("session.cookie_lifetime", $timeout);
+    session_start();
+  }
+} catch (Throwable $e) {
+  echo "Session settings: Captured Throwable: " . $e->getMessage() . "<br/>" . PHP_EOL;
+}
 ?>
 <html lang="en">
   <!--
@@ -30,9 +39,9 @@ session_start();
 require __DIR__ . "/db.cred.php";
 
 // echo "Default GC_MaxLifeTime: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
-$timeout = 60;
-ini_set("session.gc_maxlifetime", $timeout);
-ini_set("session.cookie_lifetime", $timeout);
+// $timeout = 60;
+// ini_set("session.gc_maxlifetime", $timeout);
+// ini_set("session.cookie_lifetime", $timeout);
 // echo "GC_MaxLifeTime now: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
 
 // session_start();
@@ -46,11 +55,26 @@ if (isset($_GET['lang'])) {
         $current_lang = $_SESSION['CURRENT_LANG'];
     }
 }
+
+// Authentication required !!
+if (!isset($_SESSION['USER_NAME'])) {
+  die ("You are not connected! Please log in first!");
+} else {
+  if (!isset($_SESSION['ADMIN'])) {
+    die ("No ADMIN property found! Please log in first!");
+  } else {
+    if (!$_SESSION['ADMIN']) {
+      die("Sorry, you're NOT an Admin.");
+    }
+  }
+}
+
 $userName = $_SESSION['USER_NAME'];
 $displayName = $_SESSION['DISPLAY_NAME'];
 $adminPrivileges = $_SESSION['ADMIN'];
 $bcMember = $_SESSION['BC_MEMBER'];
 $user_id = $_SESSION['USER_ID'];
+
 
 if ($current_lang == "FR") {
   echo "<h2>Bienvenue [$displayName] dans votre espace priv&eacute;.</h2><br/>" . PHP_EOL;
