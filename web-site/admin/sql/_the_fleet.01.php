@@ -130,7 +130,7 @@ if (isset($_POST['operation'])) {
     echo("<hr/>" . PHP_EOL);
     // echo("Again ? Click <a href='#'>Here</a>.");
     ?>
-    <form action="./_the_fleet.01.php" method="get">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="get">
       <!--input type="hidden" name="operation" value="blank"-->
       <table>
         <tr>

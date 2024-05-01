@@ -1,3 +1,16 @@
+<?php
+// Must be on top
+$timeout = 60;  // In seconds
+try {
+  if (!isset($_SESSION)) {
+    ini_set("session.gc_maxlifetime", $timeout);
+    ini_set("session.cookie_lifetime", $timeout);
+    session_start();
+  }
+} catch (Throwable $e) {
+  echo "Session settings: Captured Throwable: " . $e->getMessage() . "<br/>" . PHP_EOL;
+}
+?>
 <html lang="en">
   <!--
    ! BOAT CLUB MANAGEMENT
@@ -36,6 +49,19 @@
     <?php
 // phpinfo();
 require __DIR__ . "/../../php/db.cred.php";
+
+// Authentication required !!
+if (!isset($_SESSION['USER_NAME'])) {
+  die ("You are not connected! Please log in first!");
+} else {
+  if (!isset($_SESSION['ADMIN'])) {
+    die ("No ADMIN property found! Please log in first!");
+  } else {
+    if (!$_SESSION['ADMIN']) {
+      die("Sorry, you're NOT an Admin.");
+    }
+  }
+}
 
 $operation = '';
 if (isset($_POST['operation'])) {
