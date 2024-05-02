@@ -125,7 +125,7 @@ if (isset($_POST['operation'])) {
   }
 } else { // Then display the form
     ?>
-    <form action="dbQuery.07.php" method="post">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>

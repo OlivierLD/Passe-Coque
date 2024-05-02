@@ -1,13 +1,14 @@
 <html lang="en">
   <!--
-   ! A Form to query the number of views on the site.
+   ! A Form to query the NL_SUBSCRIBERS table
+   ! Editable form: dbQuery.02.02.php
    +-->
   <head>
     <!--meta charset="UTF-8">
     <meta charset="ISO-8859-1"-->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Site Nb Views</title>
+    <title>Query NL Subscribers</title>
     <style type="text/css">
       * {
         font-family: 'Courier New'
@@ -19,7 +20,7 @@
     </style>
   </head>
   <body>
-    <h1>PHP / MYSQL. NB Views</h1>
+    <h1>PHP / MYSQL. Query News Letter subscribers</h1>
 
     <?php
 // phpinfo();
@@ -33,7 +34,9 @@ if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
   if ($operation == 'query') { // Then do the query
     try {
-      // $link = mysqli_init();  // Mandatory ?
+      $email =  $_POST['email'];
+
+      $link = mysqli_init();  // Mandatory ?
     
       echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
@@ -45,7 +48,7 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      $sql = 'SELECT A.AMOUNT FROM PC_NUMBERS A WHERE A.ID = \'NB_VIEWS\' ;'; 
+      $sql = 'SELECT ID, NAME, EMAIL, SUBSCRIPTION_DATE, ACTIVE FROM NL_SUBSCRIBERS WHERE EMAIL LIKE \'%' . $email . '%\'' . ';'; 
       
       echo('Performing query <code>'.$sql.'</code><br/>');
     
@@ -53,14 +56,22 @@ if (isset($_POST['operation'])) {
       $result = mysqli_query($link, $sql);
       echo ("Returned " . $result->num_rows . " row(s)<br/>");
     
-      echo("<h2>Number of views of the site</h2>");
-
+      echo("<h2>News Letter Subscribers</h2>");
+      echo "<table>";
+      echo("<tr><th></th><th>ID</th><th>NAME</th><th>EMAIL</th><th>SINCE</th><th>ACTIVE</th></tr>" . PHP_EOL); 
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         // echo "table contains ". count($table) . " entry(ies).<br/>";
-        // echo("id:" . $table[0] . ", name:" . $table[1] . ", email:" . $table[2] . "<br/>");    // print the table that was returned on that row.
-        echo("<b>Site was viewed " . $table[0] . " time(s).</b><br/>" . PHP_EOL); 
+        $active = ($table[4]/* === true*/) ? "Yes" : "No";
+        $nl_id = $table[0];
+        echo ("<tr>");
+          echo ("<td><a href='./dbQuery.02.02.php?nl-id=$nl_id'>Edit</a></td>"); //  target='updateNLS'
+          echo ("<td>" . $nl_id . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td><td>" . $table[3] . "</td><td align='center'>" . $active . "</td>");
+          if ($table[4]) {
+            echo ("<td><a href='../../php/unsubscribe.php?subscriber-id=$nl_id' target='unsub'>Unsubscribe</a></td>");
+          }
+        echo ("</tr>" . PHP_EOL); 
       }
-
+      echo "</table>";
       
       // On ferme !
       $link->close();
@@ -68,17 +79,17 @@ if (isset($_POST['operation'])) {
     } catch (Throwable $e) {
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
-    
-  } else {
-    echo "Unsupported operation $operation";
   }
 } else { // Then display the form
     ?>
-    <form action="dbQuery.06.php" method="post">
+    <form action<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>
-          <td colspan="2" style="text-align: center;"><input type="submit" value="Query..."></td>
+          <td valign="top">Email (part of):</td><td><input type="text" name="email" size="40"></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>
         </tr>
       </table>
     </form>

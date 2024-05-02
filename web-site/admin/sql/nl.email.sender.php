@@ -1,3 +1,16 @@
+<?php
+// Must be on top
+$timeout = 60;  // In seconds
+try {
+  if (!isset($_SESSION)) {
+    ini_set("session.gc_maxlifetime", $timeout);
+    ini_set("session.cookie_lifetime", $timeout);
+    session_start();
+  }
+} catch (Throwable $e) {
+  echo "Session settings: Captured Throwable: " . $e->getMessage() . "<br/>" . PHP_EOL;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,10 +53,25 @@
 <?php
 // Original code from https://www.geeksforgeeks.org/php-send-attachment-email/
 
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
+require __DIR__ . "/../../php/db.cred.php";
+
+// Authentication required !!
+if (!isset($_SESSION['USER_NAME'])) {
+	die ("You are not connected! Please log in first!");
+} else {
+	if (!isset($_SESSION['ADMIN'])) {
+	  die ("No ADMIN property found! Please log in first!");
+	} else {
+	  if (!$_SESSION['ADMIN']) {
+		die("Sorry, you're NOT an Admin.");
+	  }
+	}
+}
+  
+// $username = "passecc128";
+// $password = "zcDmf7e53eTs";
+// $database = "passecc128";
+// $dbhost = "passecc128.mysql.db";
 
 
 if (isset($_POST['button']) && isset($_FILES['attachment'])) {
@@ -108,11 +136,11 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		$sql = 'SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK ' . 
 		       'FROM PASSE_COQUE_MEMBERS ' . 
 			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here, and below...
-// 			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\') ' .
+// 		   '      AND (LAST_NAME LIKE \'%Le%Diouris%\') ' .
 //			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\' ' .
 //			   '        OR LAST_NAME LIKE \'%Allais%\' ' . 
 //			   '        OR FIRST_NAME LIKE \'%Pierre-Jean%\')' .
-			   '      AND NEWS_LETTER_OK = TRUE;'; 
+			   '  AND NEWS_LETTER_OK = TRUE;'; 
 		
 		echo('Performing query <code>'.$sql.'</code><br/>');
 	  

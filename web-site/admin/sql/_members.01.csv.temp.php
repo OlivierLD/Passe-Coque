@@ -114,7 +114,6 @@ if (isset($_POST['operation'])) {
   }
 } else { // Then display the form
     ?>
-    <!--form action="dbQuery.03.php" method="post"-->
     <form action="#" method="post">
       <input type="hidden" name="operation" value="query">
       <table>

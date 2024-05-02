@@ -74,7 +74,7 @@ if (isset($_POST['operation'])) {
         <p>
           You can request a logging buy asking <a href="mailto:contact@passe-coque.com">contact@passe-coque.com</a>.
         </p>
-        <a href="dbQuery.08.php">Log in again?</a><br/>
+        <a href="<?php echo(basename(__FILE__)); ?>">Log in again?</a><br/>
         <?php    
       } else if ($result->num_rows > 1) {
         echo "More than one entry for $form_username, wierd..." . PHP_EOL;
@@ -95,7 +95,7 @@ if (isset($_POST['operation'])) {
           ?>
           <a href="dbQuery.08.02.php">Further...</a>
           <hr/>
-          <form action="dbQuery.08.php" method="post">
+          <form action="<?php echo(basename(__FILE__)); ?>" method="post">
             <input type="hidden" name="operation" value="logout">
             <table>
               <tr>
@@ -139,14 +139,14 @@ if (isset($_POST['operation'])) {
     session_destroy();
 
     ?>
-    <a href="dbQuery.08.php">Log in again?</a><br/>
+    <a href="<?php echo(basename(__FILE__)); ?>">Log in again?</a><br/>
     <?php
   } else {
     echo "Unsupported operation $operation";
   }
 } else { // Then display the form
     ?>
-    <form action="dbQuery.08.php" method="post">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>

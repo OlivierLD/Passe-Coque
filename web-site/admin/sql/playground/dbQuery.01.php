@@ -121,7 +121,7 @@ if (isset($_POST['operation'])) {
     echo "<h1>News Letter Subscriber creation</h1>" . PHP_EOL;
   }
     ?>
-    <form action="dbQuery.01.php" method="post">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="insert">
       <input type="hidden" name="lang" value="<?php echo $lang; ?>">
       <table>

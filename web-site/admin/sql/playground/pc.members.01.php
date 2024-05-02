@@ -1,14 +1,15 @@
 <html lang="en">
   <!--
-   ! A Form to query the pc-members table
-   ! @Deprecated, use PC_MEMBERS instead.
+   ! WiP.
+   ! A Form to query the PC_MEMBERS table, leads to an update form.
+   ! @Deprecated
    +-->
   <head>
     <!--meta charset="UTF-8">
     <meta charset="ISO-8859-1"-->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Cotisation renweal</title>
+    <title>Query Members</title>
     <style type="text/css">
       * {
         font-family: 'Courier New'
@@ -20,7 +21,7 @@
     </style>
   </head>
   <body>
-    <h1>PHP / MySQL. Fee renewal (V1)</h1>
+    <h1>PHP / MySQL. Passe-Coque Members</h1>
 
     <?php
 // phpinfo();
@@ -34,7 +35,7 @@ if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
   if ($operation == 'query') { // Then do the query
     try {
-      // $email =  $_POST['email'];
+      $name = $_POST['full-name']; 
 
       $link = mysqli_init();  // Mandatory ?
     
@@ -48,48 +49,36 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      // $sql = 'SELECT COUNT(`nl-subscribers`.*) '
-      //         . ' FROM `nl-subscribers`'
-      //         . ' ORDER BY `nl-subscribers`.`name` ASC LIMIT 0, 30 '; 
-    
-      // $sql = 'SELECT COUNT(*) FROM `nl-subscribers`;'; 
       $sql = 'SELECT
-      `reference`,
-      `command-date`,
-      CONCAT(
-          \'In \',
-          365 - TIMESTAMPDIFF(
-              DAY,
-              `command-date`,
-              CURRENT_TIMESTAMP()),
-              \' Day(s)\'
-          ) AS \'When\',
+          PCM.ID,
           CONCAT(
-              `member-first-name`,
+              UPPER(PCM.MEMBER_FIRST_NAME),
               \' \',
-              `member-last-name`
-          ) AS NAME
-      FROM
-          `pc-members`
-      WHERE
-          TIMESTAMPDIFF(
-              DAY,
-              `command-date`,
-              CURRENT_TIMESTAMP()) > 335
-      ORDER BY 1 DESC, 2;'; 
+              PCM.MEMBER_LAST_NAME
+          ) AS NAME,
+          PCM.CITY
+      FROM 
+          PC_MEMBERS PCM
+      WHERE 
+           UPPER(PCM.MEMBER_FIRST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
+           UPPER(PCM.MEMBER_LAST_NAME) LIKE UPPER(\'%' . $name . '%\')
+      ORDER BY 1;';
       
-      echo('Performing query <code>'.$sql.'</code><br/>');
+      echo('Performing query <code>' . $sql . '</code><br/>');
     
       // $result = mysql_query($sql, $link);
       $result = mysqli_query($link, $sql);
       echo ("Returned " . $result->num_rows . " row(s)<br/>");
     
-      echo("<h2>Cotisation to be renewed in less than 1 month</h2>");
+      echo("<h2>Passe-Coque Members</h2>");
       echo "<table>";
+      echo "<tr><th>Name</th><th>City</th><th> - </th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-        // echo "table contains ". count($table) . " entry(ies).<br/>";
-        // echo("id:" . $table[0] . ", name:" . $table[1] . ", email:" . $table[2] . "<br/>");    // print the table that was returned on that row.
-        echo("<tr><td>" . $table[0] . "</td><td>" . $table[1] . "</td><td>" . $table[2] . "</td><td>" . $table[3] . "</td></tr>\n"); 
+        echo(
+          "<tr><td>" . 
+            urldecode($table[1]) . "</td><td>" . urldecode($table[2]) . "</td><td>" . "<a href='./pc.members.02.php?id=" . $table[0] . "' target='PCUpdate'>Update</a>" .
+          "</td></tr>\n"
+        ); 
       }
       echo "</table>";
       
@@ -102,7 +91,7 @@ if (isset($_POST['operation'])) {
     echo("<hr/>" . PHP_EOL);
     // echo("Again ? Click <a href='#'>Here</a>.");
     ?>
-    <form action="#" method="get">
+    <form action="dbQuery.05.php" method="get">
       <!--input type="hidden" name="operation" value="blank"-->
       <table>
         <tr>
@@ -114,13 +103,12 @@ if (isset($_POST['operation'])) {
   }
 } else { // Then display the form
     ?>
-    <!--form action="dbQuery.03.php" method="post"-->
     <form action="#" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
-        <!--tr>
-          <td valign="top">Email (part of):</td><td><input type="text" name="email" size="40"></td>
-        </tr-->
+        <tr>
+          <td valign="top">Name (part of):</td><td><input type="text" name="full-name" size="40"></td>
+        </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>
         </tr>

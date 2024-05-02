@@ -144,7 +144,7 @@ if (!isset($_GET['nl-id'])) {
     // Display form here
     ?>
     <!-- Update form -->
-    <form action="dbQuery.02.02.php" method="post">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="update">
       <input type="hidden" name="nl-id" value="<?php echo $nl_id ?>">
       <table>
@@ -163,7 +163,7 @@ if (!isset($_GET['nl-id'])) {
       </table>
     </form>
     <!-- Delete form -->
-    <form action="dbQuery.02.02.php" method="post">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="delete">
       <input type="hidden" name="nl-id" value="<?php echo $nl_id ?>">
       <input type="submit" value="Delete">

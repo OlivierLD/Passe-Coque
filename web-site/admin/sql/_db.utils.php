@@ -1,4 +1,8 @@
 <?php
+/**
+ * Several utilities, functions and classes
+ * used in several places.
+ */
 
 class Boat {
     public $id;

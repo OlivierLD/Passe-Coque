@@ -125,7 +125,6 @@ if (isset($_POST['operation'])) {
   <body>
     <h1>PHP / MySQL. Passe-Coque Members from the DB, in CSV file</h1>
 
-    <!--form action="dbQuery.03.php" method="post"-->
     <form action="#" method="post">
       <input type="hidden" name="operation" value="query">
       <table>

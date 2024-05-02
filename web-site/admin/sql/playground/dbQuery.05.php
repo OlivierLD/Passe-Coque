@@ -1,7 +1,6 @@
 <html lang="en">
   <!--
-   ! WiP.
-   ! A Form to query the PC_MEMBERS table, leads to an update form.
+   ! A Form to query the PC_MEMBERS table, to get the HelloAsso card
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -20,7 +19,7 @@
     </style>
   </head>
   <body>
-    <h1>PHP / MySQL. Passe-Coque Members</h1>
+    <h1>PHP / MySQL. Members and cards</h1>
 
     <?php
 // phpinfo();
@@ -49,13 +48,15 @@ if (isset($_POST['operation'])) {
       }
     
       $sql = 'SELECT
-          PCM.ID,
           CONCAT(
               UPPER(PCM.MEMBER_FIRST_NAME),
               \' \',
               PCM.MEMBER_LAST_NAME
           ) AS NAME,
-          PCM.CITY
+          PCM.CARD_URL,
+          PCM.CITY,
+          PCM.SAILING_EXPERIENCE,
+          PCM.BOAT_BUILDING_EXP
       FROM 
           PC_MEMBERS PCM
       WHERE 
@@ -69,13 +70,14 @@ if (isset($_POST['operation'])) {
       $result = mysqli_query($link, $sql);
       echo ("Returned " . $result->num_rows . " row(s)<br/>");
     
-      echo("<h2>Passe-Coque Members</h2>");
+      echo("<h2>Members, and their card</h2>");
       echo "<table>";
-      echo "<tr><th>Name</th><th>City</th><th> - </th></tr>";
+      echo "<tr><th>Name</th><th>Card</th><th>City</th><th>Sailing Exp.</th><th>Boat Building Exp.</th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 
-            urldecode($table[1]) . "</td><td>" . urldecode($table[2]) . "</td><td>" . "<a href='./pc.members.02.php?id=" . $table[0] . "' target='PCUpdate'>Update</a>" .
+            urldecode($table[0]) . "</td><td> <a href='" . $table[1] . "' target='HA'>HelloAsso Card</a> " . 
+            "<td>" . urldecode($table[2]) . "</td><td>" . urldecode($table[3]) . "</td><td>" . urldecode($table[4]) . 
           "</td></tr>\n"
         ); 
       }
@@ -90,7 +92,7 @@ if (isset($_POST['operation'])) {
     echo("<hr/>" . PHP_EOL);
     // echo("Again ? Click <a href='#'>Here</a>.");
     ?>
-    <form action="dbQuery.05.php" method="get">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="get">
       <!--input type="hidden" name="operation" value="blank"-->
       <table>
         <tr>
@@ -102,7 +104,6 @@ if (isset($_POST['operation'])) {
   }
 } else { // Then display the form
     ?>
-    <!--form action="dbQuery.03.php" method="post"-->
     <form action="#" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
