@@ -221,7 +221,7 @@ if (isset($_POST['operation'])) {
           <a href="members.02.php"><?php echo ($current_lang == "FR") ? "Menu" : "Menu" ?></a> <!-- LA SUITE ! -->
           </p>
           <hr/>
-          <form action="<?php echo(basename(__FILE__)); ?>" method="post">
+          <form action="<?php echo(basename(__FILE__)); ?>" method="post"> <!-- members.php -->
             <input type="hidden" name="operation" value="logout">
             <table>
               <tr>

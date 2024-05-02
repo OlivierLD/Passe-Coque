@@ -55,12 +55,37 @@ require __DIR__ . "/../../php/db.cred.php";
 
 // Authentication required !!
 if (!isset($_SESSION['USER_NAME'])) {
+  echo ("<button onclick='window.open(\"https://passe-coque.com/php/admin.menu.html\");'>Authenticate</button><br/>" . PHP_EOL);
   die ("You are not connected! Please log in first!");
 } else {
   if (!isset($_SESSION['ADMIN'])) {
+    ?>
+    <button onclick="window.open('https://passe-coque.com/php/admin.menu.html');">Authenticate</button><br/>
+    <form action="../../php/members.php" method="post"> <!-- members.php -->
+        <input type="hidden" name="operation" value="logout">
+        <table>
+          <tr>
+            <td colspan="2" style="text-align: center;"><input type="submit" value="Log out"></td>
+          </tr>
+        </table>
+      </form>
+    <?php
+    echo("From script " . basename(__FILE__) . "<br/>" . PHP_EOL);
     die ("No ADMIN property found! Please log in first!");
   } else {
     if (!$_SESSION['ADMIN']) {
+      ?>
+      <button onclick="window.open('https://passe-coque.com/php/admin.menu.html');">Authenticate</button><br/>
+      <form action="../../php/members.php" method="post"> <!-- members.php -->
+          <input type="hidden" name="operation" value="logout">
+          <table>
+            <tr>
+              <td colspan="2" style="text-align: center;"><input type="submit" value="Log out"></td>
+            </tr>
+          </table>
+        </form>
+      <?php
+      echo("From script " . basename(__FILE__) . "<br/>" . PHP_EOL);
       die("Sorry, you're NOT an Admin.");
     }
   }
