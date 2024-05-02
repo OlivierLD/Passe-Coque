@@ -31,7 +31,7 @@ if (isset($_GET['lang'])) {
 }
 
 // Require the db file...
-require __DIR__ . "/../../php/db.cred.php";
+require __DIR__ . "/../../../php/db.cred.php";
 // $username = "passecc128";
 // $password = "zcDmf7e53eTs";
 // $database = "passecc128";
