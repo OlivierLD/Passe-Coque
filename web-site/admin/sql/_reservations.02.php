@@ -371,7 +371,8 @@ if (isset($_POST['operation'])) {
                             of the boat.<br/>
                             If there is no response within 24/48 hours, you can contact us at the address
                             following email: pcc@passe-coque.com.<br/>
-                            The same AR was sent to the referent to inform him that he must accept or reject the reservation request.
+                            The same AR was sent to the referent to inform him that he must accept or reject the reservation request.<br/>
+                            The reservation planning should be updated (refresh if needed).
                         </p>
                         <a href="<?php echo(basename(__FILE__) . "?lang=EN") ?>">Back</a>.
                         <?php
@@ -388,7 +389,8 @@ if (isset($_POST['operation'])) {
                             du bateau.<br/>
                             En cas d'absence de r&eacute;ponse sous 24/48 heures, vous pouvez contacter nous contacter &agrave; l'adresse
                             mail suivante : pcc@passe-coque.com.<br/>
-                            Le m&ecirc;me AR est envoy&eacute; au r&eacute;f&eacute;rent pour l'informer qu'il doit accepter ou refuser la demande de r&eacute;servation.
+                            Le m&ecirc;me AR est envoy&eacute; au r&eacute;f&eacute;rent pour l'informer qu'il doit accepter ou refuser la demande de r&eacute;servation.<br/>
+                            Le planning des r&eacute;servations doit &ecirc;tre mis &agrave; jour (faites un refresh si n&eacute;cessaire).
                         </p>
                         <a href="<?php echo(basename(__FILE__) . "?lang=FR") ?>">Retour</a>.
                         <?php

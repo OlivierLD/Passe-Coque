@@ -20,9 +20,11 @@
                 submit a form that will send you an email, from which you will be able to set or reset the password.
              +-->
              <div id="pswd-reset-request" style="display: none; padding: 5px; border: 1px solid silver; border-radius: 5px;">
-                <div style="width: 100%; background: silver; text-align: right;">
-                    <span style="margin-right: 10px;" 
-                          onmouseover="this.style.cursor='pointer';/* this.style.background='white';*/" 
+                <div style="width: 100%; background: silver; display: grid; grid-template-columns: auto auto;">
+                    <span style="margin-left: 10px;">Password creation or replacememnt request</span>
+                    <span style="text-align: right; margin-right: 10px; font-size: 1.2rem;" 
+                          onmouseover="this.style.cursor='pointer'; this.style.color='white';" 
+                          onmouseout="this.style.cursor='normal'; this.style.color='black';" 
                           onclick="document.getElementById('pswd-reset-request').style.display = 'none';">&times;</span>
                 </div>
                 <iframe name="reset-response" style="display: none;" onload="onResetPswdResponse(this);"></iframe>

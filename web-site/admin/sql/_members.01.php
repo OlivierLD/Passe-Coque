@@ -123,7 +123,7 @@ if (isset($_POST['operation'])) {
            UPPER(PCM.FIRST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
            UPPER(PCM.LAST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
            UPPER(PCM.EMAIL) LIKE UPPER(\'%' . $name . '%\')
-      ORDER BY 1;';
+      ORDER BY 2;'; // Order by LastName-FirstName
       
       echo('Performing query <code>' . $sql . '</code><br/>');
     
@@ -151,7 +151,7 @@ if (isset($_POST['operation'])) {
             urldecode($table[0]) . // Email
           "</td><td>" .  
             urldecode($table[1]) . // Name (full)
-          "</td><td>" .  
+          "</td><td style='text-align: center;'>" .  
             ($table[2] ? 'Member' : "<a href='./_boat-club.01.php?operation=subscribe&email=" . $table[0] . "'>Subscribe</a>") . // already in Boat Club, or subscribe
           "</td><td>" . 
             "<a href='./_members.02.php?id=" . $table[0] . "'>Edit</a>" .  // Edit Member //  target='PCUpdate'

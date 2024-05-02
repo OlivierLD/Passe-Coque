@@ -134,7 +134,7 @@ if ($operation != '') {
             UPPER(PCM.LAST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
             UPPER(PCM.EMAIL) LIKE UPPER(\'%' . $name . '%\')) AND
            (PCM.EMAIL = BC.EMAIL)
-      ORDER BY 1;';
+      ORDER BY 2;';
       
       echo('Performing query <code>' . $sql . '</code><br/>');
     

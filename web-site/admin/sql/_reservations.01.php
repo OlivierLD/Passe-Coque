@@ -16,6 +16,11 @@
       tr > td {
         border: 1px solid silver;
       }
+
+      ul > li {
+        display: grid;
+        grid-template-columns: 90% 10%;
+      }
     </style>
   </head>
   <body>
