@@ -1708,6 +1708,10 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                         console.log(`data loaded, ${json.length} boat(s).`);
                         THE_BOATS = json;
                         populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
+                    }, (error, errmess) => {
+                        console.log(`Response to JSON: ${error},\nUsing BACKUP list`);
+                        THE_BOATS = THE_FLEET; // Using the backup list
+                        populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                     });
                 }
             },
