@@ -29,7 +29,9 @@ mysql> select database();
 -- drop DB
 mysql> DROP DATABASE passecc128;
 
--- All instances
+mysql> DESCRIBE PASSE_COQUE_MEMBERS;
+
+-- The schema !
 CREATE TABLE IF NOT EXISTS PC_NUMBERS (
     ID VARCHAR(32) PRIMARY KEY,
     AMOUNT INT DEFAULT 0,
