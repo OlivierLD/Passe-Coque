@@ -19,6 +19,9 @@ USE pc;
 
 -- Execute script
 mysql> source /path/to/script.sql
+--
+-- https://dev.mysql.com/doc/refman/8.0/en/getting-information.html
+--
 -- show tables
 mysql> SHOW TABLES;
 mysql> SHOW TABLES LIKE '%PC%';
