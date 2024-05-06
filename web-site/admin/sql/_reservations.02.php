@@ -460,7 +460,7 @@ if (isset($_POST['operation'])) {
     <!-- User Name, Boat Id, Date From, Date To -->
     <table>
         <tr>
-            <td><?php if ($lang != 'FR') { echo"Your Email Address"; } else { echo("Votre adresse email, $userId"); } ?></td>
+            <td><?php if ($lang != 'FR') { echo("Your Email Address"); } else { echo("Votre adresse email"); } ?></td>
             <td><input type="email" name="email" size="40" value="<?php echo $userId; ?>" required></td>
         </tr>
         <tr>

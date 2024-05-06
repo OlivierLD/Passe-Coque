@@ -129,7 +129,7 @@ table {
     background-color: violet !important;
 }
 .booked {
-    background-color: darkgray !important;
+    background-color: orange !important;
 }
   </style>
 </head>
@@ -528,7 +528,7 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
             const tr = document.createElement('tr');
             tableHead.appendChild(tr);
             const firstHead = document.createElement('th');
-            firstHead.innerText = 'Bateau'; // in french for now
+            // firstHead.innerText = 'Bateau'; // in french for now
             firstHead.setAttribute("style", "padding-top: 30px;");
             tr.appendChild(firstHead);
             differentMonth.forEach(m => {
@@ -542,8 +542,32 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
             // The rows
             const tableBody = document.createElement('tbody');
             table.appendChild(tableBody);
-            // Add one row per boat
+
             let boatRows = [];
+
+            // The days of the months
+            let row = document.createElement('tr');
+            boatRows.push(row);
+            tableBody.appendChild(row);
+            // Boat name as first column
+            const data = document.createElement('td');
+            // data.setAttribute('class', 'boat-name');
+            data.innerHTML = 'Bateau'; // boat.name;
+            data.setAttribute("style", "padding-top: 30px;");
+            row.appendChild(data);
+            // Append one col per day in the planning
+            planning.calendar.days.forEach(day => {
+              const data = document.createElement('td');
+              let style = 'text-align: center; line-height: normal; border: 1px solid silver;';
+              if (day.weekDay == 0 || day.weekDay == 6) {
+                style += ' background: lime;';
+              }
+              data.setAttribute('style', style);
+              data.innerHTML = '<small>' + FRENCH_DAYS_ABBR[day.weekDay] + '</small><br/> ' + day.day; // See with week day name
+              row.appendChild(data);
+            });
+
+            // Add one row per boat
             boats.forEach(boat => {
               let row = document.createElement('tr');
               boatRows.push(row);
@@ -556,8 +580,12 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
               // Append one col per day in the planning
               planning.calendar.days.forEach(day => {
                 const data = document.createElement('td');
-                data.setAttribute('style', 'text-align: center; line-height: normal;');
-                data.innerHTML = '<small>' + FRENCH_DAYS_ABBR[day.weekDay] + '</small><br/> ' + day.day; // See with week day name
+                let style = 'text-align: center; line-height: normal; border: 1px solid silver;';
+                if (day.weekDay == 0 || day.weekDay == 6) {
+                  style += ' background: lime;';
+                }
+                data.setAttribute('style', style);
+                // data.innerHTML = '<small>' + FRENCH_DAYS_ABBR[day.weekDay] + '</small><br/> ' + day.day; // See with week day name
                 row.appendChild(data);
               });
             });
@@ -567,7 +595,7 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
               console.log(`${reservation.boat.name}, ${reservation.reservations.length} reservation(s), table row ${index}`);
               reservation.reservations.forEach((resa, idx) => {
                 console.log(`${reservation.boat.name}, from ${resa.from} to ${resa.to}, ${resa.status}, index ${idx}`);
-                let theRowToUpdate = boatRows[index];
+                let theRowToUpdate = boatRows[index + 1]; // +1, because first row contains the days of the months
                 // Walk thru all days in the planning
                 let apply = false;
                 planning.calendar.days.forEach((day, dayIdx) => {
@@ -578,7 +606,9 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
                   }
                   if (apply) {
                     theRowToUpdate.childNodes[dayIdx + 1].setAttribute('class', (adminOption) ? resa.status.toLowerCase() : 'booked');
-                    theRowToUpdate.childNodes[dayIdx + 1].title = `${resa.owner}\n${resa.comment}`;
+                    if (adminOption) {
+                      theRowToUpdate.childNodes[dayIdx + 1].title = `${resa.owner}\n${resa.comment}`;
+                    }
                   }
                   if (thisDay === resa.to) {
                     apply = false;
