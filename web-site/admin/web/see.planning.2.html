@@ -484,6 +484,9 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
   if (span) {
     theDocToFetch += (theDocToFetch.includes('?') ? '&' : '?') + 'span=' + span;
   }
+  if (adminOption) {
+    theDocToFetch += (theDocToFetch.includes('?') ? '&' : '?') + 'admin=true';
+  }
   console.log(`Document to fetch: ${theDocToFetch}`);
   fetch(theDocToFetch)   // Requires a server to be running. A protocol like file:// would trigger a CORS error
     .then(response => {

@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
   <!--
    ! WiP.
-   ! Make a reservation
+   ! Make a reservation. Step 2
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -132,7 +132,7 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
                 "WHERE ((STR_TO_DATE('$fromDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE) OR " .
                     "(STR_TO_DATE('$toDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE)) AND " .
                     "BOAT_ID = '" . $boatId . "' AND " .
-                    "RESERVATION_STATUS NOT IN ('CANCELED', 'REJECTED') " .
+                    "RESERVATION_STATUS NOT IN ('CANCELED', 'REJECTED') " .  // Only TENTATIVE, CONFIRNMED, ADMIN
                     "ORDER BY FROM_DATE;";
 
         if ($verbose) {

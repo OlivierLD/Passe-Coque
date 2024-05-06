@@ -217,7 +217,7 @@ if (isset($_POST['operation'])) {
             echo("Fetching planning for " . $boat->name . " in " . $MONTHS[$currentMonth - 1] . " " . $currentYear . "<br/>" . PHP_EOL);
         }
         $boatId = $boat->id;
-        $res = getReservations($dbhost, $username, $password, $database, $boatId, $firstDayOfMonth, $lastDayOfMonth, $VERBOSE);
+        $res = getReservations($dbhost, $username, $password, $database, $boatId, $firstDayOfMonth, $lastDayOfMonth, true, $VERBOSE);
         // var_dump($res);
         echo("<br/>" . PHP_EOL);
         if (count($res) == 0) {

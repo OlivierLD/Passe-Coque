@@ -18,6 +18,7 @@ $VERBOSE = false;
 
  // WiP.
 
+$adminOption = false;
 $span = 1; // One month wide, by default
 
 $currentYear = date("Y"); // Default, current year
@@ -32,6 +33,9 @@ if (isset($_GET['month'])) {
 }
 if (isset($_GET['span'])) {
     $span = $_GET['span'];
+}
+if (isset($_GET['admin'])) {
+    $adminOption = ("true" == $_GET['admin']);
 }
 
 $fromDate = $currentYear . "-" . $currentMonth . "-" . "01";
@@ -93,7 +97,7 @@ try {
             echo("Fetching planning for " . $boat->name . " in " . $MONTHS[$currentMonth - 1] . " " . $currentYear . "<br/>" . PHP_EOL);
         }
         $boatId = $boat->id;
-        $res = getReservations($dbhost, $username, $password, $database, $boatId, $fromDate, $toDate, $VERBOSE);
+        $res = getReservations($dbhost, $username, $password, $database, $boatId, $fromDate, $toDate, $adminOption, $VERBOSE);
         $boatAndReservations[$mainIdx]->reservations = $res;
         $mainIdx++;
     }

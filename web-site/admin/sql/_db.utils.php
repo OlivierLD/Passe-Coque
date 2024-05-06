@@ -171,11 +171,12 @@ class Reservation {
     public $comment;
 }
 
-function getReservations(string $dbhost, string $username, string $password, string $database, string $boatId, string $from, string $to, bool $verbose) : array {
+function getReservations(string $dbhost, string $username, string $password, string $database, string $boatId, string $from, string $to, bool $admin, bool $verbose) : array {
     $sql =  "SELECT EMAIL, BOAT_ID, RESERVATION_DATE, DATE_FORMAT(FROM_DATE, '%Y-%m-%d'), DATE_FORMAT(TO_DATE, '%Y-%m-%d')TO_DATE, RESERVATION_STATUS, MISC_COMMENT FROM BC_RESERVATIONS " .
             "WHERE ((FROM_DATE >= STR_TO_DATE('" . $from . "', '%Y-%m-%d') AND FROM_DATE <= STR_TO_DATE('" . $to . "', '%Y-%m-%d')) OR " . 
                 " (TO_DATE >= STR_TO_DATE('" . $from . "', '%Y-%m-%d') AND TO_DATE <= STR_TO_DATE('" . $to . "', '%Y-%m-%d'))) AND " .
                 "BOAT_ID = '" . $boatId . "' " .
+                ( $admin ? "" : "AND RESERVATION_STATUS NOT IN ('CANCELED', 'REJECTED') " ) . 
                 "ORDER BY FROM_DATE;";
     $reservations = array();
     $index = 0;
