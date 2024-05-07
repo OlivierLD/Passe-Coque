@@ -1,6 +1,7 @@
 <html lang="en">
   <!--
    ! WiP.
+   ! Basic reservation planning - 3 month. (see the $span variable)
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -43,6 +44,30 @@ if (false) {
     echo "Today is " . date("Y.m.d") . "<br>";
     echo "Today is " . date("Y-m-d") . "<br>";
     echo "Today is " . date("l") . "<br>";
+}
+
+function translateStatus(string $coded) : string {
+    $translated = "inconnu";
+    switch ($coded) {
+        case "TENTATIVE":
+            $translated = "Soumise";
+            break;
+        case "CONFIRMED":
+            $translated = "Valid&eacute;e";
+            break;
+        case "CANCELED":
+            $translated = "Annul&eacute;e";
+            break;
+        case "REJECTED":
+            $translated = "Refus&eacute;e";
+            break;
+        case "ADMIN":
+            $translated = "R&eacute;serv&eacute;e";
+            break;
+        default:
+            break;
+    }
+    return $translated;
 }
 
 $currentYear = date("Y");
@@ -118,6 +143,12 @@ if (isset($_POST['operation'])) {
 
         if ($_POST['table-operation'] == 'Update') {
             echo "It's an UPDATE<br/>";
+
+            $ownerDetails = getMember($dbhost, $username, $password, $database, $owner, $VERBOSE);
+
+            // Get detailed boat data, referent(s) infos.
+            $allDetails = getBoatAndReferentDetails($dbhost, $username, $password, $database, $boat);
+
             $sql = "UPDATE BC_RESERVATIONS SET " .
                    "RESERVATION_STATUS = '$status', " .
                    "MISC_COMMENT = '$comment' " .
@@ -126,8 +157,24 @@ if (isset($_POST['operation'])) {
                         " RESERVATION_DATE = STR_TO_DATE('$resDate', '%Y-%m-%d %H:%i:%s');";
             executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
             if ($prevStatus != $status) {
-                // Send email to $owner
-                $message = "Votre r&eacute;servation du " . $resDate . " pour le bateau " . $boat . " a &eacute;t&eacute; modifi&eacute;e de " . $prevStatus . " a " . $status . ".";
+                // Send email to $owner (the guy who reserved).
+                $message = "Bonjour " . $ownerDetails[0]->firstName . ", <br/>";
+                $message .= ("Votre r&eacute;servation du " . $resDate . " pour le bateau "  . $allDetails[0]->boatName . " (id \"" . $boat . "\") a &eacute;t&eacute; modifi&eacute;e de \"" . translateStatus($prevStatus) . "\" &agrave; \"" . translateStatus($status) . "\".<br/>");
+
+                $message .= ($allDetails[0]->boatName . " a " . count($allDetails) . " r&eacute;f&eacute;rent" . (count($allDetails) > 1 ? "s" : "") . " dont voici les coordonn&eacute;es :<br/>");
+                if (true) {
+                    foreach ($allDetails as $details) {
+                        $message .= ("R&eacute;f&eacute;rent : " . $details->refFullName . ", email : " . $details->refEmail . ", t&eacute;l&eacute;phone : " . $details->refTel . "<br/>");
+                    }
+                } else {
+                    echo "--------------</br>";
+                    var_dump($allDetails);
+                    echo "<br/>--------------</br>";
+                }
+                $message .= "<br/>- L'&eacute;quipe du Passe-Coque Club.<br/>";
+
+                echo("Sending message:<br/>" . $message . "<br/>");
+
                 sendEmail($owner, "Boat Club Passe-Coque", $message, "FR");
             }
         } else if ($_POST['table-operation'] == 'Delete') {
@@ -155,15 +202,15 @@ if (isset($_POST['operation'])) {
     <option value="2026"<?php echo(($currentYear == 2026) ? ' selected' : ''); ?>>2026</option>
   </select>
   <select name="month">
-    <option value="01"<?php echo(($currentMonth == 1) ? ' selected' : ''); ?>>January</option>
-    <option value="02"<?php echo(($currentMonth == 2) ? ' selected' : ''); ?>>February</option>
-    <option value="03"<?php echo(($currentMonth == 3) ? ' selected' : ''); ?>>March</option>
-    <option value="04"<?php echo(($currentMonth == 4) ? ' selected' : ''); ?>>April</option>
-    <option value="05"<?php echo(($currentMonth == 5) ? ' selected' : ''); ?>>May</option>
-    <option value="06"<?php echo(($currentMonth == 6) ? ' selected' : ''); ?>>June</option>
-    <option value="07"<?php echo(($currentMonth == 7) ? ' selected' : ''); ?>>July</option>
-    <option value="08"<?php echo(($currentMonth == 8) ? ' selected' : ''); ?>>August</option>
-    <option value="09"<?php echo(($currentMonth == 9) ? ' selected' : ''); ?>>September</option>
+    <option value="01"<?php echo(($currentMonth == 1)  ? ' selected' : ''); ?>>January</option>
+    <option value="02"<?php echo(($currentMonth == 2)  ? ' selected' : ''); ?>>February</option>
+    <option value="03"<?php echo(($currentMonth == 3)  ? ' selected' : ''); ?>>March</option>
+    <option value="04"<?php echo(($currentMonth == 4)  ? ' selected' : ''); ?>>April</option>
+    <option value="05"<?php echo(($currentMonth == 5)  ? ' selected' : ''); ?>>May</option>
+    <option value="06"<?php echo(($currentMonth == 6)  ? ' selected' : ''); ?>>June</option>
+    <option value="07"<?php echo(($currentMonth == 7)  ? ' selected' : ''); ?>>July</option>
+    <option value="08"<?php echo(($currentMonth == 8)  ? ' selected' : ''); ?>>August</option>
+    <option value="09"<?php echo(($currentMonth == 9)  ? ' selected' : ''); ?>>September</option>
     <option value="10"<?php echo(($currentMonth == 10) ? ' selected' : ''); ?>>October</option>
     <option value="11"<?php echo(($currentMonth == 11) ? ' selected' : ''); ?>>November</option>
     <option value="12"<?php echo(($currentMonth == 12) ? ' selected' : ''); ?>>December</option>
@@ -193,7 +240,7 @@ if (isset($_POST['operation'])) {
         echo ("In $year, $month, there were " . getNbDays($year, $month) . " days.<br/>");
     }
 
-    echo ("<h2>Reservation Planning for " . $MONTHS[$currentMonth - 1] . " " . $currentYear . "</h2>");
+    // echo ("<h2>Reservation Planning for " . $MONTHS[$currentMonth - 1] . " " . $currentYear . " (3 months)</h2>");
 
     $boatsArray = getBoats($dbhost, $username, $password, $database, $VERBOSE);     
 
@@ -209,7 +256,21 @@ if (isset($_POST['operation'])) {
     if ($VERBOSE) {
         echo ("We have " . count($boatsOfTheClub) . " boats in the club<br/>");
     }
+
+    $from = $MONTHS[$currentMonth - 1] . " " . $currentYear;
+
     $firstDayOfMonth = $currentYear . "-" . $currentMonth . "-" . "01";
+    
+    $span = 3; // 3 months
+    $currentMonth += ($span - 1);
+    while ($currentMonth > 12) {
+        $currentMonth -= 12;
+        $currentYear += 1;
+    }
+
+    $to = $MONTHS[$currentMonth - 1] . " " . $currentYear;
+    echo ("<h2>Reservation Planning from " . $from . " to " . $to . " </h2>");
+
     $lastDayOfMonth = $currentYear . "-" . $currentMonth . "-" . getNbDays($currentYear, $currentMonth);
 
     foreach($boatsOfTheClub as $boat) {
@@ -221,7 +282,7 @@ if (isset($_POST['operation'])) {
         // var_dump($res);
         echo("<br/>" . PHP_EOL);
         if (count($res) == 0) {
-            echo ("No reservation for " . $boat->name  . " in " . $MONTHS[$currentMonth - 1] . " " . $currentYear . "<br/>" . PHP_EOL);
+            echo ("No reservation for " . $boat->name  /* . " in " . $MONTHS[$currentMonth - 1] . " " . $currentYear */ . "<br/>" . PHP_EOL);
         } else {
             echo ("Reservation(s) for " . $boat->name . ":<br/>" . PHP_EOL);
             echo ("<ul>" . PHP_EOL);

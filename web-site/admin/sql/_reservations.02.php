@@ -258,7 +258,73 @@ function getBoatDetails(string $dbhost, string $username, string $password, stri
     }
 
     return $details;
+}
 
+function composeEmailToReferent(BoatDetailRef $boatDetails, Member $requester, Member $refDetails, string $from, string $to, string $lang='FR'): string {
+    $messContent = "";
+
+    if (false) {
+        echo("<br/>----------<br/>");
+        var_dump($boatDetails);
+        echo("<br/>----------<br/>");
+        var_dump($requester);
+        echo("<br/>----------<br/>");
+        var_dump($refDetails);
+        echo("<br/>----------<br/>");
+    }
+
+    if ($lang == 'FR') {
+        $messContent = 
+        "Bonjour " . $refDetails->firstName . ",\n" .
+        "L'adh&eacute;rent " . $requester->firstName . ' ' . $requester->lastName . " souhaite r&eacute;server le bateau \"" . $boatDetails->boatName . "\" du " . $from . " au " . $to . ".\n\n" . 
+        "Nous vous invitons à prendre contact avec " . $requester->firstName . ' ' . $requester->lastName . " dans les meilleurs d&eacute;lais afin de confirmer ou annuler la r&eacute;servation.\n" .
+        "La mise &agrave; jour du planning est disponible depuis votre espace Admin.\n\n" .
+        "Voici les coordonn&eacute;es de " . $requester->firstName . ' ' . $requester->lastName . " :\n" .
+        "- Email &agrave; " . $requester->email . "\n" .
+        "- T&eacute;l&eacute;phone au " . $requester->telephone . "\n\n" .
+        "- L'&eacute;quipe Passe-Coque";
+    } else {
+        $messContent = 
+        "Hello " . $refDetails->firstName . ",\n" .
+        "The member " . $requester->firstName . ' ' . $requester->lastName . " wants to book the boat \"" . $boatDetails->boatName . "\" from " . $from . " to " . $to . ".\n\n" . 
+        "Please get in touch with " . $requester->firstName . ' ' . $requester->lastName . " at your earliest convenience in order to confirm or cancel the reservation.\n" .
+        "Updating the planning can be done fromn your Admin space.\n\n" .
+        "Here is how to reach " . $requester->firstName . ' ' . $requester->lastName . " :\n" .
+        "-Email  " . $requester->email . "\n" .
+        "-Telephone " . $requester->telephone . "\n\n" .
+        "- The Passe-Coque team";
+    }
+    return $messContent;
+}
+
+function composeEmailToRequester(array $boatDetails, Member $requester, string $from, string $to, string $dbhost, string $username, string $password, string $database, string $lang='FR', bool $verbose=false): string {
+    $messContent = "";
+    if ($lang == 'FR') {
+        $messContent = 
+        "Bonjour " . $requester->firstName . ", \n" .
+        "Votre demande de réservation pour le voilier \"" . $boatDetails[0]->boatName . "\" au départ de " . $boatDetails[0]->boatBase . " du " . $from . " au " . $to . " a été enregistrée.\n" .
+        "Un email de demande de confirmation a été envoyé au" . (count($boatDetails) > 1 ? "x" : "") . " référent" . (count($boatDetails) > 1 ? "s" : "") . " du bateau :\n";
+        
+        foreach($boatDetails as $detail) {
+            $ref = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $verbose);
+            $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", téléphone : " . $ref[0]->telephone . "\n");
+        }
+        $messContent .= "En cas d'absence de réponse, vous pouvez également nous envoyer un email à : pcc@passe-coque.com.\n\n" .
+                       "- L'équipe Passe-Coque\n";
+    } else {
+        $messContent = 
+        "Hello " . $requester->firstName . ", \n" .
+        "Your reservation request for the boat \"" . $boatDetails[0]->boatName . "\" starting in " . $boatDetails[0]->boatBase . " from " . $from . " to " . $to . " has been recorded.\n" .
+        "A confirmqtion request has been sent to the referent" . (count($boatDetails) > 1 ? "s" : "") . " of the boat:\n";
+        
+        foreach($boatDetails as $detail) {
+            $ref = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $verbose);
+            $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", telephone : " . $ref[0]->telephone . "\n");
+        }
+        $messContent .= "In case you do not get a reply, you can also send an email to: pcc@passe-coque.com.\n\n" .
+                       "- The Passe-Coque team\n";
+    }
+    return $messContent;
 }
 
 if (isset($_POST['operation'])) {
@@ -345,45 +411,66 @@ if (isset($_POST['operation'])) {
                     bookTheBoat($dbhost, $username, $password, $database, $userId, $boatId, $fromDate, $toDate, $escapedComment, $VERBOSE, $lang);
                     // 3-2 Emails
                     $details = getBoatDetails($dbhost, $username, $password, $database, $boatId, $VERBOSE);
+                    $member = getMember($dbhost, $username, $password, $database, $userId, $VERBOSE); // Requester
+                    
                     // 3-2-1 Referent(s) and PCC
                     if ($lang != 'FR') {
-                        $message = "$userId wants to reserve " . $details[0]->boatName . " from " . $fromDate . " to " . $toDate . 
+                        $message = $member[0]->firstName . " " . $member[0]->lastName . "($userId) wants to reserve " . $details[0]->boatName . " from " . $fromDate . " to " . $toDate . 
                                 ". As a referent of the boat your insight is required.";
                     } else {
-                        $message = "$userId veut r&eacute;server " . $details[0]->boatName . " du " . $fromDate . " au " . $toDate . 
+                        $message = $member[0]->firstName . " " . $member[0]->lastName . " ($userId) veut r&eacute;server " . $details[0]->boatName . " du " . $fromDate . " au " . $toDate . 
                                 ". En tant que r&eacute;f&eacute;rent du bateau, votre intervention est requise.";
                     }
                     foreach ($details as $detail) {
-                        sendEmail($detail->referentEmail, "Reservation Boat Club", $message, $lang, false);
+                        try {
+                            $refDetails = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $VERBOSE);
+                            $refMess = composeEmailToReferent($detail, $member[0], $refDetails[0], $fromDate, $toDate, $lang);
+                            sendEmail($detail->referentEmail, "Reservation Boat Club", $refMess, $lang, false, $VERBOSE);
+                        } catch (Throwable $e) {
+                            echo "Captured Throwable for composeEmailToReferent : " . $e->getMessage() . "<br/>" . PHP_EOL;
+                        }
                     } 
-                    sendEmail("pcc@passe-coque.com", "Reservation Boat Club", $message, $lang, false);
+                    sendEmail("pcc@passe-coque.com", "Reservation Boat Club", $message, $lang, false, false);
                     // 3-2-2 Requester.
+                    try {
+                        $reqMess = composeEmailToRequester($details, $member[0], $fromDate, $toDate, $dbhost, $username, $password, $database, $lang, $VERBOSE);
+                        $subject = ($lang == 'FR' ? "Votre Réservation au Boat Club" : "Your Boat Club Reservation");
+                        // echo ("Sending<br/>" . $reqMess . "<br/>With subject [" . $subject . "]<br/>");
+                        sendEmail($userId, $subject, $reqMess, $lang, false, $VERBOSE);
+                    } catch (Throwable $e) {
+                        echo "Captured Throwable for composeEmailToRequester : " . $e->getMessage() . "<br/>" . PHP_EOL;
+                    }
+
                     if ($lang != 'FR') {
-                        sendEmail($userId, "Reservation Boat Club", 
-                                "Your reservation request for the " . $details[0]->boatType . "\"" . $details[0]->boatName . "\" based in " . $details[0]->boatBase . " from $fromDate to $toDate has been recorded successfully!\n" .
-                                "The referent of the boat can be contacted at the following email address: $detail->referentEmail \n" .
-                                "Please do <a href='mailto:pcc@passe-coque.com'>re-contact us</a> if you do not hear from us within the next days.", $lang, true);
+                        // sendEmail($userId, "Your Boat Club Reservation", 
+                        //         "Hello " . $member[0]->firstName . ",<br/>" .
+                        //         "Your reservation request for the " . $details[0]->boatType . " \"" . $details[0]->boatName . "\" based in " . $details[0]->boatBase . " from $fromDate to $toDate has been recorded successfully!\n" .
+                        //         "The referent of the boat can be contacted at the following email address: $detail->referentEmail \n" .
+                        //         "Please do <a href='mailto:pcc@passe-coque.com'>re-contact us</a> if you do not hear from us within the next few days.<br/><br/>" .
+                        //         "- The Passe-Coque team.", $lang, false, true);
                         ?>
                         <p>
                             Your request is recorded. You will receive a
                             email summarizing the information: date(s), boat, base, number of crew, equipment to be provided and
                             other information, contact details of the contact person to contact for access, handling and restitution
                             of the boat.<br/>
-                            If there is no response within 24/48 hours, you can contact us at the address
-                            following email: pcc@passe-coque.com.<br/>
+                            If there is no response within 24/48 hours, you can contact us at the
+                            following email address: pcc@passe-coque.com.<br/>
                             The same AR was sent to the referent to inform him that he must accept or reject the reservation request.<br/>
                             The reservation planning should be updated (refresh if needed).
                         </p>
                         <a href="<?php echo(basename(__FILE__) . "?lang=EN") ?>">Back</a>.
                         <?php
-                                    } else {
-                        sendEmail($userId, "Reservation Boat Club", 
-                                "Votre demande de reservation pour le " . $details[0]->boatType . "\"" . $details[0]->boatName . "\" bas&eacute; &agrave; " . $details[0]->boatBase . " du $fromDate au $toDate a bien &eacute;t&eacute; enregistr&eacute;e !\n" .
-                                "Le r&eacute;f&eacute;rent du bateau peut &ecirc;tre contact&eacute; &agrave; l'adresse email suivante : $detail->referentEmail \n" .
-                                "Merci de <a href='mailto:pcc@passe-coque.com'>nous recontacter</a> si vous n'avez pas de nos nouvelles dans les prochains jours.", $lang, true);
+                    } else {
+                        // sendEmail($userId, "Votre R&eacute;servation au Boat Club", 
+                        //         "Bonjour " . $member[0]->firstName . ",<br/>" .
+                        //         "Votre demande de r&eacute;servation pour le " . $details[0]->boatType . " \"" . $details[0]->boatName . "\" bas&eacute; &agrave; " . $details[0]->boatBase . " du $fromDate au $toDate a bien &eacute;t&eacute; enregistr&eacute;e !\n" .
+                        //         "Le r&eacute;f&eacute;rent du bateau peut &ecirc;tre contact&eacute; &agrave; l'adresse email suivante : $detail->referentEmail \n" .
+                        //         "Merci de <a href='mailto:pcc@passe-coque.com'>nous recontacter</a> si vous n'avez pas de nos nouvelles dans les prochains jours.<br/><br/>" .
+                        //         "- L'&eacute;quipe Passe-Coque.", $lang, false);
                         ?>
                         <p>
-                            Votre r&eacute;servation est enregistr&eacute;e. Vous allez recevoir un
+                            Votre demande de r&eacute;servation est enregistr&eacute;e. Vous allez recevoir un
                             mail r&eacute;capitulant les informations : date(s), bateau, base, nombre d'&eacute;quipiers, mat&eacute;riel &agrave; pr&eacute;voir et
                             autres mentions, coordonn&eacute;es du r&eacute;f&eacute;rent &agrave; contacter pour l'acc&egrave;s, la prise en main et la restitution
                             du bateau.<br/>

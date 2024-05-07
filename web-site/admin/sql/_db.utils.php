@@ -12,10 +12,11 @@ class Boat {
     public $base;
 }
   
-class Referent {
+class Member {
     public $email;
     public $firstName;
     public $lastName;
+    public $telephone;
 }
   
 function getBoats(string $dbhost, string $username, string $password, string $database, bool $verbose): array {
@@ -128,7 +129,7 @@ function getMembers(string $dbhost, string $username, string $password, string $
                 echo("[Connected.] ");
             }
         }
-        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME FROM PASSE_COQUE_MEMBERS;";
+        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE FROM PASSE_COQUE_MEMBERS;";
         if ($verbose) {
             echo('[Performing instruction ['.$sql.']] ');
         }
@@ -141,10 +142,11 @@ function getMembers(string $dbhost, string $username, string $password, string $
         $members = array();
         $memberIndex = 0;
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-            $members[$memberIndex] = new Referent();
+            $members[$memberIndex] = new Member();
             $members[$memberIndex]->email = $table[0];
             $members[$memberIndex]->firstName = urldecode($table[1]);
             $members[$memberIndex]->lastName = urldecode($table[2]);
+            $members[$memberIndex]->telephone = $table[3];
             $memberIndex++;
         }
         // On ferme !
@@ -161,6 +163,53 @@ function getMembers(string $dbhost, string $username, string $password, string $
     return null;
 }
   
+function getMember(string $dbhost, string $username, string $password, string $database, string $email, bool $verbose=false): array {
+    try {
+        $link = new mysqli($dbhost, $username, $password, $database);
+        
+        if ($link->connect_errno) {
+            echo("[Oops, errno:".$link->connect_errno."...] ");
+            // die("Connection failed: " . $conn->connect_error);
+            throw $conn->connect_error;
+        } else {
+            if ($verbose) {
+                echo("[Connected.] ");
+            }
+        }
+        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$email';";
+        if ($verbose) {
+            echo('[Performing instruction ['.$sql.']] ');
+        }
+        
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+  
+        $members = array();
+        $memberIndex = 0;
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $members[$memberIndex] = new Member();
+            $members[$memberIndex]->email = $table[0];
+            $members[$memberIndex]->firstName = urldecode($table[1]);
+            $members[$memberIndex]->lastName = urldecode($table[2]);
+            $members[$memberIndex]->telephone = $table[3];
+            $memberIndex++;
+        }
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("[Closed DB] ".PHP_EOL);
+            echo "Finally, returning $boats";
+        }
+        return $members;
+    } catch (Throwable $e) {
+        echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
+        throw $e;
+    }                
+    return null;
+}
+
 class Reservation {
     public $owner;
     public $boat;
@@ -272,6 +321,79 @@ function getReservation(string $dbhost, string $username, string $password, stri
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
     return $reservation;
+}
+
+class AllBoatDetails {
+    public $refEmail;
+    public $refFullName;
+    public $boatId;
+    public $boatName;
+    public $boatType;
+    public $boatBase;
+    public $refTel;
+}
+
+function getBoatAndReferentDetails(string $dbhost, string $username, string $password, string $database, string $boatId) : array {
+    $sql = "SELECT M.EMAIL, " . 
+                  "CONCAT(M.FIRST_NAME, ' ', UPPER(M.LAST_NAME)), " . 
+                  "B.BOAT_NAME, " .  
+                  "B.BOAT_TYPE, " .   
+                  "B.BASE, " .   
+                  "R.TELEPHONE " .   
+            "FROM PASSE_COQUE_MEMBERS M, ". 
+                 "THE_FLEET B, " . 
+                 "REFERENTS R " .
+            "WHERE R.BOAT_ID = B.ID AND " .
+                  "B.ID = '" . $boatId . "' AND " .
+                  "B.CATEGORY = 'CLUB' AND " .
+                  "R.EMAIL = M.EMAIL;";
+
+    $allDetails = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { 
+            $allDetails[$index] = new AllBoatDetails();
+            $allDetails[$index]->refEmail = $table[0];
+            $allDetails[$index]->refFullName = urldecode($table[1]);
+            $allDetails[$index]->boatId = $boatId;
+            $allDetails[$index]->boatName = $table[2];
+            $allDetails[$index]->boatType = $table[3];
+            $allDetails[$index]->boatBase = $table[4];
+            $allDetails[$index]->refTel = $table[5];
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $allDetails;
 }
 
 class MemberStatus {

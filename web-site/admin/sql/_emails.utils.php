@@ -1,6 +1,6 @@
 <?php
 
-function sendEmail(string $destinationEmail, string $subject, string $emailContent, string $lang = 'FR', bool $verbose=false) : void {
+function sendEmail(string $destinationEmail, string $subject, string $emailContent, string $lang = 'FR', bool $withLink=false, bool $verbose=false) : void {
     try {
         // $lang = 'EN'; // For now
 
@@ -10,7 +10,9 @@ function sendEmail(string $destinationEmail, string $subject, string $emailConte
         
         // Load POST data from HTML form
         $pc_email       = $destinationEmail; // sender email, it will be used in "reply-to" header
-        $subject	    = "Boat Club Reservation";
+        if ($subject == null) {
+            $subject	    = "Boat Club Reservation";
+        }
         $message	    = $emailContent;
         // $message       .= ("<a href='http://www.passe-coque.com/php/password.02.php?subscriber-id=$pc_email&lang=$lang'>" . (($lang == "FR") ? "Reset mot de passe" : "Reset password") . "</a><br/>"); // Use the real ID
 
@@ -25,8 +27,10 @@ function sendEmail(string $destinationEmail, string $subject, string $emailConte
                 
         try {
             $footer = "<br/><hr/><p>"; 
-            $footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
-            $footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
+            $footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='80'><br/>";  // The full URL of the image.
+            if ($withLink) {
+                $footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
+            }
             $footer .= "</p>";
             $fmt_message = str_replace("\n", "\n<br/>", $message);
             $fmt_message .= $footer;
