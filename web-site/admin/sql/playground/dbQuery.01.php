@@ -76,7 +76,7 @@ if (isset($_POST['operation'])) {
       }
 
       if ($result->num_rows == 0) {  // then create record
-        $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK, SOME_CONTENT) VALUES (\'' . $email . '\', \'' . urlencode($firstName) . '\',  \'' . urlencode($lastName) . '\', TRUE, \'News Letter Subscriber\');'; 
+        $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK, SAILING_EXPERIENCE) VALUES (\'' . $email . '\', \'' . urlencode($firstName) . '\',  \'' . urlencode($lastName) . '\', TRUE, \'News Letter Subscriber\');'; 
         if ($VERBOSE) {
           echo('Performing instruction <code>' . $sql . '</code><br/>');
         }

@@ -307,7 +307,7 @@ function composeEmailToRequester(array $boatDetails, Member $requester, string $
         
         foreach($boatDetails as $detail) {
             $ref = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $verbose);
-            $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", téléphone : " . $ref[0]->telephone . "\n");
+            $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", téléphone : " . ($ref[0]->telephone != null ? $ref[0]->telephone : "--") . "\n");
         }
         $messContent .= "En cas d'absence de réponse, vous pouvez également nous envoyer un email à : pcc@passe-coque.com.\n\n" .
                        "- L'équipe Passe-Coque\n";
@@ -315,11 +315,11 @@ function composeEmailToRequester(array $boatDetails, Member $requester, string $
         $messContent = 
         "Hello " . $requester->firstName . ", \n" .
         "Your reservation request for the boat \"" . $boatDetails[0]->boatName . "\" starting in " . $boatDetails[0]->boatBase . " from " . $from . " to " . $to . " has been recorded.\n" .
-        "A confirmqtion request has been sent to the referent" . (count($boatDetails) > 1 ? "s" : "") . " of the boat:\n";
+        "A confirmation request has been sent to the referent" . (count($boatDetails) > 1 ? "s" : "") . " of the boat:\n";
         
         foreach($boatDetails as $detail) {
             $ref = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $verbose);
-            $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", telephone : " . $ref[0]->telephone . "\n");
+            $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", telephone : " . ($ref[0]->telephone != null ? $ref[0]->telephone : "--") . "\n");
         }
         $messContent .= "In case you do not get a reply, you can also send an email to: pcc@passe-coque.com.\n\n" .
                        "- The Passe-Coque team\n";
@@ -415,10 +415,10 @@ if (isset($_POST['operation'])) {
                     
                     // 3-2-1 Referent(s) and PCC
                     if ($lang != 'FR') {
-                        $message = $member[0]->firstName . " " . $member[0]->lastName . "($userId) wants to reserve " . $details[0]->boatName . " from " . $fromDate . " to " . $toDate . 
+                        $message = $member[0]->firstName . " " . $member[0]->lastName . "($userId) wants to reserve \"" . $details[0]->boatName . "\" from " . $fromDate . " to " . $toDate . 
                                 ". As a referent of the boat your insight is required.";
                     } else {
-                        $message = $member[0]->firstName . " " . $member[0]->lastName . " ($userId) veut r&eacute;server " . $details[0]->boatName . " du " . $fromDate . " au " . $toDate . 
+                        $message = $member[0]->firstName . " " . $member[0]->lastName . " ($userId) veut r&eacute;server \"" . $details[0]->boatName . "\" du " . $fromDate . " au " . $toDate . 
                                 ". En tant que r&eacute;f&eacute;rent du bateau, votre intervention est requise.";
                     }
                     foreach ($details as $detail) {

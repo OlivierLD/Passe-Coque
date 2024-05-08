@@ -44,7 +44,7 @@ if (isset($_POST['operation'])) {
           PCM.FIRST_ENROLLED,
           PCM.NEWS_LETTER_OK,
           PCM.ADMIN_PRIVILEGES,
-          PCM.SOME_CONTENT
+          PCM.SAILING_EXPERIENCE
       FROM 
           PASSE_COQUE_MEMBERS PCM
       WHERE 
@@ -65,14 +65,14 @@ if (isset($_POST['operation'])) {
           $f = fopen('php://memory', 'w'); 
            
           // Set column headers 
-          $fields = array('ID', 'LAST_NAME', 'FIRST_NAME', 'TARIF', 'AMOUNT', 'TELEPHONE', 'FIRST_ENROLLED', 'NL_OK', 'ADMIN', 'SOME_CONTENT'); 
+          $fields = array('ID', 'LAST_NAME', 'FIRST_NAME', 'TARIF', 'AMOUNT', 'TELEPHONE', 'FIRST_ENROLLED', 'NL_OK', 'ADMIN', 'SAILING_EXPERIENCE'); 
           fputcsv($f, $fields, $delimiter); 
            
           // Output each row of the data, format line as csv and write to file pointer 
           while ($row = $query->fetch_assoc()) { 
               $nlOk = ($row['NEWS_LETTER_OK'] == 1) ? "yes" : "no";
               $admin = ($row['ADMIN_PRIVILEGES'] == 1) ? "yes" : "no";
-              $lineData = array($row['ID'], urldecode($row['LAST_NAME']), urldecode($row['FIRST_NAME']), urldecode($row['TARIF']), $row['AMOUNT'], $row['TELEPHONE'], $row['FIRST_ENROLLED'], $nlOk, $admin, urldecode($row['SOME_CONTENT'])); 
+              $lineData = array($row['ID'], urldecode($row['LAST_NAME']), urldecode($row['FIRST_NAME']), urldecode($row['TARIF']), $row['AMOUNT'], $row['TELEPHONE'], $row['FIRST_ENROLLED'], $nlOk, $admin, urldecode($row['SAILING_EXPERIENCE'])); 
               fputcsv($f, $lineData, $delimiter); 
           } 
            

@@ -333,7 +333,7 @@ class AllBoatDetails {
     public $refTel;
 }
 
-function getBoatAndReferentDetails(string $dbhost, string $username, string $password, string $database, string $boatId) : array {
+function getBoatAndReferentDetails(string $dbhost, string $username, string $password, string $database, string $boatId, bool $verbose=false) : array {
     $sql = "SELECT M.EMAIL, " . 
                   "CONCAT(M.FIRST_NAME, ' ', UPPER(M.LAST_NAME)), " . 
                   "B.BOAT_NAME, " .  

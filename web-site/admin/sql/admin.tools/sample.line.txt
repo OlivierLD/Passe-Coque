@@ -1,0 +1,50 @@
+0 - 89526213;
+1 - 07/05/2024 10:27;
+2 - Validé;
+3 - "biette ";
+4 - "Jean-Marie ";
+5 - https://www.helloasso.com/associations/passe-coque-l-association-des-passeurs-d-ecoute/adhesions/adhesion-simple/carte-adherent?cardId=89526213&ag=89526213;
+6 - biette;
+7 - Jean-Marie;
+8 - jmbiette666@gmail.com;
+9 - ;
+10 - Carte bancaire;
+11 - Passeur d'Ecoute;
+12 - 50,00;
+13 - ;
+14 - ;
+15 - 0603482678;
+16 - jmbiette666@gmail.com;
+17 - 25 bis rue georges lafont, Nantes;
+18 - 44300;
+19 - 06/06/1960;
+20 - Nantes;
+21 - Importante meme s'il faut toujours rester humble;
+22 - ;
+
+
+INSERT INTO PASSE_COQUE_MEMBERS (
+    EMAIL, 
+    FIRST_NAME, 
+    LAST_NAME, 
+    TARIF, 
+    AMOUNT, 
+    TELEPHONE, 
+    FIRST_ENROLLED, 
+    BIRTH_DATE, 
+    ADDRESS, 
+    SAILING_EXPERIENCE, 
+    SHIPYARD_EXPERIENCE) 
+VALUES (
+    'jmbiette666@gmail.com', 
+    'Jean-Marie', 
+    'biette', 
+    'Passeur d\'Ecoute', 
+    50.00, 
+    '0603482678', 
+    STR_TO_DATE('07/05/2024 10:27', '%d/%m/%Y %H:%i'), 
+    STR_TO_DATE('06/06/1960', '%d/%m/%Y'), 
+    '25 bis rue georges lafont, Nantes\n44300\nNantes', 
+    'Importante meme s\'il faut toujours rester humble', 
+    ''
+);

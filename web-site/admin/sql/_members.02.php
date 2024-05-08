@@ -100,11 +100,14 @@ if (isset($_POST['operation'])) {
       $amount = $_POST['amount']; 
       $telephone = $_POST['telephone']; 
       $first_enrolled = $_POST['first-enrolled']; 
+      $birth_date = $_POST['birth-date']; 
+      $address = $_POST['address']; 
       $nl_ok = $_POST['nl-ok']; 
       $user_password = $_POST['user-password'];
       $update_psw = $_POST['upd-psswd']; 
       $admin = $_POST['admin-priv']; 
       $user_comments = (isset($_POST['user-comments']) ? $_POST['user-comments'] : '');
+      $user_comments_2 = (isset($_POST['user-comments-2']) ? $_POST['user-comments-2'] : '');
 
       echo ("Comment: [$user_comments] <br/>");
 
@@ -130,26 +133,32 @@ if (isset($_POST['operation'])) {
                     'AMOUNT = ' . (strlen(trim($amount)) > 0 ? trim($amount) : 'NULL') . ', ' .
                     'TELEPHONE = ' . (strlen(trim($telephone)) > 0 ? ('\'' . trim($telephone) . '\'') : 'NULL') . ',  ' .
                     'FIRST_ENROLLED = ' . (strlen(trim($first_enrolled)) > 0 ? ('\'' . trim($first_enrolled) . '\'') : 'NULL') . ',  ' .
+                    'BIRTH_DATE = ' . (strlen(trim($birth_date)) > 0 ? ('\'' . trim($birth_date) . '\'') : 'NULL') . ',  ' .
+                    'ADDRESS = ' . (strlen(trim($address)) > 0 ? ('\'' . trim($address) . '\'') : 'NULL') . ',  ' .
                     'NEWS_LETTER_OK = ' . ($nl_ok === '1' ? 'TRUE' : 'FALSE') . ', ' .
                     ($update_psw === '1' ? 'PASSWORD = \'' . sha1($user_password) . '\', ' : '') .
                     'ADMIN_PRIVILEGES = ' . ($admin === '1' ? 'TRUE' : 'FALSE') . ', ' .
-                    'SOME_CONTENT = ' . (strlen(trim($user_comments)) > 0 ? ('\'' . (str_replace("'","\'", trim($user_comments))) . '\'') : 'NULL') . ' ' .
+                    'SAILING_EXPERIENCE = ' . (strlen(trim($user_comments)) > 0 ? ('\'' . (str_replace("'","\'", trim($user_comments))) . '\'') : 'NULL') . ', ' .
+                    'SHIPYARD_EXPERIENCE = ' . (strlen(trim($user_comments_2)) > 0 ? ('\'' . (str_replace("'","\'", trim($user_comments_2))) . '\'') : 'NULL') . ' ' .
                 'WHERE EMAIL = \'' . $email . '\'';
         // echo ("Update Stmt: $sql ; <br/>");
       } else if (isset($_POST['delete'])) {
         $sql = 'DELETE FROM PASSE_COQUE_MEMBERS 
                 WHERE EMAIL = \'' . $email . '\'';
       } else if ($operation === 'insert') {
-        $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, AMOUNT, TELEPHONE, FIRST_ENROLLED, NEWS_LETTER_OK, PASSWORD, ADMIN_PRIVILEGES, SOME_CONTENT)
+        $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, AMOUNT, TELEPHONE, FIRST_ENROLLED, BIRTH_DATE, ADDRESS, NEWS_LETTER_OK, PASSWORD, ADMIN_PRIVILEGES, SAILING_EXPERIENCE, SHIPYARD_EXPERIENCE)
                 VALUES (\'' . ($email) . '\', \'' . urlencode($last_name) . '\', \'' . urlencode($first_name) . '\', 
                     ' . (strlen(trim($tarif)) > 0 ? ('\'' . urlencode(trim($tarif)) . '\'') : 'NULL') . ', 
                     ' . (strlen(trim($amount)) > 0 ? trim($amount) : 'NULL') . ', 
                     ' . (strlen(trim($telephone)) > 0 ? ('\'' . trim($telephone) . '\'') : 'NULL') . ', 
                     ' . (strlen(trim($first_enrolled)) > 0 ? ('\'' . trim($first_enrolled) . '\'') : 'NULL') . ', 
+                    ' . (strlen(trim($birth_date)) > 0 ? ('\'' . trim($birth_date) . '\'') : 'NULL') . ', 
+                    ' . (strlen(trim($address)) > 0 ? ('\'' . trim($address) . '\'') : 'NULL') . ', 
                     ' . ($nl_ok === '1' ? 'TRUE' : 'FALSE') . ', 
                     ' . (strlen(trim($user_password)) > 0 ? ('\'' . sha1(trim($user_password)) . '\'') : 'NULL') . ', 
                     ' . ($admin === '1' ? 'TRUE' : 'FALSE') . ', 
-                    ' . (strlen(trim($user_comments)) > 0 ? ('\'' . trim($user_comments) . '\'') : 'NULL') . 
+                    ' . (strlen(trim($user_comments)) > 0 ? ('\'' . trim($user_comments) . '\'') : 'NULL') . ',
+                    ' . (strlen(trim($user_comments_2)) > 0 ? ('\'' . trim($user_comments_2) . '\'') : 'NULL') . 
                     ')';
       } else {
         echo "What do you ant ?? <br/>" . PHP_EOL;
@@ -216,7 +225,10 @@ if (isset($_POST['operation'])) {
         PCM.NEWS_LETTER_OK,
         PCM.PASSWORD,
         PCM.ADMIN_PRIVILEGES,
-        PCM.SOME_CONTENT
+        PCM.SAILING_EXPERIENCE,
+        PCM.SHIPYARD_EXPERIENCE,
+        PCM.BIRTH_DATE,
+        PCM.ADDRESS
     FROM 
         PASSE_COQUE_MEMBERS PCM
     WHERE 
@@ -246,14 +258,18 @@ if (isset($_POST['operation'])) {
       echo('<tr><td>Email</td><td><input type="email" name="email" value="' . urldecode($table[0]) . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Last Name</td><td><input type="text" name="last-name" value="' . urldecode($table[1]) . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>First Name</td><td><input type="text" name="first-name" value="' . urldecode($table[2]) . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>Tarif</td><td><input type="text" name="tarif" value="' . urldecode($table[3]) . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Tarif</td><td><input type="text" name="tarif" value="' . ($table[3] != null ? urldecode($table[3]) : '') . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Amount</td><td><input type="number" name="amount" value="' . $table[4] . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Telephone</td><td><input type="text" name="telephone" value="' . $table[5] . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>First Enrolled</td><td><input type="text" name="first-enrolled" value="' . urldecode($table[6]) . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Enrolled</td><td><input type="text" name="first-enrolled" value="' . ($table[6] != null ? urldecode($table[6]) : '') . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Birth Date</td><td><input type="text" name="birth-date" value="' . ($table[12] != null ? urldecode($table[12]) : '') . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td style="vertical-align: top;">Address</td><td><textarea rows="4" cols="40" name="address">' . $table[13] . '</textarea></td><tr>' . PHP_EOL);
       echo('<tr><td>News Letter ?</td><td><input type="checkbox" name="nl-ok" value="1"' . ($table[7] ? " checked" : "")  . '></td><tr>' . PHP_EOL); 
-      echo('<tr><td>Password</td><td><input type="password" name="user-password" value="' . urldecode($table[8]) . '" size="40"></td><td><input type="checkbox" name="upd-psswd" value="1"> Update password</td><tr>' . PHP_EOL);
+      echo('<tr><td>Password</td><td><input type="password" name="user-password" value="' . ($table[8] != null ? urldecode($table[8]) : '') . '" size="40"></td><td><input type="checkbox" name="upd-psswd" value="1"> Update password</td><tr>' . PHP_EOL);
       echo('<tr><td>Admin privileges</td><td><input type="checkbox" name="admin-priv" value="1"' . ($table[9] ? " checked" : "")  . '></td><tr>' . PHP_EOL); 
-      echo('<tr><td style="vertical-align: top;">Comments</td><td><textarea rows="4" cols="40" name="user-comments">' . $table[10] . '</textarea></td><tr>' . PHP_EOL);
+      echo('<tr><td style="vertical-align: top;">Sailing Experience</td><td><textarea rows="4" cols="40" name="user-comments">' . $table[10] . '</textarea></td><tr>' . PHP_EOL);
+      echo('<tr><td style="vertical-align: top;">Shipyard Experience</td><td><textarea rows="4" cols="40" name="user-comments-2">' . $table[11] . '</textarea></td><tr>' . PHP_EOL);
+
     }
     echo "</table>" . PHP_EOL;
     ?>
@@ -282,11 +298,14 @@ if (isset($_POST['operation'])) {
       <tr><td>Tarif</td><td><input type="text" name="tarif" size="40"></td><tr>
       <tr><td>Amount</td><td><input type="number" name="amount" size="40"></td><tr>
       <tr><td>Telephone</td><td><input type="text" name="telephone" size="40"></td><tr>
-      <tr><td>First Enrolled</td><td><input type="text" name="first-enrolled" size="40"></td><tr>
+      <tr><td>Enrolled</td><td><input type="text" name="first-enrolled" size="40"></td><tr>
+      <tr><td>Birth Date</td><td><input type="text" name="birth-date" size="40"></td><tr>
+      <tr><td style="vertical-align: top;">Address</td><td><textarea rows="4" cols="40" name="address"></textarea></td><tr>
       <tr><td>News Letter ?</td><td><input type="checkbox" name="nl-ok" value="1" checked></td><tr>
       <tr><td>Password</td><td><input type="password" name="user-password" size="40"></td><tr>
       <tr><td>Admin privileges</td><td><input type="checkbox" name="admin-priv" value="1"></td><tr>
-      <tr><td style="vertical-align: top;">Comments</td><td><textarea rows="4" cols="40" name="user-comments"></textarea></td><tr>
+      <tr><td style="vertical-align: top;">Sailing Experience</td><td><textarea rows="4" cols="40" name="user-comments"></textarea></td><tr>
+      <tr><td style="vertical-align: top;">Shipyard Experience</td><td><textarea rows="4" cols="40" name="user-comments-2"></textarea></td><tr>
 
     </table>
     <input type="submit" value="Create" name="create">

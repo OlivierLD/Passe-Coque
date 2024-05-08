@@ -147,7 +147,7 @@ if (isset($_POST['operation'])) {
             $ownerDetails = getMember($dbhost, $username, $password, $database, $owner, $VERBOSE);
 
             // Get detailed boat data, referent(s) infos.
-            $allDetails = getBoatAndReferentDetails($dbhost, $username, $password, $database, $boat);
+            $allDetails = getBoatAndReferentDetails($dbhost, $username, $password, $database, $boat, $VERBOSE);
 
             $sql = "UPDATE BC_RESERVATIONS SET " .
                    "RESERVATION_STATUS = '$status', " .
@@ -159,9 +159,9 @@ if (isset($_POST['operation'])) {
             if ($prevStatus != $status) {
                 // Send email to $owner (the guy who reserved).
                 $message = "Bonjour " . $ownerDetails[0]->firstName . ", <br/>";
-                $message .= ("Votre r&eacute;servation du " . $resDate . " pour le bateau "  . $allDetails[0]->boatName . " (id \"" . $boat . "\") a &eacute;t&eacute; modifi&eacute;e de \"" . translateStatus($prevStatus) . "\" &agrave; \"" . translateStatus($status) . "\".<br/>");
+                $message .= ("Votre r&eacute;servation du " . $resDate . " pour le bateau \""  . $allDetails[0]->boatName . "\" (id \"" . $boat . "\") a &eacute;t&eacute; modifi&eacute;e de \"" . translateStatus($prevStatus) . "\" &agrave; \"" . translateStatus($status) . "\".<br/>");
 
-                $message .= ($allDetails[0]->boatName . " a " . count($allDetails) . " r&eacute;f&eacute;rent" . (count($allDetails) > 1 ? "s" : "") . " dont voici les coordonn&eacute;es :<br/>");
+                $message .= ("\"" . $allDetails[0]->boatName . "\" a " . count($allDetails) . " r&eacute;f&eacute;rent" . (count($allDetails) > 1 ? "s" : "") . " dont voici les coordonn&eacute;es :<br/>");
                 if (true) {
                     foreach ($allDetails as $details) {
                         $message .= ("R&eacute;f&eacute;rent : " . $details->refFullName . ", email : " . $details->refEmail . ", t&eacute;l&eacute;phone : " . $details->refTel . "<br/>");
