@@ -48,3 +48,18 @@ VALUES (
     'Importante meme s\'il faut toujours rester humble', 
     ''
 );
+
+-- Cacha.csv
+
+0 - Andreo;
+1 - Paco;
+2 - Skipper référent;
+3 - 200 €;
+4 - 06 49 36 51 89;
+5 - ;
+6 - paco-andreo@orange.fr;
+7 - 20-sept.-21;
+8 - x;
+9 - x;
+10 - x;
+11 - ;
