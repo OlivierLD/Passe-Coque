@@ -38,7 +38,7 @@
 <?php 
 // https://www.w3schools.com/php/php_file_open.asp
 
-$FILE_NAME = "./Cacha.2024.05.09.csv";
+$FILE_NAME = "./Cacha.2024.05.09.orig.csv";
 $HA_FILE_NAME = "./HelloAsso-25_03_2021-08_05_2024.csv";
 
 
@@ -72,7 +72,7 @@ class CachaRecord {
     function __construct (array $record) {
         $this->lastName = $record[self::$LAST_NAME];   // initialize lastName
         $this->firstName = $record[self::$FIRST_NAME]; // initialize firstName
-        $this->email = $record[self::$EMAIL];          // initialize email
+        $this->email = trim($record[self::$EMAIL]);          // initialize email
         $this->tarif = $record[self::$TARIF];          // etc... 
         $this->amount = $record[self::$AMOUNT];
         $this->telephone = $record[self::$TELEPHONE];
@@ -88,8 +88,8 @@ class CachaRecord {
         return self::$_2024; // Last field index
     }
 
-    function dump() {
-        echo(trim($this->email) . ";" . 
+    function dump(string $endWith="<br/>"): string {
+        return(trim($this->email) . ";" . 
              trim($this->firstName) . ";" . 
              trim($this->lastName) . ";" .
              trim($this->tarif) . ";" .
@@ -97,7 +97,10 @@ class CachaRecord {
              trim($this->telephone) . ";" .
              trim($this->address) . ";" .
              trim($this->date) . 
-             "<br/>");
+             $endWith);
+    }
+    function doDump(string $endWith="<br/>"): void {
+        echo $this->dump($endWith);
     }
 
     function getFirstName() {
@@ -157,22 +160,22 @@ class HelloAssoRecord {
     function __construct (array $record) {
         $this->lastName = $record[self::$LAST_NAME];   // initialize lastName
         $this->firstName = $record[self::$FIRST_NAME]; // initialize firstName
-        $this->email = $record[self::$EMAIL];          // initialize email
+        $this->email = trim($record[self::$EMAIL]);          // initialize email
         $this->tarif = $record[self::$TARIF];          // etc... 
         $this->amount = $record[self::$AMOUNT];
         $this->telephone = $record[self::$TELEPHONE];
-        $this->address = $record[self::$ADDR_1] . "\n" . $record[self::$ADDR_2] . "\n" . $record[self::$ADDR_3];
+        $this->address = $record[self::$ADDR_1] . ", " . $record[self::$ADDR_2] . ", " . $record[self::$ADDR_3];
         $this->date = $record[self::$DATE];
         $this->bDate = $record[self::$B_DATE];
         $this->txt1 = $record[self::$TXT_1];
         $this->txt2 = $record[self::$TXT_2];
     }
 
-    function dump() {
-        echo(trim($this->email) . ";" . 
+    function dump(string $endWith="<br/>"): string {
+        return(trim($this->email) . ";" . 
              trim($this->firstName) . ";" . 
              trim($this->lastName) . ";" .
-             trim(unFrame($this->tarif)) . ";" .  // TODO Remove quotes
+             trim(unFrame($this->tarif)) . ";" .  // Remove quotes
              trim($this->amount) . ";" .
              trim($this->telephone) . ";" .
              trim($this->address) . ";" .
@@ -180,7 +183,10 @@ class HelloAssoRecord {
              trim($this->bDate) . ";" .
              trim($this->txt1) . ";" .
              trim($this->txt2) . 
-             "<br/>");
+             $endWith);
+    }
+    function doDump(string $endWith="<br/>"): void {
+        echo $this->dump($endWith);
     }
 
     public static function getRecordLength (): int {
@@ -228,11 +234,10 @@ $VERBOSE = false;
 
 function createRecord(string $dbhost, string $username, string $password, string $database, string $email,  
                       string $lastName, string $firstName, string $date, string $tarif, string $amount, string $telephone, 
-                      string $bDate, string $addr1, string $addr2, string $addr3, string $txt1, string $txt2, bool $verbose=false): void {
-    $address = $addr1 . '\n' . $addr2 . '\n' . $addr3;
+                      string $bDate, string $address, string $txt1, string $txt2, bool $verbose=false): void {
     $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, FIRST_NAME, LAST_NAME, TARIF, AMOUNT, TELEPHONE, FIRST_ENROLLED, BIRTH_DATE, ADDRESS, SAILING_EXPERIENCE, SHIPYARD_EXPERIENCE) ' .
-                'VALUES (\'' . $email . '\', \'' . str_replace("'", "\'", $firstName) . '\',  \'' . str_replace("'", "\'", $lastName) . '\', \'' . str_replace("'", "\'", $tarif) . '\', ' . str_replace(",", ".", $amount) . ', ' .
-                    '\'' . $telephone . '\', STR_TO_DATE(\'' .$date . '\', \'%d/%m/%Y %H:%i\'), ' . (strlen($bDate) > 0 ? 'STR_TO_DATE(\'' .$bDate . '\', \'%d/%m/%Y\')' : 'NULL') . ', ' .
+                'VALUES (\'' . $email . '\', \'' . str_replace("'", "\'", $firstName) . '\',  \'' . str_replace("'", "\'", $lastName) . '\', \'' . str_replace("'", "\'", $tarif) . '\', ' . (strlen(trim($amount)) == 0 ? 'NULL' : str_replace(",", ".", $amount)) . ', ' .
+                    '\'' . $telephone . '\', ' . ( strlen($date) > 0 ? 'STR_TO_DATE(\'' . $date . '\', \'%d/%m/%Y %H:%i\')' : 'NULL' ) . ', ' . (strlen($bDate) > 0 ? 'STR_TO_DATE(\'' .$bDate . '\', \'%d/%m/%Y\')' : 'NULL') . ', ' .
                     '\'' . str_replace("'", "\'", $address) . '\', \'' . str_replace("'", "\'", $txt1) . '\', \'' . str_replace("'", "\'", $txt2) . '\');';
     if ($verbose) {
         echo("Will execute [" . $sql . "]<br/>");                    
@@ -243,15 +248,14 @@ function createRecord(string $dbhost, string $username, string $password, string
 
 function updateRecord(string $dbhost, string $username, string $password, string $database, string $email, 
                       string $lastName, string $firstName, string $date, string $tarif, string $amount, string $telephone, 
-                      string $bDate, string $addr1, string $addr2, string $addr3, string $txt1, string $txt2, bool $verbose=false): void {
-    $address = $addr1 . '\n' . $addr2 . '\n' . $addr3;
+                      string $bDate, string $address, string $txt1, string $txt2, bool $verbose=false): void {
     $sql = 'UPDATE PASSE_COQUE_MEMBERS ' .
                 'SET FIRST_NAME = \'' . str_replace("'", "\'", $firstName) . '\', ' .
                     'LAST_NAME =  \'' . str_replace("'", "\'", $lastName) . '\', ' .
                     'TARIF = \'' . str_replace("'", "\'", $tarif) . '\', ' .
-                    'AMOUNT = ' . str_replace(",", ".", $amount) . ', ' .
+                    'AMOUNT = ' . (strlen(trim($amount)) == 0 ? 'NULL' : str_replace(",", ".", $amount)) . ', ' .
                     'TELEPHONE =  \'' . $telephone . '\', ' .
-                    'FIRST_ENROLLED = STR_TO_DATE(\'' .$date . '\', \'%d/%m/%Y %H:%i\'), ' .
+                    'FIRST_ENROLLED = ' . ( strlen($date) > 0 ? 'STR_TO_DATE(\'' . $date . '\', \'%d/%m/%Y %H:%i\')' : 'NULL' ) . ', ' .
                     'BIRTH_DATE = ' . (strlen($bDate) > 0 ? 'STR_TO_DATE(\'' .$bDate . '\', \'%d/%m/%Y\')' : 'NULL') . ', ' .
                     'ADDRESS = \'' . str_replace("'", "\'", $address) . '\', ' . 
                     'SAILING_EXPERIENCE = \'' . str_replace("'", "\'", $txt1) . '\', ' . 
@@ -323,6 +327,7 @@ if (!function_exists('str_ends_with')) {
 }
 
 try {
+    // Populate HA records
     $fullHAContent = file_get_contents($HA_FILE_NAME);
     $allHALines = explode(PHP_EOL, $fullHAContent);
 
@@ -358,7 +363,7 @@ try {
     }
     echo("Built an array of " . count($haRecords) . " HA records.<br/>");
 
-    // $fullContent = readfile($FILE_NAME);
+    // Populate CACHA records
     $fullCachaContent = file_get_contents($FILE_NAME);
     $allCachaLines = explode(PHP_EOL, $fullCachaContent);
 
@@ -394,6 +399,15 @@ try {
     echo("Built an array of " . count($cachaRecords) . " CACHA records.<br/>");
     echo("<hr/>");
 
+    // Finding missing emails (in CACHA)
+    $idx = 1;
+    foreach($cachaRecords as $rec) {
+        if (strlen(trim($rec->getEmail())) == 0) {
+            echo("Rec #" . $idx . ", no email for:<br/>");
+            $rec->doDump();
+        }
+        $idx++;
+    }
     // Finding double entries.
     foreach($cachaRecords as $rec) {
         try {
@@ -407,11 +421,38 @@ try {
     }
     echo("<hr/>");
 
+    // Find records in HA, missing in CACHA
+    $nbMissing = 0;
+    foreach($haRecords as $rec) {
+        $cachRecs = findCACHARecords($rec->getEmail(), $cachaRecords);
+        if (count($cachaRecs) == 0) {
+            echo($rec->getEmail() . " found in HA, but NOT in Cacha<br/>");
+            $nbMissing++;
+        }
+    }
+    echo($nbMissing . " records missing in Cacha.<br/>");
+    echo("<hr/>" . PHP_EOL);
+    
+?>
+    <textarea rows="10" style="font-family: 'Courier New'; line-height: normal; width: 100%;">
+<?php 
+
+
+    $analyse = false;
+    $extraMessages = array();
+    $messIdx = 0;
     // Arrays are built, now proceed
     foreach($cachaRecords as $rec) {
         try {
-            // $rec->printSummary();
-            // echo($cachaRecord->getEmail() . " - " . $cachaRecord->getFirstName() . " " . $cachaRecord->getLastName() . "- Telephone: [" . $cachaRecord->getTelephone() . "]<br/>");
+            // $rec->dump();
+
+            // Look for dup email pattern (a test)
+            $re = '/.*\[(\d)+\]$/m';
+            $str = $rec->getEmail();
+            if (preg_match($re, $str)) {
+                $extraMessages[$messIdx++] = "<span style='color: blue;'>" . $rec->getEmail() . " is a duplicated one.</span><br/>";
+            }
+            
             // Look for this email in HA
             $haRecs = findHARecords($rec->getEmail(), $haRecords);
             if (false) {
@@ -424,28 +465,105 @@ try {
                     }
                 }
                 if ($rec->getEmail() == "jeff.allais@hotmail.fr") { // A test
-                    $rec->dump();
-                    $haRecs[0]->dump();
+                    $rec->doDump();
+                    $haRecs[0]->doDump();
                 }
             } else {
-                echo("<hr/>" . PHP_EOL);
-                $rec->dump();
+                if (false && !$analyse) { // true: dump all records
+                    echo("<hr/>" . PHP_EOL);
+                    $rec->doDump();
+                }
                 if (count($haRecs) > 0) {
                     if (count($haRecs) > 1) {
-                        echo("<span style='color: red;'>" . count($haRecs) . " records in HA</span><br/>");
+                        // echo("<span style='color: red;'>" . count($haRecs) . " records in HA for " . $rec->getEmail() . "</span><br/>");
+                        $extraMessages[$messIdx++] = "-- " . count($haRecs) . " records in HA for " . $rec->getEmail() . "\n";
+                        if ($analyse) {
+                            foreach($haRecs as $haRec) {
+                                $haRec->doDump();
+                            }
+                        }
                     }
-                    foreach($haRecs as $haRec) {
-                        $haRec->dump();
+                    if (!$analyse) {
+                        foreach($haRecs as $haRec) {
+                            $extraMessages[$messIdx++] = ("-- " . $haRec->dump("\n"));
+                        }
                     }
                 } else {
-                    echo("No HA record was found<br/>");
+                    if (!$analyse) {
+                        $extraMessages[$messIdx++] = "-- No HA record was found for " . $rec->getEmail() . "<br/>\n";
+                    }
                 }
-                echo("<hr/>" . PHP_EOL);
+                if (false && !$analyse) {
+                    echo("<hr/>" . PHP_EOL);
+                }
+                if (true) {
+                    $email = $rec->getEmail();
+                    $firstName = '';
+                    $lastName = '';
+                    $date = '';
+                    $tarif = '';
+                    $amount = 0;
+                    $telephone = '';
+                    $bDate = '';
+                    $address = '';
+                    $txt1 = '';
+                    $txt2 = '';
+                    if (count($haRecs) > 0) { // Take the first record (ONLY !!)
+                        $firstName = trim($haRecs[0]->getFirstName());
+                        $lastName = trim($haRecs[0]->getLastName());
+                        $date = trim($haRecs[0]->getDate());
+                        $tarif = trim($haRecs[0]->getTarif());
+                        $amount = reworkAmount($haRecs[0]->getAmount());
+                        $telephone = trim($haRecs[0]->getTelephone());
+                        $bDate = trim($haRecs[0]->getBDate());
+                        $address = trim($haRecs[0]->getAddress());
+                        $txt1 = unFrame(trim($haRecs[0]->getTxt1()));
+                        $txt2 = unFrame(trim($haRecs[0]->getTxt2()));
+                    } else {
+                        $firstName = trim($rec->getFirstName());
+                        $lastName = trim($rec->getLastName());
+                        $date = trim($rec->getDate());
+                        $tarif = trim($rec->getTarif());
+                        $amount = reworkAmount($rec->getAmount());
+                        $telephone = trim($rec->getTelephone());
+                        $address = trim($rec->getAddress());
+                    }
+                    // Generate new record in DB, CREATE or Update
+                    // All data available, look into the DB
+                    $members = getMember($dbhost, $username, $password, $database, $rec->getEmail(), false);
+                    if (count($members) == 0) {
+                        if ($VERBOSE) {
+                            echo("<span style='color: red;'>" . $rec->getEmail() . " : Not in DB.</span><br/>");
+                        }
+                        createRecord($dbhost, $username, $password, $database, 
+                                    $email, $lastName, $firstName, $date, $tarif, $amount, $telephone, 
+                                    $bDate, $address, str_replace('""', '"', $txt1), str_replace('""', '"', $txt2), $VERBOSE);
+                    // } else if (count($members) > 1) { // TODO Detect duplicates in CSV
+                    //     echo("<span style='color: blue;'>" . $fields[$EMAIL] . " : " . count($members) . " in DB.</span><br/>");
+                    } else { // 1 in DB
+                        if ($VERBOSE) {
+                            echo($email . " : " . count($members) . " in DB.<br/>");
+                        }
+                        updateRecord($dbhost, $username, $password, $database, 
+                                    $email, $lastName, $firstName, $date, $tarif, $amount, $telephone, 
+                                    $bDate, $address, str_replace('""', '"', $txt1), str_replace('""', '"', $txt2), $VERBOSE);
+                    }
+                    // End of DB section
+                }
             }
         } catch (Throwable $e2) {
             echo "Captured Throwable : " . $e2->getMessage() . "<br/>" . PHP_EOL;
         }
     }
+?>
+    </textarea>  
+<?php
+  
+  echo ("<h3>" . $messIdx . " messages</h3>");
+  // var_dump($extraMessages);
+  foreach($extraMessages as $mess) {
+    echo ($mess . "<br/>");
+  }
 
 } catch (Throwable $e) {
     echo "Captured Throwable : " . $e->getMessage() . "<br/>" . PHP_EOL;

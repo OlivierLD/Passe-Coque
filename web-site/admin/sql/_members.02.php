@@ -22,6 +22,7 @@ try {
     <meta charset="ISO-8859-1"-->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Edit Members</title>
     <style type="text/css">
       * {
@@ -134,7 +135,7 @@ if (isset($_POST['operation'])) {
                     'TELEPHONE = ' . (strlen(trim($telephone)) > 0 ? ('\'' . trim($telephone) . '\'') : 'NULL') . ',  ' .
                     'FIRST_ENROLLED = ' . (strlen(trim($first_enrolled)) > 0 ? ('\'' . trim($first_enrolled) . '\'') : 'NULL') . ',  ' .
                     'BIRTH_DATE = ' . (strlen(trim($birth_date)) > 0 ? ('\'' . trim($birth_date) . '\'') : 'NULL') . ',  ' .
-                    'ADDRESS = ' . (strlen(trim($address)) > 0 ? ('\'' . trim($address) . '\'') : 'NULL') . ',  ' .
+                    'ADDRESS = ' . (strlen(trim($address)) > 0 ? ('\'' . (str_replace("'","\'", trim($address))) . '\'') : 'NULL') . ',  ' .
                     'NEWS_LETTER_OK = ' . ($nl_ok === '1' ? 'TRUE' : 'FALSE') . ', ' .
                     ($update_psw === '1' ? 'PASSWORD = \'' . sha1($user_password) . '\', ' : '') .
                     'ADMIN_PRIVILEGES = ' . ($admin === '1' ? 'TRUE' : 'FALSE') . ', ' .
@@ -153,12 +154,12 @@ if (isset($_POST['operation'])) {
                     ' . (strlen(trim($telephone)) > 0 ? ('\'' . trim($telephone) . '\'') : 'NULL') . ', 
                     ' . (strlen(trim($first_enrolled)) > 0 ? ('\'' . trim($first_enrolled) . '\'') : 'NULL') . ', 
                     ' . (strlen(trim($birth_date)) > 0 ? ('\'' . trim($birth_date) . '\'') : 'NULL') . ', 
-                    ' . (strlen(trim($address)) > 0 ? ('\'' . trim($address) . '\'') : 'NULL') . ', 
+                    ' . (strlen(trim($address)) > 0 ? ('\'' . (str_replace("'","\'", trim($address))) . '\'') : 'NULL') . ', 
                     ' . ($nl_ok === '1' ? 'TRUE' : 'FALSE') . ', 
                     ' . (strlen(trim($user_password)) > 0 ? ('\'' . sha1(trim($user_password)) . '\'') : 'NULL') . ', 
                     ' . ($admin === '1' ? 'TRUE' : 'FALSE') . ', 
-                    ' . (strlen(trim($user_comments)) > 0 ? ('\'' . trim($user_comments) . '\'') : 'NULL') . ',
-                    ' . (strlen(trim($user_comments_2)) > 0 ? ('\'' . trim($user_comments_2) . '\'') : 'NULL') . 
+                    ' . (strlen(trim($user_comments)) > 0 ? ('\'' . (str_replace("'","\'", trim($user_comments))) . '\'') : 'NULL') . ',
+                    ' . (strlen(trim($user_comments_2)) > 0 ? ('\'' . (str_replace("'","\'", trim($user_comments_2))) . '\'') : 'NULL') . 
                     ')';
       } else {
         echo "What do you ant ?? <br/>" . PHP_EOL;
@@ -256,19 +257,19 @@ if (isset($_POST['operation'])) {
       // echo ("Debug: " . $table[7] . "...");
 
       echo('<tr><td>Email</td><td><input type="email" name="email" value="' . urldecode($table[0]) . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>Last Name</td><td><input type="text" name="last-name" value="' . urldecode($table[1]) . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>First Name</td><td><input type="text" name="first-name" value="' . urldecode($table[2]) . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>Tarif</td><td><input type="text" name="tarif" value="' . ($table[3] != null ? urldecode($table[3]) : '') . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Last Name</td><td><input type="text" name="last-name" value="' . utf8_encode($table[1]) . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>First Name</td><td><input type="text" name="first-name" value="' . utf8_encode($table[2]) . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Tarif</td><td><input type="text" name="tarif" value="' . ($table[3] != null ? utf8_encode($table[3]) : '') . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Amount</td><td><input type="number" name="amount" value="' . $table[4] . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Telephone</td><td><input type="text" name="telephone" value="' . $table[5] . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Enrolled</td><td><input type="text" name="first-enrolled" value="' . ($table[6] != null ? urldecode($table[6]) : '') . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Birth Date</td><td><input type="text" name="birth-date" value="' . ($table[12] != null ? urldecode($table[12]) : '') . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td style="vertical-align: top;">Address</td><td><textarea rows="4" cols="40" name="address">' . $table[13] . '</textarea></td><tr>' . PHP_EOL);
+      echo('<tr><td style="vertical-align: top;">Address</td><td><textarea rows="4" cols="40" name="address">' . utf8_encode($table[13]) . '</textarea></td><tr>' . PHP_EOL);
       echo('<tr><td>News Letter ?</td><td><input type="checkbox" name="nl-ok" value="1"' . ($table[7] ? " checked" : "")  . '></td><tr>' . PHP_EOL); 
       echo('<tr><td>Password</td><td><input type="password" name="user-password" value="' . ($table[8] != null ? urldecode($table[8]) : '') . '" size="40"></td><td><input type="checkbox" name="upd-psswd" value="1"> Update password</td><tr>' . PHP_EOL);
       echo('<tr><td>Admin privileges</td><td><input type="checkbox" name="admin-priv" value="1"' . ($table[9] ? " checked" : "")  . '></td><tr>' . PHP_EOL); 
-      echo('<tr><td style="vertical-align: top;">Sailing Experience</td><td><textarea rows="4" cols="40" name="user-comments">' . $table[10] . '</textarea></td><tr>' . PHP_EOL);
-      echo('<tr><td style="vertical-align: top;">Shipyard Experience</td><td><textarea rows="4" cols="40" name="user-comments-2">' . $table[11] . '</textarea></td><tr>' . PHP_EOL);
+      echo('<tr><td style="vertical-align: top;">Sailing Experience</td><td><textarea rows="4" cols="40" name="user-comments">' . utf8_encode($table[10]) . '</textarea></td><tr>' . PHP_EOL);
+      echo('<tr><td style="vertical-align: top;">Shipyard Experience</td><td><textarea rows="4" cols="40" name="user-comments-2">' . utf8_encode($table[11]) . '</textarea></td><tr>' . PHP_EOL);
 
     }
     echo "</table>" . PHP_EOL;

@@ -1,7 +1,7 @@
 <html lang="fr">
   <!-- TODO Option admin, to see the categories or not -->
 <head>
-    <title>Passe&#8209;Coque Boat Club</title>
+    <title>Reservation Passe&#8209;Coque Boat Club</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--link rel="icon" type="image/png" href="./infinity.png"-->
@@ -125,12 +125,13 @@ table {
 }
 .canceled {
     background-color: gray !important;
+    color: white !important;
 }
 .admin {
     background-color: violet !important;
 }
 .booked {
-    background-color: orange !important;
+    background-color: #005B5F !important; /* Logo color */
 }
   </style>
 </head>
@@ -562,9 +563,9 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
             // Append one col per day in the planning
             planning.calendar.days.forEach(day => {
               const data = document.createElement('td');
-              let style = 'text-align: center; line-height: normal; border: 1px solid silver;';
+              let style = 'text-align: center; line-height: normal; border: 1px solid black;';
               if (day.weekDay == 0 || day.weekDay == 6) {
-                style += ' background: lime;';
+                style += ' background: silver;';
               }
               data.setAttribute('style', style);
               data.innerHTML = '<small>' + FRENCH_DAYS_ABBR[day.weekDay] + '</small><br/> ' + day.day; // See with week day name
@@ -584,9 +585,9 @@ const fetchAndDisplay = (fromYear, fromMonth, span=3) => {
               // Append one col per day in the planning
               planning.calendar.days.forEach(day => {
                 const data = document.createElement('td');
-                let style = 'text-align: center; line-height: normal; border: 1px solid silver;';
+                let style = 'text-align: center; line-height: normal; border: 1px solid black;';
                 if (day.weekDay == 0 || day.weekDay == 6) {
-                  style += ' background: lime;';
+                  style += ' background: silver;';
                 }
                 data.setAttribute('style', style);
                 // data.innerHTML = '<small>' + FRENCH_DAYS_ABBR[day.weekDay] + '</small><br/> ' + day.day; // See with week day name

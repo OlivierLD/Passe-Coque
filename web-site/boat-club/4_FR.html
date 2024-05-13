@@ -43,7 +43,7 @@
                             <p>
                                 <!-- I read the chart, I submit the motivations -->
                                 <iframe name="subscr-response" style="display: none; width: 100%;" onload="onSubscribeResponse(this, subscriptionOKMessage(), subscriptionErrorMessage());"></iframe>
-                                <form action="../admin/sql/_subscribe.php" method="post" target="subscr-response" id="bc-subscription">
+                                <form enctype="multipart/form-data" action="../admin/sql/_subscribe.php" method="post" target="subscr-response" id="bc-subscription">
                                     <input type="hidden" name="lang" value="FR">
                                     <table>
                                         <tr>
@@ -58,6 +58,12 @@
                                             <td style="vertical-align: top;">Vos motivations</td>
                                             <td>                    
                                                 <textarea style="line-height: normal;" name="motivations" form="bc-subscription" rows="5" cols="80" placeholder="Vos motivations ici..." required></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="vertical-align: top;">Fichier en attachement ?</td>
+                                            <td>                    
+                                                <input type="file" name="attachment" id="attachment" accept=".pdf,.doc,.docx,.odt" placeholder="Attachment" >
                                             </td>
                                         </tr>
                                     </table>

@@ -59,6 +59,24 @@ if (isset($_POST['motivations'])) {
 if (isset($_GET['motivations'])) {
     $motivations = $_GET['motivations'];
 }
+// File attachment ?
+$name = '';
+if (isset($_FILES['attachment'])) {
+    // Get uploaded file data using $_FILES array
+	$tmp_name = $_FILES['attachment']['tmp_name']; // get the temporary file name of the file on the server
+	$name	  = $_FILES['attachment']['name'];     // get the name of the file
+	$size	  = $_FILES['attachment']['size'];     // get size of the file for size validation
+	$type	  = $_FILES['attachment']['type'];     // get type of the file
+	$error	  = $_FILES['attachment']['error'];    // get the error (if any)
+
+	//validate form field for attaching the file
+	if ($error > 0) {
+		die('Upload error or No files uploaded');
+    }
+// } else {
+//    echo("No _FILES");
+}
+
 if ($VERBOSE) {
     echo ("Subscribe Data: email [$email], read the chart [$check], motivations [$motivations] <br/>" . PHP_EOL);
 }
@@ -107,6 +125,11 @@ if ($check != 'on') {
         if ($ok) {
             // TODO Translate that one.
             $message = "$email a soumis une demande d'inscription au BoatClub, avec ces motivations :\n<hr/>$motivations\n<hr/>\n&Agrave; valider.";
+            if (strlen($name) > 0) { // WiP... Attach that one to the email to the club
+                echo("File to attach:" . $name);
+            } else {
+                echo("No file was attached");
+            }
             sendEmail("pcc@passe-coque.com", "Boat Club Subscription", $message, $lang, true);
             if ($lang == 'FR') {
                 $message = 'Votre demande d\'adh&eacute;sion a &eacute;t&eacute; adress&eacute;e &agrave; pcc@passe-coque.com. Vous recevrez bient&ograve;t des nouvelles.';

@@ -150,7 +150,7 @@ if (isset($_POST['operation'])) {
           "<tr><td>" . 
             urldecode($table[0]) . // Email
           "</td><td>" .  
-            urldecode($table[1]) . // Name (full)
+            utf8_encode($table[1]) . // Name (full)
           "</td><td style='text-align: center;'>" .  
             ($table[2] ? 'Member' : "<a href='./_boat-club.01.php?operation=subscribe&email=" . $table[0] . "'>Subscribe</a>") . // already in Boat Club, or subscribe
           "</td><td>" . 

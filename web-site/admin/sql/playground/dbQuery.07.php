@@ -57,10 +57,12 @@ function decToSex($value, $type) {
   return $sign . " " . $formatted;
 }
 
-$username = "passecc128";
-$password = "zcDmf7e53eTs";
-$database = "passecc128";
-$dbhost = "passecc128.mysql.db";
+require __DIR__ . "/../../../php/db.cred.php";
+
+// $username = "passecc128";
+// $password = "zcDmf7e53eTs";
+// $database = "passecc128";
+// $dbhost = "passecc128.mysql.db";
 
 if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
