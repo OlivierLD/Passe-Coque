@@ -22,7 +22,7 @@ try {
     <meta charset="ISO-8859-1"-->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--meta http-equiv="Content-Type" content="text/html; charset=utf-8"/-->
     <title>Edit Members</title>
     <style type="text/css">
       * {

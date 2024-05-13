@@ -44,7 +44,14 @@ if (isset($_POST['operation'])) {
           PCM.FIRST_ENROLLED,
           PCM.NEWS_LETTER_OK,
           PCM.ADMIN_PRIVILEGES,
-          PCM.SAILING_EXPERIENCE
+          PCM.SAILING_EXPERIENCE,
+          PCM.SHIPYARD_EXPERIENCE,
+          PCM.BIRTH_DATE,
+          PCM.ADDRESS,
+          (SELECT 'x' from MEMBERS_AND_FEES F WHERE PCM.EMAIL = F.EMAIL AND F.YEAR = 2021) AS '2021',
+          (SELECT 'x' from MEMBERS_AND_FEES F WHERE PCM.EMAIL = F.EMAIL AND F.YEAR = 2022) AS '2022',
+          (SELECT 'x' from MEMBERS_AND_FEES F WHERE PCM.EMAIL = F.EMAIL AND F.YEAR = 2023) AS '2023',
+          (SELECT 'x' from MEMBERS_AND_FEES F WHERE PCM.EMAIL = F.EMAIL AND F.YEAR = 2024) AS '2024'
       FROM 
           PASSE_COQUE_MEMBERS PCM
       WHERE 
@@ -58,21 +65,57 @@ if (isset($_POST['operation'])) {
       // $result = mysqli_query($link, $sql);
  
       if ($query->num_rows > 0) { 
-          $delimiter = ","; 
+          $delimiter = ";"; //","; 
           $filename = "members-data_" . date('Y-m-d') . ".csv"; 
            
           // Create a file pointer 
           $f = fopen('php://memory', 'w'); 
            
           // Set column headers 
-          $fields = array('ID', 'LAST_NAME', 'FIRST_NAME', 'TARIF', 'AMOUNT', 'TELEPHONE', 'FIRST_ENROLLED', 'NL_OK', 'ADMIN', 'SAILING_EXPERIENCE'); 
+          $fields = array('ID', 
+                          'LAST_NAME', 
+                          'FIRST_NAME', 
+                          'TARIF', 
+                          'AMOUNT', 
+                          'TELEPHONE', 
+                          'FIRST_ENROLLED', 
+                          'NL_OK', 
+                          'ADMIN', 
+                          'SAILING_EXPERIENCE', 
+                          'SHIPYARD_EXPERIENCE',
+                          'BIRTH_DATE',
+                          'ADDRESS',
+                          '2021',
+                          '2022',
+                          '2023',
+                          '2024'
+                        ); 
           fputcsv($f, $fields, $delimiter); 
            
           // Output each row of the data, format line as csv and write to file pointer 
           while ($row = $query->fetch_assoc()) { 
+              // var_dump($row);
+              //echo("<br/>");
               $nlOk = ($row['NEWS_LETTER_OK'] == 1) ? "yes" : "no";
               $admin = ($row['ADMIN_PRIVILEGES'] == 1) ? "yes" : "no";
-              $lineData = array($row['ID'], urldecode($row['LAST_NAME']), urldecode($row['FIRST_NAME']), urldecode($row['TARIF']), $row['AMOUNT'], $row['TELEPHONE'], $row['FIRST_ENROLLED'], $nlOk, $admin, urldecode($row['SAILING_EXPERIENCE'])); 
+              $lineData = array($row['ID'], 
+                                utf8_encode($row['LAST_NAME']), 
+                                utf8_encode($row['FIRST_NAME']), 
+                                utf8_encode($row['TARIF']), 
+                                $row['AMOUNT'], 
+                                $row['TELEPHONE'], 
+                                $row['FIRST_ENROLLED'], 
+                                $nlOk, 
+                                $admin, 
+                                utf8_encode($row['SAILING_EXPERIENCE']), 
+                                utf8_encode($row['SHIPYARD_EXPERIENCE']),
+                                $row['BIRTH_DATE'],
+                                utf8_encode($row['ADDRESS']),
+                                $row['2021'],
+                                $row['2022'],
+                                $row['2023'],
+                                $row['2024']
+                              ); 
               fputcsv($f, $lineData, $delimiter); 
           } 
            
