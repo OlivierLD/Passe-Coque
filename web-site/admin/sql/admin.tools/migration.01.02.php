@@ -127,6 +127,18 @@ class CachaRecord {
     function getDate() {
         return $this->date;
     }
+    function get2021() {
+        return $this->fee_2021;
+    }
+    function get2022() {
+        return $this->fee_2022;
+    }
+    function get2023() {
+        return $this->fee_2023;
+    }
+    function get2024() {
+        return $this->fee_2024;
+    }
 
 }
 
@@ -264,6 +276,37 @@ function updateRecord(string $dbhost, string $username, string $password, string
 
     if ($verbose) {
         echo("Will execute [" . $sql . "]<br/>");
+    } else {
+        echo $sql . "\n";
+    }
+}
+
+function createFeeRecord(string $dbhost, string $username, string $password, string $database, 
+                         string $email, int $year, bool $verbose=false): void {
+    // Create if not exist
+    $sql = // 'INSERT INTO MEMBER_FEES (EMAIL, YEAR) ' .
+           //   'VALUES (\'' . $email . '\', ' . $year . ');';
+           'INSERT INTO MEMBER_FEES (EMAIL, YEAR) ' .
+                'SELECT \'' . $email . '\', ' . $year . ' ' .
+                'FROM DUAL ' .
+                'WHERE NOT EXISTS (' .
+                '   SELECT 1' .
+                '   FROM MEMBER_FEES ' .
+                '   WHERE EMAIL = \'' . $email . '\' AND ' .
+                '        YEAR = ' . $year .
+                ');';
+
+    if ($verbose) {
+        echo("Will execute [" . $sql . "]<br/>");                    
+    } else {
+        echo $sql . "\n";
+    }
+}
+function deleteFeeRecord(string $dbhost, string $username, string $password, string $database, 
+                         string $email, int $year, bool $verbose=false): void {
+    $sql = 'DELETE FROM MEMBER_FEES WHERE EMAIL =\'' . $email . '\' AND YEAR = ' . $year . ';';
+    if ($verbose) {
+        echo("Will execute [" . $sql . "]<br/>");                    
     } else {
         echo $sql . "\n";
     }
@@ -439,6 +482,7 @@ try {
 
 
     $analyse = false;
+    $feesOnly = false;
     $extraMessages = array();
     $messIdx = 0;
     // Arrays are built, now proceed
@@ -535,18 +579,64 @@ try {
                         if ($VERBOSE) {
                             echo("<span style='color: red;'>" . $rec->getEmail() . " : Not in DB.</span><br/>");
                         }
-                        createRecord($dbhost, $username, $password, $database, 
-                                    $email, $lastName, $firstName, $date, $tarif, $amount, $telephone, 
-                                    $bDate, $address, str_replace('""', '"', $txt1), str_replace('""', '"', $txt2), $VERBOSE);
+                        if (!$feesOnly) {
+                            createRecord($dbhost, $username, $password, $database, 
+                                        $email, $lastName, $firstName, $date, $tarif, $amount, $telephone, 
+                                        $bDate, $address, str_replace('""', '"', $txt1), str_replace('""', '"', $txt2), $VERBOSE);
+                        }
+                        // Create fees for years in MEMBER_FEES
+                        if ($rec->get2021() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2021, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2021, $VERBOSE);
+                        }
+                        if ($rec->get2022() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2022, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2022, $VERBOSE);
+                        }
+                        if ($rec->get2023() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2023, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2023, $VERBOSE);
+                        }
+                        if ($rec->get2024() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2024, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2024, $VERBOSE);
+                        }                        
                     // } else if (count($members) > 1) { // TODO Detect duplicates in CSV
                     //     echo("<span style='color: blue;'>" . $fields[$EMAIL] . " : " . count($members) . " in DB.</span><br/>");
                     } else { // 1 in DB
                         if ($VERBOSE) {
                             echo($email . " : " . count($members) . " in DB.<br/>");
                         }
-                        updateRecord($dbhost, $username, $password, $database, 
-                                    $email, $lastName, $firstName, $date, $tarif, $amount, $telephone, 
-                                    $bDate, $address, str_replace('""', '"', $txt1), str_replace('""', '"', $txt2), $VERBOSE);
+                        if (!$feesOnly) {
+                            updateRecord($dbhost, $username, $password, $database, 
+                                        $email, $lastName, $firstName, $date, $tarif, $amount, $telephone, 
+                                        $bDate, $address, str_replace('""', '"', $txt1), str_replace('""', '"', $txt2), $VERBOSE);
+                        }
+                        // Create fees for years in MEMBER_FEES
+                        if ($rec->get2021() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2021, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2021, $VERBOSE);
+                        }
+                        if ($rec->get2022() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2022, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2022, $VERBOSE);
+                        }
+                        if ($rec->get2023() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2023, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2023, $VERBOSE);
+                        }
+                        if ($rec->get2024() == 'x') {
+                            createFeeRecord($dbhost, $username, $password, $database, $email, 2024, $VERBOSE);
+                        } else {
+                            deleteFeeRecord($dbhost, $username, $password, $database, $email, 2024, $VERBOSE);
+                        }
                     }
                     // End of DB section
                 }
