@@ -162,7 +162,7 @@ if ($operation != '') {
           "<tr><td>" . 
             urldecode($table[0]) . // Email
           "</td><td>" .  
-            urldecode($table[1]) . // Name (full)
+            utf8_encode($table[1]) . // Name (full)
           "</td><td>" .  
             $table[2] . // Enrolled
           "</td><td>" . 
@@ -338,7 +338,7 @@ if ($operation != '') {
         "<tr>" . 
           "<td>Email</td><td>" . urldecode($table[0]) . "</td>" .  
         "</tr><tr>" .
-          "<td>Full Name</td><td>" . urldecode($table[1]) . "</td>" .  
+          "<td>Full Name</td><td>" . utf8_encode($table[1]) . "</td>" .  
         "</tr><tr>" .
           "<td>Enrolled</td><td><input type='date' name='enrolled' value='" . ($table[2]) . "'></td>" .  
         "</tr><tr>" .
