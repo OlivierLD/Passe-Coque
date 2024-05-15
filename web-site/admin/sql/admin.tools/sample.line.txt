@@ -63,3 +63,44 @@ VALUES (
 9 - x;
 10 - x;
 11 - ;
+
+-- Boat-Club HA
+
+ 0 - Référence commande;
+ 1 - Date de la commande;
+ 2 - Statut de la commande;
+ 3 - Nom adhérent;
+ 4 - Prénom adhérent;
+ 5 - Carte d'adhérent;
+ 6 - Nom payeur;
+ 7 - Prénom payeur;
+ 8 - Email payeur;
+ 9 - Raison sociale;
+10 - Moyen de paiement;
+11 - Tarif;
+12 - Montant tarif;
+13 - Code Promo;
+14 - Montant code promo;
+15 - Adresse;
+16 - Telephone;
+17 - Commentaires
+
+
+ 0 - 89211508;
+ 1 - 04/05/2024 10:21;  // Date commande
+ 2 - Validé;
+ 3 - Rohland;  // Adherent
+ 4 - Thilo;    // Adherent
+ 5 - https://www.helloasso.com/associations/passe-coque-l-association-des-passeurs-d-ecoute/adhesions/passe-coque-club/carte-adherent?cardId=89211508&ag=89211508;
+ 6 - Rohland;
+ 7 - Thilo;
+ 8 - thilo.rohland@gmail.com;
+ 9 - ;
+10 - Carte bancaire;
+11 - Chef de bord;
+12 - 600,00;
+13 - ;
+14 - ;
+15 - 2 rue des lutins, 56680 Gâvres;
+16 - 0627287326;
+17 -  // Comments

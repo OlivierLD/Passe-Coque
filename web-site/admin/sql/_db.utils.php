@@ -210,6 +210,53 @@ function getMember(string $dbhost, string $username, string $password, string $d
     return null;
 }
 
+function getBCMember(string $dbhost, string $username, string $password, string $database, string $email, bool $verbose=false): array {
+    try {
+        $link = new mysqli($dbhost, $username, $password, $database);
+        
+        if ($link->connect_errno) {
+            echo("[Oops, errno:".$link->connect_errno."...] ");
+            // die("Connection failed: " . $conn->connect_error);
+            throw $conn->connect_error;
+        } else {
+            if ($verbose) {
+                echo("[Connected.] ");
+            }
+        }
+        $sql = "SELECT BCM.EMAIL, PCM.FIRST_NAME, PCM.LAST_NAME, PCM.TELEPHONE FROM BOAT_CLUB_MEMBERS BCM, PASSE_COQUE_MEMBERS PCM WHERE BCM.EMAIL = '$email' AND BCM.EMAIL = PCM.EMAIL;";
+        if ($verbose) {
+            echo('[Performing instruction ['.$sql.']] ');
+        }
+        
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+  
+        $members = array();
+        $memberIndex = 0;
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $members[$memberIndex] = new Member();
+            $members[$memberIndex]->email = $table[0];
+            $members[$memberIndex]->firstName = utf8_encode($table[1]);
+            $members[$memberIndex]->lastName = utf8_encode($table[2]);
+            $members[$memberIndex]->telephone = $table[3];
+            $memberIndex++;
+        }
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("[Closed DB] ".PHP_EOL);
+            echo "Finally, returning $boats";
+        }
+        return $members;
+    } catch (Throwable $e) {
+        echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
+        throw $e;
+    }                
+    return null;
+}
+
 class Reservation {
     public $owner;
     public $boat;

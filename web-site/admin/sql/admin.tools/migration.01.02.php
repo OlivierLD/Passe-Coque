@@ -72,7 +72,7 @@ class CachaRecord {
     function __construct (array $record) {
         $this->lastName = $record[self::$LAST_NAME];   // initialize lastName
         $this->firstName = $record[self::$FIRST_NAME]; // initialize firstName
-        $this->email = trim($record[self::$EMAIL]);          // initialize email
+        $this->email = strtolower(trim($record[self::$EMAIL]));  // initialize email
         $this->tarif = $record[self::$TARIF];          // etc... 
         $this->amount = $record[self::$AMOUNT];
         $this->telephone = $record[self::$TELEPHONE];
@@ -144,8 +144,8 @@ class CachaRecord {
 
 class HelloAssoRecord {
     static $DATE = 1;
-    static $LAST_NAME = 6;
-    static $FIRST_NAME = 7;
+    static $LAST_NAME = 3; // 6;
+    static $FIRST_NAME = 4; // 7;
     static $TARIF = 11;
     static $AMOUNT = 12;
     static $EMAIL = 16;  // Email. 8 is "email payeur"
@@ -170,9 +170,9 @@ class HelloAssoRecord {
     var $txt2;
 
     function __construct (array $record) {
-        $this->lastName = $record[self::$LAST_NAME];   // initialize lastName
-        $this->firstName = $record[self::$FIRST_NAME]; // initialize firstName
-        $this->email = trim($record[self::$EMAIL]);          // initialize email
+        $this->lastName = trim(unFrame($record[self::$LAST_NAME]));   // initialize lastName
+        $this->firstName = trim(unFrame($record[self::$FIRST_NAME])); // initialize firstName
+        $this->email = strtolower(trim($record[self::$EMAIL]));    // initialize email
         $this->tarif = $record[self::$TARIF];          // etc... 
         $this->amount = $record[self::$AMOUNT];
         $this->telephone = $record[self::$TELEPHONE];
@@ -383,6 +383,9 @@ try {
         if (strlen($line) > 0) {
             if ($idx > 0) {
                 $fields = explode(";", $line);
+                // if ($fields[4] == 'Guy' || $fields[4] == 'Gabrielle') {
+                //     var_dump($fields);
+                // }
                 try {
                     if (count($fields) >= HelloAssoRecord::getRecordLength()) {
                         $haRecord = new HelloAssoRecord($fields);
@@ -394,7 +397,7 @@ try {
                     }
 
                     if ($VERBOSE) {
-                        echo ("- " . $fields[$FIRST_NAME] . ' ' . $fields[$LAST_NAME] . ", email:" . $fields[$EMAIL] . "<br/>");
+                        echo ("- " . $fields[4] . ' ' . $fields[3] . ", email:" . $fields[16] . "<br/>");
                     }
 
                 } catch (Throwable $e2) {
@@ -451,12 +454,25 @@ try {
         }
         $idx++;
     }
-    // Finding double entries.
+    // Finding double entries in Cacha.
     foreach($cachaRecords as $rec) {
         try {
             $cachaRecs = findCACHARecords($rec->getEmail(), $cachaRecords);
             if (count($cachaRecs) > 1) {
-                echo(count($cachaRecs) . " records for " . $rec->getEmail() . "<br/>");
+                echo("In Cacha, " . count($cachaRecs) . " records for " . $rec->getEmail() . "<br/>");
+            }
+        } catch (Throwable $e2) {
+            echo "Captured Throwable : " . $e2->getMessage() . "<br/>" . PHP_EOL;
+        }
+    }
+    echo("<hr/>");
+    
+    // Finding double entries in HA.
+    foreach($cachaRecords as $rec) {
+        try {
+            $haRecs = findHARecords($rec->getEmail(), $haRecords);
+            if (count($haRecs) > 1) {
+                echo("In HA, " . count($haRecs) . " records for " . $rec->getEmail() . "<br/>");
             }
         } catch (Throwable $e2) {
             echo "Captured Throwable : " . $e2->getMessage() . "<br/>" . PHP_EOL;
@@ -467,6 +483,10 @@ try {
     // Find records in HA, missing in CACHA
     $nbMissing = 0;
     foreach($haRecords as $rec) {
+        // if ($rec->getFirstName() == 'Guy' || $rec->getFirstName() == 'Gabrielle') {
+        //     var_dump($rec);
+        //     echo("<br/>");
+        // }
         $cachRecs = findCACHARecords($rec->getEmail(), $cachaRecords);
         if (count($cachaRecs) == 0) {
             echo($rec->getEmail() . " found in HA, but NOT in Cacha<br/>");
@@ -491,7 +511,7 @@ try {
             // $rec->dump();
 
             // Look for dup email pattern (a test)
-            $re = '/.*\[(\d)+\]$/m';
+            $re = '/.*\.dup\.(\d)+$/m';  // like ...fr.dup.2
             $str = $rec->getEmail();
             if (preg_match($re, $str)) {
                 $extraMessages[$messIdx++] = "<span style='color: blue;'>" . $rec->getEmail() . " is a duplicated one.</span><br/>";
