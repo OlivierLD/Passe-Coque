@@ -325,6 +325,18 @@ let closeDiv = (el) => {
     el.style.display = 'none';
 }
 
+function expandClick(origin) {
+    console.log("Click happened");
+    let divToShow = origin.parentNode.querySelector("div");
+    if (divToShow.style.display === 'none') {
+        divToShow.style.display = 'block';
+        origin.innerHTML = '&#9660;';
+    } else {
+        divToShow.style.display = 'none';
+        origin.innerHTML = '&#9658;';
+    }
+}
+
 function markerOnClick(e) {
     console.log(e);
 
@@ -393,6 +405,7 @@ let initBoatClubBases = () => {
     const laRochelle   = new L.LatLng(46.146335, -1.166267);
     const concarneau   = new L.LatLng(47.870353, -3.914394);
     const kerran       = new L.LatLng(47.598399, -2.981517);
+    const gavres       = new L.LatLng(47.700475, -3.351070);
 
     ZOOM_POSITIONS = [
         { latlng: homeBelz, txt: 'Belz Home' },
@@ -402,7 +415,8 @@ let initBoatClubBases = () => {
         { latlng: lesSables, txt: 'Les Sables d\'Olonne, Jolly Jumper (First 325)' },
         { latlng: laRochelle, txt: 'La Rochelle, . . .' },
         { latlng: concarneau, txt: 'Concarneau, Nomadict (Gin Fizz)' },
-        { latlng: kerran, txt: 'ZA de Kerran, le local.' }
+        { latlng: kerran, txt: 'ZA de Kerran, le local.' },
+        { latlng: gavres, txt: 'Gâvres, Eh\'Tak (Shipman 28).' }
     ];
 
     map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
@@ -458,7 +472,11 @@ let initBoatClubBases = () => {
         position: kerran,
         map: map,
         title: 'ZA de Kerran'});                                                                                        
-
+    makeMarker({
+        position: gavres,
+        map: map,
+        title: 'G&acirc;vres'});                                                                                        
+    
     let tooltip = null;
 
     if (false) { // Position  (lat-lng) of the mouse

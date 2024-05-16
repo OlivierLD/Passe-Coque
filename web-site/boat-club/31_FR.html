@@ -6,13 +6,13 @@
             <div style="margin: 10px;">
                 <div class="pcc-bases-list" id="pcc-bases">
                     <div>
-                        <a class="list-link" href="#" onclick="flyToZoom(1);">Lab Ocean</a>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(1);">Lab Ocean</a>
                         <div class="fade" style="display: none;">
                             Un bureau pour Passe-Coque.
                         </div>
                     </div>
                     <div>
-                        <a class="list-link" href="#" onclick="flyToZoom(2);">&Eacute;tel</a>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(2);">&Eacute;tel</a>
                         <div class="fade" style="display: none;">
                             <ul>
                                 <!-- TODO Get the boat data from the DB or the json -->
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="list-link" href="#" onclick="flyToZoom(3);">La Trinit&eacute;</a>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(3);">La Trinit&eacute;</a>
                         <div class="fade" style="display: none;">
                             <ul>
                                 <li><a href="#" id="trehudal" onclick="clickOnBoatPix(this, 'Trehudal', '../');">Tr&eacute;hudal</a> (Nicholson 33)</li>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="list-link" href="#" onclick="flyToZoom(4);">Les Sables d'Olonne</a>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(4);">Les Sables d'Olonne</a>
                         <div class="fade" style="display: none;">
                             <ul>
                                 <li><a href="#" id="jolly-jumper" onclick="clickOnBoatPix(this, 'Jolly Jumper', '../');">Jolly Jumper</a> (First 325)</li>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="list-link" href="#" onclick="flyToZoom(5);">La Rochelle</a>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(5);">La Rochelle</a>
                         <div class="fade" style="display: none;">
                             <ul>
                                 <li>. . .</li>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="list-link" href="#" onclick="flyToZoom(6);">Concarneau</a>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(6);">Concarneau</a>
                         <div class="fade" style="display: none;">
                             <ul>
                                 <li><a href="#" id="nomadict" onclick="clickOnBoatPix(this, 'Nomadict', '../');">Nomadict</a> (Gin Fizz)</li>
@@ -54,10 +54,18 @@
                         </div>
                     </div>
                     <div>
-                        <a class="list-link" href="#" onclick="flyToZoom(7);">ZA de Kerran</a>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(7);">ZA de Kerran</a>
                         <div class="fade" style="display: none;">
                             <ul>
                                 <li>Le local technique de Passe-Coque</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <span onclick="expandClick(this); ">&#9658;</span>  <a class="list-link" href="#" onclick="flyToZoom(8);">G&acirc;vres</a>
+                        <div class="fade" style="display: none;">
+                            <ul>
+                                <li><a href="#" id="eh-tak" onclick="clickOnBoatPix(this, 'Eh\'Tak', '../');">Eh'Tak</a> (Shipman 28)</li>
                             </ul>
                         </div>
                     </div>
