@@ -151,7 +151,7 @@ if (isset($_POST['operation'])) {
 
             $sql = "UPDATE BC_RESERVATIONS SET " .
                    "RESERVATION_STATUS = '$status', " .
-                   "MISC_COMMENT = '$comment' " .
+                   "MISC_COMMENT = '" . str_replace("'", "\'", $comment) . "' " .
                    "WHERE EMAIL = '$owner' AND " .
                         " BOAT_ID = '$boat' AND " .
                         " RESERVATION_DATE = STR_TO_DATE('$resDate', '%Y-%m-%d %H:%i:%s');";
