@@ -169,13 +169,23 @@ if (isset($_POST['operation'])) {
 
       ?> <!-- Member creation form -->
 
-      <form action="./_members.02.php" method="get">
-        <input type="hidden" name="task" value="create">
-        <input type="submit" value="Create New Member">
-      </form> 
+      <table cellspacing="20">
+        <tr>
+          <td style="border: none;">
+            <form action="./_members.02.php" method="get">
+              <input type="hidden" name="task" value="create">
+              <input type="submit" value="Create New Member">
+            </form> 
+          </td>
+          <td style="border: none;">  
+            <form action="" method="get">
+              <input type="submit" value="Query Again ?">
+            </form>
+          </td>
+        </tr>
+      </table>  
 
       <?php
-
 
       echo "<table>";
       echo "<tr><th>Email</th><th>Name</th><th>Tarif</th>" . 
@@ -236,23 +246,18 @@ if (isset($_POST['operation'])) {
     echo("<hr/>" . PHP_EOL);
     // echo("Again ? Click <a href='#'>Here</a>.");
     ?>
-    <form action="" method="get">
-      <!--input type="hidden" name="operation" value="blank"-->
-      <table>
-        <tr>
-          <td colspan="2" style="text-align: center;"><input type="submit" value="Query Again ?"></td>
-        </tr>
-      </table>
-    </form>
+    <!-- Query again button was here -->
     <?php
   }
 } else { // Then display the form
     ?>
     <form action="" method="post">
       <input type="hidden" name="operation" value="query">
+      <h3>Enter a filter below and click the button (empty filter returns the full list)</h3>
+      Joker character is '%'.
       <table>
         <tr>
-          <td valign="top">Name (part of first name, last name, email):</td><td><input type="text" name="full-name" size="40"></td>
+          <td valign="top">Name (part of first name, last name, email):</td><td><input type="text" name="full-name" size="40" placeholder="Your filter"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>

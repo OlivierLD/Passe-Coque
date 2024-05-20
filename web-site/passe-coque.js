@@ -1427,7 +1427,7 @@ const THE_FLEET = [
         id: "lohengrin",
         pix: "/images/boats/lohengrin/lohengrin.png",
         type: "Ketch en Acier",
-        category: TO_GRAB,
+        category: EX_BOAT,
         base: "Arzal"
     },
     { 
