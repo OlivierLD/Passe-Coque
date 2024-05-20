@@ -443,6 +443,53 @@ function getBoatAndReferentDetails(string $dbhost, string $username, string $pas
     return $allDetails;
 }
 
+// For the boats of the CLUB only
+function getBoatsByReferent(string $dbhost, string $username, string $password, string $database, string $userId, bool $verbose=false) : array {
+    $sql = "SELECT B.ID, B.BOAT_NAME, B.BOAT_TYPE, B.BASE " .
+           "FROM PASSE_COQUE_MEMBERS M, THE_FLEET B, REFERENTS R " .
+           "WHERE R.BOAT_ID = B.ID AND B.CATEGORY = 'CLUB' AND R.EMAIL = M.EMAIL AND M.EMAIL = '$userId';";
+
+    $boats = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { 
+            $boats[$index] = $table[0];
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $boats;
+}
+
 class MemberStatus {
     public $status;  // bool 
     public $errNo;   // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club

@@ -138,10 +138,13 @@ if (isset($_POST['operation'])) {
         // echo("Connected.<br/>");
       }
     
+      
+      // Also Is a Referent ?
       $sql = "SELECT PCM.PASSWORD, " . 
              "CONCAT(PCM.FIRST_NAME, ' ', PCM.LAST_NAME), " . 
              "PCM.ADMIN_PRIVILEGES, " .
-             "(SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC " . 
+             "(SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC, " . 
+             "(SELECT IF(COUNT(M.EMAIL) = 0, FALSE, TRUE) FROM PASSE_COQUE_MEMBERS M, THE_FLEET B, REFERENTS R WHERE R.BOAT_ID = B.ID AND B.CATEGORY = 'CLUB' AND R.EMAIL = M.EMAIL AND M.EMAIL = '$form_username') AS REF " .
              "FROM PASSE_COQUE_MEMBERS PCM " . 
              "WHERE PCM.EMAIL = '$form_username';"; 
       
@@ -194,6 +197,7 @@ if (isset($_POST['operation'])) {
           $display_name = $table[1];
           $admin_privileges = $table[2];
           $bc_member = $table[3];
+          $is_referent = $table[4];
         }
         if ($db_password == sha1($form_password)) { // Valid.
 
@@ -203,6 +207,7 @@ if (isset($_POST['operation'])) {
           $_SESSION['ADMIN'] = $admin_privileges;
           $_SESSION['USER_ID'] = $form_username;  // Same as USER_NAME
           $_SESSION['BC_MEMBER'] = $bc_member;
+          $_SESSION['IS_REFERENT'] = $is_referent;
           // Welcome !
           // If arrives here, is a valid user.
           // $mess = ($current_lang == "FR") ? "Bienvenue" : "Welcome";
@@ -210,10 +215,12 @@ if (isset($_POST['operation'])) {
             echo "<p>Bravo, vous &ecirc;tes maintenant connect&eacute; au syst&egrave;me.</p>" . PHP_EOL;
             echo "Membre Boat-Club : " . ($bc_member ? "Oui" : "Non") . "<br/>" . PHP_EOL;
             echo "Admin : " . ($admin_privileges ? "Oui" : "Non") . "<br/>" . PHP_EOL;
+            echo "R&eacute;f&eacute;rent : " . ($is_referent ? "Oui" : "Non") . "<br/>" . PHP_EOL;
           } else {
             echo "<p>Congratulation, you are now into the system.</p>" . PHP_EOL;
             echo "Boat-Club Member: " . ($bc_member ? "Yes" : "No") . "<br/>" . PHP_EOL;
             echo "Admin: " . ($admin_privileges ? "Yes" : "No") . "<br/>" . PHP_EOL;
+            echo "Referent: " . ($is_referent ? "Yes" : "No") . "<br/>" . PHP_EOL;
           }
           echo "<p style='line-height: normal;'>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . "<br/>" . PHP_EOL;    
           echo(($current_lang == "FR") ? "Vous pouvez maintenant acc&eacute;der au " : "You can now access the ");

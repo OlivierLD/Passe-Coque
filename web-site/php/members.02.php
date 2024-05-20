@@ -100,6 +100,7 @@ $userName = $_SESSION['USER_NAME'];
 $displayName = $_SESSION['DISPLAY_NAME'];
 $adminPrivileges = $_SESSION['ADMIN'];
 $bcMember = $_SESSION['BC_MEMBER'];
+$isReferent = $_SESSION['IS_REFERENT'];
 $user_id = $_SESSION['USER_ID'];
 
 
@@ -134,6 +135,14 @@ if ($current_lang == "FR") {
       </ul>
       <?php
     }
+    if ($isReferent) {
+      ?>
+      En tant que r&eacute;f&eacute;rent d'un bateau, vous pouvez :
+      <ul>
+        <li><a href="../admin/sql/_reservations.01.php" target="admin">G&eacute;rer les r&eacute;servations</a></li>
+      </ul>
+      <?php
+    }
     if ($adminPrivileges) {
       ?>
       En tant qu'adminstrateur, vous pouvez aussi utiliser :
@@ -161,6 +170,14 @@ if ($current_lang == "FR") {
       As a Boat Club member, you can also:
       <ul>
         <li><a href="../admin/sql/_reservations.02.php" target="admin">Make a reservation</a></li>
+      </ul>
+      <?php
+    }
+    if ($isReferent) {
+      ?>
+      As the referent of a boat, you can also:
+      <ul>
+        <li><a href="../admin/sql/_reservations.01.php" target="admin">Manage the reservations</a></li>
       </ul>
       <?php
     }

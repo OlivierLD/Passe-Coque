@@ -29,12 +29,13 @@ try {
 
       tr > td {
         border: 1px solid silver;
+        vertical-align: top;
       }
 
       a:link, a:visited {
         background-color: #f44336;
         color: white;
-        padding: 10px 20px;
+        padding: 2px 20px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -43,6 +44,28 @@ try {
 
       a:hover, a:active {
         background-color: red;
+      }
+
+      .no-wrap {
+        max-width: 300px;
+        vertical-align: top;
+        white-space: nowrap;
+        overflow-x: scroll;
+      }
+      .no-wrap-2 {
+        max-width: 200px;
+        vertical-align: top;
+        white-space: nowrap;
+        overflow-x: scroll;
+      }
+      .comments {
+        vertical-align: top;
+        max-width: 400px;
+        max-height: 40px;
+        overflow: auto;
+      }
+      .cb {
+        text-align: center;
       }
     </style>
   </head>
@@ -117,7 +140,17 @@ if (isset($_POST['operation'])) {
               PCM.FIRST_NAME
           ) AS NAME,
           PCM.TARIF,
-          (SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC
+          PCM.AMOUNT,
+          PCM.TELEPHONE,
+          PCM.FIRST_ENROLLED,
+          PCM.NEWS_LETTER_OK,
+          PCM.ADMIN_PRIVILEGES,
+          PCM.SAILING_EXPERIENCE,
+          PCM.SHIPYARD_EXPERIENCE,
+          PCM.BIRTH_DATE,
+          PCM.ADDRESS,
+          (SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC,
+          (SELECT GROUP_CONCAT(F.PERIOD) FROM MEMBERS_AND_FEES F WHERE PCM.EMAIL = F.EMAIL GROUP BY F.EMAIL) AS PAYMENTS
       FROM 
           PASSE_COQUE_MEMBERS PCM
       WHERE 
@@ -145,17 +178,48 @@ if (isset($_POST['operation'])) {
 
 
       echo "<table>";
-      echo "<tr><th>Email</th><th>Name</th><th>Tarif</th><th>Boat Club</th><th> - </th></tr>";
+      echo "<tr><th>Email</th><th>Name</th><th>Tarif</th>" . 
+               "<th>Amount</th>" .
+               "<th>Payments</th>" .
+               "<th>Telephone</th>" .
+               "<th>Enrolled</th>" .
+               "<th title='News Letter OK?'>NL</th>" .
+               "<th title='Admin Privileges?'>Adm</th>" .
+               "<th>BirthDay</th>" .
+               "<th>Address</th>" .
+               "<th>Sailing Exp.</th>" .
+               "<th>Shipyard Exp.</th>" .
+               "<th>Boat Club</th><th> - </th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 
             urldecode($table[0]) . // Email
-          "</td><td>" .  
+          "</td><td class='no-wrap'>" .  
             /*mb_convert_encoding($table[1], 'UTF-8', 'ISO-8859-1') . //  utf8_encode*/ ($table[1]) . // Name (full) // 
-          "</td><td>" .  
-            $table[2] . 
-          "</td><td style='text-align: center;'>" .  
-            ($table[3] ? 'Member' : "<a href='./_boat-club.01.php?operation=subscribe&email=" . $table[0] . "'>Subscribe</a>") . // already in Boat Club, or subscribe
+          "</td><td class='no-wrap-2'>" .  
+            $table[2] .   // tarif
+          "</td><td style='text-align: right;'>" .  
+            $table[3] .   // amount
+            "</td><td class='no-wrap-2'>" .  
+            $table[13] .   // payments
+            "</td><td class='no-wrap-2' style='text-align: center;'>" .  
+            $table[4] .   // telephone
+            "</td><td class='no-wrap-2'>" .  
+            $table[5] .   // first_enrolled
+            "</td><td class='cb'>" .  
+            ($table[6] ? 'x' : '') .   // NL OK
+            "</td><td class='cb'>" .  
+            ($table[7] ? 'x' : '') .   // Admin
+            "</td><td class='no-wrap-2'>" .  
+            $table[10] .   // b-date
+            "</td><td class='no-wrap-2'>" .  
+            $table[11] .   // address
+            "</td><td class='comments'><div class='comments'>" .  
+            $table[8] .   // Sailing
+            "</div></td><td class='comments'><div class='comments'>" .  
+            $table[9] .   // Shipyard
+          "</div></td><td style='text-align: center;'>" .  
+            ($table[12] ? 'Member' : "<a href='./_boat-club.01.php?operation=subscribe&email=" . $table[0] . "'>Subscribe</a>") . // already in Boat Club, or subscribe
           "</td><td>" . 
             "<a href='./_members.02.php?id=" . $table[0] . "'>Edit</a>" .  // Edit Member //  target='PCUpdate'
           "</td></tr>\n"

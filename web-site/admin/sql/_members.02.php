@@ -36,7 +36,7 @@ try {
       a:link, a:visited {
         background-color: #f44336;
         color: white;
-        padding: 10px 20px;
+        padding: 2px 20px;
         text-align: center;
         text-decoration: none;
         display: inline-block;

@@ -1,6 +1,15 @@
 <?php
 // Must be on top
-session_start();
+$timeout = 60;  // In seconds
+try {
+  if (!isset($_SESSION)) {
+    ini_set("session.gc_maxlifetime", $timeout);
+    ini_set("session.cookie_lifetime", $timeout);
+    session_start();
+  }
+} catch (Throwable $e) {
+  echo "Session settings: Captured Throwable: " . $e->getMessage() . "<br/>" . PHP_EOL;
+}
 ?>
 <html lang="en">
   <!--
@@ -132,7 +141,7 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
                 "WHERE ((STR_TO_DATE('$fromDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE) OR " .
                     "(STR_TO_DATE('$toDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE)) AND " .
                     "BOAT_ID = '" . $boatId . "' AND " .
-                    "RESERVATION_STATUS NOT IN ('CANCELED', 'REJECTED') " .  // Only TENTATIVE, CONFIRNMED, ADMIN
+                    "RESERVATION_STATUS NOT IN ('TENTATIVE', 'CANCELED', 'REJECTED') " .  // Only CONFIRNMED, ADMIN
                     "ORDER BY FROM_DATE;";
 
         if ($verbose) {

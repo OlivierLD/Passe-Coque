@@ -1,3 +1,16 @@
+<?php
+// Must be on top
+$timeout = 60;  // In seconds
+try {
+  if (!isset($_SESSION)) {
+    ini_set("session.gc_maxlifetime", $timeout);
+    ini_set("session.cookie_lifetime", $timeout);
+    session_start();
+  }
+} catch (Throwable $e) {
+  echo "Session settings: Captured Throwable: " . $e->getMessage() . "<br/>" . PHP_EOL;
+}
+?>
 <html lang="en">
   <!--
    ! WiP.
@@ -69,6 +82,27 @@ function translateStatus(string $coded) : string {
     }
     return $translated;
 }
+
+$adminPriv = false;
+if (isset($_SESSION['ADMIN'])) {
+    $adminPriv = $_SESSION['ADMIN'];
+}
+echo("Admin privileges: " . ($adminPriv ? "yes" : "no") . "<br/>");
+$userId = '';
+if (isset($_SESSION['USER_NAME'])) {
+    $userId = $_SESSION['USER_NAME'];
+}
+$referentFor = array(); // Boat refered by $userId.
+if (strlen(trim($userId)) > 0) {
+    // Get the boat list
+    $referentFor = getBoatsByReferent($dbhost, $username, $password, $database, $userId, $VERBOSE);
+}
+echo("User [" . $userId . "] is referent for " . count($referentFor) . " boat(s):<br/>");
+foreach($referentFor as $boatId) {
+    echo("- " . $boatId . "<br/>");
+}
+echo("<hr/>");
+
 
 $currentYear = date("Y");
 // echo("Current year is " . $currentYear . ", next will be " . ($currentYear + 1) . "<br/>");
@@ -287,6 +321,14 @@ if (isset($_POST['operation'])) {
             echo ("Reservation(s) for " . $boat->name . ":<br/>" . PHP_EOL);
             echo ("<ul>" . PHP_EOL);
             foreach($res as $reservation) {
+                $isReferent = false;
+                foreach ($referentFor as $boat_id) {
+                    if ($boat_id == $boatId) {
+                        $isReferent = true;
+                        break;
+                    }
+                }
+
                 echo("<li>" . PHP_EOL);
                 $resData = "By " . $reservation->owner . ", from " . $reservation->from . " to " . $reservation->to . ", status " . $reservation->status .
                         "<form action='" . basename(__FILE__) . "' method='post'>" .
@@ -294,7 +336,9 @@ if (isset($_POST['operation'])) {
                         "<input type='hidden' name='email' value='" . $reservation->owner . "'>" .
                         "<input type='hidden' name='boat-id' value='" . $reservation->boat . "'>" .
                         "<input type='hidden' name='res-date' value='" . $reservation->resDate . "'>" .
-                        "<input type='submit' value='Edit'>" .
+                        (($adminPriv || $isReferent) ? 
+                        "<input type='submit' value='Edit'>" :
+                        "(Not allowed to Edit)") .
                         "</form>";
                 echo $resData;
                 echo("</li>" . PHP_EOL);
