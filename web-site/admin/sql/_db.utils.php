@@ -268,7 +268,7 @@ class Reservation {
 }
 
 function getReservations(string $dbhost, string $username, string $password, string $database, string $boatId, string $from, string $to, bool $admin, bool $verbose) : array {
-    $sql =  "SELECT EMAIL, BOAT_ID, RESERVATION_DATE, DATE_FORMAT(FROM_DATE, '%Y-%m-%d'), DATE_FORMAT(TO_DATE, '%Y-%m-%d')TO_DATE, RESERVATION_STATUS, MISC_COMMENT FROM BC_RESERVATIONS " .
+    $sql =  "SELECT EMAIL, BOAT_ID, RESERVATION_DATE, DATE_FORMAT(FROM_DATE, '%Y-%m-%d'), DATE_FORMAT(TO_DATE, '%Y-%m-%d'), RESERVATION_STATUS, MISC_COMMENT FROM BC_RESERVATIONS " .
             "WHERE ((FROM_DATE >= STR_TO_DATE('" . $from . "', '%Y-%m-%d') AND FROM_DATE <= STR_TO_DATE('" . $to . "', '%Y-%m-%d')) OR " . 
                 " (TO_DATE >= STR_TO_DATE('" . $from . "', '%Y-%m-%d') AND TO_DATE <= STR_TO_DATE('" . $to . "', '%Y-%m-%d'))) AND " .
                 "BOAT_ID = '" . $boatId . "' " .
@@ -368,6 +368,66 @@ function getReservation(string $dbhost, string $username, string $password, stri
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
     return $reservation;
+}
+
+class BoatAvailability {
+    public $status;
+    public $message;
+}
+
+function checkBoatAvailability(string $dbhost, string $username, string $password, string $database, string $boatId, string $fromDate, string $toDate, bool $verbose) : BoatAvailability {
+    $boatAvailability = new BoatAvailability();
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        $sql =  "SELECT EMAIL, BOAT_ID, RESERVATION_DATE, DATE_FORMAT(FROM_DATE, '%Y-%b-%d'), DATE_FORMAT(TO_DATE, '%Y-%b-%d'), RESERVATION_STATUS, MISC_COMMENT FROM BC_RESERVATIONS " .
+                "WHERE ((STR_TO_DATE('$fromDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE) OR " .  
+                    "(STR_TO_DATE('$toDate', '%Y-%m-%d') BETWEEN FROM_DATE AND TO_DATE) OR " . 
+                    "(FROM_DATE BETWEEN STR_TO_DATE('$fromDate', '%Y-%m-%d') AND STR_TO_DATE('$toDate', '%Y-%m-%d')) OR " . 
+                    "(TO_DATE BETWEEN STR_TO_DATE('$fromDate', '%Y-%m-%d') AND STR_TO_DATE('$toDate', '%Y-%m-%d'))) AND " .
+                    "BOAT_ID = '" . $boatId . "' AND " .
+                    "RESERVATION_STATUS NOT IN ('TENTATIVE', 'CANCELED', 'REJECTED') " .  // Only CONFIRMED, ADMIN left
+                    "ORDER BY FROM_DATE;";
+
+        if (true || $verbose) {
+            echo ("Executing [" . $sql . "]<br/>");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        if ($result->num_rows == 0) {
+            $boatAvailability->status = true;
+        } else {
+            $message = '';
+            while ($table = mysqli_fetch_array($result)) {
+                $message .= ($table[0] . " reserved from " . $table[3] . " to " . $table[4] . "<br/>");
+            }
+            $boatAvailability->status = false;
+            $boatAvailability->message = $message;
+        } 
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $boatAvailability;
 }
 
 class AllBoatDetails {

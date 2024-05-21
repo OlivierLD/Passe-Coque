@@ -135,6 +135,8 @@ if (isset($_POST['operation'])) {
           <input type='hidden' name='owner' value='<?php echo $res->owner; ?>'>
           <input type='hidden' name='boat' value='<?php echo $res->boat; ?>'>
           <input type='hidden' name='res-date' value='<?php echo $res->resDate; ?>'>
+          <input type='hidden' name='from-date' value='<?php echo $res->from; ?>'>
+          <input type='hidden' name='to-date' value='<?php echo $res->to; ?>'>
           <input type='hidden' name='prev-status' value='<?php echo $res->status; ?>'>
           <table>
             <tr><td>From User</td><td><?php echo $res->owner; ?></td></tr>
@@ -171,6 +173,8 @@ if (isset($_POST['operation'])) {
         $owner = $_POST["owner"];
         $boat = $_POST["boat"];
         $resDate = $_POST["res-date"];
+        $fromDate = $_POST["from-date"];
+        $toDate = $_POST["to-date"];
         $status = $_POST["status"];
         $prevStatus = $_POST["prev-status"];
         $comment = $_POST["comment"];
@@ -178,38 +182,59 @@ if (isset($_POST['operation'])) {
         if ($_POST['table-operation'] == 'Update') {
             echo "It's an UPDATE<br/>";
 
-            $ownerDetails = getMember($dbhost, $username, $password, $database, $owner, $VERBOSE);
+            $proceed = true;
+            // When going from Tentative to Confirmed, make sure rthe boat is still available !!
+            if ($status == 'CONFIRMED' || $status == 'ADMIN') { // Moving to Confirmed or Admin
+                // echo ("Re-Checking boat availability<br/>");
+                // var_dump($_POST);
+                // echo ("<br/>");
+                $boatAvailability = checkBoatAvailability($dbhost, $username, $password, $database, $boat, $fromDate, $toDate, $VERBOSE);
+                // echo("Check result:<br/>");
+                // var_dump($boatAvailability);
+                // echo ("<br/>");
+                if (!$boatAvailability->status) {
+                    echo ("Reservation conflict:<br/>" . PHP_EOL);
+                    echo ($boatAvailability->message);
+                    $proceed = false;
+                }   
+            }
 
-            // Get detailed boat data, referent(s) infos.
-            $allDetails = getBoatAndReferentDetails($dbhost, $username, $password, $database, $boat, $VERBOSE);
+            if ($proceed) {
+                $ownerDetails = getMember($dbhost, $username, $password, $database, $owner, $VERBOSE);
 
-            $sql = "UPDATE BC_RESERVATIONS SET " .
-                   "RESERVATION_STATUS = '$status', " .
-                   "MISC_COMMENT = '" . str_replace("'", "\'", $comment) . "' " .
-                   "WHERE EMAIL = '$owner' AND " .
-                        " BOAT_ID = '$boat' AND " .
-                        " RESERVATION_DATE = STR_TO_DATE('$resDate', '%Y-%m-%d %H:%i:%s');";
-            executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
-            if ($prevStatus != $status) {
-                // Send email to $owner (the guy who reserved).
-                $message = "Bonjour " . $ownerDetails[0]->firstName . ", <br/>";
-                $message .= ("Votre r&eacute;servation du " . $resDate . " pour le bateau \""  . $allDetails[0]->boatName . "\" (id \"" . $boat . "\") a &eacute;t&eacute; modifi&eacute;e de \"" . translateStatus($prevStatus) . "\" &agrave; \"" . translateStatus($status) . "\".<br/>");
+                // Get detailed boat data, referent(s) infos.
+                $allDetails = getBoatAndReferentDetails($dbhost, $username, $password, $database, $boat, $VERBOSE);
 
-                $message .= ("\"" . $allDetails[0]->boatName . "\" a " . count($allDetails) . " r&eacute;f&eacute;rent" . (count($allDetails) > 1 ? "s" : "") . " dont voici les coordonn&eacute;es :<br/>");
-                if (true) {
-                    foreach ($allDetails as $details) {
-                        $message .= ("R&eacute;f&eacute;rent : " . $details->refFullName . ", email : " . $details->refEmail . ", t&eacute;l&eacute;phone : " . $details->refTel . "<br/>");
+                $sql = "UPDATE BC_RESERVATIONS SET " .
+                    "RESERVATION_STATUS = '$status', " .
+                    "MISC_COMMENT = '" . str_replace("'", "\'", $comment) . "' " .
+                    "WHERE EMAIL = '$owner' AND " .
+                            " BOAT_ID = '$boat' AND " .
+                            " RESERVATION_DATE = STR_TO_DATE('$resDate', '%Y-%m-%d %H:%i:%s');";
+                executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+                if ($prevStatus != $status) {
+                    // Send email to $owner (the guy who reserved).
+                    $message = "Bonjour " . $ownerDetails[0]->firstName . ", <br/>";
+                    $message .= ("Votre r&eacute;servation du " . $resDate . " pour le bateau \""  . $allDetails[0]->boatName . "\" (id \"" . $boat . "\") a &eacute;t&eacute; modifi&eacute;e de \"" . translateStatus($prevStatus) . "\" &agrave; \"" . translateStatus($status) . "\".<br/>");
+
+                    $message .= ("\"" . $allDetails[0]->boatName . "\" a " . count($allDetails) . " r&eacute;f&eacute;rent" . (count($allDetails) > 1 ? "s" : "") . " dont voici les coordonn&eacute;es :<br/>");
+                    if (true) {
+                        foreach ($allDetails as $details) {
+                            $message .= ("R&eacute;f&eacute;rent : " . $details->refFullName . ", email : " . $details->refEmail . ", t&eacute;l&eacute;phone : " . $details->refTel . "<br/>");
+                        }
+                    } else {
+                        echo "--------------</br>";
+                        var_dump($allDetails);
+                        echo "<br/>--------------</br>";
                     }
-                } else {
-                    echo "--------------</br>";
-                    var_dump($allDetails);
-                    echo "<br/>--------------</br>";
+                    $message .= "<br/>- L'&eacute;quipe du Passe-Coque Club.<br/>";
+
+                    echo("Sending message:<br/>" . $message . "<br/>");
+
+                    sendEmail($owner, "Boat Club Passe-Coque", $message, "FR");
                 }
-                $message .= "<br/>- L'&eacute;quipe du Passe-Coque Club.<br/>";
-
-                echo("Sending message:<br/>" . $message . "<br/>");
-
-                sendEmail($owner, "Boat Club Passe-Coque", $message, "FR");
+            } else {
+                echo("Moving this reservation to " . $status . " in not currently possible.<br/>");
             }
         } else if ($_POST['table-operation'] == 'Delete') {
             echo "It's a DELETE<br/>";
