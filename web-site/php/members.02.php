@@ -145,7 +145,8 @@ if ($current_lang == "FR") {
     }
     if ($adminPrivileges) {
       ?>
-      En tant qu'adminstrateur, vous pouvez aussi utiliser :
+      En tant qu'adminstrateur, vous pouvez aussi utiliser ceci :<br/>
+      Mais attention, <a href="https://www.youtube.com/watch?v=guuYU74wU70&t=15s" target="YT">With great power comes great responsibility</a>.
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
@@ -183,7 +184,8 @@ if ($current_lang == "FR") {
     }
     if ($adminPrivileges) {
       ?>
-      As an administrator, you can also use:
+      As an administrator, you can also use those:<br/>
+      But remember, <a href="https://www.youtube.com/watch?v=guuYU74wU70&t=15s" target="YT">With great power comes great responsibility</a>. Be careful.
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>

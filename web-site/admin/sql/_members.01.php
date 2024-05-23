@@ -60,12 +60,52 @@ try {
       }
       .comments {
         vertical-align: top;
-        max-width: 400px;
+        width: 400px;
+        /* min-width: 400px; */
+        /* max-width: 400px; */
         max-height: 40px;
         overflow: auto;
       }
       .cb {
         text-align: center;
+      }
+      table {
+        border-collapse: collapse;
+        --table-border-width: 1px;
+      }
+      th.no-rotate {
+        vertical-align: bottom;
+      }
+      th.rotate {
+        position: relative;
+        height: 140px;
+        white-space: nowrap;
+      }
+
+      th.rotate > div {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        /* Make sure short labels still meet the corner of the parent otherwise you'll get a gap */
+        text-align: left;
+        transform: 
+          /* Magic Numbers */
+          /* translate(25px, 51px) */
+          /* rotate(315deg); */
+          translate(calc(100% - var(--table-border-width) / 2), var(--table-border-width))
+          /* rotate(315deg); */
+          rotate(270deg);
+        transform-origin: 0% calc(100% - var(--table-border-width));
+        width: 100%;
+        /* width: 30px; */
+      }
+      th.rotate > div > span {
+        /*border-bottom: 1px solid #ccc;*/
+        /* padding: 5px 10px; */
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom: var(--table-border-width) solid gray;
       }
     </style>
   </head>
@@ -188,18 +228,23 @@ if (isset($_POST['operation'])) {
       <?php
 
       echo "<table>";
-      echo "<tr><th>Email</th><th>Name</th><th>Tarif</th>" . 
-               "<th>Amount</th>" .
-               "<th>Payments</th>" .
-               "<th>Telephone</th>" .
-               "<th>Enrolled</th>" .
-               "<th title='News Letter OK?'>NL</th>" .
-               "<th title='Admin Privileges?'>Adm</th>" .
-               "<th>BirthDay</th>" .
-               "<th>Address</th>" .
-               "<th>Sailing Exp.</th>" .
-               "<th>Shipyard Exp.</th>" .
-               "<th>Boat Club</th><th> - </th></tr>";
+      // <th class="rotate"><div><span>Column header 1</span></div></th>
+      // style='transform: rotate(-90deg);'
+      echo "<tr><th class='no-rotate'><div><span>Email</span></div></th>" . 
+               "<th class='no-rotate'><div><span>Name</span></div></th>" . 
+               "<th class='no-rotate'><div><span>Tarif</span></div></th>" . 
+               "<th class='no-rotate'><div><span>Amount</span></div></th>" .
+               "<th class='no-rotate'><div><span>Payments</span></div></th>" .
+               "<th class='no-rotate'><div><span>Telephone</span></div></th>" .
+               "<th class='no-rotate'><div><span>Enrolled</span></div></th>" .
+               "<th class='rotate' title='News Letter OK?'><div><span>News Letter</span></div></th>" .
+               "<th class='rotate'title='Admin Privileges?'><div><span>Admin Priv.</span></div></th>" .
+               "<th class='no-rotate'><div><span>BirthDay</span></div></th>" .
+               "<th class='no-rotate'><div><span>Address</span></div></th>" .
+               "<th class='no-rotate'><div><span>Sailing Exp.</span></div></th>" .
+               "<th class='no-rotate'><div><span>Shipyard Exp.</span></div></th>" .
+               "<th class='no-rotate'><div><span>Boat Club</span></div></th>" . 
+               "<th class='no-rotate'><div><span> - </span></div></th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 

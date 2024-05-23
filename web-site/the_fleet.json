@@ -302,5 +302,13 @@
         "type": "Classic Old Gaffer",
         "category": "TO_GRAB",
         "base": "Hennebont"
+    },
+    { 
+        "name": "Bemol",
+        "id": "bemol",
+        "pix": "/images/boats/sun-rise-35-sous-spi.jpg",
+        "type": "Sun Rise 35",
+        "category": "NONE",
+        "base": "Saint Philibert"
     }
 ]

@@ -401,7 +401,7 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
                     "RESERVATION_STATUS NOT IN ('TENTATIVE', 'CANCELED', 'REJECTED') " .  // Only CONFIRMED, ADMIN left
                     "ORDER BY FROM_DATE;";
 
-        if (true || $verbose) {
+        if ($verbose) {
             echo ("Executing [" . $sql . "]<br/>");
         }
         $result = mysqli_query($link, $sql);
