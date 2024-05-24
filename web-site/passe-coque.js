@@ -1046,7 +1046,7 @@ let displaySpecific = (docName) => {
 
 let showInfoTxDialog = () => {
     let infoTxDialog = document.getElementById("info-tx-dialog");
-    window.scrollTo(0, 0); // Scroll on top, for Safari...
+    window.scrollTo(0, 0); // Scroll on top, for Safari and others...
     if (infoTxDialog.show !== undefined) {
         infoTxDialog.style.display = 'inline'; // Safari...
         infoTxDialog.show();
@@ -1100,6 +1100,7 @@ let aboutSomeone = (who) => {
             dialogContent.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
         });
 
+    window.scrollTo(0, 0); // Scroll on top, for Safari and others...
     if (aboutDialog.show !== undefined) {
         aboutDialog.style.display = 'block'; // Safari...
         aboutDialog.show();
