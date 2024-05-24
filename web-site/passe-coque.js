@@ -960,7 +960,7 @@ let clickOnBoatPix = (origin, name = 'Boat Name', pathPrefix = '') => {
     // TODO Set the content
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
-    if (dialogTitle) {
+    if (dialogTitle && dialogTitle.length > 0) {
         dialogTitle[dialogTitle.length - 1].innerText = name; // Can be several dialogs... take the last.
     }
 
