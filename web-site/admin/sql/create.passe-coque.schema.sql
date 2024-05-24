@@ -1,3 +1,5 @@
+-- Install LAMP: https://www.linuxtricks.fr/wiki/debian-installer-un-serveur-lamp-apache-mariadb-php
+--
 -- Doc at https://www.mysqltutorial.org/mysql-basics/mysql-auto_increment/
 --        https://www.w3schools.com/php/php_mysql_create_table.asp           <- Good for mySQLi
 --

@@ -74,6 +74,12 @@ $ php -S 127.0.0.1:8000
 - FTP link to cluster: ftp://passecc@ftp.cluster030.hosting.ovh.net:21/  
 - Home directory path: /home/passecc  
 
+Dans FileZilla:  
+- Username: passecc  
+- Password: PasseCoque123  
+- Server: ftp.cluster030.hosting.ovh.net  
+- Port 22 (ou 21)  
+
 ### php & mySQL
 Les technologies utilis&eacute;es sont "impos&eacute;es" par l'h&eacute;bergeur, ce sont - sans surprise :
 - HTML5 / CSS3 / ES6
