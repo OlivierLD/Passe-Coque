@@ -1,6 +1,6 @@
 <?php
 // Must be on top
-$timeout = 60;  // In seconds
+$timeout = 300;  // In seconds
 try {
   if (!isset($_SESSION)) {
     ini_set("session.gc_maxlifetime", $timeout);
@@ -39,7 +39,7 @@ try {
 require __DIR__ . "/db.cred.php";
 
 // echo "Default GC_MaxLifeTime: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
-// $timeout = 60;
+// $timeout = 300;
 // ini_set("session.gc_maxlifetime", $timeout);
 // ini_set("session.cookie_lifetime", $timeout);
 // echo "GC_MaxLifeTime now: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;

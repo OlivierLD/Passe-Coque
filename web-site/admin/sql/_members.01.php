@@ -1,6 +1,6 @@
 <?php
 // Must be on top
-$timeout = 60;  // In seconds
+$timeout = 300;  // In seconds
 try {
   if (!isset($_SESSION)) {
     ini_set("session.gc_maxlifetime", $timeout);

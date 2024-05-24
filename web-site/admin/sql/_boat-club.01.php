@@ -1,6 +1,6 @@
 <?php
 // Must be on top
-$timeout = 60;  // In seconds
+$timeout = 300;  // In seconds
 try {
   if (!isset($_SESSION)) {
     ini_set("session.gc_maxlifetime", $timeout);
@@ -160,9 +160,9 @@ if ($operation != '') {
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" . 
-            urldecode($table[0]) . // Email
+            /*urldecode*/($table[0]) . // Email
           "</td><td>" .  
-            utf8_encode($table[1]) . // Name (full)
+            /*utf8_encode*/($table[1]) . // Name (full)
           "</td><td>" .  
             $table[2] . // Enrolled
           "</td><td>" . 
