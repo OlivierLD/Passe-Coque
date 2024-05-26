@@ -1557,6 +1557,10 @@ const INFO_SECTION = [
             title: "23 Mai 2024",
             content: "/actu/2024/cress.lorient.html"
         },{
+            date: "Mai-2024",
+            title: "13 Mai 2024",
+            content: "/actu/2024/armada.html"
+        },{
             date: "Avr-2024",
             title: "18 Avril 2024",
             content: "/actu/2024/cm.p.benoiton.html"
