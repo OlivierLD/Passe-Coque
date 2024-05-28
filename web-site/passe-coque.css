@@ -43,10 +43,10 @@ body {
 }
 
 h1 {
-    font-size: 4em;
+    font-size: 2em;
     font-weight: 600;
     /* text-align: center; */
-    color: blue;
+    /* color: blue; */
     /* text-shadow: 2px 2px 4px black, 0 0 25px white, 0 0 7px cyan; */
 }
 

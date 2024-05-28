@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque - Nav Server</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../../fonts/font.01.css">
+	<link rel="stylesheet" href="../../fonts/font.02.css">
+
+	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
+	<style type="text/css">
+		/* Empty */
+    </style>
+</head>
+	
+<body>
+
+	<h1 id="minimal-nav-server">Minimal Nav Server</h1>
+	<p>The goal here is to have a Raspberry Pi Zero W with a GPS connected to it, and a small eInk screen attached on top.<br>It will get from the GPS:</p>
+	<ul>
+	<li>The position</li>
+	<li>The speed</li>
+	<li>The heading</li>
+	</ul>
+	<p>In addition, it will emit its own network, so other devices (laptops, tablets, cell-phones) can connect to it.<br>In will also act as an HTTP server, also serving web pages and REST requests.<br>A TCP forwarder will also be avaialble, so the NMEA data can be used from other programs running on other devices (like OpenCPN, SeaWi, etc).</p>
+	<h2 id="what-you-will-need">What you will need</h2>
+	<ul>
+	<li>A Raspberry Pi Zero W<ul>
+	<li>like <a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/">this</a>, and make sure you have a header, to plug the screen in.</li>
+	</ul>
+	</li>
+	<li>A 16 Gb Micro SD card<ul>
+	<li>Like <a href="https://www.amazon.com/s?k=16gb+sd+card+micro&amp;crid=2R3TGBEH1JZUR&amp;sprefix=16gb+sd+card%2Caps%2C162&amp;ref=nb_sb_ss_ts-doa-p_2_12">this</a></li>
+	</ul>
+	</li>
+	<li>A 2.13 eInk screen<ul>
+	<li>Like <a href="https://learn.adafruit.com/2-13-in-e-ink-bonnet">this one</a></li>
+	</ul>
+	</li>
+	<li>A GPS dongle<ul>
+	<li>Like <a href="https://www.amazon.com/HiLetgo-G-Mouse-GLONASS-Receiver-Windows/dp/B01MTU9KTF/ref=sr_1_2_sspa?crid=GUP2CACZ6V0I&amp;dib=eyJ2IjoiMSJ9.CwfXI6_E0L91sy8oYTH4yJPSt_RGt3UzZ5z3ifDqQpQmFAUD_zFQAGUJyFfaKXYPfnR4Tkt54eBl2wIVbeSofaDPau1zsm2YIhUTV2FaGE1I8KunRQzoB2Y6m5QzNzaUrG1NXqtdvHIaImSER5XN_B2JuKnrEsgUK9ulHY-OcL2gZc6FdWjVLtsGGg5_0RqH7gSGgBtQeSxz2Nt81BF6Q9zM4rbD9x6YI6x8XcYJGiM.JDIq8BTMU9zUQKa3hY9dEkyzJMOLuFd0wArYS0ywWDo&amp;dib_tag=se&amp;keywords=gps+dongle+usb&amp;qid=1716882582&amp;sprefix=GPS+Dongle%2Caps%2C142&amp;sr=8-2-spons&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&amp;psc=1">this</a>, or <a href="https://www.amazon.com/VK-162-G-Mouse-External-Navigation-Raspberry/dp/B01EROIUEW/ref=sr_1_5?crid=GUP2CACZ6V0I&amp;dib=eyJ2IjoiMSJ9.CwfXI6_E0L91sy8oYTH4yJPSt_RGt3UzZ5z3ifDqQpQmFAUD_zFQAGUJyFfaKXYPfnR4Tkt54eBl2wIVbeSofaDPau1zsm2YIhUTV2FaGE1I8KunRQzoB2Y6m5QzNzaUrG1NXqtdvHIaImSER5XN_B2JuKnrEsgUK9ulHY-OcL2gZc6FdWjVLtsGGg5_0RqH7gSGgBtQeSxz2Nt81BF6Q9zM4rbD9x6YI6x8XcYJGiM.JDIq8BTMU9zUQKa3hY9dEkyzJMOLuFd0wArYS0ywWDo&amp;dib_tag=se&amp;keywords=gps+dongle+usb&amp;qid=1716882582&amp;sprefix=GPS+Dongle%2Caps%2C142&amp;sr=8-5">this</a>.</li>
+	</ul>
+	</li>
+	<li>An alimentation cable<ul>
+	<li>Like <a href="https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/ref=sr_1_3?crid=13F56Y2EVG6LU&amp;dib=eyJ2IjoiMSJ9.EGqyR87iLe4DQeHcmZ37j2nGqrLMje4cl0jbCPAssgOJrifcZ2DA_Q7xiXmL9zzDvl2VcECnXQvdbDrLdHeUzU0hDrC_MQXUgmE4tVa0Z92gKTBN8pOdJDe39bNJ6gCtJYN7xotNR4uSfKVyE7iqyR2Op8I6Zbl0rHUdbFq-rqDD4dhEcRVrB8CBhtAl3ePzU8M9rcVyO18LMxwg3hCLQcFDx3_5ZRoBO5hkoLqFCW8.yWdG0yZ17k7H-Uc4nUkfoSgkIWihw3xrsQxTW0wt-kk&amp;dib_tag=se&amp;keywords=USB%2Bcable&amp;qid=1716882969&amp;sprefix=usb%2Bcable%2Caps%2C144&amp;sr=8-3&amp;th=1">this one</a>. The Raspberry Pi needs a Micro USB socket. The other end depends on what you will plug it in (a cig-lighter is usually USB-A).</li>
+	</ul>
+	</li>
+	<li>Depending on the GPS dongle you choose, you may need a USB adapter to plug it in the Raspberry Pi Zero USB socket<ul>
+	<li>Like <a href="https://www.amazon.com/s?k=USB+adapter+micro+to+USB-A&amp;crid=24H0FMF2BMKDA&amp;sprefix=usb+adapter+micro+to+usb-a%2Caps%2C150&amp;ref=nb_sb_noss_2">this</a>.</li>
+	</ul>
+	</li>
+	</ul>
+	<h2 id="for-the-impatient">For the impatient</h2>
+	<ul>
+	<li>Flash the SD card with this <a href="https://passe-coque.com/disk.images/raspi.sdG.img.gz">provided image</a>. Use <a href="https://etcher.balena.io/">Etcher</a> for this, it&#39;s free and it works just great.</li>
+	<li>Put the SD card in the Raspberry Pi</li>
+	<li>Plug the eInk screen on top</li>
+	<li>Connect the GPS</li>
+	<li>Connect the power supply</li>
+	<li>You&#39;re done!</li>
+	</ul>
+	<h2 id="more-in-details">More in details</h2>
+	<p>See <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md">here</a>.</p>
+	<h2 id="options">Options</h2>
+	<p>3D printed enclosure, described through the link above.</p>
+	
+</body>
+</html>
