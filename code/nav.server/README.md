@@ -24,7 +24,7 @@ A TCP forwarder will also be avaialble, so the NMEA data can be used from other 
     - Like [this](https://www.amazon.com/s?k=USB+adapter+micro+to+USB-A&crid=24H0FMF2BMKDA&sprefix=usb+adapter+micro+to+usb-a%2Caps%2C150&ref=nb_sb_noss_2).
 
 ## For the impatient
-- Flash the SD card with a [provided image](). Use [Etcher](https://etcher.balena.io/) for this, it's free and it works just great.
+- Flash the SD card with this [provided image](https://passe-coque.com/disk.images/raspi.sdG.img.gz). Use [Etcher](https://etcher.balena.io/) for this, it's free and it works just great.
 - Put the SD card in the Raspberry Pi
 - Plug the eInk screen on top
 - Connect the GPS

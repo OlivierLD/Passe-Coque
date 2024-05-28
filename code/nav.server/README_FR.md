@@ -24,7 +24,7 @@ On aura de surcro&icirc;t un TCP forwarder, qui permettra &agrave; d'autres prog
     - Comme [ceci](https://www.amazon.com/s?k=USB+adapter+micro+to+USB-A&crid=24H0FMF2BMKDA&sprefix=usb+adapter+micro+to+usb-a%2Caps%2C150&ref=nb_sb_noss_2).
 
 ## Pour les impatients
-- Flashez la carte SD avec [cette image](). Utilisez [Etcher](https://etcher.balena.io/) pour &ccedil;a, c'est gratuit et &ccedil;a marche.
+- Flashez la carte SD avec [cette image](https://passe-coque.com/disk.images/raspi.sdG.img.gz). Utilisez [Etcher](https://etcher.balena.io/) pour &ccedil;a, c'est gratuit et &ccedil;a marche.
 - Ins&eacute;rez la carte SD dans le Raspberry Pi
 - Connectez l'&eacute;cran eInk au dessus
 - Connectez le GPS
