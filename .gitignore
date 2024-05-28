@@ -2,4 +2,6 @@
 **/*.epub
 **/.DS_Store
 **/*.zip
+**/*.gz
+
 

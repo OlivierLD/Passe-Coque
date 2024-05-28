@@ -1,0 +1,177 @@
+<html lang="fr">
+<head>
+    <title>Passe&#8209;Coque never stops!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="/css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../fonts/font.01.css">
+	<link rel="stylesheet" href="../fonts/font.02.css">
+	<link rel="stylesheet" href="../passe-coque.css">
+    <style type="text/css">
+        * {
+            line-height: normal;
+        }        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }        
+    </style>
+</head>
+<body>
+
+    <h2>Documentation du Back-End</h2>
+    <small style="font-size: 0.75em;">
+        Les tatillons vondront bien excuser mes anglicismes... Il y a des termes techniques dont je ne connais pas l'&eacute;quivalent francais,
+        et il faut qu'on avance.
+    </small>
+    <p>
+        Certains paragraphes peuvent ne pas concerner tout le monde, ceux pour qui ils ne sont pas indispensables passeront &agrave; la suite.
+    </p>
+
+    <h3>Sch&eacute;ma de base</h3>
+    Le code du sch&eacute;ma de la base est &eacute;crit en <a href="https://www.w3schools.com/sql/" target="SQL">SQL</a> (Structured Query Language), qui est un standard,
+    compris et impl&eacute;ment&eacute; par l'h&eacute;bergeur du site, le RDBMS (Relational Data Base Management System - ou Syst&egrave;me de Gestion de Base de Donn&eacute;es Relationnelle)
+    &eacute;tant MySQL.<br/>
+    On peut consulter le sch&eacute;ma <a href="./sql/create.passe-coque.schema.sql" type="text/plain" target="SQL">ICI</a>.<br/> <!-- type attribute does not work -->
+
+    Voici un diagramme qui le repr&eacute;sente, au format <a href="https://www.uml.org/" target="UML">UML</a> (Unified Modeling Language), qui est un standard aussi. 
+    M&ecirc;me le plus barjo des savants fous est cens&eacute; conna&icirc;tre ce genre de choses.<br/>
+    <img style="width: 100%;" src="./sql/drawSQL-image-export-2024-04-21.png" title="DB Schema">
+    <p>
+        Deux entit&eacute;s &eacute;mergent, qui sont &agrave; l'origine de plusieurs relations avec les autres entit&eacute;s :
+        <ul>
+            <li>PASSE_COQUE_MEMBERS</li>
+            <li>THE_FLEET</li>
+        </ul>
+    </p>
+
+    <p>
+        On peut lire dans le diagramme ci-dessus que :
+        <ul>
+            <li>Un <code>REFERENT</code> doit &ecirc;tre pr&eacute;sent dans <code>PASSE_COQUE_MEMBERS</code></li>
+            <li>Un <code>REFERENT</code> fait r&eacute;f&eacute;rence &agrave; un bateau de <code>THE_FLEET</code></li>
+            <li>Un <code>BOAT_CLUB_MEMBER</code> est aussi pr&eacute;sent dans <code>PASSE_COQUE_MEMBERS</code></li>
+            <li>Une <code>RESERVATION</code> fait r&eacute;f&eacute;rence &agrave; un <code>BOAT_CLUB_MEMBER</code> et &agrave; un bateau de <code>THE_FLEET</code></li>
+        </ul>
+        Les lignes qui relient les entit&eacute;s sur le sch&eacute;ma t&eacute;moignent des cardinalit&eacute;s des contraintes, one-to-one, one-to-many, etc (ceci 
+        m&eacute;ritera plus de d&eacute;tails pour ceux pour qui c'est nouveau et que &ccedil;a int&eacute;resse).
+        <br/>
+        <b>Attention ! </b>Ces contraintes d'int&eacute;grit&eacute; (de type <code>FOREIGN KEY</code>) utilisent ici l'option  <code>ON DELETE CASCADE</code>. Ceci signifie
+        par exemple que si on supprime un bateau de la base de donn&eacute;es, toutes les r&eacute;servations le concernant disparaitront avec.<br>
+        De m&ecirc;me pour un membre du boat club, et ainsi de suite.
+    </p>
+
+    <h3>Admin menu</h3>
+    <p>
+        &Agrave; partir de votre Espace Membre, ceux qui disposent du privil&egrave;ge 'admin' peuvent acc&eacute;der &agrave; ce menu.<br/>
+        <iframe src="./sql/index.html" style="width: 100%; height: 750px; border: 1px solid silver;"></iframe>
+        <br/>
+        On peut aussi y acc&eacute;der par <a href="https://passe-coque.com/php/admin.menu.html" target="Admin">ce lien</a>, qui vous demandera une identification pr&eacute;alable.
+        <br/>
+        Ce menu comporte pour le moment (fin avril - d&eacute;but mai 2024) certaines restrictions :
+        <ul>
+            <li>Il est moche</li>
+            <li>
+                C'est en anglais - parce que &ccedil;a me vient comme &ccedil;a dans ce domaine - mais &ccedil;a n'est pas du Shakespeare...
+                &Ccedil;a va s'arranger.
+            </li>
+            <li>&Ccedil;a ne fait que le minimum syndical...</li>
+            <li>Attention, on peut aussi faire des conneries.</li>
+        </ul>
+    </p>
+    <h4>D&eacute;tails</h4>
+    Plusieurs des liens de ce menu m&egrave;nent vers des pages qui permettent d'interagir avec la base de donn&eacute;es
+    <ol>
+        <li>avec une interface dedi&eacute;e (comme <code>Passe-Coque Members Management</code> par exemple)</li>
+        <li>directement, avec un SQL Statement (voir <code>Free SQL</code>), pour les connaisseurs...</li>
+    </ol>
+    Ceux de la premi&egrave;re cat&eacute;gorie proc&egrave;dent en g&eacute;n&eacute;ral de la fa&ccedil;on suivante :
+    <ol>
+        <li>On fait d'abord une query - avec un filtre</li>
+        <li>Ceci produit une liste, correspondant au filtre saisi par l'utilisateur (si le filtre est vide, on a toute la liste, sans filtre)</li>
+        <li>En t&ecirc;te de cette liste, on a un bouton pour cr&eacute;er un nouvel enregistrement</li>
+        <li>&Agrave; chaque ligne de cette liste, on a la possibilit&eacute; de faire un <code>Edit</code></li>
+        <li>Dans l'&eacute;cran atteint par cet <code>Edit</code>, on peut faire une suppression de l'enregistrement (<code>Delete</code>), ou une mise &agrave; jour (<code>Update</code>)</li>
+    </ol>
+    Le lien <code>Passe-Coque Members Management</code> a quelque chose en plus, il permet aussi de faire d'un membre de Passe-Coque un membre du Boat Club.
+
+    <h4>Structure (interne) du Menu</h4>
+    <ul>
+        <li>
+            <code>_members.01.php</code>
+            <ul>
+                <li><code>_members.02.php</code></li>
+            </ul>
+        </li>
+        <li>
+            <code>_the_fleet.01.php</code>
+            <ul>
+                <li><code>_the_fleet.02.php</code></li>
+                <li>
+                    <code>_referents.01.php</code>
+                    <ul>
+                        <li><code>_referents.02.php</code></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <code>_boat-club.01.php</code>
+            <ul>
+                <li><code>_members.01.php</code></li>
+            </ul>
+        </li>
+        <li><code>_free_sql.php</code></li>
+    </ul>
+
+    <h4>Exemple</h4>
+    On veut par exemple aboutir &agrave; une r&eacute;servation de bateau.<br/>
+    Pour faire une r&eacute;servation, il faut la faire au nom d'un membre de Passe-Coque, qui soit aussi un membre du Boat Club.<br/>
+    Il faut aussi que le bateau &agrave; r&eacute;server soit assign&eacute; au boat club, et qu'il ait un r&eacute;f&eacute;rent.<br/>
+    Enfin, il faut que le bateau soit disponible aux dates requises.<br/>
+    On acc&egrave;de &agrave; <code>Passe-Coque Members Management</code>, on filtre par exemple avec <code>jann</code>.<br/>
+    On fait de <code>Pierre-Jean JANNIN</code> un membre du boat club.<br/>
+    On va ensuite dans <code>Passe-Coque Fleet Management</code>. On peut utiliser un bateau existant, on en cr&eacute;er un temporairement pour les tests
+    (qu'on supprimera ensuite).<br/>
+    <hr/>
+    <i>Attention !</i> Lors d'une r&eacute;servation, des emails seront envoy&eacute;s, au r&eacute;f&eacute;rent du bateau r&eacute;serv&eacute;, &agrave; celui 
+    qui fait la r&eacute;servation, et &agrave; pcc@passe-coque.com. Si on veut voir ce qui se passe dans ces emails, il est sans doute opportun de 
+    faire la r&eacute;servation avec un bateau dont on est r&eacute;f&eacute;rent... Voir <code>Passe-Coque Referents Management</code>.
+    <hr/>
+    Pour faire la r&eacute;s&eacute;rvation, les &eacute;crans du menu <code>Admin</code> fonctionnent, mais sont... sobres. Le mieux est sans doute de le faire par le site du Boat-Club,
+    afin de pouvoir consulter le planning, qui est plus user-friendly sur le site (onglet <code>R&eacute;server</code>).
+
+    <p>
+        <h4>Commentaires</h4>
+        Des options - arbitraires - ont &eacute;t&eacute; prises pour l'&eacute;laboration du processus de r&eacute;servation :
+        <ul>
+            <li>
+                On ne demande pas &agrave; l'utilisteur de s'identifier pour faire une r&eacute;servation, des v&eacute;rifications seront faites lors de la soumission de cette r&eacute;servation.
+                <ul>
+                    <li>
+                        <i>Note :</i> Si l'utilisateur s'est n&eacute;anmoins connect&eacute; &agrave; son espace membre avant sa r&eacute;servation, on connait alors son ID (son email),
+                        qui sera alors automatiquement renseign&eacute;.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                La r&eacute;servation est faite par l'utilisateur, et devra &ecirc;tre confirm&eacute;e par le bureau du Boat Club (le client recevra un email lors du changement de status de la r&eacute;servation).
+                <b><i>Ceci requiert une attention constante &agrave; la bo&icirc;te aux lettres de pcc@passe-coque.com</i></b>.
+            </li>
+        </ul>
+    </p>
+    <p>
+        De m&ecirc;me, pour l'onglet "Adh&eacute;rer" du site du Boat Club, l'utilisateur soumet une requ&ecirc;te d'adh&eacute;sion, et s'acquite des frais induits avec HelloAsso.<br/>
+        Le bureau du Boat Club cr&eacute;era <i>manuellement</i> les donn&eacute;es dans la base, apr&egrave;s avoir re&ccedil;u la requ&ecirc;te, et s'&ecirc;tre assur&eacute; du paiement.<br/>
+        Dans la m&ecirc;me veine, il faudra inventer quelque chose pour les documents que le candidat doit envoyer au bureau du Boat-Club (motivations, CV nautique, etc).
+    </p>
+
+    <p style="font-style: italic; color: navy;">
+        ...More soon, plus bient&ocirc;t !
+    </p>
+    <hr/>
+    <i>&copy; 2024, Passe-Coque never stops</i>
+</body>
+</html>
