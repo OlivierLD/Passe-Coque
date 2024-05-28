@@ -31,7 +31,8 @@ To gather and use all the data emitted by the electronic equipments, we would ne
 In this area, the obvious winner could be the Raspberry Pi.  
 It is a small single-board computer, built and designed in England, by Eben Upton; it runs on Linux, and it is more powerful than the computer I had on my desk 40 years back... On top of that, its energy consumption is below ridiculous. It come in several models, the smallest one can do the job (Raspberry Pi Zero W - `W` stands for wireless), it's less than 20 Euros.  
 
-Raspberry Pi Alternatives: <https://pallavaggarwal.in/raspberry-pi-alternatives-clones/>
+- Raspberry Pi web site at <https://www.raspberrypi.com/>  
+- Raspberry Pi Alternatives: <https://pallavaggarwal.in/raspberry-pi-alternatives-clones/>
 
 ### Programming
 Several programming languages can be used. C, Java, Python, ... Again, as the Raspberry Pi runs on Linux, whatever language supported on it will do the job.  
@@ -39,6 +40,11 @@ Communication between components written in different languages could be an issu
 Many vendors of electronic components (like BMP180, BME180, etc) usually provide code samples written in Python.
 
 We will be mostly using Java and Python. But this does bot prevent other languages to join the show.
+
+## Several Projects
+- [Minimal Nav Server](./nav.server/README.md)
+    - With a GPS, an eInk screen.
+- . . .
 
 
 . . .

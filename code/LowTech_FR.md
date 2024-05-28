@@ -31,7 +31,8 @@ Pour rassembler et utiliser les donn&eacute;es &eacute;mises par les &eacute;qui
 Dans ce domaine, le vainqueur &eacute;vident pourrait &ecirc;tre le Raspberry Pi.  
 C'est un petit ordinateur single-board, construit et con&ccedil;u en Angleterre, par Eben Upton ; il fonctionne sous Linux, et il est plus puissant que l'ordinateur que j'avais sur mon bureau il y a 40 ans... En plus, sa consommation en &eacute;nergie est ridicule. Il en existe plusieurs mod&egrave;les, le plus petit convient (Raspberry Pi Zero W - `W` c'est pour wireless), &ccedil;a co&ucirc;te moins de 20 Euros.  
 
-Alternatives au Raspberry Pi : <https://pallavaggarwal.in/raspberry-pi-alternatives-clones/>
+- Le site web Raspberry Pi <https://www.raspberrypi.com/>  
+- Alternatives au Raspberry Pi : <https://pallavaggarwal.in/raspberry-pi-alternatives-clones/>
 
 ### Programmation
 On peut utiliser plusieurs langages de programmation. C, Java, Python, ... Encore une fois, comme le Raspberry Pi tourne sous Linux, tous les langages qui y sont impl&eacute;ment&eacute;s peuvent faire l'affaire.  
@@ -40,5 +41,9 @@ Beaucoup de fournisseurs de composants (comme BMP180, BME180, etc) donnent aussi
 
 On utilisera principalement Java et Python. Mais &ccedil;a n'emp&ecirc;che pas d'autres langages de rejoindre la sc&egrave;ne.
 
+## Plusieurs Projets
+- [Minimal Nav Server](./nav.server/README_FR.md)
+    - Avec un GPS, et un &eacute;cran eInk.
+- . . .
 
 . . .
