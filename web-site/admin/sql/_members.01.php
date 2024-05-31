@@ -80,6 +80,7 @@ try {
         position: relative;
         height: 140px;
         white-space: nowrap;
+        min-width: 20px;
       }
 
       th.rotate > div {

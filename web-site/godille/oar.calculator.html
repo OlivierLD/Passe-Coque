@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!--link rel="icon" type="image/jpg" href="./palm.04.jpg"-->
+    <title>Calculateur d'aviron</title>
+    <style>
+* {
+    font-family: 'Courier New', Courier, monospace;
+}        
+h1 {
+    /* text-stroke: 2px orange; */ /* Might not be supported */
+    font-size: 3em;
+    color: black;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke: 3px black;
+}
+    </style>
+</head>
+<script type="text/javascript">
+    if (Math.toRadians === undefined) {
+        Math.toRadians = deg => {
+            return (deg / 180) * Math.PI;
+        };
+    }
+
+    let calculate = () => {
+        let h1 = document.getElementById("H1").value;
+        let h2 = document.getElementById("H2").value;
+        let h3 = document.getElementById("H3").value;
+        let alpha = document.getElementById("alpha").value;
+
+        let l1 = (h1 - h3) / Math.sin(Math.toRadians(alpha));
+        let l2 = h2 / Math.sin(Math.toRadians(alpha));
+        let l = l1 + l2;
+
+        document.getElementById("L1").innerText = l1.toFixed(0);
+        document.getElementById("L2").innerText = l2.toFixed(0);
+        document.getElementById("L").innerText = l.toFixed(0);
+
+        console.log("Done!");
+    };
+</script>
+<body>
+    <h1>Quelle taille d'aviron ?</h1>
+    <div style="display: grid; grid-template-columns: 50% 50%;">
+        <img src="../images/godille/sculling.schema.png" title="L&eacute;gende" style="width: 100%;">
+        <div style="padding: 5px;">
+            <!-- The calculator -->
+            <h3>Les longueurs sont exprim&eacute;es en centim&egrave;tres</h3>
+            <table width="100%">
+                <tr>
+                    <td><b>H1</b> Hauteur des mains du godilleur</td>
+                    <td><input type="number" value="140" id="H1"></td>
+                </tr>
+                <tr>
+                    <td><b>H2</b> Hauteur de la dame de nage au dessus de l'eau</td>
+                    <td><input type="number" value="60" id="H2"></td>
+                </tr>
+                <tr>
+                    <td><b>H3</b> Hauteur de la dame de nage au dessus des pieds du godilleur</td>
+                    <td><input type="number" value="40" id="H3"></td>
+                </tr>
+                <tr>
+                    <td><b>&alpha;</b> Angle de l'aviron avec la surface (en degr&eacute;s)</td>
+                    <td><input type="number" value="30" id="alpha"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button onclick="calculate();">Calculer</button></td>
+                </tr>
+                <tr>
+                    <td><b>L1</b> Entre les mains et la dame de nage</td>
+                    <td><span id="L1" style="font-weight: bold;">200</span></td>
+                </tr>
+                <tr>
+                    <td><b>L2</b> Entre la dame de nage et la surface</td>
+                    <td><span id="L2" style="font-weight: bold;">120</span></td>
+                </tr>
+                <tr>
+                    <td><b>L</b> Entre les mains et la surface</td>
+                    <td><span id="L" style="font-weight: bold;">320</span></td>
+                </tr>
+            </table>
+            <hr/>
+            <span style="font-weight: bold; font-style: italic;">Attention : </span>La longueur <b>L</b> est la longueur du <i>manche</i> de l'aviron !
+            La pelle est enti&egrave;rement dans l'eau, sa longueur est &agrave; ajouter &agrave; celle de l'aviron !
+            <hr/>
+        </div>
+    </div>
+    <hr/>
+    <i>&copy; 2024, Passe-Coque. Passe-Coque never stops.</i>
+</body>
+</html>
