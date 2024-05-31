@@ -15,6 +15,18 @@ h1 {
     -webkit-text-fill-color: white; /* Will override color (regardless of order) */
     -webkit-text-stroke: 3px black;
 }
+
+.this-page {
+    display: grid; 
+    grid-template-columns: 50% 50%;
+}
+
+@media screen and (width <= 1000px) {
+    .this-page {
+        display: grid; 
+        grid-template-columns: 100%;
+    }
+}
     </style>
 </head>
 <script type="text/javascript">
@@ -43,7 +55,7 @@ h1 {
 </script>
 <body>
     <h1>Quelle taille d'aviron ?</h1>
-    <div style="display: grid; grid-template-columns: 50% 50%;">
+    <div class="this-page">
         <img src="../images/godille/sculling.schema.png" title="L&eacute;gende" style="width: 100%;">
         <div style="padding: 5px;">
             <!-- The calculator -->
@@ -83,7 +95,7 @@ h1 {
             </table>
             <hr/>
             <span style="font-weight: bold; font-style: italic;">Attention : </span>La longueur <b>L</b> est la longueur du <i>manche</i> de l'aviron !
-            La pelle est enti&egrave;rement dans l'eau, sa longueur est &agrave; ajouter &agrave; celle de l'aviron !
+            La pelle est enti&egrave;rement dans l'eau, sa longueur est &agrave; ajouter &agrave; celle du manche pour avoir celle de l'aviron !
             <hr/>
         </div>
     </div>
