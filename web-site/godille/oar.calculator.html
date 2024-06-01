@@ -16,6 +16,44 @@ h1 {
     -webkit-text-stroke: 3px black;
 }
 
+button {
+    padding: 4px 20px;
+    /* give the background a gradient */
+    background:#ffae00; /* fallback for browsers that don't support gradients */
+    /* background: -webkit-linear-gradient(top, #ffae00, #d67600); */
+    background: -webkit-linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+    background: -moz-linear-gradient(top, #ffae00, #d67600);
+    background: -o-linear-gradient(top, #ffae00, #d67600);
+    /* background: linear-gradient(top, #ffae00, #d67600); */
+    background: linear-gradient(top, rgba(255, 174, 0, 0.6), rgba(214, 118, 0, 0.6));
+    border: 2px outset #dad9d8;
+    /* style the text */
+    font-family: Lato, Verdana, Andika, Arial, sans-serif; /* Andkia is available at http://www.google.com/webfonts/specimen/Andika */
+    font-size: 1.1em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0px 1px 10px #000;
+    /* add to small curve to the corners of the button */
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    /* give the button a drop shadow */
+    -webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+    -moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+    box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
+}
+/* NOW STYLE THE BUTTON'S HOVER STATE */
+/*	button#rCoffee:hover, button#rCoffee:focus { */
+button:hover, button:focus {
+    border:2px solid #dad9d8;
+}
+
+button:disabled {
+    background: silver;
+    color: gray;
+}
+
 .this-page {
     display: grid; 
     grid-template-columns: 50% 50%;
@@ -63,22 +101,25 @@ h1 {
             <table width="100%">
                 <tr>
                     <td><b>H1</b> Hauteur des mains du godilleur</td>
-                    <td><input type="number" value="140" id="H1"></td>
+                    <td><input type="number" value="140" id="H1" style="text-align: right;" placeholder="Hauteur des mains"></td>
                 </tr>
                 <tr>
                     <td><b>H2</b> Hauteur de la dame de nage au dessus de l'eau</td>
-                    <td><input type="number" value="60" id="H2"></td>
+                    <td><input type="number" value="60" id="H2" style="text-align: right;" placeholder="Au dessus de l'eau"></td>
                 </tr>
                 <tr>
                     <td><b>H3</b> Hauteur de la dame de nage au dessus des pieds du godilleur</td>
-                    <td><input type="number" value="40" id="H3"></td>
+                    <td><input type="number" value="40" id="H3" style="text-align: right;" placeholder="Hauteur dame de nage"></td>
                 </tr>
                 <tr>
                     <td><b>&alpha;</b> Angle de l'aviron avec la surface (en degr&eacute;s)</td>
-                    <td><input type="number" value="30" id="alpha"></td>
+                    <td><input type="number" value="30" id="alpha" style="text-align: right;" placeholder="Angle surface"></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><button onclick="calculate();">Calculer</button></td>
+                    <td colspan="2"><button onclick="calculate();" style="margin: 10px;">Calculer</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>R&eacute;sultats :</b></td>
                 </tr>
                 <tr>
                     <td><b>L1</b> Entre les mains et la dame de nage</td>
@@ -99,6 +140,7 @@ h1 {
             <hr/>
         </div>
     </div>
+    Pour voir des photos de <b>vrais</b> godilleurs, voyez le <a href="https://alternav.weebly.com/godille.html" target="ALTERNAV">site d'Alex de Roquefeuil</a>.
     <hr/>
     <i>&copy; 2024, Passe-Coque. Passe-Coque never stops.</i>
 </body>
