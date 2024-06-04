@@ -1180,7 +1180,7 @@ const THE_FLEET = [
         id: "wanita",
         pix: "/images/boats/wanita.too.sq.png",
         type: "First Class 12",
-        category: NONE,
+        category: EX_BOAT,
         base: "Saint-Malo"
     },
     { 
@@ -1236,7 +1236,7 @@ const THE_FLEET = [
         id: "babou",
         pix: "/images/boats/babou.sq.png",
         type: "Flying Phantom",
-        category: NONE,
+        category: EX_BOAT,
         base: "Saint&#8209;Philibert"
     },
     {

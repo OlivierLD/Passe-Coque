@@ -25,14 +25,12 @@
 	<p>The world has been discovered by boats. And at that time, electricity was mostly - if not only - available through thunderstorms.<br>Navigators (like Columbus, Cook, and others) used at their time <strong>no-tech</strong> navigation.<br>The techniques they were using still work today, and would certainlly deserve not to be forgotten. But this section is about something else, it is about using modern technologies, from small and cheap instruments.<br>You need to master the technology in order too put it to work.<br>And this is all the different between a tool and a black-box. The black box decides on its own, and when it decides to fail, you&#39;re screwed. The tool does what it is told to. If it does not work, it&#39;s probably because it&#39;s not been used as it should. And that can probably be fixed.</p>
 	<p>For navigation, we need to:</p>
 	<ul>
-	<li>know our position<ul>
-	<li>possibly plot it on a chart</li>
-	</ul>
-	</li>
-	<li>know were we are going</li>
-	<li>know what the wind looks like</li>
-	<li>know what the boats around are doing</li>
-	<li>etc...</li>
+		<li>know our position</li>
+		<li>possibly plot it on a chart</li>
+		<li>know were we are going</li>
+		<li>know what the wind looks like</li>
+		<li>know what the boats around are doing</li>
+		<li>etc...</li>
 	</ul>
 	<p>For the position, techniques like GPS could be a solution.<br>Electronic compasses exist, that will tell us where we&#39;re going.<br>For the boat speed, wind speed and direction, electronic equipments are also available.<br>The data emitted by those devices usually follow one of the oldest IT standards, named NMEA (National Marine Electronics Association).</p>
 	<p>This is what&#39;s used by Trackers and Chart Plotters available on the market; but let&#39;s see if we could come up with another solution.</p>
@@ -41,21 +39,35 @@
 	<h3 id="computers">Computers</h3>
 	<p>In this area, the obvious winner could be the Raspberry Pi.<br>It is a small single-board computer, built and designed in England, by Eben Upton; it runs on Linux, and it is more powerful than the computer I had on my desk 40 years back... On top of that, its energy consumption is below ridiculous. It come in several models, the smallest one can do the job (Raspberry Pi Zero W - <code>W</code> stands for wireless), it&#39;s less than 20 Euros.  </p>
 	<ul>
-	<li>Raspberry Pi web site at <a href="https://www.raspberrypi.com/">https://www.raspberrypi.com/</a>  </li>
-	<li>Raspberry Pi Alternatives: <a href="https://pallavaggarwal.in/raspberry-pi-alternatives-clones/">https://pallavaggarwal.in/raspberry-pi-alternatives-clones/</a></li>
+		<li>Raspberry Pi web site at <a href="https://www.raspberrypi.com/">https://www.raspberrypi.com/</a>  </li>
+		<li>Raspberry Pi Alternatives: <a href="https://pallavaggarwal.in/raspberry-pi-alternatives-clones/">https://pallavaggarwal.in/raspberry-pi-alternatives-clones/</a></li>
 	</ul>
 	<h3 id="programming">Programming</h3>
 	<p>Several programming languages can be used. C, Java, Python, ... Again, as the Raspberry Pi runs on Linux, whatever language supported on it will do the job.<br>Communication between components written in different languages could be an issue..., solved by using protocols like TCP.<br>Many vendors of electronic components (like BMP180, BME180, etc) usually provide code samples written in Python.</p>
 	<p>We will be mostly using Java and Python. But this does bot prevent other languages to join the show.</p>
 	<h2 id="several-projects">Several Projects</h2>
 	<ul>
-	<li><a href="./nav.server/nav.server.html">Minimal Nav Server</a><ul>
-	<li>With a GPS, an eInk screen.</li>
+		<li>
+			<a href="./nav.server/nav.server.html">Minimal Nav Server</a>
+			<ul>
+				<li>With a GPS, an eInk screen.</li>
+			</ul>
+		</li>
+		<li>. . .</li>
 	</ul>
-	</li>
-	<li>. . .</li>
-	</ul>
-	<p>. . .</p>	
+	<p>
+		<h3>Documents</h3>
+		For low-tech navigation - celestial and others - you sometime need some documents.
+		Here are a couple of them, published by Passe-Coque:
+		<ul>
+			<li><a href="documents/almanac.2024.pdf" target="doc">Nautical almanac, for 2024</a></li>
+			<li><a href="documents/lunar.2024.pdf" target="doc">Lunar distances, for 2024</a></li>
+			<li><a href="documents/perpetual.2024.2030.pdf" target="doc">Perpetual" almanac, 2024-2030</a></li>
+			<li><a href="documents/port-tudy.2024.pdf" target="doc">Tides in Port-Tudy, for 2024</a></li>
+			<li><a href="documents/nse.pdf" target="doc">Naviguer sans &eacute;lectricit&eacute;</a> (in French)</li>
+			<li><a href="documents/100.all.tables.A4.pdf" target="doc">Tables de Navigation</a></li>
+		</ul>	
+	</p>	
 
 </body>
 </html>
