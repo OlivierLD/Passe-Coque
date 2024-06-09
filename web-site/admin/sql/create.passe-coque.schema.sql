@@ -103,6 +103,38 @@ CREATE TABLE IF NOT EXISTS PASSE_COQUE_MEMBERS (
     ADDRESS VARCHAR(128) COMMENT 'With number, street, zipcode, city, etc.'
 );
 
+CREATE TABLE IF NOT EXISTS TARIFS (
+    LABEL VARCHAR(32) PRIMARY KEY,
+    DESCRIPTION VARCHAR(256)
+);
+
+INSERT INTO TARIFS (LABEL, DESCRIPTION) VALUES 
+('Passeur d\'Écoute', ''),
+('Équipier Boat Club', ''),
+('Asso Partenaire', ''),
+('Prospect', 'Fourre-tout. Prospect, contacts, etc.'),
+('Presse', ''),
+('Donateur', ''),
+('Partenaire', ''),
+('CA / Administration', ''),
+('Référent', '');
+
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Passeur d\'Écoute' WHERE TARIF IN ('adhérent', 'Adhérent. Isseo', 'adherente', 'Felicie', 'membre', 'Membres FELICIE', 'Passeur d\'Ecoute');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Équipier Boat Club' WHERE TARIF IN ('Adhesion équipier Boat Club', 'Equipier');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Asso Partenaire' WHERE UPPER(TARIF) = 'ASSO PARTENAIRE';
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Prospect' WHERE TARIF IN ('Asso traverse', 'Avocate', 'Cap Martinique', 'Carter', 'CEEMF', 'Contact', 'Coriolan Caudard', 'coureur+VIP', 'ecole de voile', 'Createur Logo', 'GPO', 'expert ddt', 'Horn', 'Membre OGS', 'N/A', 'Sympathisant', 'Sympathisant / carter', 'Sympathisante', 'Sympathsant', 'Tombsy ex Hann');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Presse' WHERE TARIF IN ('Chasse marée', 'Voiles & Voiliers', 'Voiles mag');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Donateur' WHERE TARIF IN ('don unique', 'Donateur/membre d\'office', 'membre donateur', 'membre donateurs');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Asso Partenaire' WHERE TARIF IN ('Modkhoz asso', 'Mordhoz', 'Particpe Futur', 'Patriarch', 'Personne Morale', 'sailcoop', 'Schift Project', 'sympathisante Oczn as commo,', 'vent debout Belgique');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Partenaire' WHERE TARIF IN ('Nautipark', 'Navicom/partenaire', 'Robin Marine', 'Sellor', 'Statieur', 'technique voiles', 'Tribord');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'CA / Administration' WHERE TARIF IN ('Président', 'WebMaster');
+UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Référent' WHERE TARIF IN ('Référent Félicie', 'Référents / donateurs', 'referent evasion 32', 'Referente /Kim Anne', 'referente/ passe partout', 'Skipper référent');
+
+SELECT CONCAT(FIRST_NAME, ' ', LAST_NAME), TARIF FROM PASSE_COQUE_MEMBERS WHERE TARIF NOT IN (SELECT LABEL FROM TARIFS);
+
+-- TO DO WHEN CLEAN:
+ALTER TABLE PASSE_COQUE_MEMBERS ADD CONSTRAINT TARIF_FK_TARIFS FOREIGN KEY (TARIF) REFERENCES TARIFS (LABEL);
+
 CREATE TABLE IF NOT EXISTS MEMBER_FEES (
     EMAIL VARCHAR(64),
     YEAR INT,
