@@ -955,8 +955,21 @@ let mouseOnTxPix = (origin) => {
 let mouseOnRftPix = (origin) => {
 };
 
-let clickOnBoatPix = (origin, name = 'Boat Name', pathPrefix = '') => {
+let clickOnBoatPix = (origin, name = '', pathPrefix = '') => {
     console.log(`clickOnBoatPix: Click on ${origin.id}`);
+
+    if (name.trim().length === 0) {
+        try {
+            THE_FLEET.forEach(element => { // Use THE_FLEET, getTheBoats might not have been invoked yet...
+                if (element.id === origin.id) {
+                    name = element.name;
+                }	
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     // TODO Set the content
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
@@ -1446,6 +1459,14 @@ const THE_FLEET = [
         type: "Classic Old Gaffer",
         category: TO_GRAB,
         base: "Hennebont"
+    },
+    { 
+        name: "Bémol III",
+        id: "bemol",
+        pix: "/images/boats/sun-rise-35-sous-spi.jpg",
+        type: "Sun Rise 35",
+        category: TO_GRAB,
+        base: "Saint-Philibert"
     }
 ];
 

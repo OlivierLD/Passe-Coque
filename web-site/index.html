@@ -493,6 +493,7 @@ window.onload = () => {
 	clack(el);
 
 	if (true) { // Open a dialog ?
+		// debugger;
 		let qsTx = getQueryParameterByName('tx');  // A project id ?
 		if (qsTx) {
 			// Dummy element, with an id for the 'clickOnTxPix'
@@ -504,6 +505,23 @@ window.onload = () => {
 				title = (currentLang === 'FR') ? 'Projet Watter' : 'Project Watter';
 			}
 			clickOnTxPix(el, title);
+		}
+		let boatId = getQueryParameterByName('boat-id');
+		if (boatId) { // Mmmmh... Make sure the page is right ?
+			let el = document.createElement("div"); 
+			el.id = boatId;
+			let boatName = '';
+			// try {
+			// 	boatName = '';
+			// 	THE_BOATS.array.forEach(element => {
+			// 		if (element.id === boatId) {
+			// 			boatName = element.name;
+			// 		}	
+			// 	});
+			// } catch (err) {
+			// 	// Bof !
+			// }
+			clickOnBoatPix(el, boatName);
 		}
 	}
 
