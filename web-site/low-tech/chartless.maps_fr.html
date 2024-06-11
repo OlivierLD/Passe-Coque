@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque - LowTech</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../fonts/font.01.css">
+	<link rel="stylesheet" href="../fonts/font.02.css">
+
+	<link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
+	<style type="text/css">
+.postit {
+    background: #f7f7e7;
+    padding: 5px;
+}
+    </style>
+
+	<script type="module" src="../webcomponents/SlideShow.js"></script>
+
+</head>
+	
+<body>
+
+	<h1 id="low-tech-navigation">Chartless Maps</h1>
+	<p><a href="./chartless.maps.html">En anglais</a></p>
+	<h2 id="preamble">Pr&eacute;ambule</h2>
+	<p>
+		Chartless Maps, voil&agrave; une expression intraduisible...<br/>
+		"Map", en anglais, c'est une carte (comme une carte du monde, une carte routi&egrave;re).<br/>
+		"Chart", et ben... c'est aussi une carte. Bon.<br/>
+		Le suffixe "less" est privatif, comme dans "speechless", qui signifie "sans voix".<br/>
+		Donc, "Chartless Maps", &ccedil;a signifie "Cartes sans carte".<br/>
+		Nous voil&agrave; bien avanc&eacute;s !
+	</p>
+	<h2>Qu'est-ce que c'est ?</h2>
+	<p>
+		Voici d'o&ugrave; vient l'id&eacute;e.<br/>
+		Dans la section consacr&eacute;e &agrave; la navigation astronomique, on parle de ces <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Canevas Mercator</a>,
+		qui sont en fait des cartes "vides", utilis&eacute;es au large pour y porter les positions n&eacute;cessaires &agrave; l'&eacute;laboration d'un point astronomique, sur lesquelles
+		un mille marin a une repr&eacute;sentation tangible sur ce canevas, donc. Ces cartes repr&eacute;sentent en fait un tout petit bout d'oc&eacute;an, &agrave; une latitude donn&eacute;e,
+		et dont on ajuste la longitude &agrave; la demande. Bref !
+	</p>
+	<p>
+		Dans la section <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a>,
+		on peut voir comment utiliser un Raspberry Pi Zero et un GPS bon march&eacute; pour obtenir sa position, son cap et sa vitesse, pour une consommation d'&eacute;nergie ridicule.<br/>
+		Dans les sections voisines, on peut aussi voir comment mettre en &oelig;uvre un r&eacute;cepteur AIS.<br/>
+		Le Raspberry Pi &eacute;met son propre r&eacute;seau WiFi, et h&eacute;berge un server HTTP ;  ce qui permet &agrave; n'importe quel p&eacute;riph&eacute;rique (cell-phone, tablette, laptop) de se connecter
+		sur le r&eacute;seau &eacute;mis par le Raspberry Pi, et d'acc&eacute;der &agrave; l'aide d'un navigateur (un browser) &agrave; des pages web afin de visualiser les donn&eacute;es rassembl&eacute;es et trait&eacute;es par le server.
+		<div class="postit">
+			Ceci n'est donc pas du "Cloud Computing", c'est plus proche de ce qu'on pourrait appeler du "Flake Computing".
+		</div>
+		Voici quelques exemples :
+		<div style="background: white; width: 100%; padding: 10px;">
+            <slide-show id="slide-show-samples"
+                        width="740"
+                        height="500"
+                        style="line-height: 1em;">
+                <slide-show-image src="./images/screenshot.01.png" title="Console - 1"></slide-show-image>
+                <slide-show-image src="./images/screenshot.02.png" title="Console - 2"></slide-show-image>
+                <slide-show-image src="./images/screenshot.03.png" title="Console - 3"></slide-show-image>
+                <slide-show-image src="./images/screenshot.04.png" title="Console - 4"></slide-show-image>
+                <slide-show-image src="./images/screenshot.05.png" title="Console - 5"></slide-show-image>
+                <slide-show-image src="./images/screenshot.06.png" title="Console - 6"></slide-show-image>
+                <slide-show-image src="./images/screenshot.07.png" title="Console - 7"></slide-show-image>
+                <slide-show-image src="./images/screenshot.10.png" title="Console - 8"></slide-show-image>
+                <slide-show-image src="./images/screenshot.11.png" title="Console - 9"></slide-show-image>
+                <slide-show-image src="./images/screenshot.12.png" title="Console - 10 - HeadUp"></slide-show-image>
+                <slide-show-image src="./images/small.gps.01.png" title="Cell-Phone - 1"></slide-show-image>
+                <slide-show-image src="./images/small.gps.02.png" title="Cell-Phone - 2"></slide-show-image>
+                <slide-show-image src="./images/small.gps.03.png" title="Cell-Phone - 3"></slide-show-image>
+                <slide-show-image src="./images/small.gps.04.png" title="Cell-Phone - 4"></slide-show-image>
+                <slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
+                <slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
+            </slide-show>
+        </div>
+		La liste n'est pas close, la limite est votre imagination !
+	</p>
+	<p>
+		Ceci &eacute;tant dit, concernant la position du bateau, il faudrait avoir une carte.<br/>
+		Un traceur co&ucirc;te cher - plus cher qu'une carte en papier - et il lui faut &agrave; lui aussi des cartes &agrave; jour,
+		qu'il faut acheter aussi...<br/>
+		Voici ce qu'on peut faire, avec les &eacute;l&eacute;ments dont on dispose d&eacute;j&agrave;.<br>
+		On peut d&eacute;velopper un composant - fonctionnellement analogue &agrave; un canevas Mercator sur lequel on va pouvoir porter la position du bateau.
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.01.png" style="width: 100%;">
+		</div>
+		La carte donne la position du bateau, son cap, et le chemin r&eacute;cemment parcouru. Mais &ccedil;a reste sobre.<br/>
+		C'est l&agrave; que &ccedil;a devient int&eacute;ressant.<br/>
+	</p>
+	<p>
+		Avant de partir, on va se pr&eacute;parer un fichier - connu par le server (on donnera tous les d&eacute;tails plus loin), qui peut contenir la position
+		de diff&eacute;rentes marques, comme des balises, des pointes..., afin des les afficher - comme on affiche le bateau, dont on connait la position aussi - sur la carte.
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.02.png" style="width: 100%;">
+		</div>
+		&Ccedil;a commence &agrave; avoir plus d'allure, on continue.<br/> 
+		Il est facile de calculer la distance et le rel&egrave;vement de toutes les marques qu'on a d&eacute;finies :
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.03.png" style="width: 100%;">
+		</div>
+		Et dans la m&ecirc;me veine, on peut aussi d&eacute;finir des "fronti&egrave;res", des lignes qui joignent des points d&eacute;finis comme pr&eacute;c&eacute;demment :
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.04.png" style="width: 100%;">
+		</div>
+		Toujours de la m&ecirc;me facon, on peut aussi avoir des fichiers qui d&eacute;finissent les continents !
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.05.png" style="width: 100%;">
+		</div>
+		On parlait d'AIS aussi. Les "Targets AIS" sont potentiellement trait&eacute;es de la m&ecirc;me facon :
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.06.png" style="width: 100%;">
+		</div>
+		Et aussi - puisque c'est disponible - pour tous les &eacute;l&eacute;ments ci-dessus, on peut d&eacute;tecter les dangers de collision. Que ce soit avec les Targets AIS, ou avec les fronti&egrave;res que <i>nous</i>
+		avons d&eacute;finies.
+		<div style="width: 70%; text-align: center;">
+			<img src="./images/chartless.07.png" style="width: 100%;">
+		</div>
+		Les actions &agrave; prendre en cas de d&eacute;tection de collision peuvent &ecirc;tre d&eacute;finies elles aussi. On verra &ccedil;a ult&eacute;rieurement.
+	</p>
+	<p>
+		La suite arrive...
+	</p>
+
+</body>
+</html>
