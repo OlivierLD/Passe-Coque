@@ -13,8 +13,13 @@
 
 	<link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
 	<style type="text/css">
-		/* Empty */
-    </style>
+.postit {
+	background: #f7f7e7;
+	padding: 5px;
+}
+	</style>
+
+	<script type="module" src="../webcomponents/SlideShow.js"></script>
 </head>
 	
 <body>
@@ -25,7 +30,93 @@
 	<p>
 		Chartless Maps, what the heck is that supposed to mean?!
 	</p>
-
+	<h2>What is that?</h2>
+	<p>
+		Here is where the idea comes from.<br/>
+		In the section dedicated to celestial navigation, we talk about those <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Mercator Canvases</a>,
+		which are actually "empty" charts, used at sea to plot the positions required to come up with a celestial fix, on which
+		a nautical mile can be represented by a tangible segment. Those charts actually represent a small piece of ocean, at a given latitude, the
+		longitude being adjusted on demand. Good!
+	</p>
+	<p>
+		In the section <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a>,
+		you can see how to use a Raspberry Pi Zero and a cheap GPS to obtain your position, heading and speed, for a ridiculous energy consumption.<br/>
+		In nearby sections, you can also see how to put an AIS receiver to work.<br/>
+		The Raspberry Pi emits its own WiFi network, and hosts an HTTP server; this allows any device (cell-phone, tablet, laptop) to connect
+		on the Raspberry Pi's network, to access from a browser to several web pages, to visualise the data managed by the server.
+		<div class="postit">
+			This is <i>not</i> "Cloud Computing", more like "Flake Computing".
+		</div>
+		Here are a couple of examples:
+		<div style="background: white; width: 100%; padding: 10px;">
+            <slide-show id="slide-show-samples"
+                        width="740"
+                        height="500"
+                        style="line-height: 1em;">
+                <slide-show-image src="./images/screenshot.01.png" title="Console - 1"></slide-show-image>
+                <slide-show-image src="./images/screenshot.02.png" title="Console - 2"></slide-show-image>
+                <slide-show-image src="./images/screenshot.03.png" title="Console - 3"></slide-show-image>
+                <slide-show-image src="./images/screenshot.04.png" title="Console - 4"></slide-show-image>
+                <slide-show-image src="./images/screenshot.05.png" title="Console - 5"></slide-show-image>
+                <slide-show-image src="./images/screenshot.06.png" title="Console - 6"></slide-show-image>
+                <slide-show-image src="./images/screenshot.07.png" title="Console - 7"></slide-show-image>
+                <slide-show-image src="./images/screenshot.10.png" title="Console - 8"></slide-show-image>
+                <slide-show-image src="./images/screenshot.11.png" title="Console - 9"></slide-show-image>
+                <slide-show-image src="./images/screenshot.12.png" title="Console - 10 - HeadUp"></slide-show-image>
+                <slide-show-image src="./images/small.gps.01.png" title="Cell-Phone - 1"></slide-show-image>
+                <slide-show-image src="./images/small.gps.02.png" title="Cell-Phone - 2"></slide-show-image>
+                <slide-show-image src="./images/small.gps.03.png" title="Cell-Phone - 3"></slide-show-image>
+                <slide-show-image src="./images/small.gps.04.png" title="Cell-Phone - 4"></slide-show-image>
+                <slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
+                <slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
+            </slide-show>
+        </div>
+		The list is not closed, your imagination is the limit!
+	</p>
+	<p>
+		This being said, about the boat's position, it would be nice to have a chart.<br/>
+		A tracker is expensive - more than a paper chart - and it also needs charts, updated, to purchase too...<br/>
+		Here is what could be done, with what we already have.<br>
+		We could develop a component - fonctionally analog to a Mercator cavas, on which we could plot the boat's position.
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.01.png" style="width: 100%;">
+		</div>
+		The chart gives the boat's position, its heading, and the track recently followed.<br/>
+		This is where it begins to be interesting.<br/>
+	</p>
+	<p>
+		Before you leave, you prepare a file - known by the server (details coming), that can contain the positions of different markers
+		like becons, points..., so they can be displayed - just like the boat, using its position - on the chart.
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.02.png" style="width: 100%;">
+		</div>
+		It starts looking good, let's move on.<br/> 
+		It is easy to calculate distances and bearings for all those marks we've defined:
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.03.png" style="width: 100%;">
+		</div>
+		And along the same lines, we can also define "borders", lines joining marks defined like before:
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.04.png" style="width: 100%;">
+		</div>
+		Still the same way, you can have files defining continents!
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.05.png" style="width: 100%;">
+		</div>
+		We talked before about AIS. AIS targets can be represented the same way:
+		<div style="width: 50%; text-align: center;">
+			<img src="./images/chartless.06.png" style="width: 100%;">
+		</div>
+		And also - as it is available - for all the elements above, we can detect collision threats. It can be with AIS targets, or with the borders <i>we</i>
+		have defined.
+		<div style="width: 70%; text-align: center;">
+			<img src="./images/chartless.07.png" style="width: 100%;">
+		</div>
+		Actions to take in case of a collision threat can be defined too. We'll see later.
+	</p>
+	<p>
+		The rest is coming...
+	</p>
 
 </body>
 </html>
