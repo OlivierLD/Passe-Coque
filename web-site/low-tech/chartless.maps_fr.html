@@ -17,6 +17,20 @@
     background: #f7f7e7;
     padding: 5px;
 }
+
+.slide {
+	max-width: 800px; 
+	max-height: 500px;
+	padding: 10px;
+}
+
+@media screen and (width <= 800px) {
+    .slide {
+		max-width: 600px; 
+		max-height: 375px;
+		padding: 10px;
+	}
+}
     </style>
 
 	<script type="module" src="../webcomponents/SlideShow.js"></script>
@@ -53,9 +67,11 @@
 		<div class="postit">
 			Ceci n'est donc pas du "Cloud Computing", c'est plus proche de ce qu'on pourrait appeler du "Flake Computing".
 		</div>
-		Voici quelques exemples :
-		<div style="background: white; width: 100%; padding: 10px;">
-            <slide-show id="slide-show-samples"
+	</p>
+	<p>
+		Voici quelques exemples de ces pages web :
+		<div style="background: white; width: 96%; padding: 10px;">
+            <!--slide-show id="slide-show-samples"
                         width="740"
                         height="500"
                         style="line-height: 1em;">
@@ -75,7 +91,25 @@
                 <slide-show-image src="./images/small.gps.04.png" title="Cell-Phone - 4"></slide-show-image>
                 <slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
                 <slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
-            </slide-show>
+            </slide-show-->
+			<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
+                <img src="./images/screenshot.01.png" title="Console - 1" class="slide"></img>
+                <img src="./images/screenshot.02.png" title="Console - 2" class="slide"></img>
+                <img src="./images/screenshot.03.png" title="Console - 3" class="slide"></img>
+                <img src="./images/screenshot.04.png" title="Console - 4" class="slide"></img>
+                <img src="./images/screenshot.05.png" title="Console - 5" class="slide"></img>
+                <img src="./images/screenshot.06.png" title="Console - 6" class="slide"></img>
+                <img src="./images/screenshot.07.png" title="Console - 7" class="slide"></img>
+                <img src="./images/screenshot.10.png" title="Console - 8" class="slide"></img>
+                <img src="./images/screenshot.11.png" title="Console - 9" class="slide"></img>
+                <img src="./images/screenshot.12.png" title="Console - 10 - HeadUp" class="slide"></img>
+                <img src="./images/small.gps.01.png" title="Cell-Phone - 1" class="slide"></img>
+                <img src="./images/small.gps.02.png" title="Cell-Phone - 2" class="slide"></img>
+                <img src="./images/small.gps.03.png" title="Cell-Phone - 3" class="slide"></img>
+                <img src="./images/small.gps.04.png" title="Cell-Phone - 4" class="slide"></img>
+                <img src="./images/small.gps.05.png" title="Cell-Phone - 5" class="slide"></img>
+                <img src="./images/small.gps.06.png" title="Cell-Phone - 6" class="slide"></img>
+			</div>
         </div>
 		La liste n'est pas close, la limite est votre imagination !
 	</p>
@@ -106,15 +140,15 @@
 		<div style="width: 50%; text-align: center;">
 			<img src="./images/chartless.04.png" style="width: 100%;">
 		</div>
-		Toujours de la m&ecirc;me facon, on peut aussi avoir des fichiers qui d&eacute;finissent les continents !
+		Toujours de la m&ecirc;me fa&ccedil;on, on peut aussi avoir des fichiers qui d&eacute;finissent les continents !
 		<div style="width: 50%; text-align: center;">
 			<img src="./images/chartless.05.png" style="width: 100%;">
 		</div>
-		On parlait d'AIS aussi. Les "Targets AIS" sont potentiellement trait&eacute;es de la m&ecirc;me facon :
+		On parlait d'AIS aussi. Les "Cibles AIS" sont potentiellement trait&eacute;es de la m&ecirc;me fa&ccedil;on :
 		<div style="width: 50%; text-align: center;">
 			<img src="./images/chartless.06.png" style="width: 100%;">
 		</div>
-		Et aussi - puisque c'est disponible - pour tous les &eacute;l&eacute;ments ci-dessus, on peut d&eacute;tecter les dangers de collision. Que ce soit avec les Targets AIS, ou avec les fronti&egrave;res que <i>nous</i>
+		Et aussi - puisque c'est disponible - pour tous les &eacute;l&eacute;ments ci-dessus, on peut d&eacute;tecter les dangers de collision. Que ce soit avec les Cibles AIS, ou avec les fronti&egrave;res que <i>nous</i>
 		avons d&eacute;finies.
 		<div style="width: 70%; text-align: center;">
 			<img src="./images/chartless.07.png" style="width: 100%;">
@@ -122,8 +156,48 @@
 		Les actions &agrave; prendre en cas de d&eacute;tection de collision peuvent &ecirc;tre d&eacute;finies elles aussi. On verra &ccedil;a ult&eacute;rieurement.
 	</p>
 	<p>
-		La suite arrive...
+		<h3>D&eacute;tection de collision avec les cibles AIS</h3>
+		Voici comment les menaces de collision sont d&eacute;tect&eacute;es dans la classe Java <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>AISManager</code></a>.<br/>
+		On proc&egrave;de en deux &eacute;tapes :
+		<ol>
+			<li>On d&eacute;tecte les cibles AIS qui se situent dans un rayon de <b>X</b> nm</li>
+			<li>
+				Pour ces cibles :
+				<ul>
+					<li>On part de la position de la target, et de celle du bateau (le n&ocirc;tre)</li>
+					<li>On mesure la distance qui les s&eacute;pare</li>
+					<li>On calcule les positions atteintes 10 secondes plus tard, en utilisant les caps et vitesses respectifs</li>
+					<li>On mesure la nouvelle distance qui s&eacute;pare la target et le bateau</li>
+					<li>Tant que cette distance diminue, on proc&egrave;de ainsi, toutes les 10 secondes</li>
+					<li>On conserve cette distance minimum trouv&eacute;e, qu'on appelle <b>Y</b></li>
+					<li>Si cette valeur <b>Y</b> est inf&eacute;rieure &agrave; une valeur donn&eacute;e, on consid&egrave;re qu'il existe un danger de collision.</li>
+				</ul>
+			</li>
+		</ol>
+		Exemple de valeurs utilis&eacute;es :
+		<ul>
+			<li>X : 5 nm</li>
+			<li>Y : 0.5 nm</li>
+		</ul>
+		<div class="postit">
+			<h4>Note</h4>
+			On pourrait aussi proc&eacute;der d'une mani&egrave;re plus rigoureuse math&eacute;matiquement :
+			<ul>
+				<li>On &eacute;tablit l'&eacute;quation de la distance qui s&eacute;pare les deux bateaux en fonction du temps, &agrave; partir de leurs positions actuelles</li>
+				<li>On d&eacute;rive cette fonction, une fois</li>
+				<li>On cherche les racines de cette d&eacute;riv&eacute;e premi&egrave;re, pour trouver le minimum de la fonction</li>
+			</ul>
+			C'est certes plus rigoureux, mais la formule qui permet de d&eacute;terminer une position atteinte en un temps donn&eacute;, avec un cap et une vitesse connus,
+			est un peu sportive...<br/> 
+			Voir <a href="https://fr.wikipedia.org/wiki/Haversine_formula" target="WP">ici</a>.<br/>
+			D'o&ugrave; la m&eacute;thode choisie, &eacute;nonc&eacute;e ci-dessus, qui sera le cas &eacute;ch&eacute;ant plus facile &agrave; debugger. 😉
+		</div>
 	</p>
-
+	<p>
+		<h3>Le code</h3>
+		Tout le code est dans son <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, avec de la doc et des exemples.
+	</p>
+	<hr/>
+	<i>&copy; 2024, Passe-Coque</i>
 </body>
 </html>

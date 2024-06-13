@@ -17,6 +17,20 @@
 	background: #f7f7e7;
 	padding: 5px;
 }
+
+.slide {
+	max-width: 800px; 
+	max-height: 500px;
+	padding: 10px;
+}
+
+@media screen and (width <= 800px) {
+    .slide {
+		max-width: 600px; 
+		max-height: 375px;
+		padding: 10px;
+	}
+}
 	</style>
 
 	<script type="module" src="../webcomponents/SlideShow.js"></script>
@@ -47,9 +61,11 @@
 		<div class="postit">
 			This is <i>not</i> "Cloud Computing", more like "Flake Computing".
 		</div>
-		Here are a couple of examples:
-		<div style="background: white; width: 100%; padding: 10px;">
-            <slide-show id="slide-show-samples"
+	</p>
+	<p>
+		Here are a couple of examples of those web pages:
+		<div style="background: white; width: 96%; padding: 10px;">
+            <!--slide-show id="slide-show-samples"
                         width="740"
                         height="500"
                         style="line-height: 1em;">
@@ -69,7 +85,25 @@
                 <slide-show-image src="./images/small.gps.04.png" title="Cell-Phone - 4"></slide-show-image>
                 <slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
                 <slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
-            </slide-show>
+            </slide-show-->
+			<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
+                <img src="./images/screenshot.01.png" title="Console - 1" class="slide"></img>
+                <img src="./images/screenshot.02.png" title="Console - 2" class="slide"></img>
+                <img src="./images/screenshot.03.png" title="Console - 3" class="slide"></img>
+                <img src="./images/screenshot.04.png" title="Console - 4" class="slide"></img>
+                <img src="./images/screenshot.05.png" title="Console - 5" class="slide"></img>
+                <img src="./images/screenshot.06.png" title="Console - 6" class="slide"></img>
+                <img src="./images/screenshot.07.png" title="Console - 7" class="slide"></img>
+                <img src="./images/screenshot.10.png" title="Console - 8" class="slide"></img>
+                <img src="./images/screenshot.11.png" title="Console - 9" class="slide"></img>
+                <img src="./images/screenshot.12.png" title="Console - 10 - HeadUp" class="slide"></img>
+                <img src="./images/small.gps.01.png" title="Cell-Phone - 1" class="slide"></img>
+                <img src="./images/small.gps.02.png" title="Cell-Phone - 2" class="slide"></img>
+                <img src="./images/small.gps.03.png" title="Cell-Phone - 3" class="slide"></img>
+                <img src="./images/small.gps.04.png" title="Cell-Phone - 4" class="slide"></img>
+                <img src="./images/small.gps.05.png" title="Cell-Phone - 5" class="slide"></img>
+                <img src="./images/small.gps.06.png" title="Cell-Phone - 6" class="slide"></img>
+			</div>
         </div>
 		The list is not closed, your imagination is the limit!
 	</p>
@@ -115,8 +149,48 @@
 		Actions to take in case of a collision threat can be defined too. We'll see later.
 	</p>
 	<p>
-		The rest is coming...
+		<h3>AIS targets collision threat detection</h3>
+		Here is how the collision threats are detected in the Java class <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>AISManager</code></a>.<br/>
+		We proceed in two steps:
+		<ol>
+			<li>We detect the targets within a radius of <b>X</b> nm</li>
+			<li>
+				For those targets:
+				<ul>
+					<li>Starting from the position of the target, and the position of the boat (our boat)</li>
+					<li>We calculate the distance between the two</li>
+					<li>We calculate the positions reached 10 seconds later from their position, using their respective speed and heading</li>
+					<li>We measure the new distance between boat and target</li>
+					<li>As long as this distance keeps shrinking, we process this way, every 10 seconds</li>
+					<li>We save this smallest distance found, we name it <b>Y</b></li>
+					<li>If this <b>Y</b> value is lower than a given value, we then considrer that there is a collision threat.</li>
+				</ul>
+			</li>
+		</ol>
+		Sample values:
+		<ul>
+			<li>X : 5 nm</li>
+			<li>Y : 0.5 nm</li>
+		</ul>
+		<div class="postit">
+			<h4>Note</h4>
+			We could also use a mathematically more rigourous method:
+			<ul>
+				<li>You establish the equation of the distance between the boats, based on time, starting from their current position, using their speed and heading</li>
+				<li>You derivate this function, once</li>
+				<li>You find the roots of this first derivative, to get to the minimum of the function</li>
+			</ul>
+			This is indeed more rigourous, but the formula that gives us the position we can reach from a given position, with given speed and heading, within a given time,
+			is a bit tricky...<br/> 
+			See <a href="https://en.wikipedia.org/wiki/Haversine_formula" target="WP">here</a>.<br/>
+			Hence the chosen method described above, that will eventually be easier to debug, if needed. 😉
+		</div>
 	</p>
-
+	<p>
+		<h3>The code</h3>
+		All the required code is in its <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, along with doc and examples.
+	</p>
+	<hr/>
+	<i>&copy; 2024, Passe-Coque</i>
 </body>
 </html>
