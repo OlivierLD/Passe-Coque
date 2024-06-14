@@ -39,13 +39,30 @@
 	
 <body>
 
-	<h1 id="low-tech-navigation">Chartless Maps</h1>
-	<p><a href="./chartless.maps_fr.html">In French</a></p>
-	<h2 id="preamble">Preamble</h2>
+	<div style="width: 90%; padding: 20px; display: grid; grid-template-columns: auto auto;">
+		<h1 id="low-tech-navigation">Chartless Maps</h1>
+		<p style="justify-self: end;"><a href="./chartless.maps_fr.html">In French</a></p>
+	</div>
+	<hr/>
+	<h2>Table</h2>
+	<ul>
+		<li><a href="#01">Preamble</a></li>
+		<li>
+			<a href="#02">What is that?</a>
+			<ul>
+				<li><a href="#0201">AIS targets collision threat detection</a></li>
+			</ul>
+		</li>	
+		<li><a href="#03">Le code</a></li>
+		<li><a href="#04">Configuration files definition</a></li>
+	</ul>
+	<hr/>
+
+	<h2 id="preamble"><a name="01">Preamble</a></h2>
 	<p>
 		Chartless Maps, what the heck is that supposed to mean?!
 	</p>
-	<h2>What is that?</h2>
+	<h2><a name="02">What is that?</a></h2>
 	<p>
 		Here is where the idea comes from.<br/>
 		In the section dedicated to celestial navigation, we talk about those <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Mercator Canvases</a>,
@@ -150,7 +167,7 @@
 		Actions to take in case of a collision threat can be defined too. We'll see later.
 	</p>
 	<p>
-		<h3>AIS targets collision threat detection</h3>
+		<h3><a name="0201">AIS targets collision threat detection</a></h3>
 		Here is how the collision threats are detected in the Java class <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>AISManager</code></a>.<br/>
 		We proceed in two steps:
 		<ol>
@@ -188,8 +205,17 @@
 		</div>
 	</p>
 	<p>
-		<h3>The code</h3>
+		<h3><a name="03">The code</a></h3>
 		All the required code is in its <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, along with doc and examples.
+	</p>
+	<p>
+		<h3><a name="04">Configuration files definition</a></h3>
+		This is about defining the files containing the definitions of the markers and borders. Those files are referred to when the server starts.<br/>
+		Those are the files to define ashore, to be able to use them at sea.<br/>
+		Those files are <code>yaml</code> files, easy to read, easy to write. 
+		See their definitions <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/manual.md#chartless-maps-markers-and-borders" target="GH">here</a>.<br/>
+		Some graphical tools (work in progress) can help you build those files, as shown <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/manual.md#bonus" target="GH">here</a>.<br/>
+		On-line version available <a href="./resources/marker.maker.leaflet.html" target="tools">here</a>.
 	</p>
 	<hr/>
 	<i>&copy; 2024, Passe-Coque</i>
