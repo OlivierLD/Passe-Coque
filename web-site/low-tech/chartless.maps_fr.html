@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Passe&#8209;Coque - LowTech</title>
+	<title>Passe&#8209;Coque - LowTech - Chartless Maps</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--link rel="icon" type="image/png" href="./infinity.png"-->
@@ -45,6 +45,7 @@
 		<h1 id="low-tech-navigation">Chartless Maps</h1>
 		<p style="justify-self: end;"><a href="./chartless.maps.html">En anglais</a></p>
 	</div>
+	<small style="font-size: 0.75rem;">Scrollez plus bas ! Il y a des images !</small>
 	<hr/>
 	<h2>Table</h2>
 	<ul>
@@ -55,12 +56,13 @@
 				<li><a href="#0201">D&eacute;tection de collision avec les cibles AIS</a></li>
 			</ul>
 		</li>	
-		<li><a href="#03">Le code</a></li>
-		<li><a href="#04">D&eacute;finition des fichiers de configuration</a></li>
+		<li><a href="#03">Impl&eacute;mentation</a></li>
+		<li><a href="#04">Le code</a></li>
+		<li><a href="#05">D&eacute;finition des fichiers de configuration</a></li>
 	</ul>
 	<hr/>
-	<h2 id="preamble"><a name="01">Pr&eacute;ambule</a></h2>
 	<p>
+		<h2 id="preamble"><a name="01">Pr&eacute;ambule</a></h2>
 		Chartless Maps, voil&agrave; une expression intraduisible...<br/>
 		"Map", en anglais, c'est une carte (comme une carte du monde, une carte routi&egrave;re).<br/>
 		"Chart", et ben... c'est aussi une carte. Bon.<br/>
@@ -68,8 +70,8 @@
 		Donc, "Chartless Maps", &ccedil;a signifie "Cartes sans carte".<br/>
 		Nous voil&agrave; bien avanc&eacute;s !
 	</p>
-	<h2><a name="02">Qu'est-ce que c'est ?</a></h2>
 	<p>
+		<h2><a name="02">Qu'est-ce que c'est ?</a></h2>
 		Voici d'o&ugrave; vient l'id&eacute;e.<br/>
 		Dans la section consacr&eacute;e &agrave; la navigation astronomique, on parle de ces <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Canevas Mercator</a>,
 		qui sont en fait des cartes "vides", utilis&eacute;es au large pour y porter les positions n&eacute;cessaires &agrave; l'&eacute;laboration d'un point astronomique, sur lesquelles
@@ -110,7 +112,7 @@
                 <slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
                 <slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
             </slide-show-->
-			<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
+			<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
                 <img src="./images/screenshot.01.png" title="Console - 1" class="slide"></img>
                 <img src="./images/screenshot.02.png" title="Console - 2" class="slide"></img>
                 <img src="./images/screenshot.03.png" title="Console - 3" class="slide"></img>
@@ -121,6 +123,7 @@
                 <img src="./images/screenshot.10.png" title="Console - 8" class="slide"></img>
                 <img src="./images/screenshot.11.png" title="Console - 9" class="slide"></img>
                 <img src="./images/screenshot.12.png" title="Console - 10 - HeadUp" class="slide"></img>
+                <img src="./images/screenshot.13.png" title="Console - 11" class="slide"></img>
                 <img src="./images/small.gps.01.png" title="Cell-Phone - 1" class="slide"></img>
                 <img src="./images/small.gps.02.png" title="Cell-Phone - 2" class="slide"></img>
                 <img src="./images/small.gps.03.png" title="Cell-Phone - 3" class="slide"></img>
@@ -212,11 +215,15 @@
 		</div>
 	</p>
 	<p>
-		<h3><a name="03">Le code</a></h3>
+		<h2><a name="03">Impl&eacute;mentation</a></h2>
+		Comme indiqu&eacute; <a href="#05">ci-dessous</a>, la technologie utilis&eacute;e pour les fichiers qui d&eacute;finissent marques et fronti&egrave;res est <code>yaml</code>,
+		qui est un format connu et document&eacute;, que connaissent de nombreux parsers, eux-m&ecirc;mes impl&eacute;ment&eacute;s dans plusieurs langages.<br/>
+ 		On peut trouver <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">ici</a> une impl&eacute;mentation de ce mod&egrave;le en Java.
+		<h2><a name="04">Le code</a></h2>
 		Tout le code est dans son <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, avec de la doc et des exemples.
 	</p>
 	<p>
-		<h3><a name="04">D&eacute;finition des fichiers de configuration</a></h3>
+		<h2><a name="05">D&eacute;finition des fichiers de configuration</a></h2>
 		Il s'agit ici de d&eacute;finir les fichiers contenant marqueurs et fronti&egrave;res. Ces fichiers sont r&eacute;f&eacute;renc&eacute;s lors du d&eacute;marrage du server.<br/>
 		Ces fichiers sont ceux qu'il faut avoir d&eacute;fini &agrave; terre, avant de partir, afin de pouvoir les utiliser en mer.
 		Ces fichiers sont des fichiers <code>yaml</code>, faciles &agrave; lire, faciles &agrave; &eacute;crire. 
