@@ -62,7 +62,10 @@
 	</ul>
 	<hr/>
 	<p>
-		<h2 id="preamble"><a name="01">Pr&eacute;ambule</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2 id="preamble"><a name="01">Pr&eacute;ambule</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		Chartless Maps, voil&agrave; une expression intraduisible...<br/>
 		"Map", en anglais, c'est une carte (comme une carte du monde, une carte routi&egrave;re).<br/>
 		"Chart", et ben... c'est aussi une carte. Bon.<br/>
@@ -71,21 +74,25 @@
 		Nous voil&agrave; bien avanc&eacute;s !
 	</p>
 	<p>
-		<h2><a name="02">Qu'est-ce que c'est ?</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="02">Qu'est-ce que c'est ?</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		Voici d'o&ugrave; vient l'id&eacute;e.<br/>
 		Dans la section consacr&eacute;e &agrave; la navigation astronomique, on parle de ces <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Canevas Mercator</a>,
-		qui sont en fait des cartes "vides", utilis&eacute;es au large pour y porter les positions n&eacute;cessaires &agrave; l'&eacute;laboration d'un point astronomique, sur lesquelles
+		qui sont en fait des cartes "vides" (d'o&ugrave; le "Chartless Map"...), utilis&eacute;es au large pour y porter les positions n&eacute;cessaires &agrave; l'&eacute;laboration d'un point astronomique, sur lesquelles
 		un mille marin a une repr&eacute;sentation tangible sur ce canevas, donc. Ces cartes repr&eacute;sentent en fait un tout petit bout d'oc&eacute;an, &agrave; une latitude donn&eacute;e,
 		et dont on ajuste la longitude &agrave; la demande. Bref !
 	</p>
 	<p>
 		Dans la section <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a>,
 		on peut voir comment utiliser un Raspberry Pi Zero et un GPS bon march&eacute; pour obtenir sa position, son cap et sa vitesse, pour une consommation d'&eacute;nergie ridicule.<br/>
-		Dans les sections voisines, on peut aussi voir comment mettre en &oelig;uvre un r&eacute;cepteur AIS.<br/>
+		Dans les sections voisines, on peut aussi voir comment mettre en &oelig;uvre un r&eacute;cepteur AIS (Automatic Identification System).<br/>
 		Le Raspberry Pi &eacute;met son propre r&eacute;seau WiFi, et h&eacute;berge un server HTTP ;  ce qui permet &agrave; n'importe quel p&eacute;riph&eacute;rique (cell-phone, tablette, laptop) de se connecter
 		sur le r&eacute;seau &eacute;mis par le Raspberry Pi, et d'acc&eacute;der &agrave; l'aide d'un navigateur (un browser) &agrave; des pages web afin de visualiser les donn&eacute;es rassembl&eacute;es et trait&eacute;es par le server.
 		<div class="postit">
-			Ceci n'est donc pas du "Cloud Computing", c'est plus proche de ce qu'on pourrait appeler du "Flake Computing".
+			Ceci n'est donc pas du "Cloud Computing", c'est plus proche de ce qu'on pourrait appeler du "Flake Computing" ("Cloud" : nuage, "Flake" : flocon).<br/>
+			On a juste besoin d'un r&eacute;seau, pas d'Internet.
 		</div>
 	</p>
 	<p>
@@ -137,7 +144,7 @@
 	<p>
 		Ceci &eacute;tant dit, concernant la position du bateau, il faudrait avoir une carte.<br/>
 		Un traceur co&ucirc;te cher - plus cher qu'une carte en papier - et il lui faut &agrave; lui aussi des cartes &agrave; jour,
-		qu'il faut acheter aussi...<br/>
+		qu'il faut acheter &eacute;galement...<br/>
 		Voici ce qu'on peut faire, avec les &eacute;l&eacute;ments dont on dispose d&eacute;j&agrave;.<br>
 		On peut d&eacute;velopper un composant - fonctionnellement analogue &agrave; un canevas Mercator sur lequel on va pouvoir porter la position du bateau.
 		<div style="width: 50%; text-align: center;">
@@ -165,7 +172,7 @@
 		<div style="width: 50%; text-align: center;">
 			<img src="./images/chartless.05.png" style="width: 100%;">
 		</div>
-		On parlait d'AIS aussi. Les "Cibles AIS" sont potentiellement trait&eacute;es de la m&ecirc;me fa&ccedil;on :
+		On parlait d'AIS (Automatic Identification System) aussi. Les "Cibles AIS" sont potentiellement trait&eacute;es de la m&ecirc;me fa&ccedil;on :
 		<div style="width: 50%; text-align: center;">
 			<img src="./images/chartless.06.png" style="width: 100%;">
 		</div>
@@ -177,8 +184,11 @@
 		Les actions &agrave; prendre en cas de d&eacute;tection de collision peuvent &ecirc;tre d&eacute;finies elles aussi. On verra &ccedil;a ult&eacute;rieurement.
 	</p>
 	<p>
-		<h3><a name="0201">D&eacute;tection de collision avec les cibles AIS</a></h3>
-		Voici comment les menaces de collision sont d&eacute;tect&eacute;es dans la classe Java <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>AISManager</code></a>.<br/>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h3><a name="0201">D&eacute;tection de collision avec les cibles AIS</a></h3>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
+		Voici comment les menaces de collision sont d&eacute;tect&eacute;es dans la classe Java <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>nmea.computers.AISManager</code></a>.<br/>
 		On proc&egrave;de en deux &eacute;tapes :
 		<ol>
 			<li>On d&eacute;tecte les cibles AIS qui se situent dans un rayon de <b>X</b> nm</li>
@@ -215,15 +225,24 @@
 		</div>
 	</p>
 	<p>
-		<h2><a name="03">Impl&eacute;mentation</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="03">Impl&eacute;mentation</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		Comme indiqu&eacute; <a href="#05">ci-dessous</a>, la technologie utilis&eacute;e pour les fichiers qui d&eacute;finissent marques et fronti&egrave;res est <code>yaml</code>,
 		qui est un format connu et document&eacute;, que connaissent de nombreux parsers, eux-m&ecirc;mes impl&eacute;ment&eacute;s dans plusieurs langages.<br/>
  		On peut trouver <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">ici</a> une impl&eacute;mentation de ce mod&egrave;le en Java.
-		<h2><a name="04">Le code</a></h2>
+		 <div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="04">Le code</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		Tout le code est dans son <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, avec de la doc et des exemples.
 	</p>
 	<p>
-		<h2><a name="05">D&eacute;finition des fichiers de configuration</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="05">D&eacute;finition des fichiers de configuration</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		Il s'agit ici de d&eacute;finir les fichiers contenant marqueurs et fronti&egrave;res. Ces fichiers sont r&eacute;f&eacute;renc&eacute;s lors du d&eacute;marrage du server.<br/>
 		Ces fichiers sont ceux qu'il faut avoir d&eacute;fini &agrave; terre, avant de partir, afin de pouvoir les utiliser en mer.
 		Ces fichiers sont des fichiers <code>yaml</code>, faciles &agrave; lire, faciles &agrave; &eacute;crire. 

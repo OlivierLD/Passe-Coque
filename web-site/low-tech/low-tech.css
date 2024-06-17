@@ -3,11 +3,18 @@
 	line-height: 1.5em;
 }		
 
-* {
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /*font-family: 'Courier New', Courier, monospace;*/
+}        
+
+code {
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
     font-family: 'Courier New', Courier, monospace;
 }        
 
 h1 {
+    font-family: 'Courier New', Courier, monospace;
     /* text-stroke: 2px orange; */ /* Might not be supported */
     font-size: 3em;
     color: black;

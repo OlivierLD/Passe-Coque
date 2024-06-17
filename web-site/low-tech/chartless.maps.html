@@ -61,25 +61,32 @@
 	<hr/>
 
 	<p>
-		<h2 id="preamble"><a name="01">Preamble</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2 id="preamble"><a name="01">Preamble</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		Chartless Maps, what the heck is that supposed to mean?!
 	</p>
 	<p>
-		<h2><a name="02">What is that?</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="02">What is that?</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		Here is where the idea comes from.<br/>
 		In the section dedicated to celestial navigation, we talk about those <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Mercator Canvases</a>,
-		which are actually "empty" charts, used at sea to plot the positions required to come up with a celestial fix, on which
+		which are actually "empty" charts (hence the "Chartless Map"), used at sea to plot the positions required to come up with a celestial fix, on which
 		a nautical mile can be represented by a tangible segment. Those charts actually represent a small piece of ocean, at a given latitude, the
 		longitude being adjusted on demand. Good!
 	</p>
 	<p>
 		In the section <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a>,
 		you can see how to use a Raspberry Pi Zero and a cheap GPS to obtain your position, heading and speed, for a ridiculous energy consumption.<br/>
-		In nearby sections, you can also see how to put an AIS receiver to work.<br/>
+		In nearby sections, you can also see how to put an AIS (Automatic Identification System) receiver to work.<br/>
 		The Raspberry Pi emits its own WiFi network, and hosts an HTTP server; this allows any device (cell-phone, tablet, laptop) to connect
 		on the Raspberry Pi's network, to access from a browser to several web pages, to visualise the data managed by the server.
 		<div class="postit">
-			This is <i>not</i> "Cloud Computing", more like "Flake Computing".
+			This is <i>not</i> "Cloud Computing", more like "Flake Computing".<br/>
+			We just need a network, no Internet.
 		</div>
 	</p>
 	<p>
@@ -158,7 +165,7 @@
 		<div style="width: 50%; text-align: center;">
 			<img src="./images/chartless.05.png" style="width: 100%;">
 		</div>
-		We talked before about AIS. AIS targets can be represented the same way:
+		We talked before about AIS (Automatic Identification System). AIS targets can be represented the same way:
 		<div style="width: 50%; text-align: center;">
 			<img src="./images/chartless.06.png" style="width: 100%;">
 		</div>
@@ -170,8 +177,11 @@
 		Actions to take in case of a collision threat can be defined too. We'll see later.
 	</p>
 	<p>
-		<h3><a name="0201">AIS targets collision threat detection</a></h3>
-		Here is how the collision threats are detected in the Java class <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>AISManager</code></a>.<br/>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h3><a name="0201">AIS targets collision threat detection</a></h3>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
+		Here is how the collision threats are detected in the Java class <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>>nmea.computers.AISManager</code></a>.<br/>
 		We proceed in two steps:
 		<ol>
 			<li>We detect the targets within a radius of <b>X</b> nm</li>
@@ -208,15 +218,24 @@
 		</div>
 	</p>
 	<p>
-		<h2><a name="03">Implementation</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="03">Implementation</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		As mentionned <a href="#05">below</a>, the technology used for the files defining markers and borders is <code>yaml</code>,
 		which is a well known and documented format, implemented by several parsers, in several languages.<br/>
  		You can find <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">here</a> a Java implementation of the model.
-		<h2><a name="04">The code</a></h2>
+		 <div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="04">The code</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		All the required code is in its <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, along with doc and examples.
 	</p>
 	<p>
-		<h2><a name="05">Configuration files definition</a></h2>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="05">Configuration files definition</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
 		This is about defining the files containing the definitions of the markers and borders. Those files are referred to when the server starts.<br/>
 		Those are the files to define ashore, to be able to use them at sea.<br/>
 		Those files are <code>yaml</code> files, easy to read, easy to write. 
