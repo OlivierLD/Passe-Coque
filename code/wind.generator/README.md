@@ -43,6 +43,10 @@ As the tension of the output is proportionnal to the rotation speed, we will nee
 - A capacitor to smooth it down.
 - A tension regulator to finally get a 5V output (as expected here).
 
+> _Note_: On the diagram below, we've wired only one coil (the right one).   
+> The second one (on the left side) can obviously be wired too, the same way.  
+> Then it would be your job to merge the two, serially, or parallely.
+
 ![Wiring](./images/01_bb.png)
 
 > _Note_: The rectifier bridge (like a `KBP 307 IC`) is **NOT** represented on the diagram above. It looks like this:  
