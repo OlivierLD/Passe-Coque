@@ -62,6 +62,14 @@ through the external pins. Positive on the bevel side (left here), Ground on the
 > - [PowerBoost](https://www.adafruit.com/product/1944)
 > - etc...
 
+#### Charging
+When the stepper in spinning, here is what we can see (with a Charger Doctor):
+
+| Amps                                 | Voltage                               |
+|:------------------------------------:|:-------------------------------------:|
+| ![Amps](./images/Charging.0.14A.jpg) | ![Volts](./images/Charging.4.89v.jpg) |
+| 0.14 A                               | 4.89 v                                |
+
 #### BOM
 Bill of Materials, for the electronic part.
 - Stepper motor `NEMA 17`
