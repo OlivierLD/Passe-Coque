@@ -36,7 +36,12 @@
     </style>
 
 	<script type="module" src="../webcomponents/SlideShow.js"></script>
-
+	<!-- For LaTex -->
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	  
 </head>
 	
 <body>
@@ -220,6 +225,13 @@
 			</ul>
 			C'est certes plus rigoureux, mais la formule qui permet de d&eacute;terminer une position atteinte en un temps donn&eacute;, avec un cap et une vitesse connus,
 			est un peu sportive...<br/> 
+			$$
+
+			d = 2r . arcsin\left(\sqrt{ \frac {1 - cos(\phi_{2} - \phi_{1} ) + cos\phi_{1} . cos\phi_{2} . (1 - cos(\lambda_{2} - \lambda_{1})) } {2}} \right)
+
+			$$
+			o&ugrave; <i>d</i> est la distance qu'on cherche, <i>r</i> est le rayon de la sph&egrave;re (la Terre). &phi; sont les latitudes, &lambda; sont les longitudes.
+			<br/>
 			Voir <a href="https://fr.wikipedia.org/wiki/Haversine_formula" target="WP">ici</a>.<br/>
 			D'o&ugrave; la m&eacute;thode choisie, &eacute;nonc&eacute;e ci-dessus, qui sera le cas &eacute;ch&eacute;ant plus facile &agrave; debugger. 😉
 		</div>

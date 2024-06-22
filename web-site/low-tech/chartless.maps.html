@@ -34,6 +34,12 @@
 }
 	</style>
 
+	<!-- For LaTex -->
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 	<script type="module" src="../webcomponents/SlideShow.js"></script>
 </head>
 	
@@ -213,6 +219,13 @@
 			</ul>
 			This is indeed more rigourous, but the formula that gives us the position we can reach from a given position, with given speed and heading, within a given time,
 			is a bit tricky...<br/> 
+			$$
+
+			d = 2r . arcsin\left(\sqrt{ \frac {1 - cos(\phi_{2} - \phi_{1} ) + cos\phi_{1} . cos\phi_{2} . (1 - cos(\lambda_{2} - \lambda_{1})) } {2}} \right)
+
+			$$
+			where <i>d</i> is the distance we look for, <i>r</i> is the radius of the sphere (the Earth). &phi; are the latitudes, &lambda; are the longitudes.
+			<br/>
 			See <a href="https://en.wikipedia.org/wiki/Haversine_formula" target="WP">here</a>.<br/>
 			Hence the chosen method described above, that will eventually be easier to debug, if needed. 😉
 		</div>
