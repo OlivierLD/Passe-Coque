@@ -26,6 +26,12 @@
 	padding: 10px;
 }
 
+.slide-show {
+	display: grid; 
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; 
+	overflow: auto;
+}
+
 @media screen and (width <= 800px) {
     .slide {
 		max-width: 600px; 
@@ -33,6 +39,17 @@
 		padding: 10px;
 	}
 }
+
+@media print {
+	.slide-show {
+		display: grid; 
+		grid-template-columns: auto; 
+		overflow: auto;
+	}
+	.not-printed {
+		display: none;
+	}
+} 
     </style>
 
 	<script type="module" src="../webcomponents/SlideShow.js"></script>
@@ -48,7 +65,7 @@
 
 	<div style="width: 90%; padding: 20px; display: grid; grid-template-columns: auto auto;">
 		<h1 id="low-tech-navigation">Chartless Maps</h1>
-		<p style="justify-self: end;"><a href="./chartless.maps.html">En anglais</a></p>
+		<p class="not-printed" style="justify-self: end;"><a href="./chartless.maps.html">En anglais</a></p>
 	</div>
 	<small style="font-size: 0.75rem;">Scrollez plus bas ! Il y a des images !</small>
 	<hr/>
@@ -70,7 +87,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2 id="preamble"><a name="01">Pr&eacute;ambule</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Chartless Maps, voil&agrave; une expression intraduisible...<br/>
@@ -84,7 +101,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="02">Qu'est-ce que c'est ?</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Voici d'o&ugrave; vient l'id&eacute;e.<br/>
@@ -107,7 +124,7 @@
 	</p>
 	<p>
 		<div>
-			Voici quelques exemples de ces pages web (scroll horizontal) :
+			Voici quelques exemples de ces pages web <span class="not-printed">(scroll horizontal) </span>:
 			<div style="background: white; width: 96%; padding: 10px;">
 				<!--slide-show id="slide-show-samples"
 							width="740"
@@ -130,7 +147,7 @@
 					<slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
 					<slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
 				</slide-show-->
-				<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
+				<div class="slide-show">
 					<img src="./images/screenshot.01.png" title="Console - 1" class="slide"></img>
 					<img src="./images/screenshot.02.png" title="Console - 2" class="slide"></img>
 					<img src="./images/screenshot.03.png" title="Console - 3" class="slide"></img>
@@ -206,7 +223,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h3><a name="0201">D&eacute;tection de collision avec les cibles AIS</a></h3>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Voici comment les menaces de collision sont d&eacute;tect&eacute;es, dans la classe Java <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>nmea.computers.AISManager</code></a>.<br/>
@@ -256,7 +273,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="03">Impl&eacute;mentation</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Comme indiqu&eacute; <a href="#05">ci-dessous</a>, la technologie utilis&eacute;e pour les fichiers qui d&eacute;finissent marques et fronti&egrave;res est <code>yaml</code>,
@@ -264,7 +281,7 @@
 			On peut trouver <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">ici</a> une impl&eacute;mentation de ce mod&egrave;le en Java.
 			<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 				<h2><a name="04">Le code</a></h2>
-				<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+				<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 			</div>
 			Tout le code est dans son <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, avec de la doc et des exemples.
 		</div>
@@ -272,7 +289,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="05">D&eacute;finition des fichiers de configuration</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Il s'agit ici de d&eacute;finir les fichiers contenant marqueurs et fronti&egrave;res. Ces fichiers sont r&eacute;f&eacute;renc&eacute;s lors du d&eacute;marrage du server.<br/>
@@ -286,7 +303,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="06">Des d&eacute;tails (techniques)...</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Encore une fois, ce dont on parle ici est une interface web (aka HTML) destin&eacute;e &agrave; afficher des donn&eacute;es calcul&eacute;es par le server.<br/>

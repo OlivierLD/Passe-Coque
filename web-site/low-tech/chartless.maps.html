@@ -25,6 +25,12 @@
 	padding: 10px;
 }
 
+.slide-show {
+	display: grid; 
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; 
+	overflow: auto;
+}
+
 @media screen and (width <= 800px) {
     .slide {
 		max-width: 600px; 
@@ -32,6 +38,17 @@
 		padding: 10px;
 	}
 }
+
+@media print {
+	.slide-show {
+		display: grid; 
+		grid-template-columns: auto; 
+		overflow: auto;
+	}
+	.not-printed {
+		display: none;
+	}
+} 
 	</style>
 
 	<!-- For LaTex -->
@@ -47,7 +64,7 @@
 
 	<div style="width: 90%; padding: 20px; display: grid; grid-template-columns: auto auto;">
 		<h1 id="low-tech-navigation">Chartless Maps</h1>
-		<p style="justify-self: end;"><a href="./chartless.maps_fr.html">In French</a></p>
+		<p class="not-printed" style="justify-self: end;"><a href="./chartless.maps_fr.html">In French</a></p>
 	</div>
 	<small style="font-size: 0.75rem;">Scroll down! There are pictures!</small>
 	<hr/>
@@ -70,7 +87,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2 id="preamble"><a name="01">Preamble</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Chartless Maps, what the heck is that supposed to mean?!
@@ -79,7 +96,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="02">What is that?</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Here is where the idea comes from.<br/>
@@ -104,7 +121,7 @@
 	</p>
 	<p>
 		<div>
-			Here are a couple of examples of those web pages (horizontall scroll):
+			Here are a couple of examples of those web pages <span class="not-printed">(horizontall scroll)</span>:
 			<div style="background: white; width: 96%; padding: 10px;">
 				<!--slide-show id="slide-show-samples"
 							width="740"
@@ -127,7 +144,7 @@
 					<slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
 					<slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
 				</slide-show-->
-				<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
+				<div class="slide-show">
 					<img src="./images/screenshot.01.png" title="Console - 1" class="slide"></img>
 					<img src="./images/screenshot.02.png" title="Console - 2" class="slide"></img>
 					<img src="./images/screenshot.03.png" title="Console - 3" class="slide"></img>
@@ -203,7 +220,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h3><a name="0201">AIS targets collision threat detection</a></h3>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Here is how the collision threats are detected in the Java class <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>>nmea.computers.AISManager</code></a>.<br/>
@@ -253,7 +270,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="03">Implementation</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			As mentionned <a href="#05">below</a>, the technology used for the files defining markers and borders is <code>yaml</code>,
@@ -261,7 +278,7 @@
 			You can find <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">here</a> a Java implementation of the model.
 			<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 				<h2><a name="04">The code</a></h2>
-				<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+				<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 			</div>
 			All the required code is in its <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, along with doc and examples.
 		</div>
@@ -269,7 +286,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="05">Configuration files definition</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			This is about defining the files containing the definitions of the markers and borders. Those files are referred to when the server starts.<br/>
@@ -283,7 +300,7 @@
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="06">Some (technical) details...</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			<div class="not-printed" style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
 		<div>
 			Once again, what we're talking about here is a web interface (aka HTML) that will display data calculated on the server.<br/>
