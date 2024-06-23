@@ -63,6 +63,7 @@
 		<li><a href="#03">Implementation</a></li>
 		<li><a href="#04">The code</a></li>
 		<li><a href="#05">Configuration files definition</a></li>
+		<li><a href="#06">Some (technical) details...</a></li>
 	</ul>
 	<hr/>
 
@@ -71,163 +72,182 @@
 			<h2 id="preamble"><a name="01">Preamble</a></h2>
 			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
-		Chartless Maps, what the heck is that supposed to mean?!
+		<div>
+			Chartless Maps, what the heck is that supposed to mean?!
+		</div>
 	</p>
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="02">What is that?</a></h2>
 			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
-		Here is where the idea comes from.<br/>
-		In the section dedicated to celestial navigation, we talk about those <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Mercator Canvases</a>,
-		which are actually "empty" charts (hence the "Chartless Map"), used at sea to plot the positions required to come up with a celestial fix, on which
-		a nautical mile can be represented by a tangible segment. Those charts actually represent a small piece of ocean, at a given latitude, the
-		longitude being adjusted on demand. Good!
-	</p>
-	<p>
-		In the section <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a>,
-		you can see how to use a Raspberry Pi Zero and a cheap GPS to obtain your position, heading and speed, for a ridiculous energy consumption.<br/>
-		In nearby sections, you can also see how to put an AIS (Automatic Identification System) receiver to work.<br/>
-		The Raspberry Pi emits its own WiFi network, and hosts an HTTP server; this allows any device (cell-phone, tablet, laptop) to connect
-		on the Raspberry Pi's network, to access from a browser to several web pages, to visualise the data managed by the server.
-		<div class="postit">
-			This is <i>not</i> "Cloud Computing", more like "Flake Computing".<br/>
-			We just need a network, no Internet.
+		<div>
+			Here is where the idea comes from.<br/>
+			In the section dedicated to celestial navigation, we talk about those <a href="https://olivierld.github.io/web.stuff/nse/nse.html#mercator" target="NSE">Mercator Canvases</a>,
+			which are actually "empty" charts (hence the "Chartless Map"), used at sea to plot the positions required to come up with a celestial fix, on which
+			a nautical mile can be represented by a tangible segment. Those charts actually represent a small piece of ocean, at a given latitude, the
+			longitude being adjusted on demand. Good!
 		</div>
 	</p>
 	<p>
-		Here are a couple of examples of those web pages:
-		<div style="background: white; width: 96%; padding: 10px;">
-            <!--slide-show id="slide-show-samples"
-                        width="740"
-                        height="500"
-                        style="line-height: 1em;">
-                <slide-show-image src="./images/screenshot.01.png" title="Console - 1"></slide-show-image>
-                <slide-show-image src="./images/screenshot.02.png" title="Console - 2"></slide-show-image>
-                <slide-show-image src="./images/screenshot.03.png" title="Console - 3"></slide-show-image>
-                <slide-show-image src="./images/screenshot.04.png" title="Console - 4"></slide-show-image>
-                <slide-show-image src="./images/screenshot.05.png" title="Console - 5"></slide-show-image>
-                <slide-show-image src="./images/screenshot.06.png" title="Console - 6"></slide-show-image>
-                <slide-show-image src="./images/screenshot.07.png" title="Console - 7"></slide-show-image>
-                <slide-show-image src="./images/screenshot.10.png" title="Console - 8"></slide-show-image>
-                <slide-show-image src="./images/screenshot.11.png" title="Console - 9"></slide-show-image>
-                <slide-show-image src="./images/screenshot.12.png" title="Console - 10 - HeadUp"></slide-show-image>
-                <slide-show-image src="./images/small.gps.01.png" title="Cell-Phone - 1"></slide-show-image>
-                <slide-show-image src="./images/small.gps.02.png" title="Cell-Phone - 2"></slide-show-image>
-                <slide-show-image src="./images/small.gps.03.png" title="Cell-Phone - 3"></slide-show-image>
-                <slide-show-image src="./images/small.gps.04.png" title="Cell-Phone - 4"></slide-show-image>
-                <slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
-                <slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
-            </slide-show-->
-			<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
-                <img src="./images/screenshot.01.png" title="Console - 1" class="slide"></img>
-                <img src="./images/screenshot.02.png" title="Console - 2" class="slide"></img>
-                <img src="./images/screenshot.03.png" title="Console - 3" class="slide"></img>
-                <img src="./images/screenshot.04.png" title="Console - 4" class="slide"></img>
-                <img src="./images/screenshot.05.png" title="Console - 5" class="slide"></img>
-                <img src="./images/screenshot.06.png" title="Console - 6" class="slide"></img>
-                <img src="./images/screenshot.07.png" title="Console - 7" class="slide"></img>
-                <img src="./images/screenshot.10.png" title="Console - 8" class="slide"></img>
-                <img src="./images/screenshot.11.png" title="Console - 9" class="slide"></img>
-                <img src="./images/screenshot.12.png" title="Console - 10 - HeadUp" class="slide"></img>
-                <img src="./images/screenshot.13.png" title="Console - 11" class="slide"></img>
-                <img src="./images/small.gps.01.png" title="Cell-Phone - 1" class="slide"></img>
-                <img src="./images/small.gps.02.png" title="Cell-Phone - 2" class="slide"></img>
-                <img src="./images/small.gps.03.png" title="Cell-Phone - 3" class="slide"></img>
-                <img src="./images/small.gps.04.png" title="Cell-Phone - 4" class="slide"></img>
-                <img src="./images/small.gps.05.png" title="Cell-Phone - 5" class="slide"></img>
-                <img src="./images/small.gps.06.png" title="Cell-Phone - 6" class="slide"></img>
+		<div>
+			In the section <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a>,
+			you can see how to use a Raspberry Pi Zero and a cheap GPS to obtain your position, heading and speed, for a ridiculous energy consumption.<br/>
+			In nearby sections, you can also see how to put an AIS (Automatic Identification System) receiver to work.<br/>
+			The Raspberry Pi emits its own WiFi network, and hosts an HTTP server; this allows any device (cell-phone, tablet, laptop) to connect
+			on the Raspberry Pi's network, to access from a browser to several web pages, to visualise the data managed by the server.
+			<div class="postit">
+				This is <i>not</i> "Cloud Computing", more like "Flake Computing".<br/>
+				We just need a network, no Internet.
 			</div>
-        </div>
-		The list is not closed, your imagination is the limit!
+		</div>
 	</p>
 	<p>
-		This being said, about the boat's position, it would be nice to plot it on a chart.<br/>
-		A tracker is expensive - more than a paper chart - and it also needs charts, updated, to purchase too...<br/>
-		Here is what could be done, with what we already have.<br>
-		We could develop a component - fonctionally analog to a Mercator cavas, on which we could plot the boat's position.
-		<div style="width: 50%; text-align: center;">
-			<img src="./images/chartless.01.png" style="width: 100%;">
+		<div>
+			Here are a couple of examples of those web pages (horizontall scroll):
+			<div style="background: white; width: 96%; padding: 10px;">
+				<!--slide-show id="slide-show-samples"
+							width="740"
+							height="500"
+							style="line-height: 1em;">
+					<slide-show-image src="./images/screenshot.01.png" title="Console - 1"></slide-show-image>
+					<slide-show-image src="./images/screenshot.02.png" title="Console - 2"></slide-show-image>
+					<slide-show-image src="./images/screenshot.03.png" title="Console - 3"></slide-show-image>
+					<slide-show-image src="./images/screenshot.04.png" title="Console - 4"></slide-show-image>
+					<slide-show-image src="./images/screenshot.05.png" title="Console - 5"></slide-show-image>
+					<slide-show-image src="./images/screenshot.06.png" title="Console - 6"></slide-show-image>
+					<slide-show-image src="./images/screenshot.07.png" title="Console - 7"></slide-show-image>
+					<slide-show-image src="./images/screenshot.10.png" title="Console - 8"></slide-show-image>
+					<slide-show-image src="./images/screenshot.11.png" title="Console - 9"></slide-show-image>
+					<slide-show-image src="./images/screenshot.12.png" title="Console - 10 - HeadUp"></slide-show-image>
+					<slide-show-image src="./images/small.gps.01.png" title="Cell-Phone - 1"></slide-show-image>
+					<slide-show-image src="./images/small.gps.02.png" title="Cell-Phone - 2"></slide-show-image>
+					<slide-show-image src="./images/small.gps.03.png" title="Cell-Phone - 3"></slide-show-image>
+					<slide-show-image src="./images/small.gps.04.png" title="Cell-Phone - 4"></slide-show-image>
+					<slide-show-image src="./images/small.gps.05.png" title="Cell-Phone - 5"></slide-show-image>
+					<slide-show-image src="./images/small.gps.06.png" title="Cell-Phone - 6"></slide-show-image>
+				</slide-show-->
+				<div style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; overflow: auto;">
+					<img src="./images/screenshot.01.png" title="Console - 1" class="slide"></img>
+					<img src="./images/screenshot.02.png" title="Console - 2" class="slide"></img>
+					<img src="./images/screenshot.03.png" title="Console - 3" class="slide"></img>
+					<img src="./images/screenshot.04.png" title="Console - 4" class="slide"></img>
+					<img src="./images/screenshot.05.png" title="Console - 5" class="slide"></img>
+					<img src="./images/screenshot.06.png" title="Console - 6" class="slide"></img>
+					<img src="./images/screenshot.07.png" title="Console - 7" class="slide"></img>
+					<img src="./images/screenshot.10.png" title="Console - 8" class="slide"></img>
+					<img src="./images/screenshot.11.png" title="Console - 9" class="slide"></img>
+					<img src="./images/screenshot.12.png" title="Console - 10 - HeadUp" class="slide"></img>
+					<img src="./images/screenshot.13.png" title="Console - 11" class="slide"></img>
+					<img src="./images/small.gps.01.png" title="Cell-Phone - 1" class="slide"></img>
+					<img src="./images/small.gps.02.png" title="Cell-Phone - 2" class="slide"></img>
+					<img src="./images/small.gps.03.png" title="Cell-Phone - 3" class="slide"></img>
+					<img src="./images/small.gps.04.png" title="Cell-Phone - 4" class="slide"></img>
+					<img src="./images/small.gps.05.png" title="Cell-Phone - 5" class="slide"></img>
+					<img src="./images/small.gps.06.png" title="Cell-Phone - 6" class="slide"></img>
+				</div>
+			</div>
+			The list is not closed, your imagination is the limit!
 		</div>
-		The chart gives the boat's position, its heading, and the track recently followed.<br/>
-		This is where it begins to be interesting.<br/>
 	</p>
 	<p>
-		Before you leave, you prepare a file - known by the server (details coming), that can contain the positions of different markers
-		like becons, points..., so they can be displayed - just like the boat, using its position - on the chart.
-		<div style="width: 50%; text-align: center;">
-			<img src="./images/chartless.02.png" style="width: 100%;">
+		<div>
+			This being said, about the boat's position, it would be nice to plot it on a chart.<br/>
+			A tracker (like <a href="https://www.raymarine.com/en-us/our-products/chartplotters/axiom" target="RM">this one</a>) is expensive - more than a paper chart - and it also needs charts, updated, to purchase too...
+			Its energy consumption is not completely ridiculous either.<br/>
+			Here is what could be done, with what we already have, namely:
+			<ul>
+				<li>A GPS</li>
+				<li>A server, accessing the GPS data, and hosting an HTTP server</li>
+			</ul>
+			We could develop a component (for a web page) - fonctionally analog to a Mercator cavas, on which we could plot the boat's position.
+			<div style="width: 50%; text-align: center;">
+				<img src="./images/chartless.01.png" style="width: 100%;">
+			</div>
+			The chart gives the boat's position, its heading, and the track recently followed.<br/>
+			This is where it begins to be interesting.<br/>
 		</div>
-		It starts looking good, let's move on.<br/> 
-		It is easy to calculate distances and bearings for all those marks we've defined:
-		<div style="width: 50%; text-align: center;">
-			<img src="./images/chartless.03.png" style="width: 100%;">
+	</p>
+	<p>
+		<div>
+			Before you leave, you prepare a file - known by the server (details coming), that can contain the positions of different markers
+			like becons, points..., so they can be displayed - just like the boat, using its position - on the chart.
+			<div style="width: 50%; text-align: center;">
+				<img src="./images/chartless.02.png" style="width: 100%;">
+			</div>
+			It starts looking good, let's move on.<br/> 
+			It is easy to calculate distances and bearings for all those marks we've defined:
+			<div style="width: 50%; text-align: center;">
+				<img src="./images/chartless.03.png" style="width: 100%;">
+			</div>
+			And along the same lines, we can also define "borders", lines joining marks defined like before:
+			<div style="width: 50%; text-align: center;">
+				<img src="./images/chartless.04.png" style="width: 100%;">
+			</div>
+			Still the same way, you can have files defining continents!
+			<div style="width: 50%; text-align: center;">
+				<img src="./images/chartless.05.png" style="width: 100%;">
+			</div>
+			We talked before about AIS (Automatic Identification System). AIS targets can be represented the same way:
+			<div style="width: 50%; text-align: center;">
+				<img src="./images/chartless.06.png" style="width: 100%;">
+			</div>
+			And also - as it is available (we "just" need to write the code to implememnt it) - for all the elements above, we can detect collision threats. It can be with AIS targets, or with the borders <i>we</i>
+			have defined.
+			<div style="width: 70%; text-align: center;">
+				<img src="./images/chartless.07.png" style="width: 100%;">
+			</div>
+			Actions to take in case of a collision threat can be defined too (blink a light, honk a horn, etc). We'll see later.
 		</div>
-		And along the same lines, we can also define "borders", lines joining marks defined like before:
-		<div style="width: 50%; text-align: center;">
-			<img src="./images/chartless.04.png" style="width: 100%;">
-		</div>
-		Still the same way, you can have files defining continents!
-		<div style="width: 50%; text-align: center;">
-			<img src="./images/chartless.05.png" style="width: 100%;">
-		</div>
-		We talked before about AIS (Automatic Identification System). AIS targets can be represented the same way:
-		<div style="width: 50%; text-align: center;">
-			<img src="./images/chartless.06.png" style="width: 100%;">
-		</div>
-		And also - as it is available (we "just" need to write the code to implememnt it) - for all the elements above, we can detect collision threats. It can be with AIS targets, or with the borders <i>we</i>
-		have defined.
-		<div style="width: 70%; text-align: center;">
-			<img src="./images/chartless.07.png" style="width: 100%;">
-		</div>
-		Actions to take in case of a collision threat can be defined too (blink a light, honk a horn, etc). We'll see later.
 	</p>
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h3><a name="0201">AIS targets collision threat detection</a></h3>
 			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
-		Here is how the collision threats are detected in the Java class <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>>nmea.computers.AISManager</code></a>.<br/>
-		We proceed in two steps:
-		<ol>
-			<li>We detect the targets within a radius of <b>X</b> nm</li>
-			<li>
-				For those targets:
-				<ul>
-					<li>Starting from the position of the target, and the position of the boat (our boat)</li>
-					<li>We calculate the distance between the two</li>
-					<li>We calculate the positions reached 10 seconds later from their position, using their respective speed and heading</li>
-					<li>We measure the new distance between boat and target</li>
-					<li>As long as this distance keeps shrinking, we process this way, every 10 seconds</li>
-					<li>We save this smallest distance found, we name it <b>Y</b></li>
-					<li>If this <b>Y</b> value is lower than a given value, we then considrer that there is a collision threat.</li>
-				</ul>
-			</li>
-		</ol>
-		Sample values:
-		<ul>
-			<li>X : 5 nm</li>
-			<li>Y : 0.5 nm</li>
-		</ul>
-		<div class="postit">
-			<h4>Note</h4>
-			We could also use a mathematically more rigourous method:
+		<div>
+			Here is how the collision threats are detected in the Java class <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/src/main/java/nmea/computers/AISManager.java" target="github"><code>>nmea.computers.AISManager</code></a>.<br/>
+			We proceed in two steps:
+			<ol>
+				<li>We detect the targets within a radius of <b>X</b> nm</li>
+				<li>
+					For those targets:
+					<ul>
+						<li>Starting from the position of the target, and the position of the boat (our boat)</li>
+						<li>We calculate the distance between the two</li>
+						<li>We calculate the positions reached 10 seconds later from their position, using their respective speed and heading</li>
+						<li>We measure the new distance between boat and target</li>
+						<li>As long as this distance keeps shrinking, we process this way, every 10 seconds, recursively</li>
+						<li>We save this smallest distance found, we name it <b>Y</b></li>
+						<li>If this <b>Y</b> value is lower than a given value, we then considrer that there is a collision threat.</li>
+					</ul>
+				</li>
+			</ol>
+			Sample values:
 			<ul>
-				<li>You establish the equation of the distance between the boats, based on time, starting from their current position, using their speed and heading</li>
-				<li>You derivate this function, once</li>
-				<li>You find the roots of this first derivative, to get to the minimum of the function</li>
+				<li>X : 5 nm</li>
+				<li>Y : 0.5 nm</li>
 			</ul>
-			This is indeed more rigourous, but the formula that gives us the position we can reach from a given position, with given speed and heading, within a given time,
-			is a bit tricky...<br/> 
-			$$
+			<div class="postit">
+				<h4>Note</h4>
+				We could also use a mathematically more rigourous method:
+				<ul>
+					<li>You establish the equation of the distance between the boats, based on time, starting from their current position, using their speed and heading</li>
+					<li>You derivate this function, once</li>
+					<li>You find the roots of this first derivative, to get to the minimum of the function</li>
+				</ul>
+				This is indeed more rigourous, but the formula that gives us the position we can reach (on a sphere) from a given position, with given speed and heading, within a given time,
+				is a bit tricky...<br/> 
+				$$
 
-			d = 2r . arcsin\left(\sqrt{ \frac {1 - cos(\phi_{2} - \phi_{1} ) + cos\phi_{1} . cos\phi_{2} . (1 - cos(\lambda_{2} - \lambda_{1})) } {2}} \right)
+				d = 2r . arcsin\left(\sqrt{ \frac {1 - cos(\phi_{2} - \phi_{1} ) + cos\phi_{1} . cos\phi_{2} . (1 - cos(\lambda_{2} - \lambda_{1})) } {2}} \right)
 
-			$$
-			where <i>d</i> is the distance we look for, <i>r</i> is the radius of the sphere (the Earth). &phi; are the latitudes, &lambda; are the longitudes.
-			<br/>
-			See <a href="https://en.wikipedia.org/wiki/Haversine_formula" target="WP">here</a>.<br/>
-			Hence the chosen method described above, that will eventually be easier to debug, if needed. 😉
+				$$
+				where <i>d</i> is the distance we look for, <i>r</i> is the radius of the sphere (the Earth). &phi; are the latitudes, &lambda; are the longitudes.
+				<br/>
+				See details <a href="https://en.wikipedia.org/wiki/Haversine_formula" target="WP">here</a>.<br/>
+				Hence the chosen method described above, that will eventually be easier to debug, if needed. 😉
+			</div>
 		</div>
 	</p>
 	<p>
@@ -235,26 +255,100 @@
 			<h2><a name="03">Implementation</a></h2>
 			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
-		As mentionned <a href="#05">below</a>, the technology used for the files defining markers and borders is <code>yaml</code>,
-		which is a well known and documented format, implemented by several parsers, in several languages.<br/>
- 		You can find <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">here</a> a Java implementation of the model.
-		 <div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
-			<h2><a name="04">The code</a></h2>
-			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		<div>
+			As mentionned <a href="#05">below</a>, the technology used for the files defining markers and borders is <code>yaml</code>,
+			which is a well known and documented format, implemented by several parsers, in several languages.<br/>
+			You can find <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">here</a> a Java implementation of the model.
+			<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+				<h2><a name="04">The code</a></h2>
+				<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+			</div>
+			All the required code is in its <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, along with doc and examples.
 		</div>
-		All the required code is in its <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/MUX-implementations/RESTNavServer" target="github">git repo</a>, along with doc and examples.
 	</p>
 	<p>
 		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
 			<h2><a name="05">Configuration files definition</a></h2>
 			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
 		</div>
-		This is about defining the files containing the definitions of the markers and borders. Those files are referred to when the server starts.<br/>
-		Those are the files to define ashore, to be able to use them at sea.<br/>
-		Those files are <code>yaml</code> files, easy to read, easy to write. 
-		See their definitions <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/manual.md#chartless-maps-markers-and-borders" target="GH">here</a>.<br/>
-		Some graphical tools (work in progress) can help you build those files, as shown <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/manual.md#bonus" target="GH">here</a>.<br/>
-		On-line version available <a href="./resources/marker.maker.leaflet.html" target="tools">here</a>.
+		<div>
+			This is about defining the files containing the definitions of the markers and borders. Those files are referred to when the server starts.<br/>
+			Those are the files to define ashore, to be able to use them at sea.<br/>
+			Those files are <code>yaml</code> files, easy to read, easy to write. 
+			See their definitions <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/manual.md#chartless-maps-markers-and-borders" target="GH">here</a>.<br/>
+			Some graphical tools (work in progress) can help you build those files, as shown <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/manual.md#bonus" target="GH">here</a>.<br/>
+			On-line version available <a href="./resources/marker.maker.leaflet.html" target="tools">here</a>.
+		</div>
+	</p>
+	<p>
+		<div style="width: 96%; padding: 0 10px 0 10px; display: grid; grid-template-columns: auto auto;">
+			<h2><a name="06">Some (technical) details...</a></h2>
+			<div style="justify-self: end; margin-top: 14px;"><a href="#">Top</a></div>
+		</div>
+		<div>
+			Once again, what we're talking about here is a web interface (aka HTML) that will display data calculated on the server.<br/>
+			The server uses:
+			<ul>
+				<li>Data emitted by the GPS</li>
+				<li>Data defined by marks and borders</li>
+				<li>Data emitted by the AIS</li>
+			</ul>
+			Those data are available on the server, in an entity called the "cache". In Java - which is the programming language used in the examples mentionned here, 
+			this "cache", this Object, is a <code>HashMap&lt;String, Object&gt;</String></code>.<br/>
+			To display those data in a web page, the client (the web page) is regularly emitting a request to the server, using this technology called <b>REST</b>
+			(REpresentational State Transfer, which obviously does not mean anything). This technology is available in many tools, like for example the <code>curl</code> command:<br/>
+			<pre style="font-family: 'Courier New', Courier, monospace;">
+ $ curl -X GET http://192.168.50.10:9999/mux/cache				
+			</pre>
+			In order to be compatible with the tools available on the server, and on the client, we use the format named <code>JSON</code> (JavaScript Object Notation) for
+			the message returned to the client by the server. The same is obtained by the command <code>curl</code> mentioned above.<br/>
+			Here is a short example (truncated):
+			<pre class="postit" style="font-family: 'Courier New', Courier, monospace;">
+{
+	"Damping": 1,
+	"NMEA_AS_IS": {
+		"GGA": "$GPGGA,201053.00,4738.52432,N,00323.04391,W,1,08,1.17,-6.4,M,49.6,M,,*67",
+		"MMB": "$PYMMB,30.3035,I,1.0261,B*72",
+		"GLL": "$GPGLL,4738.52432,N,00323.04391,W,201053.00,A,A*79",
+		"XDR": "$PYXDR,H,44.1,P,0,C,31.6,C,1,C,17.9,C,DEWP,P,102608,P,3,P,1.0261,B,4*4E",
+		"VTG": "$GPVTG,273.49,T,,M,2.690,N,4.983,K,A*3D",
+		"RMC": "$GPRMC,201053.00,A,4738.52432,N,00323.04391,W,2.690,273.49,230623,,,A*7E",
+		"AIS": "!AIVDM,1,1,,A,402:nvAvQRggMOiEsNKAKE?008Ag,0*30\r",
+		"GSV": [
+		"$GPGSV,3,1,12,05,45,304,35,06,13,187,23,07,58,073,32,09,25,076,27*73",
+		"$GPGSV,3,2,12,11,42,226,28,13,28,258,34,14,06,148,21,16,02,019,24*77",
+		"$GPGSV,3,3,12,20,72,281,32,29,04,300,35,30,68,148,29,39,06,107,*7C"
+		],
+		"MWV": "$CCMWV,061.0,T,002.5,N,A*3B",
+		"TXT": "$GPTXT,01,01,02,LLC FFFFFFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-FFFFFFFD*2C",
+		"VWT": "$CCVWT,61.2,R,2.5,N,1.3,M,4.6,K*7D",
+		"GSA": "$GPGSA,A,3,09,07,13,05,20,11,06,30,,,,,2.01,1.17,1.64*0B",
+		"MLS": "$PNMLS,36,25,3*51\r",
+		"MWD": "$CCMWD,060.0,T,,M,2.5,N,1.3,M*69",
+		"MTA": "$PYMTA,31.6,C*08"
+	},
+	"dewpoint": 17.9,
+	"HDG Offset": 0,
+	"Relative Humidity": 44.1,
+	"Delta Altitude": 37.1,
+	"ais": {
+		"2275065": {
+		"4": {
+			"messageType": 4,
+			"repeatIndicator": 0,
+			"recordTimeStamp": 1717602450279,
+			"messageDescription": "Base Station",
+			"navStatusDesc": null,
+			"aidTypeDesc": null,
+			"vesselNameStr": null,
+			"nameStr": null,		
+. . .		
+			</pre>
+			The structure of this message depends one the way the server was coded.<br/>
+			There is - for now - no standard in this area.<br/>
+			Then, the content of this message is parsed by the client, in order to produce the representations seen before in this document.<br/>
+			The technology used on the client side to produce the chart is WebComponent (that one is a standard).
+		</div>
 	</p>
 	<hr/>
 	<i>&copy; 2024, Passe-Coque</i>
