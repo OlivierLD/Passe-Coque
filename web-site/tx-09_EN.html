@@ -1,13 +1,49 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/melkart/melkart.00.jpg" width="400px">
-        <div style="padding: 14px;">
-            <h2>Projet "Entendre la mer" ("Hearing the sea")</h2>
+
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'melkart-01');" title="Sommaire">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'melkart-02');">Details</button>
+        <button class="tablinks" onclick="openTab(event, 'melkart-03');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="melkart-01" class="tab-section" style="display: block;">
+
+            <!--div style="vertical-align: middle;"><img src="/images/construction.cone.png" height="26"> <b>Projets Low Tech&nbsp;!</b> <img src="/images/construction.cone.png" height="30"></div-->
+            <div class="txt-img-div-2">
+                <!--iframe src="https://akirodic.com/p/jellyfish/" style="width: 80%; height: 100%;"></iframe-->
+                <img src="/logos/logo.tiago.png" style="width: 50%; margin: auto;">
+                <div style="padding: 14px;">
+                    <h2>"Entendre la mer" ("Hearing the sea")</h2>
+                </div>
+            </div>
+        </div>
+
+        <div id="melkart-02" class="tab-section" style="display: none;">
+            <h2>D&eacute;tails</h2>
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <div style="overflow: auto;">
+                    The Melkart is getting ready to take on board young people with hearing impairments.<br/>
+                    This robust ketch will allow them to discover navigation in complete safety.<br/><br/>
+                    All the information very soon.
+                </div>
+                <div style="overflow: auto; text-align: center;">
+                    <img src="/images/boats/melkart/melkart.00.jpg" width="50%">
+                </div>
+            </div>
+        </div>
+
+        <div id="melkart-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <div>
+                    More soon, here...
+                    <br/><br/>
+                    Contact: <a href="mailto:tiagocampostc@hotmail.com?subject=Projets%20Entendre%20la%20mer">Tiago Campos</a>
+                </div>
+                <!--img src="./low-tech/nautile.jpg"-->
+            </div>
         </div>
     </div>
-    <div>
-        The Melkart is getting ready to take on board young people with hearing impairments.<br/>
-        This robust ketch will allow them to discover navigation in complete safety.<br/><br/>
-        All the information very soon.    
-    </div>
+
 </div>
