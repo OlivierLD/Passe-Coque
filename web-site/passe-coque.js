@@ -1165,6 +1165,14 @@ const THE_FLEET = [
         base: "Locmiqu&eacute;lic"
     },
     {
+        name: "Zephir",
+        id: "zephir",
+        pix: "/images/boats/zephir/zephir.png",
+        type: "Birvidic 700",
+        category: NONE,
+        base: "Kernevel"
+    },
+    {
         name: "Coraxy",
         id: "coraxy",
         pix: "/images/boats/coraxy.png",
