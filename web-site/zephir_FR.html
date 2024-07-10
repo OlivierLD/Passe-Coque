@@ -1,17 +1,75 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/zephir/zephir.png" width="100%">
-        <div style="padding: 14px;">
-            <h2>Zephir</h2>
-            Birvidic 700 bas&eacute; &agrave; Kernevel<br/>
+    <div style="min-height: 400px; overflow-y: scroll;">
+        <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+            <button class="tablinks tab-active" onclick="openTab(event, 'zephir-01');" title="Sommaire">Sommaire</button>
+            <button class="tablinks" onclick="openTab(event, 'zephir-02');" title="Actualit&eacute;s">D&eacute;tails</button>
+            <button class="tablinks" onclick="openTab(event, 'zephir-03');" title="Actualit&eacute;s">Actualit&eacute;s</button>
         </div>
-    </div>
-
-    <div>
-        <h2>Plus d'infos...</h2>
-        R&eacute;f&eacute;rent : Olivier<!-- Pahun-->.<br/>
-        <!--
-        T&eacute;l : . . .<br/>
-        Email : . . . -->
+    
+        <div style="min-height: 300px; max-height: 450px; overflow-y: scroll;">
+            <div id="zephir-01" class="tab-section" style="display: block;">
+                <div style="display: grid; grid-template-columns: 50% 50%;">
+                    <img src="/images/boats/zephir/zephir.png" style="height: 40vh;">
+                    <div style="padding: 14px;">
+                        <h2>Zephir</h2>
+                        Birvidic 700 bas&eacute; &agrave; Kernevel<br/>
+                    </div>
+                </div>
+                <div>
+                    <h2>Plus d'infos...</h2>
+                    R&eacute;f&eacute;rent : Olivier<!--Pahun-->.<br/>
+                    <!--
+                    T&eacute;l : . . .<br/>
+                    Email : . . . -->
+                </div>
+            </div>
+            <div id="zephir-02" class="tab-section" style="display: none;">
+                <div style="display: grid;">    
+                    <p style="line-height: 1.2em; margin-top: 10px;">
+                        Zephir est un <a href="https://www.fr-lucas.com/birvidic-700-1701" target="FL">Birvidic 700</a>, dessin&eacute; par Fran&ccedil;ois Lucas.
+                    </p>
+                </div>
+            </div>
+            <div id="zephir-03" class="tab-section" style="display: none; line-height: 1.0em;">
+                <h2>Reprise en main</h2>
+                <span>Apr&egrave;s quelques mois sur sa remorque, Zephir reprend du service</span>
+                <br/>
+                <p style="text-align: left; margin-top: 10px;">
+                    <img src="./images/boats/zephir/02.jpg" style="width: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/03.jpg" style="height: 50vh;">
+                    <br/>
+                    Apr&egrave;s ces mois sur le terre-plein, et le capot de descente qui n'est pas compl&egrave;tement &eacute;tanche, 
+                    il y a de l'eau &agrave; l'int&eacute;rieur du bateau...<br/>
+                    En tout cas, la coque ne fuit pas !<br/>
+                    <img src="./images/boats/zephir/12.jpg" style="width: 50vh;">
+                    <br/>
+                </p>
+                <h2>Reprise des caissons de flottabilit&eacute;</h2>
+                <span>De curieuses modifications ont d&ucirc; &ecirc;tre op&eacute;r&eacute;es...</span>
+                <p style="text-align: left; margin-top: 10px;">
+                    <img src="./images/boats/zephir/04.jpg" style="width: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/14.jpg" style="height: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/16.jpg" style="height: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/17.jpg" style="height: 50vh;">
+                    <br/>
+                </p>
+                <h2>Mise hors d'eau du r&eacute;gulateur</h2>
+                <span>
+                    Le r&eacute;gulateur &eacute;tait au niveau de la batterie, les connexions trempaient dans l'eau,
+                    la batterie &eacute;tait morte.
+                </span>
+                <p style="text-align: left; margin-top: 10px;">
+                    <img src="./images/boats/zephir/13.jpg" style="width: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/18.jpg" style="height: 50vh;">
+                    <br/>
+                    D&eacute;plac&eacute; du c&ocirc;t&eacute; de la couchette, plus de probl&egrave;me, les connexions sont hors d'eau.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
