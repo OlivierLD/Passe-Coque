@@ -1,16 +1,80 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/zephir/zephir.png" width="100%">
-        <div style="padding: 14px;">
-            <h2>Zephir</h2>
-            Birvidic 700, based in Kernevel<br/>
+    <div style="min-height: 400px; overflow-y: scroll;">
+        <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+            <button class="tablinks tab-active" onclick="openTab(event, 'zephir-01');" title="Sommary">Summary</button>
+            <button class="tablinks" onclick="openTab(event, 'zephir-02');" title="Details">Details</button>
+            <button class="tablinks" onclick="openTab(event, 'zephir-03');" title="News">News</button>
         </div>
-    </div>
     
-    <div>
-        <h2>More info...</h2>
-        Referent: Olivier<!-- Pahun-->.<br/>
-        <!-- Tel: . . .<br/>
-        Email: . . . -->
+        <div style="min-height: 300px; max-height: 450px; overflow-y: scroll;">
+            <div id="zephir-01" class="tab-section" style="display: block;">
+                <div style="display: grid; grid-template-columns: 50% 50%;">
+                    <img src="/images/boats/zephir/zephir.png" style="height: 40vh;">
+                    <div style="padding: 14px;">
+                        <h2>Zephir</h2>
+                        Birvidic 700 based in Kernevel<br/>
+                    </div>
+                </div>
+                <div>
+                    <h2>More info...</h2>
+                    Referent: Olivier.<br/>
+                    <!--
+                    T&eacute;l : . . .<br/>
+                    Email : . . . -->
+                </div>
+            </div>
+            <div id="zephir-02" class="tab-section" style="display: none;">
+                <div style="display: grid;">    
+                    <p style="line-height: 1.2em; margin-top: 10px;">
+                        Zephir is a <a href="https://www.fr-lucas.com/birvidic-700-1701" target="FL">Birvidic 700</a>, designed by Fran&ccedil;ois Lucas.
+                    </p>
+                </div>
+            </div>
+            <div id="zephir-03" class="tab-section" style="display: none; line-height: 1.0em;">
+                <h2>Back in business</h2>
+                <span>After a couple of months on its trailer, Zephir is back in business</span>
+                <br/>
+                <p style="text-align: left; margin-top: 10px;">
+                    <img src="./images/boats/zephir/02.jpg" style="width: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/03.jpg" style="height: 50vh;">
+                    <br/>
+                    After those months outside on the yard, and the companion way hatch, not 100% waterproof, 
+                    there is some water inside the boat...<br/>
+                    In any case, there is no leak in the hull!<br/>
+                    <img src="./images/boats/zephir/12.jpg" style="width: 50vh;">
+                    <br/>
+                </p>
+                <h2>Upgrade of the buoyancy boxes</h2>
+                <span>Wierd modifications must have been done...</span>
+                <p style="text-align: left; margin-top: 10px;">
+                    <img src="./images/boats/zephir/04.jpg" style="width: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/14.jpg" style="height: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/16.jpg" style="height: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/17.jpg" style="height: 50vh;">
+                    <br/>
+                </p>
+                <h2>Regulator out of the water</h2>
+                <span>
+                    The regulator was at the battery level, connections were in thne water,
+                    the battery was dead.
+                </span>
+                <p style="text-align: left; margin-top: 10px;">
+                    <img src="./images/boats/zephir/13.jpg" style="width: 50vh;">
+                    <br/>
+                    <img src="./images/boats/zephir/18.jpg" style="height: 50vh;">
+                    <br/>
+                    Moved on the berth side, no more problem, connections are out of the water.
+                </p>
+
+                <h2><a href="https://olivierld.github.io/web.stuff/boat.stuff/rubiscup.2024/rubiscup.2024.html" target="OlivierLD">Zephir goes to the Rubi's Cup</a> &agrave; Groix (28-30 juin 2024)</h2>
+                <p>
+                    Back from the Rubi's Cup, Zephir now has a dock in Kern&eacute;vel, <b>K88</b>.
+                </p>
+            </div>
+        </div>
     </div>
 </div>
