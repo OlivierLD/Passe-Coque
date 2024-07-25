@@ -278,7 +278,7 @@ div.tooltip:hover span {
 .boat-card {
     font-size: 12px;
     line-height: 1.2em;
-    height: 500px; 
+    height: 80vh; 
     overflow-y: scroll;
 }
 
@@ -1261,7 +1261,7 @@ span.expand-collapse:hover {
         display: none;
     }
     .pcc-dialog-content {
-        max-height: 500px; 
+        max-height: 80vh; 
         /* max-height: 400px;  */
         overflow: scroll;
         margin-top: 22px;
@@ -1567,7 +1567,7 @@ span.expand-collapse:hover {
     .boat-card {
         font-size: 12px;
         line-height: 1.2em;
-        height: 600px; 
+        height: 80vh; 
         overflow-y: scroll;
     }    
 }
