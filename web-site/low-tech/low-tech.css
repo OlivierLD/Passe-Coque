@@ -21,3 +21,8 @@ h1 {
     -webkit-text-fill-color: white; /* Will override color (regardless of order) */
     -webkit-text-stroke: 3px black;
 }
+
+.postit {
+    background: #f7f7e7;
+    padding: 5px;
+}
