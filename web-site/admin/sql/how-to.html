@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--link rel="icon" type="image/jpg" href="./palm.04.jpg"-->
+    <title>Passe-Coque Admin Tools</title>
+    <style>
+* {
+    font-family: 'Courier New', Courier, monospace;
+}        
+h1 {
+    /* text-stroke: 2px orange; */ /* Might not be supported */
+    font-size: 3em;
+    color: black;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke: 3px black;
+}
+.postit {
+    background: #f7f7e7;
+    padding: 5px;
+}
+div {
+    padding: 10px;
+}
+    </style>
+</head>
+<body>
+    <h1>Gestion des membres, comment &ccedil;a marche.</h1>
+    Tous les outils d'aministration sont disponibles &agrave; partir de l'"<a href="https://passe-coque.com/?lang=FR&nav-to=7">Espace Membres</a>".
+    <div class="postit">
+        <ul>
+            <li>Il faut avoir un mot de passe (et &ecirc;tre r&eacute;f&eacute;renc&eacute; dans la liste des membres de l'asso)</li>
+            <li>Il faut avoir le privil&egrave;ge "admin" (on va y venir)</li>
+        </ul>
+        <b><i>On peut obtenir un mot de passe (ou le re-cr&eacute;er) &agrave; partir de l'<a href="https://passe-coque.com/?lang=FR&nav-to=7">Espace Membres</a>, en bas de la page.</i></b>
+    </div>
+    <div>
+        Une fois connect&eacute;, si on dispose du privil&egrave;ge "admin", on a acc&egrave;s &agrave; l'"Admin Menu", qui figure dans la liste qui s'affiche apr&egrave;s la connexion.
+    </div>
+    <div>
+        &Agrave; partir de l'Admin Menu, pour acc&eacute;der &agrave; la gestion des membres, if faut cliquer sur le lien "Passe-Coque Members Management".<br/>
+        S'affiche alors un &eacute;cran, &agrave; partir duquel on peut restreindre la liste des membres qui va s'afficher. Si on ne saisit
+        aucune restriction, on obtient la liste compl&egrave;te quand on clique le bouton "Query".
+    </div>
+    <div>
+        Apr&egrave;s ce click sur "Query" s'affiche aliors la liste (restreinte ou pas) des membres de l'asso.<br/>
+        L'ecran est large, on peut scroller horizontalement.<br/>
+        Cette liste et ses &eacute;l&eacute;ements ne sont pas directement modifiables &agrave; partir de cet &eacute;cran, il faut pour faire des modifications 
+        en faire le choix explicite.<br/>
+        On peut&nbsp;:
+        <ul>
+            <li>Cr&eacute;er un nouveau membre en cliquant le bouton "Create New Member"</li>
+            <li>
+                Modifier les donn&eacute;es existantes en cliquant "Edit", &agrave; la fin de la ligne, &agrave; l'extr&ecirc;me droite.
+                <br/>
+                Le click sur "Edit" m&egrave;ne sur un &eacute;cran &agrave; partir duquel on peut&nbsp;:
+                <ul>
+                    <li>Modifier les donn&eacute;es d'un membre</li>
+                    <li>Supprimer un membre</li>
+                </ul>
+                Ce m&ecirc;me &eacute;cran permet aussi de voir - et cr&eacute;er - des cotisations pour chaque membre.
+            </li>
+        </ul>
+    </div>
+    <div>
+        En fin, il existe dans le menu "Admin", une ligne "Passe-Coque Members, spreadsheet (WiP)", qui permet de 
+        g&eacute;n&eacute;rer un document de type Excel, visualisable dans un tableur. C'est en travaux.
+    </div>
+    <hr/>
+    <i>Passe-Coque never stops</i>
+</body>
+</html>
