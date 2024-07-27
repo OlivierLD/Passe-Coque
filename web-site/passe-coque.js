@@ -1586,6 +1586,10 @@ const INFO_SECTION = [
             title: "Juillet 2024",
             content: "/actu/2024/FIM.html"
         },{
+            date: "Juin-2024",
+            title: "28-30 Juin 2024",
+            content: "/actu/2024/RubisCup2024.html"
+        },{
             date: "Mai-2024",
             title: "30 Mai 2024",
             content: "/actu/2024/peps.auray.html"
