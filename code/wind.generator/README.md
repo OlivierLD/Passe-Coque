@@ -106,7 +106,7 @@ The problem is the following one:
 
 In other words:
 - How much wind power do we lose with a vertical axis?
-- How much current to we lose with an horizontal axis?
+- How much current do we lose with an horizontal axis?
 
 [Several Options](https://all3dp.com/2/3d-printed-wind-turbines-wind-powered-gadgets/)
 
