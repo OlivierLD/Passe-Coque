@@ -18,7 +18,9 @@ The code used for the site is in the `web-site` folder.
 
 ## Get started
 
-- Developper Guide [here](./admin/HOW-TO.md)
+- Developper Guide [here](./web-site/admin/HOW-TO.md)
+- Tech Docs [here](./web-site/admin/tech.doc.html)
+- Admin basics [here](./web-site/admin/sql/how-to.html)
 
 ### Misc commands and hints
 If `NodeJS` is installed on your dev machine:
