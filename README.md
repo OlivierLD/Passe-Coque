@@ -19,8 +19,8 @@ The code used for the site is in the `web-site` folder.
 ## Get started
 
 - Developper Guide [here](./web-site/admin/HOW-TO.md)
-- Tech Docs [here](./web-site/admin/tech.doc.html)
-- Admin basics [here](./web-site/admin/sql/how-to.html)
+- Tech Docs <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/Passe-Coque/blob/master/web-site/admin/tech.doc.html" target="new">here</a>.
+- Admin basics <a href="https://htmlpreview.github.io/?https://github.com/OlivierLD/Passe-Coque/blob/master/web-site/admin/sql/how-to.html" target="new">here</a>.
 
 ### Misc commands and hints
 If `NodeJS` is installed on your dev machine:
