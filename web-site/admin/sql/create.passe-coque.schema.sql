@@ -109,16 +109,22 @@ CREATE TABLE IF NOT EXISTS TARIFS (
 );
 
 INSERT INTO TARIFS (LABEL, DESCRIPTION) VALUES 
-('Passeur d\'Écoute', ''),
-('Équipier Boat Club', ''),
-('Asso Partenaire', ''),
+('Passeur d\'Écoute', 'tbd'),
+('Équipier Boat Club', 'tbd'),
+('Asso Partenaire', 'tbd'),
 ('Prospect', 'Fourre-tout. Prospect, contacts, etc.'),
-('Presse', ''),
-('Donateur', ''),
-('Partenaire', ''),
-('CA / Administration', ''),
-('Référent', '');
+('Presse', 'tbd'),
+('Donateur', 'tbd'),
+('Partenaire', 'tbd'),
+('CA / Administration', 'The board'),
+('Référent', 'tbd');
 
+-- Update with description... 
+UPDATE TARIFS SET DESCRIPTION = 'tbd' WHERE LABEL IN ('Passeur d\'Écoute', 'Équipier Boat Club', 'Asso Partenaire', 'Presse', 'Donateur', 'Partenaire', 'Référent');
+UPDATE TARIFS SET DESCRIPTION = 'Fourre-tout. Prospect, contacts, etc.' WHERE LABEL = 'Prospect';
+UPDATE TARIFS SET DESCRIPTION = 'The board' WHERE LABEL = 'CA / Administration';
+
+-- Update from previous values...
 UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Passeur d\'Écoute' WHERE TARIF IN ('adhérent', 'Adhérent. Isseo', 'adherente', 'Felicie', 'membre', 'Membres FELICIE', 'Passeur d\'Ecoute');
 UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Équipier Boat Club' WHERE TARIF IN ('Adhesion équipier Boat Club', 'Equipier');
 UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Asso Partenaire' WHERE UPPER(TARIF) = 'ASSO PARTENAIRE';
@@ -132,7 +138,7 @@ UPDATE PASSE_COQUE_MEMBERS SET TARIF = 'Référent' WHERE TARIF IN ('Référent 
 
 SELECT CONCAT(FIRST_NAME, ' ', LAST_NAME), TARIF FROM PASSE_COQUE_MEMBERS WHERE TARIF NOT IN (SELECT LABEL FROM TARIFS);
 
--- TO DO WHEN CLEAN: (Done on Jul 27, 2024)
+-- TO DO WHEN CLEAN: (Done on Jul 27, 2024) ' << This quote to please the syntax processor...
 ALTER TABLE PASSE_COQUE_MEMBERS ADD CONSTRAINT TARIF_FK_TARIFS FOREIGN KEY (TARIF) REFERENCES TARIFS (LABEL);
 
 CREATE TABLE IF NOT EXISTS MEMBER_FEES (
