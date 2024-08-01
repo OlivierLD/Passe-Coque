@@ -6,6 +6,8 @@ Pour le moment (Dec 2023), il n'y a dans le code <u>AUCUNE</u> d&eacute;pendance
 
 Le site est une SPA (Single Page Application). &Ccedil;a permet de r&eacute;duire la taille des ressources de mani&egrave;re substancielle.
 
+Ceci permet aussi de r&eacute;duire tangiblement l'empreinte carbone du site, en ce sens que son affichage ne recours qu'&agrave; un minimum de servers (genre 1 seul).
+
 Autres fichiers reli&eacute;s &agrave; l'index&nbsp;:
 - `passe-coque.css`
 - `passe-coque.js`
