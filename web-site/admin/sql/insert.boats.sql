@@ -1,3 +1,11 @@
+INSERT INTO THE_FLEET VALUES ( 
+    "Araben",
+    "araben",
+    "/images/boats/voilieraraben/Araben 1.jpg",
+    "-",
+    "NONE",
+    "Arzal"
+);
 INSERT INTO THE_FLEET VALUES (
     "Eh'Tak",
     "eh-tak",
