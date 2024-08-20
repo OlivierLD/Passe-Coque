@@ -1152,7 +1152,7 @@ const THE_FLEET = [
         name: "Araben",
         id: "araben",
         pix: "/images/boats/voilieraraben/Araben 1.jpg",
-        type: "-",
+        type: "Plan Mauric",
         category: NONE,
         base: "Arzal"
     }, {

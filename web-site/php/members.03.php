@@ -30,9 +30,12 @@ require __DIR__ . "/db.cred.php";
 
 // echo "Default GC_MaxLifeTime: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
 $timeout = 300;
-ini_set("session.gc_maxlifetime", $timeout);
-ini_set("session.cookie_lifetime", $timeout);
-// echo "GC_MaxLifeTime now: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
+$applyTimeout = false;
+if ($applyTimeout) {
+  ini_set("session.gc_maxlifetime", $timeout);
+  ini_set("session.cookie_lifetime", $timeout);
+  // echo "GC_MaxLifeTime now: " . ini_get("session.gc_maxlifetime") . " s<br/>" . PHP_EOL;
+}
 
 // session_start();
 

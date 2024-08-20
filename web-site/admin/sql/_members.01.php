@@ -1,10 +1,14 @@
 <?php
 // Must be on top
 $timeout = 300;  // In seconds
+$applyTimeout = false; // Change at will
+
 try {
   if (!isset($_SESSION)) {
-    ini_set("session.gc_maxlifetime", $timeout);
-    ini_set("session.cookie_lifetime", $timeout);
+    if ($applyTimeout) {
+      ini_set("session.gc_maxlifetime", $timeout);
+      ini_set("session.cookie_lifetime", $timeout);
+    }
     session_start();
   }
 } catch (Throwable $e) {

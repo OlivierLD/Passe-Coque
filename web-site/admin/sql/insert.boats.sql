@@ -2,10 +2,11 @@ INSERT INTO THE_FLEET VALUES (
     "Araben",
     "araben",
     "/images/boats/voilieraraben/Araben 1.jpg",
-    "-",
+    "One-off Mauric",
     "NONE",
     "Arzal"
 );
+-- UPDATE THE_FLEET SET BOAT_TYPE = 'One-off Mauric' WHERE ID = 'araben';
 INSERT INTO THE_FLEET VALUES (
     "Eh'Tak",
     "eh-tak",
