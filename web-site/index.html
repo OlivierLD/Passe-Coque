@@ -538,6 +538,12 @@ window.onload = () => {
 	// let mediaQuery = "(max-width: 600px)";
 	let mql = window.matchMedia(mediaQuery);
 	console.log(`Query ${mediaQuery}, Match: ${mql.matches}. Window.innerWidth: ${window.innerWidth}`);
+
+	// A message onload ?
+	if (true) { // TODO if date matches...
+		console.log("Showing dialog on load");
+		showDialogOnLoad("Welcome !", "welcome");
+	}
 };
 
 </script>

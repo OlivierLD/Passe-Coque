@@ -27,6 +27,59 @@ let closeAboutDialog = () => {
     }
 };
 
+let showDialogOnLoad = (title, content) => { // Use the about-dialog for message on load
+    let aboutDialog = document.getElementById("about-dialog");
+
+    let dialogTitle = document.querySelectorAll('.dialog-title'); // By its class
+    let dynamicContentContainer = document.getElementById("dialog-content");
+
+    if (dialogTitle) {
+        dialogTitle[dialogTitle.length - 1].innerText = title; // Can be several dialogs... take the last.
+    }
+    let contentName = `${content}_${currentLang}.html`; // Like 'tx-01_FR.html'
+    fetch(contentName)
+        .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+            console.log(`Data Response: ${response.status} - ${response.statusText}`);
+            if (response.status !== 200) { // There is a problem...
+                dynamicContentContainer.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+            } else {
+                response.text().then(doc => {
+                    console.log(`${contentName} code data loaded, length: ${doc.length}.`);
+                    dynamicContentContainer.innerHTML = doc;
+                });
+            }
+        },
+        (error, errmess) => {
+            console.log("Ooch");
+            let message;
+            if (errmess) {
+                let mess = JSON.parse(errmess);
+                if (mess.message) {
+                    message = mess.message;
+                }
+            }
+            console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            // Plus tard...
+            dynamicContentContainer.innerHTML = generateFetchErrorMessage(contentName, error, errmess);
+        });
+
+    // dynamicContentContainer.innerHTML = content;
+    // if (DIALOG_OPTION) {
+    //     showInfoTxDialog();
+    // } else {
+    //     dynamicContentContainer.style.display = 'block';
+    // }
+
+    if (aboutDialog.show !== undefined) {
+        aboutDialog.style.display = 'inline';
+        aboutDialog.show();
+    } else {
+      alert(NO_DIALOG_MESSAGE);
+      aboutDialog.style.display = 'inline';
+    }
+};
+
+
 let openNav = () => {
     // console.log("Opening Hamburger Menu");
     // alert("Opening Hamburger Menu");
