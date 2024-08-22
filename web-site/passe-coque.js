@@ -34,7 +34,7 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
     let dynamicContentContainer = document.getElementById("dialog-content");
 
     if (dialogTitle) {
-        dialogTitle[dialogTitle.length - 1].innerText = title; // Can be several dialogs... take the last.
+        dialogTitle[0].innerText = title; // Can be several dialogs... take the first one.
     }
     let contentName = `${content}_${currentLang}.html`; // Like 'tx-01_FR.html'
     fetch(contentName)
