@@ -1,4 +1,12 @@
 INSERT INTO THE_FLEET VALUES ( 
+    "Lady of Solent",
+    "los",
+    "/images/boats/lady.of.solent/los.10.png",
+    "Contessa 35",
+    "NONE",
+    "-"
+);
+INSERT INTO THE_FLEET VALUES ( 
     "Araben",
     "araben",
     "/images/boats/voilieraraben/Araben 1.jpg",
