@@ -1,4 +1,12 @@
 INSERT INTO THE_FLEET VALUES ( 
+    "Penny Lane",
+    "penny-lane",
+    "/images/boats/dummy.boat.jpg",
+    "Arp&egrave;ge",
+    "CLUB",
+    "-"
+);
+INSERT INTO THE_FLEET VALUES ( 
     "Lady of Solent",
     "los",
     "/images/boats/lady.of.solent/los.10.png",

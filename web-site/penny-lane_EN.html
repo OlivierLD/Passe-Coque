@@ -1,0 +1,57 @@
+<!-- Absolute locations for resources like images... -->
+<div class="boat-card">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'penny-lane-01');" title="Sommary">Sommary</button>
+        <button class="tablinks" onclick="openTab(event, 'penny-lane-02');">Pictures</button>
+        <button class="tablinks" onclick="openTab(event, 'penny-lane-03');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="penny-lane-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/dummy.boat.jpg" width="100%" style="max-width: 600px;">
+                <div style="padding: 14px;">
+                    Penny Lane, Arp&egrave;ge, Dufour shipyard.
+                    <div>
+                        <!--ul>
+                            <li>Longueur Hors-tout : 35.5' / 10.82m</li>
+                            <li>Longueur flottaison : 29.5' / 8.99m</li>
+                            <li>Largeur Hors-tout : 11.42' / 3.48m</li>
+                            <li>Tirant d'eau : 6.33' / 1.93m</li>
+                        </ul-->
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2>The boat</h2>
+                <div>
+                    . . .
+                </div>
+            </div>
+        </div>
+
+        <div id="penny-lane-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="penny-lane-slide-show"
+                        width="500"
+                        height="374"
+                        style="line-height: 1em;">
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.01.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.02.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.03.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.04.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.05.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.06.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.07.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.08.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.09.jpeg" title="Penny Lane"></slide-show-image>
+                <slide-show-image src="./images/boats/penny.lane/penny.lane.10.jpeg" title="Penny Lane"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="penny-lane-03" class="tab-section" style="display: none;">
+            <h2>More info...</h2>
+            Referent: Thibault Bailleul.<br/>
+            <!-- Email : eric.de.wolbock@me.com<br/-->
+        </div>
+    </div>
+</div>

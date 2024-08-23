@@ -542,7 +542,7 @@ window.onload = () => {
 	// A message onload ?
 	if (true) { 
 		let navigateTo = getQueryParameterByName('nav-to');
-		if (! navigateTo) {
+		if (! navigateTo) { // In order not to have too many popups
 			console.log("Showing dialog on load");
 			showDialogOnLoad("Welcome !", "welcome");
 		}
