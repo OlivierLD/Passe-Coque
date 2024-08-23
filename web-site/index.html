@@ -540,9 +540,12 @@ window.onload = () => {
 	console.log(`Query ${mediaQuery}, Match: ${mql.matches}. Window.innerWidth: ${window.innerWidth}`);
 
 	// A message onload ?
-	if (true) { // TODO if date matches...
-		console.log("Showing dialog on load");
-		showDialogOnLoad("Welcome !", "welcome");
+	if (true) { 
+		let navigateTo = getQueryParameterByName('nav-to');
+		if (! navigateTo) {
+			console.log("Showing dialog on load");
+			showDialogOnLoad("Welcome !", "welcome");
+		}
 	}
 };
 
