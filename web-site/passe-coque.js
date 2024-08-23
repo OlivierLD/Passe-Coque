@@ -27,6 +27,31 @@ let closeAboutDialog = () => {
     }
 };
 
+let generateNextEvents = () => {
+    const HOW_FAR = 2;
+    let now = new Date();
+    let firstIdx;
+    // Find first date index
+    for (let idx=0; idx<NEXT_EVENTS.length; idx++) {
+        let d = new Date(NEXT_EVENTS[idx].date);
+        if (d.getTime() > now.getTime()) {
+            firstIdx = idx;
+            break;
+        }
+    }
+    if (firstIdx) {
+        let nextMeetings = [];
+        for (let i=0; i<HOW_FAR; i++) {
+            if (NEXT_EVENTS[[firstIdx + i]]) {
+                nextMeetings.push(currentLang === 'FR' ? NEXT_EVENTS[firstIdx + i].content.fr : NEXT_EVENTS[firstIdx + i].content.en);
+            }
+        }
+        return nextMeetings;
+    } else {
+        return null;
+    }
+};
+
 let showDialogOnLoad = (title, content) => { // Use the about-dialog for message on load
     let aboutDialog = document.getElementById("about-dialog");
 
@@ -36,6 +61,10 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
     if (dialogTitle) {
         dialogTitle[0].innerText = title; // Can be several dialogs... take the first one.
     }
+
+    // let ne = generateNextEvents(); // TODO Populate the dialog with this list.
+    // debugger;
+
     let contentName = `${content}_${currentLang}.html`; // Like 'tx-01_FR.html'
     fetch(contentName)
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
@@ -45,7 +74,28 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
-                    dynamicContentContainer.innerHTML = doc;
+                    let ne = generateNextEvents(); // TODO Populate the dialog with this list.
+                    // Populate event list here (ne)
+                    let node = new DOMParser().parseFromString(doc, "text/html");
+                    console.log(node.firstChild.innerHTML); // => <a href="#">Link...
+                    let list = node.getElementById('event-list');
+                    // Remove all childs
+                    while (list.firstChild) {
+                        list.removeChild(list.lastChild);
+                    }
+                    // Add new ones
+                    ne.forEach(event => {
+						let li = document.createElement('li');
+                        li.innerHTML = event;
+                        list.appendChild(li);
+					});
+                    // Remove existing (dummy) chilren
+                    while (dynamicContentContainer.firstChild) {
+                        dynamicContentContainer.removeChild(dynamicContentContainer.lastChild);
+                    }
+                    // dynamicContentContainer.innerHTML = node.innerHTML;
+                    dynamicContentContainer.appendChild(node.getRootNode().firstChild);
+                    // console.log("Ha !");
                 });
             }
         },
@@ -1780,6 +1830,34 @@ const INFO_SECTION = [
                 content: "/actu/communications.html"
               }
           ]
+    }
+];
+
+const NEXT_EVENTS = [
+    {
+        date: '2024-05-01',
+        content: { 
+            fr: '1<sup>er</sup>Mai.',
+            en: 'May 1st.'
+        }
+    }, {
+        date: '2024-09-07',
+        content: {
+            fr: '7 septembre : Journ&eacute;e des associations &agrave; Saint Philibert, salle du Mousker.',
+            en: 'September 7: Associations day, in Saint Philibert, salle du Mousker.'
+        }
+    }, {
+        date: '2024-09-24',
+        content: {
+            fr: 'le 24 septembre : <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> &agrave; St Brieuc',
+            en: 'September 24: <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> in St Brieuc'
+        }
+    }, {
+        date: '2024-12-25',
+        content: {
+            fr: 'No&euml;l.',
+            en: 'XMas.'
+        }
     }
 ];
 
