@@ -1,5 +1,6 @@
 /**
  * Oho !
+ * @author Olivier Le Diouris
  */
 const NO_DIALOG_MESSAGE = "Dialog tag not supported.";
 const DEFAULT_LANG = "FR";
@@ -62,9 +63,6 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
         dialogTitle[0].innerText = title; // Can be several dialogs... take the first one.
     }
 
-    // let ne = generateNextEvents(); // TODO Populate the dialog with this list.
-    // debugger;
-
     let contentName = `${content}_${currentLang}.html`; // Like 'tx-01_FR.html'
     fetch(contentName)
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
@@ -74,10 +72,10 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
             } else {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
-                    let ne = generateNextEvents(); // TODO Populate the dialog with this list.
+                    let ne = generateNextEvents(); // Populate the dialog with this list.
                     // Populate event list here (ne)
                     let node = new DOMParser().parseFromString(doc, "text/html");
-                    console.log(node.firstChild.innerHTML); // => <a href="#">Link...
+                    // console.log(node.firstChild.innerHTML); // => <a href="#">Link...
                     let list = node.getElementById('event-list');
                     // Remove all childs
                     while (list.firstChild) {
@@ -94,7 +92,7 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
                         dynamicContentContainer.removeChild(dynamicContentContainer.lastChild);
                     }
                     // dynamicContentContainer.innerHTML = node.innerHTML;
-                    dynamicContentContainer.appendChild(node.getRootNode().firstChild);
+                    dynamicContentContainer.appendChild(node.getRootNode().querySelectorAll('.welcome-message')[0]); // .firstChild);
                     // console.log("Ha !");
                 });
             }
@@ -124,7 +122,7 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
         aboutDialog.style.display = 'inline';
         aboutDialog.show();
     } else {
-      alert(NO_DIALOG_MESSAGE);
+      // alert(NO_DIALOG_MESSAGE);
       aboutDialog.style.display = 'inline';
     }
 };
