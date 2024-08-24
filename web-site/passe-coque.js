@@ -91,8 +91,9 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
                     while (dynamicContentContainer.firstChild) {
                         dynamicContentContainer.removeChild(dynamicContentContainer.lastChild);
                     }
-                    // dynamicContentContainer.innerHTML = node.innerHTML;
-                    dynamicContentContainer.appendChild(node.getRootNode().querySelectorAll('.welcome-message')[0]); // .firstChild);
+                    // dynamicContentContainer.innerHTML = node.innerHTML; // <- Nope.
+                    // dynamicContentContainer.appendChild(node.getRootNode().querySelectorAll('.welcome-message')[0]); // .firstChild);
+                    dynamicContentContainer.appendChild(node.body.childNodes[0]);
                     // console.log("Ha !");
                 });
             }
@@ -1850,19 +1851,19 @@ const NEXT_EVENTS = [
         date: '2024-05-01',
         content: { 
             fr: '1<sup>er</sup>Mai.',
-            en: 'May 1st.'
+            en: 'May 1st, 2024.'
         }
     }, {
         date: '2024-09-07',
         content: {
-            fr: '7 septembre : Journ&eacute;e des associations &agrave; Saint Philibert, salle du Mousker.',
-            en: 'September 7: Associations day, in Saint Philibert, salle du Mousker.'
+            fr: 'le 7 septembre 2024 : Journ&eacute;e des associations &agrave; Saint Philibert, salle du Mousker.',
+            en: 'September 7, 2024: Associations day, in Saint Philibert, salle du Mousker.'
         }
     }, {
         date: '2024-09-24',
         content: {
-            fr: 'le 24 septembre : <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> &agrave; St Brieuc',
-            en: 'September 24: <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> in St Brieuc'
+            fr: 'le 24 septembre 2024 : <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> &agrave; St Brieuc',
+            en: 'September 24, 2024: <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> in St Brieuc'
         }
     }, {
         date: '2024-12-25',
