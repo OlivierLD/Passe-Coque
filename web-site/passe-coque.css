@@ -279,7 +279,7 @@ div.tooltip:hover span {
     font-size: 12px;
     line-height: 1.2em;
     /* height: 80vh; */
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 /* .badge-pc {
@@ -441,7 +441,7 @@ div.tooltip:hover span {
     text-align: center;
     /* margin-top: 125px; */
     /* margin-left: 20px; */
-    overflow-y: scroll;
+    overflow-y: auto;
 }
   
   /* For the switch (slider) */
@@ -951,17 +951,17 @@ span.expand-collapse:hover {
     z-index: 3; 
     position: absolute; 
     /* max-height: 550px;  */
-    /* overflow: scroll; */
+    /* overflow: auto; */
 }
 .pcc-dialog-content {
     max-height: 500px; 
     /* max-height: 400px;  */
-    overflow: scroll;
+    overflow: auto;
     margin-top: 0px;
 }
 .pcc-dialog-tab-content {
     height: 400px; 
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .page-bottom {
@@ -983,7 +983,7 @@ span.expand-collapse:hover {
 }
 
 .tab {
-    overflow: scroll;
+    overflow: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: rgba(241, 241, 241, 0.5);
@@ -1257,13 +1257,13 @@ span.expand-collapse:hover {
         position: absolute; 
         /* max-height: 500px;  */
         height: 550px;
-        overflow: scroll;
+        overflow: auto;
         display: none;
     }
     .pcc-dialog-content {
         max-height: 80vh; 
         /* max-height: 400px;  */
-        overflow: scroll;
+        overflow: auto;
         margin-top: 22px;
     }    
     .boat-image-container {
@@ -1568,7 +1568,7 @@ span.expand-collapse:hover {
         font-size: 12px;
         line-height: 1.2em;
         /* height: 80vh; */
-        overflow-y: scroll;
+        overflow-y: auto;
     }    
 }
 

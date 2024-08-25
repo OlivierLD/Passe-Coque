@@ -1,12 +1,12 @@
 <div class="boat-card">
-    <div style="min-height: 400px; overflow-y: scroll;">
+    <div style="min-height: 400px; overflow-y: auto;">
         <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
             <button class="tablinks tab-active" onclick="openTab(event, 'pordin-01');" title="Summary">Summary</button>
             <button class="tablinks" onclick="openTab(event, 'pordin-02');" title="Details">Details</button>
             <button class="tablinks" onclick="openTab(event, 'pordin-03');" title="News">News</button>
         </div>
     
-        <div style="min-height: 300px; max-height: 450px; overflow-y: scroll;">
+        <div style="min-height: 300px; max-height: 450px; overflow-y: auto;">
             <div id="pordin-01" class="tab-section" style="display: block;">
                 <div style="display: grid; grid-template-columns: auto auto;">
                     <img src="/images/boats/pordin.jpg" width="100%">

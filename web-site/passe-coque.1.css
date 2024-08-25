@@ -456,7 +456,7 @@ div.tooltip:hover span {
     text-align: center;
     /* margin-top: 125px; */
     /* margin-left: 20px; */
-    overflow-y: scroll;
+    overflow-y: auto;
 }
   
   /* For the switch (slider) */
@@ -952,11 +952,11 @@ span.expand-collapse:hover {
     z-index: 3; 
     position: absolute; 
     /* max-height: 600px; 
-    overflow: scroll; */
+    overflow: auto; */
 }
 .pcc-dialog-content {
     max-height: 600px; 
-    overflow: scroll;
+    overflow: auto;
 }
 .page-bottom {
     color: white !important;
@@ -977,7 +977,7 @@ span.expand-collapse:hover {
 }
 
 .tab {
-    overflow: scroll;
+    overflow: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: rgba(241, 241, 241, 0.5);
@@ -1134,7 +1134,7 @@ span.expand-collapse:hover {
         z-index: 3; 
         position: absolute; 
         max-height: 500px; 
-        overflow: scroll;
+        overflow: auto;
         display: none;
     }
     .boat-image-container {

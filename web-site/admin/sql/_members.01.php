@@ -54,13 +54,13 @@ try {
         max-width: 300px;
         vertical-align: top;
         white-space: nowrap;
-        overflow-x: scroll;
+        overflow-x: auto;
       }
       .no-wrap-2 {
         max-width: 200px;
         vertical-align: top;
         white-space: nowrap;
-        overflow-x: scroll;
+        overflow-x: auto;
       }
       .comments {
         vertical-align: top;
