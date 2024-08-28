@@ -323,7 +323,7 @@ window.onload = () => {
 	// console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
-	// Increment view counter, keep trach, etc
+	// Increment view counter, keep track, etc
 	function requestLogger(appCodeName, appName, product, appVersion, language,
 					       platform, userAgent, latitude, longitude) {
 		fetch("./php/nbViews.php", {
@@ -534,7 +534,8 @@ window.onload = () => {
 	}
 
 	// A Test: Query match ?
-	let mediaQuery = "(width >= 800px)";
+	let mediaQuery = "screen and (width >= 800px)";
+	// let mediaQuery = "(width >= 800px)";
 	// let mediaQuery = "(max-width: 600px)";
 	let mql = window.matchMedia(mediaQuery);
 	console.log(`Query ${mediaQuery}, Match: ${mql.matches}. Window.innerWidth: ${window.innerWidth}`);

@@ -1175,7 +1175,8 @@ span.expand-collapse:hover {
 /* @media only screen and (max-width: 1000px) { */  /* No var... */
 /* @media screen and (max-width: 1000px) { */
 /* @media screen and (width <= 1300px) { */
-@media screen and (width >= 800px) { 
+/* @media screen and (width >= 800px) {  */
+@media screen and (min-width: 800px) { 
 
     .scrolling-menu {
         display: none;
@@ -1573,7 +1574,8 @@ span.expand-collapse:hover {
 }
 
  /* @media screen and (max-width: calc(var(--small-screen-width))) { */
-@media screen and (width <= 800px) {
+ /* @media screen and (width <= 800px) { */
+@media screen and (max-width: 720px) {
     h1 {
         font-size: 2em;
     }
