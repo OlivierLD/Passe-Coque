@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- 
+	Hublow
+-->
+<head>
+	<meta charset="UTF-8">
+	<title>Hublow - 01</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+
+	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
+	<style type="text/css">
+		/* Empty */
+    </style>
+	<!--script type="text/javascript" src="/qrcode.js"></script>
+	<script type="text/javascript" src="/passe-coque.js"></script-->
+
+</head>
+	
+<body>
+    <h1>Circuit &eacute;lectrique &eacute;lementaire</h1>
+    &Agrave; voir aussi, pour inspiration : cet <a href="https://www.instructables.com/Ammo-Can-Solar-Power-Supply/" target="instr">Instructable</a>.
+    <h2>Plans</h2>
+    <div>
+        <img src="./hublow.electric.network.png" style="width: 100%;">
+        <ul>
+            <li>Le panneau Solaire alimente la batterie, par l'interm&eacute;diaire d'un contr&ocirc;leur (<b>indispensable</b>).</li>
+            <li>La batterie peut &ecirc;tre aliment&eacute;e aussi par un chargeur 12 V, lui-m&ecirc;me branch&eacute; sur le secteur (220 V)</li>
+            <li>
+                Le tableau de contr&ocirc;le est reli&eacute; &agrave; la batterie
+                <ul>
+                    <li>le <b>plus</b> passe par un coupe circuit.</li>
+                    <li>On verra comment mettre le <b>moins</b> &agrave; la masse si il y a lieu</li>
+                </ul>
+            </li>
+            <li>
+                Il y a un bouton pour les plafonniers
+                <ul>
+                    <li>Les plafonniers sont connect&eacute;s en parall&egrave;le</li>
+                </ul>
+            </li>
+            <li>
+                Il y a un bouton pour les prises allume-cigare
+                <ul>
+                    <li>Les prises allume-cigare sont connect&eacute;es en parall&egrave;le</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <h2>Fournitures</h2>
+    <div>
+        Voici des exemples des &eacute;l&eacute;ments n&eacute;cessaires. Ce ne sont que des exemples destin&eacute;s &agrave; illustrer les fournitures, &ccedil;a veut dire que la m&ecirc;me chose peut exister ailleurs, &agrave; diff&eacute;rents
+        prix, et de diff&eacute;rentes qualit&eacute;s.
+        <ul>
+            <li>
+                Connecteur Allume-cigare: 
+                <ul>
+                    <li><a href="https://www.carrefour.fr/p/prise-a-encastrer-d-allume-cigares-12v-24v-avec-bouchon-dans-blister-8719497083121?s=2676" target="_blank">https://www.carrefour.fr/p/prise-a-encastrer-d-allume-cigares-12v-24v-avec-bouchon-dans-blister-8719497083121?s=2676</a></li>
+                    <li><a href="https://www.amazon.fr/prise-allume-cigare-femelle/s?k=prise+allume+cigare+femelle" target="_blank">https://www.amazon.fr/prise-allume-cigare-femelle/s?k=prise+allume+cigare+femelle</a></li>
+                </ul>
+            </li>
+            <li>
+                Allume-cigare - USB
+                <ul>
+                    <li><a href="https://www.amazon.fr/chargeur-allume-cigare-usb/s?k=chargeur+allume+cigare+usb" target="_blank">https://www.amazon.fr/chargeur-allume-cigare-usb/s?k=chargeur+allume+cigare+usb</a></li>
+                </ul>
+            </li>
+            <li>
+                Plafonnier LED
+                <ul>
+                    <li><a href="https://www.amazon.fr/Bateau-Plafonnier-Caravane-%C3%89tanche-%C3%89clairage/dp/B0C153C6HY?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A2H8H7KEMYSX1U" target="_blank">https://www.amazon.fr/Bateau-Plafonnier-Caravane-%C3%89tanche-%C3%89clairage/dp/B0C153C6HY?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A2H8H7KEMYSX1U</a></li>
+                </ul>
+                Consommation ~2.4 W => 0.2 A en 12V
+            </li>
+            <li>
+                Power Supply laptop
+                <ul>
+                    <li><a href="https://www.amazon.com/KFD-Universal-Pavilion-VivoBook-ThinkPad/dp/B07TT2F95L/ref=sr_1_4?dib=eyJ2IjoiMSJ9.XqrLvRYXZmVW8NQPKFsqPqjtwFqYmLBVDXAq9EdNCSdUeCS4zZa1RbSx8P3RHxz_22VZJ6r_WmfrYvLVpbr6uF4kP1DUxwvh7Ww-Nk7SpJkTTlT4bLVj4OCJNAS-YpnXjj8JgthRb2Se5UZrnLY0XaxWV07geUVCkkJPtn9KJ2SXJ4ofHDK6Prac6zCm6i7S9LSM3qlRoCW4Oppbm0j3qTk8haCclx6ZGJ8_36auQ30.FimpNZ7GK5OlbtjLfHn89rEUQ9QMZSmEiq6j7TbzDsQ&dib_tag=se&keywords=12v+laptop+power+supply&qid=1725197371&sr=8-4" target="_blank">https://www.amazon.com/KFD-Universal-Pavilion-VivoBook-ThinkPad/dp/B07TT2F95L/ref=sr_1_4?dib=eyJ2IjoiMSJ9.XqrLvRYXZmVW8NQPKFsqPqjtwFqYmLBVDXAq9EdNCSdUeCS4zZa1RbSx8P3RHxz_22VZJ6r_WmfrYvLVpbr6uF4kP1DUxwvh7Ww-Nk7SpJkTTlT4bLVj4OCJNAS-YpnXjj8JgthRb2Se5UZrnLY0XaxWV07geUVCkkJPtn9KJ2SXJ4ofHDK6Prac6zCm6i7S9LSM3qlRoCW4Oppbm0j3qTk8haCclx6ZGJ8_36auQ30.FimpNZ7GK5OlbtjLfHn89rEUQ9QMZSmEiq6j7TbzDsQ&dib_tag=se&keywords=12v+laptop+power+supply&qid=1725197371&sr=8-4</a></li>
+                </ul>
+                Max consumption between 6 and 12 A. See <a href="https://www.eevblog.com/forum/beginners/calculating-power-needed-for-laptop-operating-off-a-12v-battery/">Here</a>.
+            </li>
+            <li>
+                Solar Panel Charge controller
+                <ul>
+                    <li><a href="https://www.amazon.com/Controller-Intelligent-Regulator-Paremeter-Adjustable/dp/B08NFSCZ4V?th=1" target="_blank">https://www.amazon.com/Controller-Intelligent-Regulator-Paremeter-Adjustable/dp/B08NFSCZ4V?th=1</a></li>
+                </ul>
+            </li>
+            <li>
+                Battery Charger
+                <ul>
+                    <li><a href="https://www.amazon.fr/Chargeur-Intelligent-Mainteneur-Automatique-R%C3%A9paration/dp/B09DTXCK9D?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A2GHWIAV28BZMN" target="_blank">https://www.amazon.fr/Chargeur-Intelligent-Mainteneur-Automatique-R%C3%A9paration/dp/B09DTXCK9D?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A2GHWIAV28BZMN</a></li>
+                    <li><a href="https://www.amazon.fr/Intelligent-enti%C3%A8rement-Automatique-mainteneur-Plomb-Acide/dp/B094VQ88X2?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A8744HCN6QQ72" target="_blank">https://www.amazon.fr/Intelligent-enti%C3%A8rement-Automatique-mainteneur-Plomb-Acide/dp/B094VQ88X2?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A8744HCN6QQ72</a></li>
+                </ul>
+            </li>
+            <li>
+                Tableau &Eacute;lectrique
+                <ul>
+                    <li><a href="https://www.navistore.fr/87-tableau-electrique-bateau-camping-car?srsltid=AfmBOoqNR0SHrdiSSErbK-loz-4mYRRyNAhcLKCUbCx3GwMF6oisXb6W" target="_blank">https://www.navistore.fr/87-tableau-electrique-bateau-camping-car?srsltid=AfmBOoqNR0SHrdiSSErbK-loz-4mYRRyNAhcLKCUbCx3GwMF6oisXb6W</a></li>
+                </ul>
+            </li>
+            <li>
+                Coupe circuit
+                <ul>
+                    <li><a href="https://www.eurolec.fr/accessoire-auto-12-24v/coupe-batterie/coupe-batterie-marine-300a-32v-ip67.html" target="_blank">https://www.eurolec.fr/accessoire-auto-12-24v/coupe-batterie/coupe-batterie-marine-300a-32v-ip67.html</a></li>
+                    <li><a href="https://www.leroymerlin.fr/produits/outillage/outillage-a-main/pince-et-tenaille/pince-a-denuder/coupe-circuit-12-24v-300a-88455682.html?Megaboost=&at_source=google&at_placement=3P" target="_blank">https://www.leroymerlin.fr/produits/outillage/outillage-a-main/pince-et-tenaille/pince-a-denuder/coupe-circuit-12-24v-300a-88455682.html?Megaboost=&at_source=google&at_placement=3P</a></li>
+                </ul>
+            </li>
+            <li>Masse ! </li>
+            <li>
+                Batterie, 60 AH
+                <ul>
+                    <li><a href="https://www.batteryset.com/batteries-camping-cars-caravanes/1715-batterie-varta-dual-purpose-efb-led60-12v-60ah-680a-4016987164426.html" target="_blank">https://www.batteryset.com/batteries-camping-cars-caravanes/1715-batterie-varta-dual-purpose-efb-led60-12v-60ah-680a-4016987164426.html</a></li>
+                </ul>
+            </li>
+            <li>Cable: 2.5 mm<sup><small>2</small></sup> et 6 mm<sup><small>2</small></sup>. 2 conducteurs.</li>
+            <li>
+                Boites de d&eacute;rivation
+                <ul>
+                    <li><a href="https://www.leroymerlin.fr/produits/electricite-et-domotique/fil-cable-et-gaine-electrique/boite-de-derivation/boite-de-derivation-etanche-ip65-ou-ip54-avec-passes-fils-coniques-dimensions-hxlxp-95x95x52-passe-fil-conique-7x-25-87512207.html?Megaboost=&at_source=google&at_placement=3P" target="_blank">https://www.leroymerlin.fr/produits/electricite-et-domotique/fil-cable-et-gaine-electrique/boite-de-derivation/boite-de-derivation-etanche-ip65-ou-ip54-avec-passes-fils-coniques-dimensions-hxlxp-95x95x52-passe-fil-conique-7x-25-87512207.html?Megaboost=&at_source=google&at_placement=3P</a></li>
+                </ul>
+                Voir avec la r&eacute;glementation en vigueur, s'il y a lieu.
+            </li>
+            <li>Dominos</li>
+        </ul>
+    </div>
+    <hr/>
+    <address>&copy; Hublow, 2024</address>
+</body>
+</html>
+
