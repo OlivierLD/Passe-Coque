@@ -232,7 +232,7 @@
 			Il est probable que l'affichage de ces donn&eacute;s sur la carte la surcharge inutilement...
 			<br/>
 			Par exemple&nbsp;:<br/>
-			<img src="./images/screenshot.13.png" title="Triangulation" class="slide"></img>
+			<img src="./images/screenshot.13.png" title="Triangulation" class="slide" style="width: 96%;"></img>
 		</div>
 	</p>
 	<p>
@@ -263,7 +263,7 @@
 				<li>X : 5 nm</li>
 				<li>Y : 0.5 nm</li>
 			</ul>
-			<div class="postit">
+			<div class="postit" style="width: 100%; overflow: auto;">
 				<h4>Note</h4>
 				On pourrait aussi proc&eacute;der d'une mani&egrave;re plus rigoureuse math&eacute;matiquement :
 				<ul>
@@ -332,13 +332,13 @@
 			cit&eacute;s ici, ce "cache", cet Objet, est une <code>HashMap&lt;String, Object&gt;</String></code>.<br/>
 			Pour l'affichage de ces donn&eacute;es dans une page Web, le client (la page web) &eacute;met, &agrave; intervalles r&eacute;guliers, une requ&ecirc;te &agrave; destination du server, en utilisant cette technologie qu'on appelle <b>REST</b>
 			(REpresentational State Transfer, ce qui ne veut strictement rien dire). Cette technologie est disponible &agrave; partir de bien des outils, comme par exemple la commande <code>curl</code> :<br/>
-			<pre style="font-family: 'Courier New', Courier, monospace;">
+			<pre style="font-family: 'Courier New', Courier, monospace; width: 100%; overflow: auto;">
  $ curl -X GET http://192.168.50.10:9999/mux/cache				
 			</pre>
 			Afin d'&ecirc;tre compatible avec les outils pr&eacute;sents sur le server, ainsi que sur le client, on utilise le format <code>JSON</code> (JavaScript Object Notation) pour
 			la r&eacute;ponse envoy&eacute;e au client par le server. Ceci est &eacute;galement le contenu obtenu par la commande <code>curl</code> mentionn&eacute;e ci-dessus.<br/>
 			En voici un court exemple (tronqu&eacute;) :
-			<pre class="postit" style="font-family: 'Courier New', Courier, monospace;">
+			<pre class="postit" style="font-family: 'Courier New', Courier, monospace; width: 100%; overflow: auto;">
 {
 	"Damping": 1,
 	"NMEA_AS_IS": {

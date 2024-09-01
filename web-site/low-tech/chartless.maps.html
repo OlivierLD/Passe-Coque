@@ -230,7 +230,7 @@
 			More details can be provided by other interfaces. 
 			Displaying those on the chart would probably uselessly overload it...
 			<br/>
-			For examp,e:<br/>
+			For example:<br/>
 			<img src="./images/screenshot.13.png" title="Triangulation" class="slide"></img>
 		</div>
 	</p>
@@ -262,7 +262,7 @@
 				<li>X : 5 nm</li>
 				<li>Y : 0.5 nm</li>
 			</ul>
-			<div class="postit">
+			<div class="postit" style="width: 100%; overflow: auto;">
 				<h4>Note</h4>
 				We could also use a mathematically more rigourous method:
 				<ul>
@@ -331,13 +331,13 @@
 			this "cache", this Object, is a <code>HashMap&lt;String, Object&gt;</String></code>.<br/>
 			To display those data in a web page, the client (the web page) is regularly emitting a request to the server, using this technology called <b>REST</b>
 			(REpresentational State Transfer, which obviously does not mean anything). This technology is available in many tools, like for example the <code>curl</code> command:<br/>
-			<pre style="font-family: 'Courier New', Courier, monospace;">
+			<pre style="font-family: 'Courier New', Courier, monospace; width: 100%; overflow: auto;">
  $ curl -X GET http://192.168.50.10:9999/mux/cache				
 			</pre>
 			In order to be compatible with the tools available on the server, and on the client, we use the format named <code>JSON</code> (JavaScript Object Notation) for
 			the message returned to the client by the server. The same is obtained by the command <code>curl</code> mentioned above.<br/>
 			Here is a short example (truncated):
-			<pre class="postit" style="font-family: 'Courier New', Courier, monospace;">
+			<pre class="postit" style="font-family: 'Courier New', Courier, monospace; width: 100%; overflow: auto;">
 {
 	"Damping": 1,
 	"NMEA_AS_IS": {
