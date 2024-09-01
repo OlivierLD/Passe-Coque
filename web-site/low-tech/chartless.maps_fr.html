@@ -32,11 +32,20 @@
 	overflow: auto;
 }
 
+.screen-shot {
+	width: 50%; 
+	text-align: center;
+}
+
 @media screen and (width <= 800px) {
     .slide {
 		max-width: 600px; 
 		max-height: 375px;
 		padding: 10px;
+	}
+	.screen-shot {
+		width: 90%; 
+		text-align: center;
 	}
 }
 
@@ -185,7 +194,7 @@
 				<li>Un server qui a acc&egrave;s aux donn&eacute;es du GPS, et qui h&eacute;berge un server HTTP</li>
 			</ul>
 			On peut d&eacute;velopper un composant (destin&eacute; &agrave; une page web) - fonctionnellement analogue &agrave; un canevas Mercator sur lequel on va pouvoir porter la position du bateau.
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.01.png" style="width: 100%;">
 			</div>
 			La carte donne la position du bateau, son cap, et le chemin r&eacute;cemment parcouru. Mais &ccedil;a reste sobre.<br/>
@@ -196,24 +205,24 @@
 		<div>
 			Avant de partir, on va se pr&eacute;parer un fichier - connu par le server (on donnera tous les d&eacute;tails plus loin), qui peut contenir la position
 			de diff&eacute;rentes marques, comme des balises, des caps et pointes..., afin de les afficher - comme on affiche le bateau, dont on connait la position aussi - sur la carte.
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.02.png" style="width: 100%;">
 			</div>
 			&Ccedil;a commence &agrave; avoir plus d'allure, on continue.<br/> 
 			Il est facile de calculer la distance et le rel&egrave;vement de toutes les marques qu'on a d&eacute;finies :
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.03.png" style="width: 100%;">
 			</div>
 			Et dans la m&ecirc;me veine, on peut aussi d&eacute;finir des "fronti&egrave;res", des lignes qui joignent des points d&eacute;finis comme pr&eacute;c&eacute;demment :
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.04.png" style="width: 100%;">
 			</div>
 			Toujours de la m&ecirc;me fa&ccedil;on, on peut aussi avoir des fichiers qui d&eacute;finissent les continents !
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.05.png" style="width: 100%;">
 			</div>
 			On parlait d'AIS (Automatic Identification System) aussi. Les "Cibles AIS" sont potentiellement trait&eacute;es de la m&ecirc;me fa&ccedil;on :
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.06.png" style="width: 100%;">
 			</div>
 			Et aussi - puisque c'est disponible (il "suffit" d'&eacute;crire le code qui le permet) - pour tous les &eacute;l&eacute;ments ci-dessus, on peut d&eacute;tecter les dangers de collision. Que ce soit avec les Cibles AIS, ou avec les fronti&egrave;res que <i>nous</i>

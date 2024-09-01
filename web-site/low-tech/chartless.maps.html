@@ -31,11 +31,20 @@
 	overflow: auto;
 }
 
+.screen-shot {
+	width: 50%; 
+	text-align: center;
+}
+
 @media screen and (width <= 800px) {
     .slide {
 		max-width: 600px; 
 		max-height: 375px;
 		padding: 10px;
+	}
+	.screen-shot {
+		width: 90%; 
+		text-align: center;
 	}
 }
 
@@ -184,7 +193,7 @@
 				<li>A server, accessing the GPS data, and hosting an HTTP server</li>
 			</ul>
 			We could develop a component (for a web page) - fonctionally analog to a Mercator cavas, on which we could plot the boat's position.
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.01.png" style="width: 100%;">
 			</div>
 			The chart gives the boat's position, its heading, and the track recently followed.<br/>
@@ -195,24 +204,24 @@
 		<div>
 			Before you leave, you prepare a file - known by the server (details coming), that can contain the positions of different markers
 			like becons, points..., so they can be displayed - just like the boat, using its position - on the chart.
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.02.png" style="width: 100%;">
 			</div>
 			It starts looking good, let's move on.<br/> 
 			It is easy to calculate distances and bearings for all those marks we've defined:
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.03.png" style="width: 100%;">
 			</div>
 			And along the same lines, we can also define "borders", lines joining marks defined like before:
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.04.png" style="width: 100%;">
 			</div>
 			Still the same way, you can have files defining continents!
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.05.png" style="width: 100%;">
 			</div>
 			We talked before about AIS (Automatic Identification System). AIS targets can be represented the same way:
-			<div style="width: 50%; text-align: center;">
+			<div class="screen-shot">
 				<img src="./images/chartless.06.png" style="width: 100%;">
 			</div>
 			And also - as it is available (we "just" need to write the code to implememnt it) - for all the elements above, we can detect collision threats. It can be with AIS targets, or with the borders <i>we</i>
