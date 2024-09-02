@@ -126,6 +126,14 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
       // alert(NO_DIALOG_MESSAGE);
       aboutDialog.style.display = 'inline';
     }
+    // Start counter, to close the dialog after a given time
+    const HOW_LONG = 5000;
+    window.setTimeout(() => { 
+        if (aboutDialog.close) {
+            aboutDialog.close();
+        }
+        aboutDialog.style.display = 'none';
+    }, HOW_LONG);
 };
 
 
