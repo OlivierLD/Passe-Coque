@@ -35,6 +35,11 @@ try {
     <link rel="stylesheet" href="../fonts/font.01.css">
     <link rel="stylesheet" href="../fonts/font.02.css">
     <link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
+    <style type="text/css">
+      * {
+        line-height: 1em;
+      }
+    </style>
   </head>
   <body>
     <!--h1>Espace Membres</h1-->

@@ -31,22 +31,11 @@ try {
     <link rel="stylesheet" href="../fonts/font.01.css">
     <link rel="stylesheet" href="../fonts/font.02.css">
     <link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
-    <!--style type="text/css">
+    <style type="text/css">
       * {
-        font-family: 'Courier New'
+        line-height: 1em;
       }
-
-      tr > td, th {
-        border: 1px solid silver;
-      }
-      h1 {
-        /* text-stroke: 2px orange; */ /* Might not be supported */
-        font-size: 3em;
-        color: black;
-        -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-        -webkit-text-stroke: 3px black;
-      }
-    </style-->
+    </style>
   </head>
   <body>
     <!--h1>Espace Membres</h1-->
