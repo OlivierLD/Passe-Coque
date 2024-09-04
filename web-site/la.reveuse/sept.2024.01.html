@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Retour de La R&ecirc;veuse</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../fonts/font.01.css">
+	<link rel="stylesheet" href="../fonts/font.02.css">
+	<link rel="stylesheet" href="../passe-coque.menu.css">
+	<link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+
+    <script type="text/javascript">
+        // Empty !
+    </script>    
+</head>
+<body>
+
+        <h2><a name="la-reveuse">29 ao&ucirc;t - 1<sup><small style="font-size: 0.75em;">er</small></sup> septembre. Convoyage de La R&ecirc;veuse de Carteret &agrave; La Trinit&eacute;</a></h2>
+        <div>
+            <div id="mapid-3" style="width: 1200px; height: 600px;"></div>
+        </div>
+
+    </div>
+
+    <hr/>
+
+    <div style="height: 150px;"><!-- Bottom padding ??? --></div>
+</body>
+
+<script>
+    let mapLaReveuse;
+    let boundsLaReveuse;
+
+    window.onload = () => { // Important: window.onload
+
+        let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+        let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+                    // 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+        const base_layer_3 = L.tileLayer(mbUrl, {
+            id: 'mapbox.streets', 
+            attribution: mbAttr
+        });
+        const tiles3 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            opacity: 0.5
+        });
+
+        const SAT_VIEW = true;
+
+        // La Reveuse Leaflet
+        if (true) {
+            mapLaReveuse = L.map('mapid-3');
+            if (SAT_VIEW) {
+                base_layer_3.addTo(mapLaReveuse);
+            }
+            tiles3.addTo(mapLaReveuse);
+
+            boundsLaReveuse = [[49.775333621792974, 0.08242606418207288], 
+                               [46.9589918678539, -5.745821006130428]];
+            // mapLaReveuse.fitBounds(boundsLaReveuse); // Not if chart is not visible !! See below for the fitBounds
+            // mapLaReveuse.setView([groixLat, groixLng], 15);
+
+            imgSrc = "./en.route.jpeg";
+            lat = 49.33690329941836, lng = -1.8127405652194288;
+            legend = "C'est parti !";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+
+            imgSrc = "./sud.glenan.jpeg";
+            lat = 47.69073706451475, lng = -3.997134268502123;
+            legend = "Sud Gl&eacute;nan";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+
+            imgSrc = "./un.voisin.jpeg";
+            lat = 47.6414874376265, lng = -3.785473109164741;
+            legend = "Un voisin";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+
+            imgSrc = "./birvideaux.devant.jpeg";
+            lat = 47.57667776949616, lng = -3.4551966199069293;
+            legend = "Vers les Birvideaux";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+
+            imgSrc = "./alain.06.jpeg";
+            lat = 49.37338502519603, lng = -1.788625493700238;
+            legend = "Sortie de Carteret";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+                    
+            imgSrc = "./alain.07.jpeg";
+            lat = 49.370786226766, lng = -1.7891404778310973;
+            legend = "Sortie de Carteret";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+
+            imgSrc = "./alain.05.jpeg";
+            lat = 49.36595153729614, lng = -1.7887542397329528;
+            legend = "Sorti de Carteret !";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+            
+            imgSrc = "./alain.08.jpeg";
+            lat = 49.15775513535608, lng = -2.860558034735732;
+            legend = "En route";
+            L.marker([lat, lng])
+                    .addTo(mapLaReveuse)
+                    .bindPopup(`<b>${legend}</b><br/><small>Click to enlarge</small><br/><a href="${imgSrc}" target="new"><img src='${imgSrc}' width='200' title='Click to enlarge'></a>`)
+                    .bindTooltip(`${legend}`);
+                    
+            // Le trajet
+            let latlngs = [
+                [49.36813969131909, -1.7869931463792454],
+                [49.32033874670732, -2.285141948377714],
+                [48.579616769190395, -4.790010459255428],
+                [48.509624981770415, -4.829857351141984],
+                [48.41674067442947, -4.827110769110732],
+                [48.31455423064748, -4.810631276923233],
+                [48.03645841238576, -4.7707986866589644],
+                [47.99420107262182, -4.7295999561902144],
+                [47.76762816555967, -4.378037456190214],
+                [47.67524200919226, -3.990769389783964],
+                [47.45254542120988,  -3.1297284369065896],
+                [47.45080512206791,  -3.0444999040264524],
+                [47.454751740266325, -3.037118464817468],
+                [47.56614036085657, -3.009394705513842],
+                [47.58814278438262, -3.0238142611779044]
+            ];
+
+            let polyline = L.polyline(latlngs, {color: 'cyan'}).addTo(mapLaReveuse);
+
+            // zoom the map to the polyline
+            mapLaReveuse.fitBounds(polyline.getBounds());
+        }
+    };
+</script>
+</html>
