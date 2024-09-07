@@ -238,7 +238,9 @@ let clack = (origin) => {
 	// } else if (originId === "32" || originId === "33") {
     //    contentName = `31_${currentLang}.html`; // 31, 32 & 33, same doc, different anchor (hashtag).
     } else if (originId === "67") {
-        contentName = `/7_${currentLang}.html`;
+        contentName = `/7_${currentLang}.html`; // Bypass regular behavior...
+    } else if (originId === "68") {
+        // Fill out agenda content
     }
 	let contentPlaceHolder = document.getElementById("current-content");
     
@@ -317,6 +319,10 @@ let clack = (origin) => {
                                 } else if (originId === "62") {
                                     window.setTimeout(() => {
                                         fillOutActu(null); // Populate default (full) news list
+                                    }, 500);
+                                } else if (originId === "68") {
+                                    window.setTimeout(() => {
+                                        fillOutNextEvents(null);
                                     }, 500);
                                 } else if (originId === "33") { // Partager, PCC
                                     window.setTimeout(() => {
@@ -2253,6 +2259,24 @@ let fillOutActu = filter => {
     }
 
 };
+
+let fillOutNextEvents = () => {
+    console.log("Ah!!");
+    // let container = document.getElementById('next-events-container');
+    let ne = generateNextEvents(); 
+    let list = document.getElementById('next-event-list');
+    // Remove all childs
+    while (list.firstChild) {
+        list.removeChild(list.lastChild);
+    }
+    console.log(`There are ${ne.length} lines...`);
+    // Add new ones
+    ne.forEach(event => {
+        let li = document.createElement('li');
+        li.innerHTML = event;
+        list.appendChild(li);
+    });
+}
 
 // Dynamic translation, for the actu section.
 // We assume all data are already in French.
