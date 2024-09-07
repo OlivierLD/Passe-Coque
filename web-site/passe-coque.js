@@ -29,12 +29,13 @@ let closeAboutDialog = () => {
 };
 
 let generateNextEvents = () => {
-    const HOW_FAR = 2;
+    const HOW_FAR = 4; // 2;
     let now = new Date();
     let firstIdx;
     // Find first date index
     for (let idx=0; idx<NEXT_EVENTS.length; idx++) {
-        let d = new Date(NEXT_EVENTS[idx].date);
+        let d = new Date(NEXT_EVENTS[idx].date_to);
+        d.setDate(d.getDate() + 1); // Add one day (all day) to the end date.
         if (d.getTime() > now.getTime()) {
             firstIdx = idx;
             break;
@@ -1856,25 +1857,43 @@ const INFO_SECTION = [
 
 const NEXT_EVENTS = [
     {
-        date: '2024-05-01',
+        date_from: '2024-05-01',
+        date_to: '2024-05-01',
         content: { 
             fr: '1<sup>er</sup>Mai.',
             en: 'May 1st, 2024.'
         }
     }, {
-        date: '2024-09-07',
+        date_from: '2024-09-07',
+        date_to: '2024-09-07',
         content: {
             fr: 'le 7 septembre 2024 : Journ&eacute;e des associations &agrave; Saint Philibert, salle du Mousker.',
             en: 'September 7, 2024: Associations day, in Saint Philibert, salle du Mousker.'
         }
     }, {
-        date: '2024-09-24',
+        date_from: '2024-09-24',
+        date_to: '2024-09-24',
         content: {
             fr: 'le 24 septembre 2024 : <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> &agrave; St Brieuc',
             en: 'September 24, 2024: <a href="https://gcft.fr/events/nautik-deiz-a-saint-brieuc/" target="_blank">Nautik Diez</a> in St Brieuc'
         }
     }, {
-        date: '2024-12-25',
+        date_from: '2024-09-25',
+        date_to: '2024-09-26',
+        content: {
+            fr: '25 &amp; 26 septembre 2024 : <a href="https://www.seisme.org/forum-seisme/" target="_blank">Forum S&eacute;isme</a> &agrave; Rennes',
+            en: 'september 25 &amp; 26, 2024 : <a href="https://www.seisme.org/forum-seisme/" target="_blank">Forum S&eacute;isme</a> in Rennes'
+        }
+    }, {
+        date_from: '2024-10-01',
+        date_to: '2024-10-06',
+        content: {
+            fr: 'du 1er au 6 octobre 2024 : Passe-Coque est au <a href="https://grand-pavois.com/en/homepage/" target="_blank">Grand Pavois</a> &agrave; La Rochelle',
+            en: 'October 1 to 6, 2024: Passe-Coque will be at the <a href="https://grand-pavois.com/en/homepage/" target="_blank">Grand Pavois</a> in La Rochelle'
+        }
+    }, {
+        date_from: '2024-12-25',
+        date_to: '2024-12-25',
         content: {
             fr: 'No&euml;l.',
             en: 'XMas.'
