@@ -65,6 +65,7 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
     }
 
     let contentName = `${content}_${currentLang}.html`; // Like 'tx-01_FR.html'
+    let howManyLines = 0;
     fetch(contentName)
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
             console.log(`Data Response: ${response.status} - ${response.statusText}`);
@@ -82,6 +83,8 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
                     while (list.firstChild) {
                         list.removeChild(list.lastChild);
                     }
+                    howManyLines = ne.length;
+                    console.log(`There are ${ne.length} lines...`);
                     // Add new ones
                     ne.forEach(event => {
 						let li = document.createElement('li');
@@ -128,13 +131,16 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
       aboutDialog.style.display = 'inline';
     }
     // Start counter, to close the dialog after a given time
-    const HOW_LONG = 5000;
+    const HOW_LONG = 10000;
+
+    let timeout = HOW_LONG + (howManyLines > 2 ? ((howManyLines - 2) * 1000) : 0); // TODO howManyLines is set asynchronously...
+    console.log(`Timeout: ${timeout} ms`);
     window.setTimeout(() => { 
         if (aboutDialog.close) {
             aboutDialog.close();
         }
         aboutDialog.style.display = 'none';
-    }, HOW_LONG);
+    }, timeout);
 };
 
 
@@ -373,6 +379,7 @@ let updateMenu = () => { // Multilang aspect.
 	document.querySelectorAll("#_65").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Partenaires" : "Partners"));
 	// document.querySelectorAll("#_66").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Charte PCC" : "PCC Chart"));
 	document.querySelectorAll("#_67").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+	document.querySelectorAll("#_68").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Vie de l'asso" : "Life of the asso"));
 	// document.querySelectorAll("#_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 	document.querySelectorAll("#ms_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 };
