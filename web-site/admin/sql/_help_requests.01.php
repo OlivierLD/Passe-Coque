@@ -125,8 +125,10 @@ if (false) {
 }
 
 if ($option != null) {
+
+    echo("Option: " . $option . "<br/>" . PHP_EOL);
     // Create a request
-    echo("<h2>Create a request</h2>") . PHP_EOL;
+    echo("<h2>" . (($lang == 'FR') ? "Cr&eacute;&eacute;r une requ&ecirc;te" : "Create a request") . "</h2>" . PHP_EOL);
     echo("Coming..." . PHP_EOL);
 
 } else if ($operation == 'list') {
@@ -169,28 +171,115 @@ if ($option != null) {
         if (count($memberArray) > 0) {
             $ownerName = $memberArray[0]->firstName . ' ' . $memberArray[0]->lastName;
         }
-        $resData = (($lang == 'FR') ? "De " : "By ") . $ownerName . 
+        $reqData = (($lang == 'FR') ? "De " : "By ") . $ownerName . 
                 (($lang == 'FR') ? " sur " : " on ") . getBoatName($dbhost, $username, $password, $database, $request->boat, $VERBOSE);
         if ($request->to == null) {
-            $resData .=  (($lang == 'FR') ? ", le " : ", on ") . $request->from;
+            $reqData .=  (($lang == 'FR') ? ", le " : ", on ") . $request->from;
         } else {
-            $resData .=  (($lang == 'FR') ? ", de " : ", from ") . $request->from . 
+            $reqData .=  (($lang == 'FR') ? ", de " : ", from ") . $request->from . 
                         (($lang == 'FR') ? ", &agrave; " : ", to ") . $request->to;
         }
-        $resData .= /*", type " . $request->type . */ ", " . $request->comment .
+        $reqData .= /*", type " . $request->type . */ ", " . $request->comment .
                 "<form action='" . basename(__FILE__) . "' method='post'>" .
                 "<input type='hidden' name='operation' value='reply'>" .
                 "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
                 "<input type='submit' value='" . (($lang == 'FR') ? "Je viens !" : "I'm coming!") . "'>" .
                 "</form>";
-        echo $resData;
+        echo $reqData;
         echo("</li>" . PHP_EOL);
     }
     echo ("</ul>" . PHP_EOL);
 
     echo("<hr/>" . PHP_EOL);
 } else if ($operation == 'reply') {
-    echo ("Managing request #" . $_POST['idx'] . "<br/>Coming !!" . PHP_EOL);
+    echo ("Managing request #" . $_POST['idx'] . "<br/>" . PHP_EOL);
+    if ($lang == 'FR') {
+        echo("Pour r&eacute;pondre &agrave; cette requ&ecirc;te, identifiez-vous au pr&eacute;alable, avec votre email");
+    } else {
+        echo("To answer this request, please identify yourself with your email");
+    }
+
+    $reqData = "";
+
+    $reqData .= "<form action='" . basename(__FILE__) . "' method='post'>" .
+                "<input type='hidden' name='operation' value='valid-email'>" .
+                "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
+                (($lang == 'FR') ? "Votre email :" : "Your email:") .
+                "<input type='email' name='user-email' placeholder='email'>" .
+                "<input type='submit' value='OK'>" .
+                "</form>";
+    
+    echo $reqData;
+} else if ($operation == 'valid-email') {
+    $userEmail = $_POST['user-email'];
+    if ($VERBOSE) {
+        echo("Email validation for " . $userEmail . "<br/>" . PHP_EOL);
+    }
+
+    $memberStatus = checkMemberShip($dbhost, $username, $password, $database, $userEmail, $VERBOSE);
+
+    if ($VERBOSE) {
+        echo("Member status for " . $userEmail . "<br/>");
+        echo("Status: " . $memberStatus->status . "<br/>");
+        echo("ErrNo: " . $memberStatus->errNo . "<br/>"); // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club
+        echo("ErrMess: " . $memberStatus->errMess . "<br/>");
+    }
+
+    if ($memberStatus->errNo == 1) { // Not Passe-Coque
+        if ($lang == 'FR') {
+            $txt = "Il semble que vous ne soyiez pas encore un membre de l'association...<br/>" .
+                   "Cliquez <a href='/?lang=FR&nav-to=51' target='_blank'>ici</a> pour y adh&eacute;rer !";
+        } else {
+            $txt = "It seems that you're not yet a member of the association...<br/>" .
+                   "Click <a href='/?lang=EN&nav-to=51' target='_blank'>here</a> to join!";
+        }
+        echo($txt);
+    } else {
+        // Membership OK, moving on
+        $memberArray = getMember($dbhost, $username, $password, $database, $userEmail, $VERBOSE);
+        $ownerName = 'Unknown';
+        if (count($memberArray) > 0) {
+            $ownerName = $memberArray[0]->firstName . ' ' . $memberArray[0]->lastName;
+        }
+        // Get request details (referent email, dates, etc)
+
+        $htmlContent = "";
+        if ($lang == 'FR') {
+            $htmlContent = "Bonjour " . $ownerName . "<br/>" .
+                           "Votre r&eacute;ponse va &ecirc;tre transime par email au r&eacute;f&eacute;rent du bateau qui vous re-contactera pour confirmation.<br/>" .
+                           "Vous pouvez ajouter un commentaire &agrave; cet email :<br/>" .
+                           "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
+                           "<input type='hidden' name='idx' value='" . $_POST['idx'] . "'>" .
+                           "<input type='hidden' name='operation' value='send-email'>" .
+                           "<input type='hidden' name='user-email' value='" . $userEmail . "'>" .
+                           "<textarea rows='4' cols='50' name='comment' form='email-sender' placeholder='Vos commentaires...'></textarea><br/>" .
+                           "Cliquer OK pour envoyer votre r&eacute;ponse " .
+                           "<input type='submit' value='OK'>" .
+                           "</form>";
+        } else {
+            $htmlContent = "Hi " . $ownerName . "<br/>" .
+                           "Your reply will be transmitted to the boat's referent by email, who will reach out to you for confirmation.<br/>" .
+                           "You can add a comment to this email :<br/>" .
+                           "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
+                           "<input type='hidden' name='idx' value='" . $_POST['idx'] . "'>" .
+                           "<input type='hidden' name='operation' value='send-email'>" .
+                           "<input type='hidden' name='user-email' value='" . $userEmail . "'>" .
+                           "<textarea rows='4' cols='50' name='comment' form='email-sender' placeholder='Vos commentaires...'></textarea><br/>" .
+                           "Click OK to send your reply " .
+                           "<input type='submit' value='OK'>" .
+                           "</form>";
+        }
+        echo($htmlContent);
+    }
+    echo("<hr/>" . PHP_EOL);
+} else if ($operation == 'send-email') {
+    $requestId = $_POSRT['idx'];
+    $userEmail = $_POSRT['user-email'];
+    $userInput = $_POST['comment'];
+
+    echo("Will send email from " . $userEmail . "<br/>" . PHP_EOL);
+    echo("Request ID " . $requestId . "<br/>" . PHP_EOL);
+    echo("User Message " . $userInput . "<br/>" . PHP_EOL);
 
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);

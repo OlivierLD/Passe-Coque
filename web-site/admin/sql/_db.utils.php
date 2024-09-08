@@ -17,6 +17,7 @@ class Member {
     public $firstName;
     public $lastName;
     public $telephone;
+    public $status;
 }
   
 function getBoats(string $dbhost, string $username, string $password, string $database, bool $verbose): array {
@@ -171,7 +172,7 @@ function getMembers(string $dbhost, string $username, string $password, string $
                 echo("[Connected.] ");
             }
         }
-        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE FROM PASSE_COQUE_MEMBERS;";
+        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF FROM PASSE_COQUE_MEMBERS;";
         if ($verbose) {
             echo('[Performing instruction ['.$sql.']] ');
         }
@@ -189,6 +190,7 @@ function getMembers(string $dbhost, string $username, string $password, string $
             $members[$memberIndex]->firstName = urldecode($table[1]);
             $members[$memberIndex]->lastName = urldecode($table[2]);
             $members[$memberIndex]->telephone = $table[3];
+            $members[$memberIndex]->status = $table[4];
             $memberIndex++;
         }
         // On ferme !
@@ -218,7 +220,7 @@ function getMember(string $dbhost, string $username, string $password, string $d
                 echo("[Connected.] ");
             }
         }
-        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$email';";
+        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$email';";
         if ($verbose) {
             echo('[Performing instruction ['.$sql.']] ');
         }
@@ -236,6 +238,7 @@ function getMember(string $dbhost, string $username, string $password, string $d
             $members[$memberIndex]->firstName = urldecode($table[1]);
             $members[$memberIndex]->lastName = urldecode($table[2]);
             $members[$memberIndex]->telephone = $table[3];
+            $members[$memberIndex]->status = $table[4];
             $memberIndex++;
         }
         // On ferme !
