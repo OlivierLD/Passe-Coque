@@ -68,6 +68,48 @@ function getBoats(string $dbhost, string $username, string $password, string $da
     return null;
 }
   
+function getBoatName(string $dbhost, string $username, string $password, string $database, string $boatId, bool $verbose): string {
+    try {
+        $link = new mysqli($dbhost, $username, $password, $database);
+        
+        if ($link->connect_errno) {
+            echo("[Oops, errno:".$link->connect_errno."...] ");
+            // die("Connection failed: " . $conn->connect_error);
+            throw $conn->connect_error;
+        } else {
+            if ($verbose) {
+                echo("[Connected.] ");
+            }
+        }
+        $sql = "SELECT BOAT_NAME FROM THE_FLEET WHERE ID = '" . $boatId . "';";
+        if ($verbose) {
+            echo('[Performing instruction ['.$sql.']] ');
+        }
+        
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+  
+        $boatName = 'Not found';
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $boatName = $table[0];
+        }
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("[Closed DB] ".PHP_EOL);
+            echo "Finally, returning $boats";
+        }
+        return $boatName;
+  
+    } catch (Throwable $e) {
+        echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
+        throw $e;
+    }                
+    return null;
+}
+
 function getBoatsJSON(string $dbhost, string $username, string $password, string $database, bool $verbose): string {
     try {
         $link = new mysqli($dbhost, $username, $password, $database);
@@ -616,6 +658,72 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
     }
     return $memberStatus;
 }
+
+class HelpRequest {
+    public $idx;
+    public $owner;
+    public $boat;
+    public $created;
+    public $from;
+    public $to;
+    public $type;
+    public $comment;
+}
+
+function getHelpRequests(string $dbhost, string $username, string $password, string $database, string $helpType, bool $verbose) : array {
+    $sql =  "SELECT IDX, ORIGIN_EMAIL, BOAT_ID, DATE_FORMAT(CREATION_DATE, '%Y-%m-%d'), DATE_FORMAT(FROM_DATE, '%Y-%m-%d'), DATE_FORMAT(TO_DATE, '%Y-%m-%d'), HELP_TYPE, MISC_COMMENT FROM HELP_REQUESTS " .
+            "WHERE HELP_TYPE = '" . $helpType . "' " .
+            // TODO START_DATE > now
+            "ORDER BY FROM_DATE;";
+    $requests = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $requests[$index] = new HelpRequest();
+            $requests[$index]->idx = $table[0];
+            $requests[$index]->owner = $table[1];
+            $requests[$index]->boat = $table[2];
+            $requests[$index]->created = $table[3];
+            $requests[$index]->from = $table[4];
+            $requests[$index]->to = $table[5];
+            $requests[$index]->type = $table[6];
+            $requests[$index]->comment = $table[7];
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $requests;
+}
+
 
 // For INSERT, DELETE, UPDATE
 function executeSQL(string $dbhost, string $username, string $password, string $database, string $sql, bool $verbose) : void {
