@@ -149,6 +149,7 @@ if ($current_lang == "FR") {
       En tant que r&eacute;f&eacute;rent d'un bateau, vous pouvez :
       <ul>
         <li><a href="../admin/sql/_reservations.01.php" target="admin">G&eacute;rer les r&eacute;servations</a></li>
+        <li><a href="../admin/sql/_help_requests.01.php?option=request" target="admin">Demander de l'aide (convoyages, bricolages, ...)</a></li>
       </ul>
       <?php
     }

@@ -98,6 +98,12 @@ if (isset($_POST['operation'])) {
     $operation = $_POST['operation'];
 }
 
+$option = null;
+if (isset($_GET['option'])) {
+    $option = $_GET['option'];
+}
+
+
 // echo ("This month (" . $currentYear . " - " . $MONTHS[$currentMonth - 1] . ") we have " . getNbDays($currentYear, $currentMonth) . " days.<br/>");
 
 if (false) {
@@ -118,7 +124,12 @@ if (false) {
     echo ("In $year, $month, there were " . getNbDays($year, $month) . " days.<br/>");
 }
 
-if ($operation == 'list') {
+if ($option != null) {
+    // Create a request
+    echo("<h2>Create a request</h2>") . PHP_EOL;
+    echo("Coming..." . PHP_EOL);
+
+} else if ($operation == 'list') {
     // echo ("<h2>Requests Planning for " . $MONTHS[$currentMonth - 1] . " " . $currentYear . " (3 months)</h2>");
 
     $requestsArray = getHelpRequests($dbhost, $username, $password, $database, $helpType, $VERBOSE);     
