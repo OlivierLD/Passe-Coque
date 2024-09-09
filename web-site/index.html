@@ -109,7 +109,7 @@
 			</div>
 		</div>
 		<div style="/*margin-left: -50px; float: right;*/ margin-right: 20px;">  <!-- Touchy ! (Tablets, etc) -->
-			<ul id="navigation" style="display: grid; grid-template-columns: auto auto auto auto auto auto auto 80px; width: fit-content;"> <!-- Columns must match the menu below... -->
+			<ul id="navigation" style="display: grid; grid-template-columns: auto auto auto auto auto auto auto 80px 80px; width: fit-content;"> <!-- Columns must match the menu below... -->
 				<li>
 					<a href="javascript:void(0)" onclick="clack(this);" id="_1"><span id="home-label">Accueil</span></a>
 					<!--ul>
@@ -182,6 +182,12 @@
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 					</svg></a>
 				</li>
+				<li style="display: flex; align-items: center;">
+					<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this); closeNav();" id="_8" title="Boutique&#13;Shop">
+						<img src="./images/shop.png" style="width: 24px;"><!--span id="_8">La boutique</span-->
+					</a>
+				</li>
+
 				<li><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>
 			</ul>
 		</div>
@@ -276,6 +282,10 @@
 				<svg style="margin: 0 0 -5px 0;" class="" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 				</svg><span id="ms_7">Espace Membres</span></a>
+			</div>
+			<div>
+				<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this); closeNav();" id="_8" title="Boutique&#13;Shop">
+				<img src="./images/shop.png" style="width: 24px;"><span id="bs_8">La boutique</span></a>
 			</div>
 
 		</div>

@@ -73,7 +73,7 @@ require __DIR__ . "/../../php/db.cred.php";
 require __DIR__ . "/_db.utils.php";
 require __DIR__ . "/_emails.utils.php";
 
-$VERBOSE = false;
+$VERBOSE = false; // Change at will
 
 $MONTHS = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 

@@ -241,6 +241,8 @@ let clack = (origin) => {
         contentName = `/7_${currentLang}.html`; // Bypass regular behavior...
     } else if (originId === "68") {
         // Fill out agenda content
+    } else if (originId === "8") {
+        contentName = `/64_${currentLang}.html`; // Bypass regular behavior...
     }
 	let contentPlaceHolder = document.getElementById("current-content");
     
@@ -388,6 +390,7 @@ let updateMenu = () => { // Multilang aspect.
 	document.querySelectorAll("#_68").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Vie de l'asso" : "Life of the asso"));
 	// document.querySelectorAll("#_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 	document.querySelectorAll("#ms_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
+	document.querySelectorAll("#bs_8").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "La boutique" : "The shop"));
 };
 
 let switchLanguage = () => {
