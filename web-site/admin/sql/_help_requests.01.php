@@ -18,7 +18,9 @@ try {
 <html lang="en">
   <!--
    ! WiP.
-   ! Help requests list - 3 month. (see the $span variable)
+   ! - Help requests list - 3 month. (see the $span variable)
+   ! - Post a request
+   ! - Reply to a request
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -125,11 +127,16 @@ if (false) {
 }
 
 if ($option != null) {
-
+    // Create a request ?
     echo("Option: " . $option . "<br/>" . PHP_EOL);
     // Create a request
-    echo("<h2>" . (($lang == 'FR') ? "Cr&eacute;&eacute;r une requ&ecirc;te" : "Create a request") . "</h2>" . PHP_EOL);
+    echo("<h2>" . (($lang == 'FR') ? "Cr&eacute;er une requ&ecirc;te" : "Create a request") . "</h2>" . PHP_EOL);
     echo("Coming..." . PHP_EOL);
+
+    // From user (referent), boat, from-date, to-date, type, comment.
+    // $userId = $_SESSION['USER_NAME'];
+    // Creating entry for $userId
+    echo("Creating entry for $userId");
 
 } else if ($operation == 'list') {
     // echo ("<h2>Requests Planning for " . $MONTHS[$currentMonth - 1] . " " . $currentYear . " (3 months)</h2>");
@@ -280,6 +287,8 @@ if ($option != null) {
     echo("Will send email from " . $userEmail . "<br/>" . PHP_EOL);
     echo("Request ID " . $requestId . "<br/>" . PHP_EOL);
     echo("User Message " . $userInput . "<br/>" . PHP_EOL);
+
+    // TODO Send the email to the referent
 
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
