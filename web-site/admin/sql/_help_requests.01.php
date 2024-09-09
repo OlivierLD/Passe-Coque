@@ -89,7 +89,7 @@ $adminPriv = false;
 if (isset($_SESSION['ADMIN'])) {
     $adminPriv = $_SESSION['ADMIN'];
 }
-echo("Admin privileges: " . ($adminPriv ? "yes" : "no") . "<br/>");
+// echo("Admin privileges: " . ($adminPriv ? "yes" : "no") . "<br/>");
 $userId = '';
 if (isset($_SESSION['USER_NAME'])) {
     $userId = $_SESSION['USER_NAME'];
@@ -304,6 +304,7 @@ if ($option != null) {
                 "<form action='" . basename(__FILE__) . "' method='post'>" .
                 "<input type='hidden' name='operation' value='reply'>" .
                 "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
+                "<input type='hidden' name='type' value='" . $helpType . "'>" .
                 "<input type='submit' value='" . (($lang == 'FR') ? "Je viens !" : "I'm coming!") . "'>" .
                 "</form>";
         echo $reqData;
@@ -314,6 +315,7 @@ if ($option != null) {
     echo("<hr/>" . PHP_EOL);
 } else if ($operation == 'reply') {
     $reqIdx = $_POST['idx'];
+    $helpType = $_POST['type'];
     echo ("Managing request #" . $reqIdx . "<br/>" . PHP_EOL);
     if ($lang == 'FR') {
         echo("Pour r&eacute;pondre &agrave; cette requ&ecirc;te, identifiez-vous au pr&eacute;alable, avec votre email");
@@ -326,9 +328,10 @@ if ($option != null) {
     $reqData .= "<form action='" . basename(__FILE__) . "' method='post'>" .
                 "<input type='hidden' name='operation' value='valid-email'>" .
                 "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
+                "<input type='hidden' name='type' value='" . $helpType . "'>" .
                 (($lang == 'FR') ? "Votre email :" : "Your email:") .
                 "<input type='email' name='user-email' placeholder='email' size='40'>" .
-                "<input type='submit' value='OK'>" .
+                "<input type='submit' value='OK' style='margin: 5px;'>" .
                 "</form>";
     
     echo $reqData;
@@ -357,6 +360,7 @@ if ($option != null) {
         }
         echo($txt);
     } else {
+        $helpType = $_POST['type'];
         // Membership OK, moving on
         $memberArray = getMember($dbhost, $username, $password, $database, $userEmail, $VERBOSE);
         $memberName = 'Unknown';
@@ -373,11 +377,12 @@ if ($option != null) {
                            "Vous pouvez ajouter un commentaire &agrave; cet email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
                            "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
+                           "<input type='hidden' name='type' value='" . $helpType . "'>" .
                            "<input type='hidden' name='operation' value='send-email'>" .
                            "<input type='hidden' name='user-email' value='" . $userEmail . "'>" .
                            "<textarea rows='4' cols='50' name='comment' form='email-sender' placeholder='Vos commentaires...'></textarea><br/>" .
                            "Cliquer OK pour envoyer votre r&eacute;ponse " .
-                           "<input type='submit' value='OK'>" .
+                           "<input type='submit' value='OK' style='margin: 5px;'>" .
                            "</form>";
         } else {
             $htmlContent = "Hi " . $memberName . "<br/>" .
@@ -385,11 +390,12 @@ if ($option != null) {
                            "You can add a comment to this email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
                            "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
+                           "<input type='hidden' name='type' value='" . $helpType . "'>" .
                            "<input type='hidden' name='operation' value='send-email'>" .
                            "<input type='hidden' name='user-email' value='" . $userEmail . "'>" .
                            "<textarea rows='4' cols='50' name='comment' form='email-sender' placeholder='Vos commentaires...'></textarea><br/>" .
                            "Click OK to send your reply " .
-                           "<input type='submit' value='OK'>" .
+                           "<input type='submit' value='OK' style='margin: 5px;'>" .
                            "</form>";
         }
         echo($htmlContent);
@@ -399,6 +405,7 @@ if ($option != null) {
     $requestId = $_POST['idx'];
     $userEmail = $_POST['user-email'];
     $userInput = $_POST['comment'];
+    $helpType = $_POST['type'];
 
     echo("Will send email from " . $userEmail . "<br/>" . PHP_EOL);
     echo("Request ID " . $requestId . "<br/>" . PHP_EOL);
@@ -432,6 +439,7 @@ if ($option != null) {
               $lang, 
               false, 
               $VERBOSE);
+    echo("<a href='" . basename(__FILE__) . "?lang=" . $lang . "&type=" . $helpType . "'>" . ($lang == 'FR' ? "Retour" : "Back") . "</a>");
 
 } else if ($operation == 'create-request') {
     $fromEmail = $_POST['origin-email'];
