@@ -43,6 +43,26 @@ try {
       }
     </style>
   </head>
+
+  <script type="text/javascript">
+    const validateForm = () => {
+        document.getElementById("submit-message").innerHTML = ''; // Clear
+
+        let dateFrom = new Date(document.getElementById('from-date').value);
+        let dateTo = new Date(document.getElementById('to-date').value);
+        
+        console.log(`Validation requested for ${dateFrom} and ${dateTo}`);
+        if (dateTo < dateFrom) {
+            let message = `Mauvaise chronologie, ${dateTo} est anterieur a ${dateFom}`;
+            document.getElementById("submit-message").innerHTML = message;
+            // console.log(message);
+            // alert(message);
+            return false;
+        }
+        // return (dateFrom <= dateTo);
+    };
+  </script>    
+
   <body>
     <!--h1>PHP / MySQL. Help Request Planning</h1-->
 
@@ -127,16 +147,110 @@ if (false) {
 }
 
 if ($option != null) {
-    // Create a request ?
-    echo("Option: " . $option . "<br/>" . PHP_EOL);
-    // Create a request
-    echo("<h2>" . (($lang == 'FR') ? "Cr&eacute;er une requ&ecirc;te" : "Create a request") . "</h2>" . PHP_EOL);
-    echo("Coming..." . PHP_EOL);
+    if ($option == 'request') {
+        // Create a request ?
+        echo("Option: " . $option . "<br/>" . PHP_EOL);
+        // Create a request
+        echo("<h2>" . (($lang == 'FR') ? "Cr&eacute;er une requ&ecirc;te" : "Create a request") . "</h2>" . PHP_EOL);
+        // echo("Coming..." . PHP_EOL);
 
-    // From user (referent), boat, from-date, to-date, type, comment.
-    // $userId = $_SESSION['USER_NAME'];
-    // Creating entry for $userId
-    echo("Creating entry for $userId");
+        // From user (referent), boat, from-date, to-date, type, comment.
+        // $userId = $_SESSION['USER_NAME'];
+        // Creating entry for $userId
+        echo("Creating entry for $userId");
+        $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, $VERBOSE);
+
+        echo ("<ul>" . PHP_EOL);
+        foreach($boats as $boat) {
+            echo("<li>$boat[0], $boat[1], $boat[2]</li>" . PHP_EOL);
+        }
+        echo ("</ul>" . PHP_EOL);
+
+    ?>
+
+<form action="<?php echo basename(__FILE__); ?>"  onsubmit="return validateForm();" method="post">
+    <input type="hidden" name="operation" value="create-request">
+    <input type="hidden" name="origin-email" value="<?php echo($userId); ?>">
+    <table>
+        <tr>
+            <td><?php echo(($lang != 'FR') ? "The boat" : "Le bateau"); ?></td>
+            <td>
+                <select name="boat-id">
+                    <?php
+                    foreach($boats as $boat) {
+                        if ($lang != 'FR') {
+                            echo ("<option value='" . $boat[0] ."'> \"" . $boat[1] . "\", " . "(" . $boat[2] . ")" . "</option>" . PHP_EOL);
+                        } else {
+                            echo ("<option value='" . $boat[0] ."'> \"" . $boat[1] . "\", " . "("  . $boat[2] . ")" . "</option>" . PHP_EOL);
+                        }
+                    }
+                    ?>
+                </select>    
+            </td>
+        </tr>
+        <tr>
+            <td><?php echo(($lang != 'FR') ? "Nature of the request" : "Nature de la requ&ecirc;te"); ?></td>
+            <td>
+                <select name="req-type">
+                    <?php
+                        if ($lang != 'FR') {
+                            echo ("<option value='SAILING'>Navigation</option>" . PHP_EOL);
+                        } else {
+                            echo ("<option value='SAILING'>Navigation</option>" . PHP_EOL);
+                        }
+                        if ($lang != 'FR') {
+                            echo ("<option value='SHIPYARD'>Shipyard</option>" . PHP_EOL);
+                        } else {
+                            echo ("<option value='SHIPYARD'>Chantier</option>" . PHP_EOL);
+                        }
+                    ?>
+                </select>    
+            </td>
+        </tr>
+        <tr><td><?php echo(($lang != 'FR') ? "From" : "Date de d&eacute;but"); ?></td><td><input type="date" id="from-date" name="from-date" required></td></tr>
+        <tr><td><?php echo(($lang != 'FR') ? "To" : "Date de fin"); ?></td><td><input type="date" id="to-date" name="to-date" required></td></tr>
+        <tr>
+            <td style="vertical-align: top;">
+                <?php 
+                echo(($lang != 'FR') ? 
+                    "Comments, questions..." : 
+                    "Commentaires, questions..."); 
+                 ?>
+            </td>
+            <td>
+                <textarea cols="60" rows="10" name="comment-area" style="line-height: normal;"></textarea>
+            </td>
+        </tr>
+    </table>
+    <div id="submit-message"></div>
+
+    <input type="submit" value="<?php echo(($lang != 'FR') ? "Submit request" : "Soumettre votre requ&ecirc;te"); ?>">
+</form>    
+
+    <?php
+    } else if ($option == 'admin') {
+        // General requests management. View, Create ?, Delete...
+        $allRequests = getAllHelpRequests($dbhost, $username, $password, $database, $VERBOSE);
+        echo("<table>");
+        echo("<tr><th>Idx</th><th>Owner</th><th>Boat</th><th>Created</th><th>From</th><th>To</th><th>Type</th><th>Comment</th></tr>" . PHP_EOL);
+        foreach($allRequests as $request) {
+            echo("<tr><td>" . $request->idx . 
+                      "</td><td>" . $request->owner  . 
+                      "</td><td>" . $request->boat  . 
+                      "</td><td>" . $request->createc  . 
+                      "</td><td>" . $request->from  . 
+                      "</td><td>" . $request->to  . 
+                      "</td><td>" . $request->type  . 
+                      "</td><td>" . $request->comment .
+                      "</td><td><form method='post' action='" . basename(__FILE__) . "'>" .
+                                    "<input type='hidden' name='operation' value='delete'>" .
+                                    "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
+                                    "<input type='submit' value='Delete'>" .
+                            "</form>" .
+                 "</td></tr>" . PHP_EOL);  // Add delete button
+        }
+        echo("</table>");
+    }
 
 } else if ($operation == 'list') {
     // echo ("<h2>Requests Planning for " . $MONTHS[$currentMonth - 1] . " " . $currentYear . " (3 months)</h2>");
@@ -199,7 +313,8 @@ if ($option != null) {
 
     echo("<hr/>" . PHP_EOL);
 } else if ($operation == 'reply') {
-    echo ("Managing request #" . $_POST['idx'] . "<br/>" . PHP_EOL);
+    $reqIdx = $_POST['idx'];
+    echo ("Managing request #" . $reqIdx . "<br/>" . PHP_EOL);
     if ($lang == 'FR') {
         echo("Pour r&eacute;pondre &agrave; cette requ&ecirc;te, identifiez-vous au pr&eacute;alable, avec votre email");
     } else {
@@ -210,9 +325,9 @@ if ($option != null) {
 
     $reqData .= "<form action='" . basename(__FILE__) . "' method='post'>" .
                 "<input type='hidden' name='operation' value='valid-email'>" .
-                "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
+                "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
                 (($lang == 'FR') ? "Votre email :" : "Your email:") .
-                "<input type='email' name='user-email' placeholder='email'>" .
+                "<input type='email' name='user-email' placeholder='email' size='40'>" .
                 "<input type='submit' value='OK'>" .
                 "</form>";
     
@@ -244,19 +359,20 @@ if ($option != null) {
     } else {
         // Membership OK, moving on
         $memberArray = getMember($dbhost, $username, $password, $database, $userEmail, $VERBOSE);
-        $ownerName = 'Unknown';
+        $memberName = 'Unknown';
         if (count($memberArray) > 0) {
-            $ownerName = $memberArray[0]->firstName . ' ' . $memberArray[0]->lastName;
+            $memberName = $memberArray[0]->firstName . ' ' . $memberArray[0]->lastName;
         }
         // Get request details (referent email, dates, etc)
+        $reqIdx = $_POST['idx'];
 
         $htmlContent = "";
         if ($lang == 'FR') {
-            $htmlContent = "Bonjour " . $ownerName . "<br/>" .
+            $htmlContent = "Bonjour " . $memberName . " (Request #" . $reqIdx . ")<br/>" .
                            "Votre r&eacute;ponse va &ecirc;tre transime par email au r&eacute;f&eacute;rent du bateau qui vous re-contactera pour confirmation.<br/>" .
                            "Vous pouvez ajouter un commentaire &agrave; cet email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
-                           "<input type='hidden' name='idx' value='" . $_POST['idx'] . "'>" .
+                           "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
                            "<input type='hidden' name='operation' value='send-email'>" .
                            "<input type='hidden' name='user-email' value='" . $userEmail . "'>" .
                            "<textarea rows='4' cols='50' name='comment' form='email-sender' placeholder='Vos commentaires...'></textarea><br/>" .
@@ -264,11 +380,11 @@ if ($option != null) {
                            "<input type='submit' value='OK'>" .
                            "</form>";
         } else {
-            $htmlContent = "Hi " . $ownerName . "<br/>" .
+            $htmlContent = "Hi " . $memberName . "<br/>" .
                            "Your reply will be transmitted to the boat's referent by email, who will reach out to you for confirmation.<br/>" .
                            "You can add a comment to this email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
-                           "<input type='hidden' name='idx' value='" . $_POST['idx'] . "'>" .
+                           "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
                            "<input type='hidden' name='operation' value='send-email'>" .
                            "<input type='hidden' name='user-email' value='" . $userEmail . "'>" .
                            "<textarea rows='4' cols='50' name='comment' form='email-sender' placeholder='Vos commentaires...'></textarea><br/>" .
@@ -280,16 +396,66 @@ if ($option != null) {
     }
     echo("<hr/>" . PHP_EOL);
 } else if ($operation == 'send-email') {
-    $requestId = $_POSRT['idx'];
-    $userEmail = $_POSRT['user-email'];
+    $requestId = $_POST['idx'];
+    $userEmail = $_POST['user-email'];
     $userInput = $_POST['comment'];
 
     echo("Will send email from " . $userEmail . "<br/>" . PHP_EOL);
     echo("Request ID " . $requestId . "<br/>" . PHP_EOL);
     echo("User Message " . $userInput . "<br/>" . PHP_EOL);
 
-    // TODO Send the email to the referent
+    $reqDetails = getHelpRequestById($dbhost, $username, $password, $database, $requestId, $VERBOSE);
+    if (false) {
+        echo("<br/>Dumping result\n");
+        var_dump($reqDetails);
+        echo("\n<br/>");
+    }
 
+    if ($lang == 'FR') {
+        $content = "Une r&eacute;ponse de " . $userEmail . ", pour la requ&ecirc;te #" . $requestId . " (" . $reqDetails[0]->from . 
+        " - " . $reqDetails[0]->to . ", " . $reqDetails[0]->type . "), \n<br/>" . $userInput . "";
+    } else {
+        $content = "A reply from " . $userEmail . ", for request #" . $requestId . " (" . $reqDetails[0]->from . 
+        " - " . $reqDetails[0]->to . ", " . $reqDetails[0]->type . "), \n<br/>" . $userInput . "";
+    }
+
+    // echo("Email content:" . $content . "<br/>" . PHP_EOL);
+    if ($lang == 'FR') {
+        echo("Envoi d'un email &agrave; " . $reqDetails[0]->owner . ", en " . $lang . "...<br/>" . PHP_EOL);
+    } else {
+        echo("sending email to " . $reqDetails[0]->owner . ", in " . $lang . "...<br/>" . PHP_EOL);
+    }
+    // Send the email to the referent
+    sendEmail($reqDetails[0]->owner, 
+              "Help Request #" . $requestId, 
+              $content, 
+              $lang, 
+              false, 
+              $VERBOSE);
+
+} else if ($operation == 'create-request') {
+    $fromEmail = $_POST['origin-email'];
+    $boatId = $_POST['boat-id'];
+    $reqType = $_POST['req-type'];
+    $dateFrom = $_POST['from-date'];
+    $dateTo = $_POST['to-date'];
+    $comments = $_POST['comment-area'];
+    $escapedComment = str_replace("'", "\'", $comments); // Escape !!
+    /*
+      INSERT INTO HELP_REQUESTS (ORIGIN_EMAIL, BOAT_ID, FROM_DATE, TO_DATE, HELP_TYPE, MISC_COMMENT) VALUES
+      ('olivier@lediouris.net', 'don-pedro', STR_TO_DATE('2024-09-08', '%Y-%m-%d'), STR_TO_DATE('2024-09-30', '%Y-%m-%d'), 'SHIPYARD', 'On a besoin de 3 personnes pour bricoler sur le bateau pendant le mois de septembre');
+    */
+    $sqlStmt = "INSERT INTO HELP_REQUESTS (ORIGIN_EMAIL, BOAT_ID, FROM_DATE, TO_DATE, HELP_TYPE, MISC_COMMENT) VALUES " . 
+               "('$fromEmail', '$boatId', STR_TO_DATE('$dateFrom', '%Y-%m-%d'), STR_TO_DATE('$dateTo', '%Y-%m-%d'), '$reqType', '$escapedComment')";
+
+    echo("Request creation...");
+    executeSQL($dbhost, $username, $password, $database, $sqlStmt, $VERBOSE);
+
+} else if ($operation == 'delete') {
+    $idx = $_POST['idx'];
+    $sqlStmt = "DELETE FROM HELP_REQUESTS WHERE IDX = " . $idx . ";";
+    executeSQL($dbhost, $username, $password, $database, $sqlStmt, $VERBOSE);
+    echo("<a href='" . basename(__FILE__) . "?option=admin'>Back to list</a>" . PHP_EOL);
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
 }

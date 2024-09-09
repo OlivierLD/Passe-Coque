@@ -595,6 +595,58 @@ function getBoatsByReferent(string $dbhost, string $username, string $password, 
     return $boats;
 }
 
+// Not CLUB only
+function getAllBoatsByReferent(string $dbhost, string $username, string $password, string $database, string $userId, bool $verbose=false) : array {
+    $sql = "SELECT BOAT_ID, BOAT_NAME, BASE " .
+           "FROM BOATS_AND_REFERENTS " .
+           "WHERE EMAIL = '$userId';";
+
+    $boats = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { 
+            $boatData = array();
+            $boatData[0] = $table[0]; // Boat ID
+            $boatData[1] = $table[1]; // Boat Name
+            $boatData[2] = $table[2]; // Boat Base
+
+            $boats[$index] = $boatData;
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $boats;
+}
+
 class MemberStatus {
     public $status;  // bool 
     public $errNo;   // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club
@@ -673,6 +725,58 @@ class HelpRequest {
     public $comment;
 }
 
+function getAllHelpRequests(string $dbhost, string $username, string $password, string $database, bool $verbose) : array {
+    $sql =  "SELECT IDX, ORIGIN_EMAIL, BOAT_ID, DATE_FORMAT(CREATION_DATE, '%Y-%m-%d'), DATE_FORMAT(FROM_DATE, '%Y-%m-%d'), DATE_FORMAT(TO_DATE, '%Y-%m-%d'), HELP_TYPE, MISC_COMMENT FROM HELP_REQUESTS " .
+            "ORDER BY FROM_DATE;";
+    $requests = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $requests[$index] = new HelpRequest();
+            $requests[$index]->idx = $table[0];
+            $requests[$index]->owner = $table[1];
+            $requests[$index]->boat = $table[2];
+            $requests[$index]->created = $table[3];
+            $requests[$index]->from = $table[4];
+            $requests[$index]->to = $table[5];
+            $requests[$index]->type = $table[6];
+            $requests[$index]->comment = $table[7];
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $requests;
+}
+
 function getHelpRequests(string $dbhost, string $username, string $password, string $database, string $helpType, bool $verbose) : array {
     $sql =  "SELECT IDX, ORIGIN_EMAIL, BOAT_ID, DATE_FORMAT(CREATION_DATE, '%Y-%m-%d'), DATE_FORMAT(FROM_DATE, '%Y-%m-%d'), DATE_FORMAT(TO_DATE, '%Y-%m-%d'), HELP_TYPE, MISC_COMMENT FROM HELP_REQUESTS " .
             "WHERE HELP_TYPE = '" . $helpType . "' " .
@@ -727,6 +831,56 @@ function getHelpRequests(string $dbhost, string $username, string $password, str
     return $requests;
 }
 
+function getHelpRequestById(string $dbhost, string $username, string $password, string $database, string $idx, bool $verbose) : array {
+    $sql =  "SELECT IDX, ORIGIN_EMAIL, BOAT_ID, DATE_FORMAT(CREATION_DATE, '%Y-%m-%d'), DATE_FORMAT(FROM_DATE, '%Y-%m-%d'), DATE_FORMAT(TO_DATE, '%Y-%m-%d'), HELP_TYPE, MISC_COMMENT FROM HELP_REQUESTS " .
+            "WHERE IDX = " . $idx . ";";
+    $requests = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+            $requests[$index] = new HelpRequest();
+            $requests[$index]->idx = $table[0];
+            $requests[$index]->owner = $table[1];
+            $requests[$index]->boat = $table[2];
+            $requests[$index]->created = $table[3];
+            $requests[$index]->from = $table[4];
+            $requests[$index]->to = $table[5];
+            $requests[$index]->type = $table[6];
+            $requests[$index]->comment = $table[7];
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+    return $requests;
+}
 
 // For INSERT, DELETE, UPDATE
 function executeSQL(string $dbhost, string $username, string $password, string $database, string $sql, bool $verbose) : void {
