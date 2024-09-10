@@ -158,7 +158,7 @@ if (false) {
 if ($option != null) {
     if ($option == 'request') {
         // Create a request ?
-        echo("Option: " . $option . "<br/>" . PHP_EOL);
+        // echo("Option: " . $option . "<br/>" . PHP_EOL);
         // Create a request
         echo("<h2>" . (($lang == 'FR') ? "Cr&eacute;er une requ&ecirc;te" : "Create a request") . "</h2>" . PHP_EOL);
         // echo("Coming..." . PHP_EOL);
@@ -166,19 +166,26 @@ if ($option != null) {
         // From user (referent), boat, from-date, to-date, type, comment.
         // $userId = $_SESSION['USER_NAME'];
         // Creating entry for $userId
-        echo("Creating entry for $userId");
+        if ($lang == 'FR') {
+            echo("Creation d'une requ&ecirc;te pour $userId");
+        } else {
+            echo("Creating entry for $userId");
+        }
         $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, $VERBOSE);
 
-        echo ("<ul>" . PHP_EOL);
-        foreach($boats as $boat) {
-            echo("<li>$boat[0], $boat[1], $boat[2]</li>" . PHP_EOL);
+        if (false) {
+            echo ("<ul>" . PHP_EOL);
+            foreach($boats as $boat) {
+                echo("<li>$boat[0], $boat[1], $boat[2]</li>" . PHP_EOL);
+            }
+            echo ("</ul>" . PHP_EOL);
         }
-        echo ("</ul>" . PHP_EOL);
 
     ?>
 
 <form action="<?php echo basename(__FILE__); ?>"  onsubmit="return validateForm();" method="post">
     <input type="hidden" name="operation" value="create-request">
+    <input type="hidden" name="lang" value="<?php echo($lang); ?>">
     <input type="hidden" name="origin-email" value="<?php echo($userId); ?>">
     <table>
         <tr>
@@ -250,9 +257,9 @@ if ($option != null) {
     */
 
     if ($lang == 'FR') {
-        echo('Vos requ&ecirc;tes d&apos;aide :<br/>' . PHP_EOL);
+        echo('Vos requ&ecirc;tes d&apos;aide d&eacute;j&agrave; existantes&nbsp;:<br/>' . PHP_EOL);
     } else {
-        echo('Your existing requests:<br/>' . PHP_EOL);
+        echo('Your already existing requests:<br/>' . PHP_EOL);
     }
     $userRequests = getHelpRequestByUserId($dbhost, $username, $password, $database, $userId, $VERBOSE);
     echo("<table>");
@@ -268,6 +275,7 @@ if ($option != null) {
                   "</td><td>" . utf8_encode($request->comment) .
                   "</td><td><form method='post' action='" . basename(__FILE__) . "'>" .
                                 "<input type='hidden' name='operation' value='delete'>" .
+                                "<input type='hidden' name='lang' value='" . $lang . "'>" .
                                 "<input type='hidden' name='from' value='request'>" .
                                 "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
                                 "<input type='submit' value='Delete'>" .
@@ -293,6 +301,7 @@ if ($option != null) {
                       "</td><td>" . utf8_encode($request->comment) .
                       "</td><td><form method='post' action='" . basename(__FILE__) . "'>" .
                                     "<input type='hidden' name='operation' value='delete'>" .
+                                    "<input type='hidden' name='lang' value='" . $lang . "'>" .
                                     "<input type='hidden' name='from' value='admin'>" .
                                     "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
                                     "<input type='submit' value='Delete'>" .
@@ -352,6 +361,7 @@ if ($option != null) {
         }
         $reqData .= /*", type " . $request->type . */ ", " . utf8_encode($request->comment) .
                 "<form action='" . basename(__FILE__) . "' method='post'>" .
+                "<input type='hidden' name='lang' value='" . $lang . "'>" .
                 "<input type='hidden' name='operation' value='reply'>" .
                 "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
                 "<input type='hidden' name='type' value='" . $helpType . "'>" .
@@ -366,20 +376,23 @@ if ($option != null) {
 } else if ($operation == 'reply') {
     $reqIdx = $_POST['idx'];
     $helpType = $_POST['type'];
-    echo ("Managing request #" . $reqIdx . "<br/>" . PHP_EOL);
+    $lang = $_POST['lang'];
     if ($lang == 'FR') {
-        echo("Pour r&eacute;pondre &agrave; cette requ&ecirc;te, identifiez-vous au pr&eacute;alable, avec votre email");
+        echo("Gestion de la requ&ecirc;te #" . $reqIdx . "<br/>" . PHP_EOL);
+        echo("Pour r&eacute;pondre &agrave; cette requ&ecirc;te, identifiez-vous au pr&eacute;alable, avec votre email.<br/>" . PHP_EOL);
     } else {
-        echo("To answer this request, please identify yourself with your email");
+        echo("Managing request #" . $reqIdx . "<br/>" . PHP_EOL);
+        echo("To answer this request, please identify yourself with your email.<br/>" . PHP_EOL);
     }
 
     $reqData = "";
 
     $reqData .= "<form action='" . basename(__FILE__) . "' method='post'>" .
                 "<input type='hidden' name='operation' value='valid-email'>" .
+                "<input type='hidden' name='lang' value='" . $lang . "'>" .
                 "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
                 "<input type='hidden' name='type' value='" . $helpType . "'>" .
-                (($lang == 'FR') ? "Votre email :" : "Your email:") .
+                (($lang == 'FR') ? "Votre email :&nbsp;" : "Your email:&nbsp;") .
                 "<input type='email' name='user-email' placeholder='email' size='40'>" .
                 "<input type='submit' value='OK' style='margin: 5px;'>" .
                 "</form>";
@@ -387,6 +400,8 @@ if ($option != null) {
     echo $reqData;
 } else if ($operation == 'valid-email') {
     $userEmail = $_POST['user-email'];
+    $lang = $_POST['lang'];
+
     if ($VERBOSE) {
         echo("Email validation for " . $userEmail . "<br/>" . PHP_EOL);
     }
@@ -426,6 +441,7 @@ if ($option != null) {
                            "Votre r&eacute;ponse va &ecirc;tre transime par email au r&eacute;f&eacute;rent du bateau qui vous re-contactera pour confirmation.<br/>" .
                            "Vous pouvez ajouter un commentaire &agrave; cet email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
+                           "<input type='hidden' name='lang' value='" . $lang . "'>" .
                            "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
                            "<input type='hidden' name='type' value='" . $helpType . "'>" .
                            "<input type='hidden' name='operation' value='send-email'>" .
@@ -435,10 +451,11 @@ if ($option != null) {
                            "<input type='submit' value='OK' style='margin: 5px;'>" .
                            "</form>";
         } else {
-            $htmlContent = "Hi " . $memberName . "<br/>" .
+            $htmlContent = "Hi " . $memberName . " (Request #" . $reqIdx . ")<br/>" .
                            "Your reply will be transmitted to the boat's referent by email, who will reach out to you for confirmation.<br/>" .
                            "You can add a comment to this email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
+                           "<input type='hidden' name='lang' value='" . $lang . "'>" .
                            "<input type='hidden' name='idx' value='" . $reqIdx . "'>" .
                            "<input type='hidden' name='type' value='" . $helpType . "'>" .
                            "<input type='hidden' name='operation' value='send-email'>" .
@@ -456,10 +473,19 @@ if ($option != null) {
     $userEmail = $_POST['user-email'];
     $userInput = $_POST['comment'];
     $helpType = $_POST['type'];
+    $lang = $_POST['lang'];
 
-    echo("Will send email from " . $userEmail . "<br/>" . PHP_EOL);
-    echo("Request ID " . $requestId . "<br/>" . PHP_EOL);
-    echo("User Message " . $userInput . "<br/>" . PHP_EOL);
+    if ($lang == 'FR') {
+        echo("Envoi d'un message de la part de " . $userEmail . "<br/>" . PHP_EOL);
+        echo("Identifiant de la requ&ecirc;te&nbsp;: " . $requestId . "<br/>" . PHP_EOL);
+        echo("Avec le message suivant&nbsp;:<br/><i>" . $userInput . "</i><br/>" . PHP_EOL);
+        echo("<hr/>". PHP_EOL);
+    } else {
+        echo("Will send email on behalf of " . $userEmail . "<br/>" . PHP_EOL);
+        echo("Request ID " . $requestId . "<br/>" . PHP_EOL);
+        echo("With the following message:<br/><i>" . $userInput . "</i><br/>" . PHP_EOL);
+        echo("<hr/>". PHP_EOL);
+    }
 
     $reqDetails = getHelpRequestById($dbhost, $username, $password, $database, $requestId, $VERBOSE);
     if (false) {
@@ -478,9 +504,9 @@ if ($option != null) {
 
     // echo("Email content:" . $content . "<br/>" . PHP_EOL);
     if ($lang == 'FR') {
-        echo("Envoi d'un email &agrave; " . $reqDetails[0]->owner . ", en " . $lang . "...<br/>" . PHP_EOL);
+        echo("Envoi d'un email &agrave; " . $reqDetails[0]->owner . ", (lang=" . $lang . ")...<br/>" . PHP_EOL);
     } else {
-        echo("sending email to " . $reqDetails[0]->owner . ", in " . $lang . "...<br/>" . PHP_EOL);
+        echo("Sending email to " . $reqDetails[0]->owner . ", (lang=" . $lang . ")...<br/>" . PHP_EOL);
     }
     // Send the email to the referent
     sendEmail($reqDetails[0]->owner, 
@@ -497,6 +523,7 @@ if ($option != null) {
     $reqType = $_POST['req-type'];
     $dateFrom = $_POST['from-date'];
     $dateTo = $_POST['to-date'];
+    $lang = $_POST['lang'];
     $comments = $_POST['comment-area'];
     $escapedComment = str_replace("'", "\'", $comments); // Escape !!
     /*
@@ -506,16 +533,23 @@ if ($option != null) {
     $sqlStmt = "INSERT INTO HELP_REQUESTS (ORIGIN_EMAIL, BOAT_ID, FROM_DATE, TO_DATE, HELP_TYPE, MISC_COMMENT) VALUES " . 
                "('$fromEmail', '$boatId', STR_TO_DATE('$dateFrom', '%Y-%m-%d'), STR_TO_DATE('$dateTo', '%Y-%m-%d'), '$reqType', '$escapedComment')";
 
-    echo("Request creation...");
+    if ($lang == 'FR') {
+        echo("Cr&eacute;ation de la requ&ecirc;te...<br/>" . PHP_EOL);
+    } else {
+        echo("Request creation...<br/>" . PHP_EOL);
+    }
     executeSQL($dbhost, $username, $password, $database, $sqlStmt, $VERBOSE);
+
+    echo("<a href='" . "?lang=" . $lang . "&option=request'>" . ($lang == 'FR' ? 'Retour' : 'Back') . "</a>" . PHP_EOL);
 
 } else if ($operation == 'delete') {
     $idx = $_POST['idx'];
+    $lang = $_POST['lang'];
     $sqlStmt = "DELETE FROM HELP_REQUESTS WHERE IDX = " . $idx . ";";
     executeSQL($dbhost, $username, $password, $database, $sqlStmt, $VERBOSE);
 
     $from = $_POST['from'];
-    echo("<a href='" . basename(__FILE__) . "?option=" . $from . "'>Back to list</a>" . PHP_EOL);
+    echo("<a href='" . basename(__FILE__) . "?option=" . $from . "&lang=" . $lang . "'>Back to list</a>" . PHP_EOL);
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
 }
