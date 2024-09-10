@@ -155,10 +155,12 @@ if (false) {
     echo ("In $year, $month, there were " . getNbDays($year, $month) . " days.<br/>");
 }
 
+// echo("operation:" . $operation . ", option:" . $option . "<br/>" . PHP_EOL);
+
 if ($option != null) {
+    // echo("Option: " . $option . "<br/>" . PHP_EOL);
     if ($option == 'request') {
         // Create a request ?
-        // echo("Option: " . $option . "<br/>" . PHP_EOL);
         // Create a request
         echo("<h2>" . (($lang == 'FR') ? "Cr&eacute;er une requ&ecirc;te" : "Create a request") . "</h2>" . PHP_EOL);
         // echo("Coming..." . PHP_EOL);
@@ -173,7 +175,7 @@ if ($option != null) {
         }
         $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, $VERBOSE);
 
-        if (false) {
+        if (false) { // List the boats for this referent
             echo ("<ul>" . PHP_EOL);
             foreach($boats as $boat) {
                 echo("<li>$boat[0], $boat[1], $boat[2]</li>" . PHP_EOL);
@@ -272,7 +274,7 @@ if ($option != null) {
                   "</td><td>" . $request->from  . 
                   "</td><td>" . $request->to  . 
                   "</td><td>" . $request->type  . 
-                  "</td><td>" . utf8_encode($request->comment) .
+                  "</td><td>" . /*utf8_encode*/($request->comment) .
                   "</td><td><form method='post' action='" . basename(__FILE__) . "'>" .
                                 "<input type='hidden' name='operation' value='delete'>" .
                                 "<input type='hidden' name='lang' value='" . $lang . "'>" .
@@ -298,7 +300,7 @@ if ($option != null) {
                       "</td><td>" . $request->from  . 
                       "</td><td>" . $request->to  . 
                       "</td><td>" . $request->type  . 
-                      "</td><td>" . utf8_encode($request->comment) .
+                      "</td><td>" . /*utf8_encode*/($request->comment) .
                       "</td><td><form method='post' action='" . basename(__FILE__) . "'>" .
                                     "<input type='hidden' name='operation' value='delete'>" .
                                     "<input type='hidden' name='lang' value='" . $lang . "'>" .
@@ -351,7 +353,7 @@ if ($option != null) {
         if (count($memberArray) > 0) {
             $ownerName = $memberArray[0]->firstName . ' ' . $memberArray[0]->lastName;
         }
-        $reqData = (($lang == 'FR') ? "De " : "By ") . $ownerName . 
+        $reqData = (($lang == 'FR') ? "De " : "By ") . ($ownerName) . 
                 (($lang == 'FR') ? " sur " : " on ") . getBoatName($dbhost, $username, $password, $database, $request->boat, $VERBOSE);
         if ($request->to == null) {
             $reqData .=  (($lang == 'FR') ? ", le " : ", on ") . $request->from;
@@ -359,7 +361,7 @@ if ($option != null) {
             $reqData .=  (($lang == 'FR') ? ", de " : ", from ") . $request->from . 
                         (($lang == 'FR') ? ", &agrave; " : ", to ") . $request->to;
         }
-        $reqData .= /*", type " . $request->type . */ ", " . utf8_encode($request->comment) .
+        $reqData .= /*", type " . $request->type . */ ", " . /*utf8_encode*/($request->comment) .
                 "<form action='" . basename(__FILE__) . "' method='post'>" .
                 "<input type='hidden' name='lang' value='" . $lang . "'>" .
                 "<input type='hidden' name='operation' value='reply'>" .
