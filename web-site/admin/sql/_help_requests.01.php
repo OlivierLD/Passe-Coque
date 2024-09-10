@@ -237,6 +237,46 @@ if ($option != null) {
 </form>    
 
     <?php
+    // List existing requests for current user ($userId), with delete button
+    /*
+    $requests[$index]->idx = $table[0];
+    $requests[$index]->owner = $table[1];
+    $requests[$index]->boat = $table[2];
+    $requests[$index]->created = $table[3];
+    $requests[$index]->from = $table[4];
+    $requests[$index]->to = $table[5];
+    $requests[$index]->type = $table[6];
+    $requests[$index]->comment = $table[7];
+    */
+
+    if ($lang == 'FR') {
+        echo('Vos requ&ecirc;tes d&apos;aide :<br/>' . PHP_EOL);
+    } else {
+        echo('Your existing requests:<br/>' . PHP_EOL);
+    }
+    $userRequests = getHelpRequestByUserId($dbhost, $username, $password, $database, $userId, $VERBOSE);
+    echo("<table>");
+    echo("<tr><th>Idx</th><th>Owner</th><th>Boat</th><th>Created</th><th>From</th><th>To</th><th>Type</th><th>Comment</th></tr>" . PHP_EOL);
+    foreach($userRequests as $request) {
+        echo("<tr><td>" . $request->idx . 
+                  "</td><td>" . $request->owner  . 
+                  "</td><td>" . $request->boat  . 
+                  "</td><td>" . $request->created  . 
+                  "</td><td>" . $request->from  . 
+                  "</td><td>" . $request->to  . 
+                  "</td><td>" . $request->type  . 
+                  "</td><td>" . utf8_encode($request->comment) .
+                  "</td><td><form method='post' action='" . basename(__FILE__) . "'>" .
+                                "<input type='hidden' name='operation' value='delete'>" .
+                                "<input type='hidden' name='from' value='request'>" .
+                                "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
+                                "<input type='submit' value='Delete'>" .
+                        "</form>" .
+             "</td></tr>" . PHP_EOL);  // Add delete button
+    }
+    echo("</table>");
+    echo("<hr/>");
+
     } else if ($option == 'admin') {
         // General requests management. View, Create ?, Delete...
         $allRequests = getAllHelpRequests($dbhost, $username, $password, $database, $VERBOSE);
@@ -246,13 +286,14 @@ if ($option != null) {
             echo("<tr><td>" . $request->idx . 
                       "</td><td>" . $request->owner  . 
                       "</td><td>" . $request->boat  . 
-                      "</td><td>" . $request->createc  . 
+                      "</td><td>" . $request->created  . 
                       "</td><td>" . $request->from  . 
                       "</td><td>" . $request->to  . 
                       "</td><td>" . $request->type  . 
-                      "</td><td>" . $request->comment .
+                      "</td><td>" . utf8_encode($request->comment) .
                       "</td><td><form method='post' action='" . basename(__FILE__) . "'>" .
                                     "<input type='hidden' name='operation' value='delete'>" .
+                                    "<input type='hidden' name='from' value='admin'>" .
                                     "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
                                     "<input type='submit' value='Delete'>" .
                             "</form>" .
@@ -309,7 +350,7 @@ if ($option != null) {
             $reqData .=  (($lang == 'FR') ? ", de " : ", from ") . $request->from . 
                         (($lang == 'FR') ? ", &agrave; " : ", to ") . $request->to;
         }
-        $reqData .= /*", type " . $request->type . */ ", " . $request->comment .
+        $reqData .= /*", type " . $request->type . */ ", " . utf8_encode($request->comment) .
                 "<form action='" . basename(__FILE__) . "' method='post'>" .
                 "<input type='hidden' name='operation' value='reply'>" .
                 "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
@@ -472,7 +513,9 @@ if ($option != null) {
     $idx = $_POST['idx'];
     $sqlStmt = "DELETE FROM HELP_REQUESTS WHERE IDX = " . $idx . ";";
     executeSQL($dbhost, $username, $password, $database, $sqlStmt, $VERBOSE);
-    echo("<a href='" . basename(__FILE__) . "?option=admin'>Back to list</a>" . PHP_EOL);
+
+    $from = $_POST['from'];
+    echo("<a href='" . basename(__FILE__) . "?option=" . $from . "'>Back to list</a>" . PHP_EOL);
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
 }
