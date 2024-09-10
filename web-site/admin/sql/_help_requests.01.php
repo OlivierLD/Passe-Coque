@@ -29,9 +29,9 @@ try {
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Help Requests</title>
     <style type="text/css">
-      * {
+      /* * {
         font-family: 'Courier New'
-      }
+      } */
 
       tr > td {
         border: 1px solid silver;
@@ -40,12 +40,21 @@ try {
       ul > li {
         display: grid;
         grid-template-columns: 90% 10%;
+        border: 1px solid silver;
+        border-radius: 5px;
+        padding: 5px 10px;
       }
     </style>
+
+	<link rel="stylesheet" href="../../fonts/font.01.css">
+	<link rel="stylesheet" href="../../fonts/font.02.css">
+
+	<!--link rel="stylesheet" href="./passe-coque.menu.css"-->
+	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
   </head>
 
   <script type="text/javascript">
-    const validateForm = () => {
+    const validateForm = () => { // Used below
         document.getElementById("submit-message").innerHTML = ''; // Clear
 
         let dateFrom = new Date(document.getElementById('from-date').value);
@@ -305,7 +314,7 @@ if ($option != null) {
                 "<input type='hidden' name='operation' value='reply'>" .
                 "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
                 "<input type='hidden' name='type' value='" . $helpType . "'>" .
-                "<input type='submit' value='" . (($lang == 'FR') ? "Je viens !" : "I'm coming!") . "'>" .
+                "<input type='submit' value='" . (($lang == 'FR') ? "Je viens !" : "I&apos;m coming!") . "'>" .
                 "</form>";
         echo $reqData;
         echo("</li>" . PHP_EOL);

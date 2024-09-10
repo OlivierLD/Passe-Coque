@@ -1911,8 +1911,8 @@ const NEXT_EVENTS = [
         date_from: '2024-12-25',
         date_to: '2024-12-25',
         content: {
-            fr: 'No&euml;l.',
-            en: 'XMas.'
+            fr: '25 d&eacute;cembre, No&euml;l.',
+            en: 'Dec 25, XMas.'
         }
     }
 ];
