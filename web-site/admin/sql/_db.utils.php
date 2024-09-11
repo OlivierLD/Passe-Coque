@@ -650,7 +650,7 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
 class MemberStatus {
     public static $PASSE_COQUE_AND_BOAT_CLUB_MEMBER = 0;
     public static $NO_PASSE_COQUE_MEMBER = 1;
-    public static $NO_BOAT_CLUB_MEMBER = 1;
+    public static $NO_BOAT_CLUB_MEMBER = 2;
 
     public $status;  // bool 
     public $errNo;   // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club
@@ -704,7 +704,7 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
             } else {
                 $memberStatus->status = true;
                 $memberStatus->errNo = MemberStatus::$PASSE_COQUE_AND_BOAT_CLUB_MEMBER;
-                $memberStatus->errMess = "";
+                $memberStatus->errMess = "PC & BC";
             }
         } 
         // On ferme !
