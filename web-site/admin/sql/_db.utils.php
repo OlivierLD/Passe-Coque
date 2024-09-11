@@ -648,6 +648,10 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
 }
 
 class MemberStatus {
+    public static $PASSE_COQUE_AND_BOAT_CLUB_MEMBER = 0;
+    public static $NO_PASSE_COQUE_MEMBER = 1;
+    public static $NO_BOAT_CLUB_MEMBER = 1;
+
     public $status;  // bool 
     public $errNo;   // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club
     public $errMess; // string
@@ -683,7 +687,7 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
         }
         if ($result->num_rows == 0) {
             $memberStatus->status = false;
-            $memberStatus->errNo = 1;
+            $memberStatus->errNo = MemberStatus::$NO_PASSE_COQUE_MEMBER;
             $memberStatus->errMess = "Not a Passe-Coque Member";
         } else {
             // Assume there is only one record returned.
@@ -695,11 +699,11 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
             }
             if ($bcEmail == null || strlen($bcEmail) == 0) {
                 $memberStatus->status = false;
-                $memberStatus->errNo = 2;
+                $memberStatus->errNo = MemberStatus::$NO_BOAT_CLUB_MEMBER;
                 $memberStatus->errMess = "Passe-Coque Member, but not Boat Club Member";
             } else {
                 $memberStatus->status = true;
-                $memberStatus->errNo = 0;
+                $memberStatus->errNo = MemberStatus::$PASSE_COQUE_AND_BOAT_CLUB_MEMBER;
                 $memberStatus->errMess = "";
             }
         } 

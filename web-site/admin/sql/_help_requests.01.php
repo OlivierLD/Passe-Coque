@@ -417,7 +417,7 @@ if ($option != null) {
         echo("ErrMess: " . $memberStatus->errMess . "<br/>");
     }
 
-    if ($memberStatus->errNo == 1) { // Not Passe-Coque
+    if ($memberStatus->errNo == MemberStatus::$NO_PASSE_COQUE_MEMBER) { // Not Passe-Coque
         if ($lang == 'FR') {
             $txt = "Il semble que vous ne soyiez pas encore un membre de l'association...<br/>" .
                    "Cliquez <a href='/?lang=FR&nav-to=51' target='_blank'>ici</a> pour y adh&eacute;rer !";
