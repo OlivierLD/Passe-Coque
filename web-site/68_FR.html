@@ -1,3 +1,27 @@
+<style>
+    .bde {
+        position: relative;
+        background-image: url("/images/back.home.1500.jpg");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed; /* <= This one */
+        /* opacity: 0.25; */
+    }
+    .bdb {
+        position: relative;
+        background-image: url("/images/kerran.yard.jpg");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed; /* <= This one */
+        /* opacity: 0.25; */
+    }
+    .transp-box {
+        margin: 0px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.75;
+    }
+</style>
 <div style="margin-top: -10px;">
     <!--div class="container"> 
         <img src="/images/partager.png" width="100%">
@@ -17,15 +41,19 @@
         Les rubriques ci-dessous rassemblent les besoins d'aide, que ce soit pour des navigations, ou des travaux sur les bateaux.<br/>
         Allez-y si vous avez du temps et des comp&eacute;tences ! Ou juste envie d'apprendre !
         <div style="display: grid; grid-template-columns: auto; width: 100%;">
-            <div style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
-                <h3>Bourse des &eacute;quipiers</h3>
-                <br/>
-                <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=FR&type=SAILING" style="width:100%;height:300px;border:none;"></iframe>
+            <div class="bde" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
+                <div class="transp-box">
+                    <h3>Bourse des &eacute;quipiers</h3>
+                    <br/>
+                    <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=FR&type=SAILING" style="width:100%;height:300px;border:none;"></iframe>
+                </div>
             </div>
-            <div style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
-                <h3>Bourse des bricoleurs</h3>
-                <br/>
-                <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=FR&type=SHIPYARD" style="width:100%;height:300px;border:none;"></iframe>
+            <div class="bdb" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
+                <div class="transp-box">
+                    <h3>Bourse des bricoleurs</h3>
+                    <br/>
+                    <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=FR&type=SHIPYARD" style="width:100%;height:300px;border:none;"></iframe>
+                </div>
             </div>
         </div>
     </div>

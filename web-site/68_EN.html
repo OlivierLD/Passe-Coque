@@ -1,3 +1,27 @@
+<style>
+    .bde {
+        position: relative;
+        background-image: url("/images/back.home.1500.jpg");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed; /* <= This one */
+        /* opacity: 0.25; */
+    }
+    .bdb {
+        position: relative;
+        background-image: url("/images/kerran.yard.jpg");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed; /* <= This one */
+        /* opacity: 0.25; */
+    }
+    .transp-box {
+        margin: 0px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.75;
+    }
+</style>
 <div style="margin-top: -10px;">
     <!--div class="container"> 
         <img src="/images/partager.png" width="100%">
@@ -17,15 +41,19 @@
         The sections below are gathering the needs for help, for navigations, or work on the boats.<br/>
         Go for it if you have time and skills! Or if just you want to learn!
         <div style="display: grid; grid-template-columns: auto; width: 100%;">
-            <div style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
-                Crews wanted! 
-                <br/>
-                <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=EN&type=SAILING" style="width:100%;height:300px;border:none;"></iframe>
+            <div class="bde" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
+                <div class="transp-box">                
+                    Crews wanted! 
+                    <br/>
+                    <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=EN&type=SAILING" style="width:100%;height:300px;border:none;"></iframe>
+                </div>
             </div>
-            <div style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
-                Shipyard skills wanted!     
-                <!-- Reservation form -->
-                <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=EN&type=SHIPYARD" style="width:100%;height:300px;border:none;"></iframe>
+            <div class="bdb" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
+                <div class="transp-box">
+                    Shipyard skills wanted!     
+                    <!-- Reservation form -->
+                    <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=EN&type=SHIPYARD" style="width:100%;height:300px;border:none;"></iframe>
+                </div>
             </div>
         </div>
     </div>

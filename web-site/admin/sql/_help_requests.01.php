@@ -28,6 +28,12 @@ try {
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Help Requests</title>
+
+    <link rel="stylesheet" href="../../fonts/font.01.css">
+	<link rel="stylesheet" href="../../fonts/font.02.css">
+	<!--link rel="stylesheet" href="./passe-coque.menu.css"-->
+	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
+    
     <style type="text/css">
       /* * {
         font-family: 'Courier New'
@@ -44,13 +50,12 @@ try {
         border-radius: 5px;
         padding: 5px 10px;
       }
+
+      body {
+        background: transparent;
+      }
     </style>
 
-	<link rel="stylesheet" href="../../fonts/font.01.css">
-	<link rel="stylesheet" href="../../fonts/font.02.css">
-
-	<!--link rel="stylesheet" href="./passe-coque.menu.css"-->
-	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
   </head>
 
   <script type="text/javascript">
