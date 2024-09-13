@@ -129,7 +129,7 @@ if (isset($_GET['lang'])) {
     $lang = $_GET['lang'];
 }
 
-$operation = 'list';
+$operation = 'list';  // Default operation
 if (isset($_POST['operation'])) {
     $operation = $_POST['operation'];
 }
@@ -385,10 +385,14 @@ if ($option != null) {
     $helpType = $_POST['type'];
     $lang = $_POST['lang'];
     if ($lang == 'FR') {
-        echo("Gestion de la requ&ecirc;te #" . $reqIdx . "<br/>" . PHP_EOL);
+        if ($VERBOSE) {
+            echo("Gestion de la requ&ecirc;te #" . $reqIdx . "<br/>" . PHP_EOL);
+        }
         echo("Pour r&eacute;pondre &agrave; cette requ&ecirc;te, identifiez-vous au pr&eacute;alable, avec votre email.<br/>" . PHP_EOL);
     } else {
-        echo("Managing request #" . $reqIdx . "<br/>" . PHP_EOL);
+        if ($VERBOSE) {
+            echo("Managing request #" . $reqIdx . "<br/>" . PHP_EOL);
+        }
         echo("To answer this request, please identify yourself with your email.<br/>" . PHP_EOL);
     }
 
@@ -444,7 +448,7 @@ if ($option != null) {
 
         $htmlContent = "";
         if ($lang == 'FR') {
-            $htmlContent = "Bonjour " . $memberName . " (Request #" . $reqIdx . ")<br/>" .
+            $htmlContent = "Bonjour " . $memberName . ",<br/>" . // " (Request #" . $reqIdx . ")<br/>" .
                            "Votre r&eacute;ponse va &ecirc;tre transime par email au r&eacute;f&eacute;rent du bateau qui vous re-contactera pour confirmation.<br/>" .
                            "Vous pouvez ajouter un commentaire &agrave; cet email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
@@ -458,7 +462,7 @@ if ($option != null) {
                            "<input type='submit' value='OK' style='margin: 5px;'>" .
                            "</form>";
         } else {
-            $htmlContent = "Hi " . $memberName . " (Request #" . $reqIdx . ")<br/>" .
+            $htmlContent = "Hi " . $memberName . ",<br/>" . // " (Request #" . $reqIdx . ")<br/>" .
                            "Your reply will be transmitted to the boat's referent by email, who will reach out to you for confirmation.<br/>" .
                            "You can add a comment to this email :<br/>" .
                            "<form action='" . basename(__FILE__) . "' method='post' id='email-sender'>" .
@@ -521,6 +525,7 @@ if ($option != null) {
               $content, 
               $lang, 
               false, 
+              true,      // cc the board
               $VERBOSE);
     echo("<a href='" . basename(__FILE__) . "?lang=" . $lang . "&type=" . $helpType . "'>" . ($lang == 'FR' ? "Retour" : "Back") . "</a>");
 

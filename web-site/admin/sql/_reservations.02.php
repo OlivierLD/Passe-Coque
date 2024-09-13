@@ -379,18 +379,18 @@ if (isset($_POST['operation'])) {
                         try {
                             $refDetails = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $VERBOSE);
                             $refMess = composeEmailToReferent($detail, $member[0], $refDetails[0], $fromDate, $toDate, $lang);
-                            sendEmail($detail->referentEmail, "Reservation Boat Club", $refMess, $lang, false, $VERBOSE);
+                            sendEmail($detail->referentEmail, "Reservation Boat Club", $refMess, $lang, false, false, $VERBOSE);
                         } catch (Throwable $e) {
                             echo "Captured Throwable for composeEmailToReferent : " . $e->getMessage() . "<br/>" . PHP_EOL;
                         }
                     } 
-                    sendEmail("pcc@passe-coque.com", "Reservation Boat Club", $message, $lang, false, false);
+                    sendEmail("pcc@passe-coque.com", "Reservation Boat Club", $message, $lang, false, false, false);
                     // 3-2-2 Requester.
                     try {
                         $reqMess = composeEmailToRequester($details, $member[0], $fromDate, $toDate, $dbhost, $username, $password, $database, $lang, $VERBOSE);
                         $subject = ($lang == 'FR' ? "Votre Réservation au Boat Club" : "Your Boat Club Reservation");
                         // echo ("Sending<br/>" . $reqMess . "<br/>With subject [" . $subject . "]<br/>");
-                        sendEmail($userId, $subject, $reqMess, $lang, false, $VERBOSE);
+                        sendEmail($userId, $subject, $reqMess, $lang, false, false, $VERBOSE);
                     } catch (Throwable $e) {
                         echo "Captured Throwable for composeEmailToRequester : " . $e->getMessage() . "<br/>" . PHP_EOL;
                     }
@@ -401,7 +401,7 @@ if (isset($_POST['operation'])) {
                         //         "Your reservation request for the " . $details[0]->boatType . " \"" . $details[0]->boatName . "\" based in " . $details[0]->boatBase . " from $fromDate to $toDate has been recorded successfully!\n" .
                         //         "The referent of the boat can be contacted at the following email address: $detail->referentEmail \n" .
                         //         "Please do <a href='mailto:pcc@passe-coque.com'>re-contact us</a> if you do not hear from us within the next few days.<br/><br/>" .
-                        //         "- The Passe-Coque team.", $lang, false, true);
+                        //         "- The Passe-Coque team.", $lang, false, false, true);
                         ?>
                         <p>
                             Your request is recorded. You will receive a

@@ -130,14 +130,14 @@ if ($check != 'on') {
             } else {
                 echo("No file was attached");
             }
-            sendEmail("pcc@passe-coque.com", "Boat Club Subscription", $message, $lang, true);
+            sendEmail("pcc@passe-coque.com", "Boat Club Subscription", $message, $lang, false, true);
             if ($lang == 'FR') {
                 $message = 'Votre demande d\'adh&eacute;sion a &eacute;t&eacute; adress&eacute;e &agrave; pcc@passe-coque.com. Vous recevrez bient&ograve;t des nouvelles.';
             } else {
                 $message = 'Your subscription request has been sent to pcc@passe-coque.com. You\'ll be updated soon.';
             }
             echo("\n");
-            sendEmail($email, "Boat Club Subscription", $message, $lang, true);
+            sendEmail($email, "Boat Club Subscription", $message, $lang, false, true);
         }
     } catch (Throwable $e) {
         echo "ERROR: Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;

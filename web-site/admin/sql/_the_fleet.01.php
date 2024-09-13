@@ -112,7 +112,7 @@ if (isset($_POST['operation'])) {
     
       echo("<h2>Passe-Coque Fleet</h2>");
 
-      ?> <!-- Member creation form -->
+      ?> <!-- Boat creation form -->
 
       <form action="./_the_fleet.02.php" method="get">
         <input type="hidden" name="task" value="create">

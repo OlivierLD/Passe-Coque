@@ -1,6 +1,6 @@
 <?php
 
-function sendEmail(string $destinationEmail, string $subject, string $emailContent, string $lang = 'FR', bool $withLink=false, bool $verbose=false) : void {
+function sendEmail(string $destinationEmail, string $subject, string $emailContent, string $lang = 'FR', bool $withLink=false, bool $ccBoard=false, bool $verbose=false) : void {
     try {
         // $lang = 'EN'; // For now
 
@@ -22,6 +22,9 @@ function sendEmail(string $destinationEmail, string $subject, string $emailConte
         $headers = "MIME-Version: 1.0\r\n";              // Defining the MIME version
         $headers .= "From:".$from_email."\r\n";          // Sender Email (contact)
         $headers .= "Reply-To: ".$pc_email."\r\n";       // Email address to reach back
+        if ($ccBoard) {
+            $headers .= "CC: catherine.laguerre@hotmail.com, olivier.lediouris@gmail.com\r\n"; // Optional
+        }
         $headers .= "Content-Type: multipart/mixed;";    // Defining Content-Type
         $headers .= "boundary = $boundary\r\n";          // Defining the Boundary
                 
