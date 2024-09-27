@@ -75,6 +75,7 @@
 	
 <body>
 
+	<h4><img src="../logos/logo.02.png" style="width: 50px; vertical-align: middle;" title="Passe&#8209;Coque"/> Un tuto Passe-Coque</h4>
 	<div style="width: 90%; padding: 20px; display: grid; grid-template-columns: auto auto;">
 		<h1 id="low-tech-navigation">OpenCPN &amp; GRIBs</h1>
 		<!--p class="not-printed" style="justify-self: end;"><a href="./chartless.maps.html">En anglais</a></p-->
@@ -105,10 +106,10 @@
 		<img src="./pix/OpenCPN.05.png" style="width: 90%;"><br/>
 		On peut d&eacute;finir les param&egrave;tres de la requ&ecirc;te, qui est compos&eacute;e dynamiquement dans le bas du dialogue.
 		<pre style="font-family: 'Courier New', Courier, monospace;">
-			send GFS:67N,8S,79W,12E|0.25,0.25|0,3,6..72|=
-			WIND,PRESS,WIND500,HGT500			
+send GFS:67N,8S,79W,12E|0.25,0.25|0,3,6..72|=
+WIND,PRESS,WIND500,HGT500			
 		</pre>
-		Attention &agrave; la taille du fichier GRIB (indiqu&eacute;e sous la requ&ecirc;te), une taille de plus de 10Mb peut constituer un probl&egrave;me...
+		Attention &agrave; la taille du fichier GRIB (indiqu&eacute;e sous la requ&ecirc;te), une taille de plus de 10Mb (comme ci-dessus, 25.07 MB) peut constituer un probl&egrave;me...
 	</p>
 	<p>
 		<h2>Envoi de la requ&ecirc;te GRIB</h2>
@@ -116,7 +117,7 @@
 		Ce qui n'est pas forc&eacute;ment ce qu'on veut faire.<br/>
 		<img src="./pix/OpenCPN.06.png" style="width: 90%;"><br/>
 		Le sujet du mail doit &ecirc;tre <span style="font-family: 'Courier New', Courier, monospace;">grib-request</span>, le destinataire doit &ecirc;tre <span style="font-family: 'Courier New', Courier, monospace;">query@saildocs.com</span>, 
-		et le contenu de mail est la requ&ecirc;te qu'on a compos&eacute;e, en mode plain-text.<br/>
+		et le contenu du mail est la requ&ecirc;te qu'on a compos&eacute;e, <i>en mode plain-text</i>.<br/>
 	</p>
 	<p>
 		<h2>R&eacute;ception du GRIB</h2>
@@ -124,7 +125,7 @@
 	</p>
 	<p>
 		<h2>Affichage du GRIB</h2>
-		On download ce fichier sur le laptop, et il est alors possible de l'ouvrir dans OpenCPN (3e icone en partant de la droite)&nbsp;:<br/>
+		On download ce fichier sur le laptop, et il est alors possible de l'ouvrir dans OpenCPN (3e ic&ocirc;ne en partant de la droite)&nbsp;:<br/>
 		<img src="./pix/OpenCPN.07.png" style="width: 90%;"><br/>
 	</p>
 	<hr/>
