@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque - GRIB How-To</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../fonts/font.01.css">
+	<link rel="stylesheet" href="../fonts/font.02.css">
+
+	<link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
+
+	<link rel="stylesheet" href="./low-tech.css" type="text/css"/>
+	<style type="text/css">
+.postit {
+    background: #f7f7e7;
+    padding: 5px;
+}
+
+.slide {
+	max-width: 800px; 
+	max-height: 500px;
+	padding: 10px;
+}
+
+.slide-show {
+	display: grid; 
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; 
+	overflow: auto;
+}
+
+.screen-shot {
+	width: 50%; 
+	text-align: center;
+}
+
+@media screen and (width <= 800px) {
+    .slide {
+		max-width: 600px; 
+		max-height: 375px;
+		padding: 10px;
+	}
+	.screen-shot {
+		width: 90%; 
+		text-align: center;
+	}
+}
+
+@media print {
+	.slide-show {
+		display: grid; 
+		grid-template-columns: auto; 
+		overflow: auto;
+	}
+	.not-printed {
+		display: none;
+	}
+} 
+    </style>
+
+	<script type="module" src="../webcomponents/SlideShow.js"></script>
+	<!-- For LaTex -->
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+	<script type="text/javascript" 
+			async
+  			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+</head>
+	
+<body>
+
+	<div style="width: 90%; padding: 20px; display: grid; grid-template-columns: auto auto;">
+		<h1 id="low-tech-navigation">OpenCPN &amp; GRIBs</h1>
+		<!--p class="not-printed" style="justify-self: end;"><a href="./chartless.maps.html">En anglais</a></p-->
+	</div>
+	<hr/>
+	On suppose ici que le plug-in GRIB a &eacute;t&eacute; install&eacute; dans OpenCPN.
+	<br/>
+	On proc&egrave;de en plusieurs etapes&nbsp;:
+	<ul>
+		<li>On d&eacute;finit un requ&ecirc;te GRIB</li>
+		<li>Cette requ&ecirc;te est ensuite envoy&eacute;e <i>par email</i> &agrave; query@saildocs.com</li>
+		<li>En r&eacute;ponse &agrave; cet email, le fichier GRIB arrive en attachement</li>
+		<li>On download ce fichier GRIB</li>
+		<li>Il peut &ecirc;tre ensuite affich&eacute; dans OpenCPN</li>
+	</ul>
+
+	<p>
+		<h2>D&eacute;finition de la requ&ecirc;te GRIB</h2>
+		On clique sur l'ic&ocirc;ne du plug-in GRIB.<br/>
+		<img src="./pix/OpenCPN.01.png" style="width: 90%;"><br/>
+		Ce qui fait apparaitre la boite de dialogue suivante :<br/>
+		<img src="./pix/OpenCPN.02.png" style="width: 90%;"><br/>
+		On accede a la creation de la requete en cliquant sur le '@' tout a fait &agrave; droite.<br/>
+		<img src="./pix/OpenCPN.03.png" style="width: 90%;"><br/>
+		On est alors invite a draguer sur la carte la zone du GRIB a definir, et a re-cliquer sur le '@' une fois que c'est fait.<br/>
+		<img src="./pix/OpenCPN.04.png" style="width: 90%;"><br/>
+		Ce qui fait apparaitre le dialogue suivant&nbsp;:
+		<img src="./pix/OpenCPN.05.png" style="width: 90%;"><br/>
+		On peut definir les parametres de la requete, qui est composee dynamiquement dans le bas du dialogue.
+		<pre style="font-family: 'Courier New', Courier, monospace;">
+			send GFS:67N,8S,79W,12E|0.25,0.25|0,3,6..72|=
+			WIND,PRESS,WIND500,HGT500			
+		</pre>
+	</p>
+	<p>
+		<h2>Envoi de la requ&ecirc;te GRIB</h2>
+		<b>Attention :</b> Si on clique "Send", la requ&ecirc;te sera envoy&eacute;e par l'appli mail d&eacute;finie par d&eacute;faut sur le laptop o&ugrave; fonctionne OpenCPN !
+		Ce qui n'est pas forc&eacute;ment ce qu'on veut faire.<br/>
+		<img src="./pix/OpenCPN.06.png" style="width: 90%;"><br/>
+		Le sujet du mail doit &ecirc;tre <span style="font-family: 'Courier New', Courier, monospace;">grib-request</span>, le destinataire doit &ecirc;tre <span style="font-family: 'Courier New', Courier, monospace;">query@saildocs.com</span>, 
+		et le contenu de mail est la requ&ecirc;te qu'on a compos&eacute;e, en mode plain-text.<br/>
+	</p>
+	<p>
+		<h2>R&eacute;ception du GRIB</h2>
+		Apr&egrave;s un petit moment, la r&eacute;ponse arrive dans l'inbox de l'exp&eacute;diteur de la requ&ecirc;te.<br/>
+	</p>
+	<p>
+		<h2>Affichage du GRIB</h2>
+		On download ce fichier sur le laptop, et il est alors possible de l'ouvrir dans OpenCPN (3e icone en partant de la droite)&nbsp;:<br/>
+		<img src="./pix/OpenCPN.07.png" style="width: 90%;"><br/>
+	</p>
+	<hr/>
+	<i>&copy; 2024, Passe-Coque</i>
+</body>
+</html>
