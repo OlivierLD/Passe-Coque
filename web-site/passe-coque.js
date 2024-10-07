@@ -54,6 +54,7 @@ let generateNextEvents = () => {
     }
 };
 
+// Can be used for event list, and others (like going directly to a project or boat)
 let showDialogOnLoad = (title, content) => { // Use the about-dialog for message on load
     let aboutDialog = document.getElementById("about-dialog");
 
@@ -1906,6 +1907,13 @@ const NEXT_EVENTS = [
         content: {
             fr: 'du 1er au 6 octobre 2024 : Passe-Coque est au <a href="https://grand-pavois.com/en/homepage/" target="_blank">Grand Pavois</a> &agrave; La Rochelle',
             en: 'October 1 to 6, 2024: Passe-Coque will be at the <a href="https://grand-pavois.com/en/homepage/" target="_blank">Grand Pavois</a> in La Rochelle'
+        }
+    }, {
+        date_from: '2024-10-09',
+        date_to: '2024-10-13',
+        content: {
+            fr: 'Du 9 au 13 octobre, <a href="https://aventuriersdelamer.fr/index.php/le-programme-jour-par-jour/" target="_blank">Festival des aventuriers de la mer</a>, &agrave; Lorient.',
+            en: 'October 9 to 13, 2024, <a href="https://aventuriersdelamer.fr/index.php/le-programme-jour-par-jour/" target="_blank">Festival des aventuriers de la mer</a>, Lorient.'
         }
     }, {
         date_from: '2024-12-25',
