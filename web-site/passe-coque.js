@@ -1916,6 +1916,13 @@ const NEXT_EVENTS = [
             en: 'October 9 to 13, 2024, <a href="https://aventuriersdelamer.fr/index.php/le-programme-jour-par-jour/" target="_blank">Festival des aventuriers de la mer</a>, Lorient.'
         }
     }, {
+        date_from: '2024-10-15',
+        date_to: '2024-10-20',
+        content: {
+            fr: 'Du 15 au 20 octobre, le Nautic, Nouvelle Version, &agrave; Paris.',
+            en: 'October 15 to 20, 2024, Le Nautic, new version, in Paris.'
+        }
+    }, {
         date_from: '2024-12-25',
         date_to: '2024-12-25',
         content: {
