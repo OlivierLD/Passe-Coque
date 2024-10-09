@@ -45,7 +45,7 @@ try {
 
       ul > li {
         display: grid;
-        grid-template-columns: 90% 10%;
+        grid-template-columns: 80% 20%;
         border: 1px solid silver;
         border-radius: 5px;
         padding: 5px 10px;
@@ -347,7 +347,7 @@ if ($option != null) {
 
     $lastDayOfMonth = $currentYear . "-" . $currentMonth . "-" . getNbDays($currentYear, $currentMonth);
 
-    echo("<ul>" . PHP_EOL);
+    echo("<ul style='padding-left: 1px;'>" . PHP_EOL);
     foreach($requestsArray as $request) {
         if ($VERBOSE) {
             echo("Fetching requests for " . $request->owner . "/" . $request->boat . " in " . $MONTHS[$currentMonth - 1] . " " . $currentYear . "<br/>" . PHP_EOL);
