@@ -39,10 +39,26 @@ try {
       * {
         line-height: 1em;
       }
+      .gears-bg {
+        position: relative;
+        background-image: url("/images/gears.png");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed; /* <= This one */
+        /* opacity: 0.25; */
+      }
+      .transp-box {
+        margin: 0px;
+        padding: 10px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.75;
+      }
     </style>
   </head>
-  <body>
+  <body class="gears-bg">
     <!--h1>Espace Membres</h1-->
+    <div class="transp-box">
     <?php
 
 require __DIR__ . "/db.cred.php";
@@ -216,6 +232,6 @@ if ($current_lang == "FR") {
       </table>
     </form>
     <hr/>
-       
+    </div>   
   </body>        
 </html>

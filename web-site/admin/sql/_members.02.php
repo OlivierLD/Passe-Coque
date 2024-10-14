@@ -204,6 +204,7 @@ if (isset($_POST['operation'])) {
 
         // echo ("Update for $email ... <br/>");
 
+        // TODO STR_TO_DATE for the dates ?:
         $sql = 'UPDATE PASSE_COQUE_MEMBERS ' .
                'SET LAST_NAME = \'' . /*urlencode*/($last_name) . '\', FIRST_NAME = \'' . /*urlencode*/($first_name) . '\', ' .
                     'TARIF = ' . (strlen(trim($tarif)) > 0 && $tarif != '-' ? ('\'' . /*urlencode*/str_replace("'","\'", (trim($tarif))) . '\'') : 'NULL') . ', ' . 
@@ -223,7 +224,8 @@ if (isset($_POST['operation'])) {
         $sql = 'DELETE FROM PASSE_COQUE_MEMBERS 
                 WHERE EMAIL = \'' . $email . '\'';
       } else if ($operation === 'insert') {
-        $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, AMOUNT, TELEPHONE, FIRST_ENROLLED, BIRTH_DATE, ADDRESS, NEWS_LETTER_OK, PASSWORD, ADMIN_PRIVILEGES, SAILING_EXPERIENCE, SHIPYARD_EXPERIENCE)
+          // TODO STR_TO_DATE for the dates ?:
+          $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, AMOUNT, TELEPHONE, FIRST_ENROLLED, BIRTH_DATE, ADDRESS, NEWS_LETTER_OK, PASSWORD, ADMIN_PRIVILEGES, SAILING_EXPERIENCE, SHIPYARD_EXPERIENCE)
                 VALUES (\'' . ($email) . '\', \'' . /*urlencode*/($last_name) . '\', \'' . /*urlencode*/($first_name) . '\', 
                     ' . (strlen(trim($tarif)) > 0 && $tarif != '-' ? ('\'' . /*urlencode*/str_replace("'","\'", (trim($tarif))) . '\'') : 'NULL') . ', 
                     ' . (strlen(trim($amount)) > 0 ? trim($amount) : 'NULL') . ', 
