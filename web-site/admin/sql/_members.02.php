@@ -92,6 +92,7 @@ function getTarifs(string $dbhost, string $username, string $password, string $d
           $tarifs[$tarifIndex] = $table[0];
           $tarifIndex++;
       }
+      $tarifs[$tarifIndex] = '-'; // For the nulls
       // On ferme !
       $link->close();
       if ($verbose) {
@@ -205,7 +206,7 @@ if (isset($_POST['operation'])) {
 
         $sql = 'UPDATE PASSE_COQUE_MEMBERS ' .
                'SET LAST_NAME = \'' . /*urlencode*/($last_name) . '\', FIRST_NAME = \'' . /*urlencode*/($first_name) . '\', ' .
-                    'TARIF = ' . (strlen(trim($tarif)) > 0 ? ('\'' . /*urlencode*/str_replace("'","\'", (trim($tarif))) . '\'') : 'NULL') . ', ' . 
+                    'TARIF = ' . (strlen(trim($tarif)) > 0 && $tarif != '-' ? ('\'' . /*urlencode*/str_replace("'","\'", (trim($tarif))) . '\'') : 'NULL') . ', ' . 
                     'AMOUNT = ' . (strlen(trim($amount)) > 0 ? trim($amount) : 'NULL') . ', ' .
                     'TELEPHONE = ' . (strlen(trim($telephone)) > 0 ? ('\'' . trim($telephone) . '\'') : 'NULL') . ',  ' .
                     'FIRST_ENROLLED = ' . (strlen(trim($first_enrolled)) > 0 ? ('\'' . trim($first_enrolled) . '\'') : 'NULL') . ',  ' .
@@ -224,7 +225,7 @@ if (isset($_POST['operation'])) {
       } else if ($operation === 'insert') {
         $sql = 'INSERT INTO PASSE_COQUE_MEMBERS (EMAIL, LAST_NAME, FIRST_NAME, TARIF, AMOUNT, TELEPHONE, FIRST_ENROLLED, BIRTH_DATE, ADDRESS, NEWS_LETTER_OK, PASSWORD, ADMIN_PRIVILEGES, SAILING_EXPERIENCE, SHIPYARD_EXPERIENCE)
                 VALUES (\'' . ($email) . '\', \'' . /*urlencode*/($last_name) . '\', \'' . /*urlencode*/($first_name) . '\', 
-                    ' . (strlen(trim($tarif)) > 0 ? ('\'' . /*urlencode*/str_replace("'","\'", (trim($tarif))) . '\'') : 'NULL') . ', 
+                    ' . (strlen(trim($tarif)) > 0 && $tarif != '-' ? ('\'' . /*urlencode*/str_replace("'","\'", (trim($tarif))) . '\'') : 'NULL') . ', 
                     ' . (strlen(trim($amount)) > 0 ? trim($amount) : 'NULL') . ', 
                     ' . (strlen(trim($telephone)) > 0 ? ('\'' . trim($telephone) . '\'') : 'NULL') . ', 
                     ' . (strlen(trim($first_enrolled)) > 0 ? ('\'' . trim($first_enrolled) . '\'') : 'NULL') . ', 
@@ -294,7 +295,7 @@ if (isset($_POST['operation'])) {
         PCM.EMAIL,
         PCM.LAST_NAME,
         PCM.FIRST_NAME,
-        PCM.TARIF,
+        IFNULL(PCM.TARIF, \'-\'),
         PCM.AMOUNT,
         PCM.TELEPHONE,
         PCM.FIRST_ENROLLED,
@@ -347,8 +348,8 @@ if (isset($_POST['operation'])) {
 
       echo('<tr><td>Amount</td><td><input type="number" name="amount" value="' . $table[4] . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td>Telephone</td><td><input type="text" name="telephone" value="' . $table[5] . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>Enrolled</td><td><input type="date" name="first-enrolled" value="' . ($table[6] != null ? urldecode($table[6]) : '') . '" size="40"></td><tr>' . PHP_EOL);
-      echo('<tr><td>Birth Date</td><td><input type="date" name="birth-date" value="' . ($table[12] != null ? urldecode($table[12]) : '') . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>First Enrolled</td><td><input type="date" name="first-enrolled" value="' . ($table[6] != null ? date('Y-m-d', strtotime($table[6])) : '') . '" size="40"></td><tr>' . PHP_EOL);
+      echo('<tr><td>Birth Date</td><td><input type="date" name="birth-date" value="' . ($table[12] != null ? /*urldecode*/($table[12]) : '') . '" size="40"></td><tr>' . PHP_EOL);
       echo('<tr><td style="vertical-align: top;">Address</td><td><textarea rows="4" cols="40" name="address">' . /*utf8_encode*/($table[13]) . '</textarea></td><tr>' . PHP_EOL);
       echo('<tr><td>News Letter ?</td><td><input type="checkbox" name="nl-ok" value="1"' . ($table[7] ? " checked" : "")  . '></td><tr>' . PHP_EOL); 
       echo('<tr><td>Password</td><td><input type="password" name="user-password" value="' . ($table[8] != null ? urldecode($table[8]) : '') . '" size="40"></td><td><input type="checkbox" name="upd-psswd" value="1"> Update password</td><tr>' . PHP_EOL);

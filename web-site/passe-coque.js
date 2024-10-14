@@ -2637,6 +2637,7 @@ let checkFields = (evt) => {
     return ok;
 };
 
+// Copy the content of a field
 let copyToClipboard = (fieldId) => {
     let value = document.getElementById(fieldId).innerHTML;
     let codeContent = value.replaceAll("<br>", "\n");
@@ -2651,6 +2652,7 @@ let copyToClipboard = (fieldId) => {
     // customAlert(`Value ${value} copied to clipboard`);
 };
 
+// Copy a literal value
 let copyTextToClipboard = (content) => {
     let codeContent = content.replaceAll("<br>", "\n");
     codeContent = content.replaceAll("<br/>", "\n");
@@ -2661,5 +2663,5 @@ let copyTextToClipboard = (content) => {
     codeHolder.select();
     document.execCommand("copy");
     document.body.removeChild(codeHolder);
-    // customAlert(`Value ${value} copied to clipboard`);
+    // customAlert(`Value ${content} copied to clipboard`);
 };
