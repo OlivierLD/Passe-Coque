@@ -2386,7 +2386,7 @@ let openTab = (evt, tabName) => {
 };
 
 let customAlertOpened = false;
-let showCustomAlert = (content) => {
+let showCustomAlert = (content, autoClose=true) => {
     let customAlert = document.getElementById("custom-alert");
     document.getElementById('custom-alert-content').innerHTML = `<pre>${content}</pre>`;
     if (customAlert.show !== undefined) {
@@ -2396,7 +2396,7 @@ let showCustomAlert = (content) => {
         customAlert.style.display = 'inline';
     }
     customAlertOpened = true;
-    window.setTimeout(closeCustomAlert, 5000);
+    window.setTimeout(closeCustomAlert, autoClose ? 5000 : 15000); // Close in 5, or 15s
 };
 
 let closeCustomAlert = () => {
@@ -2447,10 +2447,10 @@ let sendMessageErrorMessage = () => {
 
 let onSubscriptionResponse = (iframe) => {
     // console.log(iframe);
-    let message = '';
+    let message = ''; // Error message
     try {
         message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
-        // console.log(`Response message: ${message}`);
+        console.log(`Response message (onSubscriptionResponse): ${message}`);
         if (message.startsWith("OK")) {
             message = "Votre Souscription a bien &eacute;t&eacute; enregistr&eacute;e.";
             if (currentLang == 'EN') {
@@ -2473,13 +2473,13 @@ let onSubscriptionResponse = (iframe) => {
     // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
-        showCustomAlert(message);
+        showCustomAlert(message, false); // Stay on.
     }
 }
 
 let onSubmitResponse = (iframe, okMess, errorMess) => {
     // console.log(iframe);
-    let message = '';
+    let message = ''; // error message
     try {
         message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
         if (message.length > 0) {  // because of the onload on the iframe...
@@ -2505,7 +2505,7 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
     // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
-        showCustomAlert(message);
+        showCustomAlert(message, false);
     }
 };
 
@@ -2585,7 +2585,7 @@ let onResetPswdResponse = (iframe) => {
     // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
-        showCustomAlert(message);
+        showCustomAlert(message, false);
     }
 }
 
@@ -2599,14 +2599,28 @@ let onResetPswdResponse = (iframe) => {
 let checkFields = (evt) => {
     let ok = true;
     let errMess = [];
-    let lastName = document.getElementById('last-name').value;
-    let firstName = document.getElementById('first-name').value;
-    let email = document.getElementById('user-email').value;
-    if (!lastName || lastName.trim().length === 0) {
-        errMess.push(currentLang === 'FR' ? 'On a besoin d\'un nom.' : 'Last name is required.');
+
+    let lastName, firstName, fullName;
+    
+    if (document.getElementById('last-name')) { // Several possible origins...
+        lastName = document.getElementById('last-name').value;
+        firstName = document.getElementById('first-name').value;
+    } else {
+        fullName = document.getElementById('first-last-name').value;
     }
-    if (!firstName || firstName.trim().length === 0) {
-        errMess.push(currentLang === 'FR' ? 'On a besoin d\'un pr&eacute;nom.' : 'First name is required.');
+
+    let email = document.getElementById('user-email').value;
+    if (!fullName) {
+        if (!lastName || lastName.trim().length === 0) {
+            errMess.push(currentLang === 'FR' ? 'On a besoin d\'un nom.' : 'Last name is required.');
+        }
+        if (!firstName || firstName.trim().length === 0) {
+            errMess.push(currentLang === 'FR' ? 'On a besoin d\'un pr&eacute;nom.' : 'First name is required.');
+        }
+    } else {
+        if (fullName.trim().length === 0) {
+            errMess.push(currentLang === 'FR' ? 'On a besoin d\'un nom.' : 'Name is required.');
+        }
     }
     if (!email || email.trim().length === 0) {
         errMess.push(currentLang === 'FR' ? 'On a besoin d\'un email.' : 'Email is required.');
