@@ -2386,6 +2386,7 @@ let openTab = (evt, tabName) => {
 };
 
 let customAlertOpened = false;
+// TODO With 'Copy Message'option
 let showCustomAlert = (content, autoClose=true) => {
     let customAlert = document.getElementById("custom-alert");
     document.getElementById('custom-alert-content').innerHTML = `<pre>${content}</pre>`;
@@ -2452,14 +2453,14 @@ let onSubscriptionResponse = (iframe) => {
         message = iframe.contentDocument.querySelectorAll('body')[0].innerText.trim();
         console.log(`Response message (onSubscriptionResponse): ${message}`);
         if (message.startsWith("OK")) {
-            message = "Votre Souscription a bien &eacute;t&eacute; enregistr&eacute;e.";
+            message = "Votre Souscription a bien &eacute;t&eacute; enregistr&eacute;e.<br/>Message du server :<br/>" + message;
             if (currentLang == 'EN') {
-                message = "Your subscription was successfull.";
+                message = "Your subscription was successfull.<br/>Message from the server:<br/>" + message;
             }
         } else if (message.startsWith("ERROR")) {
-            message = "Cette adresse email est d&eacute;j&agrave; utilis&eacute;e.<br/>Essayez avec une autre...";
+            message = "Une erreur s'est produite (content dans le presse-papier) :<br/>" + message;
             if (currentLang == 'EN') {
-                message = "Email address already in use.<br/>Try another one...";
+                message = "An error happened (content in your clipboard):<br/>" + message;
             }
         }
     } catch (err) {
@@ -2473,7 +2474,8 @@ let onSubscriptionResponse = (iframe) => {
     // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
-        showCustomAlert(message, false); // Stay on.
+        showCustomAlert(message, true);
+        copyTextToClipboard(message); // All the time, error or not.
     }
 }
 
@@ -2505,7 +2507,7 @@ let onSubmitResponse = (iframe, okMess, errorMess) => {
     // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
-        showCustomAlert(message, false);
+        showCustomAlert(message, true);
     }
 };
 
@@ -2585,7 +2587,7 @@ let onResetPswdResponse = (iframe) => {
     // Display in dialog, or custom alert.
     if (message.length > 0) {
         // alert(message);
-        showCustomAlert(message, false);
+        showCustomAlert(message, true);
     }
 }
 
@@ -2633,4 +2635,31 @@ let checkFields = (evt) => {
         showCustomAlert(`<pre>${prefix}${mess}</pre>`);
     }
     return ok;
+};
+
+let copyToClipboard = (fieldId) => {
+    let value = document.getElementById(fieldId).innerHTML;
+    let codeContent = value.replaceAll("<br>", "\n");
+    codeContent = content.replaceAll("<br/>", "\n");
+    // console.log(codeContent);
+    let codeHolder = document.createElement("textarea"); // To keep the format, 'input' would not.
+    codeHolder.value = codeContent;
+    document.body.appendChild(codeHolder);
+    codeHolder.select();
+    document.execCommand("copy");
+    document.body.removeChild(codeHolder);
+    // customAlert(`Value ${value} copied to clipboard`);
+};
+
+let copyTextToClipboard = (content) => {
+    let codeContent = content.replaceAll("<br>", "\n");
+    codeContent = content.replaceAll("<br/>", "\n");
+    // console.log(codeContent);
+    let codeHolder = document.createElement("textarea"); // To keep the format, 'input' would not.
+    codeHolder.value = codeContent;
+    document.body.appendChild(codeHolder);
+    codeHolder.select();
+    document.execCommand("copy");
+    document.body.removeChild(codeHolder);
+    // customAlert(`Value ${value} copied to clipboard`);
 };
