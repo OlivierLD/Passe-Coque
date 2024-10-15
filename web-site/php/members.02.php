@@ -156,7 +156,7 @@ if ($current_lang == "FR") {
     <?php
     if ($bcMember) {
       ?>
-      En tant que membre du Boat Club, vous pouvez aussi :
+      En tant que <i>membre du Boat Club</i>, vous pouvez aussi :
       <ul>
         <li><a href="../admin/sql/_reservations.02.php" target="admin">Faire une r&eacute;servation</a></li>
       </ul>
@@ -164,7 +164,7 @@ if ($current_lang == "FR") {
     }
     if ($isReferent) {
       ?>
-      En tant que r&eacute;f&eacute;rent d'un bateau, vous pouvez :
+      En tant que <i>r&eacute;f&eacute;rent d'un bateau</i>, vous pouvez :
       <ul>
         <li><a href="../admin/sql/_reservations.01.php" target="admin">G&eacute;rer les r&eacute;servations</a></li>
         <li><a href="../admin/sql/_help_requests.01.php?option=request" target="admin">Demander de l'aide (convoyages, bricolages, ...)</a></li>
@@ -173,7 +173,7 @@ if ($current_lang == "FR") {
     }
     if ($adminPrivileges) {
       ?>
-      En tant qu'adminstrateur, vous pouvez aussi utiliser ceci :<br/>
+      En tant qu'<i>adminstrateur</i>, vous pouvez aussi utiliser ceci :<br/>
       Mais attention, <a href="https://www.youtube.com/watch?v=guuYU74wU70&t=15s" target="YT">With great power comes great responsibility</a>.
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
@@ -196,7 +196,7 @@ if ($current_lang == "FR") {
     <?php
     if ($bcMember) {
       ?>
-      As a Boat Club member, you can also:
+      As a <i>Boat Club member</i>, you can also:
       <ul>
         <li><a href="../admin/sql/_reservations.02.php" target="admin">Make a reservation</a></li>
       </ul>
@@ -204,7 +204,7 @@ if ($current_lang == "FR") {
     }
     if ($isReferent) {
       ?>
-      As the referent of a boat, you can also:
+      As the <i>referent of a boat</i>, you can also:
       <ul>
         <li><a href="../admin/sql/_reservations.01.php" target="admin">Manage the reservations</a></li>
       </ul>
@@ -212,7 +212,7 @@ if ($current_lang == "FR") {
     }
     if ($adminPrivileges) {
       ?>
-      As an administrator, you can also use those:<br/>
+      As an <i>administrator</i>, you can also use those:<br/>
       But remember, <a href="https://www.youtube.com/watch?v=guuYU74wU70&t=15s" target="YT">With great power comes great responsibility</a>. Be careful.
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>

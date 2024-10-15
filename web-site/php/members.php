@@ -36,7 +36,8 @@ try {
         line-height: 1em;
       }
       .bodygrad {
-        background: silver;
+        /*background: silver;*/
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3));
       }
     </style>
   </head>
@@ -218,7 +219,7 @@ if (isset($_POST['operation'])) {
             echo "Referent: " . ($is_referent ? "Yes" : "No") . "<br/>" . PHP_EOL;
           }
           echo "<p style='line-height: normal;'>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . "<br/>" . PHP_EOL;    
-          echo(($current_lang == "FR") ? "Vous pouvez maintenant acc&eacute;der au " : "You can now access the ");
+          echo(($current_lang == "FR") ? "Vous pouvez maintenant acc&eacute;der &agrave; votre " : "You can now access your ");
           ?>
           <a href="members.02.php"><?php echo ($current_lang == "FR") ? "Menu" : "Menu" ?></a> <!-- LA SUITE ! -->
           </p>

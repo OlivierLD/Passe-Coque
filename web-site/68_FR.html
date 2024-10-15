@@ -1,4 +1,13 @@
 <style>
+    .agenda {
+        position: relative;
+        background-image: url("/images/agenda.jpg");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed; /* <= This one */
+        background-position: 30px -140px;
+        /* opacity: 0.25; */
+    }
     .bde {
         position: relative;
         background-image: url("/images/back.home.1500.jpg");
@@ -30,6 +39,10 @@
         border: 1px solid black;
         opacity: 0.75;
     }
+    .bodygrad {
+        /*background: silver;*/
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3));
+    }
 </style>
 <div style="margin-top: -10px;">
     <!--div class="container"> 
@@ -39,12 +52,14 @@
         </div>
     </div-->
 
-    <div style="text-align: left; padding: 20px; background: white;">
+    <div class="bodygrad" style="text-align: left; padding: 20px;"> <!--  background: white; -->
         <h2>Vie de l'Association</h2>
-        <div style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
-            <h3><img src="./images/booklet.svg" style="width: 48px; vertical-align: middle;">&nbsp;Agenda</h3>
-            <div id="next-events-container">
-                <ul id="next-event-list"></ul>
+        <div class="agenda" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
+            <div class="transp-box">
+                <h3><img src="./images/booklet.svg" style="width: 48px; vertical-align: middle;">&nbsp;Agenda</h3>
+                <div id="next-events-container">
+                    <ul id="next-event-list"></ul>
+                </div>
             </div>
         </div>
         Les rubriques ci-dessous rassemblent les besoins d'aide, que ce soit pour des navigations, ou des travaux sur les bateaux.<br/>

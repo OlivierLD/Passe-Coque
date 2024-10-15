@@ -1,4 +1,13 @@
 <style>
+    .agenda {
+        position: relative;
+        background-image: url("/images/agenda.jpg");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed; /* <= This one */
+        background-position: 30px -140px;
+        /* opacity: 0.25; */
+    }
     .bde {
         position: relative;
         background-image: url("/images/back.home.1500.jpg");
@@ -39,12 +48,14 @@
         </div>
     </div-->
 
-    <div style="text-align: left; padding: 20px; background: white;">
+    <div class="bodygrad" style="text-align: left; padding: 20px;"> <!--  background: white; -->
         <h2>Life of the Association</h2>
-        <div style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
-            <h3><img src="./images/booklet.svg" style="width: 48px; vertical-align: middle;">&nbsp;Agenda</h3>
-            <div id="next-events-container">
-                <ul id="next-event-list"></ul>
+        <div class="agenda" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
+            <div class="transp-box">
+                <h3><img src="./images/booklet.svg" style="width: 48px; vertical-align: middle;">&nbsp;Agenda</h3>
+                <div id="next-events-container">
+                    <ul id="next-event-list"></ul>
+                </div>
             </div>
         </div>
         The sections below are gathering the needs for help, for navigations, or work on the boats.<br/>
