@@ -17,6 +17,8 @@ try {
 ?>
 <html lang="en">
   <!--
+   ! Member Space menu
+   !
    ! After Custom Authentication.
    ! Crendentials stored in DB.
    ! Member space, once identified.

@@ -35,9 +35,12 @@ try {
       * {
         line-height: 1em;
       }
+      .bodygrad {
+        background: silver;
+      }
     </style>
   </head>
-  <body>
+  <body class="bodygrad">
     <!--h1>Espace Membres</h1-->
     <?php
 

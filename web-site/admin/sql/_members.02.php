@@ -17,10 +17,11 @@ try {
 ?>
 <html lang="en">
   <!--
-   ! WiP.
+   ! WiP. 
    ! A Form to Update the PASSE_COQUE_MEMBERS table, leads to an update form.
+   !
    ! PK (email) as a GET prm.
-   ! Can also be used to create or delete a new member
+   ! Can also be used to create or delete a new member.
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -59,7 +60,7 @@ try {
     <?php
 // phpinfo();
 
-require __DIR__ . "/../../php/db.cred.php";
+require __DIR__ . "/../../php/db.cred.php"; // Warinig: a concatenation
 
 // echo('Before...' . PHP_EOL);
 
@@ -200,7 +201,7 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
     
-      if (isset($_POST['update'])) {  // TODO urlencode ?
+      if (isset($_POST['update'])) {  // TODO urlencode, dates management ?
 
         // echo ("Update for $email ... <br/>");
 
