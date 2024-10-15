@@ -55,7 +55,7 @@ try {
 <body>
 
 <div>
-	<h3>Envoi d'un mailing aux "Passeur d'&Eacute;coute", "Admin", et 'R&eacute;f&eacute;rent'</h3>
+	<h3>Envoi d'un mailing aux membres de type "Passeur d'&Eacute;coute", "Admin", et 'R&eacute;f&eacute;rent'</h3>
 </div>
 
 <?php
