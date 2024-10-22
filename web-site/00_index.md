@@ -1,4 +1,8 @@
 ## Resources Index
+
+> Warning: La liste n'est pas &agrave; jour !  
+> &Ccedil;a vient...
+
 - Locate the menus and their corresponding page.
 
 | Prefix | Menu Location |
