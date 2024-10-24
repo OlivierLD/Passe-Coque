@@ -134,6 +134,29 @@ if (isset($_POST['operation'])) {
         // echo("Connected.<br/>");
       }
     
+      // Last fee date ?
+      $sql = 'SELECT CONCAT(UPPER(M.LAST_NAME), \' \', M.FIRST_NAME), 
+                     M.EMAIL,
+                     M.TARIF,
+                    (SELECT MAX(F.PERIOD) from MEMBERS_AND_FEES F WHERE M.EMAIL = F.EMAIL GROUP BY F.EMAIL)
+              FROM PASSE_COQUE_MEMBERS M
+              WHERE M.EMAIL = \'' . $form_username . '\' AND
+                    M.TARIF IS NOT NULL
+              ORDER BY 1;';
+      // echo('Performing query <code>' . $sql . '</code><br/>');
+      $result = mysqli_query($link, $sql);
+      // echo ("Returned " . $result->num_rows . " row(s)<br/>");
+      $now = date_create(date("Y-m-d"));
+      $days_since_last_fee = 0;
+      while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result. Should be just 1
+        // The last date: more than one year ?
+        $last_fee = date_create(urldecode($table[3]));
+        // Diff
+        $diff = date_diff($last_fee, $now);
+        $days_since_last_fee = $diff->format("%a");
+      }
+      // Will return the days_since_last_fee. To be managed later (like if days_since_last_fee > 365)
+      $_SESSION['DAYS_SINCE_LAST_FEE'] = $days_since_last_fee;
       
       // Also Is a Referent ?
       $sql = "SELECT PCM.PASSWORD, " . 

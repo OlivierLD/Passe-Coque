@@ -22,6 +22,7 @@ try {
    ! After Custom Authentication.
    ! Crendentials stored in DB.
    ! Member space, once identified.
+   !
    ! -> Invoked from members.php
    !
    ! Also:
@@ -129,7 +130,8 @@ $adminPrivileges = $_SESSION['ADMIN'];
 $bcMember = $_SESSION['BC_MEMBER'];
 $isReferent = $_SESSION['IS_REFERENT'];
 $user_id = $_SESSION['USER_ID'];
-
+//
+$days_since_last_fee = $_SESSION['DAYS_SINCE_LAST_FEE'];
 
 if ($current_lang == "FR") {
   echo "<h2>Bienvenue [$displayName] dans votre espace priv&eacute;.</h2><br/>" . PHP_EOL;
@@ -171,6 +173,16 @@ if ($current_lang == "FR") {
       </ul>
       <?php
     }
+    // Cotisation a jour...
+    if ($days_since_last_fee > 365) { // Oops
+      echo "Votre derniere cotisation date de $days_since_last_fee jours...<br/>" . PHP_EOL;
+      echo "Certains documents vous sont inaccessibles.<br/><br/>" . PHP_EOL;
+    } else { // It's OK.
+      ?>
+      Votre cotisation est &agrave; jour.<br/><br/>
+      <?php
+    }
+
     if ($adminPrivileges) {
       ?>
       En tant qu'<i>adminstrateur</i>, vous pouvez aussi utiliser ceci :<br/>
@@ -208,6 +220,15 @@ if ($current_lang == "FR") {
       <ul>
         <li><a href="../admin/sql/_reservations.01.php" target="admin">Manage the reservations</a></li>
       </ul>
+      <?php
+    }
+    // Cotisation a jour...
+    if ($days_since_last_fee > 365) { // Oops
+      echo "Your last membership fee is $days_since_last_fee old...<br/>" . PHP_EOL;
+      echo "You will not have access to some documens.<br/><br/>" . PHP_EOL;
+    } else { // It's OK.
+      ?>
+      Your membership fee is up-to-date.<br/><br/>
       <?php
     }
     if ($adminPrivileges) {
