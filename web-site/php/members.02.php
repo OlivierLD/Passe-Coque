@@ -179,7 +179,11 @@ if ($current_lang == "FR") {
       echo "Certains documents vous sont inaccessibles.<br/><br/>" . PHP_EOL;
     } else { // It's OK.
       ?>
-      Votre cotisation est &agrave; jour.<br/><br/>
+      Votre cotisation est &agrave; jour.<br/>
+      <iframe src="./member.docs.html" frameBorder="0" style="width: 98%; height: 150px; border: 1px solid silver; border-radius: 5px; overflow: scroll;">
+        <!-- Members only -->
+      </iframe>
+      <br/>
       <?php
     }
 
@@ -228,7 +232,11 @@ if ($current_lang == "FR") {
       echo "You will not have access to some documens.<br/><br/>" . PHP_EOL;
     } else { // It's OK.
       ?>
-      Your membership fee is up-to-date.<br/><br/>
+      Your membership fee is up-to-date.<br/>
+      <iframe src="./member.docs.html" frameBorder="0" style="width: 98%; height: 150px; border: 1px solid silver; border-radius: 5px; overflow: scroll;">
+        <!-- Members only -->
+      </iframe>
+      <br/>
       <?php
     }
     if ($adminPrivileges) {
