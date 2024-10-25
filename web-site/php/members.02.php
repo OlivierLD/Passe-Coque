@@ -175,8 +175,8 @@ if ($current_lang == "FR") {
     }
     // Cotisation a jour...
     if ($days_since_last_fee > 365) { // Oops
-      echo "Votre derniere cotisation date de $days_since_last_fee jours...<br/>" . PHP_EOL;
-      echo "Certains documents vous sont inaccessibles.<br/><br/>" . PHP_EOL;
+      echo "<b>Votre derni&egrave;re cotisation date de $days_since_last_fee jours...<br/>" . PHP_EOL;
+      echo "Certains documents vous sont inaccessibles.</b><br/><br/>" . PHP_EOL;
     } else { // It's OK.
       ?>
       Votre cotisation est &agrave; jour.<br/>
