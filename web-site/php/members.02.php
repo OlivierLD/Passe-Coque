@@ -175,8 +175,10 @@ if ($current_lang == "FR") {
     }
     // Cotisation a jour...
     if ($days_since_last_fee > 365) { // Oops
-      echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'><b>Votre derni&egrave;re cotisation date de $days_since_last_fee jours...<br/>" . PHP_EOL;
-      echo "Certains documents vous sont inaccessibles.</b><br/></div>" . PHP_EOL;
+      echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'>" .PHP_EOL;
+      echo "<b>Votre derni&egrave;re cotisation date de $days_since_last_fee jours...<br/>" . PHP_EOL;
+      echo "<i>Certains documents vous sont inaccessibles</i>.</b><br/>" . PHP_EOL;;
+      echo "</div>" . PHP_EOL;
     } else { // It's OK.
       ?>
       Votre cotisation est &agrave; jour.<br/>
@@ -228,8 +230,10 @@ if ($current_lang == "FR") {
     }
     // Cotisation a jour...
     if ($days_since_last_fee > 365) { // Oops
-      echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'><b>Your last membership fee is $days_since_last_fee old...<br/>" . PHP_EOL;
-      echo "You will not have access to some documens.</b><br/></div>" . PHP_EOL;
+      echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'>" . PHP_EOL;
+      echo "<b>Your last membership fee is $days_since_last_fee old...<br/>" . PHP_EOL;
+      echo "<i>You will not have access to some documents</i>.</b><br/>" . PHP_EOL;
+      echo "</div>" . PHP_EOL;
     } else { // It's OK.
       ?>
       Your membership fee is up-to-date.<br/>

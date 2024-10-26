@@ -22,7 +22,7 @@ try {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../passe-coque.css">
-	<title>Send Email With Attachment</title>
+	<title>Send Email- no Attachment</title>
     <style type="text/css">
         h3 {
             margin: 0 10px;
@@ -49,6 +49,9 @@ try {
 		}
 		a:hover, a:active {
 			background-color: red;
+		}
+		* {
+			line-height: 1.0em;
 		}
     </style>
 </head>

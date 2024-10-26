@@ -50,6 +50,9 @@ try {
 		a:hover, a:active {
 			background-color: red;
 		}
+		* {
+			line-height: 1.0em;
+		}
     </style>
 </head>
 <body>

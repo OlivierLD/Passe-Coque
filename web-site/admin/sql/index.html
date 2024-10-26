@@ -29,38 +29,46 @@ h1 {
 </head>
 <body>
     <h1>Passe-Coque Admin</h1>
-    <h3>Admin Utilities</h3>
+    <h3><img src="../../images/cone.png" style="width: 56px; vertical-align: middle;">Admin Utilities - Careful with that!<img src="../../images/cone.png" style="width: 56px; vertical-align: middle;"></h3>
     <ul>
         <li><a href="_info.php" target="MySQL">Backend engine info</a></li>
-        <li><a href="nl.email.sender.php" target="NL">News Letter emails</a></li>
-        <li><a href="pc.mailing.php" target="NL">Communication emails (Passeurs d'&Eacute;coute, R&eacute;f&eacute;rents, Admin)</a></li>
-        <li><a href="pc.mailing.all.members.php" target="NL">Communication emails (tous types de membres)</a></li>
-
-        <li><a href="how-to.html" target="how-to">Passe-Coque Members Management: How to.</a></li>
-        
-        <li><a href="_members.01.php" target="MySQL">Passe-Coque Members Management</a></li>
-        <li><a href="_members.year.fees.php" target="MySQL">Passe-Coque Members, Year Fees</a></li>
-        <li><a href="_the_fleet.01.php" target="MySQL">Passe-Coque Fleet Management</a></li>
-        <li><a href="_referents.01.php" target="MySQL">Passe-Coque Referents Management</a></li>
-        <li><a href="_boat-club.01.php" target="MySQL">Passe-Coque Boat-Club Members Management</a></li>
-        <li><a href="../web/see.planning.2.html?admin=true" target="MySQL">Passe-Coque Boat-Club Reservations Planning</a></li>
         <li>
-            <a href="_reservations.01.php" target="MySQL">Passe-Coque Boat-Club Reservations</a>
+            <h3>Mailings</h3>
             <ul>
-                <li><a href="_reservations.02.php?lang=EN&admin=true" target="MySQL">Make a Reservation</a></li>
+                <li><a href="nl.email.sender.php" target="NL">News Letter emails</a></li>
+                <li><a href="pc.mailing.php" target="NL">Communication emails (Passeurs d'&Eacute;coute, R&eacute;f&eacute;rents, Admin)</a></li>
+                <li><a href="pc.mailing.all.members.php" target="NL">Communication emails (tous types de membres)</a></li>
             </ul>
         </li>
-        <li><a href="_help_requests.01.php?option=admin" target="admin">Gestion des demandes d'aide (convoyages, bricolages, ...)</a></li>
-        <li><a href="_members.01.csv.php" target="MySQL">Passe-Coque Members, spreadsheet (WiP)</a></li>
         <li>
-            <a href="_free_sql.php" target="MySQL">Free SQL (Careful! WiP)</a>
+            <h3>DataBase access</h3>
             <ul>
-                <li><a href="_free_sql.php?stmt=SELECT+*+FROM+THE_FLEET+F+%0D%0AWHERE+F.ID+NOT+IN+%28SELECT+BOAT_ID+FROM+REFERENTS%29+AND%0D%0A+F.CATEGORY+%3C%3E+%27EX_BOAT%27%3B" target="MySQL">Boats with no referent</a></li>
-                <li><a href="_free_sql.php?stmt=SELECT+*+FROM+BOATS_AND_REFERENTS%3B" target="MySQL">Boats and referents</a></li>
-                <li><a href="_free_sql.php?stmt=SELECT+M.EMAIL%2C+CONCAT%28M.FIRST_NAME%2C+%27+%27%2C+UPPER%28M.LAST_NAME%29%29%2C%0D%0A+B.BOAT_NAME%2C+B.BOAT_TYPE%2C%0D%0A+B.BASE%2C+R.TELEPHONE%0D%0AFROM+PASSE_COQUE_MEMBERS+M%2C%0D%0A+THE_FLEET+B%2C%0D%0A+REFERENTS+R%0D%0AWHERE+R.BOAT_ID+%3D+B.ID+AND%0D%0A+B.CATEGORY+%3D+%27CLUB%27+AND%0D%0A+R.EMAIL+%3D+M.EMAIL%3B" target="MySQL">Boats and referents (Boat Club only)</a></li>
-                <li><a href="_free_sql.php?stmt=SELECT+PCM.EMAIL%2C+%0D%0A+++++++CONCAT%28+UPPER%28PCM.LAST_NAME%29%2C+%27+%27%2C+PCM.FIRST_NAME+%29+AS+NAME+%0D%0AFROM+PASSE_COQUE_MEMBERS+PCM+%0D%0AWHERE+PCM.EMAIL+NOT+IN+%28SELECT+DISTINCT+EMAIL+FROM+MEMBERS_AND_FEES%29+%0D%0AORDER+BY+2%3B" target="MySQL">Members with no fee</a></li>
-                <li><a href="_free_sql.php?stmt=SELECT+CONCAT%28UPPER%28M.LAST_NAME%29%2C+%27+%27%2C+M.FIRST_NAME%29%2C+%0D%0A+++++++M.EMAIL%2C%0D%0A+++++++%28SELECT+GROUP_CONCAT%28F.PERIOD%29+from+MEMBERS_AND_FEES+F+WHERE+M.EMAIL+%3D+F.EMAIL+GROUP+BY+F.EMAIL%29%0D%0AFROM+PASSE_COQUE_MEMBERS+M%0D%0AWHERE+M.EMAIL+LIKE+%27%%27+%0D%0AORDER+BY+1%3B" target="MySQL">Members and year fees</a></li>
-                <li>. . .</li>
+                <li><a href="how-to.html" target="how-to">Passe-Coque Members Management: How to.</a></li>
+                <li><a href="_members.01.php" target="MySQL">Passe-Coque Members Management</a></li>
+                <li><a href="_members.year.fees.php" target="MySQL">Passe-Coque Members, Year Fees</a></li>
+                <li><a href="_the_fleet.01.php" target="MySQL">Passe-Coque Fleet Management</a></li>
+                <li><a href="_referents.01.php" target="MySQL">Passe-Coque Referents Management</a></li>
+                <li><a href="_boat-club.01.php" target="MySQL">Passe-Coque Boat-Club Members Management</a></li>
+                <li><a href="../web/see.planning.2.html?admin=true" target="MySQL">Passe-Coque Boat-Club Reservations Planning</a></li>
+                <li>
+                    <a href="_reservations.01.php" target="MySQL">Passe-Coque Boat-Club Reservations</a>
+                    <ul>
+                        <li><a href="_reservations.02.php?lang=EN&admin=true" target="MySQL">Make a Reservation</a></li>
+                    </ul>
+                </li>
+                <li><a href="_help_requests.01.php?option=admin" target="admin">Gestion des demandes d'aide (convoyages, bricolages, ...)</a></li>
+                <li><a href="_members.01.csv.php" target="MySQL">Passe-Coque Members, spreadsheet (WiP)</a></li>
+                <li>
+                    <a href="_free_sql.php" target="MySQL">Free SQL (Careful! WiP)</a>
+                    <ul>
+                        <li><a href="_free_sql.php?stmt=SELECT+*+FROM+THE_FLEET+F+%0D%0AWHERE+F.ID+NOT+IN+%28SELECT+BOAT_ID+FROM+REFERENTS%29+AND%0D%0A+F.CATEGORY+%3C%3E+%27EX_BOAT%27%3B" target="MySQL">Boats with no referent</a></li>
+                        <li><a href="_free_sql.php?stmt=SELECT+*+FROM+BOATS_AND_REFERENTS%3B" target="MySQL">Boats and referents</a></li>
+                        <li><a href="_free_sql.php?stmt=SELECT+M.EMAIL%2C+CONCAT%28M.FIRST_NAME%2C+%27+%27%2C+UPPER%28M.LAST_NAME%29%29%2C%0D%0A+B.BOAT_NAME%2C+B.BOAT_TYPE%2C%0D%0A+B.BASE%2C+R.TELEPHONE%0D%0AFROM+PASSE_COQUE_MEMBERS+M%2C%0D%0A+THE_FLEET+B%2C%0D%0A+REFERENTS+R%0D%0AWHERE+R.BOAT_ID+%3D+B.ID+AND%0D%0A+B.CATEGORY+%3D+%27CLUB%27+AND%0D%0A+R.EMAIL+%3D+M.EMAIL%3B" target="MySQL">Boats and referents (Boat Club only)</a></li>
+                        <li><a href="_free_sql.php?stmt=SELECT+PCM.EMAIL%2C+%0D%0A+++++++CONCAT%28+UPPER%28PCM.LAST_NAME%29%2C+%27+%27%2C+PCM.FIRST_NAME+%29+AS+NAME+%0D%0AFROM+PASSE_COQUE_MEMBERS+PCM+%0D%0AWHERE+PCM.EMAIL+NOT+IN+%28SELECT+DISTINCT+EMAIL+FROM+MEMBERS_AND_FEES%29+%0D%0AORDER+BY+2%3B" target="MySQL">Members with no fee</a></li>
+                        <li><a href="_free_sql.php?stmt=SELECT+CONCAT%28UPPER%28M.LAST_NAME%29%2C+%27+%27%2C+M.FIRST_NAME%29%2C+%0D%0A+++++++M.EMAIL%2C%0D%0A+++++++%28SELECT+GROUP_CONCAT%28F.PERIOD%29+from+MEMBERS_AND_FEES+F+WHERE+M.EMAIL+%3D+F.EMAIL+GROUP+BY+F.EMAIL%29%0D%0AFROM+PASSE_COQUE_MEMBERS+M%0D%0AWHERE+M.EMAIL+LIKE+%27%%27+%0D%0AORDER+BY+1%3B" target="MySQL">Members and year fees</a></li>
+                        <li>. . .</li>
+                    </ul>
+                </li>        
             </ul>
         </li>
     </ul>
