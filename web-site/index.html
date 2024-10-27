@@ -568,7 +568,7 @@ window.onload = () => {
 
 	// A message onload ?
 	if (true) { 
-		let navigateTo = getQueryParameterByName('nav-to');
+		let navigateTo = getQueryParameterByName('nav-to');  // TODO boat-id, tx ?
 		if (! navigateTo) { // In order not to have too many popups
 			console.log("Showing dialog on load");
 			showDialogOnLoad("Welcome !", "welcome");
