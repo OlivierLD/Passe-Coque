@@ -130,6 +130,7 @@ $adminPrivileges = $_SESSION['ADMIN'];
 $bcMember = $_SESSION['BC_MEMBER'];
 $isReferent = $_SESSION['IS_REFERENT'];
 $user_id = $_SESSION['USER_ID'];
+$isPrjOwner = $_SESSION['IS_PRJ_OWNER'];
 //
 $days_since_last_fee = $_SESSION['DAYS_SINCE_LAST_FEE'];
 
@@ -170,9 +171,19 @@ if ($current_lang == "FR") {
       <ul>
         <li><a href="../admin/sql/_reservations.01.php" target="admin">G&eacute;rer les r&eacute;servations</a></li>
         <li><a href="../admin/sql/_help_requests.01.php?option=request" target="admin">Demander de l'aide (convoyages, bricolages, ...)</a></li>
+        <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
       </ul>
       <?php
     }
+    if ($isPrjOwner) {
+      ?>
+      En tant que <i>responsable d'un projet</i>, vous pouvez :
+      <ul>
+        <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
+      </ul>
+      <?php
+    }
+
     // Cotisation a jour...
     if ($days_since_last_fee > 365) { // Oops
       echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'>" .PHP_EOL;
@@ -225,6 +236,16 @@ if ($current_lang == "FR") {
       As the <i>referent of a boat</i>, you can also:
       <ul>
         <li><a href="../admin/sql/_reservations.01.php" target="admin">Manage the reservations</a></li>
+        <li><a href="../admin/sql/_help_requests.01.php?option=request" target="admin">Ask for help (deliveries, workshop, ...)</a></li>
+        <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
+      </ul>
+      <?php
+    }
+    if ($isPrjOwner) {
+      ?>
+      As a <i>Project Leader</i>, you can also:
+      <ul>
+        <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Learn how to make a blog</a></li>
       </ul>
       <?php
     }
