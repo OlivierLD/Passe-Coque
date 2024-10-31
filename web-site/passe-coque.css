@@ -941,10 +941,15 @@ span.expand-collapse:hover {
 
 .pix-strip {
     display: grid; 
-    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;
+    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;
     /* grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;  */
     margin-right: 20px;
 }
+
+.partners-container {
+    max-height: 300px;
+}
+
 .pcc-dialog {
     width: 85%; /*800px; */
     margin-top: 40px; 
@@ -1161,6 +1166,11 @@ span.expand-collapse:hover {
     text-align: center;
 }    
 
+.logo-image {
+    width: 180px;
+    height: auto;
+}  
+
 /**/
 /* End of Default Cell-Phone */
 
@@ -1247,9 +1257,14 @@ span.expand-collapse:hover {
     .pix-strip {
         display: grid; 
         /* grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;  */
-        grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px; 
+        grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px; 
         margin-right: 20px;
     }    
+
+    .partners-container {
+        max-height: none;
+    }
+
     .pcc-dialog {
         width: 75%; 
         margin-top: 40px; 
@@ -1400,7 +1415,9 @@ span.expand-collapse:hover {
         grid-template-columns: 98%;
     }
     .logo-image {
-        width: 180px;
+        /* width: 180px;
+        height: auto; */
+        width: auto;
         height: auto;
     }  
     .actu-container {
