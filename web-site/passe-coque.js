@@ -1931,6 +1931,13 @@ const NEXT_EVENTS = [
             en: 'October 15 to 20, 2024, Le Nautic, new version, in Paris.'
         }
     }, {
+        date_from: '2024-11-10',
+        date_to: '2024-11-10',
+        content: {
+            fr: '10 novembre 2024, d&eacute;part du Vend&eacute;e Globe, aux Sables d\'Olonne.',
+            en: 'November 10, 2024, start of the Vend&eacute;e Globe, in the Sables d\'Olonne.'
+        }
+    }, {
         date_from: '2024-12-25',
         date_to: '2024-12-25',
         content: {
