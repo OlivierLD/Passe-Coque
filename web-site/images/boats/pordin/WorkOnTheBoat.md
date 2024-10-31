@@ -3,5 +3,6 @@
 - Nettoyage...
 - Nouvelle épissure pataras
 - Connexion électronique
+- Installation gaz (réchaud)
 
 ---

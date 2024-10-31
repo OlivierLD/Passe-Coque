@@ -1733,6 +1733,10 @@ const INFO_SECTION = [
         content: [{
             date: "Oct-2024",
             title: "Octobre 2024",
+            content: "/actu/2024/vendee.globe.html"
+        },{
+            date: "Oct-2024",
+            title: "Octobre 2024",
             content: "/actu/2024/la.reveuse.02.html"
         },{
             date: "Jul-2024",
