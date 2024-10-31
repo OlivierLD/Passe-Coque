@@ -2683,6 +2683,10 @@ let copyTextToClipboard = (content) => {
 
 let keepScrolling = true;
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+};
+
 let onPartnerSlidesLoad = () => {
     console.log('Partners, loaded!');
     let parentDiv = document.getElementById("partners-container");
@@ -2690,6 +2694,7 @@ let onPartnerSlidesLoad = () => {
     if (pixStrip) {
         let scrollMargin = 0;
         let max = pixStrip.scrollWidth - parentDiv.clientWidth + 10;
+        let timeout = 10;
         console.log('PixStrip was found.');
         let scrollDiv = (margin) => {
             pixStrip.style.marginLeft = `-${margin}px`; // TODO Try scrollLeft ?
@@ -2701,10 +2706,17 @@ let onPartnerSlidesLoad = () => {
                         // console.log(`margin now ${scrollMargin} / ${max} ...`);
                         if (scrollMargin > max) {
                             scrollMargin = 0;
+                            sleep(2000).then(() => { 
+                                console.log('Resuming after sleep...'); // Wow !
+                                scrollDiv(scrollMargin);                        
+                            });
+                        } else {
+                            scrollDiv(scrollMargin);                        
                         }
+                    } else {
+                        scrollDiv(scrollMargin); // For resumeScroll.                       
                     }
-                    scrollDiv(scrollMargin);
-                }, 10);
+                }, timeout);
             } else {
                 console.log('Partner screen was left...');
             }
