@@ -2669,3 +2669,45 @@ let copyTextToClipboard = (content) => {
     document.body.removeChild(codeHolder);
     // customAlert(`Value ${content} copied to clipboard`);
 };
+
+let keepScrolling = true;
+
+let onPartnerSlidesLoad = () => {
+    console.log('Partners, loaded!');
+    let parentDiv = document.getElementById("partners-container");
+    let pixStrip = document.querySelector(".pix-strip");
+    if (pixStrip) {
+        let scrollMargin = 0;
+        let max = pixStrip.scrollWidth - parentDiv.clientWidth + 10;
+        console.log('PixStrip was found.');
+        let scrollDiv = (margin) => {
+            pixStrip.style.marginLeft = `-${margin}px`; // TODO Try scrollLeft ?
+            pixStrip = document.querySelector(".pix-strip"); // Still there...
+            if (pixStrip) {
+                window.setTimeout(() => {
+                    if (keepScrolling) {
+                        scrollMargin += 1;
+                        // console.log(`margin now ${scrollMargin} / ${max} ...`);
+                        if (scrollMargin > max) {
+                            scrollMargin = 0;
+                        }
+                    }
+                    scrollDiv(scrollMargin);
+                }, 10);
+            } else {
+                console.log('Partner screen was left...');
+            }
+        };
+        scrollDiv(scrollMargin); // First start
+    }
+};
+
+let stopScroll = () => {
+    console.log("Stop scrolling...");
+    keepScrolling = false;
+};
+
+let resumeScroll = () => {
+    console.log("Resume scrolling...");
+    keepScrolling = true;
+};
