@@ -2695,17 +2695,25 @@ let onPartnerSlidesLoad = () => {
         let scrollMargin = 0;
         let max = pixStrip.scrollWidth - parentDiv.clientWidth + 10;
         let timeout = 10;
+        let inc = 1;
         console.log('PixStrip was found.');
         let scrollDiv = (margin) => {
             pixStrip.style.marginLeft = `-${margin}px`; // TODO Try scrollLeft ?
-            pixStrip = document.querySelector(".pix-strip"); // Still there...
+            pixStrip = document.querySelector(".pix-strip"); // Still there (still on the partner page)...
             if (pixStrip) {
                 window.setTimeout(() => {
                     if (keepScrolling) {
-                        scrollMargin += 1;
+                        scrollMargin += inc;
                         // console.log(`margin now ${scrollMargin} / ${max} ...`);
                         if (scrollMargin > max) {
-                            scrollMargin = 0;
+                            // scrollMargin = 0;
+                            inc = -1;
+                            sleep(2000).then(() => { 
+                                console.log('Resuming after sleep...'); // Wow !
+                                scrollDiv(scrollMargin);                        
+                            });
+                        } else if (scrollMargin < 0) {
+                            inc = 1;
                             sleep(2000).then(() => { 
                                 console.log('Resuming after sleep...'); // Wow !
                                 scrollDiv(scrollMargin);                        
