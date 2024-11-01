@@ -1934,8 +1934,8 @@ const NEXT_EVENTS = [
         date_from: '2024-11-10',
         date_to: '2024-11-10',
         content: {
-            fr: '10 novembre 2024, d&eacute;part du Vend&eacute;e Globe, aux Sables d\'Olonne.',
-            en: 'November 10, 2024, start of the Vend&eacute;e Globe, in the Sables d\'Olonne.'
+            fr: '10 novembre 2024, d&eacute;part du <a href="https://www.vendeeglobe.org/" target="VG">Vend&eacute;e Globe</a>, aux Sables d\'Olonne.',
+            en: 'November 10, 2024, start of the <a href="https://www.vendeeglobe.org/" target="VG">Vend&eacute;e Globe</a>, in the Sables d\'Olonne.'
         }
     }, {
         date_from: '2024-12-25',
