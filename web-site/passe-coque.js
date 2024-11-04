@@ -1665,8 +1665,8 @@ const THE_TEAM = [
         boss: false,
         image: "/images/the.team/jeff.png",
         label: {
-            fr: "Jeff<br/>D&eacute;veloppement",
-            en: "Jeff<br/>Development"
+            fr: "Jeff<br/>D&eacute;veloppement de l'Eco-Village",
+            en: "Jeff<br/>Eco-Village Development"
         }
     }, {
         id: "alain",
