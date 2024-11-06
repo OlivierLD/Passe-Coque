@@ -1422,7 +1422,7 @@ const THE_FLEET = [
         id: "tri-yann",
         pix: "/images/boats/tri.yann.png",
         type: "Trimaran Allegro",
-        category: NONE,
+        category: CLUB,
         base: "Saint&#8209;Philibert"
     },
     { 
@@ -1590,7 +1590,7 @@ const THE_FLEET = [
         id: "gwenillig",
         pix: "/images/boats/gwenillig.png",
         type: "Eygthene 24",
-        category: NONE,
+        category: CLUB,
         base: "--"
     },
     { 
@@ -1622,7 +1622,7 @@ const THE_FLEET = [
         id: "bemol",
         pix: "/images/boats/sun-rise-35-sous-spi.jpg",
         type: "Sun Rise 35",
-        category: TO_GRAB,
+        category: CLUB,
         base: "Saint-Philibert"
     }
 ];
