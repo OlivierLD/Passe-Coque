@@ -608,7 +608,7 @@ function getBoatsByReferent(string $dbhost, string $username, string $password, 
 function getAllBoatsByReferent(string $dbhost, string $username, string $password, string $database, string $userId, bool $admin=false, bool $verbose=false) : array {
     $sql = "SELECT BR.BOAT_ID, BR.BOAT_NAME, BR.BASE, CONCAT(PC.FIRST_NAME, ' ', UPPER(PC.LAST_NAME)), BR.EMAIL " .
            "FROM BOATS_AND_REFERENTS BR, PASSE_COQUE_MEMBERS PC " .
-           "WHERE BR.EMAIL = PC.EMAIL AND (BR.EMAIL = '$userId' OR $admin);";
+           "WHERE BR.EMAIL = PC.EMAIL AND (BR.EMAIL = '$userId' OR " . ($admin ? 1 : 0) . ");";
 
     $boats = array();
     $index = 0;
@@ -629,11 +629,11 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { 
             $boatData = array();

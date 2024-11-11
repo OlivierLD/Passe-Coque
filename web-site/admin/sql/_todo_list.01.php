@@ -76,7 +76,7 @@ try {
   <body>
     <h1>PHP / MySQL. TODO lists</h1>
 
-    <?php
+<?php
 // phpinfo();
 
 require __DIR__ . "/../../php/db.cred.php";
@@ -146,8 +146,11 @@ if ($operation == 'list') {
         $title = ($lang == 'FR') ? "Liste des bateaux" : "Boat list";
         echo ("<h2>" . $title . "</h2>");
         // La suite
-        $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, $adminPriv, $VERBOSE);
-        if (true) { // List the boats for this referent
+        $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, ($adminPriv ? true : false), $VERBOSE);
+        if (true) { // List the boats for this referent (or admin)
+
+            echo ("For $userId, " . count($boats) . " boat(s).<br/>" . PHP_EOL);
+
             echo ("<ul>" . PHP_EOL);
             foreach($boats as $boat) {
                 // echo("<li>$boat[0], <b>$boat[1]</b>, $boat[2] (ref: $boat[3])</li>" . PHP_EOL);
@@ -170,6 +173,8 @@ if ($operation == 'list') {
 
         $canModify = ($adminPriv || $userId == $contact);
 
+        // TODO Display boat name here
+
         echo ("<table>" . PHP_EOL);
         echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
         foreach ($todoLines as $line) {
@@ -189,20 +194,39 @@ if ($operation == 'list') {
 <?php
 
                 echo ("</td>" . PHP_EOL); 
-                echo ("<td><button>Delete</button></td>" . PHP_EOL); // TODO A Form
+                echo ("<td>" . PHP_EOL);
+?>                 
+            <form action="<?php echo basename(__FILE__); ?>" method="post">
+                <input type="hidden" name="operation" value="delete-line">
+                <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
+                <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
+                <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
+            </form>
+<?php                
+                echo("</td>" . PHP_EOL);
             }
             echo ("</tr>" . PHP_EOL);
         }
         echo ("</table>" . PHP_EOL);
 
         if ($canModify) {
-            echo ("<button>Create new Line</button>" . PHP_EOL);
+            // echo ("<button>Create new Line</button>" . PHP_EOL);
+?>
+            <form action="<?php echo basename(__FILE__); ?>" method="post">
+                <input type="hidden" name="operation" value="create-line">
+                <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                <input type="hidden" name="boat-id" value="<?php echo($boat_id); ?>">
+                <input type="submit" value="<?php echo(($lang != 'FR') ? "Create" : "Cr&eacute;er"); ?>">
+            </form>
+<?php            
         }
 
         echo ("<hr/>" . PHP_EOL);
     }
 } else if ($operation == "edit-line") {
-    $lang = $_POST['lang'];
     $boatId = $_POST['boat-id'];
     $lineId = $_POST['line-id'];
     $ref = $_POST['ref'];
@@ -211,7 +235,7 @@ if ($operation == 'list') {
 
     echo ("Got " . count($line) . " fields.<br/>" . PHP_EOL);
     if (count($line) > 0) {
-        ?>
+?>
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="update-line">
                 <input type="hidden" name="lang" value="<?php echo($lang); ?>">
@@ -243,8 +267,7 @@ if ($operation == 'list') {
 
                 <input type="submit" value="<?php echo(($lang != 'FR') ? "Update" : "Mettre &agrave; jour"); ?>">
             </form>
-
-        <?php
+<?php
     } else {
         echo ("Required line ($lineId) was not found...<br/>" . PHP_EOL);
     }
@@ -252,7 +275,42 @@ if ($operation == 'list') {
 
     echo ("<hr/>" . PHP_EOL);
     echo ("<a href='" . basename(__FILE__) . "?option=for-boat&boat-id=$boatId&ref=$ref&lang=$lang'>" . ($lang == 'FR' ? 'Retour TODO list' : 'Back to TODO List') . "</a>" . PHP_EOL);
+} else if ($operation == "create-line") {
+    $lang = $_POST["lang"];
+    $ref = $_POST["ref"];
+    $boatId = $_POST["boat-id"];
+?>
+            <form action="<?php echo basename(__FILE__); ?>" method="post">
+                <input type="hidden" name="operation" value="insert-line">
+                <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                <input type="hidden" name="boat-id" value="<?php echo($boatId); ?>">
 
+                <table>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <textarea rows="5" cols="60" name="description" placeholder="On fait quoi ?"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="<?php echo(($lang != 'FR') ? "Create" : "Cr&eacute;er"); ?>">
+            </form>
+
+<?php
+} else if ($operation == "insert-line") {
+    $lang = $_POST["lang"];
+    $ref = $_POST["ref"];
+    $boatId = $_POST["boat-id"];
+
+    $description = $_POST["description"];
+
+    $sql = "INSERT INTO TODO_LISTS (BOAT_ID, LINE_DESC, LINE_STATUS) VALUES ('$boatId', '" . str_replace("'", "\'", $description) . "', 'OPENED');";
+
+    executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+
+    echo ("<hr/>" . PHP_EOL);
+    echo ("<a href='" . basename(__FILE__) . "?option=for-boat&boat-id=$boatId&ref=$ref&lang=$lang'>" . ($lang == 'FR' ? 'Retour TODO list' : 'Back to TODO List') . "</a>" . PHP_EOL);
 } else if ($operation == "update-line") {
     $lang = $_POST["lang"];
     $ref = $_POST["ref"];
@@ -266,6 +324,20 @@ if ($operation == 'list') {
     // echo ("Will update line $lineId, Desc [$newDescription], Status [$newStatus]" . PHP_EOL);
     $sql = "UPDATE TODO_LISTS SET LINE_DESC = '" . str_replace("'", "\'", $newDescription) . "', LINE_STATUS = '$newStatus', LAST_UPDATED = CURRENT_TIMESTAMP
             WHERE LINE_ID = $lineId;";
+
+    executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+
+    echo ("<hr/>" . PHP_EOL);
+    echo ("<a href='" . basename(__FILE__) . "?option=for-boat&boat-id=$boatId&ref=$ref&lang=$lang'>" . ($lang == 'FR' ? 'Retour TODO list' : 'Back to TODO List') . "</a>" . PHP_EOL);
+} else if ($operation == "delete-line") {
+    $lang = $_POST["lang"];
+    $ref = $_POST["ref"];
+    $boatId = $_POST["boat-id"];
+    $lineId = $_POST["line-id"];
+
+    // The update
+    // echo ("Will update line $lineId, Desc [$newDescription], Status [$newStatus]" . PHP_EOL);
+    $sql = "DELETE FROM TODO_LISTS WHERE LINE_ID = $lineId;";
 
     executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
 
