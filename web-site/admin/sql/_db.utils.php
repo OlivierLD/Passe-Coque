@@ -605,10 +605,10 @@ function getBoatsByReferent(string $dbhost, string $username, string $password, 
 }
 
 // Not CLUB only
-function getAllBoatsByReferent(string $dbhost, string $username, string $password, string $database, string $userId, bool $verbose=false) : array {
-    $sql = "SELECT BOAT_ID, BOAT_NAME, BASE " .
-           "FROM BOATS_AND_REFERENTS " .
-           "WHERE EMAIL = '$userId';";
+function getAllBoatsByReferent(string $dbhost, string $username, string $password, string $database, string $userId, bool $admin=false, bool $verbose=false) : array {
+    $sql = "SELECT BR.BOAT_ID, BR.BOAT_NAME, BR.BASE, CONCAT(PC.FIRST_NAME, ' ', UPPER(PC.LAST_NAME)), BR.EMAIL " .
+           "FROM BOATS_AND_REFERENTS BR, PASSE_COQUE_MEMBERS PC " .
+           "WHERE BR.EMAIL = PC.EMAIL AND (BR.EMAIL = '$userId' OR $admin);";
 
     $boats = array();
     $index = 0;
@@ -640,6 +640,8 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
             $boatData[0] = $table[0]; // Boat ID
             $boatData[1] = $table[1]; // Boat Name
             $boatData[2] = $table[2]; // Boat Base
+            $boatData[3] = $table[3]; // Referent name
+            $boatData[4] = $table[4]; // Referent email
 
             $boats[$index] = $boatData;
             $index++;
@@ -654,6 +656,110 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
     }
 
     return $boats;
+}
+
+function getBoatsTODOList(string $dbhost, string $username, string $password, string $database, string $userId, string $boatId, bool $verbose=false) : array {
+    $sql = "SELECT BOAT_ID, LINE_ID, LINE_DESC, CREATION_DATE, LINE_STATUS, LAST_UPDATED 
+            FROM TODO_LISTS 
+            WHERE BOAT_ID = '$boatId' 
+            ORDER BY LINE_ID;";
+
+    $lines = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { 
+            $lineData = array();
+            $lineData[0] = $table[0]; // Boat ID
+            $lineData[1] = $table[1]; // LINE_ID
+            $lineData[2] = $table[2]; // LINE_DESC
+            $lineData[3] = $table[3]; // CREATION_DATE
+            $lineData[4] = $table[4]; // LINE_STATUS
+            $lineData[5] = $table[5]; // LAST_UPDATED
+
+            $lines[$index] = $lineData;
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $lines;
+}
+
+function getTODOListLine(string $dbhost, string $username, string $password, string $database, int $lineId, bool $verbose=false) : array {
+    $sql = "SELECT BOAT_ID, LINE_ID, LINE_DESC, CREATION_DATE, LINE_STATUS, LAST_UPDATED 
+            FROM TODO_LISTS 
+            WHERE LINE_ID = $lineId;";
+
+    $line = array(); // On line only
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+    
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>");
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]");
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        }
+        while ($table = mysqli_fetch_array($result)) { 
+            $line[0] = $table[0]; // Boat ID
+            $line[1] = $table[1]; // LINE_ID
+            $line[2] = $table[2]; // LINE_DESC
+            $line[3] = $table[3]; // CREATION_DATE
+            $line[4] = $table[4]; // LINE_STATUS
+            $line[5] = $table[5]; // LAST_UPDATED
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $line;
 }
 
 class MemberStatus {

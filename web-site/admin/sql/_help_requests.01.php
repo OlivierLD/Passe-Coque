@@ -178,7 +178,7 @@ if ($option != null) {
         } else {
             echo("Creating entry for $userId");
         }
-        $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, $VERBOSE);
+        $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, false, $VERBOSE);
 
         if (false) { // List the boats for this referent
             echo ("<ul>" . PHP_EOL);
