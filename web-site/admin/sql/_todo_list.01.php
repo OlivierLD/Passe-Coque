@@ -136,8 +136,9 @@ if ($operation == 'list') {
         // List the boats
         $title = ($lang == 'FR') ? "Liste des bateaux" : "Boat list";
         echo ("<h2>" . $title . "</h2>");
-        // La suite
-        $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, ($adminPriv ? true : false), $VERBOSE);
+        // La suite...
+        // $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, ($adminPriv ? true : false), $VERBOSE); // One per referent
+        $boats = getDistinctBoatsWithReferents($dbhost, $username, $password, $database, $VERBOSE); // No duplicate
         if (true) { // List the boats for this referent (or admin)
 
             if ($VERBOSE) {
@@ -171,10 +172,19 @@ if ($operation == 'list') {
         $todoLines = getBoatsTODOList($dbhost, $username, $password, $database, $contact, $boat_id, $VERBOSE);
 
         if ($VERBOSE) {
-            echo ("Got " . count($todoLines) . " lines for $boat_id.<br/>" . PHP_EOL);
-        }
+            echo ("Got " . count($todoLines) . " lines for '$boat_id'.<br/>" . PHP_EOL);
+            try {
+                echo ("Can Modify: Admin [$adminPriv], [$userId] in [$contact]: [" . (strpos($contact, $userId) !== false ? 'yes' : 'no') . "]<br/>" . PHP_EOL);
+            } catch (Throwable $e) {
+                echo "Captured Throwable for str_contains/strpos : " . $e->getMessage() . "<br/>" . PHP_EOL;
+            }
+        }                        
 
-        $canModify = ($adminPriv || $userId == $contact);
+        $canModify = ($adminPriv || // $userId == $contact);  // contains
+                                    (strpos($contact, $userId) !== false));
+        if ($VERBOSE) {
+            echo ("Can Modify => [" . ($canModify ? 'yes' : 'no') . "]<br/>" . PHP_EOL);
+        }                        
 
         echo ("<h3>" . ($lang == 'FR' ? "TODO list pour $boatName" : "TODO list for $boatName") . "</h3>" . PHP_EOL);
 
@@ -186,27 +196,27 @@ if ($operation == 'list') {
             if ($canModify) {
                 echo ("<td>" . PHP_EOL);
 ?>
-            <form action="<?php echo basename(__FILE__); ?>" method="post">
-                <input type="hidden" name="operation" value="edit-line">
-                <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
-                <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
-                <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
-                <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
-            </form>
+                <form action="<?php echo basename(__FILE__); ?>" method="post">
+                    <input type="hidden" name="operation" value="edit-line">
+                    <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                    <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                    <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
+                    <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
+                    <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
+                </form>
 <?php
 
                 echo ("</td>" . PHP_EOL); 
                 echo ("<td>" . PHP_EOL);
 ?>                 
-            <form action="<?php echo basename(__FILE__); ?>" method="post">
-                <input type="hidden" name="operation" value="delete-line">
-                <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
-                <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
-                <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
-                <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
-            </form>
+                <form action="<?php echo basename(__FILE__); ?>" method="post">
+                    <input type="hidden" name="operation" value="delete-line">
+                    <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                    <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                    <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
+                    <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
+                    <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
+                </form>
 <?php                
                 echo("</td>" . PHP_EOL);
             }

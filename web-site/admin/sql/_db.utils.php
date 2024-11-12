@@ -30,17 +30,17 @@ function getBoats(string $dbhost, string $username, string $password, string $da
             throw $conn->connect_error;
         } else {
             if ($verbose) {
-                echo("[Connected.] ");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
         $sql = "SELECT ID, BOAT_NAME, BOAT_TYPE, CATEGORY, BASE FROM THE_FLEET;";
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] ');
+            echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }
         
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
   
         $boats = array();
@@ -79,17 +79,17 @@ function getBoatName(string $dbhost, string $username, string $password, string 
             throw $conn->connect_error;
         } else {
             if ($verbose) {
-                echo("[Connected.] ");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
         $sql = "SELECT BOAT_NAME FROM THE_FLEET WHERE ID = '" . $boatId . "';";
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] ');
+            echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }
         
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
   
         $boatName = 'Not found';
@@ -121,17 +121,17 @@ function getBoatsJSON(string $dbhost, string $username, string $password, string
             throw $conn->connect_error;
         } else {
             if ($verbose) {
-                echo("[Connected.] ");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
         $sql = "SELECT * FROM THE_FLEET;";
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] ');
+            echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }
         
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
 
         $json_result = "[";
@@ -169,17 +169,17 @@ function getMembers(string $dbhost, string $username, string $password, string $
             throw $conn->connect_error;
         } else {
             if ($verbose) {
-                echo("[Connected.] ");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
         $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF FROM PASSE_COQUE_MEMBERS;";
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] ');
+            echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }
         
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
   
         $members = array();
@@ -217,17 +217,17 @@ function getMember(string $dbhost, string $username, string $password, string $d
             throw $conn->connect_error;
         } else {
             if ($verbose) {
-                echo("[Connected.] ");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
         $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF FROM PASSE_COQUE_MEMBERS WHERE EMAIL = '$email';";
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] ');
+            echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }
         
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
   
         $members = array();
@@ -265,17 +265,17 @@ function getBCMember(string $dbhost, string $username, string $password, string 
             throw $conn->connect_error;
         } else {
             if ($verbose) {
-                echo("[Connected.] ");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
         $sql = "SELECT BCM.EMAIL, PCM.FIRST_NAME, PCM.LAST_NAME, PCM.TELEPHONE FROM BOAT_CLUB_MEMBERS BCM, PASSE_COQUE_MEMBERS PCM WHERE BCM.EMAIL = '$email' AND BCM.EMAIL = PCM.EMAIL;";
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] ');
+            echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }
         
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
   
         $members = array();
@@ -342,16 +342,16 @@ function getReservations(string $dbhost, string $username, string $password, str
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
             $reservations[$index] = new Reservation();
@@ -393,16 +393,16 @@ function getReservation(string $dbhost, string $username, string $password, stri
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
-        if (true || $verbose) {
-            echo ("Executing [" . $sql . "]" . PHP_EOL);
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { // Should be only one
             $reservation->owner = $table[0];
@@ -442,7 +442,7 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
@@ -456,11 +456,11 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
                     "ORDER BY FROM_DATE;";
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]<br/>");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         if ($result->num_rows == 0) {
             $boatAvailability->status = true;
@@ -523,16 +523,16 @@ function getBoatAndReferentDetails(string $dbhost, string $username, string $pas
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { 
             $allDetails[$index] = new AllBoatDetails();
@@ -577,16 +577,16 @@ function getBoatsByReferent(string $dbhost, string $username, string $password, 
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { 
             $boats[$index] = $table[0];
@@ -595,7 +595,7 @@ function getBoatsByReferent(string $dbhost, string $username, string $password, 
         // On ferme !
         $link->close();
         if ($verbose) {
-            echo("Closed DB<br/>".PHP_EOL);
+            echo("Closed DB<br/>" . PHP_EOL);
         }
     } catch (Throwable $e) {
         echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
@@ -624,7 +624,7 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
@@ -642,6 +642,66 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
             $boatData[2] = $table[2]; // Boat Base
             $boatData[3] = $table[3]; // Referent name
             $boatData[4] = $table[4]; // Referent email
+
+            $boats[$index] = $boatData;
+            $index++;
+        }        
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    return $boats;
+}
+
+function getDistinctBoatsWithReferents(string $dbhost, string $username, string $password, string $database, bool $verbose=false) : array {
+    $sql = "SELECT DISTINCT BR.BOAT_ID, 
+                   BR.BOAT_NAME, 
+                   BR.BASE,
+                   (SELECT GROUP_CONCAT(CONCAT(PCM.FIRST_NAME, ' ', UPPER(PCM.LAST_NAME))) 
+                       FROM BOATS_AND_REFERENTS BR2, PASSE_COQUE_MEMBERS PCM 
+                       WHERE BR2.BOAT_ID = BR.BOAT_ID AND PCM.EMAIL = BR2.EMAIL) AS REFERENTS,
+                   (SELECT GROUP_CONCAT(PCM.EMAIL) 
+                       FROM BOATS_AND_REFERENTS BR2, PASSE_COQUE_MEMBERS PCM 
+                       WHERE BR2.BOAT_ID = BR.BOAT_ID AND PCM.EMAIL = BR2.EMAIL) AS REF_EMAILS
+            FROM BOATS_AND_REFERENTS BR;";
+
+    $boats = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>" . PHP_EOL);
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
+        }
+        while ($table = mysqli_fetch_array($result)) { 
+            $boatData = array();
+            $boatData[0] = $table[0]; // Boat ID
+            $boatData[1] = $table[1]; // Boat Name
+            $boatData[2] = $table[2]; // Boat Base
+            $boatData[3] = $table[3]; // Referent(s) name
+            $boatData[4] = $table[4]; // Referent(s) emails
 
             $boats[$index] = $boatData;
             $index++;
@@ -678,16 +738,16 @@ function getBoatsTODOList(string $dbhost, string $username, string $password, st
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { 
             $lineData = array();
@@ -731,16 +791,16 @@ function getTODOListLine(string $dbhost, string $username, string $password, str
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { 
             $line[0] = $table[0]; // Boat ID
@@ -794,7 +854,7 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
@@ -803,11 +863,11 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
         $sql = "SELECT PC.EMAIL, (SELECT BC.EMAIL FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PC.EMAIL) FROM PASSE_COQUE_MEMBERS PC WHERE PC.EMAIL = '$userId';";
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]<br/>");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         if ($result->num_rows == 0) {
             $memberStatus->status = false;
@@ -870,16 +930,16 @@ function getAllHelpRequests(string $dbhost, string $username, string $password, 
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
             $requests[$index] = new HelpRequest();
@@ -924,16 +984,16 @@ function getHelpRequests(string $dbhost, string $username, string $password, str
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
             $requests[$index] = new HelpRequest();
@@ -976,16 +1036,16 @@ function getHelpRequestById(string $dbhost, string $username, string $password, 
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
             $requests[$index] = new HelpRequest();
@@ -1027,16 +1087,16 @@ function getHelpRequestByUserId(string $dbhost, string $username, string $passwo
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
         if ($verbose) {
-            echo ("Executing [" . $sql . "]");
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
         }
         $result = mysqli_query($link, $sql);
         if ($verbose) {
-            echo ("Returned " . $result->num_rows . " row(s)<br/>");
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
         }
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
             $requests[$index] = new HelpRequest();
@@ -1075,7 +1135,7 @@ function executeSQL(string $dbhost, string $username, string $password, string $
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
-                echo("Connected.<br/>");
+                echo("Connected.<br/>" . PHP_EOL);
             }
         }
 
@@ -1086,7 +1146,7 @@ function executeSQL(string $dbhost, string $username, string $password, string $
             if ($link->query($sql) === TRUE) {
               echo "OK. Statement executed successfully<br/><hr/>" . PHP_EOL;
             } else {
-              echo "ERROR executing: " . $sql . "<br/>" . $link->error . "<br/>";
+              echo "ERROR executing: " . $sql . "<br/>" . $link->error . "<br/>" . PHP_EOL;
             }
         } else {
             echo "Stby<br/>" . PHP_EOL;
