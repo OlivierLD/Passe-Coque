@@ -74,14 +74,14 @@ try {
   </script>    
 
   <body>
-    <h1>PHP / MySQL. TODO lists</h1>
+    <!--h1>PHP / MySQL. TODO lists</h1-->
 
 <?php
 // phpinfo();
 
 require __DIR__ . "/../../php/db.cred.php";
 require __DIR__ . "/_db.utils.php";
-require __DIR__ . "/_emails.utils.php";
+// require __DIR__ . "/_emails.utils.php";
 
 $VERBOSE = false; // Change at will
 
@@ -109,17 +109,6 @@ $currentYear = date("Y");
 // echo("Current year is " . $currentYear . ", next will be " . ($currentYear + 1) . "<br/>");
 $currentMonth = date("m");
 
-// if (isset($_GET['year'])) {
-//     $currentYear = $_GET['year'];
-// }
-// if (isset($_GET['month'])) {
-//     $currentMonth = $_GET['month'];
-// }
-
-// $helpType = 'SAILING';
-// if (isset($_GET['type'])) {
-//     $helpType = $_GET['type'];
-// }
 $lang = 'FR';
 if (isset($_GET['lang'])) {
     $lang = $_GET['lang'];
@@ -136,12 +125,14 @@ if (isset($_GET['option'])) {
     $option = $_GET['option'];
 }
 
-// echo ("This month (" . $currentYear . " - " . $MONTHS[$currentMonth - 1] . ") we have " . getNbDays($currentYear, $currentMonth) . " days.<br/>");
-echo("operation: [" . $operation . "], option: [" . $option . "]<br/>" . PHP_EOL);
-echo("UserID: [" . $userId . "], Admin Priv: [" . ($adminPriv ? 'yes' : 'no') . "]<br/>" . PHP_EOL);
+if ($VERBOSE) {
+    // echo ("This month (" . $currentYear . " - " . $MONTHS[$currentMonth - 1] . ") we have " . getNbDays($currentYear, $currentMonth) . " days.<br/>");
+    echo("operation: [" . $operation . "], option: [" . $option . "]<br/>" . PHP_EOL);
+    echo("UserID: [" . $userId . "], Admin Priv: [" . ($adminPriv ? 'yes' : 'no') . "]<br/>" . PHP_EOL);
+}
 
 if ($operation == 'list') { 
-    if ($option == null) {
+    if ($option == null || $option == 'no-empty') {
         // List the boats
         $title = ($lang == 'FR') ? "Liste des bateaux" : "Boat list";
         echo ("<h2>" . $title . "</h2>");
@@ -149,13 +140,24 @@ if ($operation == 'list') {
         $boats = getAllBoatsByReferent($dbhost, $username, $password, $database, $userId, ($adminPriv ? true : false), $VERBOSE);
         if (true) { // List the boats for this referent (or admin)
 
-            echo ("For $userId, " . count($boats) . " boat(s).<br/>" . PHP_EOL);
+            if ($VERBOSE) {
+                echo ("For $userId, " . count($boats) . " boat(s).<br/>" . PHP_EOL);
+            }
 
             echo ("<ul>" . PHP_EOL);
             foreach($boats as $boat) {
-                // echo("<li>$boat[0], <b>$boat[1]</b>, $boat[2] (ref: $boat[3])</li>" . PHP_EOL);
-                $url = basename(__FILE__) . "?option=for-boat&boat-id=$boat[0]&ref=$boat[4]&lang=$lang";
-                echo("<li><a href='$url'><b>$boat[1]</b></a>, $boat[2] (ref: $boat[3])</li>" . PHP_EOL);
+                $good2display = true;
+                if ($option == 'no-empty') {
+                    $todolist = getBoatsTODOList($dbhost, $username, $password, $database, $userId, $boat[0], $VERBOSE);
+                    if (count($todolist) == 0) {
+                        $good2display = false;
+                    }
+                }
+                if ($good2display) {
+                    // echo("<li>$boat[0], <b>$boat[1]</b>, $boat[2] (ref: $boat[3])</li>" . PHP_EOL);
+                    $url = basename(__FILE__) . "?option=for-boat&boat-id=$boat[0]&ref=$boat[4]&lang=$lang";
+                    echo("<li><a href='$url'><b>$boat[1]</b></a>, $boat[2] (ref: $boat[3])</li>" . PHP_EOL);
+                }
             }
             echo ("</ul>" . PHP_EOL);
         }
@@ -165,6 +167,7 @@ if ($operation == 'list') {
         if ($VERBOSE) {
             echo("Will get todo list for $boat_id, from $contact<br/>" . PHP_EOL);
         }
+        $boatName = getBoatName($dbhost, $username, $password, $database, $boat_id, $VERBOSE);
         $todoLines = getBoatsTODOList($dbhost, $username, $password, $database, $contact, $boat_id, $VERBOSE);
 
         if ($VERBOSE) {
@@ -173,7 +176,7 @@ if ($operation == 'list') {
 
         $canModify = ($adminPriv || $userId == $contact);
 
-        // TODO Display boat name here
+        echo ("<h3>" . ($lang == 'FR' ? "TODO list pour $boatName" : "TODO list for $boatName") . "</h3>" . PHP_EOL);
 
         echo ("<table>" . PHP_EOL);
         echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
@@ -223,6 +226,12 @@ if ($operation == 'list') {
             </form>
 <?php            
         }
+        // Back to boats list
+        if ($lang == 'FR') {
+            echo ("Retour &agrave; la <a href='javascript:history.back()'>liste des bateaux</a><br/>" . PHP_EOL);
+        } else {
+            echo ("Back to <a href='javascript:history.back()'>Boat list</a><br/>" . PHP_EOL);
+        }
 
         echo ("<hr/>" . PHP_EOL);
     }
@@ -233,7 +242,9 @@ if ($operation == 'list') {
     // Retrieve from DB, populate form
     $line = getTODOListLine($dbhost, $username, $password, $database, $lineId, $VERBOSE);
 
-    echo ("Got " . count($line) . " fields.<br/>" . PHP_EOL);
+    if ($VERBOSE) {
+        echo ("Got " . count($line) . " fields.<br/>" . PHP_EOL);
+    }
     if (count($line) > 0) {
 ?>
             <form action="<?php echo basename(__FILE__); ?>" method="post">
