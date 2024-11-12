@@ -188,41 +188,45 @@ if ($operation == 'list') {
 
         echo ("<h3>" . ($lang == 'FR' ? "TODO list pour $boatName" : "TODO list for $boatName") . "</h3>" . PHP_EOL);
 
-        echo ("<table>" . PHP_EOL);
-        echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
-        foreach ($todoLines as $line) {
-            echo ("<tr>" . PHP_EOL);
-            echo (  "<td><pre>$line[2]</pre></td><td>$line[3]</td><td>$line[4]</td><td>$line[5]</td>" . PHP_EOL);
-            if ($canModify) {
-                echo ("<td>" . PHP_EOL);
-?>
-                <form action="<?php echo basename(__FILE__); ?>" method="post">
-                    <input type="hidden" name="operation" value="edit-line">
-                    <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                    <input type="hidden" name="ref" value="<?php echo($contact); ?>">
-                    <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
-                    <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
-                    <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
-                </form>
-<?php
+        if (count($todoLines) == 0) {
+            echo ((($lang == 'FR') ? "Rien sur la TODO list de $boatName..." : "Nothing on the TODO list for $boatName...") . "<br/>" . PHP_EOL);
+        } else {
+            echo ("<table>" . PHP_EOL);
+            echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
+            foreach ($todoLines as $line) {
+                echo ("<tr>" . PHP_EOL);
+                echo (  "<td><pre>$line[2]</pre></td><td>$line[3]</td><td>$line[4]</td><td>$line[5]</td>" . PHP_EOL);
+                if ($canModify) {
+                    echo ("<td>" . PHP_EOL);
+    ?>
+                    <form action="<?php echo basename(__FILE__); ?>" method="post">
+                        <input type="hidden" name="operation" value="edit-line">
+                        <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                        <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                        <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
+                        <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
+                        <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
+                    </form>
+    <?php
 
-                echo ("</td>" . PHP_EOL); 
-                echo ("<td>" . PHP_EOL);
-?>                 
-                <form action="<?php echo basename(__FILE__); ?>" method="post">
-                    <input type="hidden" name="operation" value="delete-line">
-                    <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                    <input type="hidden" name="ref" value="<?php echo($contact); ?>">
-                    <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
-                    <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
-                    <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
-                </form>
-<?php                
-                echo("</td>" . PHP_EOL);
+                    echo ("</td>" . PHP_EOL); 
+                    echo ("<td>" . PHP_EOL);
+    ?>                 
+                    <form action="<?php echo basename(__FILE__); ?>" method="post">
+                        <input type="hidden" name="operation" value="delete-line">
+                        <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                        <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                        <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
+                        <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
+                        <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
+                    </form>
+    <?php                
+                    echo("</td>" . PHP_EOL);
+                }
+                echo ("</tr>" . PHP_EOL);
             }
-            echo ("</tr>" . PHP_EOL);
-        }
-        echo ("</table>" . PHP_EOL);
+            echo ("</table>" . PHP_EOL);
+    }
 
         if ($canModify) {
             // echo ("<button>Create new Line</button>" . PHP_EOL);

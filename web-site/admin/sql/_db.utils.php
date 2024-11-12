@@ -662,10 +662,10 @@ function getDistinctBoatsWithReferents(string $dbhost, string $username, string 
     $sql = "SELECT DISTINCT BR.BOAT_ID, 
                    BR.BOAT_NAME, 
                    BR.BASE,
-                   (SELECT GROUP_CONCAT(CONCAT(PCM.FIRST_NAME, ' ', UPPER(PCM.LAST_NAME))) 
+                   (SELECT GROUP_CONCAT(CONCAT(' ', PCM.FIRST_NAME, ' ', UPPER(PCM.LAST_NAME))) 
                        FROM BOATS_AND_REFERENTS BR2, PASSE_COQUE_MEMBERS PCM 
                        WHERE BR2.BOAT_ID = BR.BOAT_ID AND PCM.EMAIL = BR2.EMAIL) AS REFERENTS,
-                   (SELECT GROUP_CONCAT(PCM.EMAIL) 
+                   (SELECT GROUP_CONCAT(CONCAT(' ', PCM.EMAIL)) 
                        FROM BOATS_AND_REFERENTS BR2, PASSE_COQUE_MEMBERS PCM 
                        WHERE BR2.BOAT_ID = BR.BOAT_ID AND PCM.EMAIL = BR2.EMAIL) AS REF_EMAILS
             FROM BOATS_AND_REFERENTS BR;";
@@ -700,8 +700,8 @@ function getDistinctBoatsWithReferents(string $dbhost, string $username, string 
             $boatData[0] = $table[0]; // Boat ID
             $boatData[1] = $table[1]; // Boat Name
             $boatData[2] = $table[2]; // Boat Base
-            $boatData[3] = $table[3]; // Referent(s) name
-            $boatData[4] = $table[4]; // Referent(s) emails
+            $boatData[3] = trim($table[3]); // Referent(s) name(s)
+            $boatData[4] = trim($table[4]); // Referent(s) emails
 
             $boats[$index] = $boatData;
             $index++;
