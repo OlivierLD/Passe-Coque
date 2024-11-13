@@ -163,7 +163,7 @@ if (isset($_POST['operation'])) {
                     "CONCAT(PCM.FIRST_NAME, ' ', PCM.LAST_NAME), " . 
                     "PCM.ADMIN_PRIVILEGES, " .
                    "(SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC, " . 
-                   "(SELECT IF(COUNT(M.EMAIL) = 0, FALSE, TRUE) FROM PASSE_COQUE_MEMBERS M, THE_FLEET B, REFERENTS R WHERE R.BOAT_ID = B.ID AND B.CATEGORY = 'CLUB' AND R.EMAIL = M.EMAIL AND M.EMAIL = '$form_username') AS REF, " .
+                   "(SELECT IF(COUNT(M.EMAIL) = 0, FALSE, TRUE) FROM PASSE_COQUE_MEMBERS M, THE_FLEET B, REFERENTS R WHERE R.BOAT_ID = B.ID /*AND B.CATEGORY = 'CLUB'*/ AND R.EMAIL = M.EMAIL AND M.EMAIL = '$form_username') AS REF, " .
                    "(SELECT IF(COUNT(P.OWNER_EMAIL) = 0, FALSE, TRUE) FROM PROJECT_OWNERS P WHERE P.OWNER_EMAIL = '$form_username') AS PRJ " .
              "FROM PASSE_COQUE_MEMBERS PCM " . 
              "WHERE PCM.EMAIL = '$form_username';"; 

@@ -253,6 +253,9 @@ if ($operation == 'list') {
         if (count($todoLines) == 0) {
             echo ((($lang == 'FR') ? "Rien sur la TODO list de $boatName..." : "Nothing on the TODO list for $boatName...") . "<br/>" . PHP_EOL);
         } else {
+            
+            // echo("As $contact, $userId ...");
+
             echo ("<table>" . PHP_EOL);
             echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
             foreach ($todoLines as $line) {
@@ -264,7 +267,7 @@ if ($operation == 'list') {
                     <form action="<?php echo basename(__FILE__); ?>" method="post">
                         <input type="hidden" name="operation" value="edit-line">
                         <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                        <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                        <input type="hidden" name="ref" value="<?php echo($userId); ?>">
                         <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
                         <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
                         <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
@@ -277,7 +280,7 @@ if ($operation == 'list') {
                     <form action="<?php echo basename(__FILE__); ?>" method="post">
                         <input type="hidden" name="operation" value="delete-line">
                         <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                        <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                        <input type="hidden" name="ref" value="<?php echo($userId); ?>">
                         <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
                         <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
                         <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
@@ -297,7 +300,7 @@ if ($operation == 'list') {
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="create-line">
                 <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                <input type="hidden" name="ref" value="<?php echo($userId); ?>">
                 <input type="hidden" name="boat-id" value="<?php echo($boat_id); ?>">
                 <input type="submit" value="<?php echo(($lang != 'FR') ? "Create an element" : "Cr&eacute;er un &eacute;l&eacute;ment"); ?>">
             </form>
@@ -320,7 +323,7 @@ if ($operation == 'list') {
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="update-line">
                 <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                <input type="hidden" name="ref" value="<?php echo($userId); ?>">
                 <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
                 <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
 
@@ -361,6 +364,8 @@ if ($operation == 'list') {
     $ref = $_POST["ref"];
     $boatId = $_POST["boat-id"];
 
+    // echo("As $contact, $userId ...");
+
     echo("<h3>" . (($lang == 'FR') ? "Ajout d'un &eacute;l&eacute;ment dans la liste" : "Add an element in the List") . "</h3>" . PHP_EOL);
     echo ("<hr/>" . PHP_EOL);
     // Back to boats list
@@ -375,7 +380,7 @@ if ($operation == 'list') {
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="insert-line">
                 <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                <input type="hidden" name="ref" value="<?php echo($contact); ?>">
+                <input type="hidden" name="ref" value="<?php echo($userId); ?>">
                 <input type="hidden" name="boat-id" value="<?php echo($boatId); ?>">
 
                 <table>
@@ -396,6 +401,8 @@ if ($operation == 'list') {
     $lang = $_POST["lang"];
     $ref = $_POST["ref"];
     $boatId = $_POST["boat-id"];
+
+    // echo("As $contact, $userId ...");
 
     $description = $_POST["description"];
 
