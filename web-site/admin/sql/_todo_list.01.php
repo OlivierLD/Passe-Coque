@@ -38,6 +38,10 @@ try {
         font-family: 'Courier New'
       } */
 
+      * {
+        line-height: 1em;
+      }
+
       tr > td {
         border: 1px solid silver;
         vertical-align: top;
@@ -64,12 +68,30 @@ try {
       body {
         background: transparent;
       }
+ 
+      input[type=button], input[type=submit], input[type=reset] {
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        position: relative;
+        background-color: var(--pc-bg-color);
+        color: white;
+        border: 1px solid silver;
+        border-radius: 6px;
+      }
+
+      .big-column {
+        max-width: 40vw;
+        overflow-x: scroll;
+      }
     </style>
 
   </head>
 
   <script type="text/javascript">
     const validateForm = () => { // Used below ?
+        // Empty
     };
   </script>    
 
@@ -84,6 +106,31 @@ require __DIR__ . "/_db.utils.php";
 // require __DIR__ . "/_emails.utils.php";
 
 $VERBOSE = false; // Change at will
+
+function translateStatus(string $lang, string $original) : string {
+    $translated = $original;
+    try {
+        switch ($original) {
+            case 'OPENED':
+                $translated = ($lang == 'FR') ? "&Agrave; faire" : "To Do";
+                break;
+            case 'CANCELED':
+                $translated = ($lang == 'FR') ? "Annul&eacute;" : "Canceled";
+                break;
+            case 'COMPLETED':
+                $translated = ($lang == 'FR') ? "Termin&eacute;" : "Comnpleted";
+                break;
+            case 'IN_PROGRESS':
+                $translated = ($lang == 'FR') ? "En cours" : "In progess";
+                break;
+            default:
+                break;
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for a switch : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+    return $translated;
+}
 
 $MONTHS = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 
@@ -150,8 +197,15 @@ if ($operation == 'list') {
                 $good2display = true;
                 if ($option == 'no-empty') {
                     $todolist = getBoatsTODOList($dbhost, $username, $password, $database, $userId, $boat[0], $VERBOSE);
+                    if ($VERBOSE) {
+                        echo ("Boat $boat[0], " . count($todolist) . 
+                              " item(s) in the list, user $userId, ref-email(s): $boat[4], strpos says: " . 
+                              ((strpos($boat[3], $userId) === false) ? "No" : "Yes") . "<br/>" . PHP_EOL);
+                    }
                     if (count($todolist) == 0) {
-                        $good2display = false;
+                        if (strpos($boat[4], $userId) === false) { // Except if user is referent
+                            $good2display = false;
+                        }
                     }
                 }
                 if ($good2display) {
@@ -187,6 +241,14 @@ if ($operation == 'list') {
         }                        
 
         echo ("<h3>" . ($lang == 'FR' ? "TODO list pour $boatName" : "TODO list for $boatName") . "</h3>" . PHP_EOL);
+        echo ("<hr/>" . PHP_EOL);
+        // Back to boats list
+        if ($lang == 'FR') {
+            echo ("Retour &agrave; la <a href='javascript:history.back()'>liste des bateaux</a><br/>" . PHP_EOL);
+        } else {
+            echo ("Back to <a href='javascript:history.back()'>Boat list</a><br/>" . PHP_EOL);
+        }
+        echo ("<hr/>" . PHP_EOL);
 
         if (count($todoLines) == 0) {
             echo ((($lang == 'FR') ? "Rien sur la TODO list de $boatName..." : "Nothing on the TODO list for $boatName...") . "<br/>" . PHP_EOL);
@@ -195,7 +257,7 @@ if ($operation == 'list') {
             echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
             foreach ($todoLines as $line) {
                 echo ("<tr>" . PHP_EOL);
-                echo (  "<td><pre>$line[2]</pre></td><td>$line[3]</td><td>$line[4]</td><td>$line[5]</td>" . PHP_EOL);
+                echo (  "<td class='big-column'><pre>$line[2]</pre></td><td>$line[3]</td><td>" . translateStatus($lang, $line[4]) . "</td><td>$line[5]</td>" . PHP_EOL);
                 if ($canModify) {
                     echo ("<td>" . PHP_EOL);
     ?>
@@ -230,23 +292,17 @@ if ($operation == 'list') {
 
         if ($canModify) {
             // echo ("<button>Create new Line</button>" . PHP_EOL);
-?>
+            echo ("<hr/>" . PHP_EOL);
+            ?>
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="create-line">
                 <input type="hidden" name="lang" value="<?php echo($lang); ?>">
                 <input type="hidden" name="ref" value="<?php echo($contact); ?>">
                 <input type="hidden" name="boat-id" value="<?php echo($boat_id); ?>">
-                <input type="submit" value="<?php echo(($lang != 'FR') ? "Create" : "Cr&eacute;er"); ?>">
+                <input type="submit" value="<?php echo(($lang != 'FR') ? "Create an element" : "Cr&eacute;er un &eacute;l&eacute;ment"); ?>">
             </form>
 <?php            
         }
-        // Back to boats list
-        if ($lang == 'FR') {
-            echo ("Retour &agrave; la <a href='javascript:history.back()'>liste des bateaux</a><br/>" . PHP_EOL);
-        } else {
-            echo ("Back to <a href='javascript:history.back()'>Boat list</a><br/>" . PHP_EOL);
-        }
-
         echo ("<hr/>" . PHP_EOL);
     }
 } else if ($operation == "edit-line") {
@@ -281,10 +337,10 @@ if ($operation == 'list') {
                         <td>
                             <!--input type="text" name="status" value="<?php echo($line[4]); ?>"-->
                             <select name="status">
-                                <option value="OPENED"<?php echo('OPENED' == $line[4] ? "selected" : ""); ?>>OPENED</option>
-                                <option value="IN_PROGRESS"<?php echo('IN_PROGRESS' == $line[4] ? "selected" : ""); ?>>IN_PROGRESS</option>
-                                <option value="CANCELED"<?php echo('CANCELED' == $line[4] ? "selected" : ""); ?>>CANCELED</option>
-                                <option value="COMPLETED"<?php echo('COMPLETED' == $line[4] ? "selected" : ""); ?>>COMPLETED</option>
+                                <option value="OPENED"<?php echo('OPENED' == $line[4] ? "selected" : ""); ?>><?php echo translateStatus($lang, 'OPENED'); ?></option>
+                                <option value="IN_PROGRESS"<?php echo('IN_PROGRESS' == $line[4] ? "selected" : ""); ?>><?php echo translateStatus($lang, 'IN_PROGRESS'); ?></option>
+                                <option value="CANCELED"<?php echo('CANCELED' == $line[4] ? "selected" : ""); ?>><?php echo translateStatus($lang, 'CANCELED'); ?></option>
+                                <option value="COMPLETED"<?php echo('COMPLETED' == $line[4] ? "selected" : ""); ?>><?php echo translateStatus($lang, 'COMPLETED'); ?></option>
                             </select>    
                         </td>
                     </tr>
@@ -304,6 +360,17 @@ if ($operation == 'list') {
     $lang = $_POST["lang"];
     $ref = $_POST["ref"];
     $boatId = $_POST["boat-id"];
+
+    echo("<h3>" . (($lang == 'FR') ? "Ajout d'un &eacute;l&eacute;ment dans la liste" : "Add an element in the List") . "</h3>" . PHP_EOL);
+    echo ("<hr/>" . PHP_EOL);
+    // Back to boats list
+    if ($lang == 'FR') {
+        echo ("<a href='javascript:history.back()'>Retour</a><br/>" . PHP_EOL);
+    } else {
+        echo ("<a href='javascript:history.back()'>Back</a><br/>" . PHP_EOL);
+    }
+    echo ("<hr/>" . PHP_EOL);
+
 ?>
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="insert-line">
@@ -315,11 +382,13 @@ if ($operation == 'list') {
                     <tr>
                         <td>Description</td>
                         <td>
-                            <textarea rows="5" cols="60" name="description" placeholder="On fait quoi ?"></textarea>
+                            <textarea rows="5" cols="60" name="description" placeholder="<?php echo(($lang != 'FR') ? "Job Description" : "Description du job"); ?>"></textarea>
                         </td>
                     </tr>
                 </table>
+                <hr/>
                 <input type="submit" value="<?php echo(($lang != 'FR') ? "Create" : "Cr&eacute;er"); ?>">
+                <hr/>
             </form>
 
 <?php
