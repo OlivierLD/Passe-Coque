@@ -1132,7 +1132,8 @@ function executeSQL(string $dbhost, string $username, string $password, string $
     
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception ?
+            // throw $conn->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -1144,9 +1145,14 @@ function executeSQL(string $dbhost, string $username, string $password, string $
         }
         if (true) { // Do perform ?
             if ($link->query($sql) === TRUE) {
-              echo "OK. Statement executed successfully<br/><hr/>" . PHP_EOL;
+                if ($verbose) {
+                    echo "OK. Statement executed successfully<br/><hr/>" . PHP_EOL;
+                }
             } else {
-              echo "ERROR executing: " . $sql . "<br/>" . $link->error . "<br/>" . PHP_EOL;
+                if ($verbose) {
+                    echo "ERROR executing: " . $sql . "<br/>" . $link->error . "<br/>" . PHP_EOL;
+                }
+                throw new Exception($link->error);
             }
         } else {
             echo "Stby<br/>" . PHP_EOL;
@@ -1157,7 +1163,10 @@ function executeSQL(string $dbhost, string $username, string $password, string $
             echo("Closed DB<br/>".PHP_EOL);
         }
     } catch (Throwable $e) {
-      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+        if ($verbose) {
+            echo "Captured Throwable for executeSQL : " . $e->getMessage() . "<br/>" . PHP_EOL;
+        }
+        throw new Exception($e->getMessage());
     }
 }
 

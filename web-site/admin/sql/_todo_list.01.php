@@ -401,7 +401,12 @@ if ($operation == 'list') {
 
     $sql = "INSERT INTO TODO_LISTS (BOAT_ID, LINE_DESC, LINE_STATUS) VALUES ('$boatId', '" . str_replace("'", "\'", $description) . "', 'OPENED');";
 
-    executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+    try {
+        executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+        echo ((($lang == 'FR') ? "C'est fait. Ligne cr&eacute;&eacute;e." : "Done. Line created.") . "<br/>" . PHP_EOL);
+    } catch (Throwable $e) {
+        echo "Captured Throwable for executeSQL : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
 
     echo ("<hr/>" . PHP_EOL);
     echo ("<a href='" . basename(__FILE__) . "?option=for-boat&boat-id=$boatId&ref=$ref&lang=$lang'>" . ($lang == 'FR' ? 'Retour TODO list' : 'Back to TODO List') . "</a>" . PHP_EOL);
@@ -418,8 +423,12 @@ if ($operation == 'list') {
     // echo ("Will update line $lineId, Desc [$newDescription], Status [$newStatus]" . PHP_EOL);
     $sql = "UPDATE TODO_LISTS SET LINE_DESC = '" . str_replace("'", "\'", $newDescription) . "', LINE_STATUS = '$newStatus', LAST_UPDATED = CURRENT_TIMESTAMP
             WHERE LINE_ID = $lineId;";
-
-    executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+    try {
+        executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+        echo ((($lang == 'FR') ? "Mise &agrave; jour effectu&eacute;e." : "Update completed.") . "<br/>" . PHP_EOL);
+    } catch (Throwable $e) {
+        echo "Captured Throwable for executeSQL : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
 
     echo ("<hr/>" . PHP_EOL);
     echo ("<a href='" . basename(__FILE__) . "?option=for-boat&boat-id=$boatId&ref=$ref&lang=$lang'>" . ($lang == 'FR' ? 'Retour TODO list' : 'Back to TODO List') . "</a>" . PHP_EOL);
@@ -433,7 +442,12 @@ if ($operation == 'list') {
     // echo ("Will update line $lineId, Desc [$newDescription], Status [$newStatus]" . PHP_EOL);
     $sql = "DELETE FROM TODO_LISTS WHERE LINE_ID = $lineId;";
 
-    executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+    try {
+        executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
+        echo ((($lang == 'FR') ? "Suppression effectu&eacute;e." : "Delete completed.") . "<br/>" . PHP_EOL);
+    } catch (Throwable $e) {
+        echo "Captured Throwable for executeSQL : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
 
     echo ("<hr/>" . PHP_EOL);
     echo ("<a href='" . basename(__FILE__) . "?option=for-boat&boat-id=$boatId&ref=$ref&lang=$lang'>" . ($lang == 'FR' ? 'Retour TODO list' : 'Back to TODO List') . "</a>" . PHP_EOL);
