@@ -243,10 +243,13 @@ if ($operation == 'list') {
         echo ("<h3>" . ($lang == 'FR' ? "TODO list pour $boatName" : "TODO list for $boatName") . "</h3>" . PHP_EOL);
         echo ("<hr/>" . PHP_EOL);
         // Back to boats list
+        $backUrl =  basename(__FILE__) . "?lang=$lang" . ( $adminPriv ? "" : "&option=no-empty");
         if ($lang == 'FR') {
-            echo ("Retour &agrave; la <a href='javascript:history.back()'>liste des bateaux</a><br/>" . PHP_EOL);
+            // echo ("Retour &agrave; la <a href='javascript:history.back()'>liste des bateaux</a><br/>" . PHP_EOL);
+            echo ("Retour &agrave; la <a href='$backUrl'>liste des bateaux</a><br/>" . PHP_EOL);
         } else {
-            echo ("Back to <a href='javascript:history.back()'>Boat list</a><br/>" . PHP_EOL);
+            // echo ("Back to <a href='javascript:history.back()'>Boat list</a><br/>" . PHP_EOL);
+            echo ("Back to <a href='$backUrl'>Boat list</a><br/>" . PHP_EOL);
         }
         echo ("<hr/>" . PHP_EOL);
 
@@ -369,10 +372,13 @@ if ($operation == 'list') {
     echo("<h3>" . (($lang == 'FR') ? "Ajout d'un &eacute;l&eacute;ment dans la liste" : "Add an element in the List") . "</h3>" . PHP_EOL);
     echo ("<hr/>" . PHP_EOL);
     // Back to boats list
+    $backUrl =  basename(__FILE__) . "?lang=$lang" . ( $adminPriv ? "" : "&option=no-empty");
     if ($lang == 'FR') {
-        echo ("<a href='javascript:history.back()'>Retour</a><br/>" . PHP_EOL);
+        // echo ("Retour &agrave; la <a href='javascript:history.back()'>liste des bateaux</a><br/>" . PHP_EOL);
+        echo ("Retour &agrave; la <a href='$backUrl'>liste des bateaux</a><br/>" . PHP_EOL);
     } else {
-        echo ("<a href='javascript:history.back()'>Back</a><br/>" . PHP_EOL);
+        // echo ("Back to <a href='javascript:history.back()'>Boat list</a><br/>" . PHP_EOL);
+        echo ("Back to <a href='$backUrl'>Boat list</a><br/>" . PHP_EOL);
     }
     echo ("<hr/>" . PHP_EOL);
 
