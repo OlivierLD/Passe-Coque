@@ -19,7 +19,7 @@ try {
   <!--
    ! WiP.
    ! - Gestion des TODO lists.
-   ! - All CRUD operations
+   ! - All CRUD operations and associated forms.
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -276,7 +276,6 @@ if ($operation == 'list') {
                         <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
                     </form>
     <?php
-
                     echo ("</td>" . PHP_EOL); 
                     echo ("<td>" . PHP_EOL);
     ?>                 

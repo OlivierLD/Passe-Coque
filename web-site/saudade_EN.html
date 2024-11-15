@@ -1,25 +1,88 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/saudade.png" width="100%">
-        <div style="padding: 14px;">
-            <h2>Saudade</h2>
-            Year 1975<br/>
-            Electric motorization, with the help of the VETUS Company
+
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'voile-mag-01');" title="Sommaire">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'voile-mag-02');">Resources</button>
+        <button class="tablinks" onclick="openTab(event, 'voile-mag-03');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="voile-mag-01" class="tab-section" style="display: block;">
+
+            <!--div style="vertical-align: middle;"><img src="/images/construction.cone.png" height="26"> <b>Projets Low Tech&nbsp;!</b> <img src="/images/construction.cone.png" height="30"></div-->
+            <div class="txt-img-div-2">
+                <!--iframe src="https://akirodic.com/p/jellyfish/" style="width: 80%; height: 100%;"></iframe-->
+                <img src="/images/boats/saudade.png" style="width: 60%; margin: auto; vertical-align: top;">
+                <div style="padding: 14px;">
+                    <h2>Saudade</h2>
+                    Year 1975<br/>
+                    Electric motorization, with the help of the VETUS Company
+                    <div>
+                        <h2>The boat</h2>
+                        Super Arlequin
+                        <ul>
+                            <li>Shipyard: Chantier Qu&eacute;r&eacute;</li>
+                            <li>LOA: 9,20 m</li>
+                            <li>Beam: 2,92 m</li>
+                            <li>Draft: 1,65 m</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="voile-mag-02" class="tab-section" style="display: none;">
+            <h2>Resources</h2>
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <div style="border: 1px solid silver; border-radius: 5px; margin: 3px; padding: 3px;">
+                    The different steps of the refit, as published in Voile Magazine.
+                    <ul>
+                        <li><a href="./voile.mag/S1DIY - Des chandeliers neufs.pdf" target="voile-mag">Des chandeliers neufs</a></li>
+                        <li><a href="./voile.mag/S1DIY - Monter un passe-coque.pdf" target="voile-mag">Monter un passe-coque</a></li>
+                        <li><a href="./voile.mag/S1EP0 - Les partenaires.pdf" target="voile-mag">Les partenaires</a></li>
+                        <li><a href="./voile.mag/S1EP1 - La redaction se jette à l'eau.pdf" target="voile-mag">La r&eacute;daction se jette &agrave; l'eau</a></li>
+                        <li><a href="./voile.mag/S1EP2 - Etat des lieux.pdf" target="voile-mag">&Eacute;tat des lieux</a></li>
+                        <li><a href="./voile.mag/S1EP3 - 48h autour du mât.pdf" target="voile-mag">48 heures autour du m&acirc;t</a></li>
+                        <li><a href="./voile.mag/S1EP3 - Enlever l'accastillage.pdf" target="voile-mag">Enlever l'accastillage</a></li>
+                        <li><a href="./voile.mag/S1EP4 - le mât de la tête au pied.pdf" target="voile-mag">Le m&acirc;t, de la t&ecirc;te au pied</a></li>
+                        <li><a href="./voile.mag/S1EP5 - choisir ses cordages.pdf" target="voile-mag">Choisir ses cordages</a></li>
+                        <li><a href="./voile.mag/S1EP6 - Pojeter du liége.pdf" target="voile-mag">Projeter du li&egrave;ge</a></li>
+                        <li><a href="./voile.mag/S1EP7 - AFPA.pdf" target="voile-mag">AFPA</a></li>
+                        <li><a href="./voile.mag/S1EP8 - L'art du scarf.pdf" target="voile-mag">L'art du scraf</a></li>
+                        <li><a href="./voile.mag/S1EP9 - Le travail du bois.pdf" target="voile-mag">Le travail du bois</a></li>
+                        <li><a href="./voile.mag/S1EP10 - Le travail du bois2.pdf" target="voile-mag">Le travail du bois - 2</a></li>
+                        <li><a href="./voile.mag/S1EP11 - La peinture de pont.pdf" target="voile-mag">La peinture du pont</a></li>
+                        <li><a href="./voile.mag/S1EP12 - Montage de la ligne d'arbre.pdf" target="voile-mag">Montage de la ligne d'arbre</a></li>
+                        <li><a href="./voile.mag/S1EP13 - Concours covering.pdf" target="voile-mag">D&eacute;co de coque !</a></li>
+                        <li><a href="./voile.mag/S1EP13 - pose du covering.pdf" target="voile-mag">Pose du covering</a></li>
+                        <li><a href="./voile.mag/S1EP14 - Mise à l'eau.pdf" target="voile-mag">Mise &agrave; l'eau</a></li>
+                        <li><a href="./voile.mag/S1EP15 - Cap sur LR .pdf" target="voile-mag">Cap sur La Rochelle</a></li>
+                        <li><a href="./voile.mag/S1EPXX - Le Bilan de la saison 1.pdf" target="voile-mag">Bilan de la premi&egrave;re saison</a></li>
+                        <li><a href="./voile.mag/S1EPXX - Le choc.pdf" target="voile-mag">Le choc !</a></li>
+                        <li><a href="./voile.mag/S1EPXX - Morbihan challenge.pdf" target="voile-mag">Morbihan Challenge</a></li>
+                        <li><a href="./voile.mag/S1EPXX - Test Ronstan+Homer.pdf" target="voile-mag">Test &eacute;quipement</a></li>
+                        <li><a href="./voile.mag/S2DIY - Reparer une voile.pdf" target="voile-mag">R&eacute;parer une voile</a></li>
+                        <li><a href="./voile.mag/S2EP0 - Les partenaires.pdf" target="voile-mag">Les partenaires</a></li>
+                        <li><a href="./voile.mag/S2EP1 - Retour au chantier.pdf" target="voile-mag">Retour au chantier</a></li>
+                        <li><a href="./voile.mag/S2EP2 - Travaux d'hiver.pdf" target="voile-mag">Travaux d'hiver</a></li>
+                        <li><a href="./voile.mag/S2EP3 - Un nouveau mât.pdf" target="voile-mag">Un nouveau m&acirc;t</a></li>
+                        <li><a href="./voile.mag/S2EP4 - Pose de l Electronique.pdf" target="voile-mag">Pose de l'&eacute;lectronique</a></li>
+                        <li><a href="./voile.mag/S2EP5 - mâtage.pdf" target="voile-mag">M&acirc;tage</a></li>
+                        <li><a href="./voile.mag/S2EP6 - Recoupe d'un génois.pdf" target="voile-mag">Recoupe du g&eacute;nois</a></li>
+                        <li><a href="./voile.mag/S2EP7 - Le Bilan du moteur electrique.pdf" target="voile-mag">Le bilan du moteur &eacute;lectrique</a></li>
+                    </ul>
+                </div>
+                <div style="border: 1px solid silver; border-radius: 5px; margin: 3px; padding: 3px;">
+                    A <a href="https://www.youtube.com/playlist?list=PL9JXSPrZ3PeIBUP59mxteVj1ymQl-YfJE" target="YT">video collection</a>.
+                </div>
+            </div>
+        </div>
+
+        <div id="voile-mag-03" class="tab-section" style="display: none;">
+            <h2>Contact</h2>
+            Referent: The Voile Magazine team.<br/>
+            Email: <a href="mailto:fx.decrecy@voilemagazine.com">fx.decrecy@voilemagazine.com</a>
         </div>
     </div>
-    <div>
-        <h2>The boat</h2>
-        Super Arlequin
-        <ul>
-            <li>Shipyard: Chantier Qu&eacute;r&eacute;</li>
-            <li>LOA: 9,20 m</li>
-            <li>Beam: 2,92 m</li>
-            <li>Draft: 1,65 m</li>
-        </ul>
-    </div>
-    <div>
-        <h2>More info...</h2>
-        Referent: The Voile Magazine team.<br/>
-        Email: <a href="mailto:fx.decrecy@voilemagazine.com">fx.decrecy@voilemagazine.com</a>
-    </div>
+
 </div>
