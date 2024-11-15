@@ -1,27 +1,56 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/transmit/hublow.png" width="400px">
-        <div style="padding: 14px;">
-            <h2>Light Unusual Habitat</h2>
+
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'hublow-01');" title="Sommaire">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'hublow-02');">News</button>
+        <button class="tablinks" onclick="openTab(event, 'hublow-03');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="hublow-01" class="tab-section" style="display: block;">
+
+            <!--div style="vertical-align: middle;"><img src="/images/construction.cone.png" height="26"> <b>Projets Low Tech&nbsp;!</b> <img src="/images/construction.cone.png" height="30"></div-->
+            <div class="txt-img-div-2">
+                <!--img src="/images/transmit/hublow.png" width="400px"-->
+                <img src="./hublow/HUBLOW ©ClaireGuidicelli-20.jpg" width="400px">
+                <div style="padding: 14px;">
+                    <h2>Unusual light hgabitat</h2>
+                </div>
+        
+                <div style="padding: 14px;">
+                    Hublow is a project supported by the Passe&#8209;Coque association in its feasibility phase.<br/>
+                    In an ecological and "Low Tech" approach, Hublow aims to offer a new offer of unusual lightweight 
+                    housing by upcycling old abandoned sailboats.<br/>
+                    Hublow thus wishes to provide an innovative, ecological and practical response to housing and attractiveness 
+                    issues in the Morbihan region.
+                </div>
+            </div>
+        </div>
+
+        <div id="hublow-02" class="tab-section" style="display: none;">
+            <h2>Actualit&eacute;s</h2>
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <img src="./hublow/HUBLOW ©ClaireGuidicelli-02.jpg" width="90%" style="padding: 0 0 5px 0;">
+                <img src="./hublow/HUBLOW ©ClaireGuidicelli-13.jpg" width="90%" style="padding: 0 0 5px 0;">
+                <img src="./hublow/HUBLOW ©ClaireGuidicelli-17.jpg" width="90%" style="padding: 0 0 5px 0;">
+                <img src="./hublow/HUBLOW ©ClaireGuidicelli-28.jpg" width="90%" style="padding: 0 0 5px 0;">
+                <img src="./hublow/HUBLOW ©ClaireGuidicelli-34.jpg" width="90%" style="padding: 0 0 5px 0;">
+                <img src="./hublow/HUBLOW ©ClaireGuidicelli-43.jpg" width="90%" style="padding: 0 0 5px 0;">
+            </div>
+            <div>
+                <img class="logo-image" src="/logos/Fondation.BPGO.png" title="BPGO">
+            </div>
+            <div>
+                <iframe src="/hublow/pres.HUBLOW.2023.pdf" style="aspect-ratio: 16 / 11; height: 100%; width: 100%;"></iframe>
+            </div>
+        
+        </div>
+
+        <div id="hublow-03" class="tab-section" style="display: none;">
+            <h2>Contact</h2>
+            Email: <a href="mailto:contact.hublow@gmail.com">contact.hublow@gmail.com</a> <br/>
+            tel: +33 6 35 59 18 80
         </div>
     </div>
-    <div>
-        Hublow is a project supported by the Passe&#8209;Coque association in its feasibility phase.<br/>
-        In an ecological and "Low Tech" approach, Hublow aims to offer a new offer of unusual lightweight 
-        housing by upcycling old abandoned sailboats.<br/>
-        Hublow thus wishes to provide an innovative, ecological and practical response to housing and attractiveness 
-        issues in the Morbihan region.
-    </div>
-    <div>
-        <img class="logo-image" src="/logos/Fondation.BPGO.png" title="BPGO">
-    </div>
-    <div>
-        <iframe src="/hublow/pres.HUBLOW.2023.pdf" style="aspect-ratio: 16 / 11; height: 100%; width: 100%;"></iframe>
-    </div>
-    <div>
-        <h2>More info...</h2>
-        Contact: Jeff Allais<br/> 
-        Email: <a href="mailto:jeff.allais@hotmail.fr">jeff.allais@hotmail.fr</a><br/>
-        Tel: +33 6 35 59 18 80<br/>
-    </div>
+
 </div>
