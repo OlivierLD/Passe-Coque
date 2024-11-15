@@ -118,7 +118,7 @@ function translateStatus(string $lang, string $original) : string {
                 $translated = ($lang == 'FR') ? "Annul&eacute;" : "Canceled";
                 break;
             case 'COMPLETED':
-                $translated = ($lang == 'FR') ? "Termin&eacute;" : "Comnpleted";
+                $translated = ($lang == 'FR') ? "Termin&eacute;" : "Completed";
                 break;
             case 'IN_PROGRESS':
                 $translated = ($lang == 'FR') ? "En cours" : "In progess";
