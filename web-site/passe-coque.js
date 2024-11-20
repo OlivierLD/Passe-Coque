@@ -539,7 +539,7 @@ let initBoatClubBases = () => {
         { latlng: homeBelz, txt: 'Belz Home' },
         { latlng: labOcean, txt: 'Lab Ocean, un bureau pour Passe-Coque' },
         { latlng: etel, txt: 'Etel, Manu Oviri (Commanche 32), Eh\'Tak (Shipman 28)' },
-        { latlng: laTrinite, txt: 'La Trinité, Trehudal (Nichlson 33)' },
+        { latlng: laTrinite, txt: 'La Trinit&eacute;, Trehudal (Nichlson 33)' },
         { latlng: lesSables, txt: 'Les Sables d\'Olonne, Jolly Jumper (First 325)' },
         { latlng: laRochelle, txt: 'La Rochelle, . . .' },
         { latlng: concarneau, txt: 'Concarneau, Nomadict (Gin Fizz)' },
@@ -1618,7 +1618,7 @@ const THE_FLEET = [
         base: "Hennebont"
     },
     { 
-        name: "Bémol III",
+        name: "B&eacute;mol III",
         id: "bemol",
         pix: "/images/boats/sun-rise-35-sous-spi.jpg",
         type: "Sun Rise 35",
@@ -1938,6 +1938,13 @@ const NEXT_EVENTS = [
             en: 'November 10, 2024, start of the <a href="https://www.vendeeglobe.org/" target="VG">Vend&eacute;e Globe</a>, in the Sables d\'Olonne.'
         }
     }, {
+        date_from: '2024-12-12',
+        date_to: '2024-12-12',
+        content: {
+            fr: '12 d&eacute;cembre 2024.<ul><li>Le Kick-off de l&apos;association Flow, cr&eacute;&eacute;e pour que le projet HUBLOW d&apos;habitat insolite &agrave; partir de bateaux recycl&eacute;s prenne son envol après avoir &eacute;t&eacute; initi&eacute; et incub&eacute; au sein de Passe- Coque. Rendez-vous au Lab Oc&eacute;an &agrave; 18h.</li><li>Le m&ecirc;me jour au Mus&eacute;e de la Marine, r&eacute;sultats de l&apos;&eacute;lection du voilier de l&apos;ann&eacute;e avec le Yacht club de France et notre partenaire Voile Magazine.</li></ul>',
+            en: 'Dec 12, 2024.<ul><li>The Kick-off of the Flow association, created so that the HUBLOW project of unusual housing from recycled boats takes off after having been initiated and incubated within Passe-Coque. See you at Lab Oc&eacute;an at 6 p.m.</li><li>The same day at the Mus&eacute;e de la Marine, results of the election of the sailboat of the year with the Yacht club de France and our partner Voiles Magazine.</li></ul>'
+        }
+    }, {
         date_from: '2024-12-25',
         date_to: '2024-12-25',
         content: {
@@ -1963,7 +1970,7 @@ let updateFilter = radio => {
             fillOutFleet(CLUB);
             break;
         case '4':
-            console.log("À saisir");
+            console.log("&agrave; saisir");
             fillOutFleet(TO_GRAB);
             break;
         default:
@@ -2430,7 +2437,7 @@ let closeCustomAlert = () => {
 // window.alert = showCustomAlert;  // Not in window.onload !
 
 let subscriptionOKMessage = () => {
-    let mess = "Votre requête a été envoyée,\nvous êtes en copie (vérifiez vos spams...).";
+    let mess = "Votre requ&ecirc;te a &eacute;t&eacute; envoy&eacute;e,\nvous &ecirc;tes en copie (v&eacute;rifiez vos spams...).";
     if (currentLang !== 'FR') {
         mess = "Your request has been sent,\nyou're cc'd (check your spams...)."
     }
@@ -2438,7 +2445,7 @@ let subscriptionOKMessage = () => {
 }
 
 let subscriptionErrorMessage = () => {
-    let mess = "Votre requête a posé un problème, elle n'est pas partie.";
+    let mess = "Votre requ&ecirc;te a pos&eacute; un problème, elle n'est pas partie.";
     if (currentLang !== 'FR') {
         mess = "There was a problem posting your request...."
     }
@@ -2544,13 +2551,13 @@ let onSubscribeResponse = (iframe, okMess, errorMess) => {
                     }
                 } else if (innerMess.startsWith("SUBSCRIBE-002")) {
                     if (currentLang == 'FR') {
-                        message = "Vous êtes déjà membre du boat-club.";
+                        message = "Vous &ecirc;tes d&eacute;j&agrave; membre du boat-club.";
                     } else {
                         message = "You are already a Boat-Club member.";
                     }
                 } else if (innerMess.startsWith("SUBSCRIBE-003")) {
                     if (currentLang == 'FR') {
-                        message = "Vous devez être membre de Passe-Coque pour pouvoir être membre du Boat-Club.";
+                        message = "Vous devez &ecirc;tre membre de Passe-Coque pour pouvoir &ecirc;tre membre du Boat-Club.";
                     } else {
                         message = "You need to be a Passe-Coque member to be a Boat-Club member.";
                     }
