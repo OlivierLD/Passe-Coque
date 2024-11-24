@@ -168,6 +168,9 @@ try {
 
     function oneDayAlmanac(bool $verbose) : string {
         try {
+            // See this: https://www.w3schools.com/php/func_date_date_add.asp
+            // date_add($date, date_interval_create_from_date_string("1 day"));
+
             // Current dateTime
             $year = (int)date("Y");
             $month = (int)date("m");
@@ -179,45 +182,76 @@ try {
             $nbDaysThisMonth = TimeUtil::getNbDays($year, $month);
             // echo("This month, $nbDaysThisMonth days.<br/>" . PHP_EOL);
 
-            $container = ("<p>Calculated at $year:$month:$day $hours:$minutes:$seconds UTC</p>" . PHP_EOL);
+            $htmlContentSunMoonAries = "";
+            $htmlContentPlanets = "";
+            $htmlContentSemiDiamAndCo = "";
+            $htmlContentStarsPage = "";
+    
+            $htmlContentSunMoonAries = ("<p>Calculated at $year:$month:$day $hours:$minutes:$seconds UTC</p>" . PHP_EOL);
             // date("l jS \of F Y h:i:s A"). See https://www.w3schools.com/php/func_date_date.asp
-            $container .= "<div class='sub-title'>Sun almanac for " . date("l F jS, Y") .  "</div>" . PHP_EOL;
-            $container .= "<table>" . PHP_EOL;
-            $container .= "<tr><th>UT</th><th>Sun GHA</th><th>&delta; GHA</th><th>Sun RA</th><th>Sun Decl</th><th>Aries GHA</th></tr>" . PHP_EOL;
-            $container .= "<tr><th>TU</th><th>Soleil AHvo</th><th>&delta; AHvo</th><th>Soleil AHso</th><th>Soleil Decl</th><th>Pt Vernal AHso</th></tr>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<div class='sub-title'>Celestial Almanac for " . date("l F jS, Y") .  "</div>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<table>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<tr>" . 
+                               "<th></th><th colspan='4'>Sun</th>" . 
+                                          "<th colspan='4'>Moon</th>" . "<th>Aries</th><th></th>" . 
+                          "</tr>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<tr>" . 
+                               "<th>UT</th><th>Sun GHA</th><th>&delta; GHA</th><th>Sun RA</th><th>Sun Decl</th>" . 
+                                          "<th>Moon GHA</th><th>&delta; GHA</th><th>Moon RA</th><th>Moon Decl</th>" . "<th>Aries GHA</th><th>UT</th>" . 
+                          "</tr>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<tr>" . 
+                               "<th>TU</th><th>Soleil AHvo</th><th>&delta; AHvo</th><th>Soleil AHso</th><th>Soleil Decl</th>" . 
+                                           "<th>Lune AHao</th><th>&delta; AHao</th><th>Lune AHso</th><th>Lune Decl</th>" . "<th>Pt Vernal AHso</th><th>TU</th>" . 
+                          "</tr>" . PHP_EOL;
 
             // Astro Computer
             $ac = new AstroComputer(); 
 
-            $prevGHA = null;
+            $prevGHASun = null;
+            $prevGHAMoon = null;
+            $withStars = true;
 
             for ($i=0; $i<24; $i++) {
                 $h = $i;
-                $ac->calculate($year, $month, $day, $h, 0, 0, true);
+                $ac->calculate($year, $month, $day, $h, 0, 0, true, $withStars);
                 $context2 = $ac->getContext();
-                $deltaGHA = "";
-                if ($prevGHA != null) {
-                    $diff = $ac->getSunGHA() - $prevGHA;
+                $deltaGHASun = "";
+                if ($prevGHASun != null) {
+                    $diff = $ac->getSunGHA() - $prevGHASun;
                     while ($diff < 0) {
                         $diff += 360;
                     }
-                    $deltaGHA = sprintf("%1\$.4f&deg;", $diff);
+                    $deltaGHASun = sprintf("%1\$.4f&deg;", $diff);
                 }
-                $prevGHA = $ac->getSunGHA();
-                $container .= ("<tr><td>" . sprintf("%02d", $h) . 
+                $deltaGHAMoon = "";
+                if ($prevGHAMoon != null) {
+                    $diff = $ac->getMoonGHA() - $prevGHAMoon;
+                    while ($diff < 0) {
+                        $diff += 360;
+                    }
+                    $deltaGHAMoon = sprintf("%1\$.4f&deg;", $diff);
+                }
+                $prevGHASun = $ac->getSunGHA();
+                $prevGHAMoon = $ac->getMoonGHA();
+                $htmlContentSunMoonAries .= ("<tr><td>" . sprintf("%02d", $h) . 
                                 "</td><td>" . Utils::decToSex($ac->getSunGHA()) . 
-                                "</td><td>" . $deltaGHA . 
+                                "</td><td>" . $deltaGHASun . 
                                 "</td><td>" . Utils::decToSex($ac->getSunRA(), Utils::$NONE) . 
                                 "</td><td>" . Utils::decToSex($ac->getSunDecl(), Utils::$NS) . 
+                                "</td><td>" . Utils::decToSex($ac->getMoonGHA()) . 
+                                "</td><td>" . $deltaGHAMoon . 
+                                "</td><td>" . Utils::decToSex($ac->getSunRA(), Utils::$NONE) . 
+                                "</td><td>" . Utils::decToSex($ac->getMoonDecl(), Utils::$NS) . 
                                 "</td><td>" . Utils::decToSex($ac->getAriesGHA(), Utils::$NONE) .
+                                "<td>" . sprintf("%02d", $h) . 
                                 "</td></tr>" . PHP_EOL); 
             }
             // End of Test
 
-            $container .= ("</table>" . PHP_EOL);
-            $container .= ("<hr/>" . PHP_EOL);
+            $htmlContentSunMoonAries .= ("</table>" . PHP_EOL);
+            $htmlContentSunMoonAries .= ("<hr/>" . PHP_EOL);
 
-            return $container;
+            return $htmlContentSunMoonAries;
 
         } catch (Throwable $e) {
             if ($verbose) {

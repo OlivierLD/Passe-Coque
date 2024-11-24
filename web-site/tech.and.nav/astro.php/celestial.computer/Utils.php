@@ -45,7 +45,7 @@ class Utils {
 		$dec = $absVal - $intValue;
 		$i = (int) $intValue;
 		$dec *= 60; // "%02d:%02d:%02.02f"
-		$df = ($truncMinute ? "%02f" : "%1\$.2f"); // "%02.02f");
+		$df = ($truncMinute ? "%02f" : "%05.2f"); //  "%1\$.2f"); // "%02.02f");
 		$s = sprintf("%d", $i) . "&deg;" . sprintf($df, $dec) . "'";
 		if ($v < 0.0) {
 			switch ($displayType) {
