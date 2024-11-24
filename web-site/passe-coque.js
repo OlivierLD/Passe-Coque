@@ -1279,7 +1279,7 @@ const THE_FLEET = [
     {
         name: "Penny Lane",
         id: "penny-lane",
-        pix: "/images/boats/dummy.boat.jpg",
+        pix: "/images/boats/penny.lane/penny.lane.12.jpg",
         type: "Arp&egrave;ge",
         category: CLUB,
         base: "-"
