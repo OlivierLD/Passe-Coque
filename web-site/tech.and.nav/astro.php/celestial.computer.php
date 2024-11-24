@@ -1,7 +1,8 @@
-<!--
- ! This is a first test, validating the architecture and the concept.
- +-->
 <?php
+//
+// This is a first test, validating the architecture and the concept.
+// Remove this comment for a valid JSON output.
+//
 
 try {
     // phpinfo();
@@ -28,6 +29,7 @@ try {
         public $oneStar;
         public $starGHA;
         public $starCatalog;
+        public $stars;
     }
 
     function doYourJob(bool $verbose) : string {
@@ -50,7 +52,7 @@ try {
                 // Astro Computer basic test
                 $ac = new AstroComputer(); 
                 // $ac->setDateTime($year, $month, $day, $hours, $minutes, $seconds);
-                $ac->calculate($year, $month, $day, $hours, $minutes, $seconds, true);
+                $ac->calculate($year, $month, $day, $hours, $minutes, $seconds, true, true);
                 $context2 = $ac->getContext();
                 // echo ("From calculate: EoT:" . $context2->EoT . " ");
 
@@ -67,6 +69,7 @@ try {
                 $container->oneStar = Star::getStar("Zubenelgenubi");
                 $container->starCatalog = Star::getCatalog();
                 $container->starGHA = $starGHA;
+                $container->stars = $ac->getStars();
 
                 $jsonData = json_encode($container); // , JSON_FORCE_OBJECT);
                 // End of Basic Test

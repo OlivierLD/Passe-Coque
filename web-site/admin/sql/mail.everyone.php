@@ -116,6 +116,12 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	$subject	    = $_POST["subject"];      // subject for the email
 	$message	    = $_POST["message"];      // body of the email
 
+	$testOnly       = false;      // Checkbox
+	if (isset($_POST['test-only']) && $_POST['test-only'] == 'test-only') {
+		$testOnly = true;
+	}
+	echo("Test Only: " . ($testOnly ? 'Yes' : 'No') . "<br/>" . PHP_EOL);
+
 	/*Always remember to validate the form fields like this
 	if (strlen($sender_name) < 1) {
 		die('Name is too short or empty!');
@@ -163,10 +169,11 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		$sql = 'SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK ' . 
 		       'FROM PASSE_COQUE_MEMBERS ' . 
 			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here, and below...
-//			   '      AND (UPPER(LAST_NAME) LIKE \'%LE DIOURIS%\' ' .
+			//    '      AND (UPPER(LAST_NAME) LIKE \'%LE DIOURIS%\' ' .
+			//    '        OR EMAIL LIKE \'%admin%\' ' . 
 //			   '        OR LAST_NAME LIKE \'%Allais%\' ' . 
 //			   '        OR FIRST_NAME LIKE \'%Pierre-Jean%\'' . 
-//			   '      )' .
+			//    '      )' .
 //  		   '  AND NEWS_LETTER_OK = TRUE' .
 			   ';'; 
 		
@@ -179,44 +186,49 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		set_time_limit($result->num_rows); // 1 second per email
 	  
 		while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
+
 		  // echo "table contains ". count($table) . " entry(ies).<br/>";
 		  $active = ($table[3]/* === true*/) ? "Yes" : "No";
 		  $nl_id = $table[0];
 		  $subscriber_email = $table[0];
 
-		  $footer = "<br/><hr/><p>"; 
-		  $footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
-		  $footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
-		  // $footer .= "<a href='http://www.passe-coque.com/php/unsubscribe.php?subscriber-id=$nl_id'>Se d&eacute;sabonner / Unsubscribe</a><br/>"; // Use the real ID
-		  $footer .= "</p>";
-		  $fmt_message = str_replace("\n", "\n<br/>", $message);
-		  $fmt_message .= $footer;
-	  
-		  // plain text, or html
-		  $body = "--$boundary\r\n";
-		  // $body .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
-		  $body .= "Content-Type: text/html; charset=UTF-8\r\n"; // To allow HTML artifacts, like links and Co.
-		  $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-		  $body .= chunk_split(base64_encode($fmt_message));
-			  
-		  // attachment
-		  $body .= "--$boundary\r\n";
-		  $body .="Content-Type: $type; name=".$name."\r\n";
-		  $body .="Content-Disposition: attachment; filename=".$name."\r\n";
-		  $body .="Content-Transfer-Encoding: base64\r\n";
-		  $body .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
-		  $body .= $encoded_content; // Attaching the encoded file with email
-	  
-		  // TODO Bcc in the headers (see https://stackoverflow.com/questions/9525415/php-email-sending-bcc)
-		  $sentMailResult = mail($subscriber_email, $subject, $body, $headers);
+		  if (! $testOnly) {	
+			$footer = "<br/><hr/><p>"; 
+			$footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
+			$footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
+			// $footer .= "<a href='http://www.passe-coque.com/php/unsubscribe.php?subscriber-id=$nl_id'>Se d&eacute;sabonner / Unsubscribe</a><br/>"; // Use the real ID
+			$footer .= "</p>";
+			$fmt_message = str_replace("\n", "\n<br/>", $message);
+			$fmt_message .= $footer;
+		
+			// plain text, or html
+			$body = "--$boundary\r\n";
+			// $body .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
+			$body .= "Content-Type: text/html; charset=UTF-8\r\n"; // To allow HTML artifacts, like links and Co.
+			$body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+			$body .= chunk_split(base64_encode($fmt_message));
+				
+			// attachment
+			$body .= "--$boundary\r\n";
+			$body .="Content-Type: $type; name=".$name."\r\n";
+			$body .="Content-Disposition: attachment; filename=".$name."\r\n";
+			$body .="Content-Transfer-Encoding: base64\r\n";
+			$body .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
+			$body .= $encoded_content; // Attaching the encoded file with email
+		
+			// TODO Bcc in the headers (see https://stackoverflow.com/questions/9525415/php-email-sending-bcc)
+			$sentMailResult = mail($subscriber_email, $subject, $body, $headers);
 
-		  if ($sentMailResult) {
-			  echo "Email to $subscriber_email was sent successfully.<br/>" . PHP_EOL;
-			  // unlink($name); // delete the file after attachment sent.
+			if ($sentMailResult) {
+				echo "Email to $subscriber_email was sent successfully.<br/>" . PHP_EOL;
+				// unlink($name); // delete the file after attachment sent.
+			} else {
+				echo "There was a problem for $subscriber_email ...<br/>";
+				die("Sorry but the email to $subscriber_email could not be sent. Please go back and try again!");
+			}	  
 		  } else {
-			  echo "There was a problem for $subscriber_email ...<br/>";
-			  die("Sorry but the email to $subscriber_email could not be sent. Please go back and try again!");
-		  }	  
+			echo "Would send email to $subscriber_email.<br/>";
+		  }
 		}
 		
 		// On ferme !
@@ -234,11 +246,14 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	Choose a pdf to attach (or any file you want...), change the subject, enter a message (the content of the email), and click the button!
 	<div style="display: flex; justify-content: center; margin-top: 10px;">
 		<form enctype="multipart/form-data" method="POST" action="" style="width: 500px;">
+			<div>
+				<input type="checkbox" name="test-only" value="test-only"> Test only (no email will be sent)
+			</div>
 			<div class="form-group">
 				<input class="form-control" type="text" name="sender_name" placeholder="Sender Name" required value="Passe-Coque Contact"/>
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="email" name="sender_email" placeholder="Recipient's Email Address" required value="contact@passe-coque.com"/>
+				<input class="form-control" type="email" name="sender_email" placeholder="Reply-to Email Address" required value="contact@passe-coque.com"/>
 			</div>
 			<div class="form-group">
 				<input class="form-control" type="text" name="subject" placeholder="Subject" value="Change the subject !!"/>
