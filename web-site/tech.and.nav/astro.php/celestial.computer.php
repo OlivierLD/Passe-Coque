@@ -1,7 +1,6 @@
 <?php
 //
 // This is a first test, validating the architecture and the concept.
-// Remove this comment for a valid JSON output.
 //
 
 try {

@@ -29,6 +29,7 @@ try {
     <h2>Misc links and stuff</h2>
     <ul>
       <li><a href="./astro.php/index.01.html" target="_new">Astro PHP, first POC</a></li>
+      <li><a href="./astro.php/almanac.publisher.html" target="_new">Almanac Publisher (WiP)</a></li>
     </ul>
   </div>
   <hr/>
