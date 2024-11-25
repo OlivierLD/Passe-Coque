@@ -1,8 +1,10 @@
 <?php
+
 // Celestial Almanac publication
 // Wow.
 
 try {
+    set_time_limit(300); // In seconds. 
     // phpinfo();
     include __DIR__ . '/celestial.computer/autoload.php';
 
@@ -58,7 +60,7 @@ try {
             $htmlContentSemiDiamAndCo = "";
             $htmlContentStarsPage = "";
     
-            $htmlContentSunMoonAries = ("<p>Calculated at $year:$month:$day $hours:$minutes:$seconds UTC</p>" . PHP_EOL);
+            // $htmlContentSunMoonAries .= ("<p>Calculated at $year:$month:$day $hours:$minutes:$seconds UTC</p>" . PHP_EOL);
             // date("l jS \of F Y h:i:s A"). See https://www.w3schools.com/php/func_date_date.asp
 
             $year = (int)date_format($date, "Y");
