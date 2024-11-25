@@ -157,7 +157,8 @@ try {
                     $semiDiamSun = sprintf("%.04f", ($context2->SDsun / 60));
                     $sunHP = sprintf("%.04f", ($context2->HPsun / 60)); 
                     $semiDiamMoon = sprintf("%.04f", ($context2->SDmoon / 60)); 
-                    $moonPhaseAngle = $context2->moonPhase;                      // TODO FIx that
+                    // var_dump($ac->getMoonPhase());
+                    $moonPhaseAngle = $ac->getMoonPhase()->phase;                      // TODO Fix that
                     $moonPhase = sprintf("%.02f %%, ", $context2->k_moon) . $ac->getMoonPhaseStr(); // sprintf("", ) "${calcResult.moon.illum.toFixed(2)}% ${calcResult.moon.phase.phase}";
                     $phaseIndex = floor($moonPhaseAngle / (360 / 28.5)) + 1;
                     if ($phaseIndex > 28) {
@@ -166,7 +167,7 @@ try {
                     $phaseImageName = sprintf("./moon/phase%02d.gif", $phaseIndex);
 
                     $tPassSun = decimalHoursToHMS(12 - ($context2->EoT / 60));
-                    $moonAge = "TBD"; // (calcResult.moon.phase.phaseAngle * 28 / 360);
+                    $moonAge = ($moonPhaseAngle * 28 / 360);
 
                     // $htmlContentSemiDiamAndCo .= "<table>";
                     $htmlContentSemiDiamAndCo .= (
@@ -181,7 +182,7 @@ try {
                             "<td rowspan='3'></td>" . 
                         "</tr>" .
                         "<tr><td colspan='5'>EoT at 12:00 UTC : " . $context2->EoT . " (in minutes)</td><td colspan='5'>Phase at 12:00 UTC : " . sprintf("%.02f", $moonPhaseAngle) . "&deg;</td></tr>" .
-                        "<tr><td colspan='5'>Meridian Pass. Time : " . $tPassSun . "</td><td colspan='5'>Age : " . $moonAge . " day(s)</td></tr>" 
+                        "<tr><td colspan='5'>Meridian Pass. Time : " . $tPassSun . "</td><td colspan='5'>Age : " . sprintf("%.01f", $moonAge) . " day(s)</td></tr>" 
                     );
                 }
                                              
