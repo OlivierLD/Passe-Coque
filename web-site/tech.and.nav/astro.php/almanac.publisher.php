@@ -20,7 +20,6 @@ try {
 		return sprintf("%02d:%02d:%06.03f", $hours, $min, $sec);
     }
 
-
     /*
      * This is a layer on top of the AstroComputer
      * 
@@ -38,7 +37,9 @@ try {
 
     */
 
-    function oneDayAlmanac(bool $verbose, DateTime $date, $whithStars) : string {
+    function oneDayAlmanac(bool $verbose, DateTime $date, $withStars) : string {
+        $starCatalog = null;
+
         try {
 
             // Current dateTime
@@ -70,8 +71,8 @@ try {
             strftime(" in French %d.%M.%Y and");
             */
             $theDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
-            $htmlContentSunMoonAries .= "<div class='sub-title'>Celestial Almanac for " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
-            $htmlContentSunMoonAries .= "<table>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<div class='sub-title'> " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<table style='margin: auto;'>" . PHP_EOL;
             $htmlContentSunMoonAries .= "<tr>" . 
                                "<th></th><th colspan='5' style='font-size: 2rem;'>Sun &#9737;</th>" . 
                                           "<th colspan='6' style='font-size: 2rem;'>Moon &#9790;</th>" . "<th style='font-size: 2rem;'>Aries &gamma;</th><th></th>" . 
@@ -85,6 +86,10 @@ try {
                                            "<th>Lune AHao</th><th>&delta; AHao</th><th>Lune AHso</th><th>Lune Decl</th><th>&delta; Decl</th><th>ph (&pi;)</th>" . "<th>Pt Vernal AHso</th><th>TU</th>" . 
                           "</tr>" . PHP_EOL;
 
+            $htmlContentPlanets .= "<table style='margin: auto;'>" . PHP_EOL;
+            $htmlContentPlanets .= "<tr><th rowspan='2'>UT</th><th colspan='3' style='font-size: 2rem;'>Venus &#9792;</th><th colspan='3' style='font-size: 2rem;'>Mars &#9794;</th><th colspan='3' style='font-size: 2rem;'>Jupiter &#9795;</th><th colspan='3' style='font-size: 2rem;'>Saturn &#9796;</th><th rowspan='2'>UT</th></tr>" . PHP_EOL;
+            $htmlContentPlanets .= "<tr><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th></tr>" . PHP_EOL;
+    
             // Astro Computer. Roule ma poule.
             $ac = new AstroComputer(); 
 
@@ -92,11 +97,12 @@ try {
             $prevGHAMoon = null;
             $prevDeclSun = null;
             $prevDeclMoon = null;
-            $withStars = true;
 
             for ($i=0; $i<24; $i++) {
                 $h = $i;
+
                 $ac->calculate($year, $month, $day, $h, 0, 0, true, $withStars);
+
                 $context2 = $ac->getContext();
                 $deltaGHASun = "";
                 if ($prevGHASun != null) {
@@ -153,6 +159,28 @@ try {
                                  "<td>" . sprintf("%02d", $h) .  "</td>" .
                              "</tr>" . PHP_EOL); 
 
+                $venusGHA = Utils::decToSex($context2->GHAvenus);
+                $venusRA = Utils::decToSex($context2->RAvenus);
+                $venusDecl = Utils::decToSex($context2->DECvenus, Utils::$NS);
+    
+                $marsGHA = Utils::decToSex($context2->GHAmars);
+                $marsRA = Utils::decToSex($context2->RAmars);
+                $marsDecl = Utils::decToSex($context2->DECmars, Utils::$NS);
+    
+                $jupiterGHA = Utils::decToSex($context2->GHAjupiter);
+                $jupiterRA = Utils::decToSex($context2->RAjupiter);
+                $jupiterDecl = Utils::decToSex($context2->DECjupiter, Utils::$NS);
+    
+                $saturnGHA = Utils::decToSex($context2->GHAsaturn);
+                $saturnRA = Utils::decToSex($context2->RAsaturn);
+                $saturnDecl = Utils::decToSex($context2->DECsaturn, Utils::$NS);
+    
+                $htmlContentPlanets .= ("<tr><td style='font-weight: bold;'>" . sprintf("%02d", $h) .  "</td><td>$venusGHA</td><td>$venusRA</td><td>$venusDecl</td>" . 
+                                                                                "<td>$marsGHA</td><td>$marsRA</td><td>$marsDecl</td>" .
+                                                                                "<td>$jupiterGHA</td><td>$jupiterRA</td><td>$jupiterDecl</td>" .
+                                                                                "<td>$saturnGHA</td><td>$saturnRA</td><td>$saturnDecl</td>" .
+                                                "<td style='font-weight: bold;'>" . sprintf("%02d", $h) .  "</td></tr>");
+
                 if ($h === 12) {
                     $semiDiamSun = sprintf("%.04f", ($context2->SDsun / 60));
                     $sunHP = sprintf("%.04f", ($context2->HPsun / 60)); 
@@ -185,17 +213,85 @@ try {
                         "<tr><td colspan='5'>Meridian Pass. Time : " . $tPassSun . "</td><td colspan='5'>Age : " . sprintf("%.01f", $moonAge) . " day(s)</td></tr>" 
                     );
                 }
-                                             
+
+                if ($withStars && $h === 0) {
+                    if ($starCatalog === null) {
+                        $starCatalog = Star::getCatalog(); // from STAR_CATALOG...
+                    }
+
+                    $htmlContentStarsPage .= "<div class='sub-title'> " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
+                    $htmlContentStarsPage .= "<div style='display: grid; grid-template-columns: auto auto;'>";
+                    $htmlContentStarsPage .= "<div>";
+                    $htmlContentStarsPage .= ("Stars at 0000 U.T. (GHA(star) = SHA(star) + GHA(Aries))");
+    
+                    $htmlContentStarsPage .= (
+                        "<br/>" .
+                        "<table>" .
+                        "<tr><th>Name</th><th>SHA</th><th>Dec</th></tr>"
+                    );
+    
+                    $ariesGHA = $ac->getAriesGHA();
+                    $starArray = $ac->getStars();
+    
+                    $nbStars = count($starArray);
+                    // $htmlContentStarsPage .= "<br/>Found $nbStars stars.<br/>";
+    
+                    for ($j=0; $j<$nbStars; $j++) {
+                        $star = Star::getStar($starArray[$j]->name);
+                        if ($star === null) {
+                            echo("Star " . $starArray[$j][0] . " not found in catalog");
+                        } else {
+                            // console.log("Found ${starArray[i].name}: ${JSON.stringify(star)}");
+                            $starSHA = $starArray[$j]->GHAStar - $ariesGHA;
+                            while ($starSHA < 0) {
+                                $starSHA += 360;
+                            }
+                            $starDec = $starArray[$j]->DECStar;
+                            $htmlContentStarsPage .= (
+                                "<tr><td" . (($starDec < 0) ? " style='background: silver;'" : "") ."><b>" . $starArray[$j]->name . "</b>, " . $star->getConstellation() . "</td>" . 
+                                    "<td>" . Utils::decToSex($starSHA) . "</td>" . 
+                                    "<td>" . Utils::decToSex($starDec, Utils::$NS) . "</td></tr>"
+                            );
+                        }
+                    }
+                    $htmlContentStarsPage .= "</table>";
+                    $htmlContentStarsPage .= "</div>";
+    
+                    $htmlContentStarsPage .= "<div>";
+                    $htmlContentStarsPage .= "<b>Calculated at 00:00:00 U.T.</b>";
+    
+                    $htmlContentStarsPage .= "<table>";
+    
+                    $htmlContentStarsPage .= "<tr><td>Mean Obliquity of Ecliptic</td><td>" . $context2->eps0 . "&deg;</td></tr>";                    
+                    $htmlContentStarsPage .= "<tr><td>True Obliquity of Ecliptic</td><td>" . $context2->eps . "&deg;</td></tr>";   
+                    $htmlContentStarsPage .= "<tr><td>Delta &psi;</td><td>" . round(3600000 * $context2->delta_psi) / 1000 . "&quot;</td></tr>";                    
+                    $htmlContentStarsPage .= "<tr><td>Delta &epsilon;</td><td> " . round(3600000 * $context2->delta_eps) / 1000 . "&quot;</td></tr>";                    
+                    $htmlContentStarsPage .= "<tr><td>Julian Date</td><td>" . round(1000000 * $context2->JD) / 1000000 . "</td></tr>";                    
+                    $htmlContentStarsPage .= "<tr><td>Julian Ephemeris Date</td><td>" . round(1000000 * $context2->JDE) / 1000000 . "</td></tr>";                    
+    
+                    $htmlContentStarsPage .= "</table>";
+    
+                    $htmlContentStarsPage .= "</div>";
+    
+                    $htmlContentStarsPage .= "</div>";
+
+                    // echo ("End of Stars<br/>");
+    
+                }
+                // echo ("End of hour $h.<br/>". PHP_EOL);
             }
             $htmlContentSunMoonAries .= $htmlContentSemiDiamAndCo;
             $htmlContentSunMoonAries .= ("</table>" . PHP_EOL);
-            $htmlContentSunMoonAries .= ("<hr/>" . PHP_EOL);
 
-            return ($htmlContentSunMoonAries); //  . "<br/>" . $htmlContentSemiDiamAndCo); // TODO Et le reste...
+            $htmlContentPlanets .=      ("</table>" . PHP_EOL);
 
+            return ($htmlContentSunMoonAries . "<br/>" . 
+                    $htmlContentPlanets . "<hr/>" . 
+                    ($withStars ? $htmlContentStarsPage . "<hr/>" : "")
+                   );
         } catch (Throwable $e) {
             if ($verbose) {
-                echo "[Captured Throwable (2) for doYourJob : " . $e->getMessage() . "] " . PHP_EOL;
+                echo "[Captured Throwable (2) for oneDayAlmanac : " . $e->getMessage() . "] " . PHP_EOL;
             }
             throw $e;
         }
