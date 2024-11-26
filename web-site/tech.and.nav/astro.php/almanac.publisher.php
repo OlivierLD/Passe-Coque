@@ -4,7 +4,7 @@
 // Wow.
 
 try {
-    set_time_limit(300); // In seconds. 
+    set_time_limit(3600); // In seconds. 300: 5 minutes, 3600: one hour
     // phpinfo();
     include __DIR__ . '/celestial.computer/autoload.php';
 
@@ -73,7 +73,7 @@ try {
     ♄	9796	2644	SATURN
 
     */
-    $pageBreak = "<div class='page-break content'><hr/></div>" . "<br/>";
+    $pageBreak = "<div class='page-break content'><!--hr/--></div>" . "<br/>";
 
     function oneDayAlmanac(bool $verbose, DateTime $date, bool $withStars, string $userLang) : string {
         $starCatalog = null;
@@ -308,7 +308,7 @@ try {
                     $htmlContentStarsPage .= "</div>";
     
                     $htmlContentStarsPage .= "<div>";
-                    $htmlContentStarsPage .= "<b>Calculated at 00:00:00 U.T.</b>";
+                    $htmlContentStarsPage .= "<b>" . translateText($userLang, 'calculated-at') . "</b>";
     
                     $htmlContentStarsPage .= "<table>";
     
@@ -372,7 +372,8 @@ try {
         array("id" => "tpass", "content" => array("EN" => "Meridian Pass. Time", "FR" => "Temps pass. au m&eacute;ridien")),
         array("id" => "age", "content" => array("EN" => "Age", "FR" => "Age")),
         array("id" => "day-s", "content" => array("EN" => "day(s)", "FR" => "jour(s)")),
-        array("id" => "stars-at", "content" => array("EN" => "Stars at 0000 U.T. (GHA(star) = SHA(star) + GHA(Aries))", "FR" => "&Eacute;toiles &agrave; at 0000 TU. (AHao(&eacute;toile) = AHso(&eacute;toile) + AHvo(Pt Vernal))")),
+        array("id" => "calculated-at", "content" => array("EN" => "Calculated at 00:00:00 U.T.", "FR" => "Calcul&eacute; &agrave; 00:00:00 TU.")),
+        array("id" => "stars-at", "content" => array("EN" => "Stars at 0000 U.T. (GHA(star) = SHA(star) + GHA(Aries))", "FR" => "&Eacute;toiles &agrave; 0000 TU. (AHao(&eacute;toile) = AHso(&eacute;toile) + AHvo(Pt Vernal))")),
         array("id" => "name", "content" => array("EN" => "Name", "FR" => "Nom")),
         array("id" => "moe", "content" => array("EN" => "Mean Obliquity of Ecliptic", "FR" => "Obliquit&eacute; moyenne de l'&eacute;cliptique")),
         array("id" => "toe", "content" => array("EN" => "True Obliquity of Ecliptic", "FR" => "Obliquit&eacute; vraie de l'&eacute;cliptique")),
