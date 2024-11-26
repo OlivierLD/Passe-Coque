@@ -38,6 +38,7 @@ try {
     ♄	9796	2644	SATURN
 
     */
+    $pageBreak = "<div class='page-break content'><hr/></div>" . "<br/>";
 
     function oneDayAlmanac(bool $verbose, DateTime $date, $withStars) : string {
         $starCatalog = null;
@@ -145,7 +146,7 @@ try {
                 $prevDeclMoon = $ac->getMoonDecl();
                 $htmlContentSunMoonAries .= 
                             ("<tr>" . 
-                                 "<td>" . sprintf("%02d", $h) . "</td>" .
+                                 "<td><b>" . sprintf("%02d", $h) . "</b></td>" .
                                  "<td>" . Utils::decToSex($ac->getSunGHA()) .  "</td>" .
                                  "<td>" . $deltaGHASun .  "</td>" .
                                  "<td>" . Utils::decToSex($ac->getSunRA(), Utils::$NONE) .  "</td>" .
@@ -158,7 +159,7 @@ try {
                                  "<td>" . $deltaDeclMoon .  "</td>" .
                                  "<td>" . sprintf("%.04f&apos;", ($ac->getMoonHp() / 60)) .  "</td>" .
                                  "<td>" . Utils::decToSex($ac->getAriesGHA(), Utils::$NONE) . "</td>" .
-                                 "<td>" . sprintf("%02d", $h) .  "</td>" .
+                                 "<td><b>" . sprintf("%02d", $h) .  "</b></td>" .
                              "</tr>" . PHP_EOL); 
 
                 $venusGHA = Utils::decToSex($context2->GHAvenus);
@@ -287,9 +288,9 @@ try {
 
             $htmlContentPlanets .=      ("</table>" . PHP_EOL);
 
-            return ($htmlContentSunMoonAries . "<br/>" . 
-                    $htmlContentPlanets . "<hr/>" . 
-                    ($withStars ? $htmlContentStarsPage . "<hr/>" : "")
+            return ($GLOBALS['pageBreak'] . $htmlContentSunMoonAries . "<br/>" . 
+                    $htmlContentPlanets  . 
+                    ($withStars ? ($GLOBALS['pageBreak'] . $htmlContentStarsPage) : "")
                    );
         } catch (Throwable $e) {
             if ($verbose) {
@@ -302,8 +303,49 @@ try {
 
     function plublishAlmanac(bool $verbose, string $from, string $to, bool $withStars) : string {
         $finalOutput = "";
+
         $startDate = date_create($from); // Format "2024-11-25"
         $endDate = date_create($to);
+
+        $year = (int)date_format($startDate, "Y");
+        $month = (int)date_format($startDate, "m");
+        $day = (int)date_format($startDate, "d");
+        /*
+        https://www.w3schools.com/php/func_date_strftime.asp
+        setlocale(LC_TIME, "fr_FR");
+        strftime(" in French %d.%M.%Y and");
+        */
+        $fromDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
+
+        // Front page
+        $firstPage = "<div class='content print-only front-page'>";
+        $firstPage .=    "<h3 style='text-align: center;'>Passe-Coque</h3>";
+        $firstPage .=    "<div class='in-the-middle'>";
+        if ($from === $to) {
+            $firstPage .= "<h1 style='text-align: center; font-size: 4.5em;'>Celestial Almanac <br/>for " . date_format($fromDate, "l F jS, Y") . "</h1>";
+        } else {
+            $year = (int)date_format($endDate, "Y");
+            $month = (int)date_format($endDate, "m");
+            $day = (int)date_format($endDate, "d");
+            /*
+            https://www.w3schools.com/php/func_date_strftime.asp
+            setlocale(LC_TIME, "fr_FR");
+            strftime(" in French %d.%M.%Y and");
+            */
+            $toDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
+            $firstPage .= "<h1 style='text-align: center; font-size: 4.5em; color: black;'>Celestial Almanac <br/>from " . date_format($fromDate, "l F jS, Y") . "<br/>to " . date_format($toDate, "l F jS, Y") . "</h1>";
+        }
+        $firstPage .= "<div style='text-align: center;'>";
+        $firstPage .=   "<img src='sextant.gif' style='margin-top: 30px;'>";
+        $firstPage .= "</div>";
+        $firstPage .= "</div>";
+        $firstPage .= "<div style='width: 100%; font-style: italic; font-weight: bold; text-align: center;' class='bottom-of-page'>Passe-Coque never stops</div>";
+        $firstPage .= "</div>";
+
+        $finalOutput .= ($firstPage /* . $GLOBALS['pageBreak'] */);
+
+        // $startDate = date_create($from); // Format "2024-11-25"
+        // $endDate = date_create($to);
         $currentDate = $startDate;
         while ($currentDate <= $endDate) {
             // $finalOutput .= "Calculating Almanac for " . date_format($currentDate,"Y/m/d") . "<br/>";
