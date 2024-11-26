@@ -239,7 +239,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 				<input class="form-control" type="email" name="sender_email" placeholder="Recipient's Email Address" required value="contact@passe-coque.com"/>
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="subject" placeholder="Subject" value="News Letter XXXX"/>
+				<input class="form-control" type="text" name="subject" placeholder="Subject" value="" required/> <!-- value was News Letter XXXX -->
 			</div>
 			<div class="form-group">
 				<textarea class="form-control" name="message" placeholder="Message"></textarea>

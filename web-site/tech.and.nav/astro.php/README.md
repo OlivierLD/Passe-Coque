@@ -26,7 +26,7 @@ $ (find . -name '*.php' -print0 | xargs -0 cat) |  wc -l
 ```
 ou aussi 
 ```
-$ echo -e "$((find . -name '*.php' -print0 | xargs -0 cat) |  wc -l) lignes de php code"
+$ echo -e "$((find . -name '*.php' -type f -print0 | xargs -0 cat) |  wc -l) lignes de php code"
 ```
 
 ---
