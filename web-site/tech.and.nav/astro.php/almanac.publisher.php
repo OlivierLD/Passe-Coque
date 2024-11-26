@@ -22,6 +22,41 @@ try {
 		return sprintf("%02d:%02d:%06.03f", $hours, $min, $sec);
     }
 
+    $MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    $DAYS_EN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    
+    $MONTHS_FR = ["Janvier", "F&eacute;vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Ao&ucirc;t", "Septembre", "Octobre", "Novembre", "D&eacute;cembre"];
+    $DAYS_FR = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+
+    function translateDate(int $year, int $month, int $day, $userLang) : string {
+        $theDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
+
+        $defaultDate = date_format($theDate, "l F jS, Y");
+        $translatedDate = $defaultDate;
+        
+        if ($userLang == 'FR') { // Translate to French
+            try {
+                $dow = (int)date_format($theDate, "w"); // 0..6
+                $m = (int)date_format($theDate, "n"); // 1..12
+                $dom = (int)date_format($theDate, "d"); // 1..31
+                $y = date_format($theDate, "Y");
+
+                if (false) {
+                    echo ("DOW:[". $dow . "]<br/>");
+                    echo ("MONTH:[". $m . "]<br/>");
+                    echo ("DOM:[". $dom . "]<br/>");
+                    echo ("YEAR:[". $y . "]<br/>");
+                }
+
+                $translatedDate = $GLOBALS['DAYS_FR'][$dow] . " " . sprintf("%d" . ($dom == 1 ? "er" : ""), $dom) . " " . $GLOBALS['MONTHS_FR'][$m - 1] . " " . $y;
+            } catch (Throwable $err) {
+                echo "[Captured Throwable (-) for translateDate : " . $err . "] " . PHP_EOL;
+            }
+        }
+
+        return $translatedDate;
+    }
+
     /*
      * This is a layer on top of the AstroComputer
      * 
@@ -40,11 +75,10 @@ try {
     */
     $pageBreak = "<div class='page-break content'><hr/></div>" . "<br/>";
 
-    function oneDayAlmanac(bool $verbose, DateTime $date, $withStars) : string {
+    function oneDayAlmanac(bool $verbose, DateTime $date, bool $withStars, string $userLang) : string {
         $starCatalog = null;
 
         try {
-
             // Current dateTime
             $year = (int)date("Y");
             $month = (int)date("m");
@@ -73,25 +107,32 @@ try {
             setlocale(LC_TIME, "fr_FR");
             strftime(" in French %d.%M.%Y and");
             */
-            $theDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
-            $htmlContentSunMoonAries .= "<div class='sub-title'> " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
+            if (false) {
+                $theDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
+                $htmlContentSunMoonAries .= "<div class='sub-title'> " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
+            } else {
+                $htmlContentSunMoonAries .= "<div class='sub-title'> " . translateDate($year, $month, $day, $userLang) .  "</div>" . PHP_EOL;
+            }
             $htmlContentSunMoonAries .= "<table style='margin: auto;'>" . PHP_EOL;
             $htmlContentSunMoonAries .= "<tr>" . 
-                               "<th></th><th colspan='5' style='font-size: 2rem;'>Sun &#9737;</th>" . 
-                                          "<th colspan='6' style='font-size: 2rem;'>Moon &#9790;</th>" . "<th style='font-size: 2rem;'>Aries &gamma;</th><th></th>" . 
+                               "<th rowspan='2'>" . translateText($userLang, 'ut') . "</th><th colspan='5' style='font-size: 2rem;'>" . translateText($userLang, 'sun') . " &#9737;</th>" . 
+                                          "<th colspan='6' style='font-size: 2rem;'>" . translateText($userLang, 'moon') . " &#9790;</th>" . "<th style='font-size: 2rem;'>" . translateText($userLang, 'aries') . " &gamma;</th><th rowspan='2'>" . translateText($userLang, 'ut') . "</th>" . 
                           "</tr>" . PHP_EOL;
             $htmlContentSunMoonAries .= "<tr>" . 
-                               "<th>UT</th><th>Sun GHA</th><th>&delta; GHA</th><th>Sun RA</th><th>Sun Decl</th><th>&delta; Decl</th>" . 
-                                          "<th>Moon GHA</th><th>&delta; GHA</th><th>Moon RA</th><th>Moon Decl</th><th>&delta; Decl</th><th>hp (&pi;)</th>" . "<th>Aries GHA</th><th>UT</th>" . 
-                          "</tr>" . PHP_EOL;
-            $htmlContentSunMoonAries .= "<tr>" . 
-                               "<th>TU</th><th>Soleil AHvo</th><th>&delta; AHvo</th><th>Soleil AHso</th><th>Soleil Decl</th><th>&delta; Decl</th>" . 
-                                           "<th>Lune AHao</th><th>&delta; AHao</th><th>Lune AHso</th><th>Lune Decl</th><th>&delta; Decl</th><th>ph (&pi;)</th>" . "<th>Pt Vernal AHso</th><th>TU</th>" . 
+                               "<th>" . translateText($userLang, 'AHvo') . "</th><th>&delta; " . translateText($userLang, 'AHvo') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . "</th><th>&delta; " . translateText($userLang, 'decl') . "</th>" . 
+                                          "<th>" . translateText($userLang, 'AHao') . "</th><th>&delta; " . translateText($userLang, 'AHao') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . "</th><th>&delta;" . translateText($userLang, 'decl') . "</th><th>" . translateText($userLang, 'hp') . " (&pi;)</th>" . "<th>" . translateText($userLang, 'AHvo') . "</th>" . 
                           "</tr>" . PHP_EOL;
 
             $htmlContentPlanets .= "<table style='margin: auto;'>" . PHP_EOL;
-            $htmlContentPlanets .= "<tr><th rowspan='2'>UT</th><th colspan='3' style='font-size: 2rem;'>Venus &#9792;</th><th colspan='3' style='font-size: 2rem;'>Mars &#9794;</th><th colspan='3' style='font-size: 2rem;'>Jupiter &#9795;</th><th colspan='3' style='font-size: 2rem;'>Saturn &#9796;</th><th rowspan='2'>UT</th></tr>" . PHP_EOL;
-            $htmlContentPlanets .= "<tr><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th><th>GHA</th><th>SHA</th><th>Decl</th></tr>" . PHP_EOL;
+            $htmlContentPlanets .= "<tr><th rowspan='2'>" . translateText($userLang, 'ut') . 
+                                       "</th><th colspan='3' style='font-size: 2rem;'>" . translateText($userLang, 'venus') . " &#9792;</th><th colspan='3' style='font-size: 2rem;'>" .
+                                        translateText($userLang, 'mars') . " &#9794;</th><th colspan='3' style='font-size: 2rem;'>" . 
+                                        translateText($userLang, 'jupiter') . " &#9795;</th><th colspan='3' style='font-size: 2rem;'>" . 
+                                        translateText($userLang, 'saturn') . " &#9796;</th><th rowspan='2'>" . translateText($userLang, 'ut') . "</th></tr>" . PHP_EOL;
+            $htmlContentPlanets .= "<tr><th>" . translateText($userLang, 'AHao') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . 
+                                       "</th><th>" . translateText($userLang, 'AHao') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . 
+                                       "</th><th>" . translateText($userLang, 'AHao') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . 
+                                       "</th><th>" . translateText($userLang, 'AHao') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . "</th></tr>" . PHP_EOL;
     
             // Astro Computer. Roule ma poule.
             $ac = new AstroComputer(); 
@@ -206,15 +247,17 @@ try {
                         "<tr>" .
                             "<td rowspan='3'></td>" .
                             "<td colspan='2'>&frac12;&nbsp;&#x2300 " . $semiDiamSun . "'</td>" . 
-                            "<td colspan='3'>hp (&pi;) " . $sunHP . "'</td>" . 
+                            "<td colspan='3'> " . translateText($userLang, 'hp') . " (&pi;) " . $sunHP . "'</td>" . 
                             "<td colspan='3'>&frac12;&nbsp;&#x2300 " . $semiDiamMoon . "'</td>" . 
                             "<td colspan='2'>" . $moonPhase . "</td>" . 
                             "<td rowspan='3' colspan='2'><img src='" . $phaseImageName . "' alt='" . sprintf("%.02f", $moonPhaseAngle)  . "' title='" . sprintf("%.02f", $moonPhaseAngle) . "'&deg'}'>" .
                             "<td rowspan='3'></td>" . 
                         "</tr>" .
-                        "<tr><td colspan='5'>EoT at 12:00 UTC : " . $context2->EoT . " (in minutes)</td><td colspan='5'>Phase at 12:00 UTC : " . sprintf("%.02f", $moonPhaseAngle) . "&deg;</td></tr>" .
-                        "<tr><td colspan='5'>Meridian Pass. Time : " . $tPassSun . "</td><td colspan='5'>Age : " . sprintf("%.01f", $moonAge) . " day(s)</td></tr>" 
+                        "<tr><td colspan='5'>" . translateText($userLang, 'eot') . " : " . $context2->EoT . " (" . translateText($userLang, 'in-minutes') . ")</td><td colspan='5'>" . translateText($userLang, 'phase-at') . " : " . sprintf("%.02f", $moonPhaseAngle) . "&deg;</td></tr>" .
+                        "<tr><td colspan='5'>" . translateText($userLang, 'tpass') . " : " . $tPassSun . "</td><td colspan='5'>" . translateText($userLang, 'age') . " : " . sprintf("%.01f", $moonAge) . " " . translateText($userLang, 'day-s') . "</td></tr>" 
                     );
+
+                    // TODO Rise and Set for Sun and Moon
                 }
 
                 if ($withStars && $h === 0) {
@@ -222,15 +265,19 @@ try {
                         $starCatalog = Star::getCatalog(); // from STAR_CATALOG...
                     }
 
-                    $htmlContentStarsPage .= "<div class='sub-title'> " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
+                    if (false) {
+                        $htmlContentStarsPage .= "<div class='sub-title'> " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
+                    } else {
+                        $htmlContentStarsPage .= "<div class='sub-title'> " . translateDate($year, $month, $day, $userLang) .  "</div>" . PHP_EOL;
+                    }
                     $htmlContentStarsPage .= "<div style='display: grid; grid-template-columns: auto auto;'>";
                     $htmlContentStarsPage .= "<div>";
-                    $htmlContentStarsPage .= ("Stars at 0000 U.T. (GHA(star) = SHA(star) + GHA(Aries))");
+                    $htmlContentStarsPage .= (translateText($userLang, 'stars-at'));
     
                     $htmlContentStarsPage .= (
                         "<br/>" .
                         "<table>" .
-                        "<tr><th>Name</th><th>SHA</th><th>Dec</th></tr>"
+                        "<tr><th>" . translateText($userLang, 'name') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . "</th></tr>"
                     );
     
                     $ariesGHA = $ac->getAriesGHA();
@@ -265,12 +312,12 @@ try {
     
                     $htmlContentStarsPage .= "<table>";
     
-                    $htmlContentStarsPage .= "<tr><td>Mean Obliquity of Ecliptic</td><td>" . $context2->eps0 . "&deg;</td></tr>";                    
-                    $htmlContentStarsPage .= "<tr><td>True Obliquity of Ecliptic</td><td>" . $context2->eps . "&deg;</td></tr>";   
+                    $htmlContentStarsPage .= "<tr><td>" . translateText($userLang, 'moe') . "</td><td>" . $context2->eps0 . "&deg;</td></tr>";                    
+                    $htmlContentStarsPage .= "<tr><td>" . translateText($userLang, 'toe') . "</td><td>" . $context2->eps . "&deg;</td></tr>";   
                     $htmlContentStarsPage .= "<tr><td>Delta &psi;</td><td>" . round(3600000 * $context2->delta_psi) / 1000 . "&quot;</td></tr>";                    
                     $htmlContentStarsPage .= "<tr><td>Delta &epsilon;</td><td> " . round(3600000 * $context2->delta_eps) / 1000 . "&quot;</td></tr>";                    
-                    $htmlContentStarsPage .= "<tr><td>Julian Date</td><td>" . round(1000000 * $context2->JD) / 1000000 . "</td></tr>";                    
-                    $htmlContentStarsPage .= "<tr><td>Julian Ephemeris Date</td><td>" . round(1000000 * $context2->JDE) / 1000000 . "</td></tr>";                    
+                    $htmlContentStarsPage .= "<tr><td>" . translateText($userLang, 'jj') . "</td><td>" . round(1000000 * $context2->JD) / 1000000 . "</td></tr>";                    
+                    $htmlContentStarsPage .= "<tr><td>" . translateText($userLang, 'jje') . "</td><td>" . round(1000000 * $context2->JDE) / 1000000 . "</td></tr>";                    
     
                     $htmlContentStarsPage .= "</table>";
     
@@ -301,7 +348,51 @@ try {
         // return null;
     }
 
-    function plublishAlmanac(bool $verbose, string $from, string $to, bool $withStars) : string {
+    $TRANSLATIONS = [
+        array("id" => "main-title", "content" => array("EN" => "Celestial Almanac", "FR" => "&Eacute;ph&eacute;m&eacute;rides Nautiques")),
+        array("id" => "for-main-title", "content" => array("EN" => "for", "FR" => "pour")),
+        array("id" => "from", "content" => array("EN" => "from", "FR" => "de")),
+        array("id" => "to", "content" => array("EN" => "to", "FR" => "&agrave;")),
+        array("id" => "sun", "content" => array("EN" => "Sun", "FR" => "Soleil")),
+        array("id" => "moon", "content" => array("EN" => "Moon", "FR" => "Lune")),
+        array("id" => "aries", "content" => array("EN" => "Aries", "FR" => "Pt Vernal")),
+        array("id" => "AHvo", "content" => array("EN" => "GHA", "FR" => "AHvo")),
+        array("id" => "AHso", "content" => array("EN" => "SHA", "FR" => "AHso")),
+        array("id" => "AHao", "content" => array("EN" => "GHA", "FR" => "AHao")),
+        array("id" => "decl", "content" => array("EN" => "D", "FR" => "D")),
+        array("id" => "ut", "content" => array("EN" => "UT", "FR" => "TU")),
+        array("id" => "hp", "content" => array("EN" => "hp", "FR" => "ph")),
+        array("id" => "venus", "content" => array("EN" => "Venus", "FR" => "V&eacute;nus")),
+        array("id" => "mars", "content" => array("EN" => "Mars", "FR" => "Mars")),
+        array("id" => "jupiter", "content" => array("EN" => "Jupiter", "FR" => "Jupiter")),
+        array("id" => "saturn", "content" => array("EN" => "Saturn", "FR" => "Saturne")),
+        array("id" => "eot", "content" => array("EN" => "EoT at 12:00 UTC", "FR" => "&Eacute;qu. du temps &agrave; 12:00 TU")),
+        array("id" => "in-minutes", "content" => array("EN" => "in minutes", "FR" => "en minutes")),
+        array("id" => "phase-at", "content" => array("EN" => "Phase at 12:00 UTC", "FR" => "Phase &agrave; 12:00 TU")),
+        array("id" => "tpass", "content" => array("EN" => "Meridian Pass. Time", "FR" => "Temps pass. au m&eacute;ridien")),
+        array("id" => "age", "content" => array("EN" => "Age", "FR" => "Age")),
+        array("id" => "day-s", "content" => array("EN" => "day(s)", "FR" => "jour(s)")),
+        array("id" => "stars-at", "content" => array("EN" => "Stars at 0000 U.T. (GHA(star) = SHA(star) + GHA(Aries))", "FR" => "&Eacute;toiles &agrave; at 0000 TU. (AHao(&eacute;toile) = AHso(&eacute;toile) + AHvo(Pt Vernal))")),
+        array("id" => "name", "content" => array("EN" => "Name", "FR" => "Nom")),
+        array("id" => "moe", "content" => array("EN" => "Mean Obliquity of Ecliptic", "FR" => "Obliquit&eacute; moyenne de l'&eacute;cliptique")),
+        array("id" => "toe", "content" => array("EN" => "True Obliquity of Ecliptic", "FR" => "Obliquit&eacute; vraie de l'&eacute;cliptique")),
+        array("id" => "jj", "content" => array("EN" => "Julian Date", "FR" => "Jour Julien")),
+        array("id" => "jje", "content" => array("EN" => "Julian Ephemeris Date", "FR" => "Jour Julien des &Eacute;ph&eacute;merides"))
+    ];
+
+    function translateText(string $userLang, string $itemId) : string {
+        $translation = "Not Found/Introuvable";
+        for ($i=0; $i<count($GLOBALS['TRANSLATIONS']); $i++) {
+            $oneItem = $GLOBALS['TRANSLATIONS'][$i];
+            if ($oneItem['id'] == $itemId) {
+                $translation = $oneItem['content'][$userLang];
+                break;
+            }
+        }
+        return $translation;
+    }
+
+    function plublishAlmanac(bool $verbose, string $from, string $to, bool $withStars, string $userLang) : string {
         $finalOutput = "";
 
         $startDate = date_create($from); // Format "2024-11-25"
@@ -316,13 +407,15 @@ try {
         strftime(" in French %d.%M.%Y and");
         */
         $fromDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
+        $fromDateFmt = translateDate($year, $month, $day, $userLang);
 
         // Front page
         $firstPage = "<div class='content print-only front-page'>";
         $firstPage .=    "<h3 style='text-align: center;'>Passe-Coque</h3>";
         $firstPage .=    "<div class='in-the-middle'>";
         if ($from === $to) {
-            $firstPage .= "<h1 style='text-align: center; font-size: 4.5em;'>Celestial Almanac <br/>for " . date_format($fromDate, "l F jS, Y") . "</h1>";
+            $firstPage .= "<h1 style='text-align: center; font-size: 4.5em;'>" . translateText($userLang, 'main-title') . 
+                             "<br/>" . translateText($userLang, 'for-main-title') . " " . /*date_format($fromDate, "l F jS, Y")*/ $fromDateFmt . "</h1>";
         } else {
             $year = (int)date_format($endDate, "Y");
             $month = (int)date_format($endDate, "m");
@@ -332,8 +425,13 @@ try {
             setlocale(LC_TIME, "fr_FR");
             strftime(" in French %d.%M.%Y and");
             */
-            $toDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day));
-            $firstPage .= "<h1 style='text-align: center; font-size: 4.5em; color: black;'>Celestial Almanac <br/>from " . date_format($fromDate, "l F jS, Y") . "<br/>to " . date_format($toDate, "l F jS, Y") . "</h1>";
+            if (false) {
+                $toDate = date_create(sprintf("%04d-%02d-%02d", $year, $month, $day)); // main-title
+                $firstPage .= "<h1 style='text-align: center; font-size: 4.5em; color: black;'>" . translateText($userLang, 'main-title') . " <br/>" . translateText($userLang, 'from') . " " . date_format($fromDate, "l F jS, Y") . "<br/>" . translateText($userLang, 'to') . " " . date_format($toDate, "l F jS, Y") . "</h1>";
+            } else {
+                $toDateFmt = translateDate($year, $month, $day, $userLang);
+                $firstPage .= "<h1 style='text-align: center; font-size: 4.5em; color: black;'>" . translateText($userLang, 'main-title') . " <br/>" . translateText($userLang, 'from') . " " . $fromDateFmt . "<br/>" . translateText($userLang, 'to') . " " . $toDateFmt . "</h1>";
+            }
         }
         $firstPage .= "<div style='text-align: center;'>";
         $firstPage .=   "<img src='sextant.gif' style='margin-top: 30px;'>";
@@ -349,7 +447,7 @@ try {
         $currentDate = $startDate;
         while ($currentDate <= $endDate) {
             // $finalOutput .= "Calculating Almanac for " . date_format($currentDate,"Y/m/d") . "<br/>";
-            $finalOutput .= oneDayAlmanac($verbose, $currentDate, $withStars) . "<br/>";
+            $finalOutput .= oneDayAlmanac($verbose, $currentDate, $withStars, $userLang) . "<br/>";
             // See this: https://www.w3schools.com/php/func_date_date_add.asp
             // date_add($date, date_interval_create_from_date_string("1 day"));
             date_add($currentDate, date_interval_create_from_date_string("1 day"));
@@ -361,6 +459,7 @@ try {
     $fromDate = "-";
     $toDate = "-";
     $withStars = "false";
+    $userLang = "EN";
 
     // Whatever you want it to be 
     if (isset($_GET['option'])) {
@@ -375,11 +474,13 @@ try {
     if (isset($_GET['stars'])) {
         $withStars = $_GET['stars'];
     }
-
+    if (isset($_GET['lang'])) {
+        $userLang = $_GET['lang'];
+    }
 
     if ($option == "1") {
         try {
-            $data = plublishAlmanac($VERBOSE, $fromDate, $toDate, $withStars == 'true'); // oneDayAlmanac($VERBOSE);
+            $data = plublishAlmanac($VERBOSE, $fromDate, $toDate, $withStars == 'true', $userLang); // oneDayAlmanac($VERBOSE);
             header('Content-Type: text/html; charset=utf-8');
             echo $data;
             // http_response_code(200);

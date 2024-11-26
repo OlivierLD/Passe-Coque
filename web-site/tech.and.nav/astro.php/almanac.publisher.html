@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Dynamically translatable -->
 <!--html lang="fr"-->
 <head>
   <meta charset="UTF-8">
@@ -38,10 +39,10 @@
 
 <div class="ui screen-only">
 
-	<h2>Celestial Almanacs Publication.</h2>
+	<h2><span id='main-title'>Celestial Almanacs Publication.</span></h2>
 
 	<div>
-		Compare the results with <a href="https://neoprogrammics.com/de405_usno_ae98/DE405_Sun.php" target="_new">this</a>.
+		<span id='compare-with'>Compare the results with</span> <a href="https://neoprogrammics.com/de405_usno_ae98/DE405_Sun.php" target="_new"><span id='with-this'>this</span></a>.
 	</div>
 	<div id="screen-warning" class="screen-only screen-warning">
 		<b><i>Note&nbsp;:</i></b>
@@ -67,14 +68,14 @@
 			</p>
 		</div>
 		<hr/>
-		<div>
+		<div id="method">
 			All calculations are done on the server, in php. Rendering is done on the client.
 		</div>
 	</div>
 
-	<span class="sub-title">Enter UTC dates from and to, then click the Compute button.</span>
+	<span class="sub-title" id="manual">Enter UTC dates from and to, then click the Compute button.</span>
 	<table class="no-border">
-		<tr><th>From</th><th>To</th></tr>
+		<tr><th><span id='from-label'>From</span></th><th><span id='to-label'>To</span></th></tr>
         <tr>
             <td style="vertical-align: top;">
                 <div>
@@ -127,15 +128,18 @@
                 </div>
             </td>
             <td style="vertical-align: top;">
-                <div id="user-messages" style="max-height: 4rem; overflow-y: scroll;"></div>
+				<select id="user-lang" title="Langue / Language" onchange="translatePage(this);">
+					<option value="FR">Fran&ccedil;ais</option>
+					<option value="EN">English</option>
+				</select>
             </td>
         </tr>
     </table>
 
 	<div>
 		<!--input type="checkbox" id="verbose" onchange="verbose(this);"><small>Console Verbose</small-->
-		<button id="now" onclick="updateUTCDates();" title="Update time to current time">Today</button>&nbsp;
-		<input type="checkbox" id="with-stars" onchange="withStars(this);"><small>With Stars</small>
+		<button id="now" onclick="updateUTCDates();" title="Update time to current time"><span id='today'>Today</span></button>&nbsp;
+		<input type="checkbox" id="with-stars" onchange="withStars(this);"><small><span id='with-stars-label'>With Stars</span></small>
 		<button onclick="requestData(1);">Compute</button>
 	</div>
 
@@ -251,7 +255,7 @@ function requestData(option) {
 	if (option) {
 		switch (option) {
 			case 1:
-				url = `./almanac.publisher.php?option=1&from=${fromStr}&to=${toStr}&stars=${consoleWithStars}`;
+				url = `./almanac.publisher.php?option=1&from=${fromStr}&to=${toStr}&stars=${consoleWithStars}&lang=${document.getElementById('user-lang').value}`;
 				console.log(`URL will be ${url}`);
 				break;
 			default: 
@@ -299,12 +303,118 @@ function requestData(option) {
 	});
 };
 
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+const TRANSLATIONS = [
+	{
+		id: 'main-title',
+		content: {
+			'EN': 'Celestial Almanacs Publication.',
+			'FR': 'Publication d\'&Eacute;ph&eacute;m&eacute;rides Nautiques.'
+		}
+	}, {
+		id: 'compare-with',
+		content: {
+			'EN': 'Compare the results with',
+			'FR': 'Comparez les r&eacute;sultats avec.'
+		}
+	}, {
+		id: 'with-this',
+		content: {
+			'EN': 'this',
+			'FR': 'ceci'
+		}
+	}, {
+		id: 'method',
+		content: {
+			'EN': 'All calculations are done on the server, in php. Rendering is done on the client.',
+			'FR': 'Tous les calculs sont faits sur le server, en php. L\'affichage est fait sur le client.'
+		}
+	}, {
+		id: 'manual',
+		content: {
+			'EN': 'Enter UTC dates from and to, then click the Compute button.',
+			'FR': 'Saisissez les dates (UTC) de d&eacute;but et de fin, puis cliquez le bouton Compute.'
+		}
+	}, {
+		id: 'from-label',
+		content: {
+			'EN': 'From',
+			'FR': 'D&eacute;but'
+		}
+	}, {
+		id: 'to-label',
+		content: {
+			'EN': 'To',
+			'FR': 'Fin'
+		}
+	}, {
+		id: 'today',
+		content: {
+			'EN': 'Today',
+			'FR': 'Aujourd\'hui'
+		}
+	}, {
+		id: 'with-stars-label',
+		content: {
+			'EN': 'With Stars',
+			'FR': 'Avec &Eacute;toiles'
+		}
+	}
+];
+
+let switchLang = (lng) => {
+	TRANSLATIONS.forEach(item => {
+		document.getElementById(item.id).innerHTML = item.content[lng];
+	});
+}
+
+let translatePage = (cb) => {
+	// console.log('Work to do!');
+	let userLang = cb.value;
+	// debugger;
+	switchLang(userLang);
+}
+
 window.onload = () => {
 	console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
 	updateUTCDates();
 	// requestData(); // Will do what's expected
+
+	let userLang = getQueryParameterByName('lang');
+
+	if (!userLang) { 
+		let browserUserLang = navigator.language || navigator.userLanguage; 
+		console.log("The browser's language is: " + browserUserLang);
+		if (browserUserLang) {
+			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+				userLang = 'FR';
+			} else {
+				userLang = 'EN';
+				console.log("We'll speak english");
+			}
+		}
+	}
+	document.getElementById('user-lang').value = userLang;
+	if (userLang !== 'EN') {
+		switchLang(userLang);
+	}
 
 };
 
