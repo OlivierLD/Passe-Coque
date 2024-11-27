@@ -30,6 +30,7 @@ try {
     <ul>
       <li><a href="./astro.php/index.01.html" target="_new">Astro PHP, first POC</a></li>
       <li><a href="./astro.php/almanac.publisher.html" target="_new">Almanac Publisher (WiP)</a></li>
+      <li><a href="./tides.php/tide.sample.php" target="_new">Tide Almanac (WiP)</a></li>
     </ul>
   </div>
   <hr/>
