@@ -19,6 +19,8 @@ try {
     * 
     * We are going to produce a JSON structure, that is then going to be fetched
     * from some ES6 code...
+    *
+    * For PHP UTC Dates, see https://www.w3schools.com/php/func_date_gmdate.asp
     */
 
     class Container {
@@ -37,14 +39,19 @@ try {
             // Quick test
             try {
                 // Core test
+                if (false) {
+                    $dummyGHA = 301.8575336115582;
+                    // Expect 301° 51' 27", 301°51.45', 301°51'27.1080"
+                    echo("Raw: " . $dummyGHA . ", Fmt: ". Utils::decToSex($dummyGHA, Utils::$NONE) );
+                }
 
-                // Current dateTime
-                $year = (int)date("Y");
-                $month = (int)date("m");
-                $day = (int)date("d");
-                $hours = (int)date("H");
-                $minutes = (int)date("i");
-                $seconds = (int)date("s");
+                // Current UTC dateTime
+                $year = (int)gmdate("Y");
+                $month = (int)gmdate("m");
+                $day = (int)gmdate("d");
+                $hours = (int)gmdate("H");
+                $minutes = (int)gmdate("i");
+                $seconds = (int)gmdate("s");
 
                 $container = new Container();
 
@@ -106,13 +113,13 @@ try {
     function moreSpecific_1(bool $verbose) : string {
         // Sun current status
         try {
-            // Current dateTime
-            $year = (int)date("Y");
-            $month = (int)date("m");
-            $day = (int)date("d");
-            $hours = (int)date("H");
-            $minutes = (int)date("i");
-            $seconds = (int)date("s");
+            // Current dateTime UTC
+            $year = (int)gmdate("Y");
+            $month = (int)gmdate("m");
+            $day = (int)gmdate("d");
+            $hours = (int)gmdate("H");
+            $minutes = (int)gmdate("i");
+            $seconds = (int)gmdate("s");
 
             $container = "<h4>Sun current status</h4>" . PHP_EOL;
             $container .= "<ul>" . PHP_EOL;
@@ -132,7 +139,9 @@ try {
 
             $container .= ("<li>Calculated at $year:$month:$day $hours:$minutes:$seconds UTC</li>" . PHP_EOL);
             $container .= ("<li>DeltaT: " . $ac->getDeltaT() . " s</li>" . PHP_EOL);
-            $container .= ("<li>Sun GHA: " . Utils::decToSex($ac->getSunGHA(), Utils::$NONE) . ", Sun Dec: " . Utils::decToSex($ac->getSunDecl(), Utils::$NS) . "</li>" . PHP_EOL);
+            // $container .= ("<li>Raw - Sun GHA: " . Utils::decToSex($context2->GHAsun, Utils::$NONE) . ", Sun Dec: " . Utils::decToSex($context2->DECsun, Utils::$NS) . "</li>" . PHP_EOL);
+            $container .= ("<li>Raw - Sun GHA: " . $context2->GHAsun . ", Sun Dec: " . $context2->DECsun . "</li>" . PHP_EOL);
+            $container .= ("<li>Fmt - Sun GHA: " . Utils::decToSex($ac->getSunGHA(), Utils::$NONE) . ", Sun Dec: " . Utils::decToSex($ac->getSunDecl(), Utils::$NS) . "</li>" . PHP_EOL);
 
             if ($verbose) {
                 echo("Invoking SightReductionUtil...<br/>");
@@ -170,13 +179,13 @@ try {
             // See this: https://www.w3schools.com/php/func_date_date_add.asp
             // date_add($date, date_interval_create_from_date_string("1 day"));
 
-            // Current dateTime
-            $year = (int)date("Y");
-            $month = (int)date("m");
-            $day = (int)date("d");
-            $hours = (int)date("H");
-            $minutes = (int)date("i");
-            $seconds = (int)date("s");
+            // Current UTC dateTime
+            $year = (int)gmdate("Y");
+            $month = (int)gmdate("m");
+            $day = (int)gmdate("d");
+            $hours = (int)gmdate("H");
+            $minutes = (int)gmdate("i");
+            $seconds = (int)gmdate("s");
 
             $nbDaysThisMonth = TimeUtil::getNbDays($year, $month);
             // echo("This month, $nbDaysThisMonth days.<br/>" . PHP_EOL);
@@ -188,7 +197,7 @@ try {
     
             $htmlContentSunMoonAries = ("<p>Calculated at $year:$month:$day $hours:$minutes:$seconds UTC</p>" . PHP_EOL);
             // date("l jS \of F Y h:i:s A"). See https://www.w3schools.com/php/func_date_date.asp
-            $htmlContentSunMoonAries .= "<div class='sub-title'>Celestial Almanac for " . date("l F jS, Y") .  "</div>" . PHP_EOL;
+            $htmlContentSunMoonAries .= "<div class='sub-title'>Celestial Almanac for " . gmdate("l F jS, Y") .  "</div>" . PHP_EOL;
             $htmlContentSunMoonAries .= "<table>" . PHP_EOL;
             $htmlContentSunMoonAries .= "<tr>" . 
                                "<th></th><th colspan='4'>Sun</th>" . 
