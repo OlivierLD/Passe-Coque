@@ -55,8 +55,100 @@ class TideUtilities {
                                      "R2", "2Q1", "P1", "2SM2", "M3", "L2", "2MK3", "K2", "M8",
                                      "MS4" ];
 
-    public static function getWaterHeight(TideStation $ts, array $constSpeed, DateTime $when) : float {
-        return 0;
+    /**
+     * $when: like '2024-11-28 12:34:56', LOCAL!! date.
+     * See https://www.w3schools.com/php/func_date_strtotime.asp
+     */                                     
+    public static function getWaterHeight(TideStation $ts, array $constSpeed, string $when) : float {
+		$value = 0.0;
+
+		$stationBaseHeight = $ts->getBaseHeight();
+		$stationUnit = $ts->getDisplayUnit();
+
+        // https://www.w3schools.com/php/func_date_mktime.asp
+        $calcDate = date_parse($when);
+        $year = (int)$calcDate["year"];
+        $month = (int)$calcDate["month"];
+        $day = (int)$calcDate["day"];
+        $hours = (int)$calcDate["hour"]; 
+        $minutes = (int)$calcDate["minute"];
+        $seconds = (float)$calcDate["second"];
+
+        // $calcDateTime = mktime($hours, $minutes, $seconds, $month, $day, $year); // Watch the order !!
+        // $jan1st = mktime(0, 0, 0, 1, 1, $year);
+
+        $secNow = strtotime(sprintf("%04d-%02d-%02d %02d:%02d:%02d", $year, $month, $day, $hours, $minutes, $seconds)); // Same as $when "2024-11-28 12:34:56");
+        $secJan1st = strtotime(sprintf("%04d-%02d-%02d %02d:%02d:%02d", $year, 1, 1, 0, 0, 0)); // "2024-01-01 00:00:00");
+
+        $nbSecSinceJan1st = ($secNow - $secJan1st);
+
+        //  long nbSecSinceJan1st = (d.getTime().getTime() - jan1st.getTime().getTime() ) / 1_000L;
+        //  System.out.println(" ----- NbSec for " + d.getTime().toString() + " = " + nbSecSinceJan1st);
+		$timeOffset = $nbSecSinceJan1st * 0.00027777777777777778; // aka divided by 3600. That one seems OK.
+		if (true) {
+            // gmdate("Y-m-d\TH:i:s\Z", $timestamp) 
+            // TODO Change to local time (not Z)
+            echo("Current: " . gmdate("Y-m-d\TH:i:sP", $secNow) . ", Jan 1st: " . gmdate("Y-m-d\TH:i:sP", $secJan1st) . "<br/>");
+            echo("Current: " . $secNow . " s, Jan 1st: " . $secJan1st . " s<br/>");
+			echo("Used TimeOffset: " . sprintf("%d", round($timeOffset)) . " hours (ie " . $nbSecSinceJan1st . " s), base height: " . $stationBaseHeight . " " . $stationUnit . "<br/>" . PHP_EOL);
+		}
+		$value = $ts->getBaseHeight();
+		for ($i = 0; $i < count($constSpeed); $i++) {
+            if (false) {
+                echo("For " . $ts->getFullName() . ", Harmonics:<br/>" . PHP_EOL);
+                var_dump($ts->getHarmonics());
+                echo("-- TS Harmonics: --<br/>" . PHP_EOL);
+                echo("ConstSpeed :<br/>" . PHP_EOL);
+                var_dump($constSpeed);
+                echo("-- constSpeed --<br/>" . PHP_EOL);
+            }
+            if (false) {
+                if ($ts->getHarmonics()[$i]->getName() != $constSpeed[$i]->getName()) {
+                    echo (".... Mismatch !!!<br/>" . PHP_EOL);
+                }
+            }
+            $currentConstSpeed = $constSpeed[$ts->getHarmonics()[$i]->getName()]; // By its key.
+
+			// value += (ts.getHarmonics().get(i).getAmplitude() * Math.cos(constSpeed.get(i).getValue() * timeOffset - ts.getHarmonics().get(i).getEpoch()));
+			$value += ($ts->getHarmonics()[$i]->getAmplitude() * cos($currentConstSpeed->getCoeffValue() * $timeOffset - $ts->getHarmonics()[$i]->getEpoch()));
+			if (false) {  // Verbose
+				echo(sprintf("Coeff %s - Amplitude: %f, Speed Value: %f, Epoch: %f => Value: %f\n",
+                             $currentConstSpeed->getCoeffName(),
+                             $ts->getHarmonics()[$i]->getAmplitude(),
+                             $currentConstSpeed->getCoeffValue(),
+                             $ts->getHarmonics()[$i]->getEpoch(),
+                             $value) . "<br/>" . PHP_EOL);   // Value !!
+			}
+		}
+		// if ($ts->getUnit().indexOf("^2") > -1) {
+        if (strpos($ts->getUnit(),  "^2") !== false) {            
+			$value = ($value >= 0.0 ? sqrt($value) : -sqrt(-$value));
+		}
+
+        return $value;
     }
 
+    public static function getMinMaxWH(TideStation $ts, array $constSpeed, string $when) : array {
+        return array("min" => 0, "max" => 0);
+    }
+
+    public static function findConstSpeed(Constituents $doc, string $constName) : ConstSpeed {
+        $speedMap = $doc->getConstSpeedMap();
+
+        if (false) {
+            echo ("SpeedMap:<br/>" . PHP_EOL);
+            var_dump($speedMap);
+            echo ("<br/>" . PHP_EOL);
+        }
+
+        $theConstSpeed = null;
+
+        foreach ($speedMap as $name => $coeff) {
+            if ($name == $constName) { // could also be $coeff->getCoeffName
+                $theConstSpeed = $coeff;
+                break;
+            }
+        }
+        return $theConstSpeed;
+    }
 }
