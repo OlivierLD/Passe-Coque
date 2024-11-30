@@ -44,6 +44,9 @@ try {
         } else {
             echo("Port-Tudy IS NOT a current station.<br/>" . PHP_EOL);
             echo("Displa Unit: " . $portTudyStation->getDisplayUnit() . "<br/>" . PHP_EOL);
+
+            
+
         }
     }
 

@@ -1641,16 +1641,16 @@ const THE_TEAM = [
         boss: false,
         image: "/images/the.team/regis.2.jpg",
         label: {
-            fr: "R&eacute;gis<br/>Administrateur / p&eacute;dagogie, relation avec les lyc&eacute;es et les GRETA",
-            en: "R&eacute;gis<br/>Administrator / pedagogy, relationship with high schools and GRETA"
+            fr: "R&eacute;gis<br/>Tr&eacute;sorier / p&eacute;dagogie, relation avec les lyc&eacute;es et les GRETA",
+            en: "R&eacute;gis<br/>CFO / pedagogy, relationship with high schools and GRETA"
         }
     }, {
         id: "catherine",
         boss: false,
         image: "/images/catherine.png",
         label: {
-            fr: "Catherine<br/>Tr&eacute;sori&egrave;re",
-            en: "Catherine<br/>CFO"
+            fr: "Catherine<br/>Secr&eacute;taire",
+            en: "Catherine<br/>Secretary"
         }
     }, {
         id: "olivier",
