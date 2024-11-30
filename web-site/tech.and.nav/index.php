@@ -32,6 +32,12 @@ try {
       <li><a href="./astro.php/almanac.publisher.html" target="_new">Almanac Publisher (WiP)</a></li>
       <li><a href="./tides.php/tide.sample.php" target="_new">Tide Almanac (WiP)</a></li>
     </ul>
+    <h2>Documents</h2>
+    <ul>
+      <li><a href="almanacs/almanac.2025.pdf" target="docs">&Eacute;ph&eacute;m&eacute;rides Nautiques</a> pour 2025</li>
+      <li><a href="almanacs/lunar.2025.pdf" target="docs">Distances Lunaires</a> pour 2025</li>
+      <li><a href="almanacs/perpetual.2025.2030.pdf" target="docs">Almanach "perp&eacute;tuel"</a> pour 2025-2030</li>
+    </ul>
   </div>
   <hr/>
   <i>&copy; Passe-Coque, 2024</i>
