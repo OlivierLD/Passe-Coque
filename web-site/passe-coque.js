@@ -2749,3 +2749,12 @@ let resumeScroll = () => {
     console.log("Resume scrolling...");
     keepScrolling = true;
 };
+
+// Jump to somewhere else in the same site...
+let jumpTo = (page, extraPrm) => {
+    let origin = window.location.origin;
+    let newUrl = origin + `?nav-to=${page}&${extraPrm}` 
+    console.log(`Going to ${newUrl}`);
+    // debugger;
+    window.open(newUrl);
+};
