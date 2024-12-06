@@ -96,6 +96,47 @@ class TideUtilities {
     public static $FEET_2_METERS = 0.30480061; // US feet to meters
 	public static $COEFF_FOR_EPOCH = 0.017453292519943289;
 
+    private static $DAYS_PER_MONTH = array (
+		31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+	);
+	private static $JANUARY = 1;
+	private static $FEBRUARY = 2;
+	private static $MARCH = 3;
+	private static $APRIL = 4;
+	private static $MAY = 5;
+	private static $JUNE = 6;
+	private static $JULY = 7;
+	private static $AUGUST = 8;
+	private static $SEPTEMBER = 9;
+	private static $OCTOBER = 10;
+	private static $NOVEMBER = 11;
+	private static $DECEMBER = 12;
+
+	/**
+	 * Get the number of days for a given month and year. Takes care of leap years.
+	 *
+	 * @param y year
+	 * @param m month Jan:1, Dec:12
+	 * @return the number of days in the given month.
+	 */
+	public static function getNbDays(int $y, int $m) : int {
+		$nd = self::$DAYS_PER_MONTH[$m - 1];
+		if ($m == self::$FEBRUARY) {
+			$leap = false;
+			if ($y % 4 == 0) { // Leap
+				$leap = true;
+				if ($y % 100 == 0) { // Not leap
+					$leap = $y % 400 == 0; // Except if %400 = 0
+				}
+			}
+			if ($leap) {
+				$nd += 1; // 29;
+			}
+		}
+		return $nd;
+	}
+
+
     public static function startsWith (string $string, string $startString) : bool { 
         $len = strlen($startString); 
         return (substr($string, 0, $len) === $startString); 
@@ -311,9 +352,13 @@ class TideUtilities {
 				$wh = 0;
 				try {
 					$wh = TideUtilities::getWaterHeight($ts, $constSpeed, $strDate);
+                    if (false) {
+                        echo("Water height in " . $ts->getFullName() . " at " . $dateTime->format('Y-m-d H:i:s e') . " is " . sprintf("%.02f", $wh) . " " . $ts->getUnit() . "<br/>" . PHP_EOL);
+                    }
                 } catch (Throwable $ex) {
                     throw $ex;
                 }
+                $applyTimeZone = true; // Set to true for local times.
 				if ($previousWH != null) {
 					if ($ts->isCurrentStation()) {
 						if (($previousWH > 0 && $wh <= 0) || ($previousWH < 0 && $wh >= 0)) {
@@ -337,10 +382,19 @@ class TideUtilities {
 										$high1 = $previousWH;
 										date_sub($dateTime, date_interval_create_from_date_string("1 minute"));
 										$high1Cal = $dateTime;
+                                        if ($applyTimeZone) {
+                                            $high1Cal->setTimeZone(new DateTimeZone($ts->getTimeZone()));
+                                        }
+                                        if (false) {
+                                            echo("--> Now going down. Water height in " . $ts->getFullName() . " at " . $dateTime->format('Y-m-d H:i:s e') . " is " . sprintf("%.02f", $wh) . " " . $ts->getUnit() . "<br/>" . PHP_EOL);
+                                        }                    
 									} else {
 										$high2 = $previousWH;
 										date_sub($dateTime, date_interval_create_from_date_string("1 minute"));
 										$high2Cal = $dateTime;
+                                        if ($applyTimeZone) {
+                                            $high2Cal->setTimeZone(new DateTimeZone($ts->getTimeZone()));
+                                        }
 									}
 									$trend = $GLOBALS['FALLING']; // Now falling
 								}
@@ -356,6 +410,9 @@ class TideUtilities {
                                         }                        
 										date_sub($dateTime, date_interval_create_from_date_string("1 minute"));
 										$low1Cal = $dateTime;
+                                        if ($applyTimeZone) {
+                                            $low1Cal->setTimeZone(new DateTimeZone($ts->getTimeZone()));
+                                        }
                                         if (false) {
                                             echo($low1Cal->format('Y-m-d H:i:s') . " !<br/>" . PHP_EOL);
                                         }                        
@@ -363,6 +420,9 @@ class TideUtilities {
 										$low2 = $previousWH;
 										date_sub($dateTime, date_interval_create_from_date_string("1 minute"));
 										$low2Cal = $dateTime;
+                                        if ($applyTimeZone) {
+                                            $low2Cal->setTimeZone(new DateTimeZone($ts->getTimeZone()));
+                                        }
 									}
 									$trend = $GLOBALS['RISING']; // Now rising
 								}
@@ -404,8 +464,29 @@ class TideUtilities {
 		// 	slackList.stream().forEach(timeList::add);
 		// }
 
-        usort($timeList, 'comparator');
+        usort($timeList, 'comparator'); // Sort the list on times
 		return $timeList;
+	}
+
+    /**
+     * $brestOneDay is the TideTable for Brest at the given date.
+     * It must have been computed befgore invoking this one
+     */
+    public static function getCoeffInBrest(TideStation $ts, array $brestOneDay) : array {
+		$coeffs = array();
+		// assert ts.getFullName().equals("Brest%2C%20France");
+		$U = 0.032429906542056; // Hard coded
+		$baseHeight = $ts->getBaseHeight(); // 4.02 for Brest
+
+        for ($i=0; $i<count($brestOneDay); $i++) {
+            $tv = $brestOneDay[$i];
+            if ($tv->getType() == "HW") { 
+                $hwValue = $tv->getValue();
+                $coeff = ($hwValue - $baseHeight) / $U;
+                array_push($coeffs, round($coeff));
+            }
+        }
+		return $coeffs;
 	}
 
 }

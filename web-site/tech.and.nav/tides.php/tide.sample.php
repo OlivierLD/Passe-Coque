@@ -13,16 +13,25 @@
 </head>
 
 <body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
+<h2>PHP Tides Test</h2>    
 
 <?php
 
-function stationTest(string $stationName, int $year, BackEndSQLiteTideComputer $backend, Constituents $constituentsObject, array $stationsData) : void {
+function stationTest(string $stationName, 
+                     int $year, 
+                     int $month, 
+                     int $day,
+                     BackEndSQLiteTideComputer $backend, 
+                     Constituents $constituentsObject, 
+                     array $stationsData, 
+                     ?bool $withCoeffs=false,
+                     ?bool $oneMonthTable=false) : void {
 
     $theTideStation = $backend->findTideStation($stationName, $year, $constituentsObject, $stationsData);
     if ($theTideStation == null) {
         echo($stationName . " was not found...<br/>" . PHP_EOL);
     } else {
-        echo($stationName . " : Base height: " . $theTideStation->getBaseHeight() . " " . $theTideStation->getDisplayUnit() . "<br/>" . PHP_EOL);
+        echo("<b>" . $stationName . "</b> : Base height: " . $theTideStation->getBaseHeight() . " " . $theTideStation->getDisplayUnit() . "<br/>" . PHP_EOL);
         // var_dump($theTideStation);
         if ($theTideStation->isCurrentStation()) {
             echo($stationName . " IS a current station.<br/>" . PHP_EOL);
@@ -57,12 +66,49 @@ function stationTest(string $stationName, int $year, BackEndSQLiteTideComputer $
 
         // More...
         echo("Tide table for one day...<br/>" . PHP_EOL);
-        $tideForOneDay = TideUtilities::getTideTableForOneDay($theTideStation, $constituentsObject->getConstSpeedMap(), $year, 12, 5, null /*$theTideStation->getTimeZone()*/);
-        echo("Tide table for one day, done.<br/>" . PHP_EOL);
+        $before = microtime(true);
+        $tz2Use = null ; // "Europe/Paris"; // Enforce
+        $tideForOneDay = TideUtilities::getTideTableForOneDay($theTideStation, $constituentsObject->getConstSpeedMap(), $year, $month, $day, $tz2Use /*$theTideStation->getTimeZone()*/);
+
+        $after = microtime(true);
+        $timeDiff = ($after - $before) * 1000;
+        echo("Tide table for one day, done in " . sprintf("%.02f", $timeDiff) . " ms<br/>" . PHP_EOL);
+
+        if ($withCoeffs) {
+            $brestTideStation = $backend->findTideStation("Brest, France", $year, $constituentsObject, $stationsData);
+
+			// assert (brestTideStation != null);
+            $brestTable = TideUtilities::getTideTableForOneDay($brestTideStation, $constituentsObject->getConstSpeedMap(), $year, $month, $day, $tz2Use);
+            $coeffsInBrest = TideUtilities::getCoeffInBrest($brestTideStation, $brestTable);
+            $indexInCoeffs = 0;
+            for ($i=0; $i<count($tideForOneDay); $i++) {
+                $tv = $tideForOneDay[$i];
+                if (count($coeffsInBrest) > $indexInCoeffs) {
+                    $tv->setCoeff($coeffsInBrest[$indexInCoeffs]);
+                    $indexInCoeffs++;
+                }
+            }
+        }
 
         // var_dump($tideForOneDay);
         for ($i=0; $i<count($tideForOneDay); $i++) {
-            echo("- " . $tideForOneDay[$i]->getType() . " at " . $tideForOneDay[$i]->getFormattedDate() . ", " . $tideForOneDay[$i]->getValue() . " " . $tideForOneDay[$i]->getUnit() . "<br/>" . PHP_EOL);
+            echo("- " . $tideForOneDay[$i]->getType() . 
+                 " at " . $tideForOneDay[$i]->getFormattedDate() . 
+                 ", " . sprintf("%.02f", $tideForOneDay[$i]->getValue()) . " " . $tideForOneDay[$i]->getUnit() . 
+                 ($tideForOneDay[$i]->getCoeff() != 0 ? sprintf(", Coeff: %02d", $tideForOneDay[$i]->getCoeff()) : "") . "<br/>" . PHP_EOL);
+        }
+
+        // Tide for one month ?
+        if ($oneMonthTable) {
+            $nbDaysThisMonth = TideUtilities::getNbDays($year, $month);
+            echo("Will process tide for one month:" . $year . ", " . $month . ", " . $nbDaysThisMonth . " days.<br/>" . PHP_EOL);
+            $monthTable = array();
+            for ($d=1; $d<=$nbDaysThisMonth; $d++) {
+                // echo(">>> Processing day :" . $d . ".<br/>" . PHP_EOL);
+                $tideForOneDay = TideUtilities::getTideTableForOneDay($theTideStation, $constituentsObject->getConstSpeedMap(), $year, $month, $d, $tz2Use /*$theTideStation->getTimeZone()*/);
+                $monthTable += [sprintf("%04d-%02d-%02d", $year, $month, $d) => $tideForOneDay];
+            }
+            var_dump($monthTable);
         }
 
     }
@@ -109,22 +155,33 @@ try {
     echo("-------------------------------<br/>" . PHP_EOL);
     echo("----- <b>Water Height Tests</b> ------<br/>" . PHP_EOL);
     echo("-------------------------------<br/>" . PHP_EOL);
+
+    $year = (int)date("Y"); // gmdate ?
+    $month = (int)date("m");
+    $day = (int)date("d");
+
     // Find Port-Tudy... for the given year.
     $stationName = "Port-Tudy";
-    $year = 2024;
-    stationTest($stationName, $year, $backend, $constituentsObject, $stationsData);
+    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData, true, true);
 
     echo("-------------------------------<br/>" . PHP_EOL);
     // And so on...
     $stationName = "Half Moon Bay";
-    $year = 2024;
-    stationTest($stationName, $year, $backend, $constituentsObject, $stationsData);
+    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData);
 
     echo("-------------------------------<br/>" . PHP_EOL);
     // Find Port-Tudy... for the given year, again.
     $stationName = "Port-Tudy";
-    $year = 2024;
-    stationTest($stationName, $year, $backend, $constituentsObject, $stationsData);
+    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData);
+
+    echo("-------------------------------<br/>" . PHP_EOL);
+    // Find Johnston Atoll, Pacific Ocean... for the given year.
+    $stationName = "Johnston Atoll";
+    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData);
+
+    echo("-------------------------------<br/>" . PHP_EOL);
+    $stationName = "Falmouth";
+    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData);
 
     echo("-------------------------------<br/>" . PHP_EOL);
     
