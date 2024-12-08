@@ -34,7 +34,7 @@ try {
         Tides in PHP
         <ul>
           <li><a href="./tides.php/tide.sample.php" target="_new">Tide Workbench (WiP)</a></li>
-          <li><a href="./tides.php/tide.publisher/tide.publisher.101.php" target="_new">Tide Almanac for Port-Tudy (currtent month)</a></li>
+          <li><a href="./tides.php/tide.publisher/tide.publisher.101.php" target="_new">Tide Almanac Publisher. WiP.</a></li>
         </ul>
       </li>
     </ul>
