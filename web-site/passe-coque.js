@@ -2753,8 +2753,12 @@ let resumeScroll = () => {
 // Jump to somewhere else in the same site...
 let jumpTo = (page, extraPrm) => {
     let origin = window.location.origin;
-    let newUrl = origin + `?nav-to=${page}&${extraPrm}` 
+    let newUrl = origin + `?lang=${currentLang}&nav-to=${page}&${extraPrm}` 
     console.log(`Going to ${newUrl}`);
     // debugger;
-    window.open(newUrl);
+    if (false) {
+        window.open(newUrl); // New window
+    } else {
+        window.location.assign(newUrl); // Same window
+    }
 };

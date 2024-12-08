@@ -38,6 +38,23 @@ try {
         </ul>
       </li>
     </ul>
+
+    <h2>How to print your documents</h2>
+    An example, with the tide almanac publisher (above):<br/>
+    You will see:
+    <ul>
+      <li>How to produce the tide almanac you want</li>
+      <li>
+        How to print it (or save it as a pdf) with the right size or so (from a right-click in the browser)...
+      </li>
+    </ul>
+    <video style="border: 1px solid black;" width="80%" height="auto" controls>
+        <source src="./how-to.print.mov" type="video/mp4">
+        <!--source src="/videos/Passe&#8209;Coque-SO.mp4" type="video/mp4"-->
+        <!--source src="movie.ogg" type="video/ogg"-->
+      Your browser does not support the video tag.
+    </video>
+
     <h2>Documents</h2>
     <ul>
       <li><a href="almanacs/almanac.2025.pdf" target="docs">&Eacute;ph&eacute;m&eacute;rides Nautiques</a> pour 2025</li>
