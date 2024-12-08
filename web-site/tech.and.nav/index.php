@@ -30,7 +30,13 @@ try {
     <ul>
       <li><a href="./astro.php/index.01.html" target="_new">Astro PHP, first POC</a></li>
       <li><a href="./astro.php/almanac.publisher.html" target="_new">Almanac Publisher (WiP)</a></li>
-      <li><a href="./tides.php/tide.sample.php" target="_new">Tide Almanac (WiP)</a></li>
+      <li>
+        Tides in PHP
+        <ul>
+          <li><a href="./tides.php/tide.sample.php" target="_new">Tide Workbench (WiP)</a></li>
+          <li><a href="./tides.php/tide.publisher/tide.publisher.101.php" target="_new">Tide Almanac for Port-Tudy (currtent month)</a></li>
+        </ul>
+      </li>
     </ul>
     <h2>Documents</h2>
     <ul>
