@@ -37,6 +37,14 @@ try {
           <li><a href="./tides.php/tide.publisher/tide.publisher.101.php" target="_new">Tide Almanac Publisher. WiP.</a></li>
         </ul>
       </li>
+      <li>
+        For later (for inspiration)
+        <ul>
+          <li><a href="https://olivierld.github.io/web.stuff/tides/Basic.04.html" target="_new">Basic test, with Graph</a></li>
+          <li><a href="https://olivierld.github.io/web.stuff/tides/earth.tide.stations.html" target="_new">Earth Tide Stations</a></li>
+          <li><a href="https://olivierld.github.io/web.stuff/tides/leaflet.tide.stations.html" target="_new">Leaflet Tide Stations</a></li>
+        </ul>
+      </li>
     </ul>
 
     <h2>How to print your documents</h2>
