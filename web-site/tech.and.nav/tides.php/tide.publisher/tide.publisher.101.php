@@ -273,7 +273,7 @@ function getStationsList(string $pattern) : array {
     if ($VERBOSE) {
         echo("Connection created.<br/>". PHP_EOL);
     }
-    $stationList = $backend->getStationList($pattern);
+    $stationList = $backend->getStationList($pattern, true); // Tide Stations only
 
     $backend->closeDB();
     if ($VERBOSE) {
