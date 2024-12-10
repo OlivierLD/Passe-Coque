@@ -1005,7 +1005,7 @@ let getQueryParameterByName = (name, url) => {
 
 let qrcode;
 
-let makeCode = (url) => {    
+let makeCode = (url, location) => {    
 	if (url === undefined) {
 		url = document.location.href;
 	} 
@@ -1015,7 +1015,13 @@ let makeCode = (url) => {
 
   	qrcode.makeCode(toDisplay);
     // qrcode.style.display = 'block';
-    document.getElementById("qrcode").style.display = 'block'; // Show it ! (Hidden otherwise)
+    if (location) {
+        // let content = document.getElementById("qrcode").innerHTML;
+        document.getElementById(location).appendChild(document.getElementById("qrcode"));
+        document.getElementById(location).firstChild.style.display = 'block';
+    } else {
+        document.getElementById("qrcode").style.display = 'block'; // Show it ! (Hidden otherwise)
+    }
 };
 
 const DIALOG_OPTION = true;
