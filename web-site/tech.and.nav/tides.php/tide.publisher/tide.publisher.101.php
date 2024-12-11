@@ -453,10 +453,11 @@ function selectStationAndDuration(array $list) : void {
                 document.getElementById('month-list').disabled = (item.value === 'YEAR');
             };
             let sendAck = (form) => {
-                // console.log("The received Obj:" + form);
+                // console.log("Generating ack");
                 // debugger;
                 let lang = form.querySelector("input[name = 'lang']").value;
-                let station = form.querySelector("select[name = 'station-name']").value;
+                // let station = form.querySelector("select[name = 'station-name']").value;
+                let station = form.querySelector("select[name = 'station-name']").querySelector('option:checked').innerText
                 let duration = form.querySelector("select[name = 'duration']").value;
 
                 let message = "";
@@ -484,6 +485,7 @@ function selectStationAndDuration(array $list) : void {
                         <select name="station-name" form="formStation">
         <?php
                         for ($i=0; $i<count($list); $i++) {
+                            // str_replace("'", "&quote;", $list[$i])
                             echo("<option value='" . $list[$i] . "'>" . $list[$i] . "</option>" . PHP_EOL);
                         }
         ?>
