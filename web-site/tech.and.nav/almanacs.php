@@ -54,6 +54,7 @@ try {
     <h2>Meteo (en travaux)</h2>
     <ul>
       <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html" target="OlivLD">Faxes, North Atlantic (real time)</a></li>
+      <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.2.html" target="OlivLD">Several Atlantic faxes (v2), reworked on the client side...</a></li>
       <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NPac.html" target="OlivLD">Faxes, North Pacific (real time)</a></li>
       <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/forecast.html" target="OlivLD">Several GRIB-based sites</a></li>
     </ul>
