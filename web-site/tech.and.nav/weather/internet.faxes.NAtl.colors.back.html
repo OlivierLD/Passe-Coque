@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--
+ | This is a test, WiP.
+ | North Atlantic faxes from the Internet, rotated and re-scaled, new origins.
+ | BUT: The faxes are NOT transparent, like when processed in Java, where the white
+ | is trurned transparent, and the black into another color.
+ |
+ | We have to:
+ | - Make the white transparent
+ | - Change the black into another color
+ | - Rescale, rotate, translate the fax.
+ +-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+    <title>Internet Faxes</title>
+    <link rel="icon" type="image/ico" href="../icons/hammerhead.02.ico">
+    <link rel="stylesheet" href="../css/white.css" type="text/css"/>
+    <style>
+    html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .fax-container {
+      display: grid;
+      grid-template-columns: 450px 450px;
+      padding: 0px;
+      /* margin: auto; */
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted silver;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 240px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+    img {
+      mix-blend-mode: multiply;
+    }
+    </style>
+    <script type="text/javascript">
+      let surfaceFaxesVisible = () => {
+          let left = document.getElementById("left");
+          return !(left.style.display === 'none');
+      };  
+      let set500mbOpacity = val => {
+        let fax500mb = document.getElementById("500mb");
+        fax500mb.style.opacity = val;
+      };
+
+      // Show/Hide surface faxes
+      let showSurface = (cb) => {
+          let left = document.getElementById("left");
+          let right = document.getElementById("right");
+          right.style.display = cb.checked ? 'inline' : 'none';
+          left.style.display = cb.checked ? 'inline' : 'none';
+          let fax500mb = document.getElementById("500mb");
+          fax500mb.style.marginTop = cb.checked ? '-575px' : '-30px';
+          // if (!cb.checked) {
+          //   set500mbOpacity('1.0');
+          // } else {
+          //   set500mbOpacity('0.5');
+          // }
+      };
+      // Show/Hide 500mb fax
+      let show500mb = (cb) => {
+          let fax500mb = document.getElementById("500mb");
+          fax500mb.style.display = cb.checked ? 'inline' : 'none';
+          // if (cb.checked && !surfaceFaxesVisible()) {
+          //   set500mbOpacity('1.0');
+          // } else {
+          //   set500mbOpacity('0.5');
+          // }
+      };
+    </script>
+</head>
+<body style="background-color: #fff;">
+  <h2 class="tooltip">
+    Faxes from the Internet, North Atlantic
+    <span class="tooltiptext">3 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
+  </h2>
+
+<!-- North-West Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA12.gif -->
+<!-- North-East Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA11.gif -->
+<!-- North Atlantic 500mb: https://tgftp.nws.noaa.gov/fax/PPAA10.gif -->
+
+  <div style="padding-top: 0px; margin-bottom: 20px;">
+    <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
+    <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
+  </div>
+
+  <!-- Original faxes -->
+  <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px;">
+      <img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
+      <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
+      <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img>
+  </div>
+  <hr/>
+  <!-- Reworked faxes -->
+  <div id="reworked-faxes" style="min-height: 600px; min-width: 1024px; padding-top: 40px;">
+    <canvas id="reworked-faxes-canvas"></canvas>
+  </div>
+  <hr/>
+</body>
+<script type="text/javascript">
+
+let dummyTest = (ctx) => {
+  const imgData = ctx.createImageData(100, 100);
+  console.log(`New image, ${100} x ${100} : ${imgData.data.length} elemens.`);
+  for (let i = 0; i < imgData.data.length; i += 4) {
+    imgData.data[i+0] = 255; // red
+    imgData.data[i+1] = 0;
+    imgData.data[i+2] = 0;
+    imgData.data[i+3] = 255;
+  }
+  ctx.putImageData(imgData, 0, 0);
+
+}
+
+let changeColor = /*async*/ (ctx, image, colorFrom, colorTo) => {
+
+  // See https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_createimagedata
+
+  // var response = await fetch(image.src /*imageUrl*/);
+  // var fileBlob = await response.blob();
+  // var bitmap = await createImageBitmap(fileBlob);
+  // var canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+  // var context = canvas.getContext('2d');
+  // context.drawImage(bitmap, 0, 0);
+  // var imageData = context.getImageData(0, 0, bitmap.width, bitmap.height);
+
+  let width = image.width;
+  let height = image.height;
+  // var picLength = width * height; // number of chunks of 4
+
+  let imageData = ctx.getImageData(0, 0, width, height);
+  let newImage = ctx.createImageData(width, height);
+  console.log(`New image, ${width} x ${height} : ${newImage.data.length} pixels (of 4 ints).`);
+
+  for (let i=0; i<imageData.data.length; /*picLength * 4;*/ i+=4) {
+    newImage.data[i] = imageData.data[i];
+    newImage.data[i+1] = imageData.data[i+1];
+    newImage.data[i+2] = imageData.data[i+2];
+    newImage.data[i+3] = imageData.data[i+3];
+    if (true) {
+      // Turn white into transparent: (255, 255, 255, 255) becomes (255, 255, 255, 0)
+      if (imageData.data[i] === 255 && imageData.data[i+1] === 255 && imageData.data[i+2] === 255) {
+        newImage.data[i + 3] = 0;
+      }
+
+      // Turn colorrom into colorTo (from.r, fromg, fromb, 255) becomes (to.r, to.g, to.b, 255)
+      if (imageData.data[i] === colorFrom.r && imageData.data[i+1] === colorFrom.g && imageData.data[i+2] === colorFrom.b) {
+        newImage.data[i] = colorTo.r;
+        newImage.data[i+1] = colorTo.g;
+        newImage.data[i+2] = colorTo.b;
+      }
+    }
+  }
+  return newImage;
+  // ctx.putImageData(newImage, 0, 0);
+};
+
+let downloadToFileSystem = (from, to) => {
+  const baseUrl = "./faxes/fax.download.php";
+  let url = baseUrl + `?origin=${from}&destination=${to}`;
+	fetch(url, {
+		method: "GET",
+		headers: {
+			// "Content-type": "application/json; charset=UTF-8"
+			"Content-type": "text/html; charset=UTF-8"
+		}
+	}).then(response => {
+		console.log(`Received from PHP: \nResponse Status:${response.status}`);
+    // Assumimg this is text (not json, or what not)
+    response.text().then(data => {
+      console.log("Received [" + data + "]");
+    });
+	},
+	(error, errmess) => {
+		console.log("fax download: Ooch");
+		let message;
+		if (errmess) {
+			let mess = JSON.parse(errmess);
+			if (mess.message) {
+				message = mess.message;
+			}
+		}
+		console.debug("Failed to get to the " + baseUrl + "..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+	});
+
+};
+
+// On Load: Rework the faxes loaded above, in the placeholder div.
+// Margins can be tuned with the debugger (inspector).
+window.onload = () => {
+
+  // First, download the faxes on the file system, to be able to rework them.
+  // This cannot be done from ES6, that's why we use php.
+  const NW_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA12.gif";
+  const NE_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA11.gif";
+  const N_ATL_500mb_URL =  "https://tgftp.nws.noaa.gov/fax/PPAA10.gif";
+
+  downloadToFileSystem(NW_ATL_URL, "left.gif");
+  downloadToFileSystem(NE_ATL_URL, "right.gif");
+  downloadToFileSystem(N_ATL_500mb_URL, "500mb.gif");
+
+  const leftFax = document.getElementById('left');
+  const rightFax = document.getElementById('right');
+  const fax500mb = document.getElementById('500mb');
+
+  /*
+    * First tentative...
+    */
+  // Surface, left fax
+  leftFax.style.width = '600px';
+  leftFax.style.height = 'auto';
+  leftFax.style.transform = 'rotate(90deg)';
+  /* leftFax.style.filter = 'opacity(1.0)';  */    // In the background.
+  leftFax.style.opacity = '1.0';      // Another option, same as above.
+
+  // Surface, right fax
+  rightFax.style.width = '600px';
+  rightFax.style.height = 'auto';
+  rightFax.style.transform = 'rotate(90deg)';
+  /* rightFax.style.filter = 'opacity(1.0)';  */   // In the background (see z-index)
+  rightFax.style.opacity = '1.0';      // Another option, same as above.
+  rightFax.style.marginLeft = '-33px';
+  rightFax.style.zIndex = '-1';
+
+  // 500mb fax
+  fax500mb.style.width = '919px';
+  fax500mb.style.height = 'auto';
+  // fax500mb.style.transform = 'rotate(0deg)';
+  /* fax500mb.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
+  fax500mb.style.opacity = '1.0'; // '0.5';     // Foreground, not opaque (see z-index)
+  fax500mb.style.marginLeft = '62px';
+  fax500mb.style.marginTop = '-575px';
+  fax500mb.style.zIndex = '1';
+
+  /*
+    * Now with Images and canvases
+    */
+  let canvas = document.getElementById("reworked-faxes-canvas");
+  let ctx = canvas.getContext("2d");
+
+  let srcLeft = document.getElementById("left").src;
+  let srcRight = document.getElementById("right").src;
+  let src500mb = document.getElementById("500mb").src;
+  
+  console.log("Now loading...");
+
+  let imageLeft = new Image();
+  // imageLeft.crossOrigin = "anonymous";
+  imageLeft.src = srcLeft;
+  console.log(`Image width: ${imageLeft.width}, height: ${imageLeft.height}`);
+  ctx.drawImage(imageLeft, 0, 0); // For the getImageData to work... But causes a CORS error.
+  // Change colors, white to transparent, and black to red
+  let transformed = changeColor(ctx, imageLeft, {r: 0, g: 0, b: 0}, {r: 255, g: 0, b: 0});
+  console.log(`transformed: ${transformed.data.length} pixels`);
+  // let newImage = ctx.getImageData(0, 0, width, height);
+  if (true) {
+    ctx.putImageData(transformed, 0, 0);
+  } else {
+    dummyTest(ctx);
+  }
+}
+</script>
+</html>
