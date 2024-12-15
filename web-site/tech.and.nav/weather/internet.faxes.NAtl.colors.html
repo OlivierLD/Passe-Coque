@@ -512,6 +512,25 @@ let doYourJob = () => {
 // Margins can be tuned with the debugger (inspector).
 window.onload = () => {
 
+  // Check OffscreenCanvas availability
+  try {
+    if (OffscreenCanvas) {
+      console.log("All good. OffscreenCanvas is available.");
+    } else {
+      let mess = "Your browser seems not to be compatible with the recent versions of ES6 (aka JavaScript).\n" +
+                "Some features might not be available...\n" + 
+                "Votre navigateur semble ne pas être compatible avec les récentes versions d'ES6 (JavaScript).\n" +
+                "Certaines fonctionnalités peuvent ne pas être disopnibles...";
+      alert(mess);
+    }
+  } catch (err) {
+    let mess = "Your browser seems not to be compatible with the recent versions of ES6 (aka JavaScript).\n" +
+                "Some features might not be available...\n" + 
+                "Votre navigateur semble ne pas être compatible avec les récentes versions d'ES6 (JavaScript).\n" +
+                "Certaines fonctionnalités peuvent ne pas être disopnibles...";
+    alert(mess);
+  }
+
   // First, download the faxes on the file system, to be able to rework them.
   // This cannot be done from ES6, that's why we use php.
   const NW_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA12.gif";

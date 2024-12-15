@@ -513,6 +513,29 @@ window.onload = () => {
 		switchLanguage();
 	}
 
+	// Check OffscreenCanvas availability
+	try {
+		if (OffscreenCanvas) {
+			console.log("All good. OffscreenCanvas is available.");
+		} else {
+			let mess = "Your browser seems not to be compatible with the recent versions of ES6 (aka JavaScript).\n" +
+						"Some features might not be available...";
+			if (userLang === 'FR') {
+				mess = "Votre navigateur semble ne pas être compatible avec les récentes versions d'ES6 (JavaScript).\n" +
+					   "Certaines fonctionnalités peuvent ne pas être disopnibles..."
+			}
+			alert(mess);
+		}
+	} catch (err) {
+		let mess = "Your browser seems not to be compatible with the recent versions of ES6 (aka JavaScript).\n" +
+				   "Some features might not be available...";
+		if (userLang === 'FR') {
+			mess = "Votre navigateur semble ne pas être compatible avec les récentes versions d'ES6 (JavaScript).\n" +
+				   "Certaines fonctionnalités peuvent ne pas être disopnibles..."
+		}
+		alert(mess);
+	}
+
 	let pageToLoad = "_1"; // Default
 
 	// nav-to Query Parameter, no underscore
