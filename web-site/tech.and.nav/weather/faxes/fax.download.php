@@ -38,6 +38,12 @@ try {
 	file_put_contents( $fp, $data ); 
 
 	header('Content-Type: plain/text; charset=utf-8');
+	header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+	header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+	header("Cache-Control: post-check=0, pre-check=0", false);
+	header("Pragma: no-cache");
+
 	echo "File " . $origin . " downloaded as " . $destination . PHP_EOL;
 } catch (Throwable $e) {
 	echo "[Captured Throwable (3) for celestial.computer.php : " . $e . "] " . PHP_EOL;
