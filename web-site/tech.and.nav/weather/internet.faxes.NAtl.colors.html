@@ -13,7 +13,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
-    <title>Internet Faxes</title>
+    <title>N.Atl. Internet Faxes</title>
     <link rel="icon" type="image/ico" href="../../icons/hammerhead.02.ico">
     <link rel="stylesheet" href="../../css/white.css" type="text/css"/>
     <style>
@@ -71,6 +71,7 @@
         let bwDiv = document.getElementById("placeholder");
         bwDiv.style.display = cb.checked ? 'inline' : 'none';
       };
+
       // Show/Hide surface faxes
       let showSurface = (cb) => {
           let left = document.getElementById("left");
@@ -79,11 +80,6 @@
           left.style.display = cb.checked ? 'inline' : 'none';
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.marginTop = cb.checked ? '-575px' : '-30px';
-          // if (!cb.checked) {
-          //   set500mbOpacity('1.0');
-          // } else {
-          //   set500mbOpacity('0.5');
-          // }
 
           // Reworked ones
           let left2 = document.getElementById("reworked-faxes-canvas-left");
@@ -98,11 +94,6 @@
       let show500mb = (cb) => {
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.display = cb.checked ? 'inline' : 'none';
-          // if (cb.checked && !surfaceFaxesVisible()) {
-          //   set500mbOpacity('1.0');
-          // } else {
-          //   set500mbOpacity('0.5');
-          // }
 
           // Reworked ones
           // let left2 = document.getElementById("reworked-faxes-canvas-left");
@@ -114,11 +105,6 @@
       let showSeaState= (cb) => {
           let faxSeaState = document.getElementById("seastate");
           faxSeaState.style.display = cb.checked ? 'inline' : 'none';
-          // if (cb.checked && !surfaceFaxesVisible()) {
-          //   set500mbOpacity('1.0');
-          // } else {
-          //   set500mbOpacity('0.5');
-          // }
 
           // Reworked ones
           // let left2 = document.getElementById("reworked-faxes-canvas-left");
@@ -132,14 +118,12 @@
   <div id="top-content" style="display: grid; grid-template-columns: 50% 50%;">
     <div>
       <h2 class="tooltip">
-        Faxes from the Internet, North Atlantic
+        Faxes from the Internet, North Atlantic (in progress)
         <span class="tooltiptext">4 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
       </h2>
-      <div id="update-date">
-      </div>
+      <div id="update-date"></div>
     </div>
-    <div id="message-area" style="max-height: 100px; overflow: scroll; font-family: 'Courier New', Courier, monospace;" placeholder="Message area">
-    </div>
+    <div id="message-area" style="max-height: 100px; overflow: scroll; font-family: 'Courier New', Courier, monospace;" placeholder="Message area"></div>
   </div>
 
 <!-- North-West Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA12.gif -->
@@ -148,7 +132,7 @@
 <!-- North Atlantic Sea State: https://tgftp.nws.noaa.gov/fax/PJAA99.gif -->
 
   <div id="raw-placeholder" style="display: none;">
-    <!-- TODO Try downloading them in php -->
+    <!-- Try downloading them locally (to avoid CORS errors), in php -->
     <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
     <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
     <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img-->
@@ -160,13 +144,40 @@
   <hr/>
   <!-- Original faxes -->
   <div style="padding-top: 0px; margin-bottom: 20px;">
-    <input type="checkbox" id="show-bw" onchange="showBW(this);" checked> Show Black &amp; White version
-    <input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes
-    <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
-    <input type="checkbox" id="show-sea-state" onchange="showSeaState(this);" checked> Sea State Fax
+    <table>
+      <tr>
+        <td colspan="2"><input type="checkbox" id="show-bw" onchange="showBW(this);" checked> Show Black &amp; White version</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes</td>
+        <td>
+          <input type="color" id="sfc-color" name="sfc-color" value="#ff0000" onchange="doYourJob();"/>
+          <label for="sfc-color">Surface Faxes color</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" id="show-500mb" onchange="show500mb(this);" checked> 500mb Fax
+        </td>
+        <td>
+          <input type="color" id="500mb-color" name="500mb-color" value="#0000ff" onchange="doYourJob();"/>
+          <label for="500mb-color">500mb Fax color</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" id="show-sea-state" onchange="showSeaState(this);" checked> Sea State Fax
+        </td>
+        <td>
+          <input type="color" id="sea-state-color" name="sea-state-color" value="#013220" onchange="doYourJob();"/>
+          <label for="sea-state-color">Sea State Fax color</label>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <div style="height: 80vh; overflow: scroll;">
+    <!-- B&W ones -->
     <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px;">
         <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
         <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
@@ -177,7 +188,7 @@
         <img id="seastate" src="faxes/_sea-state.gif"></img>
     </div>
     <hr/>
-    <!-- Reworked faxes -->
+    <!-- Reworked, colored faxes -->
     <div id="reworked-faxes" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 80px;">
       <!-- Canvas dimensions are touchy !! -->
       <canvas id="reworked-faxes-canvas-left" width="2048" height="1600"></canvas> <!--  style="width: 2048px; height: 1600px;" -->
@@ -187,20 +198,9 @@
     </div>
   </div>
   <hr/>
+  <!-- This is the end -->
 </body>
 <script type="text/javascript">
-
-let dummyTest = (ctx) => {
-  const imgData = ctx.createImageData(100, 100);
-  console.log(`New image, ${100} x ${100} : ${imgData.data.length} elements.`);
-  for (let i = 0; i < imgData.data.length; i += 4) {
-    imgData.data[i+0] = 255; // red
-    imgData.data[i+1] = 0;
-    imgData.data[i+2] = 0;
-    imgData.data[i+3] = 255;
-  }
-  ctx.putImageData(imgData, 0, 0);
-}
 
 let appendMessage = (text) => {
   let messageArea = document.getElementById("message-area");
@@ -305,9 +305,18 @@ let downloadToFileSystem = async (from, to) => {
   await promise;
 };
 
+let hexToRgb = (hex) => {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
 let doYourJob = () => {
   /*
-   * First tentative...
+   * First tentative... B&W faxes.
    */
   const leftFax = document.getElementById('left');
   const rightFax = document.getElementById('right');
@@ -319,14 +328,12 @@ let doYourJob = () => {
     leftFax.style.width = '600px';
     leftFax.style.height = 'auto';
     leftFax.style.transform = 'rotate(90deg)';
-    /* leftFax.style.filter = 'opacity(1.0)';  */    // In the background.
     leftFax.style.opacity = '1.0';      // Another option, same as above.
 
     // Surface, right fax
     rightFax.style.width = '600px';
     rightFax.style.height = 'auto';
     rightFax.style.transform = 'rotate(90deg)';
-    /* rightFax.style.filter = 'opacity(1.0)';  */   // In the background (see z-index)
     rightFax.style.opacity = '1.0';      // Another option, same as above.
     rightFax.style.marginLeft = '-33px';
     rightFax.style.zIndex = '-1';
@@ -334,8 +341,6 @@ let doYourJob = () => {
     // 500mb fax
     fax500mb.style.width = '919px';
     fax500mb.style.height = 'auto';
-    // fax500mb.style.transform = 'rotate(0deg)';
-    /* fax500mb.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
     fax500mb.style.opacity = '1.0'; // '0.5';     // Foreground, not opaque (see z-index)
     fax500mb.style.marginLeft = '62px';
     fax500mb.style.marginTop = '-575px';
@@ -351,6 +356,7 @@ let doYourJob = () => {
   }
   /*
    * Now with Images and canvases
+   * Colored faxes.
    */
 
   let srcLeft = document.getElementById("raw-left").src;
@@ -377,12 +383,17 @@ let doYourJob = () => {
 
   osContext.drawImage(imageLeft, 0, 0);
 
-  // Change colors, white to transparent, and black to red
+  // Change colors, white to transparent, and black to (default) red
   try {
-    let transformed = changeColor(osContext /*ctx*/, imageLeft, {r: 0, g: 0, b: 0}, {r: 255, g: 0, b: 0});
+    let sfcColor = document.getElementById("sfc-color").value;
+    let newColor = {r: 255, g: 0, b: 0};
+    let parsedColor = hexToRgb(sfcColor);
+    if (parsedColor) {
+      newColor = {r: parsedColor.r, g: parsedColor.g, b: parsedColor.b};
+    }
+    let transformed = changeColor(osContext /*ctx*/, imageLeft, {r: 0, g: 0, b: 0}, newColor);
     console.log(`transformed: ${transformed.data.length} pixels`);
     appendMessage(`transformed: ${transformed.data.length} pixels`);
-    // let newImage = ctx.getImageData(0, 0, width, height);
     ctx.putImageData(transformed, 0, 0); // , 0, 0, transformed.width, transformed.height);
   } catch (err) {
     console.log(`Oops: ${err}`);
@@ -391,7 +402,6 @@ let doYourJob = () => {
   canvas.style.width = '600px';
   canvas.style.height = 'auto';
   canvas.style.transform = 'rotate(90deg)';
-  /* leftFax.style.filter = 'opacity(1.0)';  */    // In the background.
   canvas.style.opacity = '1.0';      // Another option, same as above.
 
   // 2 - Right
@@ -411,12 +421,17 @@ let doYourJob = () => {
   osContext = osCanvas.getContext('2d');
   osContext.drawImage(imageRight, 0, 0);
 
-  // Change colors, white to transparent, and black to red
+  // Change colors, white to transparent, and black to (default) red
   try {
-    transformed = changeColor(osContext /*ctx*/, imageRight, {r: 0, g: 0, b: 0}, {r: 255, g: 0, b: 0});
+    let sfcColor = document.getElementById("sfc-color").value;
+    let newColor = {r: 255, g: 0, b: 0};
+    let parsedColor = hexToRgb(sfcColor);
+    if (parsedColor) {
+      newColor = {r: parsedColor.r, g: parsedColor.g, b: parsedColor.b};
+    }
+    transformed = changeColor(osContext /*ctx*/, imageRight, {r: 0, g: 0, b: 0}, newColor);
     console.log(`transformed: ${transformed.data.length} pixels`);
     appendMessage(`transformed: ${transformed.data.length} pixels`);
-    // let newImage = ctx.getImageData(0, 0, width, height);
     ctx.putImageData(transformed, 0, 0); // , 0, 0, transformed.width, transformed.height);
   } catch (err) {
     console.log(`Oops: ${err}`);
@@ -426,7 +441,6 @@ let doYourJob = () => {
   canvas.style.width = '600px';
   canvas.style.height = 'auto';
   canvas.style.transform = 'rotate(90deg)';
-  /* canvas.style.filter = 'opacity(1.0)';  */   // In the background (see z-index)
   canvas.style.opacity = '1.0';      // Another option, same as above.
   canvas.style.marginLeft = '-99px';
   canvas.style.zIndex = '-1';
@@ -448,9 +462,15 @@ let doYourJob = () => {
   osContext = osCanvas.getContext('2d');
   osContext.drawImage(image500mb, 0, 0);
 
-  // Change colors, white to transparent, and black to blue
+  // Change colors, white to transparent, and black to (default) blue
   try {
-    transformed = changeColor(osContext /*ctx*/, image500mb, {r: 0, g: 0, b: 0}, {r: 0, g: 0, b: 255});
+    let _500mbColor = document.getElementById("500mb-color").value;
+    let newColor = {r: 0, g: 0, b: 255};
+    let parsedColor = hexToRgb(_500mbColor);
+    if (parsedColor) {
+      newColor = {r: parsedColor.r, g: parsedColor.g, b: parsedColor.b};
+    }
+    transformed = changeColor(osContext /*ctx*/, image500mb, {r: 0, g: 0, b: 0}, newColor);
     console.log(`transformed: ${transformed.data.length} pixels`);
     appendMessage(`transformed: ${transformed.data.length} pixels`);
     // let newImage = ctx.getImageData(0, 0, width, height);
@@ -462,8 +482,6 @@ let doYourJob = () => {
 
   canvas.style.width = '919px';
   canvas.style.height = 'auto';
-  // canvas.style.transform = 'rotate(0deg)';
-  /* canvas.style.filter = 'opacity(0.5)'; */    // Foreground, not opaque (see z-index)
   canvas.style.opacity = '1.0'; // '0.5';     // Foreground, not opaque (see z-index)
   canvas.style.marginLeft = '121px';
   canvas.style.marginTop = '-520px';
@@ -486,9 +504,15 @@ let doYourJob = () => {
   osContext = osCanvas.getContext('2d');
   osContext.drawImage(imageSeaState, 0, 0);
 
-  // Change colors, white to transparent, and black to dark green
+  // Change colors, white to transparent, and black to (default) dark green
   try {
-    transformed = changeColor(osContext /*ctx*/, imageSeaState, {r: 0, g: 0, b: 0}, {r: 1, g: 50, b: 32});
+    let seaStateColor = document.getElementById("sea-state-color").value;
+    let newColor = {r: 1, g: 50, b: 32};
+    let parsedColor = hexToRgb(seaStateColor);
+    if (parsedColor) {
+      newColor = {r: parsedColor.r, g: parsedColor.g, b: parsedColor.b};
+    }
+    transformed = changeColor(osContext /*ctx*/, imageSeaState, {r: 0, g: 0, b: 0}, newColor);
     console.log(`transformed: ${transformed.data.length} pixels`);
     appendMessage(`transformed: ${transformed.data.length} pixels`);
     // let newImage = ctx.getImageData(0, 0, width, height);
@@ -506,6 +530,42 @@ let doYourJob = () => {
   canvas.style.marginLeft = '-329px';
   canvas.style.marginTop = '-519px';
   canvas.style.zIndex = '1';
+};
+
+const NW_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA12.gif";
+const NE_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA11.gif";
+const N_ATL_500mb_URL =  "https://tgftp.nws.noaa.gov/fax/PPAA10.gif";
+const N_ATL_SEA_STATE_URL =  "https://tgftp.nws.noaa.gov/fax/PJAA99.gif";
+
+let loadFaxes = async () => {
+  await downloadToFileSystem(NW_ATL_URL, "_left.gif");
+  document.getElementById("left").src = "faxes/_left.gif";
+  document.getElementById("raw-left").src = "faxes/_left.gif";
+
+  console.log("First fax downloaded, moving on.");
+  appendMessage("First fax downloaded, moving on.");
+
+  await downloadToFileSystem(NE_ATL_URL, "_right.gif");
+  document.getElementById("right").src = "faxes/_right.gif";
+  document.getElementById("raw-right").src = "faxes/_right.gif";
+
+  console.log("Second fax downloaded, moving on.");
+  appendMessage("Second fax downloaded, moving on.");
+  await downloadToFileSystem(N_ATL_500mb_URL, "_500mb.gif");
+  document.getElementById("500mb").src = "faxes/_500mb.gif";
+  document.getElementById("raw-500mb").src = "faxes/_500mb.gif";
+  console.log("Third fax downloaded, moving on.");
+  appendMessage("Third fax downloaded, moving on.");
+  await downloadToFileSystem(N_ATL_SEA_STATE_URL, "_sea-state.gif");
+  document.getElementById("seastate").src = "faxes/_sea-state.gif";
+  document.getElementById("raw-sea-state").src = "faxes/_sea-state.gif";
+  console.log("Fourth fax downloaded, moving on.");
+  appendMessage("Fourth fax downloaded, moving on.");
+
+  document.getElementById("update-date").innerHTML = `Just updated, on ${new Date()}`;
+  setTimeout(() => {  // Ugly !
+    doYourJob();
+  }, 1000);
 };
 
 // On Load: Rework the faxes loaded above, in the placeholder div.
@@ -533,10 +593,6 @@ window.onload = () => {
 
   // First, download the faxes on the file system, to be able to rework them.
   // This cannot be done from ES6, that's why we use php.
-  const NW_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA12.gif";
-  const NE_ATL_URL = "https://tgftp.nws.noaa.gov/fax/PYAA11.gif";
-  const N_ATL_500mb_URL =  "https://tgftp.nws.noaa.gov/fax/PPAA10.gif";
-  const N_ATL_SEA_STATE_URL =  "https://tgftp.nws.noaa.gov/fax/PJAA99.gif";
 
   // document.getElementById("update-date").innerHTML = `Updated on ${new Date()}`;
 
@@ -546,64 +602,7 @@ window.onload = () => {
     }, 10);
   }
 
-  downloadToFileSystem(NW_ATL_URL, "_left.gif").then(
-    (value) => {
-      document.getElementById("left").src = "faxes/_left.gif";
-      document.getElementById("raw-left").src = "faxes/_left.gif";
-
-      console.log("First fax downloaded, moving on.");
-      appendMessage("First fax downloaded, moving on.");
-
-      downloadToFileSystem(NE_ATL_URL, "_right.gif").then(
-        (value) => {
-          document.getElementById("right").src = "faxes/_right.gif";
-          document.getElementById("raw-right").src = "faxes/_right.gif";
-
-          console.log("Second fax downloaded, moving on.");
-          appendMessage("Second fax downloaded, moving on.");
-          downloadToFileSystem(N_ATL_500mb_URL, "_500mb.gif").then(
-            (value) => {
-              document.getElementById("500mb").src = "faxes/_500mb.gif";
-              document.getElementById("raw-500mb").src = "faxes/_500mb.gif";
-              console.log("Third fax downloaded, moving on.");
-              appendMessage("Third fax downloaded, moving on.");
-              downloadToFileSystem(N_ATL_SEA_STATE_URL, "_sea-state.gif").then(
-                (value) => {
-                  document.getElementById("seastate").src = "faxes/_sea-state.gif";
-                  document.getElementById("raw-sea-state").src = "faxes/_sea-state.gif";
-                  console.log("Fourth fax downloaded, moving on.");
-                  appendMessage("Fourth fax downloaded, moving on.");
-
-                  document.getElementById("update-date").innerHTML = `Just updated, on ${new Date()}`;
-                  setTimeout(() => {  // Ugly !
-                    doYourJob();
-                  }, 1000);
-                },
-                (error) => {
-                  console.log(`Fourth step failed: ${error}`);
-                  appendMessage(`Fourth step failed: ${error}`);
-                }
-              );
-
-            },
-            (error) => {
-              console.log(`Third step failed: ${error}`);
-              appendMessage(`Third step failed: ${error}`);
-            }
-          );
-        },
-        (error) => {
-          console.log(`Second step failed: ${error}`);
-          appendMessage(`Second step failed: ${error}`);
-        }  
-      );
-    },
-    (error) => {
-      console.log(`First step failed: ${error}`);
-      appendMessage(`First step failed: ${error}`);
-    }
-  );
-  
+  loadFaxes();  
 }
 
 </script>
