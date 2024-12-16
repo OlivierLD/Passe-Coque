@@ -168,8 +168,6 @@
 		<h1 class="display-data blink_me" style="color: navy;">Loading, please wait...</h1>
 	</div>
 
-  <canvas id="offscreen-backup" style="display: none;"></canvas>
-
   <div id="top-content" style="display: grid; grid-template-columns: 50% 50%;">
     <div>
       <h2 class="tooltip">
@@ -265,17 +263,17 @@ let appendMessage = (text) => {
   messageArea.scrollTop = messageArea.scrollHeight; // Scroll to Bottom
 };
 
-let offScreenCanvasBackup = (bitmap) => {
-  let canvas = document.getElementById("offscreen-backup");
-  canvas.width = bitmap.width;
-  canvas.height = bitmap.height;
-  let context = canvas.getContext('2d');
-  context.drawImage(bitmap, 0, 0);
-
-  return context;
-}
-
 let changeColor = /*async*/ (ctx, image, colorFrom, colorTo) => {
+
+  // See https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_createimagedata
+
+  // var response = await fetch(image.src /*imageUrl*/);
+  // var fileBlob = await response.blob();
+  // var bitmap = await createImageBitmap(fileBlob);
+  // var canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+  // var context = canvas.getContext('2d');
+  // context.drawImage(bitmap, 0, 0);
+  // var imageData = context.getImageData(0, 0, bitmap.width, bitmap.height);
 
   let width = image.width;
   let height = image.height;
@@ -432,15 +430,11 @@ let doYourJob = () => {
   imageLeft.src = srcLeft;
   console.log(`Image width: ${imageLeft.width}, height: ${imageLeft.height}`);
   appendMessage(`Image width: ${imageLeft.width}, height: ${imageLeft.height}`);
-  let osContext = null;
-  if (false) {
-    // Try OffscreenCanvas...
-    let osCanvas = new OffscreenCanvas(imageLeft.width, imageLeft.height);
-    let osContext = osCanvas.getContext('2d');
-    osContext.drawImage(imageLeft, 0, 0);
-  } else {
-    osContext = offScreenCanvasBackup(imageLeft);
-  }
+  // Try OffscreenCanvas...
+  let osCanvas = new OffscreenCanvas(imageLeft.width, imageLeft.height);
+  let osContext = osCanvas.getContext('2d');
+
+  osContext.drawImage(imageLeft, 0, 0);
 
   // Change colors, white to transparent, and black to (default) red
   try {
@@ -475,14 +469,10 @@ let doYourJob = () => {
   console.log(`Image width: ${imageRight.width}, height: ${imageRight.height}`);
   appendMessage(`Image width: ${imageRight.width}, height: ${imageRight.height}`);
 
-  if (false) {
-    // Try OffscreenCanvas...
-    osCanvas = new OffscreenCanvas(imageRight.width, imageRight.height);
-    osContext = osCanvas.getContext('2d');
-    osContext.drawImage(imageRight, 0, 0);
-  } else {
-    osContext = offScreenCanvasBackup(imageRight);
-  }
+  // Try OffscreenCanvas...
+  osCanvas = new OffscreenCanvas(imageRight.width, imageRight.height);
+  osContext = osCanvas.getContext('2d');
+  osContext.drawImage(imageRight, 0, 0);
 
   // Change colors, white to transparent, and black to (default) red
   try {
@@ -520,14 +510,10 @@ let doYourJob = () => {
   console.log(`Image width: ${image500mb.width}, height: ${image500mb.height}`);
   appendMessage(`Image width: ${image500mb.width}, height: ${image500mb.height}`);
 
-  if (false) {
-    // Try OffscreenCanvas...
-    osCanvas = new OffscreenCanvas(image500mb.width, image500mb.height);
-    osContext = osCanvas.getContext('2d');
-    osContext.drawImage(image500mb, 0, 0);
-  } else {
-    osContext = offScreenCanvasBackup(image500mb);
-  }
+  // Try OffscreenCanvas...
+  osCanvas = new OffscreenCanvas(image500mb.width, image500mb.height);
+  osContext = osCanvas.getContext('2d');
+  osContext.drawImage(image500mb, 0, 0);
 
   // Change colors, white to transparent, and black to (default) blue
   try {
@@ -566,14 +552,10 @@ let doYourJob = () => {
   console.log(`Image width: ${imageSeaState.width}, height: ${imageSeaState.height}`);
   appendMessage(`Image width: ${imageSeaState.width}, height: ${imageSeaState.height}`);
 
-  if (false) {
-    // Try OffscreenCanvas...
-    osCanvas = new OffscreenCanvas(imageSeaState.width, imageSeaState.height);
-    osContext = osCanvas.getContext('2d');
-    osContext.drawImage(imageSeaState, 0, 0);
-  } else {
-    osContext = offScreenCanvasBackup(imageSeaState);
-  }
+  // Try OffscreenCanvas...
+  osCanvas = new OffscreenCanvas(imageSeaState.width, imageSeaState.height);
+  osContext = osCanvas.getContext('2d');
+  osContext.drawImage(imageSeaState, 0, 0);
 
   // Change colors, white to transparent, and black to (default) dark green
   try {
