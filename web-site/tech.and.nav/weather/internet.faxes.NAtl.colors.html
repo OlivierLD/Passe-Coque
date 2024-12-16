@@ -435,7 +435,7 @@ let doYourJob = () => {
   let osContext = null;
   if (false) {
     // Try OffscreenCanvas...
-    let osCanvas = new OffscreenCanvas(imageLeft.width, imageLeft.height);
+    osCanvas = new OffscreenCanvas(imageLeft.width, imageLeft.height);
     let osContext = osCanvas.getContext('2d');
     osContext.drawImage(imageLeft, 0, 0);
   } else {

@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <!--
- ! WiP
+ ! WiP. Celestial and Tidal Almanacs
  +-->
+ <?php
+
+$lang = 'FR';
+if (isset($_GET['lang'])) {
+    $lang = $_GET['lang'];
+}
+
+ ?>
 <html>
   <head>
-    <title>Passe-Coque</title>
+    <title><?php echo( $lang == 'FR' ? "Almanachs Passe-Coque" : "Passe-Coque Almanacs"); ?></title>
     <link rel="icon" type="image/png" href="../logos/LOGO_PC_no_txt.png">
     <link rel="stylesheet" href="../passe-coque.css" type="text/css" id="styleLink">
     <style type="text/css">
@@ -12,7 +20,7 @@
     </style>
   </head>
   <body>
-    <h1>Publication d'almanachs</h1>
+    <h1><?php echo( $lang == 'FR' ? "Publication d'almanachs" : "Almanac publication"); ?></h1>
     <?php
 /**
  * What's wrong with a comment ?
@@ -29,37 +37,77 @@ try {
   echo "[Captured Throwable (top level) for index.php : " . $plaf . "] " . PHP_EOL;
 }
   ?>
-  <div>
-    <h2>&Eacute;ph&eacute;m&eacute;rides astronomiques</h2>
+
+  <?php 
+      if ($lang == 'FR') {
+  ?>
+        <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+            Les documents qui suivent sont con&ccedil;us pour &ecirc;tre visualis&eacute;s dans un navigateur web, <i>puis</i> imprim&eacute;s &agrave; partir de celui-ci (on peut aussi g&eacute;n&eacute;rer un pdf).
+            La version imprim&eacute;e comporte des sauts de page et autres formattages qui ne seront pas visibles &agrave; partir du navigateur.<br/>
+            Lors de l'impression, vous aurez la possibilit&eacute; - &agrave; partir des boites de dialogue du navigateur - de faire appara&icirc;tre ou pas
+            des donn&eacute;es comme les en-t&ecirc;tes et bas de page, num&eacute;ros de page, etc, et m&ecirc;me l'&eacute;chelle.<br/>
+        </p>
+  <?php 
+      } else {  
+  ?>  
+        <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+            The following documents are designed to be visualized from a web browser, <i>and then</i> printed from it (a pdf can also be generated from the page).
+            The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
+            When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
+            data like headers, footers, page numbers, etc, and even scale.<br/>
+        </p>
+  <?php
+      }
+  ?>
+
+<div>
+    <h2><?php echo( $lang == 'FR' ? "&Eacute;ph&eacute;m&eacute;rides astronomiques" : "Celestial Almanacs"); ?></h2>
     <ul>
-      <li><a href="./astro.php/almanac.publisher.html" target="_blank">Celestial Almanac Publisher / Publication d'&eacute;ph&eacute;m&eacute;rides astronomiques</a></li>
+      <?php 
+      if ($lang == 'FR') {
+      ?>
+      <li><a href="./astro.php/almanac.publisher.html" target="_blank">Publication d'&eacute;ph&eacute;m&eacute;rides astronomiques</a></li>
+      <?php 
+      } else {  
+      ?>  
+      <li><a href="./astro.php/almanac.publisher.html" target="_blank">Celestial Almanac Publisher</a></li>
+      <?php
+      }
+      ?>
     </ul>
 
-    <h2>Almanachs de mar&eacute;e</h2>
+    <h2><?php echo( $lang == 'FR' ? "Almanachs de mar&eacute;e" : "Tidal Almanacs"); ?></h2>
     <ul>
       <li>
-        <a href="./tides.es6/leaflet.tide.stations.html" target="_blank">&Agrave; partir d'une carte / From a chart.</a><br/>
-        Choisissez la sation dont vous voulez l'almanach sur une carte g&eacute;ographique (ceux qui savent cliquer avec une souris vont y arriver).<br/>
-        Choose the station you want the almanac of on a chart (if you can click, you can do it).
+        <?php
+        if ($lang == 'FR') {
+        ?>
+        <a href="./tides.es6/leaflet.tide.stations.html" target="_blank">&Agrave; partir d'une carte.</a><br/>
+        Choisissez la sation dont vous voulez l'almanach sur une carte g&eacute;ographique (ceux qui savent cliquer avec une souris vont y arriver).
+        <?php
+        } else {
+        ?>
+          <a href="./tides.es6/leaflet.tide.stations.html" target="_blank">From a chart.</a><br/>
+          Choose the station you want the almanac of on a chart (if you can click, you can do it).
+        <?php  
+        }
+        ?>
       </li>
       <li>
+      <?php
+        if ($lang == 'FR') {
+        ?>
         <a href="./tides.php/tide.publisher/tide.publisher.101.php?lang=FR" target="_blank">Interface texte, en fran&ccedil;ais.</a><br/>
         Choisissez la station par son nom (ou une partie de son nom).
-      </li>
-      <li>
+        <?php
+        } else {
+        ?>
         <a href="./tides.php/tide.publisher/tide.publisher.101.php?lang=EN" target="_blank">Text interface, in English.</a><br/>
         Choose the station by name (or a part of it).
+        <?php  
+        }
+        ?>
       </li>
-    </ul>
-
-    <h2>Meteo (en travaux)</h2>
-    <ul>
-      <li><a href="./weather/internet.faxes.NAtl.colors.html" target="_blank">Nort Altantic faxes, real time, B&W and colored versions.</a></li>
-
-      <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html" target="OlivLD">Faxes, North Atlantic (real time)</a></li>
-      <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.2.html" target="OlivLD">Several Atlantic faxes (v2), reworked on the client side...</a></li>
-      <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NPac.html" target="OlivLD">Faxes, North Pacific (real time)</a></li>
-      <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/forecast.html" target="OlivLD">Several GRIB-based sites</a></li>
     </ul>
   </div>
   <hr/>

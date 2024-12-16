@@ -154,7 +154,8 @@ if ($current_lang == "FR") {
       <li><a href="members.04.php">Voir vos cotisations</a></li>
       <!--li><a href="../admin/sql/_reservations.01.php">Voir le planning des r&eacute;servations</a></li-->
       <li><a href="../admin/web/see.planning.2.html?admin=false">Voir le planning des r&eacute;servations</a></li>
-      <li>Acc&eacute;der &agrave; la <a href="../tech.and.nav/almanacs.php" target="pub">publication d'almanachs</a> (travaux en cours)</li>
+      <li>Acc&eacute;der &agrave; la <a href="../tech.and.nav/almanacs.php?lang=FR" target="pub">publication d'almanachs</a> (travaux en cours)</li>
+      <li>Consulter la <a href="../tech.and.nav/meteo.php?lang=FR" target="pub">m&eacute;t&eacute;o</a> (Atlantique Nord, travaux en cours)</li>
       <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
     </ul>
     <?php
@@ -223,7 +224,8 @@ if ($current_lang == "FR") {
       <li><a href="members.03.php">Change your password (for <?php echo $user_id ?>)</a></li>
       <li><a href="members.04.php">See your subscriptions</a></li>
       <li><a href="../admin/sql/_reservations.01.php">See the boat reservation planning</a></li>
-      <li>Access the <a href="../tech.and.nav/almanacs.php" target="pub">Almanacs Publication</a> page (work in progress)</li>
+      <li>Access the <a href="../tech.and.nav/almanacs.php?lang=EN" target="pub">Almanacs Publication</a> page (work in progress)</li>
+      <li>Check out the <a href="../tech.and.nav/meteo.php?lang=EN" target="pub">Weather Forecast</a> (North Atlantic, work in progress)</li>
       <li><a href="#" onclick="alert('Later');">. . . </a></li>
     </ul>
     <?php
