@@ -56,6 +56,23 @@
     img {
       mix-blend-mode: multiply;
     }
+		.blink_me {
+			animation: blinker 0.5s linear infinite;
+		}
+		@keyframes blinker {
+			50% {
+				opacity: 0;
+			}
+		}
+		.display-data {
+			grid-area: middle;
+			text-align: center;
+			vertical-align: baseline;
+			margin: auto;
+			color: inherit;
+			font-size: 48px;
+			font-weight: bold;
+		}
     </style>
     <script type="text/javascript">
       let surfaceFaxesVisible = () => {
@@ -80,26 +97,38 @@
           left.style.display = cb.checked ? 'inline' : 'none';
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.marginTop = cb.checked ? '-575px' : '-30px';
+          let faxSeaState = document.getElementById("seastate");
+          faxSeaState.style.marginTop = cb.checked ? '-574px' : '-29px';
 
           // Reworked ones
           let left2 = document.getElementById("reworked-faxes-canvas-left");
           let right2 = document.getElementById("reworked-faxes-canvas-right");
           let f500mb2 = document.getElementById("reworked-faxes-canvas-500mb");
+          let faxSeaState2 = document.getElementById("reworked-faxes-canvas-sea-state");
 
           left2.style.display = cb.checked ? 'inline' : 'none';
           right2.style.display = cb.checked ? 'inline' : 'none';
           f500mb2.style.marginTop = cb.checked ? '-520px' : '-30px';
+          faxSeaState2.style.marginTop = cb.checked ? '-519px' : '-29px';
+
+          adjust();
       };
       // Show/Hide 500mb fax
       let show500mb = (cb) => {
           let fax500mb = document.getElementById("500mb");
           fax500mb.style.display = cb.checked ? 'inline' : 'none';
+          let faxSeaState = document.getElementById("seastate");
+          faxSeaState.style.marginLeft = cb.checked ? '-388px' : '63px';
 
           // Reworked ones
           // let left2 = document.getElementById("reworked-faxes-canvas-left");
           // let right2 = document.getElementById("reworked-faxes-canvas-right");
           let f500mb2 = document.getElementById("reworked-faxes-canvas-500mb");
           f500mb2.style.display = cb.checked ? 'inline' : 'none';
+          let faxSeaState2 = document.getElementById("reworked-faxes-canvas-sea-state");
+          faxSeaState2.style.marginLeft = cb.checked ? '-329px' : '122px';
+
+          adjust();
       };
       // Show/Hide Sea State fax
       let showSeaState= (cb) => {
@@ -111,19 +140,43 @@
           // let right2 = document.getElementById("reworked-faxes-canvas-right");
           let faxSeaState2 = document.getElementById("reworked-faxes-canvas-sea-state");
           faxSeaState2.style.display = cb.checked ? 'inline' : 'none';
+
+          adjust();
+      };
+
+      let adjust = () => {
+          // B&W ones
+          let left = document.getElementById("left");
+          let right = document.getElementById("right");
+          let fax500mb = document.getElementById("500mb");
+          let seaState = document.getElementById("seastate");
+          // Reworked ones
+          let left2 = document.getElementById("reworked-faxes-canvas-left");
+          let right2 = document.getElementById("reworked-faxes-canvas-right");
+          let f500mb2 = document.getElementById("reworked-faxes-canvas-500mb");
+          let seaState2 = document.getElementById("reworked-faxes-canvas-sea-state");
+
+          // Unused...
+          // console.log("Adjusting");
       };
     </script>
 </head>
 <body style="background-color: #fff;">
+
+  <div id="loading-message" style="width: 100%; text-align: center; display: block; z-index: 10; position: fixed; top: 5px; left: 0;">
+		<!-- This will be hidden when page is loaded. See window.onload -->
+		<h1 class="display-data blink_me" style="color: navy;">Loading, please wait...</h1>
+	</div>
+
   <div id="top-content" style="display: grid; grid-template-columns: 50% 50%;">
     <div>
       <h2 class="tooltip">
-        Faxes from the Internet, North Atlantic (in progress)
+        Faxes from the Internet, North Atlantic.
         <span class="tooltiptext">4 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
       </h2>
       <div id="update-date"></div>
     </div>
-    <div id="message-area" style="max-height: 100px; overflow: scroll; font-family: 'Courier New', Courier, monospace;" placeholder="Message area"></div>
+    <div id="message-area" style="height: 100px; max-height: 100px; overflow: scroll; font-family: 'Courier New', Courier, monospace; border: 1px solid silver; border-radius: 5px; padding: 5px;" placeholder="Message area"></div>
   </div>
 
 <!-- North-West Atlantic: https://tgftp.nws.noaa.gov/fax/PYAA12.gif -->
@@ -146,7 +199,7 @@
   <div style="padding-top: 0px; margin-bottom: 20px;">
     <table>
       <tr>
-        <td colspan="2"><input type="checkbox" id="show-bw" onchange="showBW(this);" checked> Show Black &amp; White version</td>
+        <td colspan="2"><input type="checkbox" id="show-bw" onchange="showBW(this);"> Show Black &amp; White version</td>
       </tr>
       <tr>
         <td><input type="checkbox" id="show-surface" onchange="showSurface(this);" checked> Surface Faxes</td>
@@ -178,7 +231,7 @@
 
   <div style="height: 80vh; overflow: scroll;">
     <!-- B&W ones -->
-    <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px;">
+    <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px; display: none;">
         <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
         <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
         <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img-->
@@ -328,30 +381,30 @@ let doYourJob = () => {
     leftFax.style.width = '600px';
     leftFax.style.height = 'auto';
     leftFax.style.transform = 'rotate(90deg)';
-    leftFax.style.opacity = '1.0';      // Another option, same as above.
+    leftFax.style.opacity = '1.0'; 
 
     // Surface, right fax
     rightFax.style.width = '600px';
     rightFax.style.height = 'auto';
     rightFax.style.transform = 'rotate(90deg)';
-    rightFax.style.opacity = '1.0';      // Another option, same as above.
-    rightFax.style.marginLeft = '-33px';
+    rightFax.style.opacity = '1.0'; 
+    rightFax.style.marginLeft = '-188px'; // '-33px'; // -188px
     rightFax.style.zIndex = '-1';
 
     // 500mb fax
     fax500mb.style.width = '919px';
     fax500mb.style.height = 'auto';
-    fax500mb.style.opacity = '1.0'; // '0.5';     // Foreground, not opaque (see z-index)
+    fax500mb.style.opacity = '1.0'; 
     fax500mb.style.marginLeft = '62px';
-    fax500mb.style.marginTop = '-575px';
+    fax500mb.style.marginTop = '-537px'; // -575px
     fax500mb.style.zIndex = '1';
 
     // Sea state fax
-    faxSeaState.style.width = '919px';
+    faxSeaState.style.width = '917px';
     faxSeaState.style.height = 'auto';
-    faxSeaState.style.opacity = '1.0'; // '0.5';     // Foreground, not opaque (see z-index)
-    faxSeaState.style.marginLeft = '-388px';
-    faxSeaState.style.marginTop = '-574px';
+    faxSeaState.style.opacity = '1.0'; 
+    faxSeaState.style.marginLeft = '63px'; // '-388px';
+    faxSeaState.style.marginTop = '-594px'; // '-574px';
     faxSeaState.style.zIndex = '1';
   }
   /*
@@ -566,6 +619,10 @@ let loadFaxes = async () => {
   setTimeout(() => {  // Ugly !
     doYourJob();
   }, 1000);
+
+  setTimeout(() => {
+    document.getElementById("loading-message").style.display = "none"; // Hide loading message
+  }, 1000);
 };
 
 // On Load: Rework the faxes loaded above, in the placeholder div.
@@ -603,6 +660,8 @@ window.onload = () => {
   }
 
   loadFaxes();  
+
+  // document.getElementById("loading-message").style.display = "none"; // Hide loading message
 }
 
 </script>
