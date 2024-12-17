@@ -13,7 +13,7 @@ if (isset($_GET['lang'])) {
  ?>
 <html>
   <head>
-    <title>Passe-Coque</title>
+    <title>Passe-Coque - Meteo</title>
     <link rel="icon" type="image/png" href="../logos/LOGO_PC_no_txt.png">
     <link rel="stylesheet" href="../passe-coque.css" type="text/css" id="styleLink">
     <style type="text/css">

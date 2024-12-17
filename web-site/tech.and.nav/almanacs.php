@@ -64,15 +64,15 @@ try {
     <h2><?php echo( $lang == 'FR' ? "&Eacute;ph&eacute;m&eacute;rides astronomiques" : "Celestial Almanacs"); ?></h2>
     <ul>
       <?php 
-      if ($lang == 'FR') {
+        if ($lang == 'FR') {
       ?>
       <li><a href="./astro.php/almanac.publisher.html" target="_blank">Publication d'&eacute;ph&eacute;m&eacute;rides astronomiques</a></li>
       <?php 
-      } else {  
+        } else {  
       ?>  
       <li><a href="./astro.php/almanac.publisher.html" target="_blank">Celestial Almanac Publisher</a></li>
       <?php
-      }
+        }
       ?>
     </ul>
 
@@ -82,8 +82,8 @@ try {
         <?php
         if ($lang == 'FR') {
         ?>
-        <a href="./tides.es6/leaflet.tide.stations.html" target="_blank">&Agrave; partir d'une carte.</a><br/>
-        Choisissez la sation dont vous voulez l'almanach sur une carte g&eacute;ographique (ceux qui savent cliquer avec une souris vont y arriver).
+          <a href="./tides.es6/leaflet.tide.stations.html" target="_blank">&Agrave; partir d'une carte.</a><br/>
+          Choisissez la sation dont vous voulez l'almanach sur une carte g&eacute;ographique (ceux qui savent cliquer avec une souris vont y arriver).
         <?php
         } else {
         ?>
@@ -97,13 +97,13 @@ try {
       <?php
         if ($lang == 'FR') {
         ?>
-        <a href="./tides.php/tide.publisher/tide.publisher.101.php?lang=FR" target="_blank">Interface texte, en fran&ccedil;ais.</a><br/>
-        Choisissez la station par son nom (ou une partie de son nom).
+          <a href="./tides.php/tide.publisher/tide.publisher.101.php?lang=FR" target="_blank">Interface texte, en fran&ccedil;ais.</a><br/>
+          Choisissez la station par son nom (ou une partie de son nom).
         <?php
         } else {
         ?>
-        <a href="./tides.php/tide.publisher/tide.publisher.101.php?lang=EN" target="_blank">Text interface, in English.</a><br/>
-        Choose the station by name (or a part of it).
+          <a href="./tides.php/tide.publisher/tide.publisher.101.php?lang=EN" target="_blank">Text interface, in English.</a><br/>
+          Choose the station by name (or a part of it).
         <?php  
         }
         ?>
