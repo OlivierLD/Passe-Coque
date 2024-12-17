@@ -159,6 +159,31 @@
           // Unused...
           // console.log("Adjusting");
       };
+
+      let moveup = (id) => {
+        let fax = document.getElementById(id);
+        let currentTop = parseInt(fax.style.top.replace('px', ''));
+        fax.style.top = `${currentTop - 1}px`;
+        console.log(`Moving ${id} up: top: ${currentTop - 1}px`);
+      };
+      let moveleft = (id) => {
+        let fax = document.getElementById(id);
+        let currentLeft = parseInt(fax.style.left.replace('px', ''));
+        fax.style.left = `${currentLeft - 1}px`;
+        console.log(`Moving ${id} left: left: ${currentLeft - 1}px`);
+      };
+      let moveright = (id) => {
+        let fax = document.getElementById(id);
+        let currentLeft = parseInt(fax.style.left.replace('px', ''));
+        fax.style.left = `${currentLeft + 1}px`;
+        console.log(`Moving ${id} right: left: ${currentLeft + 1}px`);
+      };
+      let movedown = (id) => {
+        let fax = document.getElementById(id);
+        let currentTop = parseInt(fax.style.top.replace('px', ''));
+        fax.style.top = `${currentTop + 1}px`;
+        console.log(`Moving ${id} down: top: ${currentTop + 1}px`);
+      };
     </script>
 </head>
 <body style="background-color: #fff;">
@@ -168,7 +193,7 @@
 		<h1 class="display-data blink_me" style="color: navy;">Loading, please wait...</h1>
 	</div>
 
-  <canvas id="offscreen-backup" style="display: none;"></canvas>
+  <canvas id="offscreen-backup" style="display: none;"></canvas> <!-- used to avoid refering to OffsecreenCanvas -->
 
   <div id="top-content" style="display: grid; grid-template-columns: 50% 50%;">
     <div>
@@ -186,7 +211,7 @@
 <!-- North Atlantic 500mb: https://tgftp.nws.noaa.gov/fax/PPAA10.gif -->
 <!-- North Atlantic Sea State: https://tgftp.nws.noaa.gov/fax/PJAA99.gif -->
 
-  <div id="raw-placeholder" style="display: none;">
+  <div id="raw-placeholder" style="display: none;"> <!-- invisible div -->
     <!-- Try downloading them locally (to avoid CORS errors), in php -->
     <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
     <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
@@ -199,6 +224,7 @@
   <hr/>
   <!-- Original faxes -->
   <div style="padding-top: 0px; margin-bottom: 20px;">
+    <!-- Command widgets -->
     <table>
       <tr>
         <td colspan="2"><input type="checkbox" id="show-bw" onchange="showBW(this);"> Show Black &amp; White version</td>
@@ -231,16 +257,54 @@
     </table>
   </div>
 
-  <div style="height: 80vh; overflow: scroll;">
-    <!-- B&W ones -->
+  <div style="height: 80vh; overflow: scroll; position: relative;">
+    <!-- B&W ones, hidden by default -->
     <div id="placeholder" class="fax-container" style="min-height: 600px; min-width: 1024px; padding-top: 40px; display: none;">
-        <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
-        <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
-        <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img-->
-        <img id="left" src="faxes/_left.gif"></img>
-        <img id="right" src="faxes/_right.gif"></img>
-        <img id="500mb" src="faxes/_500mb.gif"></img>
-        <img id="seastate" src="faxes/_sea-state.gif"></img>
+        This one is still a work in progress, a workbench, a playground...
+        <!-- Fax widgets - to me the ones below -->
+        <div style="display: grid; grid-template-columns: 140px 140px 140px 140px; padding-top: 10px; position: relative; z-index: 10;">
+          <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
+            <span>Surface, West</span><br/><br/>
+            <button onclick="moveup('left')">&#8679;</button><br><br>
+            <button onclick="moveleft('left')">&#8678;</button>
+            <button onclick="moveright('left')">&#8680;</button><br><br>
+            <button onclick="movedown('left')">&#8681;</button>
+          </div>
+          
+          <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
+            <span>Surface, East</span><br/><br/>
+            <button onclick="moveup('right')">&#8679;</button><br><br>
+            <button onclick="moveleft('right')">&#8678;</button>
+            <button onclick="moveright('right')">&#8680;</button><br><br>
+            <button onclick="movedown('right')">&#8681;</button>
+          </div>
+
+          <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
+            <span>500mb</span><br/><br/>
+            <button onclick="moveup('500mb')">&#8679;</button><br><br>
+            <button onclick="moveleft('500mb')">&#8678;</button>
+            <button onclick="moveright('500mb')">&#8680;</button><br><br>
+            <button onclick="movedown('500mb')">&#8681;</button>
+          </div>
+
+          <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
+            <span>Sea State</span><br/><br/>
+            <button onclick="moveup('seastate')">&#8679;</button><br><br>
+            <button onclick="moveleft('seastate')">&#8678;</button>
+            <button onclick="moveright('seastate')">&#8680;</button><br><br>
+            <button onclick="movedown('seastate')">&#8681;</button>
+          </div>
+        </div>
+
+        <div style="margin-top: 60px; position: relative; height: 600px;">
+          <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
+          <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
+          <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img-->
+          <img id="left" src="faxes/_left.gif"></img>
+          <img id="right" src="faxes/_right.gif"></img>
+          <img id="500mb" src="faxes/_500mb.gif"></img>
+          <img id="seastate" src="faxes/_sea-state.gif"></img>
+        </div>
     </div>
     <hr/>
     <!-- Reworked, colored faxes -->
@@ -383,30 +447,37 @@ let doYourJob = () => {
     leftFax.style.width = '600px';
     leftFax.style.height = 'auto';
     leftFax.style.transform = 'rotate(90deg)';
+    leftFax.style.left = '0px'; 
+    leftFax.style.top = '32px'; 
     leftFax.style.opacity = '1.0'; 
+    leftFax.style.position = 'absolute';
 
     // Surface, right fax
     rightFax.style.width = '600px';
     rightFax.style.height = 'auto';
     rightFax.style.transform = 'rotate(90deg)';
     rightFax.style.opacity = '1.0'; 
-    rightFax.style.marginLeft = '-188px'; // '-33px'; // -188px
+    rightFax.style.left = '416px'; // '-188px'; // '-33px'; // -188px
+    rightFax.style.top = '32px'; 
+    rightFax.style.position = 'absolute';
     rightFax.style.zIndex = '-1';
 
     // 500mb fax
     fax500mb.style.width = '919px';
     fax500mb.style.height = 'auto';
     fax500mb.style.opacity = '1.0'; 
-    fax500mb.style.marginLeft = '62px';
-    fax500mb.style.marginTop = '-537px'; // -575px
+    fax500mb.style.left = '62px';
+    fax500mb.style.top = '0px'; // '-537px'; // -575px
+    fax500mb.style.position = 'absolute';
     fax500mb.style.zIndex = '1';
 
     // Sea state fax
     faxSeaState.style.width = '917px';
     faxSeaState.style.height = 'auto';
     faxSeaState.style.opacity = '1.0'; 
-    faxSeaState.style.marginLeft = '63px'; // '-388px';
-    faxSeaState.style.marginTop = '-594px'; // '-574px';
+    faxSeaState.style.left = '63px'; // '-388px';
+    faxSeaState.style.top = '2px'; // '-594px'; // '-574px';
+    faxSeaState.style.position = 'absolute';
     faxSeaState.style.zIndex = '1';
   }
   /*

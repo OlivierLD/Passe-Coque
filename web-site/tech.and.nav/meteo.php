@@ -21,7 +21,7 @@ if (isset($_GET['lang'])) {
     </style>
   </head>
   <body>
-    <h1><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o" : "Weather Forecasts"); ?></h1>
+    <h1><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o (traduction en cours...)" : "Weather Forecasts (translation in progress...)"); ?></h1>
     <ul>
       <li><a href="./weather/internet.faxes.NAtl.colors.html" target="_blank">North Altantic faxes, real time, Colored versions.</a></li>
 
