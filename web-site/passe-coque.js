@@ -1247,7 +1247,13 @@ let aboutSomeone = (who) => {
             dialogContent.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
         });
 
-    window.scrollTo(0, 0); // Scroll on top, for Safari and others...
+    let topOfCard = window.scrollY; // pageYOffset; // who.getBoundingClientRect().top;
+    
+    // window.scrollTo(0, 0); // Scroll on top, for Safari and others...
+    let marginTop = `${topOfCard.toFixed(0)}px`;
+    console.log(`Dialog top margin: ${marginTop}`);
+    aboutDialog.style.marginTop = marginTop;
+
     if (aboutDialog.show !== undefined) {
         aboutDialog.style.display = 'block'; // Safari...
         aboutDialog.show();
