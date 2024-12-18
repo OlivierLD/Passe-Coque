@@ -1968,8 +1968,8 @@ const NEXT_EVENTS = [
         date_from: '2025-03-01',
         date_to: '2025-03-01',
         content: {
-            fr: 'Premi&egrave;re formation Low-Tech, d&eacute;tails en janvier.',
-            en: 'First Low-Tech training, details in January.'
+            fr: '1<sup><small>er</small></sup> mars 2025. Premi&egrave;re formation Low-Tech, d&eacute;tails en janvier.',
+            en: 'March 1st 2025. First Low-Tech training, details in January.'
         }
     }
 ];
