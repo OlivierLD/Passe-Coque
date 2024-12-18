@@ -1957,6 +1957,20 @@ const NEXT_EVENTS = [
             fr: '25 d&eacute;cembre, No&euml;l.',
             en: 'Dec 25, XMas.'
         }
+    }, {
+        date_from: '2024-12-22',
+        date_to: '2025-04-01',
+        content: {
+            fr: 'Retrouvez Arthur Le Vaillant sur FR3 dans "Littoral", tous les dimanches.',
+            en: 'See Arthur Le Vaillant, every sunday on FR3, in his program "Littoral"..'
+        }
+    }, {
+        date_from: '2025-03-01',
+        date_to: '2025-03-01',
+        content: {
+            fr: 'Premi&egrave;re formation Low-Tech, d&eacute;tails en janvier.',
+            en: 'First Low-Tech training, details in January.'
+        }
     }
 ];
 
