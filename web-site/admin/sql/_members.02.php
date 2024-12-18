@@ -370,7 +370,10 @@ if (isset($_POST['operation'])) {
     </form>
     </div>  <!-- End of left div -->
 
-    <div id="right"> <!-- Fees -->
+    <div id="right"> 
+    
+    <div id="fees">
+    <!-- Fees -->
     <?php  
     $sql = 'SELECT PERIOD, AMOUNT FROM MEMBER_FEES WHERE  EMAIL = \'' . $email . '\' ORDER BY 1;';
 
@@ -401,30 +404,85 @@ if (isset($_POST['operation'])) {
         </form>
         <?php
       }
+
       echo("</table>");
+    } catch (Throwable $ex) {
+      echo "Captured Throwable for connection : " . $ex->getMessage() . "<br/>" . PHP_EOL;
+    }
       ?>
 
-      <form action='./_member.fees.php' method='post'>  <!--  TODO Implement !!! -->
+      <form action='./_member.fees.php' method='post'> 
         <input type='hidden' name='email' value='<?php echo $email; ?>'>
         <input type='hidden' name='operation' value='create-fee'>
         <input type="submit" value="Create a Fee">
       </form>
+    </div> <!-- End of Fees -->
+
+    <!-- If DONOR, associated projects -->
+    <div id="donors">
+      <!------ -->
+    <?php  
+    $sql = 'SELECT PROJECT_ID, PROJECT_NAME, DESCRIPTION FROM PROJECTS_DONORS WHERE EMAIL = \'' . $email . '\' ORDER BY 1;';
+
+    echo('Performing query <code>' . $sql . '</code><br/>');
+
+    try {
+      $result = mysqli_query($link, $sql);
+      echo ("Returned " . $result->num_rows . " row(s)<br/>");
+
+      echo("<h3>Project contribution for " . $email . "</h3>" . PHP_EOL);
+
+      if ($result->num_rows > 0) {
+        echo("<table>");
+        echo("<tr><th>Project</th><th>Description</th><th-</th></tr>");
+        while ($table = mysqli_fetch_array($result)) {
+          ?>
+          <form action='./_member.projects.php' method='post'>
+            <input type='hidden' name='operation' value='delete-donor'>
+            <input type='hidden' name='email' value='<?php echo $email; ?>'>
+            <input type='hidden' name='project-id' value='<?php echo $table[0]; ?>'>
+          <?php
+          echo("<tr>" . 
+                "<td>" . $table[1] . "</td>" . 
+                "<td>" . $table[2] . "</td>" . 
+                "<td><input type='submit' name='delete' value='Delete'></td>" .
+              "</tr>");
+          ?>
+          </form>
+          <?php
+        }
+        echo("</table>");
+      }
+    } catch (Throwable $ex) {
+      echo "Captured Throwable for connection : " . $ex->getMessage() . "<br/>" . PHP_EOL;
+    }
+      ?>
+      <form action='./_member.projects.php' method='post'> 
+        <input type='hidden' name='email' value='<?php echo $email; ?>'>
+        <input type='hidden' name='operation' value='create-donor'>
+        <input type="submit" value="Create a Contribution">
+      </form>
+      <!------ -->
+    </div> <!-- End of "donors" div -->
+
+    </div>  <!-- End of "right" div -->
+
       <?php
       echo("</form>");
 
     } catch (Throwable $ex) {
       echo "Captured Throwable for connection : " . $ex->getMessage() . "<br/>" . PHP_EOL;
-  }
+    }
     ?>
-    </div>
+
     <?php
     // On ferme !
     $link->close();
 
 
-  } catch (Throwable $e) {
-      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
-  }
+  // } catch (Throwable $e) {
+  //     echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+  // }
 } else if ($create_record) {
   // Display the form to create the record
   ?>
