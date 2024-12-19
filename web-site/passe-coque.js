@@ -1034,7 +1034,9 @@ let clickOnTxPix = (origin, title = '') => {
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
     if (dialogTitle) {
         dialogTitle[dialogTitle.length - 1].innerText = title; // Can be several dialogs... take the last.
+        dialogTitle[dialogTitle.length - 1].title = origin.id; // Bonus !
     }
+
     let contentName = `${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
     fetch(contentName)
         .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.

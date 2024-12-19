@@ -321,7 +321,7 @@ if ($option != null) {
 } else if ($operation == 'list') {
     // echo ("<h2>Requests Planning for " . $MONTHS[$currentMonth - 1] . " " . $currentYear . " (3 months)</h2>");
 
-    $requestsArray = getHelpRequests($dbhost, $username, $password, $database, $helpType, $VERBOSE);     
+    $requestsArray = getHelpRequests($dbhost, $username, $password, $database, $helpType, $VERBOSE); // TODO Restrict on dates ?
 
     if ($VERBOSE) {
         echo ("We have " . count($requestsArray) . " requests<br/>");
