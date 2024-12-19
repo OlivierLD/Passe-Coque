@@ -347,35 +347,53 @@ if ($option != null) {
 
     $lastDayOfMonth = $currentYear . "-" . $currentMonth . "-" . getNbDays($currentYear, $currentMonth);
 
+    $currentDT = DateTime::createFromFormat("Y-m-d", sprintf("%04d-%02d-%02d", (int)date("Y"), (int)date("m"), (int)date("d")));
+
     echo("<ul style='padding-left: 1px;'>" . PHP_EOL);
     foreach($requestsArray as $request) {
         if ($VERBOSE) {
             echo("Fetching requests for " . $request->owner . "/" . $request->boat . " in " . $MONTHS[$currentMonth - 1] . " " . $currentYear . "<br/>" . PHP_EOL);
         }
-        echo("<li>" . PHP_EOL);
-        $memberArray = getMember($dbhost, $username, $password, $database, $request->owner, $VERBOSE);
-        $ownerName = 'Unknown';
-        if (count($memberArray) > 0) {
-            $ownerName = $memberArray[0]->firstName . ' ' . $memberArray[0]->lastName;
+        // TODO : Filter on $request->from, $request->to (nullable) in the span window (3 months)
+        $requestFromDT = DateTime::createFromFormat("Y-m-d", $request->from);
+        $requestToDT = null;
+        if ($request->to != null) {
+            $requestToDT = DateTime::createFromFormat("Y-m-d", $request->to);
         }
-        $reqData = (($lang == 'FR') ? "De " : "By ") . ($ownerName) . 
-                (($lang == 'FR') ? " sur " : " on ") . getBoatName($dbhost, $username, $password, $database, $request->boat, $VERBOSE);
-        if ($request->to == null) {
-            $reqData .=  (($lang == 'FR') ? ", le " : ", on ") . $request->from;
-        } else {
-            $reqData .=  (($lang == 'FR') ? ", de " : ", from ") . $request->from . 
-                        (($lang == 'FR') ? ", &agrave; " : ", to ") . $request->to;
+        $expired = ($currentDT > $requestFromDT ? true : false);
+        if ($requestToDT != null) {
+            $expired = ($currentDT > $requestToDT ? true : false);
         }
-        $reqData .= /*", type " . $request->type . */ ", " . /*utf8_encode*/($request->comment) .
-                "<form action='" . basename(__FILE__) . "' method='post'>" .
-                "<input type='hidden' name='lang' value='" . $lang . "'>" .
-                "<input type='hidden' name='operation' value='reply'>" .
-                "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
-                "<input type='hidden' name='type' value='" . $helpType . "'>" .
-                "<input type='submit' value='" . (($lang == 'FR') ? "Je viens !" : "I&apos;m coming!") . "'>" .
-                "</form>";
-        echo $reqData;
-        echo("</li>" . PHP_EOL);
+
+        if (true) { // Dates OK...
+            echo("<li>" . PHP_EOL);
+            $memberArray = getMember($dbhost, $username, $password, $database, $request->owner, $VERBOSE);
+            $ownerName = 'Unknown';
+            if (count($memberArray) > 0) {
+                $ownerName = $memberArray[0]->firstName . ' ' . $memberArray[0]->lastName;
+            }
+            $reqData = (($lang == 'FR') ? "De " : "By ") . ($ownerName) . 
+                    (($lang == 'FR') ? " sur " : " on ") . getBoatName($dbhost, $username, $password, $database, $request->boat, $VERBOSE);
+            if ($request->to == null) {
+                $reqData .=  (($lang == 'FR') ? ", le " : ", on ") . $request->from;
+            } else {
+                $reqData .=  (($lang == 'FR') ? ", de " : ", from ") . $request->from . 
+                            (($lang == 'FR') ? ", &agrave; " : ", to ") . $request->to;
+            }
+            if ($expired) {
+                $reqData .= " (expired...)";
+            }
+            $reqData .= /*", type " . $request->type . */ ", " . /*utf8_encode*/($request->comment) .
+                    "<form action='" . basename(__FILE__) . "' method='post'>" .
+                    "<input type='hidden' name='lang' value='" . $lang . "'>" .
+                    "<input type='hidden' name='operation' value='reply'>" .
+                    "<input type='hidden' name='idx' value='" . $request->idx . "'>" .
+                    "<input type='hidden' name='type' value='" . $helpType . "'>" .
+                    "<input type='submit' value='" . (($lang == 'FR') ? "Je viens !" : "I&apos;m coming!") . "'>" .
+                    "</form>";
+            echo $reqData;
+            echo("</li>" . PHP_EOL);
+        }
     }
     echo ("</ul>" . PHP_EOL);
 
