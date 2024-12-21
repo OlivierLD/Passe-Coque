@@ -84,7 +84,7 @@ sqlite> .read oliv.sql
 ```
 
 ## A GUI for SQLite
-Cool stuff, easy to use, perfect!
+Cool stuff, easy to use, multi-platform, perfect!
 - <https://sqlitebrowser.org/>
   - Works on Linux, Mac, and Windows.
   - On a Raspberry Pi, do a 

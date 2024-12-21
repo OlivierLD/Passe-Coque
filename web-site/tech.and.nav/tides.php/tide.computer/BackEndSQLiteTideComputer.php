@@ -271,12 +271,12 @@ class BackEndSQLiteTideComputer {
         } else {
 			$selectStatement = "select t1.name " .
                                "from stations as t1 " .
-                               "where upper(t1.name) like upper('%" . $escapedPattern . "%')";
+                               "where upper(t1.name) like upper('%" . $escapedPattern . "%')"; // Tide stations only
             if (false) {
                 echo("SQL to execute : [" . $selectStatement . "]<br/>" . PHP_EOL);
             }                               
             if ($tideOnly) {
-                $selectStatement .= " and t1.baseheightunit <> 'knots'";
+                $selectStatement .= " and t1.baseheightunit not like 'knots%'";
             }
 			try {
                 $results = self::$db->query($selectStatement);
