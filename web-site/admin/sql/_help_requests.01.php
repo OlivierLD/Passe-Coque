@@ -365,7 +365,7 @@ if ($option != null) {
             $expired = ($currentDT > $requestToDT ? true : false);
         }
 
-        if (true) { // Dates OK...
+        if (true) { // Dates OK... Refine this.
             echo("<li>" . PHP_EOL);
             $memberArray = getMember($dbhost, $username, $password, $database, $request->owner, $VERBOSE);
             $ownerName = 'Unknown';
@@ -381,7 +381,7 @@ if ($option != null) {
                             (($lang == 'FR') ? ", &agrave; " : ", to ") . $request->to;
             }
             if ($expired) {
-                $reqData .= " (expired...)";
+                $reqData .= (($lang == 'FR') ? " (expir&eacute;...)" : "(expired...)");
             }
             $reqData .= /*", type " . $request->type . */ ", " . /*utf8_encode*/($request->comment) .
                     "<form action='" . basename(__FILE__) . "' method='post'>" .

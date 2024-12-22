@@ -48,6 +48,24 @@ table {
 }
 
 @media print {
+
+    /* #result-to-publish > table > * {
+        font-size: 0.80rem;
+        line-height: 0.5rem;
+        color: black;
+    }
+
+    td {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    table {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 1px;
+    } */
+
     .table-content, .content, .blank-for-print {
         page-break-before: always;
     }
@@ -208,6 +226,10 @@ function getCoeffData (BackEndSQLiteTideComputer $backend, Constituents $constit
     return $coeffsInBrest;
 }
 
+// For decToSex
+$NS = 1;
+$EW = 2;
+
 /**
  * Publish for one month
  */
@@ -220,6 +242,7 @@ function publishAlmanac(string $stationName,
 
     global $VERBOSE, $lang;        
     global $DATE_FMT_DOW_DAY_MONTH_YEAR, $DATE_FMT_FULL_MONTH_YEAR;
+    global $NS, $EW;
 
     $content = "";
 

@@ -30,17 +30,21 @@ if (isset($_GET['lang'])) {
   </head>
   <body style="color: black; background-image: url(/images/weather.jpg); background-size: 100%; background-repeat: no-repeat;">
     <div class="transp-box">
-      <h1><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o (traduction en cours...)" : "Weather Forecasts (translation in progress...)"); ?></h1>
+      <h1><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o (Faxes, GRIBs, etc...)" : "Weather Forecasts (Faxes, GRIBs, etc...)"); ?></h1>
       <ul>
         <li><a href="./weather/internet.faxes.NAtl.colors.html" target="_blank"><?php echo( $lang == 'FR' ? "Faxes de l'Atlantique Nord, temps r&eacute;el, en couleurs." : "North Altantic faxes, real time, Colored versions."); ?></a></li>
         <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/forecast.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Plusieurs sites affichant des GRIBs." : "Several GRIB web sites."); ?></a></li>
       </ul>
       <hr/>
       <ul>
-        <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html" target="OlivLD">Faxes, North Atlantic (real time)</a></li>
-        <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.2.html" target="OlivLD">Several Atlantic faxes (v2), reworked on the client side...</a></li>
-        <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NPac.html" target="OlivLD">Faxes, North Pacific (real time)</a></li>
+        <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Faxes Atlantique Nord (en temps r&eacute;el)" : "Faxes, North Atlantic (real time)"); ?></a></li>
+        <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.2.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Faxes Atlantique Nord, v2." : "Several Atlantic faxes (v2), reworked on the client side..."); ?></a></li>
+        <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NPac.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Faxes, Pacifique Nord (en temps r&eacute;el)" : "Faxes, North Pacific (real time)"); ?></a></li>
       </ul>
+      <ul>
+        <li><a href="https://www.meteo-marine.com/consulter/atlantique/" target="OlivLD"><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o Marine Atlantique" : "Atlantic Marine Weather (in French)"); ?></a></li>
+      </ul>  
+      <?php echo( $lang == 'FR' ? "Et plus bient&ocirc;t..." : "And more soon..."); ?>
     </div>
 
     <hr/>

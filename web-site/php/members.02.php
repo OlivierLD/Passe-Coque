@@ -58,6 +58,7 @@ try {
         opacity: 0.75;
       }
     </style>
+  	<script type="text/javascript" src="../passe-coque.js"></script>
   </head>
   <body class="gears-bg">
     <!--h1>Espace Membres</h1-->
@@ -134,6 +135,8 @@ $isPrjOwner = $_SESSION['IS_PRJ_OWNER'];
 //
 $days_since_last_fee = $_SESSION['DAYS_SINCE_LAST_FEE'];
 
+// --- Start of the menu content ---
+
 if ($current_lang == "FR") {
   echo "<h2>Bienvenue [$displayName] dans votre espace priv&eacute;.</h2><br/>" . PHP_EOL;
   // echo "Admin: [$adminPrivileges] .<br/>" . PHP_EOL;
@@ -148,20 +151,59 @@ if ($current_lang == "FR") {
 if ($current_lang == "FR") {
   // echo "<div style='font-size: 3em; line-height: 1em;'>Cette page est en cours de d&eacute;veloppement...</div>" . PHP_EOL;
     ?>
-    Vous voulez :
-    <ul>
-      <li><a href="members.03.php">Changer votre mot de passe (pour <?php echo $user_id ?>)</a></li>
-      <li><a href="members.04.php">Voir vos cotisations</a></li>
-      <!--li><a href="../admin/sql/_reservations.01.php">Voir le planning des r&eacute;servations</a></li-->
-      <li><a href="../admin/web/see.planning.2.html?admin=false">Voir le planning des r&eacute;servations</a></li>
-      <li>
-        Acc&eacute;der &agrave; des outils de Navigation
+
+    <!-- 
+      Menu sections depend on:
+      - default (PC member)
+      - $bcMember
+      - $isReferent
+      - $isPrjOwner
+      - $adminPrivileges
+     +-->
+     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'member-space-01');" title="Passe-Coque">Espace Membre</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-02');">Boat-Club</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-03');">R&eacute;f&eacute;rent</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-04');">Responsable de Projet</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-05');">Administrateur</button>
+    </div>
+
+
+    <div id="member-space-01" class="tab-section" style="display: block;">
+        Vous voulez :
         <ul>
-          <li>👉 Acc&eacute;der &agrave; la <a href="../tech.and.nav/almanacs.php?lang=FR" target="pub">publication d'almanachs</a> (de mar&eacute;e, et &eacute;ph&eacute;m&eacute;rides astronomiques)</li>
-          <li>👉 Consulter la <a href="../tech.and.nav/meteo.php?lang=FR" target="pub">m&eacute;t&eacute;o</a> (Atlantique Nord, GRIBs et Faxes)</li>
+          <li><a href="members.03.php">Changer votre mot de passe (pour <?php echo $user_id ?>)</a></li>
+          <li><a href="members.04.php">Voir vos cotisations</a></li>
+          <!--li><a href="../admin/sql/_reservations.01.php">Voir le planning des r&eacute;servations</a></li-->
+          <li><a href="../admin/web/see.planning.2.html?admin=false">Voir le planning des r&eacute;servations</a></li>
+          <li>
+            Acc&eacute;der &agrave; des outils de Navigation
+            <ul>
+              <li>👉 Acc&eacute;der &agrave; la <a href="../tech.and.nav/almanacs.php?lang=FR" target="pub">publication d'almanachs</a> (de mar&eacute;e, et &eacute;ph&eacute;m&eacute;rides astronomiques)</li>
+              <li>👉 Consulter la <a href="../tech.and.nav/meteo.php?lang=FR" target="pub">m&eacute;t&eacute;o</a> (Atlantique Nord, GRIBs et Faxes)</li>
+            </ul>
+          <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
         </ul>
-      <li><a href="#" onclick="alert('Plus tard');">. . . </a></li>
-    </ul>
+        <?php
+        // Cotisation a jour...
+        if ($days_since_last_fee > 365) { // Oops
+          echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'>" .PHP_EOL;
+          echo "<b>Votre derni&egrave;re cotisation date de $days_since_last_fee jours...<br/>" . PHP_EOL;
+          echo "<i>Certains documents vous sont inaccessibles</i>.</b><br/>" . PHP_EOL;;
+          echo "</div>" . PHP_EOL;
+        } else { // It's OK.
+        ?>
+          Votre cotisation est &agrave; jour.<br/>
+          <iframe src="./member.docs.html" frameBorder="0" style="width: 98%; height: 150px; border: 1px solid silver; border-radius: 5px; overflow: scroll;">
+            <!-- Members only -->
+          </iframe>
+          <br/>
+        <?php
+        }
+        ?>
+    </div>
+
+    <div id="member-space-02" class="tab-section" style="display: none;">
     <?php
     if ($bcMember) {
       ?>
@@ -170,7 +212,15 @@ if ($current_lang == "FR") {
         <li><a href="../admin/sql/_reservations.02.php" target="admin">Faire une r&eacute;servation</a></li>
       </ul>
       <?php
+    } else {
+      ?>
+        Vous n'&ecirc;tes pas membre du Boat-Club...
+      <?php
     }
+    ?>
+    </div>
+    <div id="member-space-03" class="tab-section" style="display: none;">
+    <?php
     if ($isReferent) {
       ?>
       En tant que <i>r&eacute;f&eacute;rent d'un bateau</i>, vous pouvez :
@@ -181,7 +231,15 @@ if ($current_lang == "FR") {
         <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
       </ul>
       <?php
+    } else {
+      ?>
+        Vous n'&ecirc;tes pas r&eacute;f&eacute;rent d'un bateau...
+      <?php
     }
+    ?>
+    </div>
+    <div id="member-space-04" class="tab-section" style="display: none;">
+    <?php
     if ($isPrjOwner) {
       ?>
       En tant que <i>responsable d'un projet</i>, vous pouvez :
@@ -189,24 +247,15 @@ if ($current_lang == "FR") {
         <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
       </ul>
       <?php
-    }
-
-    // Cotisation a jour...
-    if ($days_since_last_fee > 365) { // Oops
-      echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'>" .PHP_EOL;
-      echo "<b>Votre derni&egrave;re cotisation date de $days_since_last_fee jours...<br/>" . PHP_EOL;
-      echo "<i>Certains documents vous sont inaccessibles</i>.</b><br/>" . PHP_EOL;;
-      echo "</div>" . PHP_EOL;
-    } else { // It's OK.
+    } else {
       ?>
-      Votre cotisation est &agrave; jour.<br/>
-      <iframe src="./member.docs.html" frameBorder="0" style="width: 98%; height: 150px; border: 1px solid silver; border-radius: 5px; overflow: scroll;">
-        <!-- Members only -->
-      </iframe>
-      <br/>
+        Vous n'&ecirc;tes pas responsable d'un projet...
       <?php
     }
-
+    ?>
+    </div>
+    <div id="member-space-05" class="tab-section" style="display: none;">
+    <?php
     if ($adminPrivileges) {
       ?>
       En tant qu'<i>adminstrateur</i>, vous pouvez aussi utiliser ceci :<br/>
@@ -217,26 +266,67 @@ if ($current_lang == "FR") {
         <li><a href="../admin/sql/_todo_list.01.php" target="admin">G&eacute;rer les TODO lists (toutes)</a></li>
       </ul>  
       <?php
+    } else {
+      ?>
+        Vous n'avez pas les privil&egrave;ges Admin...
+      <?php
     }
     ?>
+    </div>
     <?php
 } else {
   // echo "<div style='font-size: 3em; line-height: 1em;'>This page is being developped...</div>" . PHP_EOL;
     ?>
-    You want to:
-    <ul>
-      <li><a href="members.03.php">Change your password (for <?php echo $user_id ?>)</a></li>
-      <li><a href="members.04.php">See your subscriptions</a></li>
-      <li><a href="../admin/sql/_reservations.01.php">See the boat reservation planning</a></li>
-      <li>
-        Access Navigation tools
+    <!-- 
+      Menu sections depend on:
+      - default (PC member)
+      - $bcMember
+      - $isReferent
+      - $isPrjOwner
+      - $adminPrivileges
+     +-->
+     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'member-space-01');" title="Passe-Coque">Member Space</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-02');">Boat-Club</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-03');">Referent</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-04');">Projet Leader</button>
+        <button class="tablinks" onclick="openTab(event, 'member-space-05');">Admin</button>
+    </div>
+
+    <div id="member-space-01" class="tab-section" style="display: block;">
+        You want to:
         <ul>
-            <li>👉 Access the <a href="../tech.and.nav/almanacs.php?lang=EN" target="pub">Almanacs Publication</a> page (tides and celestial almanacs)</li>
-            <li>👉 Check out the <a href="../tech.and.nav/meteo.php?lang=EN" target="pub">Weather Forecast</a> (North Atlantic, GRIBs and Faxes)</li>
+          <li><a href="members.03.php">Change your password (for <?php echo $user_id ?>)</a></li>
+          <li><a href="members.04.php">See your subscriptions</a></li>
+          <li><a href="../admin/sql/_reservations.01.php">See the boat reservation planning</a></li>
+          <li>
+            Access Navigation tools
+            <ul>
+                <li>👉 Access the <a href="../tech.and.nav/almanacs.php?lang=EN" target="pub">Almanacs Publication</a> page (tides and celestial almanacs)</li>
+                <li>👉 Check out the <a href="../tech.and.nav/meteo.php?lang=EN" target="pub">Weather Forecast</a> (North Atlantic, GRIBs and Faxes)</li>
+            </ul>
+          </li>
+          <li><a href="#" onclick="alert('Later');">. . . </a></li>
         </ul>
-      </li>
-      <li><a href="#" onclick="alert('Later');">. . . </a></li>
-    </ul>
+      <?php
+        // Cotisation a jour...
+        if ($days_since_last_fee > 365) { // Oops
+          echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'>" . PHP_EOL;
+          echo "<b>Your last membership fee is $days_since_last_fee old...<br/>" . PHP_EOL;
+          echo "<i>You will not have access to some documents</i>.</b><br/>" . PHP_EOL;
+          echo "</div>" . PHP_EOL;
+        } else { // It's OK.
+          ?>
+          Your membership fee is up-to-date.<br/>
+          <iframe src="./member.docs.html" frameBorder="0" style="width: 98%; height: 150px; border: 1px solid silver; border-radius: 5px; overflow: scroll;">
+            <!-- Members only -->
+          </iframe>
+          <br/>
+          <?php
+        }
+      ?>
+    </div>
+    <div id="member-space-02" class="tab-section" style="display: none;">
     <?php
     if ($bcMember) {
       ?>
@@ -245,7 +335,15 @@ if ($current_lang == "FR") {
         <li><a href="../admin/sql/_reservations.02.php" target="admin">Make a reservation</a></li>
       </ul>
       <?php
+    } else {
+      ?>
+      You're not a member of the Boat-Club...
+      <?php
     }
+    ?>
+    </div>
+    <div id="member-space-03" class="tab-section" style="display: none;">
+    <?php
     if ($isReferent) {
       ?>
       As the <i>referent of a boat</i>, you can also:
@@ -255,7 +353,15 @@ if ($current_lang == "FR") {
         <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
       </ul>
       <?php
+    } else {
+      ?>
+        You're not the referent of a boat...
+      <?php
     }
+    ?>
+    </div>
+    <div id="member-space-04" class="tab-section" style="display: none;">
+    <?php
     if ($isPrjOwner) {
       ?>
       As a <i>Project Leader</i>, you can also:
@@ -263,22 +369,15 @@ if ($current_lang == "FR") {
         <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Learn how to make a blog</a></li>
       </ul>
       <?php
-    }
-    // Cotisation a jour...
-    if ($days_since_last_fee > 365) { // Oops
-      echo "<div style='border: 1px solid silver; border-radius: 5px; padding: 10px; margin: 10px;'>" . PHP_EOL;
-      echo "<b>Your last membership fee is $days_since_last_fee old...<br/>" . PHP_EOL;
-      echo "<i>You will not have access to some documents</i>.</b><br/>" . PHP_EOL;
-      echo "</div>" . PHP_EOL;
-    } else { // It's OK.
+    } else {
       ?>
-      Your membership fee is up-to-date.<br/>
-      <iframe src="./member.docs.html" frameBorder="0" style="width: 98%; height: 150px; border: 1px solid silver; border-radius: 5px; overflow: scroll;">
-        <!-- Members only -->
-      </iframe>
-      <br/>
+        You're not leading any project (yet)...
       <?php
     }
+    ?>
+    </div>
+    <div id="member-space-05" class="tab-section" style="display: none;">
+    <?php
     if ($adminPrivileges) {
       ?>
       As an <i>administrator</i>, you can also use those:<br/>
@@ -286,13 +385,22 @@ if ($current_lang == "FR") {
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
+        <li><a href="../admin/sql/_todo_list.01.php" target="admin">Manage (all) TODO lists</a></li>
       </ul>  
+      <?php
+    } else {
+      ?>
+        You don't have Admin privileges...
       <?php
     }
     ?>
+    </div>
     <?php
 }
     ?>
+
+    <!-- End of menu content -->
+
     <hr/>
     <form action="members.php" method="post">
       <input type="hidden" name="operation" value="logout">
