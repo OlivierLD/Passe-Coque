@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html> <!-- lang="fr"-->
+<head>
+  <meta charset="UTF-8">
+  <title>Print from the browser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../passe-coque.css" />
+
+  <style type="text/css">
+	* {
+		line-height: 1rem;
+	}
+
+	.div-comment {
+		margin-top: 20px;
+		margin-bottom: 5px;
+	}
+  </style>
+</head>
+
+<body style="background: #a0c3cf; background-image: linear-gradient(#d9e4ea, #a0c3cf);">
+	<h1><span id='main-title'>Comment imprimer ou g&eacute;n&eacute;rer un pdf &agrave; partir du navigateur.</span></h1>
+	<div class="div-comment">
+		Prenons un exemple, comme la publication d'almanachs de mar&eacute;e.<br/>
+		On a g&eacute;n&eacute;r&eacute; un almanach d'un mois, pour Lorient, voici ce que &ccedil;a donne quand c'est fini.
+	</div>
+	<div style="text-align: left;">
+		<img src="001.png" style="width: 80%; height: auto;">
+	</div>
+	<div class="div-comment">
+		Maintenant, et c'est l&agrave; que c'est int&eacute;ressant, on veut que le r&eacute;sultat (en pdf ici), tienne sur une page imprimable.<br/>
+		Sur la page, faites un click droit avec la souris, un menu doit appara&icirc;tre (ici, on est sur Chrome, les autres navigateurs peuvent &ecirc;tre un peu diff&eacute;rents, mais 
+		la fonctionnalit&eacute; existe. Sinon... ben changez de navigateur !).<br/>
+		Dans le menu, choisissez "Print" (c'est en anglais ici, vous trouverez l'&eacute;quivalent dans votre langue).
+	</div>
+	<div style="text-align: left;">
+		<img src="002.png" style="width: 80%; height: auto;">
+	</div>
+
+	<div class="div-comment">
+		Une nouvelle boite de dialogue apparait, dans laquelle on voit au moins deux choses :
+		<ul>
+			<li>&Agrave; quoi votre document va ressembler une fois imprim&eacute;</li>
+			<li>Une liste des options disponibles pour le modifier</li>
+		</ul>
+		On a choisi "Save as PDF", dans la premi&egrave;re ligne.<br/>
+		Ici, on constate clairement que le document ne tient pas sur une page.<br/>
+		On va utiliser l'&eacute;chelle pour arranger &ccedil;a.
+	</div>
+	<div style="text-align: left;">
+		<img src="003.png" style="width: 80%; height: auto;">
+	</div>
+	<div class="div-comment">
+		&Agrave; la place de "Default", on choisit "Custom".
+	</div>
+	<div style="text-align: left;">
+		<img src="004.png" style="width: 80%; height: auto;">
+	</div>
+	<div class="div-comment">
+		Et l&agrave;, on ajuste l'&eacute;chelle jusqu'&agrave; ce que &ccedil;a colle !<br/>
+		Dans notre cas, "60" semble convenir.<br/>
+		On peut mainenant cliquer sur "Save" et le fichier pdf est pr&ecirc;t !
+	</div>
+	<div style="text-align: left;">
+		<img src="005.png" style="width: 80%; height: auto;">
+	</div>
+
+	<hr/>
+	<i>&copy;2024, Passe-Coque</i>
+</body>
+</html>

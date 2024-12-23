@@ -31,6 +31,7 @@ if (isset($_GET['lang'])) {
   <body style="color: black; background-image: url(/images/weather.jpg); background-size: 100%; background-repeat: no-repeat;">
     <div class="transp-box">
       <h1><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o (Faxes, GRIBs, etc...)" : "Weather Forecasts (Faxes, GRIBs, etc...)"); ?></h1>
+      <hr/>
       <ul>
         <li><a href="./weather/internet.faxes.NAtl.colors.html" target="_blank"><?php echo( $lang == 'FR' ? "Faxes de l'Atlantique Nord, temps r&eacute;el, en couleurs." : "North Altantic faxes, real time, Colored versions."); ?></a></li>
         <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/forecast.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Plusieurs sites affichant des GRIBs." : "Several GRIB web sites."); ?></a></li>
@@ -41,9 +42,12 @@ if (isset($_GET['lang'])) {
         <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NAtl.2.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Faxes Atlantique Nord, v2." : "Several Atlantic faxes (v2), reworked on the client side..."); ?></a></li>
         <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/internet.faxes.NPac.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Faxes, Pacifique Nord (en temps r&eacute;el)" : "Faxes, North Pacific (real time)"); ?></a></li>
       </ul>
+      <hr/>
       <ul>
-        <li><a href="https://www.meteo-marine.com/consulter/atlantique/" target="OlivLD"><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o Marine Atlantique" : "Atlantic Marine Weather (in French)"); ?></a></li>
+        <li><a href="https://www.meteo-marine.com/consulter/atlantique/" target="_bank"><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o Marine Atlantique" : "Atlantic Marine Weather (in French)"); ?></a></li>
+        <li><a href="https://portail.ping-info-nautique.fr/" target="_blank">PING</a></li>
       </ul>  
+      <hr/>
       <?php echo( $lang == 'FR' ? "Et plus bient&ocirc;t..." : "And more soon..."); ?>
     </div>
 

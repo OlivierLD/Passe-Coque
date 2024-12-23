@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html> <!-- lang="fr"-->
+<head>
+  <meta charset="UTF-8">
+  <title>Print from the browser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../passe-coque.css" />
+
+  <style type="text/css">
+	* {
+		line-height: 1rem;
+	}
+
+	.div-comment {
+		margin-top: 20px;
+		margin-bottom: 5px;
+	}
+  </style>
+</head>
+
+<body style="background: #a0c3cf; background-image: linear-gradient(#d9e4ea, #a0c3cf);">
+	<h1><span id='main-title'>How to print or generate a pdf from your browser.</span></h1>
+	<div class="div-comment">
+		Let's take an example, like the Tide Publishing.<br/>
+		We've generated a one month tide almanac for Lorient, here is what the page looks like after the computation is completed.
+	</div>
+	<div style="text-align: left;">
+		<img src="001.png" style="width: 80%; height: auto;">
+	</div>
+	<div class="div-comment">
+		Now, and this is where it is interesting, we want to print the content of this page (as a pdf here), so it fits on one printed page.<br/>
+		On the page, do a right-click with the mouse, a menu is going to show up (here, it is on Chrome, other browsers may look slightly different, but 
+		the feature will be here. If not... well upgrade your browser!).<br/>
+		In the menu, choose "Print".
+	</div>
+	<div style="text-align: left;">
+		<img src="002.png" style="width: 80%; height: auto;">
+	</div>
+
+	<div class="div-comment">
+		A new dialog will show up, in which you'll see two main things:
+		<ul>
+			<li>What your document is going to look like when printed</li>
+			<li>A list of the options you can use to tweak it</li>
+		</ul>
+		We choose to "Save as PDF", in the first line. <br/>
+		Here, you can definitely see that the document does not fit in the page.<br/>
+		Let us use the scale to fix that.
+	</div>
+	<div style="text-align: left;">
+		<img src="003.png" style="width: 80%; height: auto;">
+	</div>
+	<div class="div-comment">
+		Instead of "Default", we will choose "Custom".
+	</div>
+	<div style="text-align: left;">
+		<img src="004.png" style="width: 80%; height: auto;">
+	</div>
+	<div class="div-comment">
+		And then, adjust the scale value until the data fit in a page!<br/>
+		Here, "60" seems to do the job.<br/>
+		You can now click the "Save" buttom, and your pdf file is ready!
+	</div>
+	<div style="text-align: left;">
+		<img src="005.png" style="width: 80%; height: auto;">
+	</div>
+
+	<hr/>
+	<i>&copy;2024, Passe-Coque</i>
+</body>
+</html>

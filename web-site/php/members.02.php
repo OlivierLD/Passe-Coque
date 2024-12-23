@@ -57,6 +57,9 @@ try {
         border: 1px solid black;
         opacity: 0.75;
       }
+      .tablinks {
+        font-weight: bold;
+      }
     </style>
   	<script type="text/javascript" src="../passe-coque.js"></script>
   </head>
