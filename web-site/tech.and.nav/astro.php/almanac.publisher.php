@@ -83,6 +83,37 @@ try {
         return $fmt;
     }
 
+    function greekTranslation(string $fullName) : string {
+        $greek = $fullName;
+        $greek = str_replace("alpha ", "&alpha; ", $greek);
+        $greek = str_replace("alfa ", "&alpha; ", $greek);
+        $greek = str_replace("beta ", "&beta; ", $greek);
+        $greek = str_replace("gamma ", "&gamma; ", $greek);
+        $greek = str_replace("delta ", "&delta; ", $greek);
+        $greek = str_replace("epsilon ", "&epsilon; ", $greek);
+        $greek = str_replace("zeta ", "&zeta; ", $greek);
+        $greek = str_replace("theta ", "&theta; ", $greek);
+        $greek = str_replace("eta ", "&eta; ", $greek);
+        $greek = str_replace("iota ", "&iota; ", $greek);
+        $greek = str_replace("kappa ", "&kappa; ", $greek);
+        $greek = str_replace("lambda ", "&lambda; ", $greek);
+        $greek = str_replace("mu ", "&mu; ", $greek);
+        $greek = str_replace("nu ", "&nu; ", $greek);
+        $greek = str_replace("xi ", "&xi; ", $greek);
+        $greek = str_replace("omicron ", "&omicron; ", $greek);
+        $greek = str_replace("pi ", "&pi; ", $greek);
+        $greek = str_replace("rho ", "&rho; ", $greek);
+        $greek = str_replace("sigma ", "&sigma; ", $greek);
+        $greek = str_replace("tau ", "&tau; ", $greek);
+        $greek = str_replace("upsilon ", "&upsilon; ", $greek);
+        $greek = str_replace("phi ", "&phi; ", $greek);
+        $greek = str_replace("chi ", "&chi; ", $greek);
+        $greek = str_replace("psi ", "&psi; ", $greek);
+        $greek = str_replace("omega ", "&omega; ", $greek);
+
+        return /*$fullName . " -> " .*/ $greek;
+    }
+
     function oneDayAlmanac(bool $verbose, DateTime $date, bool $withStars, string $userLang) : string {
         $starCatalog = null;
 
@@ -307,7 +338,7 @@ try {
                             }
                             $starDec = $starArray[$j]->DECStar;
                             $htmlContentStarsPage .= (
-                                "<tr><td" . (($starDec < 0) ? " style='background: silver;'" : "") ."><b>" . $starArray[$j]->name . "</b>, " . $star->getConstellation() . "</td>" . 
+                                "<tr><td" . (($starDec < 0) ? " style='background: silver;'" : "") ."><b>" . $starArray[$j]->name . "</b>, " . greekTranslation($star->getConstellation()) . "</td>" . 
                                     "<td>" . Utils::decToSex($starSHA) . "</td>" . 
                                     "<td>" . Utils::decToSex($starDec, Utils::$NS) . "</td></tr>"
                             );
