@@ -264,7 +264,7 @@ function requestData(option) {
 		console.log("Chronology OK, proceeding.");
 	}
 
-	document.getElementById('place-holder').innerHTML = ". . ."; // Reset
+	document.getElementById('place-holder').innerHTML = "Computing . . ."; // Reset
 
 	let fromStr = `${document.getElementById('UTC-year-from').value}-${document.getElementById('UTC-month-from').value}-${document.getElementById('UTC-day-from').value}`;
 	let toStr = `${document.getElementById('UTC-year-to').value}-${document.getElementById('UTC-month-to').value}-${document.getElementById('UTC-day-to').value}`;

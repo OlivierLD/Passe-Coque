@@ -123,8 +123,8 @@ try {
             }
             $htmlContentSunMoonAries .= "<table style='margin: auto;'>" . PHP_EOL;
             $htmlContentSunMoonAries .= "<tr>" . 
-                               "<th rowspan='2'>" . translateText($userLang, 'ut') . "</th><th colspan='5' style='font-size: 2rem;'>" . translateText($userLang, 'sun') . " &#9737;</th>" . 
-                                          "<th colspan='6' style='font-size: 2rem;'>" . translateText($userLang, 'moon') . " &#9790;</th>" . "<th style='font-size: 2rem;'>" . translateText($userLang, 'aries') . " &gamma;</th><th rowspan='2'>" . translateText($userLang, 'ut') . "</th>" . 
+                               "<th rowspan='2'>" . translateText($userLang, 'ut') . "</th><th colspan='5' style='font-size: 1.2rem;'>" . translateText($userLang, 'sun') . " &#9737;</th>" . 
+                                          "<th colspan='6' style='font-size: 1.2rem;'>" . translateText($userLang, 'moon') . " &#9790;</th>" . "<th style='font-size: 1.2rem;'>" . translateText($userLang, 'aries') . " &gamma;</th><th rowspan='2'>" . translateText($userLang, 'ut') . "</th>" . 
                           "</tr>" . PHP_EOL;
             $htmlContentSunMoonAries .= "<tr>" . 
                                "<th>" . translateText($userLang, 'AHvo') . "</th><th>&delta; " . translateText($userLang, 'AHvo') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . "</th><th>&delta; " . translateText($userLang, 'decl') . "</th>" . 
@@ -133,9 +133,10 @@ try {
 
             $htmlContentPlanets .= "<table style='margin: auto;'>" . PHP_EOL;
             $htmlContentPlanets .= "<tr><th rowspan='2'>" . translateText($userLang, 'ut') . 
-                                       "</th><th colspan='3' style='font-size: 2rem;'>" . translateText($userLang, 'venus') . " &#9792;</th><th colspan='3' style='font-size: 2rem;'>" .
-                                        translateText($userLang, 'mars') . " &#9794;</th><th colspan='3' style='font-size: 2rem;'>" . 
-                                        translateText($userLang, 'jupiter') . " &#9795;</th><th colspan='3' style='font-size: 2rem;'>" . 
+                                       "</th><th colspan='3' style='font-size: 1.2rem;'>" . 
+                                        translateText($userLang, 'venus') . " &#9792;</th><th colspan='3' style='font-size: 1.2rem;'>" .
+                                        translateText($userLang, 'mars') . " &#9794;</th><th colspan='3' style='font-size: 1.2rem;'>" . 
+                                        translateText($userLang, 'jupiter') . " &#9795;</th><th colspan='3' style='font-size: 1.2rem;'>" . 
                                         translateText($userLang, 'saturn') . " &#9796;</th><th rowspan='2'>" . translateText($userLang, 'ut') . "</th></tr>" . PHP_EOL;
             $htmlContentPlanets .= "<tr><th>" . translateText($userLang, 'AHao') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . 
                                        "</th><th>" . translateText($userLang, 'AHao') . "</th><th>" . translateText($userLang, 'AHso') . "</th><th>" . translateText($userLang, 'decl') . 
@@ -363,6 +364,7 @@ try {
 
                     $htmlContentStarsPage .= $htmlSunMoonRiseAndSet; // Et Hop !
 
+                    $htmlContentStarsPage .= "</div>";
                     $htmlContentStarsPage .= "</div>";
                 }
                 // echo ("End of hour $h.<br/>". PHP_EOL);
