@@ -39,6 +39,16 @@
         border: 1px solid black;
         opacity: 0.75;
     }
+    .bodygrad {
+        /*background: silver;*/
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3));
+    }
+    * {
+        line-height: normal;
+    }
+    a { /* TODO Tweak for other devices */
+        scroll-margin-top: 150px;
+    }
 </style>
 <div style="margin-top: -10px;">
     <!--div class="container"> 
@@ -50,9 +60,17 @@
 
     <div class="bodygrad" style="text-align: left; padding: 20px;"> <!--  background: white; -->
         <h2>Life of the Association</h2>
+        <ul>
+            <li><a href="#agenda">Agenda</a></li>
+            <li><a href="#bde">Crew Wanted!</a></li>
+            <li><a href="#bdb">Shipyard Skills Wanted!</a></li>
+            <li><a href="#todo">TODO lists</a></li>
+            <li><a href="#tuto">Tutos &amp; Trainings</a></li>
+        </ul>
+
         <div class="agenda" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
             <div class="transp-box">
-                <h3><img src="./images/booklet.svg" style="width: 48px; vertical-align: middle;">&nbsp;Agenda</h3>
+                <h3><a name="agenda"><img src="./images/booklet.svg" style="width: 48px; vertical-align: middle;">&nbsp;Agenda</a></h3>
                 <div id="next-events-container">
                     <ul id="next-event-list"></ul>
                 </div>
@@ -70,21 +88,21 @@
         <div style="display: grid; grid-template-columns: auto; width: 100%;">
             <div class="bde" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
                 <div class="transp-box">                
-                    <h3><img src="./images/small.boat.svg" style="width: 48px; vertical-align: middle;">&nbsp;Crews wanted!</h3>
+                    <h3><a name="bde"><img src="./images/small.boat.svg" style="width: 48px; vertical-align: middle;">&nbsp;Crews wanted!</a></h3>
                     <br/>
                     <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=EN&type=SAILING" style="width:100%;height:300px;border:none;"></iframe>
                 </div>
             </div>
             <div class="bdb" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
                 <div class="transp-box">
-                    <h3><img src="./images/hammer.svg" style="width: 48px; vertical-align: middle;">Shipyard skills wanted!</h3>
+                    <h3><a name="bdb"><img src="./images/hammer.svg" style="width: 48px; vertical-align: middle;">Shipyard skills wanted!</a></h3>
                     <!-- Reservation form -->
                     <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_help_requests.01.php?lang=EN&type=SHIPYARD" style="width:100%;height:300px;border:none;"></iframe>
                 </div>
             </div>
             <div class="bdb" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
                 <div class="transp-box">
-                    <h3><img src="./images/hammer.svg" style="width: 48px; vertical-align: middle;">&nbsp;Boats TODO lists</h3>
+                    <h3><a name="todo"><img src="./images/hammer.svg" style="width: 48px; vertical-align: middle;">&nbsp;Boats TODO lists</a></h3>
                     <br/>
                     <iframe id="reservation-frame" allowtransparency="true" src="/admin/sql/_todo_list.01.php?option=no-empty&lang=EN" style="width:100%;height:300px;border:none;"></iframe>
                 </div>
@@ -92,7 +110,7 @@
             <hr/>
             <div class="tuto" style="text-align: left; border: 1px solid navy; border-radius: 5px; padding: 10px; width: 90%; margin: 10px;">
                 <div class="transp-box">
-                    <h3><img src="./images/tutorial.svg" style="width: 48px; vertical-align: middle;">&nbsp;Tutorials, Trainings &amp; Co</h3>
+                    <h3><a name="tuto"><img src="./images/tutorial.svg" style="width: 48px; vertical-align: middle;">&nbsp;Tutorials, Trainings &amp; Co</a></h3>
                     <div style="display: grid; grid-template-columns: 50% 50%; overflow: scroll;">
                         <iframe id="tuto-frame" allowtransparency="true" src="./misc-tech-docs/index.html" style="width: 100%; margin: 4px; overflow: scroll; height:300px; border: 1px solid silver; border-radius: 5px;"></iframe>
                         <iframe id="training-frame" allowtransparency="true" src="./misc-tech-docs/trainings.html" style="width: 100%; margin: 4px; overflow: scroll; height: 300px; border: 1px solid silver; border-radius: 5px;"></iframe>
