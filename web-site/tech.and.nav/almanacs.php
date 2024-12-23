@@ -64,7 +64,7 @@ if (isset($_GET['lang'])) {
               La version imprim&eacute;e comporte des sauts de page et autres formattages qui ne seront pas visibles &agrave; partir du navigateur.<br/>
               Lors de l'impression, vous aurez la possibilit&eacute; - &agrave; partir des boites de dialogue du navigateur - de faire appara&icirc;tre ou pas
               des donn&eacute;es comme les en-t&ecirc;tes et bas de page, num&eacute;ros de page, etc, et m&ecirc;me l'&eacute;chelle.<br/>
-              Pour les d&eacute;tails sur la fa&ccedil;on de proc&eacute;der, voyez <a href="./how-to/how.to.print.FR.html" target="_blank">ici</a>.
+              <span style="font-style: italic; border: 1px solid silver; border-radius: 5px; padding: 5px;">Pour les d&eacute;tails sur la fa&ccedil;on de proc&eacute;der, voyez <a href="./how-to/how.to.print.FR.html" target="_blank">ici</a>.</span>
           </p>
     <?php 
         } else {  
@@ -74,7 +74,7 @@ if (isset($_GET['lang'])) {
               The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
               When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
               data like headers, footers, page numbers, etc, and even scale.<br/>
-              For details, see <a href="./how-to/how.to.print.EN.html" target="_blank">here</a>.
+              <span style="font-style: italic; border: 1px solid silver; border-radius: 5px; padding: 5px;">For details, see <a href="./how-to/how.to.print.EN.html" target="_blank">here</a>.</span>
           </p>
     <?php
         }

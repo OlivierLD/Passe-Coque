@@ -75,6 +75,14 @@ try {
     */
     $pageBreak = "<div class='page-break content'><!--hr/--></div>" . "<br/>";
 
+    function fmtHM(float $hm) : string {
+        $fmt = "";
+        $h = floor($hm);
+        $m = ($hm - $h) * 60;
+        $fmt = sprintf("%02d:%02d", $h, $m);
+        return $fmt;
+    }
+
     function oneDayAlmanac(bool $verbose, DateTime $date, bool $withStars, string $userLang) : string {
         $starCatalog = null;
 
@@ -264,7 +272,7 @@ try {
                     if ($starCatalog === null) {
                         $starCatalog = Star::getCatalog(); // from STAR_CATALOG...
                     }
-
+                    $htmlContentStarsPage .= "<div>";
                     if (false) {
                         $htmlContentStarsPage .= "<div class='sub-title'> " . date_format($theDate, "l F jS, Y") .  "</div>" . PHP_EOL;
                     } else {
@@ -321,12 +329,41 @@ try {
     
                     $htmlContentStarsPage .= "</table>";
     
-                    $htmlContentStarsPage .= "</div>";
-    
-                    $htmlContentStarsPage .= "</div>";
+                    // $htmlContentStarsPage .= "</div>";
+                    // $htmlContentStarsPage .= "</div>";
 
                     // echo ("End of Stars<br/>");
     
+                }
+                if ($withStars && $h === 12) { // Sun and Moon rise & set
+                    $htmlSunMoonRiseAndSet = "<div style='margin-top: 20px;'>";
+                    $htmlSunMoonRiseAndSet .= ("<b>" . translateText($userLang, 'calculated-at-gw') . "</b><br/>");
+                    $htmlSunMoonRiseAndSet .= "<table>";
+                    $htmlSunMoonRiseAndSet .= "<tr><th></th><th colspan='4'>" . translateText($userLang, 'sun') . "</th><th colspan='2'>" . translateText($userLang, 'moon') . "</th><th></th></tr>";
+                    $htmlSunMoonRiseAndSet .= "<tr><th>Lat.</th><th>" . translateText($userLang, 'rise') . "</th><th>Z " . translateText($userLang, 'rise') . "</th><th>" . translateText($userLang, 'set') . "</th><th>Z " . translateText($userLang, 'set') . "</th><th>" . translateText($userLang, 'rise') . "</th><th>" . translateText($userLang, 'set') . "</th><th>Lat.</th></tr>";
+
+                    for ($lat = 75; $lat >= -55; $lat -= 5) {
+                        $sunRS = $ac->sunRiseAndSet($lat, 0);  
+                        $moonRS = $ac->moonRiseAndSet($lat, 0);  
+                        $oneLine = "<tr>" . 
+                            "<td style='text-align: left;'><b>" . ($lat > 0 ? "N " : ($lat < 0 ? "S " : "")) . abs($lat) . "</b></td>" . // Lat
+                            "<td>" . (is_nan($sunRS[0]) ? "" : fmtHM($sunRS[0])) . "</td>" . // Sun Rise
+                            "<td>" . (is_nan($sunRS[2]) ? "" : sprintf("%03d", $sunRS[2])) . "</td>" . // Z Sun Rise
+                            "<td>" . (is_nan($sunRS[1]) ? "" : fmtHM($sunRS[1])) . "</td>" . // Sun Set
+                            "<td>" . (is_nan($sunRS[3]) ? "" : sprintf("%03d", $sunRS[3])) . "</td>" . // Z Sun Set
+
+                            "<td>" . (is_nan($moonRS[0]) ? "" : fmtHM($moonRS[0])) . "</td>" . // Moon Rise
+                            "<td>" . (is_nan($moonRS[1]) ? "" : fmtHM($moonRS[1])) . "</td>" . // Moon Set
+
+                            "<td style='text-align: right;'><b>" . ($lat > 0 ? "N " : ($lat < 0 ? "S " : "")) . abs($lat) . "</b></td>" . // Lat
+                        "</tr>";
+                        $htmlSunMoonRiseAndSet .= $oneLine;
+                    }
+                    $htmlSunMoonRiseAndSet .= ("</table>" . "</div>");
+
+                    $htmlContentStarsPage .= $htmlSunMoonRiseAndSet; // Et Hop !
+
+                    $htmlContentStarsPage .= "</div>";
                 }
                 // echo ("End of hour $h.<br/>". PHP_EOL);
             }
@@ -378,7 +415,10 @@ try {
         array("id" => "moe", "content" => array("EN" => "Mean Obliquity of Ecliptic", "FR" => "Obliquit&eacute; moyenne de l'&eacute;cliptique")),
         array("id" => "toe", "content" => array("EN" => "True Obliquity of Ecliptic", "FR" => "Obliquit&eacute; vraie de l'&eacute;cliptique")),
         array("id" => "jj", "content" => array("EN" => "Julian Date", "FR" => "Jour Julien")),
-        array("id" => "jje", "content" => array("EN" => "Julian Ephemeris Date", "FR" => "Jour Julien des &Eacute;ph&eacute;merides"))
+        array("id" => "jje", "content" => array("EN" => "Julian Ephemeris Date", "FR" => "Jour Julien des &Eacute;ph&eacute;merides")),
+        array("id" => "rise", "content" => array("EN" => "Rise", "FR" => "Lever")),
+        array("id" => "set", "content" => array("EN" => "Set", "FR" => "Coucher")),
+        array("id" => "calculated-at-gw", "content" => array("EN" => "Calculated at 12:00 U.T. for Greenwich longitude", "FR" => "Calcul&eacute; &agrave; 12:00 TU au m&eacute;ridien de Greenwich.")),
     ];
 
     function translateText(string $userLang, string $itemId) : string {
