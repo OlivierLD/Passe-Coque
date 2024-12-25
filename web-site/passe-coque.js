@@ -1745,6 +1745,10 @@ const INFO_SECTION = [
     {
         section: "2024",
         content: [{
+            date: "Dec-2024",
+            title: "D&eacute;cembre 2024",
+            content: "/actu/2024/late.2024.html"
+        },{
             date: "Oct-2024",
             title: "Octobre 2024",
             content: "/actu/2024/vendee.globe.html"

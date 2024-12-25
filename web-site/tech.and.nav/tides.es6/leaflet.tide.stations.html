@@ -149,7 +149,12 @@ console.log("Done with inner Module");
     </div>
     <div style="text-align: left; max-height: 300px; overflow-y: scroll;">
         <div id="generated-graph">
-            <div id="station-name">Tide Graph</div>
+            <div style="display: grid; grid-template-columns: auto;">
+                <div id="station-name">Tide Graph</div>
+                <div id="graph-width">
+                    <button onclick="changeWidth('generated-curve-dialog', '-');">-</button>&nbsp;Witdh&nbsp;<button onclick="changeWidth('generated-curve-dialog', '+');">+</button>
+                </div>
+            </div>
             <graph-display id="tide-graph-01"
                            tabindex="-1"
                            class=""
@@ -245,8 +250,8 @@ function getCurveData(station) {
     zonedNow.setMilliseconds(0);
     console.log(`Starting tide curve calculation at ${zonedNow}`);
     const ONE_MINUTE = 1000 * 60;
-    let tideData = [];
-    let tideTable = [];
+    let tideData = [];  // The Curve !!
+    let tideTable = []; // One-day table
     let goingUp = null;
     let prevWH = null;
 
@@ -318,7 +323,7 @@ function showGeneratedDialog(station) {
             // tableContent += (`${line.type}: at ${dateFmt.formatDate(line.at, 'd-M-y H:i')}, ${line.wh.toFixed(2)} ${line.unit}\n`);
         });
         tableContent += "</pre>";
-        // TODO Draw the graph.
+        // Draw the graph.
         let graph = document.getElementById("tide-graph-01");
         let x = [];
         let y = [];
@@ -395,6 +400,7 @@ function showGeneratedDialog(station) {
         graphDialog.style.display = 'inline';
     }
 }
+
 function closeGeneratedDialog() {
     let graphDialog = document.getElementById("generated-curve-dialog");
     if (graphDialog.close !== undefined) {
@@ -531,6 +537,32 @@ function searchStation() {
         console.log("Nothing to look for...");
     }
 }
+
+let origWidth = null;
+
+function changeWidth(dialogId, dir) {
+    let dialog = document.getElementById(dialogId);
+    let currentWidth = dialog.clientWidth;
+    console.log(`Width is now ${currentWidth}`);
+    if (origWidth === null) {
+        origWidth = currentWidth;
+    }
+    if (dir === '-') {
+        if (currentWidth <= origWidth) {
+            // Too small
+            console.log("No change...");
+        } else {
+            currentWidth *= 0.75;
+            // dialog.clientWidth = currentWidth;
+            dialog.style.width = `${currentWidth.toFixed(0)}px`;
+        }
+    } else if (dir === '+') {
+        currentWidth /= 0.75;
+        // dialog.clientWidth = currentWidth;
+        dialog.style.width = `${currentWidth.toFixed(0)}px`;
+    }    
+    // TODO Change the tide curve...
+};
 
 window.onload = () => {
     console.log("Data loaded!");

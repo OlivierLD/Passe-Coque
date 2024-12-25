@@ -46,6 +46,7 @@ if (isset($_GET['lang'])) {
       <ul>
         <li><a href="https://www.meteo-marine.com/consulter/atlantique/" target="_bank"><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o Marine Atlantique" : "Atlantic Marine Weather (in French)"); ?></a></li>
         <li><a href="https://portail.ping-info-nautique.fr/" target="_blank">PING</a></li>
+        <li><a href="https://ocean.weather.gov/Atl_tab.php" target="NOAA">Ocean Prediciton Center</a></li>
       </ul>  
       <hr/>
       <?php echo( $lang == 'FR' ? "Et plus bient&ocirc;t..." : "And more soon..."); ?>
