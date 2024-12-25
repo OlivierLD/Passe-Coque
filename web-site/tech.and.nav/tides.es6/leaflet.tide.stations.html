@@ -21,14 +21,16 @@
 .dialog-header {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    width: 102.7%;
+    width: 100%; /* 102.7%; */
     margin-left: -16px;
     margin-top: -16px;
     padding: 10px;
     font-size: 16px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 700;
-    background-color: silver;
+    /* border-bottom: 1px solid blue; */
+    text-align: center;
+    /* background-color: silver; */
 }
 
 .dialog-header-close {
@@ -152,7 +154,8 @@ console.log("Done with inner Module");
             <div style="display: grid; grid-template-columns: auto;">
                 <div id="station-name">Tide Graph</div>
                 <div id="graph-width">
-                    <button onclick="changeWidth('generated-curve-dialog', '-');">-</button>&nbsp;Witdh&nbsp;<button onclick="changeWidth('generated-curve-dialog', '+');">+</button>
+                    <!-- One day, one week, one month -->
+                    <button onclick="changeWidth('tide-graph-01', '-');">-</button>&nbsp;<span id='graph-witdh'>one day</span>&nbsp;<button onclick="changeWidth('tide-graph-01', '+');">+</button>
                 </div>
             </div>
             <graph-display id="tide-graph-01"
@@ -205,7 +208,13 @@ OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leafle
 
 <script>
 
-function getCurveData(station) {
+function getCurveData(station, widthIdx) {
+
+    let widthToUse = ONE_DAY;
+    if (widthIdx !== undefined) {
+        widthToUse = widthIdx;
+    }
+
     console.log(`Base height: ${station.baseHeight} ${station.unit}`);
     console.log(`Pos: ${station.latitude} ${station.longitude}`);
 
@@ -255,7 +264,24 @@ function getCurveData(station) {
     let goingUp = null;
     let prevWH = null;
 
-    for (let i=0; i<=(60 * 24); i++) {
+    let start = 0; // TODO Tweak this
+    let end = (60 * 24); // In minutes. See below
+    switch (widthToUse) {
+        case ONE_DAY:
+            end = (60 * 24);
+            break;
+        case ONE_WEEK:
+            end = (60 * 24) * 7;
+            break;
+        case ONE_MONTH:
+            end = (60 * 24) * 30;
+            break;
+        default:
+            end = (60 * 24);
+            break;
+    }
+
+    for (let i=start; i<=end; i++) {
         wh = tideEngine.default.getWaterHeight(zonedNow, jan1st, station, siteCoeff);
         if (i < 5) {
             console.log(`WH in ${decodeURIComponent(station.fullName)} on ${zonedNow}: ${wh.toFixed(3)} ${station.unit}`);
@@ -290,19 +316,25 @@ function getCurveData(station) {
     };
 }
 
+let currentTideStation = null;
 // Show/Hide generated graphics dialog
-function showGeneratedDialog(station) {
+function showGeneratedDialog(station, width) {
+    if (width === undefined) {
+        width = 0;
+        changeWidth('tide-graph-01', ' ');
+    }
     let graphDialog = document.getElementById("generated-curve-dialog");
     // Calculate tide curve here.
     let tideStation = tideEngine.default.findTideStation(station, THE_YEAR);
     if (tideStation !== null && tideStation.tideStation) { // Then calculate curve
+        currentTideStation = station; // Just the name
         console.log(`Calculating tide curve for [${decodeURIComponent(station)}]`);
-        let data = getCurveData(tideStation);
+        let data = getCurveData(tideStation, width);
         console.log("CurveData Done");
 
         // Coeffs ?
         let tideStationBrest = tideEngine.default.findTideStation("Brest%2C%20France", THE_YEAR);
-        let brestData = getCurveData(tideStationBrest);
+        let brestData = getCurveData(tideStationBrest, width);
         let coeffInBrest = tideEngine.default.getCoeffInBrest(tideStationBrest, brestData.tideTable); // <= Send the tide table for Brest !!
 
         // Example: 
@@ -388,6 +420,8 @@ function showGeneratedDialog(station) {
                 }
 			]
 		};
+        // Adjust witdh (if not first call)
+
         graph.data = graphData;
         graph.label = `WH at ${dateFmt.formatDate(new Date(data.now), 'd-M-y H:i')}, ${data.wh.toFixed(2)} ${tideStation.displayUnit}`;
         graph.repaint();
@@ -538,30 +572,32 @@ function searchStation() {
     }
 }
 
-let origWidth = null;
+const ONE_DAY = 0;   // 450
+const ONE_WEEK = 1;  // 750
+const ONE_MONTH = 2; // 900
+const WIDTH = [450, 750, 900];
 
-function changeWidth(dialogId, dir) {
-    let dialog = document.getElementById(dialogId);
-    let currentWidth = dialog.clientWidth;
-    console.log(`Width is now ${currentWidth}`);
-    if (origWidth === null) {
-        origWidth = currentWidth;
-    }
+let graphWidthIdx = ONE_DAY;
+let prevGraphWidthIdx = graphWidthIdx;
+
+function changeWidth(graphId, dir) {
+    let graph = document.getElementById(graphId);
     if (dir === '-') {
-        if (currentWidth <= origWidth) {
-            // Too small
-            console.log("No change...");
-        } else {
-            currentWidth *= 0.75;
-            // dialog.clientWidth = currentWidth;
-            dialog.style.width = `${currentWidth.toFixed(0)}px`;
-        }
+        graphWidthIdx = Math.max(graphWidthIdx - 1, 0);
     } else if (dir === '+') {
-        currentWidth /= 0.75;
-        // dialog.clientWidth = currentWidth;
-        dialog.style.width = `${currentWidth.toFixed(0)}px`;
-    }    
-    // TODO Change the tide curve...
+        graphWidthIdx = Math.min(graphWidthIdx + 1, WIDTH.length - 1);
+    } else if (dir === ' ') {
+        graphWidthIdx = ONE_DAY;
+    } 
+    graph.width = WIDTH[graphWidthIdx];
+    document.getElementById('graph-witdh').innerText = (graphWidthIdx === 0 ? 'one day' : (graphWidthIdx === 1 ? 'one week' : 'one month'));
+    if (dir !== ' ' && graphWidthIdx !== prevGraphWidthIdx) {
+        // TODO Change the tide curve...
+        let stationName = currentTideStation;
+        console.log(`-- Recalculating curve for ${stationName}, witdh ${graphWidthIdx}`);
+        showGeneratedDialog(stationName, graphWidthIdx);
+    }
+    prevGraphWidthIdx = graphWidthIdx;
 };
 
 window.onload = () => {
