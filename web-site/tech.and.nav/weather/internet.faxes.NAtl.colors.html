@@ -383,6 +383,7 @@ let downloadToFileSystem = async (from, to) => {
     req.open('GET', url);
     req.onload = function() {
       if (req.status == 200) {
+        console.log(`FaxDownload returned [${req.response}]`); // Optional
         resolve(req.response);
       } else {
         resolve("File not Found");
