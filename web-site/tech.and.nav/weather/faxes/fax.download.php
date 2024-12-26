@@ -32,7 +32,7 @@ function file_get_contents_curl($url) {
 
 try {
 
-	$origin .= ("?random=" . time.time());  // To avoid caching
+	$origin .= ("?random=" . rand());  // To avoid caching
 	$data = file_get_contents_curl($origin); 
 	$fp = $destination; 
 

@@ -216,6 +216,9 @@
     <!--img id="left" src="https://tgftp.nws.noaa.gov/fax/PYAA12.gif"></img>
     <img id="right" src="https://tgftp.nws.noaa.gov/fax/PYAA11.gif"></img>
     <img id="500mb" src="https://tgftp.nws.noaa.gov/fax/PPAA10.gif"></img-->
+
+    <!-- TODO Make sure the no-cache works here... -->
+
     <img id="raw-left" src="faxes/_left.gif" style="width: 50%; height: auto; margin: 5px;"></img>
     <img id="raw-right" src="faxes/_right.gif" style="width: 50%; height: auto; margin: 5px;"></img>
     <img id="raw-500mb" src="faxes/_500mb.gif" style="width: 50%; height: auto; margin: 5px;"></img>
@@ -265,34 +268,38 @@
         <div style="display: grid; grid-template-columns: 140px 140px 140px 140px; padding-top: 10px; position: relative; z-index: 10;">
           <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
             <span>Surface, West</span><br/><br/>
-            <button onclick="moveup('left')">&#8679;</button><br><br>
-            <button onclick="moveleft('left')">&#8678;</button>
-            <button onclick="moveright('left')">&#8680;</button><br><br>
-            <button onclick="movedown('left')">&#8681;</button>
+            <button onclick="moveup('left')">&#x2191;</button><br><br>
+            <button onclick="moveleft('left')">&#x2190;</button>
+            &nbsp;&nbsp;&nbsp;
+            <button onclick="moveright('left')">&#x2192;</button><br><br>
+            <button onclick="movedown('left')">&#x2193;</button>
           </div>
           
           <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
             <span>Surface, East</span><br/><br/>
-            <button onclick="moveup('right')">&#8679;</button><br><br>
-            <button onclick="moveleft('right')">&#8678;</button>
-            <button onclick="moveright('right')">&#8680;</button><br><br>
-            <button onclick="movedown('right')">&#8681;</button>
+            <button onclick="moveup('right')">&#x2191;</button><br><br>
+            <button onclick="moveleft('right')">&#x2190;</button>
+            &nbsp;&nbsp;&nbsp;
+            <button onclick="moveright('right')">&#x2192;</button><br><br>
+            <button onclick="movedown('right')">&#x2193;</button>
           </div>
 
           <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
             <span>500mb</span><br/><br/>
-            <button onclick="moveup('500mb')">&#8679;</button><br><br>
-            <button onclick="moveleft('500mb')">&#8678;</button>
-            <button onclick="moveright('500mb')">&#8680;</button><br><br>
-            <button onclick="movedown('500mb')">&#8681;</button>
+            <button onclick="moveup('500mb')">&#x2191;</button><br><br>
+            <button onclick="moveleft('500mb')">&#x2190;</button>
+            &nbsp;&nbsp;&nbsp;
+            <button onclick="moveright('500mb')">&#x2192;</button><br><br>
+            <button onclick="movedown('500mb')">&#x2193;</button>
           </div>
 
           <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
             <span>Sea State</span><br/><br/>
-            <button onclick="moveup('seastate')">&#8679;</button><br><br>
-            <button onclick="moveleft('seastate')">&#8678;</button>
-            <button onclick="moveright('seastate')">&#8680;</button><br><br>
-            <button onclick="movedown('seastate')">&#8681;</button>
+            <button onclick="moveup('seastate')">&#x2191;</button><br><br>
+            <button onclick="moveleft('seastate')">&#x2190;</button>
+            &nbsp;&nbsp;&nbsp;
+            <button onclick="moveright('seastate')">&#x2192;</button><br><br>
+            <button onclick="movedown('seastate')">&#x2193;</button>
           </div>
         </div>
 
@@ -750,6 +757,27 @@ window.onload = () => {
   }
 
   loadFaxes();  
+
+  // Append query string to image urls to avoid caching...
+  let orig1 = document.getElementById('raw-left').src;
+  orig1 += ('?random=' + performance.now());
+  document.getElementById('raw-left').src = orig1;
+  console.log(`Image URL is now [${orig1}]`);
+
+  let orig2 = document.getElementById('raw-right').src;
+  orig2 += ('?random=' + performance.now());
+  document.getElementById('raw-right').src = orig2;
+  console.log(`Image URL is now [${orig2}]`);
+
+  let orig3 = document.getElementById('raw-500mb').src;
+  orig3 += ('?random=' + performance.now());
+  document.getElementById('raw-500mb').src = orig3;
+  console.log(`Image URL is now [${orig3}]`);
+
+  let orig4 = document.getElementById('raw-sea-state').src;
+  orig4 += ('?random=' + performance.now());
+  document.getElementById('raw-sea-state').src = orig4;
+  console.log(`Image URL is now [${orig4}]`);
 
   // document.getElementById("loading-message").style.display = "none"; // Hide loading message
 }
