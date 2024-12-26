@@ -1,5 +1,11 @@
 <div class="boat-card">
 
+    <style type="text/css">
+        .normal-line-height, .normal-line-height > * {
+            line-height: normal;
+        }
+    </style>
+
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'low-tech-01');" title="Sommaire">Sommaire</button>
         <button class="tablinks" onclick="openTab(event, 'low-tech-02');">Ressources</button>
@@ -48,6 +54,7 @@
                         <li>
                             <a href="./low-tech/low.tech_fr.html" target="PC">Low-Tech vs No-Tech navigation</a>
                             <ul>
+                                <li><a href="./nav.server/nav.server_fr.html">Minimal Nav Server</a></li>
                                 <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a></li>
                                 <li>A <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/RESTNavServer/README.md" target="GH">Navigation Server</a> on a Raspberry Pi</li>
                                 <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/casestudy.md" target="GH">Case Study</a>, with AIS option...</li>
@@ -59,7 +66,7 @@
                                     Bient&ocirc;t&nbsp;:
                                     <ul>
                                         <li>Un r&eacute;cepteur AIS</li>
-                                        <li>Un pilote automatique avec un Raspberry Pi</li>
+                                        <li>Un pilote automatique avec un Raspberry Pi(..lot !)</li>
                                     </ul>
                                 </li>
                             </ul>
@@ -72,8 +79,13 @@
         <div id="low-tech-03" class="tab-section" style="display: none;">
             <h2>Plus d'infos...</h2>
             <div style="display: grid; grid-template-columns: 50% 50%;">
-                <div>
-                    Plus ici, bient&ocirc;t...
+                <div class="normal-line-height">
+                    Ce projet met en &oelig;uvre une quantit&eacute; de code non n&eacute;gligeable...<br/>
+                    Ce code est &eacute;crit dans diff&eacute;rents langages, comme Java, Python, ES6, CSS3, HTML5, mais pas seulement !<br/>
+                    Ce code est en Open Source, et est disponible dans plusieurs r&eacute;f&eacute;rentiels git, le principal &eacute;tant
+                    <a href="https://github.com/OlivierLD/ROB/blob/master/README.md" target="ROB">ROBERT</a> (<b>R</b>aspberry <b>O</b>n <b>B</b>oard for <b>E</b>mbarked <b>R</b>esearch and <b>T</b>echnology).<br/>
+                    Que ceux qui ne sont pas familiers avec cette technologie restent assis ! On va voir qu'on founira tous les moyens de la mettre
+                    en &oelig;uvre sans avoir &agrave; s'en pr&eacute;occuper.
                     <br/><br/>
                     Contact : <a href="mailto:olivier@lediouris.net?subject=Projets%20Low-Tech">olivier@lediouris.net</a>
                 </div>

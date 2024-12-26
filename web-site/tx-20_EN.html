@@ -1,5 +1,11 @@
 <div class="boat-card">
 
+    <style type="text/css">
+        .normal-line-height, .normal-line-height > * {
+            line-height: normal;
+        }
+    </style>
+
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'low-tech-01');" title="Summary">Summary</button>
         <button class="tablinks" onclick="openTab(event, 'low-tech-02');">Resources</button>
@@ -47,6 +53,7 @@
                         <li>
                             <a href="./low-tech/low.tech.html" target="PC">Low-Tech vs No-Tech navigation</a>
                             <ul>
+                                <li><a href="./nav.server/nav.server.html">Minimal Nav Server</a></li>
                                 <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/NMEA-multiplexer-basic/HOWTO.md" target="NS">The cheapest Nav Station</a></li>
                                 <li>A <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/MUX-implementations/RESTNavServer/README.md" target="GH">Navigation Server</a> on a Raspberry Pi</li>
                                 <li><a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/NMEA-multiplexer/casestudy.md" target="GH">Case Study</a>, with AIS option...</li>
@@ -71,8 +78,13 @@
         <div id="low-tech-03" class="tab-section" style="display: none;">
             <h2>Plus d'infos...</h2>
             <div style="display: grid; grid-template-columns: 50% 50%;">
-                <div>
-                    More here soon...
+                <div class="normal-line-height">
+                    This project involves a substantial quantity of code...<br/>
+                    This code is written in different languages, like Java, Python, ES6, CSS3, HTML5, but not only!<br/>
+                    This code is Open Source, available in several git repositories, the main one being
+                    <a href="https://github.com/OlivierLD/ROB/blob/master/README.md" target="ROB">ROBERT</a> (<b>R</b>aspberry <b>O</b>n <b>B</b>oard for <b>E</b>mbarked <b>R</b>esearch and <b>T</b>echnology).<br/>
+                    If you're not familiar with all this, please keep sat down! We'll see how to put all this to work
+                    without having to worry about it.
                     <br/><br/>
                     Contact : <a href="mailto:olivier@lediouris.net?subject=Low-Tech%20Projects">olivier@lediouris.net</a>
                 </div>
