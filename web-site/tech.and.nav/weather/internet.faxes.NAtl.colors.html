@@ -758,7 +758,7 @@ window.onload = () => {
 
   loadFaxes();  
 
-  // Append query string to image urls to avoid caching...
+  // Append random query string to image urls to avoid caching...
   let orig1 = document.getElementById('raw-left').src;
   orig1 += ('?random=' + performance.now());
   document.getElementById('raw-left').src = orig1;
