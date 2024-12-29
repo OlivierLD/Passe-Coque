@@ -58,6 +58,110 @@
 <h3 id="programmation">Programmation</h3>
 <p>On peut utiliser plusieurs langages de programmation. C, Java, Python, ... Encore une fois, comme le Raspberry Pi tourne sous Linux, tous les langages qui y sont impl&eacute;ment&eacute;s peuvent faire l&#39;affaire.<br>La communication entre composants &eacute;crits dans les langages diff&eacute;rents peut poser un probl&egrave;me..., r&eacute;solu en utilisant des protocoles comme TCP.<br>Beaucoup de fournisseurs de composants (comme BMP180, BME180, etc) donnent aussi des exemples de code &eacute;crits Python.</p>
 <p>On utilisera principalement Java et Python. Mais &ccedil;a n&#39;emp&ecirc;che pas d&#39;autres langages de rejoindre la sc&egrave;ne.</p>
+
+<hr/>
+<h2 id="en-gros">En partant de z&eacute;ro</h2>
+<div>
+	Prenons un exemple.<br/>
+	On veut mettre en route serveur de navigation minimal (comme celui &eacute;voqu&eacute; <a href="./nav.server/nav.server_fr.html">ci-dessous</a>),
+	avec un Raspberry Pi Zero W.<br/>
+	Id&eacute;alement, il faut disposer des &eacute;l&eacute;ments suivants, chez soi&nbsp;:
+	<ul>
+		<li>Un r&eacute;seau wireless (celui que vous avez &agrave; la maison fait parfaitement l'affaire)</li>
+		<li>Un laptop, &agrave; partir duquel on flashera la carte SD, et configurera le syst&egrave;me du Raspberry Pi</li>
+		<li>Un Raspberry Pi Zero W, comme <a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/" target="RPi">celui-l&agrave;</a> (si vous n'avez qu'un Raspberry Pi Zero - sans W, il vous faudra aussi un Wireless Dongle), comme <a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/" target="duh">celui-ci</a></li>
+		<li>Une carte micro-SD (16Gb fait largement l'affaire), comme <a href="https://www.amazon.com/s?k=16gb+sd+card+micro&amp;crid=2R3TGBEH1JZUR&amp;sprefix=16gb+sd+card%2Caps%2C162&amp;ref=nb_sb_ss_ts-doa-p_2_12" target="duh">celle-ci</a>. La carte SD tient lieu de disque dur.</li>
+		<li>
+			Un cable d'alimentation pour le Raspberry Pi, comme <a href="https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/ref=sr_1_3?crid=13F56Y2EVG6LU&amp;dib=eyJ2IjoiMSJ9.EGqyR87iLe4DQeHcmZ37j2nGqrLMje4cl0jbCPAssgOJrifcZ2DA_Q7xiXmL9zzDvl2VcECnXQvdbDrLdHeUzU0hDrC_MQXUgmE4tVa0Z92gKTBN8pOdJDe39bNJ6gCtJYN7xotNR4uSfKVyE7iqyR2Op8I6Zbl0rHUdbFq-rqDD4dhEcRVrB8CBhtAl3ePzU8M9rcVyO18LMxwg3hCLQcFDx3_5ZRoBO5hkoLqFCW8.yWdG0yZ17k7H-Uc4nUkfoSgkIWihw3xrsQxTW0wt-kk&amp;dib_tag=se&amp;keywords=USB%2Bcable&amp;qid=1716882969&amp;sprefix=usb%2Bcable%2Caps%2C144&amp;sr=8-3&amp;th=1" target="duh">celui-ci</a>. Le Raspberry Pi a besoin d&#39;une prise de type Micro USB. L&#39;autre extremit&eacute; d&eacute;pend de ce &agrave; quoi vous le connecterez (un allume-cigare est en g&eacute;n&eacute;ral USB-A).<br/>
+			Soyez prudent dans le choix du cable. Il existe un nombre &eacute;tonnant de cables USB..., m&ecirc;me si le 'U' signifie 'Universal'...
+		</li>
+		<li>Un GPS, avec un port USB, et si besoin un adapteur pour le port s&eacute;rie du Raspberry Pi, comme <a href="https://www.amazon.com/HiLetgo-G-Mouse-GLONASS-Receiver-Windows/dp/B01MTU9KTF/ref=sr_1_2_sspa?crid=GUP2CACZ6V0I&amp;dib=eyJ2IjoiMSJ9.CwfXI6_E0L91sy8oYTH4yJPSt_RGt3UzZ5z3ifDqQpQmFAUD_zFQAGUJyFfaKXYPfnR4Tkt54eBl2wIVbeSofaDPau1zsm2YIhUTV2FaGE1I8KunRQzoB2Y6m5QzNzaUrG1NXqtdvHIaImSER5XN_B2JuKnrEsgUK9ulHY-OcL2gZc6FdWjVLtsGGg5_0RqH7gSGgBtQeSxz2Nt81BF6Q9zM4rbD9x6YI6x8XcYJGiM.JDIq8BTMU9zUQKa3hY9dEkyzJMOLuFd0wArYS0ywWDo&amp;dib_tag=se&amp;keywords=gps+dongle+usb&amp;qid=1716882582&amp;sprefix=GPS+Dongle%2Caps%2C142&amp;sr=8-2-spons&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&amp;psc=1" target="duh">celui-ci</a>, ou <a href="https://www.amazon.com/VK-162-G-Mouse-External-Navigation-Raspberry/dp/B01EROIUEW/ref=sr_1_5?crid=GUP2CACZ6V0I&amp;dib=eyJ2IjoiMSJ9.CwfXI6_E0L91sy8oYTH4yJPSt_RGt3UzZ5z3ifDqQpQmFAUD_zFQAGUJyFfaKXYPfnR4Tkt54eBl2wIVbeSofaDPau1zsm2YIhUTV2FaGE1I8KunRQzoB2Y6m5QzNzaUrG1NXqtdvHIaImSER5XN_B2JuKnrEsgUK9ulHY-OcL2gZc6FdWjVLtsGGg5_0RqH7gSGgBtQeSxz2Nt81BF6Q9zM4rbD9x6YI6x8XcYJGiM.JDIq8BTMU9zUQKa3hY9dEkyzJMOLuFd0wArYS0ywWDo&amp;dib_tag=se&amp;keywords=gps+dongle+usb&amp;qid=1716882582&amp;sprefix=GPS+Dongle%2Caps%2C142&amp;sr=8-5" target="duh">celui-l&agrave;</a></li>
+	</ul>
+	On fournit ci-dessus des liens vers des sites o&ugrave; on peut se procurer le mat&eacute;riel n&eacute;cessaire. Ce ne sont que des exemples, il y en a d'autres, on n'est pas l&agrave; pour faire de la pub !
+	<br/>
+	Une fois ces &eacute;l&eacute;ments r&eacute;unis, allons-y. Les diff&eacute;rents projets qu'on pr&eacute;sentera ici seront en g&eacute;n&eacute;ral initialis&eacute;s suivant le sch&eacute;ma suivant:
+	<ol>
+		<li><a href="#system-init">Configuration du Syst&egrave;me de base</a></li>
+		<li><a href="#install-prereq">Installation des pr&eacute;-requis</a></li>
+		<li><a href="#clone-ref">Clone des r&eacute;f&eacute;rentiels, installation du code</a></li>
+		<li><a href="#config-network">Configuration r&eacute;seau</a></li>
+		<li><a href="#good-to-go">On y est presque</a>...</li>
+	</ol>
+
+	<h4><a name="system-init">Configuration du Syst&egrave;me de base</a></h4>
+	La premi&egrave;re chose &agrave; faire est de flasher la carte SD pour y installer le syst&egrave;me d'exploitation.
+	Ceci se fait &agrave; partir du laptop, avec <a href="https://www.raspberrypi.com/news/raspberry-pi-imager-imaging-utility/" target="Imager">Raspberry Pi Imager</a>.
+	Lors de cette &eacute;tape, pensez &agrave;
+	<ul>
+		<li>Donner un nom &agrave; la machine (comme <code>nav-pi</code>, ou ce que vous voulez)</li>
+		<li>Choisir un mot de passe pour le user <code>pi</code> (le plus simple sera le mieux)</li>
+		<li><i>Important</i> : d&eacute;finir les param&egrave;tres (nom et mot de passe) du r&eacute;seau sur lequel vous &ecirc;tes !</li>
+		<li><i>Important aussi</i> : Activer SSH (Secured SHell), &ccedil;a vous permettra ensuite de vous connecter sur le Raspberry Pi &agrave; partir de votre laptop.</li>
+	</ul>
+	<p class="postit">
+		<i>Note</i> :<br/>
+		&Agrave; propos de SSH, cet outil vous permet de travailler <i><b>sur</b></i> le Raspberry Pi, <i><b>&agrave; partir</b></i> du laptop. Ainsi,
+		on n'a pas besoin d'avoir de clavier ni d'&eacute;cran connect&eacute; au Raspberry Pi pour effectuer les travaux qui suivent...
+	</p>
+	
+	Flasher ensuite la carte SD. Ceci prend plusieurs minutes.<br/>
+	Lorsque c'est fait, c'est l&agrave; que l'aventure commence !<br/>
+	Mettez la carte fraichement flash&eacute;e &agrave; sa place dans le Raspberry Pi, et branchez son alimentation.<br/>
+	Vous allez voir les leds clignoter sur le Raspberry Pi.<br/>
+	On va maintenant t&acirc;cher de se connecter sur le Raspberry Pi &agrave; partir du laptop, celui d'o&ugrave; on a flash&eacute; la carte SD.<br/>
+	Si vous disposez d'un utilitaire comme <code>fing</code>, faites un <code>sudo fing</code> dans un terminal, vous devriez voir le Raspberry Pi, avec son adresse IP.
+	(Si vous n'avez pas <code>fing</code>, installez-le, &ccedil;a vaut le coup).<br/>
+	&Agrave; partir d'un terminal sur le laptop, vous pouvez alors faire un
+	<pre style="font-family: 'Courier New', Courier, monospace;">
+ $ ssh pi@nav-pi.home		
+	</pre>
+	Ici, <code>nav-pi</code> est le nous que <i><b>vous</b></i> avez donn&eacute; &agrave; la machine lors du flash.<br/>
+	Si &ccedil;a marche, on va ensuite vous demander le mot de passe que <i><b>vous</b></i> avez choisi, lors de la m&ecirc;me &eacute;tape.<br/>
+	Vous &ecirc;tes maintenant connect&eacute; sur le Raspberry Pi ! Bravo !<br/>
+	On va maintenant pouvoir y installer la suite...<br/>
+
+	<h4><a name="install-prereq">Installation des pr&eacute;-requis</a></h4>
+	Il s'agit ici d'installer les composants "ext&eacute;rieurs" n&eacute;cessaires au bon focntionnement de la station.<br/>
+	Par exemple, si Java est n&eacute;cessaire, on devra installer un JDK ou un JRE (Java Development Kit, Java Runtime Engine) ; 
+	c'est simple, mais on ne peut pas se dispenser de cette &eacute;tape si elle est requise.<br/>
+	Ceci se fait avec <code>apt-get</code> :
+	<pre style="font-family: 'Courier New', Courier, monospace;">
+$ sudo apt-get install default-jdk
+	</pre>
+	Il peut s'agir aussi d'installer des packages en Python. Par exemple
+	<pre style="font-family: 'Courier New', Courier, monospace;">
+$ sudo pip3 install adafruit-circuitpython-bme280
+	</pre>
+
+	<h4><a name="clone-ref">Clone des r&eacute;f&eacute;rentiels, installation du code</a></h4>
+	Ici, on a plusieurs options. On peut faire &ccedil;a sur le Raspberry Pi - ce qui implique de cloner l'int&eacute;gralit&eacute; du ou des r&eacute;f&eacute;rentiels n&eacute;cessaires,
+	et &ccedil;a peut prendre de la place, ou on peut faire ce travail sur le laptop d'o&ugrave; on est parti, et ne transf&eacute;rer sur le Raspberry Pi que ce qui n&eacute;cessaire
+	en fonction des options choisies.<br/>
+	On &eacute;voquera ces options dans chaque projet, en d&eacute;tails.
+
+	<h4><a name="config-network">Configuration r&eacute;seau</a></h4>
+	On peut &eacute;galement configurer le Raspberry Pi afin qu'il &eacute;mette son propre r&eacute;seau. Ainsi, d'autres p&eacute;riph&eacute;riques
+	pourront s'y connecter (laptops, tablettes, cell-phones, ...). Le r&eacute;seau sera propre au bateau.<br/>
+	On a ainsi un r&eacute;seau, sans avoir Internet. &Eacute;tonnant, non ?
+
+	<h4><a name="good-to-go">En avant !</a></h4>
+	Un dernier truc &agrave; faire quand on a atteint la config n&eacute;cessaire et que tout marche, c'est de faire un backup !<br/>
+	Si la carte SD se trouve &ecirc;tre abim&eacute;e, ou si pour n'importe quelle raison quelque chose cesse de fonctionner, le backup vous premettra de tout remettre en route sans avoir &agrave; 
+	repasser par les &eacute;tapes d&eacute;crites ci-dessus.<br/>
+	Le backup consiste &agrave; faire un double de la carte SD. Ceci peut se faire avec <a href="https://etcher.balena.io/" target="BE">Balena Etcher</a>, logiciel gratuit.<br/>
+	Et apr&egrave;s, roule ma poule !
+</div>
+<hr/>
+<p class="postit">
+	<i>Note</i> :<br/>
+	Ainsi qu'on l'a mentionn&eacute; plus haut, <b>tout le code</b> est en Open Source, ce qui veut dire que tout le code est en acc&egrave;s libre, mais que c'est parfois un peu cryptique...
+	Les &eacute;tapes du processus d&eacute;crit plus haut seront &eacute;videntes pour ceux qui ont d&eacute;j&agrave;
+	approch&eacute; ce domaine, mais peuvent sembler r&eacute;barbatives &agrave; quelqu'un qui s'en est tenu &agrave; l'&eacute;cart...<br/>
+	Que personne ne se d&eacute;courage ! Les &eacute;tapes seront d&eacute;crites aussi pr&eacute;cisement que possibles, et auront &eacute;t&eacute; test&eacute;es aussi minutieusement que possible,
+	afin - justement - que tous puissent y parvenir.
+</p>
+
+<hr/>
 <h2 id="plusieurs-projets">Plusieurs Projets</h2>
 <ul>
 	<li>
@@ -69,7 +173,7 @@
 	<li><a href="chartless.maps_fr.html">Chartless Maps</a></li>
 	<li>. . .</li>
 </ul>
-<p>
+<!--p>
 	<h3>Documents</h3>
 	Pour la navigation low-tech - astronomique et autres - on a parfois besoin de documents.
 	En voici des exemples, publi&eacute;s par Passe-Coque :
@@ -81,7 +185,7 @@
 		<li><a href="documents/nse.pdf" target="doc">Naviguer sans &eacute;lectricit&eacute;</a></li>
 		<li><a href="documents/100.all.tables.A4.pdf" target="doc">Tables de Navigation</a></li>
 	</ul>
-</p>
+</p-->
 <hr/>
 <i>&copy; Passe-Coque, 2024</i>
 </body>

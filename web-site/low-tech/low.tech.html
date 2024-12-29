@@ -57,6 +57,107 @@
 	<h3 id="programming">Programming</h3>
 	<p>Several programming languages can be used. C, Java, Python, ... Again, as the Raspberry Pi runs on Linux, whatever language supported on it will do the job.<br>Communication between components written in different languages could be an issue..., solved by using protocols like TCP.<br>Many vendors of electronic components (like BMP180, BME180, etc) usually provide code samples written in Python.</p>
 	<p>We will be mostly using Java and Python. But this does bot prevent other languages to join the show.</p>
+	<hr/>
+	<h2 id="en-gros">Starting from scratch</h2>
+	<div>
+		Let's take an example.<br/>
+		We want to setup a Minimal Navigation Server (like the one <a href="./nav.server/nav.server_fr.html">below</a>),
+		with a Raspberry Pi Zero W.<br/>
+		Ideally, we need the following elements, at home:
+		<ul>
+			<li>A wireless network (the one you have at home will fit 100%)</li>
+			<li>A laptop, from which we'll flash the SD card, and configure the Raspberry Pi OS</li>
+			<li>A Raspberry Pi Zero W, like <a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/" target="RPi">this one</a> (if you only have a Raspberry Pi Zero - no W, you'll also need a Wireless Dongle), like <a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/" target="duh">this one</a></li>
+			<li>A micro-SD card (16Gb does the job), like <a href="https://www.amazon.com/s?k=16gb+sd+card+micro&amp;crid=2R3TGBEH1JZUR&amp;sprefix=16gb+sd+card%2Caps%2C162&amp;ref=nb_sb_ss_ts-doa-p_2_12" target="duh">this</a>. The SD card is the hard disk.</li>
+			<li>
+				A power cable for the Raspberry Pi, like <a href="https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/ref=sr_1_3?crid=13F56Y2EVG6LU&amp;dib=eyJ2IjoiMSJ9.EGqyR87iLe4DQeHcmZ37j2nGqrLMje4cl0jbCPAssgOJrifcZ2DA_Q7xiXmL9zzDvl2VcECnXQvdbDrLdHeUzU0hDrC_MQXUgmE4tVa0Z92gKTBN8pOdJDe39bNJ6gCtJYN7xotNR4uSfKVyE7iqyR2Op8I6Zbl0rHUdbFq-rqDD4dhEcRVrB8CBhtAl3ePzU8M9rcVyO18LMxwg3hCLQcFDx3_5ZRoBO5hkoLqFCW8.yWdG0yZ17k7H-Uc4nUkfoSgkIWihw3xrsQxTW0wt-kk&amp;dib_tag=se&amp;keywords=USB%2Bcable&amp;qid=1716882969&amp;sprefix=usb%2Bcable%2Caps%2C144&amp;sr=8-3&amp;th=1" target="duh">this</a>. The Raspberry Pi usually needs a Micro USB. The other end depends on what you'll connect it to (a cigarette-lighter is usually USB-A).<br/>
+				Be carefull when chosing the cable. There is an amazing number of USB cables..., even if the 'U' stands for 'Universal'...
+			</li>
+			<li>A GPS, with a USB port, and if needed, an adaptor to connect it on the Raspberry Pi, like <a href="https://www.amazon.com/HiLetgo-G-Mouse-GLONASS-Receiver-Windows/dp/B01MTU9KTF/ref=sr_1_2_sspa?crid=GUP2CACZ6V0I&amp;dib=eyJ2IjoiMSJ9.CwfXI6_E0L91sy8oYTH4yJPSt_RGt3UzZ5z3ifDqQpQmFAUD_zFQAGUJyFfaKXYPfnR4Tkt54eBl2wIVbeSofaDPau1zsm2YIhUTV2FaGE1I8KunRQzoB2Y6m5QzNzaUrG1NXqtdvHIaImSER5XN_B2JuKnrEsgUK9ulHY-OcL2gZc6FdWjVLtsGGg5_0RqH7gSGgBtQeSxz2Nt81BF6Q9zM4rbD9x6YI6x8XcYJGiM.JDIq8BTMU9zUQKa3hY9dEkyzJMOLuFd0wArYS0ywWDo&amp;dib_tag=se&amp;keywords=gps+dongle+usb&amp;qid=1716882582&amp;sprefix=GPS+Dongle%2Caps%2C142&amp;sr=8-2-spons&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&amp;psc=1" target="duh">this one</a>, or <a href="https://www.amazon.com/VK-162-G-Mouse-External-Navigation-Raspberry/dp/B01EROIUEW/ref=sr_1_5?crid=GUP2CACZ6V0I&amp;dib=eyJ2IjoiMSJ9.CwfXI6_E0L91sy8oYTH4yJPSt_RGt3UzZ5z3ifDqQpQmFAUD_zFQAGUJyFfaKXYPfnR4Tkt54eBl2wIVbeSofaDPau1zsm2YIhUTV2FaGE1I8KunRQzoB2Y6m5QzNzaUrG1NXqtdvHIaImSER5XN_B2JuKnrEsgUK9ulHY-OcL2gZc6FdWjVLtsGGg5_0RqH7gSGgBtQeSxz2Nt81BF6Q9zM4rbD9x6YI6x8XcYJGiM.JDIq8BTMU9zUQKa3hY9dEkyzJMOLuFd0wArYS0ywWDo&amp;dib_tag=se&amp;keywords=gps+dongle+usb&amp;qid=1716882582&amp;sprefix=GPS+Dongle%2Caps%2C142&amp;sr=8-5" target="duh">that one</a></li>
+		</ul>
+		We provide above links to site where you can get those elements. These are just examples, there are many others, we're not here to advertise!
+		<br/>
+		Once you have all those elements, we're good to go. The projects we'll present here will usually have to go through the following steps:
+		<ol>
+			<li><a href="#system-init">Operating System configuration</a></li>
+			<li><a href="#install-prereq">Pre-requisites installation</a></li>
+			<li><a href="#clone-ref">Cloning of the repositories, code installation</a></li>
+			<li><a href="#config-network">Network Configuration</a></li>
+			<li><a href="#good-to-go">Almost there</a>...</li>
+		</ol>
+	
+		<h4><a name="system-init">Operating System configuration</a></h4>
+		The first thing to do is to flash the SD card, to install the operating system on it.
+		This is done from the laptop, with <a href="https://www.raspberrypi.com/news/raspberry-pi-imager-imaging-utility/" target="Imager">Raspberry Pi Imager</a>.
+		During this step, remember to:
+		<ul>
+			<li>Give a name to the machine (like <code>nav-pi</code>,or whatever you like)</li>
+			<li>Choose a password for the <code>pi</code> user (the simplest the best)</li>
+			<li><i>Important</i> : define the parameters (name and password) of the network you're on!</li>
+			<li><i>Important too</i> : Activate SSH (Secured SHell), this will allow you to connect to the  Raspberry Pi from your laptop.</li>
+		</ul>
+		<p class="postit">
+			<i>Note</i> :<br/>
+			About SSH, this tool will allow you to work <i><b>on</b></i> the Raspberry Pi, <i><b>from</b></i> your laptop. This way,
+			there is no need to have a keyboard nor a screen connected to the Raspberry Pi to execute the work to be done...
+		</p>
+		
+		Then flash the SD card. This takes several minutes.<br/>
+		Once done, get ready for the adventure!<br/>
+		Put the freshly flashed SD card where it belongs in the Raspberry Pi, and connect its power cable.<br/>
+		You'll see some leds blinking on the Raspberry Pi.<br/>
+		Now, we're going to try to connect to the Raspberry Pi from the laptop, the one you flashed the SD card from.<br/>
+		If you have a utility like <code>fing</code>, do a <code>sudo fing</code> from a terminal, you should see the Raspberry Pi, along with its IP address.
+		(If you don't have <code>fing</code>, install it, it's worth it).<br/>
+		From a terminal on the laptop, You can then do a 
+		<pre style="font-family: 'Courier New', Courier, monospace;">
+$ ssh pi@nav-pi.home		
+		</pre>
+		Here, <code>nav-pi</code> is the name <i><b>you</b></i> gave to the machine during the flash.<br/>
+		If it works, you're then going to be prompted for the password <i><b>you</b></i> chose, during the same step.<br/>
+		You're now connected to the Raspberry Pi! Great job!<br/>
+		We'll now install what's left...<br/>
+	
+		<h4><a name="install-prereq">Pre-requisites installation</a></h4>
+		Now we want to install "external" components, required for the station to work as expected.<br/>
+		For example, if Java is in the list, we'll need to install a JDK, or at east a JRE (Java Development Kit, Java Runtime Engine); 
+		this is easy, but it has to be done.<br/>
+		It can be done with <code>apt-get</code> :
+		<pre style="font-family: 'Courier New', Courier, monospace;">
+$ sudo apt-get install default-jdk
+		</pre>
+		It can also be required to install Python package(s). Like for example
+		<pre style="font-family: 'Courier New', Courier, monospace;">
+$ sudo pip3 install adafruit-circuitpython-bme280
+		</pre>
+	
+		<h4><a name="clone-ref">Cloning of the repositories, code installation</a></h4>
+		Here, we have several options. The job can be done on the Raspberry Pi - this means cloning one or more git repositories,
+		and this can take some disk space, or you can do the job on the laptop we started from, and then transfer on the Raspberry Pi only what's needed.<br/>
+		We will detail all those options, in details in each project.
+	
+		<h4><a name="config-network">Network Configuration</a></h4>
+		It is also possible to configure the Raspberry Pi so it emits its own network. So, other devices
+		will be able to connect to it (laptops, tablettes, cell-phones, ...). The network will belong to the boat.<br/>
+		This way, we can have a network, without Internet. Amazing, no?
+	
+		<h4><a name="good-to-go">Let's go!</a></h4>
+		The last thing to do, once you've reached a working config, is a backup!<br/>
+		If the SD card happens to fail, or for any reason something stops working, the backup will allow you to get things back to work without having to go through the steps mentionned above.<br/>
+		Doing the backup, it's actually cloning the SD card. This can be done with <a href="https://etcher.balena.io/" target="BE">Balena Etcher</a>, a freeware.<br/>
+		And then, hit the road!
+	</div>
+	<hr/>
+	<p class="postit">
+		<i>Note</i> :<br/>
+		As said before, <b>all the code</b> is Open Source, that means that it can be accessed without restriction, but this can sometime sound a bit cryptic...
+		The steps described above will sound obvious to those who already approached this domain,
+		but some others might find is a bit off-putting...<br/>
+		Let no-one be discouraged! The different steps will be described as precisely as possible, and will have been tested as carefully as possible,
+		so - precisely - anyone can do it.
+	</p>
+	<hr/>	
+
 	<h2 id="several-projects">Several Projects</h2>
 	<ul>
 		<li>
@@ -68,7 +169,7 @@
 		<li><a href="chartless.maps.html">Chartless Maps</a></li>
 		<li>. . .</li>
 	</ul>
-	<p>
+	<!--p>
 		<h3>Documents</h3>
 		For low-tech navigation - celestial and others - you sometime need some documents.
 		Here are a couple of them, published by Passe-Coque:
@@ -80,7 +181,7 @@
 			<li><a href="documents/nse.pdf" target="doc">Naviguer sans &eacute;lectricit&eacute;</a> (in French)</li>
 			<li><a href="documents/100.all.tables.A4.pdf" target="doc">Tables de Navigation</a></li>
 		</ul>	
-	</p>	
+	</p-->	
 	<hr/>
 	<i>&copy; Passe-Coque, 2024</i>
 </body>
