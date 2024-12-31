@@ -509,7 +509,7 @@ class TideUtilities {
             if ($tv->getType() == "HW") { 
                 $hwValue = $tv->getValue();
                 $coeff = ($hwValue - $baseHeight) / $U;
-                array_push($coeffs, round($coeff)); // round($coeff));
+                array_push($coeffs, round($coeff)); // ceil($coeff));
             }
         }
 		return $coeffs;
