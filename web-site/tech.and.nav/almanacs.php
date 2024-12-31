@@ -33,6 +33,20 @@ if (isset($_GET['lang'])) {
         /* border: 1px solid black;*/
         opacity: 0.75;
     }
+    a:link, a:visited {
+          background-color: #f44336;
+          color: white;
+          padding: 5px 25px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          border: 1px solid silver;
+          border-radius: 6px;
+      }
+
+      a:hover, a:active {
+          background-color: red;
+      }
 
     </style>
   </head>
