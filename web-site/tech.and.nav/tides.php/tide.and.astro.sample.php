@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tide Workbench</title>
+  <title>Tide & Astro Workbench</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style type="text/css">
@@ -18,12 +18,16 @@
 </head>
 
 <body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
-<h2>PHP Tides Test</h2>    
-See original repo <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/TideEngine/src/main/php/README.md" target="git">here</a>.
+<h2>PHP Tides and Astro Test</h2>    
 
+<!--
+ ! A test, POC. Mixing Tides and Astro.
+ ! Careful with the dates (local vs UTC)...
+ +-->
 <?php
 
 ini_set('memory_limit', '-1'); // For reloadOneStation ...
+set_time_limit(3600); // In seconds. 300: 5 minutes, 3600: one hour
 
 function getCoeffData (BackEndSQLiteTideComputer $backend, Constituents $constituentsObject, array $stationsData, int $year, int $month, int $day, ?string $tz2Use) : array {
     $brestTideStation = $backend->findTideStation("Brest, France", $year, $constituentsObject, $stationsData);
@@ -33,6 +37,7 @@ function getCoeffData (BackEndSQLiteTideComputer $backend, Constituents $constit
     return $coeffsInBrest;
 }
 
+// Tide stuff
 function stationTest(string $stationName, 
                      int $year, 
                      int $month, 
@@ -208,10 +213,90 @@ function stationTest(string $stationName,
     }
 }
 
+// Astro stuff
+function astroTest(float $latitude, float $longitude, bool $verbose) : string {
+    // Sun current status
+    try {
+        // Current dateTime UTC
+        $year = (int)gmdate("Y");
+        $month = (int)gmdate("m");
+        $day = (int)gmdate("d");
+        $hours = (int)gmdate("H");
+        $minutes = (int)gmdate("i");
+        $seconds = (int)gmdate("s");
+
+        $container = "<h3>Sun current status</h3>" . PHP_EOL;
+        $container .= ("<b>At $year:$month:$day $hours:$minutes:$seconds UTC</b>" . PHP_EOL);
+        $container .= ("<ul>" . PHP_EOL);
+
+        // Astro Computer basic test
+        $before = microtime(true); // See https://www.w3schools.com/php/func_date_microtime.asp
+        $ac = new AstroComputer(); 
+        // $ac->setDateTime($year, $month, $day, $hours, $minutes, $seconds);
+        $ac->calculate($year, $month, $day, $hours, $minutes, $seconds, true);
+        $after = microtime(true);
+
+        $timeDiff = ($after - $before) * 1000;
+        $container .= ("<li>Calculated in " . sprintf("%f ms", $timeDiff)  .  " (" . sprintf("From %f to %f", $before, $after)  . ")</li>" . PHP_EOL);
+
+        $context2 = $ac->getContext();
+        // echo ("From calculate: EoT:" . $context2->EoT . " ");
+
+        $container .= ("<li>DeltaT: " . $ac->getDeltaT() . " s</li>" . PHP_EOL);
+        // $container .= ("<li>Raw - Sun GHA: " . Utils::decToSex($context2->GHAsun, Utils::$NONE) . ", Sun Dec: " . Utils::decToSex($context2->DECsun, Utils::$NS) . "</li>" . PHP_EOL);
+        $container .= ("<li>Raw - Sun GHA: " . $context2->GHAsun . ", Sun Dec: " . $context2->DECsun . "</li>" . PHP_EOL);
+        $container .= ("<li>Fmt - Sun GHA: " . Utils::decToSex($ac->getSunGHA(), Utils::$NONE) . ", Sun Dec: " . Utils::decToSex($ac->getSunDecl(), Utils::$NS) . "</li>" . PHP_EOL);
+
+        if ($verbose) {
+            echo("Invoking SightReductionUtil...<br/>");
+        }
+        $lat = $latitude; $lng = $longitude;
+        $sru = new SightReductionUtil(
+            $ac->getSunGHA(),
+            $ac->getSunDecl(),
+            $lat,
+            $lng);
+        $sru->calculate();
+        if ($verbose) {
+            echo("He:" . Utils::decToSex($sru->getHe()) . ", Z:" . sprintf("%f&deg;", $sru->getZ()) . "<br/>");
+            echo("Done invoking SightReductionUtil.<br/>");
+        }
+        $container .= ("<li>From Pos: " . Utils::decToSex($lat, Utils::$NS) . " / " . Utils::decToSex($lng, Utils::$EW) . "</li>" . PHP_EOL);
+        $container .= ("<li>Sun He:" . Utils::decToSex($sru->getHe()) . ", Sun Z:" . sprintf("%f&deg;", $sru->getZ()) . "</li>" . PHP_EOL);
+
+        $container .= ("</ul>" . PHP_EOL);
+        // $container .= ("<hr/>" . PHP_EOL);
+
+        // Moon Phase ?
+        $moonPhaseAngle = $ac->getMoonPhase()->phase;                      // TODO Fix that
+        $container .= ('Moon Phase: ' . $moonPhaseAngle . "&deg;<br/>" . PHP_EOL);
+
+        $moonPhase = sprintf("%.02f %%, ", $context2->k_moon) . $ac->getMoonPhaseStr(); // sprintf("", ) "${calcResult.moon.illum.toFixed(2)}% ${calcResult.moon.phase.phase}";
+        $phaseIndex = floor($moonPhaseAngle / (360 / 28.5)) + 1;
+        if ($phaseIndex > 28) {
+            $phaseIndex = 28;
+        }
+        $phaseImageName = sprintf("./../astro.php//moon/phase%02d.gif", $phaseIndex);
+        $container .= ("<img src='$phaseImageName'><br/>" . PHP_EOL);
+
+        $container .= ("<hr/>" . PHP_EOL);
+
+
+    } catch (Throwable $e) {
+        if ($verbose) {
+            echo "[ Captured Throwable (2) for astroTest : " . $e->getMessage() . "] " . PHP_EOL;
+        }
+        throw $e;
+    }
+
+    // Final one
+    return $container;
+}
+
 try {
-    set_time_limit(3600); // In seconds. 300: 5 minutes, 3600: one hour
     // phpinfo();
-    include __DIR__ . '/tide.computer/autoload.php';
+    include __DIR__ . '/tide.computer/autoload.php'; // For the tide computer
+    include __DIR__ . '/../astro.php/celestial.computer/autoload.php'; // For the Astro Computer
 
     $VERBOSE = false;
 
@@ -256,34 +341,22 @@ try {
 
     // Find Port-Tudy... for the given year.
     $stationName = "Port-Tudy";
-    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData, true, true);
+    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData, false, false, true);
 
-    echo("-------------------------------<br/>" . PHP_EOL);
-    // And so on...
-    $stationName = "Half Moon Bay";
-    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData);
-
-    echo("-------------------------------<br/>" . PHP_EOL);
-    // Find Port-Tudy... for the given year, again.
-    $stationName = "Port-Tudy";
-    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData);
-
-    echo("-------------------------------<br/>" . PHP_EOL);
-    // Find Johnston Atoll, Pacific Ocean... for the given year.
-    $stationName = "Johnston Atoll";
-    stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData);
-
-    echo("-------------------------------<br/>" . PHP_EOL);
-
-    if (true) {
-        $stationName = "Falmouth";
-        stationTest($stationName, $year, $month, $day, $backend, $constituentsObject, $stationsData, false, false, true);
-    }
     echo("-------------------------------<br/>" . PHP_EOL);
     // reloadOneStation...
-    $stationName = "Falmouth"; // year + 1. Needs fixes.
+    $stationName = "Port-Tudy"; // year + 1. reloadOneStation
     stationTest($stationName, $year + 1, $month, $day, $backend, $constituentsObject, $stationsData, false, false, true);
-
+    echo("-------------------------------<br/>" . PHP_EOL);
+    $theTideStation = $backend->findTideStation($stationName, $year, $constituentsObject, $stationsData, true);
+    if ($theTideStation == null) {
+        echo($stationName . " was not found...<br/>" . PHP_EOL);
+    } else {
+        echo("<b>" . $stationName . "</b> : Base height: " . $theTideStation->getBaseHeight() . " " . $theTideStation->getDisplayUnit() . "<br/>" . PHP_EOL);
+        echo("<b>" . $stationName . "</b>, Position: " . decToSex($theTideStation->getLatitude(), "NS") . " / " . decToSex($theTideStation->getLongitude(), "EW") . "<br/>" . PHP_EOL);
+        $astroContent = astroTest($theTideStation->getLatitude(), $theTideStation->getLongitude(), true);
+        echo($astroContent . PHP_EOL);
+    }
     echo("-------------------------------<br/>" . PHP_EOL);
 
     $backend->closeDB();
