@@ -101,6 +101,8 @@ table {
 
 <?php
 
+ini_set('memory_limit', '-1'); // Required for reloadOneStation (or its equivalent)
+
 $VERBOSE = false;
 
 $lang = "EN"; 
