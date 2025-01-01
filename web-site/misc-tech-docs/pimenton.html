@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque - Un pimenton ?</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../fonts/font.01.css">
+	<link rel="stylesheet" href="../fonts/font.02.css">
+
+	<link rel="stylesheet" href="../passe-coque.css" type="text/css"/>
+
+	<link rel="stylesheet" href="./low-tech.css" type="text/css"/>
+	<style type="text/css">
+* {
+	line-height: normal;
+}		
+
+.postit {
+    background: #f7f7e7;
+    padding: 15px;
+	border: 1px solid black;
+	border-radius: 6px;
+}
+
+.slide {
+	max-width: 800px; 
+	max-height: 500px;
+	padding: 10px;
+}
+
+.slide-show {
+	display: grid; 
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; 
+	overflow: auto;
+}
+
+.screen-shot {
+	width: 50%; 
+	text-align: center;
+}
+
+@media screen and (width <= 800px) {
+    .slide {
+		max-width: 600px; 
+		max-height: 375px;
+		padding: 10px;
+	}
+	.screen-shot {
+		width: 90%; 
+		text-align: center;
+	}
+}
+
+@media print {
+	.slide-show {
+		display: grid; 
+		grid-template-columns: auto; 
+		overflow: auto;
+	}
+	.not-printed {
+		display: none;
+	}
+} 
+    </style>
+
+	<script type="module" src="../webcomponents/SlideShow.js"></script>
+	<!-- For LaTex -->
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+	<script type="text/javascript" 
+			async
+  			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+</head>
+	
+<body>
+
+	<h4><img src="../logos/logo.02.png" style="width: 50px; vertical-align: middle;" title="Passe&#8209;Coque"/> Un tuto Passe-Coque</h4>
+	<div>
+		Faire une cloison dans un bateau, m&ecirc;me sans avoir de scanner 3D !! Incroyable, non ?
+	</div>
+	<div style="width: 90%; padding: 20px; display: grid; grid-template-columns: auto auto;">
+		<h1 id="low-tech-navigation">Un pimenton - qu'est-ce que c'est ?</h1>
+		<!--p class="not-printed" style="justify-self: end;"><a href="./chartless.maps.html">En anglais</a></p-->
+	</div>
+	<hr/>
+	<div class="postit">
+		Un pimenton, c'est cet outil qui va permettre de relever et de reproduire la forme d'une cloison &agrave; l'int&eacute;rieur d'un bateau, en forme ou
+		&agrave; bouchains. <br/>
+		C'est en g&eacute;n&eacute;ral en bois, &ccedil;a fonctionne sans &eacute;lectricit&eacute; ni &eacute;lectronique. Et m&ecirc;me la nuit si &ccedil;a se trouve !
+		<p style="margin-left: 50px;">
+			Soit dit en passant, on n'a pas attendu l'&eacute;lectricit&eacute; - ni l'&eacute;lectronique - pour construire des bateaux...
+		</p>
+		Les scanners 3D et les d&eacute;coupes CNC (Computer Numerical Control) sont certes des outils pr&eacute;cis et fort pratiques, mais leur prix 
+		peut ne pas laisser indiff&eacute;rent. On va voir ci-apr&egrave;s, qu'avec un pimenton, le prix de la r&eacute;alisation d'une cloison peut se
+		limiter... au prix de la cloison.<br/><br/>
+		Il ne s'agit - toujours pas - de d&eacute;nigrer les avanc&eacute;es technologiques, surtout lorsqu'elles fonctionnent sans d&eacute;grader le reste, mais bien
+		de pr&eacute;server et transmettre ces techniques "ancestrales", non pas pour des raisons historiques ou nostalgiques, mais bien parce qu'elles continuent de
+		fonctionner, et qu'elles sont disponibles - comme on va le voir - sans avoir besoin de recourir aux comp&eacute;tences d'un arch&eacute;ologue.<br/><br/>
+		<i>- Inidiana Jones</i>
+	</div>
+	<h2>Comment &ccedil;a marche</h2>
+	<p>
+		L'id&eacute;e est la suivante :
+		<ol>
+			<li>On veut poser une cloison &agrave; un endroit donn&eacute; dans le bateau. Le bateau est vide, il n'y a que la coque et le pont.</li>
+			<li>&Agrave; cet endroit, on va poser des tasseaux - provisoires - verticalement, l&agrave; ou la cloison devra finalement se trouver.</li>
+			<li>Sur ces tasseaux, on vient fixer un morceau de bois plat - comme un contre-plaqu&eacute; (si besoin, m&ecirc;me un bout de placo fera l'affaire).</li>
+			<li>Ensuite, on viendra rep&eacute;rer sur ce contre-plaqu&eacute; la position du pimenton lorsque son extr&eacute;mit&eacute; touche la coque, ou le pont.</li>
+			<li>Lorsqu'on a suffisament de rep&egrave;res, on d&eacute;solidarise le contre-plaqu&eacute; des tasseaux (qu'on peut retirer), et on le sort du bateau.</li>
+			<li>On pose alors ce contre-plaqu&eacute; sur celui qui va servir &agrave; faire la cloison attendue.</li>
+			<li>
+				Et en remettant le m&ecirc;me pimenton sur le premier CP, gr&acirc;ce aux empreintes trac&eacute;es pr&eacute;alablement, on peut - &agrave; la pointe du pimenton - reproduire
+				la ligne qui joint les points de la coque, et ceux du pont !
+			</li>
+			<li>Ne reste plus qu'&agrave; faire la d&eacute;coupe.</li>
+		</ol>
+	</p>
+	<h2>Des d&eacute;tails, peut-&ecirc;tre ?</h2>
+	<p>
+		<h3>Objectif</h3>
+		<p>
+			Le but de la man&oelig;uvre&nbsp;:
+			<div style="display: grid; grid-template-columns: 50% 50%;">
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					<img src="./pimenton/inside_03.jpg" style="width: 80%;">
+					<br/>
+					Dans un bateau vide comme celui-ci...
+				</div>
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					<img src="./pimenton/inside_04.jpg" style="width: 80%;">
+					<br/>
+					On veut poser un cloison comme celle-ce (en rouge).
+				</div>
+			</div>
+		</p>
+	</p>
+	<p>
+		<h3>Un pimenton</h3>
+		<p>
+			On se le taille dans un bout de CP, il a un c&ocirc;t&eacute; pointu, et il y a des encoches tout le long du "manche". Pour des
+			raisons bient&ocirc;t &eacute;videntes, il est de bon ton qu'aucune des encoches ne ressemble &agrave; une autre.<br/>
+			La longueur du pimenton d&eacute;pend des tailles respectives de la cloison &agrave; faire, et de la taille du morceau de CP sur lequel on
+			va faire le relev&eacute; des formes, mentionn&eacute; dans le paragraphe suivant.<br/>
+			Le nombre, la taille, et la forme des encoches sont &agrave; la disposition de l'usager !
+			<div style="text-align: center;">
+				<img src="./pimenton/pimenton_01.jpg" style="width: 50%;">
+			</div>
+
+		</p>
+		<h3>Les tasseaux et le support du trac&eacute;</h3>
+		<p>
+			Le r&ocirc;le de ces tasseaux sera donc de soutenir - en place - le morceau de CP (ou d'autre chose) sur 
+			lequel on relevera les diff&eacute;rentes positions du pimenton. Ce CP n'a bien &eacute;videmment aucun r&ocirc;le structurel,
+			le plus important est que lors de ces relev&eacute;s, il soit <i><b>exactement</b></i> &agrave; la place de la future cloison.<br/>
+			On les maintient en place avec des cales, des coins, voire du mastic.<br/><br/>
+			Le CP sur lequel on effectuera les relev&eacute;s doit &ecirc;tre &agrave; la fois assez grand pour que les relev&eacute;s soient aussi nombreux et pr&eacute;cis que possible, 
+			et pas trop grand pour pouvoir... rentrer dans le bateau.
+
+			<div style="display: grid; grid-template-columns: 50% 50%;">
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					<img src="./pimenton/inside_06.jpg" style="width: 80%;">
+					<br/>
+					On rep&egrave;re soigneusement la position de la cloison &agrave; r&eacute;aliser, et on fixe les tasseaux (en bleu)
+					dans ce plan. Il faut faire attention &agrave; ce que les tasseaux soient bien fix&eacute;s, qu'ils ne bougent pas durant
+					les op&eacute;rations ult&eacute;rieures. Les pointill&eacute;s rouges ne sont l&agrave; que pour la clart&eacute; de
+					la figure.
+				</div>
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					<img src="./pimenton/inside_08.jpg" style="width: 80%;">
+					<br/>
+					On peut alors fixer sur les tasseaux (serre-joints, vis, pourvu que ca tienne) ce morceau de CP, destin&eacute; &agrave;
+					recevoir les relev&eacute;s.
+				</div>
+			</div>
+
+		</p>
+		<h3>Le trac&eacute;</h3>
+		<p>
+			Attention, &ccedil;a commence !<br/>
+			On attrappe le pimenton, on en place la pointe en contact avec la coque ou le pont, et avec un crayon, on en trace les contours
+			sur le CP.<br/>
+			<div style="display: grid; grid-template-columns: 50% 50%;">
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					<img src="./pimenton/trace_01.jpg" style="width: 80%;">
+					<br/>
+					On proc&egrave;de ainsi autant de fois que possible, afin d'&ecirc;tre s&ucirc;r d'avoir suffisamment de points ainsi identifi&eacute;s pour
+					reproduire le contour de la cloison.
+				</div>
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					<img src="./pimenton/trace_03.jpg" style="width: 70%;">
+					<br/>
+					On peut ensuite retirer le CP ainsi marqu&eacute; de ses tasseaux, on va pouvoir attaquer le report.<br/>
+					On n'a que trois relev&eacute;s sur la figure..., on en aura bien plus en r&eacute;alit&eacute;.
+				</div>
+			</div>
+			Il est sans doute opportun de relever les livets, la quille, et son homologue sous le roof, afin de cerner des dimensions 
+			maximales de la future cloison. Ces relev&eacute;s-l&agrave; pourront &ecirc;tre faits d'une autre couleur que les autres.
+		</p>
+		<h3>Le report des points</h3>
+		<p>
+			Cette op&eacute;ration est en fait l'inverse de la pr&eacute;c&eacute;dente, et l'objectif final de toute l'op&eacute;ration.<br/>
+			On va poser le CP de l'&eacute;tape pr&eacute;c&eacute;dente sur la grande feuille de CP qui deviendra la cloison finale.
+			<div style="display: grid; grid-template-columns: 50% 50%;">
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					<img src="./pimenton/trace_04.jpg" style="width: 80%;">
+					<br/>
+					On reporte ainsi la position de la pointe du pimenton, et on reconstitue la forme de la cloison.
+				</div>
+				<div style="border: 1px solid silver; border-radius: 6px; margin: 5px; padding: 5px;">
+					Il n'y a plus qu'&agrave; d&eacute;couper la cloison, &agrave; vos sauteuses !
+				</div>
+			</div>
+		</p>
+		Ne reste plus qu'&agrave; faire rentrer la cloison fraichement d&eacute;coup&eacute;e dans le bateau.<br/>
+		Mais c'est un autre sujet !
+	</p>
+	<hr/>
+	<i>&copy; 2025, Passe-Coque</i>
+</body>
+</html>
