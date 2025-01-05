@@ -13,6 +13,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style type="text/css">
+:root {
+    --doc-scale: 0.9;
+}
 * {
     font-family: 'Courier New', Courier, monospace;
 }
@@ -36,12 +39,18 @@ table {
     margin-top: 5px;
 }
 
+.scaled {
+    transform: scale(var(--doc-scale)); /* Equal to scaleX(0.7) scaleY(0.7) */
+    /* background-color: pink; */
+}
+
 @media screen {
     .screen-only {
         display: inline-block;
     }
 
     #result-to-publish {
+        margin: 0 0;
 		display: block;
         /* color: darkred; */
 	}
@@ -93,10 +102,17 @@ table {
 } 
 
     </style>
+    <script type="text/javascript">
+function setDocScale(e) {
+    let v = this.value;
+    document.body.style.setProperty("--doc-scale", v);
+}
+
+    </script>        
 </head>
 
 <body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
-<div id="user-entry" class="screen-only">
+<div id="user-entry" class="screen-only"  style="width: 90%;">
 <h2>PHP Tides Publisher</h2>
 
 <?php
@@ -390,6 +406,14 @@ function publishStationDuration(string $stationName, int $year, ?int $month=null
     <p>
         <button onclick="history.back()"><?php echo translate($lang, "go-back"); ?></button>
     </p>
+    <p>
+        Scale Slider (WiP)
+        <!-- Scale slider -->
+        <input type="range" value="0.9" min="0" max="1.00" step="0.01" style="width: 90%;"
+			   oninput="setDocScale.call(this, event); docscale.value = this.value;"/>
+		<output name="docscale" id="docscale" style="color: navy;">0.9</output>
+
+    </p>
     <?php
 
     // $year = (int)date("Y"); // gmdate ?
@@ -406,7 +430,7 @@ function publishStationDuration(string $stationName, int $year, ?int $month=null
         }
     }
     echo("</div>"); // Close the screen-only div
-    echo("<div id='result-to-publish'>" . PHP_EOL);
+    echo("<div id='result-to-publish' class='scaled'>" . PHP_EOL);
     echo($content);
     // echo("</div>");
 
