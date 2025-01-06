@@ -19,6 +19,11 @@
 * {
     font-family: 'Courier New', Courier, monospace;
 }
+html, body {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
 td {
     border: 1px solid black;
     border-radius: 5px;
@@ -41,7 +46,7 @@ table {
 
 .scaled {
     transform: scale(var(--doc-scale)); /* Equal to scaleX(0.7) scaleY(0.7) */
-    /* background-color: pink; */
+    transform-origin: top left;
 }
 
 @media screen {
@@ -53,6 +58,11 @@ table {
         margin: 0 0;
 		display: block;
         /* color: darkred; */
+        width: 105vw; /* needs some love... */
+        /* height: 100%; */
+        /* max-height: 400px; */
+        flex: 1 1 auto;
+        overflow: auto;
 	}
 }
 
@@ -98,13 +108,14 @@ table {
     #result-to-publish {
 		display: block;
         /* color: black; */
+        max-height: none;
 	}
 } 
 
     </style>
     <script type="text/javascript">
 function setDocScale(e) {
-    let v = this.value;
+    let v = this.value / 100.0;
     document.body.style.setProperty("--doc-scale", v);
 }
 
@@ -112,8 +123,8 @@ function setDocScale(e) {
 </head>
 
 <body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
-<div id="user-entry" class="screen-only"  style="width: 90%;">
-<h2>PHP Tides Publisher</h2>
+<div id="user-entry" class="screen-only" style="width: 90%;">
+<h2>Passe-Coque PHP Tides Publisher</h2>
 
 <?php
 
@@ -164,6 +175,8 @@ $translations = array(
     "meters" => array("EN" => "meters", "FR" => "mètres"),
     "feet" => array("EN" => "feet", "FR" => "pieds"),
     "knots" => array("EN" => "knots", "FR" => "nœuds"),
+    "scale-slider" => array("EN" => "Scale Slider", "FR" => "Échelle"),
+    "calc-completed" => array("EN" => "Calculation completed", "FR" => "Calcul terminé")
 );
 
 function translate (string $lang, string $textId) : string {
@@ -407,12 +420,13 @@ function publishStationDuration(string $stationName, int $year, ?int $month=null
         <button onclick="history.back()"><?php echo translate($lang, "go-back"); ?></button>
     </p>
     <p>
-        Scale Slider (WiP)
-        <!-- Scale slider -->
-        <input type="range" value="0.9" min="0" max="1.00" step="0.01" style="width: 90%;"
-			   oninput="setDocScale.call(this, event); docscale.value = this.value;"/>
-		<output name="docscale" id="docscale" style="color: navy;">0.9</output>
-
+        <!-- Scale slider. WiP. Still some CSS work to do for the margins when scaled -->
+        <div style="display: grid; grid-template-columns: 10% auto 10%;">
+            <span><?php echo translate($lang, "scale-slider"); ?></span>
+            <input type="range" value="90" min="0" max="100" step="1" style="width: 100%;"
+                   oninput="setDocScale.call(this, event); docscale.value = this.value + '%';"/>
+            <output name="docscale" id="docscale" style="color: navy; text-align: left; margin-left: 10px;">90%</output>
+        </div>
     </p>
     <?php
 
@@ -429,10 +443,19 @@ function publishStationDuration(string $stationName, int $year, ?int $month=null
             $content .= ("<div class='page-break'></div>" . PHP_EOL);
         }
     }
-    echo("</div>"); // Close the screen-only div
+    // Completion date
+    $UTdate = microtime(true);
+    // echo ("microtime: " . $UTdate . "<br/>");
+    // var_dump($UTdate);
+    // echo ("<br/>");
+    $now = DateTime::createFromFormat('U.u', $UTdate); // UTC
+    echo(translate($lang, "calc-completed") .  " " . $now->format("d-M-Y H:i:s") . " (UTC).<br/>" . PHP_EOL);
+    echo("<hr/>" . PHP_EOL); 
+
+    echo("</div>" . PHP_EOL); // Close the screen-only div
     echo("<div id='result-to-publish' class='scaled'>" . PHP_EOL);
-    echo($content);
-    // echo("</div>");
+    echo($content); // The expected result
+    // echo("</div>"); // Close at the end of the doc
 
     $backend->closeDB();
     if ($VERBOSE) {
@@ -688,6 +711,10 @@ try {
     echo "[Captured Throwable (big loop) for " . __FILE__ . " : " . $plaf . "] " . PHP_EOL;
 }
 ?>
+</div>
+<div class="screen-only">
+    <hr/>
+    <i>&copy; Passe-Coque, 2025</i>
 </div>
 </body>
 </html>
