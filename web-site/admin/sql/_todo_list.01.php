@@ -436,6 +436,7 @@ if ($operation == 'list') {
     $sql = "UPDATE TODO_LISTS SET LINE_DESC = '" . str_replace("'", "\'", $newDescription) . "', LINE_STATUS = '$newStatus', LAST_UPDATED = CURRENT_TIMESTAMP
             WHERE LINE_ID = $lineId;";
     try {
+        echo("SQL: [" . $sql . "]<br/>" . PHP_EOL);
         executeSQL($dbhost, $username, $password, $database, $sql, $VERBOSE);
         echo ((($lang == 'FR') ? "Mise &agrave; jour effectu&eacute;e." : "Update completed.") . "<br/>" . PHP_EOL);
     } catch (Throwable $e) {
