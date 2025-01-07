@@ -263,7 +263,32 @@ if ($operation == 'list') {
             echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
             foreach ($todoLines as $line) {
                 echo ("<tr>" . PHP_EOL);
-                echo (  "<td class='big-column'><pre>$line[2]</pre></td><td>$line[3]</td><td>" . translateStatus($lang, $line[4]) . "</td><td>$line[5]</td>" . PHP_EOL);
+                $color = "black";
+                switch ($line[4]) {
+                    case 'OPENED':
+                        $color = 'green';
+                        break;
+                    case 'IN_PROGRESS':
+                        $color = 'blue';
+                        break;
+                    case 'CANCELED':
+                        $color = 'orange';
+                        break;
+                    case 'COMPLETED':
+                        $color = 'black';
+                        break;
+                    default:
+                        $color = 'black';
+                        break;
+                }
+
+                echo (  "<td class='big-column'><pre>$line[2]</pre></td><td>$line[3]</td><td><b style='color: " . $color . ";'>" . translateStatus($lang, $line[4]) . "</b></td><td>$line[5]</td>" . PHP_EOL);
+                //                                   |                      |                                                      |                                                |
+                //                                   |                      |                                                      |                                                Last Updated
+                //                                   |                      |                                                      Status
+                //                                   |                      Created
+                //                                   Description
+
                 if ($canModify) {
                     echo ("<td>" . PHP_EOL);
     ?>
