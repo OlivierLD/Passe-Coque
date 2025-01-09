@@ -52,7 +52,7 @@ if (isset($_GET['lang'])) {
   </head>
   <body class="bg-doc">
     <div class="transp-box">
-      <h1><?php echo( $lang == 'FR' ? "Publication d'almanachs" : "Almanac publication"); ?></h1>
+      <h1><?php echo( $lang == 'FR' ? "Almanachs : Mar&eacute;es et &eacute;ph&eacute;m&eacute;rides astronomiques" : "Tide and Celestial Almanacs"); ?></h1>
       <?php
   /**
    * What's wrong with a comment ?
@@ -73,44 +73,29 @@ if (isset($_GET['lang'])) {
     <?php 
         if ($lang == 'FR') {
     ?>
-          <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+          <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px; line-height: normal;">
               Les documents qui suivent sont con&ccedil;us pour &ecirc;tre visualis&eacute;s dans un navigateur web, <i>puis</i> imprim&eacute;s &agrave; partir de celui-ci (on peut aussi g&eacute;n&eacute;rer un pdf).
               La version imprim&eacute;e comporte des sauts de page et autres formattages qui ne seront pas visibles &agrave; partir du navigateur.<br/>
               Lors de l'impression, vous aurez la possibilit&eacute; - &agrave; partir des boites de dialogue du navigateur - de faire appara&icirc;tre ou pas
               des donn&eacute;es comme les en-t&ecirc;tes et bas de page, num&eacute;ros de page, etc, et m&ecirc;me l'&eacute;chelle.<br/>
-              <span style="font-style: italic; border: 1px solid silver; border-radius: 5px; padding: 5px;">Pour les d&eacute;tails sur la fa&ccedil;on de proc&eacute;der, voyez <a href="./how-to/how.to.print.FR.html" target="_blank">ici</a>.</span>
+              <span style="font-style: italic; border: 4px solid orange; border-radius: 5px; padding: 5px;">Pour les d&eacute;tails sur la fa&ccedil;on de proc&eacute;der, voyez <a href="./how-to/how.to.print.FR.html" target="_blank">ici</a>.</span>
           </p>
     <?php 
         } else {  
     ?>  
-          <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px;">
+          <p style="margin: 5px; padding: 5px; border: 1px solid silver; border-radius: 5px; line-height: normal;">
               The following documents are designed to be visualized from a web browser, <i>and then</i> printed from it (a pdf can also be generated from the page).
               The printed version will have page breaks and other formattings that will not be displayed from the web browser.<br/>
               When printing, you will have the possibility - from the dialog showing up in the browser - to hide or show different 
               data like headers, footers, page numbers, etc, and even scale.<br/>
-              <span style="font-style: italic; border: 1px solid silver; border-radius: 5px; padding: 5px;">For details, see <a href="./how-to/how.to.print.EN.html" target="_blank">here</a>.</span>
+              <span style="font-style: italic; border: 4px solid orange; border-radius: 5px; padding: 5px;">For details, see <a href="./how-to/how.to.print.EN.html" target="_blank">here</a>.</span>
           </p>
     <?php
         }
     ?>
 
   <div>
-      <h2><?php echo( $lang == 'FR' ? "&Eacute;ph&eacute;m&eacute;rides astronomiques" : "Celestial Almanacs"); ?></h2>
-      <ul>
-        <?php 
-          if ($lang == 'FR') {
-        ?>
-        <li><a href="./astro.php/almanac.publisher.html" target="_blank">Publication d'&eacute;ph&eacute;m&eacute;rides astronomiques</a><img style="vertical-align: middle;" src="./astro.php/sextant.gif"></li>
-        <?php 
-          } else {  
-        ?>  
-        <li><a href="./astro.php/almanac.publisher.html" target="_blank">Celestial Almanac Publisher</a><img style="vertical-align: middle;" src="./astro.php/sextant.gif"></li>
-        <?php
-          }
-        ?>
-      </ul>
-
-      <h2><?php echo( $lang == 'FR' ? "Almanachs de mar&eacute;e" : "Tidal Almanacs"); ?></h2>
+  <h2><?php echo( $lang == 'FR' ? "Almanachs de mar&eacute;e" : "Tide Almanacs"); ?></h2>
       <ul>
         <li>
           <?php
@@ -143,6 +128,22 @@ if (isset($_GET['lang'])) {
           ?>
         </li>
       </ul>
+
+      <h2><?php echo( $lang == 'FR' ? "&Eacute;ph&eacute;m&eacute;rides astronomiques" : "Celestial Almanacs"); ?></h2>
+      <ul>
+        <?php 
+          if ($lang == 'FR') {
+        ?>
+        <li><a href="./astro.php/almanac.publisher.html" target="_blank">Publication d'&eacute;ph&eacute;m&eacute;rides astronomiques</a><img style="vertical-align: middle;" src="./astro.php/sextant.gif"></li>
+        <?php 
+          } else {  
+        ?>  
+        <li><a href="./astro.php/almanac.publisher.html" target="_blank">Celestial Almanac Publisher</a><img style="vertical-align: middle;" src="./astro.php/sextant.gif"></li>
+        <?php
+          }
+        ?>
+      </ul>
+
     </div>
   </div>
   <hr/>

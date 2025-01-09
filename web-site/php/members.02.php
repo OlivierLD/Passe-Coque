@@ -261,7 +261,7 @@ if ($current_lang == "FR") {
     <?php
     if ($adminPrivileges) {
       ?>
-      En tant qu'<i>adminstrateur</i>, vous pouvez aussi utiliser ceci :<br/>
+      En tant qu'<i>administrateur</i>, vous pouvez aussi utiliser ceci :<br/>
       Mais attention, <a href="https://www.youtube.com/watch?v=guuYU74wU70&t=15s" target="YT">With great power comes great responsibility</a>.
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>

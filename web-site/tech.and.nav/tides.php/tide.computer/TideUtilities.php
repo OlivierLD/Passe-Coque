@@ -594,6 +594,7 @@ class TideUtilities {
             echo("Calculation completed.<br/>" . PHP_EOL);
         }
         return array(
+            // TODO More data ?
             "completed" => $now->format("Y-m-d H:i:s"),
             // "wh" => $whNow,
             "tideTable" => $tideTable,

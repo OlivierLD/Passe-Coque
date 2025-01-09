@@ -219,6 +219,12 @@ if ($operation == 'list') {
     } else if ($option == 'for-boat') {
         $boat_id = $_GET['boat-id']; 
         $contact = $_GET['ref'];
+        $completedOnly = false;
+        if (isset($_GET['completed-option'])) {
+            $completedValue = $_GET['completed-option'];
+            $completedOnly = ($completedValue == 'restricted');
+        }
+
         if ($VERBOSE) {
             echo("Will get todo list for $boat_id, from $contact<br/>" . PHP_EOL);
         }
@@ -259,63 +265,86 @@ if ($operation == 'list') {
             
             // echo("As $contact, $userId ...");
 
+            // Non completed, non canceled only ?
+            ?>
+            <form name="display-option" action="<?php echo basename(__FILE__); ?>" method="get">
+                <inout type="hidden" name="opration" value="list">
+                <input type="hidden" name="lang" value="<?php echo $lang; ?>">
+                <input type="hidden" name="option" value="for-boat">
+                <input type="hidden" name="boat-id" value="<?php echo $boat_id; ?>">
+                <input type="hidden" name="ref" value="<?php echo $contact; ?>">
+
+                <input type="checkbox" name="completed-option" value="restricted" <?php echo($completedOnly ? "checked" : ""); ?> onChange="this.form.submit()"> 
+                <?php echo($lang == 'FR' ? "'&Agrave; faire' ou 'En cours' seulement." : "Non completed nor canceled only.") ?>
+            </form>
+            <?php
+
+
             echo ("<table>" . PHP_EOL);
             echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
             foreach ($todoLines as $line) {
-                echo ("<tr>" . PHP_EOL);
-                $color = "black";
-                switch ($line[4]) {
-                    case 'OPENED':
-                        $color = 'green';
-                        break;
-                    case 'IN_PROGRESS':
-                        $color = 'blue';
-                        break;
-                    case 'CANCELED':
-                        $color = 'orange';
-                        break;
-                    case 'COMPLETED':
-                        $color = 'black';
-                        break;
-                    default:
-                        $color = 'black';
-                        break;
+                $display = true;
+                if ($completedOnly) {
+                    if ($line[4] == 'COMPLETED' || $line[4] == 'CANCELED') {
+                        $display = false;
+                    }
                 }
+                if ($display) {
+                    echo ("<tr>" . PHP_EOL);
+                    $color = "black";
+                    switch ($line[4]) {
+                        case 'OPENED':
+                            $color = 'green';
+                            break;
+                        case 'IN_PROGRESS':
+                            $color = 'blue';
+                            break;
+                        case 'CANCELED':
+                            $color = 'orange';
+                            break;
+                        case 'COMPLETED':
+                            $color = 'black';
+                            break;
+                        default:
+                            $color = 'black';
+                            break;
+                    }
 
-                echo (  "<td class='big-column'><pre>$line[2]</pre></td><td>$line[3]</td><td><b style='color: " . $color . ";'>" . translateStatus($lang, $line[4]) . "</b></td><td>$line[5]</td>" . PHP_EOL);
-                //                                   |                      |                                                      |                                                |
-                //                                   |                      |                                                      |                                                Last Updated
-                //                                   |                      |                                                      Status
-                //                                   |                      Created
-                //                                   Description
+                    echo (  "<td class='big-column'><pre>$line[2]</pre></td><td>$line[3]</td><td><b style='color: " . $color . ";'>" . translateStatus($lang, $line[4]) . "</b></td><td>$line[5]</td>" . PHP_EOL);
+                    //                                   |                      |                                                      |                                                |
+                    //                                   |                      |                                                      |                                                Last Updated
+                    //                                   |                      |                                                      Status
+                    //                                   |                      Created
+                    //                                   Description
 
-                if ($canModify) {
-                    echo ("<td>" . PHP_EOL);
-    ?>
-                    <form action="<?php echo basename(__FILE__); ?>" method="post">
-                        <input type="hidden" name="operation" value="edit-line">
-                        <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                        <input type="hidden" name="ref" value="<?php echo($userId); ?>">
-                        <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
-                        <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
-                        <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
-                    </form>
-    <?php
-                    echo ("</td>" . PHP_EOL); 
-                    echo ("<td>" . PHP_EOL);
-    ?>                 
-                    <form action="<?php echo basename(__FILE__); ?>" method="post">
-                        <input type="hidden" name="operation" value="delete-line">
-                        <input type="hidden" name="lang" value="<?php echo($lang); ?>">
-                        <input type="hidden" name="ref" value="<?php echo($userId); ?>">
-                        <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
-                        <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
-                        <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
-                    </form>
-    <?php                
-                    echo("</td>" . PHP_EOL);
+                    if ($canModify) {
+                        echo ("<td>" . PHP_EOL);
+        ?>
+                        <form action="<?php echo basename(__FILE__); ?>" method="post">
+                            <input type="hidden" name="operation" value="edit-line">
+                            <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                            <input type="hidden" name="ref" value="<?php echo($userId); ?>">
+                            <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
+                            <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
+                            <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
+                        </form>
+        <?php
+                        echo ("</td>" . PHP_EOL); 
+                        echo ("<td>" . PHP_EOL);
+        ?>                 
+                        <form action="<?php echo basename(__FILE__); ?>" method="post">
+                            <input type="hidden" name="operation" value="delete-line">
+                            <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+                            <input type="hidden" name="ref" value="<?php echo($userId); ?>">
+                            <input type="hidden" name="boat-id" value="<?php echo($line[0]); ?>">
+                            <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
+                            <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
+                        </form>
+        <?php                
+                        echo("</td>" . PHP_EOL);
+                    }
+                    echo ("</tr>" . PHP_EOL);
                 }
-                echo ("</tr>" . PHP_EOL);
             }
             echo ("</table>" . PHP_EOL);
     }
