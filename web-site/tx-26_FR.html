@@ -1,25 +1,56 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: 50% 50%;">
-        <img src="/logos/la.tete.a.toto.jpeg" style="width: 100%;"> <!-- width="300px"> -->
-        <div style="padding: 14px;">
-            <h2>La T&ecirc;te &agrave; Toto</h2>
-            <p>
-                On n'embarque aucune &eacute;nergie avant de partir.<br/>
-                On n'&eacute;met rien de polluant en route (On dit bien "rien de polluant". On ne dit pas que "d&eacute;carboner", on ne parle pas de gaz &agrave; effet de serre, ce serait restrictif - vaste sujet.).<br/>
-                On navigue sans limite, de temps, ni d'espace.<br/>
-                Z&eacute;ro avant, z&eacute;ro apr&egrave;s !<br/>
-                Z&eacute;ro plus z&eacute;ro &eacute;gale... ?
-            </p>
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'tat-01');" title="Projet">Projet</button>
+        <button class="tablinks" onclick="openTab(event, 'tat-02');">D&eacute;tails</button>
+        <button class="tablinks" onclick="openTab(event, 'tat-03');">Contact</button>
+    </div>
+
+    <div id="tat-01" class="tab-section" style="display: block;">
+        <div style="display: grid; grid-template-columns: 50% 50%;">
+            <img src="/logos/la.tete.a.toto.jpeg" style="width: 80%;"> <!-- width="300px"> -->
+            <div style="padding: 14px;">
+                <h2>La T&ecirc;te &agrave; Toto</h2>
+                <p>
+                    On n'embarque aucune &eacute;nergie avant de partir.<br/>
+                    On n'&eacute;met rien de polluant en route (On dit bien "rien de polluant". 
+                    On ne dit pas que "d&eacute;carboner", on ne parle pas que de gaz &agrave; effet de serre, 
+                    ce serait restrictif - vaste sujet.).<br/>
+                    On navigue sans limite, de temps, ni d'espace.<br/>
+                    Z&eacute;ro avant, z&eacute;ro apr&egrave;s !<br/>
+                    Z&eacute;ro plus z&eacute;ro &eacute;gale... ?
+                </p>
+            </div>
         </div>
     </div>
-    <div style="line-height: 1.2em;">
-        Ce projet est en cours de d&eacute;veloppement, on aura bient&ocirc;t plus de d&eacute;tails &agrave; son sujet ici.<br/>
-        Un peu de doc en attendant&nbsp;:
-        <ul>
-            <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/nav.astro.intro.html" target="_new">Introduction &agrave; la nav astro</a></li>
-            <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/meteo.intro.html" target="_new">Introduction &agrave; la m&eacute;t&eacute;o marine</a></li>
-            <li><a href="#" onclick="alert('Soon...');">Construire un r&eacute;gulateur d'allure</a> (Hasler windvane)</li>
-        </ul>
+
+    <div id="tat-02" class="tab-section" style="display: none;">
+        <div style="line-height: 1.2em;">
+            Ce projet est en cours de d&eacute;veloppement, on aura bient&ocirc;t plus de d&eacute;tails &agrave; son sujet ici.<br/>
+            Il s'agit de mettre en &oelig;uvre des techniques et des outils aussi &eacute;voqu&eacute;s ailleur sur le pr&eacute;sent site.
+
+            <ul>
+                <li><a href="/?lang=FR&nav-to=31&tx=25" target="_blank">Apprendre &agrave; godiller</a></li>
+                <li><a href="/?lang=FR&nav-to=64" target="_blank">Naviguer sans &eacute;lectricit&eacute;</a> (tab "Ouvrages Nautiques")</li>
+                <li><a href="/?lang=FR&nav-to=31&tx=20" target="_blank">Projets Low-Tech</a></li>
+                <li>
+                    Diverses formations
+                    <ul>
+                        <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/nav.astro.intro.html" target="_new">Introduction &agrave; la nav astro</a></li>
+                        <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/meteo.intro.html" target="_new">Introduction &agrave; la m&eacute;t&eacute;o marine</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" onclick="alert('Soon...');">Construire un r&eacute;gulateur d'allure</a> (Hasler windvane)</li>
+            </ul>
+            &Agrave; terme, on t&acirc;chera de mettre en &oelig;uvre tout ceci <b><i>en vrai</i></b>, &agrave; bord d'un bateau de la flotte Passe-Coque, pour une vraie
+            travers&eacute;e Low-Tech ou No-Tech. <b><i>La suite arrive !</i></b>
+        </div>
     </div>
+
+    <div id="tat-03" class="tab-section" style="display: none;">
+        <div style="line-height: 1.2em;">
+            Contact : <a href="mailto:olivier@lediouris.net?subject=La%20T&ecirc;te%20&agrave;%20Toto">olivier@lediouris.net</a>
+        </div>
+    </div>
+
     <hr/>
 </div>
