@@ -1733,15 +1733,28 @@ const THE_TEAM = [
     }
 ];
 
-const INFO_SECTION = [
-    {
+const INFO_SECTION = [{
         section: "agenda",
         content: [{
+            date: "Jan-2025",
+            title: "Agenda 2025",
+            content: "/actu/agenda2025.html"
+        }, {
             date: "Jan-2024",
             title: "Agenda 2024",
             content: "/actu/agenda2024.html"
         }]
     },
+    {   
+        section: "2025",
+        content: [
+            {
+                date: "2025",
+                title: "2025",
+                content: "/actu/2025/news.01.html"
+            }
+        ]
+    },    
     {
         section: "2024",
         content: [{
@@ -2221,6 +2234,10 @@ let updateInfoFilter = radio => {
         case 'agenda':
             console.log('Agenda');
             fillOutActu('agenda');
+            break;
+        case 'a2025':
+            console.log("2025");
+            fillOutActu('2025');
             break;
         case 'a2024':
             console.log("2024");

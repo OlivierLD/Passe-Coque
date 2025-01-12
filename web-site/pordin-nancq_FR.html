@@ -1,21 +1,59 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/pordin.jpg" width="100%">
-        <div style="padding: 14px;">
-            <h2>Pordin Nancq</h2>
-            Carter 37, bas&eacute; &agrave; Locmiquelic<br/>
-            Une merveille&nbsp;!
-            <div>
-                Pour plus de d&eacute;tails, voyez la <a href="/?lang=FR&nav-to=31&tx=05">fiche du projet</a>.
-            </div>
-        </div>
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'pordin-01');" title="Sommaire">Pordin-Nancq</button>
+        <button class="tablinks" onclick="openTab(event, 'pordin-02');" title="Actualit&eacute;s">Programme</button>
     </div>
 
-    <div>
-        <h2>Plus d'infos...</h2>
-        R&eacute;f&eacute;rent : Jimmy<!-- Pahun-->.<br/>
-        <!--
-        T&eacute;l : . . .<br/>
-        Email : . . . -->
+    <div style="min-height: 300px; max-height: 450px; overflow-y: auto;">
+        <div id="pordin-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/pordin.jpg" width="100%">
+                <div style="padding: 14px;">
+                    <h2>Pordin Nancq</h2>
+                    Carter 37, bas&eacute; &agrave; Locmiquelic<br/>
+                    Une merveille&nbsp;!
+                    <div>
+                        Pour plus de d&eacute;tails, voyez la <a href="/?lang=FR&nav-to=31&tx=05">fiche du projet</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2>Plus d'infos...</h2>
+                R&eacute;f&eacute;rent : Jimmy<!-- Pahun-->.<br/>
+                <!--
+                T&eacute;l : . . .<br/>
+                Email : . . . -->
+            </div>
+        </div>
+        <div id="pordin-02" class="tab-section" style="display: block;">
+            <h2>Programme du bateau</h2>
+            <ul>
+                <li>
+                    <h3>18 au 21 avril 2025, Spi Ouest-France</h3>
+                    &Eacute;quipage
+                    <ul>
+                        <li>. . .</li>
+                    </ul>
+                </li>
+                <!-- -->
+                <li>
+                    <h3>26 mai au 1er juin 2025, Semaine du Golfe</h3>
+                    &Eacute;quipage
+                    <ul>
+                        <li>. . .</li>
+                    </ul>
+                </li>
+                <!-- -->
+                <li>
+                    <h3>27 au 30 juin 2025, Rubi's Cup</h3>
+                    &Eacute;quipage
+                    <ul>
+                        <li>. . .</li>
+                    </ul>
+                </li>
+            </ul>
+            <hr/>
+        </div>
     </div>
 </div>
