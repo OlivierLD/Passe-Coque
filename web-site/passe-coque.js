@@ -1971,7 +1971,7 @@ const NEXT_EVENTS = [
         }
     }, {
         date_from: '2024-12-22',
-        date_to: '2025-04-01',
+        date_to: '2025-01-05',
         content: {
             fr: 'Retrouvez Arthur Le Vaillant sur FR3 dans "Littoral", tous les dimanches.',
             en: 'See Arthur Le Vaillant, every sunday on FR3, in his program "Littoral"..'
