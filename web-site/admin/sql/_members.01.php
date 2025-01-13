@@ -279,7 +279,7 @@ if (isset($_POST['operation'])) {
             "</div></td><td class='comments'><div class='comments'>" .  
             $table[9] .   // Shipyard
           "</div></td><td style='text-align: center;'>" .  
-            ($table[12] ? 'Member' : ($table[2] == 'Passeur d\'Écoute' ? "<a href='./_boat-club.01.php?operation=subscribe&email=" . $table[0] . "'>Subscribe</a>" : "")) . // already in Boat Club, or subscribe if Passeur d'Ecoute.
+            ($table[12] ? 'Member' : (($table[2] == 'Passeur d\'Écoute' || $table[2] == '2 Passeurs d\'Écoute') ? "<a href='./_boat-club.01.php?operation=subscribe&email=" . $table[0] . "'>Subscribe</a>" : "")) . // already in Boat Club, or subscribe if Passeur d'Ecoute.
           "</td><td>" . 
             "<a href='./_members.02.php?id=" . $table[0] . "'>Edit</a>" .  // Edit Member //  target='PCUpdate'
           "</td></tr>\n"

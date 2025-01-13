@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS TARIFS (
 
 INSERT INTO TARIFS (LABEL, DESCRIPTION) VALUES 
 ('Passeur d\'Écoute', 'tbd'),
+('2 Passeurs d\'Écoute', 'tbd'),
 ('Équipier Boat Club', 'tbd'),
 ('Asso Partenaire', 'tbd'),
 ('Prospect', 'Fourre-tout. Prospect, contacts, etc.'),

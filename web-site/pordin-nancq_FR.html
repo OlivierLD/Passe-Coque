@@ -2,6 +2,7 @@
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'pordin-01');" title="Sommaire">Pordin-Nancq</button>
         <button class="tablinks" onclick="openTab(event, 'pordin-02');" title="Actualit&eacute;s">Programme</button>
+        <button class="tablinks" onclick="openTab(event, 'pordin-03');" title="T&eacute;moignages">T&eacute;moignages</button>
     </div>
 
     <div style="min-height: 300px; max-height: 450px; overflow-y: auto;">
@@ -26,7 +27,7 @@
                 Email : . . . -->
             </div>
         </div>
-        <div id="pordin-02" class="tab-section" style="display: block;">
+        <div id="pordin-02" class="tab-section" style="display: none;">
             <h2>Programme du bateau</h2>
             <ul>
                 <li>
@@ -51,6 +52,17 @@
                     <ul>
                         <li>. . .</li>
                     </ul>
+                </li>
+            </ul>
+            <hr/>
+        </div>
+        <div id="pordin-03" class="tab-section" style="display: none;">
+            <h2>T&eacute;moignages</h2>
+            Vous avez navigu&eacute; &agrave; bord de "Pordin-Nancq", et vous voulez en parler ?<br/>
+            Envoyez-nous <a href="mailto:contact@passe-coque.com?subject=Temoignages%20Pordin-Nancq">un message</a> !
+            <ul>
+                <li>
+                    . . .
                 </li>
             </ul>
             <hr/>
