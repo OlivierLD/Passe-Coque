@@ -36,6 +36,7 @@ function getCoeffData (BackEndSQLiteTideComputer $backend, Constituents $constit
     return $coeffsInBrest;
 }
 
+// Called from the main (below)
 function stationTest(string $stationName, 
                      int $year, 
                      int $month, 
@@ -211,6 +212,7 @@ function stationTest(string $stationName,
     }
 }
 
+// Main part
 try {
     set_time_limit(3600); // In seconds. 300: 5 minutes, 3600: one hour
     // phpinfo();
@@ -223,7 +225,7 @@ try {
         echo("PHP Version is " . phpversion() . "... This might be too low.");
     }
 
-    $backend = new BackEndSQLiteTideComputer();
+    $backend = new BackEndSQLiteTideComputer(); // The tide engine
     echo("Backend created.<br/>". PHP_EOL);
 
     // $backend->getStationsData();
@@ -305,7 +307,7 @@ try {
     echo("Test Completed.<br/>". PHP_EOL);
 
 } catch (Throwable $plaf) {
-    echo "[Captured Throwable (big) for tide.sample.php : " . $plaf . "] " . PHP_EOL;
+    echo "[Captured Throwable (big loop) for tide.sample.php : " . $plaf . "] " . PHP_EOL;
 }
 ?>
 </body>

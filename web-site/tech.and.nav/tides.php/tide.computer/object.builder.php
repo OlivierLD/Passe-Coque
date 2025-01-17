@@ -1,6 +1,10 @@
 <?php 
 
-// Unused. Fails in memory.
+// Build required data objects from their json representation.
+// Unused for now. 
+// Requires the memory limit set high.
+
+ini_set('memory_limit', '-1'); // No limit...
 
 // Constituents
 // Read the JSON file
@@ -16,7 +20,7 @@ if ($constituents_json_data === null) {
     die('Error decoding the Constituents JSON file');
 }
 
-echo("Constituents Map has " . count($constituents_json_data) . " entries.<br/>" . PHP_EOL);
+echo("Constituents Map has " . count($constituents_json_data["constSpeedMap"]) . " entries.<br/>" . PHP_EOL);
 
 if (false) {
     // Display data
@@ -39,6 +43,13 @@ if ($stations_json_data === null) {
     die('Error decoding the Stations JSON file');
 }
 
-echo("Stations Map has " . count($stations_json_data) . " entries.<br/>" . PHP_EOL);
+echo("Stations Map has " . count($stations_json_data["stations"]) . " entries.<br/>" . PHP_EOL);
+
+if (false) {
+    // Display data
+    echo "<pre>";
+    print_r($stations_json_data);
+    echo "</pre>";
+}
 
 ?>
