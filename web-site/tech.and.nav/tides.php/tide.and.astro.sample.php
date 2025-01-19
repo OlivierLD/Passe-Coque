@@ -365,7 +365,7 @@ try {
     echo("Test Completed.<br/>". PHP_EOL);
 
 } catch (Throwable $plaf) {
-    echo "[Captured Throwable (big) for tide.sample.php : " . $plaf . "] " . PHP_EOL;
+    echo "[Captured Throwable (big) for tide.and.astro.sample.php : " . $plaf . "] " . PHP_EOL;
 }
 ?>
 </body>

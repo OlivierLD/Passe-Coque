@@ -1996,6 +1996,27 @@ const NEXT_EVENTS = [
             fr: '1<sup><small>er</small></sup> mars 2025. Premi&egrave;re formation Low-Tech, d&eacute;tails en janvier.',
             en: 'March 1st 2025. First Low-Tech training, details in January.'
         }
+    }, {
+        date_from: '2025-04-18',
+        date_to: '2025-04-21',
+        content: {
+            fr: 'Du 18 au 21 avril 2025, Spi Ouest-France.',
+            en: 'April 18 to 21, 2025, Spi Ouest-France.'
+        }
+    }, {
+        date_from: '2025-05-26',
+        date_to: '2025-06-01',
+        content: {
+            fr: 'Du 26 main au 1er juin 2025, Semaine du Golfe.',
+            en: 'May 26 to June 1st, 2025, Semaine du Golfe.'
+        }
+    }, {
+        date_from: '2025-06-27',
+        date_to: '2025-06-30',
+        content: {
+            fr: 'Du 27 au 30 juin 2025, Rubi\'s Cup.',
+            en: 'June 27 to 30, 2025, Rubi\'s Cup.'
+        }
     }
 ];
 
