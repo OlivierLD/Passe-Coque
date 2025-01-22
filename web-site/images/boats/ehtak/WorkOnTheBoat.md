@@ -19,4 +19,50 @@ Prochaine sortie de l'eau:
 - Antifouling - à gratter
 - Peinture coque, œuvres mortes.
 
+- Lumière cuisine.
+- Feux de route ?
+- 220 V à bord ?
+
+### Old list
+
+- WD40 cadena descente
+- Couture rabans
+- Poser dame de nage
+- Nav: Règle de Cras, compas, crayon, compas de relèvements, journal de bord.
+
+
+
+TODO next:  
+Réparations
+- Chaise moteur annexe (balcon AR) à nettoyer ✅
+- Vis capot descente
+- Réchaud !
+    - Installer ✅
+    - Connecter
+- Batterie service, à changer
+- WD40 clips capote
+- Panneau AV moteur diesel, à réparer
+- Refixer fils électriques sous les listons
+
+Améliorations
+- Des petits équipets/cagettes (éponges au dessus de l’évier, compas de relèvement, etc)
+- Accroche torchons
+- Main courantes intérieures - petits hamacs (fruits, légumes, etc)
+- Stick pour la barre ✅
+- Pose-cul barreur
+- Mousse sur les filières à l’arrière (pour le dos)
+- Plan du circuit électrique
+- Tangon: 2 pattes d’oie
+- “Passe-coque" écrit sur le taud de GV
+
+Vérifications
+- Feu de tête de mat
+- Hale-bas de tangon
+- Gréement de spi
+- Amure GV - une estrope.
+
+
+
+
+
 ---

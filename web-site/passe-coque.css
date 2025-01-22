@@ -1273,7 +1273,7 @@ span.expand-collapse:hover {
         z-index: 3; 
         position: absolute; 
         /* max-height: 500px;  */
-        height: 550px;
+        /* height: 550px; */
         overflow: auto;
         display: none;
     }
