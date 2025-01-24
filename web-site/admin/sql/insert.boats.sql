@@ -29,7 +29,7 @@ INSERT INTO THE_FLEET VALUES (
     "/images/boats/eh-tak.jpg",
     "Shipman 28",
     "CLUB",
-    "G&acirc;vres"
+    "&Eacute;tel"
 );
 INSERT INTO THE_FLEET VALUES (
     "Pordin-Nancq",

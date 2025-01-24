@@ -389,6 +389,7 @@ let updateMenu = () => { // Multilang aspect.
 	// document.querySelectorAll("#_66").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Charte PCC" : "PCC Chart"));
 	document.querySelectorAll("#_67").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 	document.querySelectorAll("#_68").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Vie de l'asso" : "Life of the asso"));
+	document.querySelectorAll("#_69").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Outils de communication" : "Communication material"));
 	// document.querySelectorAll("#_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 	document.querySelectorAll("#ms_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " Espace Membres" : " Members Space"));
 	document.querySelectorAll("#bs_8").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " La boutique" : " The shop"));
@@ -543,8 +544,8 @@ let initBoatClubBases = () => {
         { latlng: lesSables, txt: 'Les Sables d\'Olonne, Jolly Jumper (First 325)' },
         { latlng: laRochelle, txt: 'La Rochelle, . . .' },
         { latlng: concarneau, txt: 'Concarneau, Nomadict (Gin Fizz)' },
-        { latlng: kerran, txt: 'ZA de Kerran, le local.' },
-        { latlng: gavres, txt: 'Gâvres, Eh\'Tak (Shipman 28).' }
+        { latlng: kerran, txt: 'ZA de Kerran, le local.' } // ,
+        // { latlng: gavres, txt: 'Gâvres, Eh\'Tak (Shipman 28).' }
     ];
 
     map = L.map('mapid'); // .setView([currentLatitude, currentLongitude], 13);
@@ -1317,7 +1318,7 @@ const THE_FLEET = [
         pix: "/images/boats/eh-tak.jpg",
         type: "Shipman 28",
         category: CLUB,
-        base: "G&acirc;vres"
+        base: "&Eacute;tel"
     },
     {
         name: "Pordin-Nancq",

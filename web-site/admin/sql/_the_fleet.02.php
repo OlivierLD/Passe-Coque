@@ -120,10 +120,10 @@ if (isset($_POST['operation'])) {
         // echo ("Update for $email ... <br/>");
 
         $sql = 'UPDATE THE_FLEET ' .
-               'SET BOAT_NAME = \'' . ($boat_name) . '\', PIX_LOC = \'' . ($pix_loc) . '\', ' .
+               'SET BOAT_NAME = \'' . str_replace("'", "\'", $boat_name) . '\', PIX_LOC = \'' . ($pix_loc) . '\', ' .
                     'BOAT_TYPE = \'' . ($boat_type) . '\', ' . 
                     'CATEGORY = \'' . ($category) . '\', ' . 
-                    'BASE = \'' . (trim($base)) . '\' ' . 
+                    'BASE = \'' . (trim(str_replace("'", "\'", $base))) . '\' ' . 
                 'WHERE ID = \'' . $id . '\'';
         // echo ("Update Stmt: $sql ; <br/>");
       } else if (isset($_POST['delete'])) {
@@ -131,8 +131,8 @@ if (isset($_POST['operation'])) {
                 WHERE ID = \'' . $id . '\'';
       } else if ($operation === 'insert') {
         $sql = 'INSERT INTO THE_FLEET ' .
-               'VALUES (\'' . ($boat_name) . '\', \'' . ($id) . '\', \'' . ($pix_loc) . '\', ' .
-                       '\'' . ($boat_type) . '\', \'' . ($category) . '\', \'' . ($base) . '\')';
+               'VALUES (\'' . (str_replace("'", "\'", $boat_name)) . '\', \'' . ($id) . '\', \'' . ($pix_loc) . '\', ' .
+                       '\'' . ($boat_type) . '\', \'' . ($category) . '\', \'' . (str_replace("'", "\'", $base)) . '\')';
       } else {
         echo "What do you ant ?? <br/>" . PHP_EOL;
         $sql = '';
