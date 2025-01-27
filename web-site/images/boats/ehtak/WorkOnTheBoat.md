@@ -39,30 +39,27 @@ Réparations
 - Réchaud !
     - Installer ✅
     - Connecter
-- Batterie service, à changer
-- WD40 clips capote
+- Batterie service, à changer ✅
+- WD40 clips capote ✅
 - Panneau AV moteur diesel, à réparer
 - Refixer fils électriques sous les listons
+- Un taquet à changer sur le roof
 
 Améliorations
 - Des petits équipets/cagettes (éponges au dessus de l’évier, compas de relèvement, etc)
 - Accroche torchons
 - Main courantes intérieures - petits hamacs (fruits, légumes, etc)
 - Stick pour la barre ✅
-- Pose-cul barreur
-- Mousse sur les filières à l’arrière (pour le dos)
+- Pose-cul barreur, extérieur hiloire.
+- Mousse sur les filières à l’arrière (pour le dos) ✅
 - Plan du circuit électrique
 - Tangon: 2 pattes d’oie
-- “Passe-coque" écrit sur le taud de GV
+- “Passe-coque" écrit sur le taud de GV ?
 
 Vérifications
 - Feu de tête de mat
 - Hale-bas de tangon
 - Gréement de spi
 - Amure GV - une estrope.
-
-
-
-
 
 ---

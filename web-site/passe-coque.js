@@ -2008,7 +2008,7 @@ const NEXT_EVENTS = [
         date_from: '2025-05-26',
         date_to: '2025-06-01',
         content: {
-            fr: 'Du 26 main au 1er juin 2025, Semaine du Golfe.',
+            fr: 'Du 26 mai au 1er juin 2025, Semaine du Golfe.',
             en: 'May 26 to June 1st, 2025, Semaine du Golfe.'
         }
     }, {

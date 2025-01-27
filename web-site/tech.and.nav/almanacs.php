@@ -42,11 +42,11 @@ if (isset($_GET['lang'])) {
           display: inline-block;
           border: 1px solid silver;
           border-radius: 6px;
-      }
+    }
 
-      a:hover, a:active {
+    a:hover, a:active {
           background-color: red;
-      }
+    }
 
     </style>
   </head>
