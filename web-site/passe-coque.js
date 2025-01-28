@@ -29,7 +29,7 @@ let closeAboutDialog = () => {
 };
 
 let generateNextEvents = () => {
-    const HOW_FAR = 4; // 2;
+    const HOW_FAR = 5; // 4; // 2;
     let now = new Date();
     let firstIdx;
     // Find first date index
@@ -2003,6 +2003,13 @@ const NEXT_EVENTS = [
         content: {
             fr: 'Du 18 au 21 avril 2025, Spi Ouest-France.',
             en: 'April 18 to 21, 2025, Spi Ouest-France.'
+        }
+    }, {
+        date_from: '2025-05-09',
+        date_to: '2025-05-11',
+        content: {
+            fr: 'Du 9 au 11 mai 2025, Tour de Belle-&Icirc;le.',
+            en: 'May 9 to 11, 2025, Tour de Belle-&Icirc;le.'
         }
     }, {
         date_from: '2025-05-26',
