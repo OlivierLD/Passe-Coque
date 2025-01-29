@@ -1048,6 +1048,16 @@ let clickOnTxPix = (origin, title = '') => {
                 response.text().then(doc => {
                     console.log(`${contentName} code data loaded, length: ${doc.length}.`);
                     dynamicContentContainer.innerHTML = doc;
+                    if (title === '') {
+                        // GET IT FROM THE DOC !!
+                        const parser = new DOMParser();
+                        const content = parser.parseFromString(doc, "text/xml");
+                        let innerTitle = content.querySelectorAll(".boat-card")[0].getAttribute("header");
+                        if (dialogTitle) {
+                            dialogTitle[dialogTitle.length - 1].innerText = innerTitle; // Can be several dialogs... take the last.
+                            dialogTitle[dialogTitle.length - 1].title = origin.id; // Bonus !
+                        }
+                    }
                 });
             }
         },
