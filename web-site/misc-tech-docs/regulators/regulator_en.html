@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque - How-To, Tutorials</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../../fonts/font.01.css">
+	<link rel="stylesheet" href="../../fonts/font.02.css">
+
+	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
+
+	<link rel="stylesheet" href="../../low-tech/low-tech.css" type="text/css"/>
+	<style type="text/css">
+.postit {
+    background: #f7f7e7;
+    padding: 5px;
+}
+
+.slide {
+	max-width: 800px; 
+	max-height: 500px;
+	padding: 10px;
+}
+
+.slide-show {
+	display: grid; 
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; 
+	overflow: auto;
+}
+
+.screen-shot {
+	width: 50%; 
+	text-align: center;
+}
+
+@media screen and (width <= 800px) {
+    .slide {
+		max-width: 600px; 
+		max-height: 375px;
+		padding: 10px;
+	}
+	.screen-shot {
+		width: 90%; 
+		text-align: center;
+	}
+}
+
+@media print {
+	.slide-show {
+		display: grid; 
+		grid-template-columns: auto; 
+		overflow: auto;
+	}
+	.not-printed {
+		display: none;
+	}
+} 
+    </style>
+
+	<script type="module" src="../../webcomponents/SlideShow.js"></script>
+	<!-- For LaTex -->
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+	<script type="text/javascript" 
+			async
+  			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+</head>
+	
+<body>
+
+	<h4><img src="../../logos/logo.02.png" style="width: 100px; vertical-align: middle;" title="Passe&#8209;Coque"/>Passe-Coque Tutoriels</h4>
+	<h2>Regulators (aka Controllers)</h2>
+	<div>
+		Une &eacute;olienne peut produire du courant &eacute;lectrique gr&acirc;ce &agrave; la force du vent.<br/>
+		Un panneau solaire peut produire du courant &eacute;lectrique gr&acirc;ce &agrave; la lumi&egrave;re du soleil.<br/>
+	</div>
+	<hr/>
+	<div>
+		Les &eacute;oliennes et les panneaux solaires ont ceci en commun que la source de l'&eacute;nergie qu'ils produisent n'est pas constante...<br/>
+		Le vent ne souffle pas toujours &agrave; la m&ecirc;me vitesse, le soleil ne brille pas toujours avec la m&ecirc;me intensit&eacute; (surtout la nuit, je sais).
+	</div>
+	<hr/>
+	<div>
+		En cons&eacute;quence, l'&eacute;nergie produite n'est pas constante, ni en intensit&eacute; (Amp&egrave;res), ni en voltage (Volts).<br/>
+		Cette &eacute;nergie &eacute;tant destin&eacute;e &agrave; &ecirc;tre stock&eacute;e dans des batteries 12v, il convient de ne pas y injecter des courants d'un voltage trop disparate -
+		les batteries pourraient ne pas aimer &ccedil;a - d'o&ugrave; le r&ocirc;le d'un r&eacute;gulateur entre la source d'&eacute;nergie et la batterie, qui va faire en sorte que le courant
+		qu'on y injecte soit aussi proche de 12 volts que possible.
+	</div>
+	<hr/>
+	<div>
+		Le courant produit par une &eacute;olienne ou par un panneau solaire se trouve ne pas varier de la m&ecirc;me fa&ccedil;on, et on a constat&eacute; que le fait 
+		d'avoir des r&eacute;gulateurs diff&eacute;rents en fonction du type d'&eacute;nergie s'av&eacute;rait plus efficace que d'en avoir un g&eacute;n&eacute;rique.
+	</div>
+	<hr/>
+	<div>
+		Pour une &eacute;olienne, on aura recours &agrave; un r&eacute;gulateur du type du <a href="https://www.marlec.co.uk/online-shop/wind-power/attachment/hrs-503/" target="Marlec">Marlec</a>.<br/>
+		Pour un panneau solaire, un r&eacute;gulateur comme <a href="https://fr.aliexpress.com/item/1005007541095935.html?spm=a2g0o.detail.pcDetailTopMoreOtherSeller.4.67adWij8Wij8ZJ&gps-id=pcDetailTopMoreOtherSeller&scm=1007.40050.354490.0&scm_id=1007.40050.354490.0&scm-url=1007.40050.354490.0&pvid=f891a42b-3c1f-403d-8057-095e2999336e&_t=gps-id:pcDetailTopMoreOtherSeller,scm-url:1007.40050.354490.0,pvid:f891a42b-3c1f-403d-8057-095e2999336e,tpp_buckets:668%232846%238113%231998&pdp_npi=4%40dis%21EUR%215.39%215.39%21%21%2139.87%2139.87%21%40211b613917384004542123349e0f18%2112000041220242776%21rec%21FR%211894764174%21X&utparam-url=scene%3ApcDetailTopMoreOtherSeller%7Cquery_from%3A" target="AliBaba">celui-ci</a> fait l'affaire.<br/>
+		<i>Les liens ci-dessus ne sont que des exemples !</i>
+	</div>
+	<hr/>
+	<i>&copy; 2025, Passe-Coque</i>
+</body>
+</html>
