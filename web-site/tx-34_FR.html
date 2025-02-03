@@ -3,8 +3,9 @@
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'passages-01');" title="Projet">Projet</button>
         <button class="tablinks" onclick="openTab(event, 'passages-02');">D&eacute;tails</button>
-        <button class="tablinks" onclick="openTab(event, 'passages-03');">Contact</button>
-        <button class="tablinks" onclick="openTab(event, 'passages-04');">Nous soutenir</button>
+        <button class="tablinks" onclick="openTab(event, 'passages-03');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'passages-04');">Contact</button>
+        <button class="tablinks" onclick="openTab(event, 'passages-05');">Nous soutenir</button>
     </div>
 
     <div class="pcc-dialog-tab-content">
@@ -13,7 +14,7 @@
             <!--div style="vertical-align: middle;"><img src="/images/construction.cone.png" height="26"> <b>Projets Low Tech&nbsp;!</b> <img src="/images/construction.cone.png" height="30"></div-->
             <div class="txt-img-div-2">
                 <!--iframe src="https://akirodic.com/p/jellyfish/" style="width: 80%; height: 100%;"></iframe-->
-                <img src="./passages/image002.png" style="width: 80%; margin: auto; margin-top: 5px;">
+                <img src="./passages/passages.003.jpg" style="width: 80%; margin: auto; margin-top: 5px;">
                 <div style="padding: 14px;">
                     <h2>Projet Passages</h2>
                     Hydrophone, le Th&eacute;&acirc;tre de Lorient et Radio Balises s'associent dans une d&eacute;marche de coop&eacute;ration culturelle sur la 
@@ -63,30 +64,33 @@
                     </ul>
                 </div>
                 <div>
-                    <!-- Slide show -->
-                    <slide-show id="slide-show-passage"
-                                width="400"
-                                height="300"
-                                slideclick="onSlideShowClick"
-                                style="line-height: 1em;"
-                                title="Cliquez pour agrandir">
-                        <slide-show-image src="./passages/passages.001.jpg" title="1" desc="Cliquer pour agrandir"></slide-show-image>
-                        <slide-show-image src="./passages/passages.002.jpg" title="2" desc="Cliquer pour agrandir"></slide-show-image>
-                        <slide-show-image src="./passages/passages.003.jpg" title="3" desc="Cliquer pour agrandir"></slide-show-image>
-                        <slide-show-image src="./passages/passages.004.jpg" title="4" desc="Cliquer pour agrandir"></slide-show-image>
-                        <slide-show-image src="./passages/passages.005.jpg" title="5" desc="Cliquer pour agrandir"></slide-show-image>
-                        <slide-show-image src="./passages/passages.006.jpg" title="6" desc="Cliquer pour agrandir"></slide-show-image>
-                        <slide-show-image src="./passages/passages.007.jpg" title="7" desc="Cliquer pour agrandir"></slide-show-image>
-                        <slide-show-image src="./passages/passages.008.jpg" title="8" desc="Cliquer pour agrandir"></slide-show-image>
-                    </slide-show>
-                </div>
-                <div>
                     Voyez aussi le Projet "<a href="./?nav-to=31&tx=09" target="_blank">Entendre la mer</a>"".
                 </div>
             </div>
         </div>
 
         <div id="passages-03" class="tab-section" style="display: none;">
+            <div>
+                <!-- Slide show -->
+                <slide-show id="slide-show-passage"
+                            width="600"
+                            height="340"
+                            slideclick="onSlideShowClick"
+                            style="line-height: 1em;"
+                            title="Cliquez pour agrandir">
+                    <slide-show-image src="./passages/passages.001.jpg" title="1" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.002.jpg" title="2" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.003.jpg" title="3" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.004.jpg" title="4" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.005.jpg" title="5" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.006.jpg" title="6" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.007.jpg" title="7" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.008.jpg" title="8" desc="Cliquer pour agrandir"></slide-show-image>
+                </slide-show>
+            </div>
+        </div>
+
+        <div id="passages-04" class="tab-section" style="display: none;">
             <h2>Plus d'infos...</h2>
             <div style="display: grid; grid-template-columns: 100%;">
                 <div>
@@ -108,7 +112,7 @@
             </div>
         </div>
 
-        <div id="passages-04" class="tab-section" style="display: none;">
+        <div id="passages-05" class="tab-section" style="display: none;">
             <h2>Nous soutenir financi&egrave;rement</h2>
             <div style="display: grid; grid-template-columns: 100%;">
                 <!--div>
