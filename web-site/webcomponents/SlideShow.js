@@ -91,7 +91,7 @@ class SlideShow extends HTMLElement {
 				'.slideshow-container {' +
 				'   max-width: 1000px;' +
 				'   position: relative;' +
-				'   background-color: silver;' +
+				'   background-color: black;' +  /* was silver */
 				'   margin: auto;' +
 				'}' +
 				'\n' +

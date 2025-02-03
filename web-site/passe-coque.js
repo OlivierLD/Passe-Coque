@@ -57,6 +57,9 @@ let generateNextEvents = () => {
 // Can be used for event list, and others (like going directly to a project or boat)
 let showDialogOnLoad = (title, content) => { // Use the about-dialog for message on load
     let aboutDialog = document.getElementById("about-dialog");
+    // Add the class to show the spinnaker
+    // document.getElementById("spinnaker-bg").classList.add('welcome-dialog');
+    aboutDialog.classList.add('welcome-dialog');
 
     let dialogTitle = document.querySelectorAll('.dialog-title'); // By its class
     let dynamicContentContainer = document.getElementById("dialog-content");

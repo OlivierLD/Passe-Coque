@@ -733,7 +733,7 @@ span.expand-collapse:hover {
     --slide-height: 400px;  
 
     max-width: calc(var(--slide-width) + 100px);
-    background-color: silver;
+    background-color: black; /* silver; */
     margin: auto;
     /*position: inherit;*/
     /* margin-top: -150px; */
@@ -1172,6 +1172,20 @@ span.expand-collapse:hover {
     width: 180px;
     height: auto;
 }  
+
+.welcome-dialog {
+    background-image: url('./spinnaker/downwind.jpg'); 
+    /* background: radial-gradient(at top, rgba(255, 255, 255, 0.0) 20%, rgba(10, 10, 0, 0.0) 55%), url("./spinnaker/downwind.jpg") no-repeat top; */
+    background-size: cover;
+    background-blend-mode: soft-light;
+    /* opacity: 0.75; */
+    /* filter: brightness(50%); */
+    /* position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px; */
+}
 
 /**/
 /* End of Default Cell-Phone */
