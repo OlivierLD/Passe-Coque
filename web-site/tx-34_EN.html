@@ -3,7 +3,7 @@
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'passages-01');" title="Projet">Projet</button>
         <button class="tablinks" onclick="openTab(event, 'passages-02');">D&eacute;tails</button>
-        <button class="tablinks" onclick="openTab(event, 'passages-03');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'passages-03'); setAuto('slide-show-passage', document.getElementById('passage-slider'));">Photos</button>
         <button class="tablinks" onclick="openTab(event, 'passages-04');">Contact</button>
         <button class="tablinks" onclick="openTab(event, 'passages-05');">Nous soutenir</button>
     </div>
@@ -69,8 +69,20 @@
             </div>
         </div>
 
-        <div id="passages-03" class="tab-section" style="display: none;">
+        <script type="text/javascript">
+            // Start the slide-scroll
+            // See the tab button (3rd)
+        </script>
+
+        <div id="passages-03" class="tab-section" style="display: none;" onload="">
             <div>
+                <div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+                    <label class="switch switch-element" style="margin-top: 0.5em;">
+                      <input id="passage-slider" type="checkbox" onchange="setAuto('slide-show-passage', this);" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    <span class="switch-element">Slides Auto-Scroll</span>
+                </div>		
                 <!-- Slide show -->
                 <slide-show id="slide-show-passage"
                             width="600"

@@ -19,12 +19,44 @@ let showAboutDialog = () => {
 
 let closeAboutDialog = () => {
     let aboutDialog = document.getElementById("about-dialog");
-    if (aboutDialog.close !== undefined) {
-      aboutDialog.close();
-      aboutDialog.style.display = 'none';
+    // If welcome content
+    if (aboutDialog.querySelectorAll('.welcome-message').length > 0) {
+        // aboutDialog.style.transitionProperty = 'height';
+        // aboutDialog.style.transitionDuration = '5s';
+        // aboutDialog.style.transform = 'rotateX(45deg)';
+        let rotAngle = 1;
+        let rotWaitTime = 25;
+        let rotFunc = (angle) => {
+            // console.log(`Angle is now ${angle}`);
+            aboutDialog.style.transform = `rotateX(${angle}deg) rotateY(${angle}deg)`;
+            angle += 1;
+            if (angle <= 90) {
+                window.setTimeout(() => {
+                    rotFunc(angle);
+                }, rotWaitTime);
+            } else {
+                if (aboutDialog.close !== undefined) {
+                    aboutDialog.close();
+                    aboutDialog.style.display = 'none';
+                } else {
+                    // alert(NO_DIALOG_MESSAGE);
+                    aboutDialog.style.display = 'none';
+                }
+            }
+        };
+        // window.setTimeout(() => {
+            if (rotAngle < 90) {
+                rotFunc(rotAngle);
+            }
+        //}, rotWaitTime);
     } else {
-      // alert(NO_DIALOG_MESSAGE);
-      aboutDialog.style.display = 'none';
+        if (aboutDialog.close !== undefined) {
+            aboutDialog.close();
+            aboutDialog.style.display = 'none';
+        } else {
+            // alert(NO_DIALOG_MESSAGE);
+            aboutDialog.style.display = 'none';
+        }
     }
 };
 
@@ -140,10 +172,14 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
     let timeout = HOW_LONG + (howManyLines > 2 ? ((howManyLines - 2) * 1000) : 0); // TODO howManyLines is set asynchronously...
     console.log(`Timeout: ${timeout} ms`);
     window.setTimeout(() => { 
-        if (aboutDialog.close) {
-            aboutDialog.close();
+        if (false) {
+            if (aboutDialog.close) {
+                aboutDialog.close();
+            }
+            aboutDialog.style.display = 'none';
+        } else {
+            closeAboutDialog();
         }
-        aboutDialog.style.display = 'none';
     }, timeout);
 };
 
@@ -2317,6 +2353,17 @@ let updateInfoFilter = radio => {
             break;
     }
 };
+
+let interval = undefined;
+
+function setAuto(id, cb) {
+    console.log(`setAuto for ${id}, ${cb}, ${cb.checked}`);
+    if (cb.checked) {
+        interval = setInterval(() => { document.getElementById(id)._forward(); }, 5000);
+    } else {
+        clearInterval(interval);
+    }
+}
 
 function onSlideShowClick(src) {
     console.log(">> Client side!! Slide " + src + " was clicked.");

@@ -1174,7 +1174,7 @@ span.expand-collapse:hover {
 }  
 
 .welcome-dialog {
-    background-image: url('./spinnaker/downwind.jpg'); 
+    background-image: url('./spinnaker/spinnaker.02.png'); 
     /* background: radial-gradient(at top, rgba(255, 255, 255, 0.0) 20%, rgba(10, 10, 0, 0.0) 55%), url("./spinnaker/downwind.jpg") no-repeat top; */
     background-size: cover;
     background-blend-mode: soft-light;
