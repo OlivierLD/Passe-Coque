@@ -1176,21 +1176,20 @@ span.expand-collapse:hover {
 .welcome-dialog {
     background-image: url('./spinnaker/spinnaker.02.png'); 
     /* background: radial-gradient(at top, rgba(255, 255, 255, 0.0) 20%, rgba(10, 10, 0, 0.0) 55%), url("./spinnaker/downwind.jpg") no-repeat top; */
-    background-size: cover;
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    background-size: cover; /* auto 100%; */
+    background-position: center bottom; /* Center the image */
     /* background-blend-mode: soft-light; */
     /* opacity: 0.75; */
     /* filter: brightness(50%); */
-    /* position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px; */
 }
 
 .welcome-right-frame {
     background-image: url('./images/weather.jpg'); 
     /* background: radial-gradient(at top, rgba(255, 255, 255, 0.0) 20%, rgba(10, 10, 0, 0.0) 55%), url("./spinnaker/downwind.jpg") no-repeat top; */
-    background-size: cover;
+    background-size: contain; /* cover; */
+    background-position: center; /* Center the image */
     /* background-blend-mode: soft-light; */
 }
 

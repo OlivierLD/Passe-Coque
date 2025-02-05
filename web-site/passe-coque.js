@@ -2357,9 +2357,20 @@ let updateInfoFilter = radio => {
 let interval = undefined;
 
 function setAuto(id, cb) {
-    console.log(`setAuto for ${id}, ${cb}, ${cb.checked}`);
+    console.log(`setAuto for ${id}, slider ${cb.id}, ${cb.checked}`);
     if (cb.checked) {
-        interval = setInterval(() => { document.getElementById(id)._forward(); }, 5000);
+        interval = setInterval(() => { 
+            try {
+                if (document.getElementById(id).offsetParent !== null) { // Check visibility
+                    document.getElementById(id)._forward(); 
+                } else {
+                    clearInterval(interval);        
+                }
+            } catch (err) {
+                console.log(err);
+                clearInterval(interval);        
+            }
+        }, 5000);
     } else {
         clearInterval(interval);
     }
