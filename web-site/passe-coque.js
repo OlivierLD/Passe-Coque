@@ -281,7 +281,7 @@ let clack = (origin) => {
         contentName = `/7_${currentLang}.html`; // Bypass regular behavior...
     } else if (originId === "68") {
         // Fill out agenda content
-    } else if (originId === "8") {
+    } else if (originId === "8") { 
         contentName = `/64_${currentLang}.html`; // Bypass regular behavior...
     }
 	let contentPlaceHolder = document.getElementById("current-content");

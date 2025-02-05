@@ -1201,6 +1201,11 @@ span.expand-collapse:hover {
     opacity: 0.75;
 }
 
+.tablinks {
+    font-weight: bold;
+}
+
+
 /**/
 /* End of Default Cell-Phone */
 

@@ -96,6 +96,7 @@
 			- Contact                          61
 		- Espace Membres  - 7
 		- Boutique  - 8
+		- Navigation - 9
 
 		Pour la traduction FR/EN, voir la fonction updateMenu()
 	-->
@@ -114,7 +115,7 @@
 			</div>
 		</div>
 		<div style="/*margin-left: -50px; float: right;*/ margin-right: 20px;">  <!-- Touchy ! (Tablets, etc) -->
-			<ul id="navigation" style="display: grid; grid-template-columns: auto auto auto auto auto auto auto 80px 80px; width: fit-content;"> <!-- Columns must match the menu below... -->
+			<ul id="navigation" style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto 80px; width: fit-content;"> <!-- Columns must match the menu below... -->
 				<li>
 					<a href="javascript:void(0)" onclick="clack(this);" id="_1"><span id="home-label">Accueil</span></a>
 					<!--ul>
@@ -199,8 +200,13 @@
 						</svg>
 					</a>
 				</li>
+				<li style="display: flex; align-items: center;">
+					<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this); closeNav();" id="_9" title="Navigation">
+						<img src="./images/small.boat.svg" style="width: 32px; vertical-align: top;">
+					</a>
+				</li>
 
-				<li><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a></li>
+				<li><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px; margin-left: 30px;"></image></a></li>
 			</ul>
 		</div>
 	</div>
@@ -307,7 +313,12 @@
 					<span id="bs_8"> La boutique</span>
 				</a>
 			</div>
-
+			<div>
+				<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this); closeNav();" id="_9" title="Navigation">
+					<img src="./images/small.boat.svg" style="width: 32px; vertical-align: top;">
+					<span id="bs_9"> Navigation</span>
+				</a>
+			</div>
 		</div>
 	</div>
 

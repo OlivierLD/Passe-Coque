@@ -33,7 +33,7 @@ if (isset($_GET['lang'])) {
       <h1><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o (Faxes, GRIBs, etc...)" : "Weather Forecasts (Faxes, GRIBs, etc...)"); ?></h1>
       <hr/>
       <ul>
-        <li><a href="./weather/internet.faxes.NAtl.colors.html" target="_blank"><?php echo( $lang == 'FR' ? "Faxes de l'Atlantique Nord, temps r&eacute;el, en couleurs." : "North Altantic faxes, real time, Colored versions."); ?></a></li>
+        <li><a href="./weather/internet.faxes.NAtl.colors.html" target="_blank"><?php echo( $lang == 'FR' ? "Faxes de l'Atlantique Nord, temps r&eacute;el, en couleurs." : "North Altantic faxes, real time, Colored version."); ?></a></li>
         <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/forecast.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Plusieurs sites affichant des GRIBs." : "Several GRIB web sites."); ?></a></li>
       </ul>
       <hr/>
