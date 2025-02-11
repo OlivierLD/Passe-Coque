@@ -61,7 +61,7 @@ let closeAboutDialog = () => {
 };
 
 let generateNextEvents = () => {
-    const HOW_FAR = 5; // 4; // 2;
+    const HOW_FAR = 6; // 5; // 4; // 2;
     let now = new Date();
     let firstIdx;
     // Find first date index
@@ -1961,7 +1961,7 @@ const INFO_SECTION = [{
     }
 ];
 
-const NEXT_EVENTS = [
+const NEXT_EVENTS = [ // oldest to newest.
     {
         date_from: '2024-05-01',
         date_to: '2024-05-01',
@@ -2066,6 +2066,13 @@ const NEXT_EVENTS = [
         content: {
             fr: 'Du 26 mai au 1er juin 2025, Semaine du Golfe.',
             en: 'May 26 to June 1st, 2025, Semaine du Golfe.'
+        }
+    }, {
+        date_from: '2025-06-13',
+        date_to: '2025-06-15',
+        content: {
+            fr: 'Du 13 au 15 juin 2025, 150 Milles de l\'Atlantic Yacht Club.',
+            en: 'June 13 to 15, 2025, Atlantic Yacht Club\'s 150 miles.'
         }
     }, {
         date_from: '2025-06-27',
