@@ -1018,6 +1018,24 @@ span.expand-collapse:hover {
     background-color: #ccc;
 }
 
+.blink_me {
+    animation: blinker 0.5s linear infinite;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+.display-data {
+    grid-area: middle;
+    text-align: center;
+    vertical-align: baseline;
+    margin: auto;
+    color: inherit;
+    font-size: 48px;
+    font-weight: bold;
+}
+
 .pcc-bases {
     display: grid; 
     grid-template-columns: 100%; 
