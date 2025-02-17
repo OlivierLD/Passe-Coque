@@ -42,6 +42,16 @@ let closeAboutDialog = () => {
                     // alert(NO_DIALOG_MESSAGE);
                     aboutDialog.style.display = 'none';
                 }
+                // Reset rotation
+                aboutDialog.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                // remove class welcome-dialog
+                aboutDialog.classList.remove('welcome-dialog');
+                // reset title
+                let dialogTitle = document.querySelectorAll('.dialog-title'); // By its class
+                if (dialogTitle) {
+                    dialogTitle[0].innerText = '';
+                }
+            
             }
         };
         // window.setTimeout(() => {
