@@ -2,54 +2,71 @@
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'tat-01');" title="Projet">Project</button>
         <button class="tablinks" onclick="openTab(event, 'tat-02');">Details</button>
-        <button class="tablinks" onclick="openTab(event, 'tat-03');">Contact</button>
+        <button class="tablinks" onclick="openTab(event, 'tat-03');">News, comments, ...</button>
+        <button class="tablinks" onclick="openTab(event, 'tat-04');">Contact</button>
     </div>
 
-    <div id="tat-01" class="tab-section" style="display: block;">
-        <div style="display: grid; grid-template-columns: 50% 50%;">
-            <img src="/logos/la.tete.a.toto.jpeg" style="width: 80%;"> <!-- width="300px"> -->
-            <div style="padding: 14px;">
-                <h2>La T&ecirc;te &agrave; Toto</h2>
-                <p>
-                    We don't pack any energy before leaving.<br/>
-                    We don't emit anything polluting when en route.<br/>
-                    We navigate without limits, time or space.<br/>
-                    Zero before, zero after!<br/>
-                    Zero plus zero equals...? (ask a French guy...)
-                </p>
+    <div class="pcc-dialog-tab-content">
+
+        <div id="tat-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <img src="/logos/la.tete.a.toto.jpeg" style="width: 80%;"> <!-- width="300px"> -->
+                <div style="padding: 14px;">
+                    <h2>La T&ecirc;te &agrave; Toto</h2>
+                    <p>
+                        We don't pack any energy before leaving.<br/>
+                        We don't emit anything polluting when en route.<br/>
+                        We navigate without limits, time or space.<br/>
+                        Zero before, zero after!<br/>
+                        Zero plus zero equals...? (ask a French guy...)
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="tat-02" class="tab-section" style="display: none;">
-        <div style="line-height: 1.2em;">
-            This project is being developped, more here about it soon.<br/>
-            It's about putting at works some techniques and tools already metionned elsewhere in the present web site.
+        <div id="tat-02" class="tab-section" style="display: none;">
+            <div style="line-height: 1.2em;">
+                This project is being developped, more here about it soon.<br/>
+                It's about putting at works some techniques and tools already metionned elsewhere in the present web site.
 
-            <ul>
-                <li><a href="/?lang=EN&nav-to=31&tx=25" target="_blank">Learn to scull</a></li>
-                <li><a href="/?lang=EN&nav-to=64" target="_blank">Naviguer sans &eacute;lectricit&eacute;</a> (tab "Nautical Books")</li>
-                <li><a href="/?lang=EN&nav-to=31&tx=20" target="_blank">Low-Tech projects</a> (another project)</li>
-                <li>
-                    Various trainings
-                    <ul>
-                        <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/nav.astro.intro.html" target="_new">Introduction &agrave; la nav astro</a></li>
-                        <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/meteo.intro.html" target="_new">Introduction &agrave; la m&eacute;t&eacute;o marine</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" onclick="alert('Soon...');">Build an Hasler windvane</a></li>
-                <li><a href="./misc-tech-docs/regulators/regulator_en.html" onclick="/*alert('Soon...');*/" target="reg">Regulators ?</a> Solar and eolian</li>
+                <ul>
+                    <li><a href="/?lang=EN&nav-to=31&tx=25" target="_blank">Learn to scull</a></li>
+                    <li><a href="/?lang=EN&nav-to=64" target="_blank">Naviguer sans &eacute;lectricit&eacute;</a> (tab "Nautical Books")</li>
+                    <li><a href="/?lang=EN&nav-to=31&tx=20" target="_blank">Low-Tech projects</a> (another project)</li>
+                    <li>
+                        Various trainings
+                        <ul>
+                            <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/nav.astro.intro.html" target="_new">Introduction &agrave; la nav astro</a></li>
+                            <li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/meteo.intro.html" target="_new">Introduction &agrave; la m&eacute;t&eacute;o marine</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" onclick="alert('Soon...');">Build an Hasler windvane</a></li>
+                    <li><a href="./misc-tech-docs/regulators/regulator_en.html" onclick="/*alert('Soon...');*/" target="reg">Regulators ?</a> Solar and eolian</li>
 
-            </ul>
-            Eventually, we'll put all this to work <b><i>for real</i></b>, on board a boat of the Passe-Coque fleet, for a real
-            Low-Tech or No-Tech passage. <b><i>More here soon!</i></b>
+                </ul>
+                Eventually, we'll put all this to work <b><i>for real</i></b>, on board a boat of the Passe-Coque fleet, for a real
+                Low-Tech or No-Tech passage. <b><i>More here soon!</i></b>
+            </div>
         </div>
-    </div>
 
-    <div id="tat-03" class="tab-section" style="display: none;">
-        <div style="line-height: 1.2em;">
-            Contact : <a href="mailto:olivier@lediouris.net?subject=La%20T&ecirc;te%20&agrave;%20Toto">olivier@lediouris.net</a>
+        <div id="tat-03" class="tab-section" style="display: none;">
+            <div style="line-height: 1.2em;">
+                <ul>
+                    <li>
+                        <b>February 2025</b>, Conrad Colman (see <a href="https://www.vendeeglobe.org/skippers/conrad-colman" target="VG">here</a>, and 
+                        <a href="https://www.conradcolman.com/accueil" target="CC">there</a>) finishes the Vend&eacute;e Globe in 21<sup>st</sup> position,
+                        <b>without having used any fossil fuel</b>. Bravo!
+                    </li>
+                </ul>
+            </div>
         </div>
+
+        <div id="tat-04" class="tab-section" style="display: none;">
+            <div style="line-height: 1.2em;">
+                Contact : <a href="mailto:olivier@lediouris.net?subject=La%20T&ecirc;te%20&agrave;%20Toto">olivier@lediouris.net</a>
+            </div>
+        </div>
+
     </div>
 
     <hr/>
