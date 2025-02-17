@@ -209,7 +209,7 @@ if ($operation == 'list') {
                 echo ("For $userId, " . count($boats) . " boat(s).<br/>" . PHP_EOL);
             }
 
-            echo ("<ul>" . PHP_EOL);
+            echo ("<ol>" . PHP_EOL);
             foreach($boats as $boat) {
                 $good2display = true;
                 if ($option == 'no-empty') {
@@ -231,7 +231,7 @@ if ($operation == 'list') {
                     echo("<li><a href='$url'><b>$boat[1]</b></a>, $boat[2] (ref: $boat[3])</li>" . PHP_EOL);
                 }
             }
-            echo ("</ul>" . PHP_EOL);
+            echo ("</ol>" . PHP_EOL);
         }
     } else if ($option == 'for-boat') {
         $boat_id = $_GET['boat-id']; 
