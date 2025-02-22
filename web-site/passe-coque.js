@@ -566,6 +566,27 @@ function decToSex(val, ns_ew) {
     return s;
 }
 
+/** 
+ * Turn "N 47 40.66" into 47.677667
+ * Warning: No deg sign, no min sign.
+ */
+function sexToDec(val, lat_lng) {
+    let sign = val.substring(0, 1);
+    let fullValue = val.substring(val.indexOf(' ') + 1);
+    let degs = fullValue.substring(0, fullValue.indexOf(' '));
+    let mins = fullValue.substring(fullValue.indexOf(' ') + 1);
+
+    let deg = parseInt(degs);
+    let min = parseFloat(mins);
+
+    let decValue = deg + (min / 60.0);
+    if (sign === 'W' || sign === 'S') {
+        decValue *= -1;
+    }
+
+    return decValue;
+}
+
 function flyToZoom(idx) {
     // map.panTo(ZOOM_POSITIONS[idx]);
     // map.setView(ZOOM_POSITIONS[idx], 18);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<meta charset="UTF-8">
-	<title>Passe&#8209;Coque</title>
+	<title>Passe&#8209;Coque - KIS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--link rel="icon" type="image/png" href="./infinity.png"-->
@@ -44,9 +44,16 @@
 .bg:after {
     opacity: 0.25; /* Here is your opacity */
 }
-
+* {
+    line-height: 1.1em;
+}
     </style>
 	<script type="text/javascript" src="../passe-coque.js"></script>
+
+    <!-- For Leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 </head>
 	
 <body>
@@ -58,7 +65,7 @@
         Les ports de plaisance se sont d&eacute;velopp&eacute;s dans les derni&egrave;res d&eacute;cennies, et de grosses infrastructures ont aussi &eacute;t&eacute; cr&eacute;&eacute;es pour 
         accomoder cette "nouvelle" forme de tourisme, qui peut parfois donner lieu &agrave; des embouteillages, une forme de manque de place et d'espace,
         parfois antinomique avec l'id&eacute;e originale qui conduit &agrave; ce genre de navigation, ce contact avec une nature vierge, et des &eacute;l&eacute;ments parfois incontr&ocirc;lables...<br/>
-        La c&ocirc;te bretonne a ceci de particulier qu'elle rec&egrave;le une multitide d'abris s&ucirc;rs et rapproch&eacute;s, qui rendent la navigation c&ocirc;ti&egrave;re d'autant plus attractive (il y en a
+        La c&ocirc;te bretonne a ceci de particulier qu'elle rec&egrave;le une multitude d'abris s&ucirc;rs et rapproch&eacute;s, qui rendent la navigation c&ocirc;ti&egrave;re d'autant plus attractive (il y en a
         qui disent "Il y a un bistro tous les deux milles !"). C'est loin d'&ecirc;tre le cas partout, si vous prenez - au hasard - la c&ocirc;te ouest des USA, quand on
         quitte un mouillage, il faut pr&eacute;voir 24 heures (voire davantage) pour atteindre le suivant... Et ce n'est pas le seul exemple.<br/>
     </div>
@@ -71,7 +78,225 @@
     <div style="margin-top: 20px;">
         On t&acirc;chera donc ici de recenser ces endroits, qui seront illustr&eacute;s d'exp&eacute;riences concr&egrave;tes.
     </div>
+
+    <hr/>
+
+    <div style="min-height: 50px; margin: -10px 0 0 5px;"> <!-- class="background-container-4" -->
+        <h2>Les endroits &agrave; garder secrets...</h2>
+        <div>
+            Mouse Pos: <span id="mouse-pos"></span>.
+        </div>  
+        <div style="display: grid; grid-template-columns: 30% 70%;">
+            <div style="margin: 10px;">
+                <div class="places-list" id="the-places">
+                    <div style="text-align: right; min-width: 200px;">
+                        <div id="fly-to" style="text-align: left; border: 1px solid cyan; border-radius: 5px; padding: 5px;">
+                             Fly to ?
+                             <ul>
+                                <li><a class="list-link" href="" onclick="flyToPlace(0); return false;">Local Passe-Coque</a></li>
+                                <li>
+                                    Groix
+                                    <ul>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(1); return false;">Port St Nicolas</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(2); return false;">Locmaria</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(3); return false;">Les Sables Rouges</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(4); return false;">Les Grands Sables</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(5); return false;">Port M&eacute;lite</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Nord du Coureau de Groix
+                                    <ul>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(6); return false;">Fort Bloqu&eacute;</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(7); return false;">Cour&eacute;gan</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(8); return false;">Kerroch</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(9); return false;">Perello</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(10); return false;">Kerguelen</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Houat
+                                    <ul>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(12); return false;">Porz Lehr</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Ailleurs...
+                                    <ul>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(11); return false;">Drakes Bay</a></li>
+                                        <li><a class="list-link" href="" onclick="flyToPlace(13); return false;">Baie d'Anaho</a></li>
+                                    </ul>
+                                </li>
+                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="kismapid" style="width: 1024px; height: 600px; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
+            <!--div id="kismapid" class="pcc-base-map"></div-->
+        </div>
+
+    </div>    
+    Pour inspiration, voir <a href="https://blueanarchy.org/cruising/" target="BA">ici</a>.
     <hr/>
     <i>&copy; Passe-Coque, 2025</i>
 </body>
+
+<script type="text/javascript">
+
+let kismap = L.map('kismapid'); // .setView([currentLatitude, currentLongitude], 13);
+
+/*
+// let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+let mbUrl = // 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+const base_layer = L.tileLayer(mbUrl, {
+    id: 'mapbox.streets', 
+    // attribution: mbAttr, 
+    opacity: 1.0
+}).addTo(map);
+*/
+
+let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+const satLayer = L.tileLayer(mbUrl, {id: 'mapbox.streets', attribution: mbAttr, opacity: 1.0});
+satLayer.addTo(kismap);
+
+
+const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 25,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    opacity: 0.5
+}).addTo(kismap);
+
+
+let placeMarkerOnClick = (e) => {
+    console.log(e);
+
+    let mess = '';
+    let posIdx = -1;
+    // Find position
+    for (let i=0; i<PLACES_ZOOM_POSITIONS.length; i++) {
+        if (e.latlng.lat === PLACES_ZOOM_POSITIONS[i].latlng.lat && e.latlng.lng === PLACES_ZOOM_POSITIONS[i].latlng.lng) {
+            console.log(`Found position index: ${i}, ${PLACES_ZOOM_POSITIONS[i].txt}`);
+            mess = PLACES_ZOOM_POSITIONS[i].txt;
+            posIdx = i;
+            break;
+        }
+    }
+	// alert(`You clicked the marker at ${e.latlng}\n${mess} `);
+}
+
+let makePlaceMarker = (markerData) => {
+    let content = 'Bient&ocirc;t plus de d&eacute;tails ici.'; // markerData.content;
+    if (markerData.content !== undefined && markerData.content.length > 0) {
+        content = `${markerData.content}`;
+    }
+    if (markerData.link !== undefined && markerData.link.length > 0) {
+        content += `<br/><a href='${markerData.link}' target='more'>D&eacute;tails</a>...`;
+    }
+
+    L.marker([markerData.position.lat, markerData.position.lng])
+     .on('click', placeMarkerOnClick) // TODO Update the page, harbor data, boat list, etc.
+     .addTo(kismap)
+     .bindPopup(`<b>${markerData.title}</b><br/>${content}`);
+}
+
+let initPlaces = () => {
+
+    kismap.setView([47.598399, -2.981517], 14); // 14); // Kerran
+
+    PLACES_ZOOM_POSITIONS.forEach((place) => {
+        makePlaceMarker({
+            position: place.latlng,
+            map: kismap,
+            title: place.txt,
+            content: place.content,
+            link: place.link
+        });
+    })
+
+    let tooltip = null;
+
+    if (true) { // Position  (lat-lng) of the mouse
+        kismap.addEventListener('mousemove', (event) => {
+            // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+            // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+            mess = `${decToSex(event.latlng.lat, "NS")} / ${decToSex(event.latlng.lng, "EW")} (raw: ${event.latlng.lat} / ${event.latlng.lng})`;
+            // console.log(`Mouse Pos ${mess}`);
+            document.getElementById('mouse-pos').innerText = mess;
+
+            if (false) { // Position tooltip
+                if (tooltip != null) {
+                    kismap.removeLayer(tooltip);
+                }
+                tooltip = L.tooltip()
+                           .setLatLng(L.latLng([event.latlng.lat, event.latlng.lng]))
+                           .setContent(`${decToSex(event.latlng.lat, "NS")}<br/>${decToSex(event.latlng.lng, "EW")}`)
+                           .addTo(kismap);
+            }
+        });
+    }
+
+};
+
+let flyToPlace = (idx) => {
+    console.log(`Fling to place #${idx}, ${PLACES_ZOOM_POSITIONS[idx].txt}`);
+    // kismap.panTo(ZOOM_POSITIONS[idx]);
+    // kismap.setView(ZOOM_POSITIONS[idx], 18);
+    kismap.flyTo(PLACES_ZOOM_POSITIONS[idx].latlng);
+};
+
+// TODO A database for those guys ? (SQLite)
+const zaKerran    = new L.LatLng(47.598399, -2.981517);
+
+const portStNic   = new L.LatLng(sexToDec("N 47 37.86"), sexToDec("W 3 29.29"));
+const locMaria    = new L.LatLng(sexToDec("N 47 37.60"), sexToDec("W 3 26.29"));
+
+const sablesRouges    = new L.LatLng(sexToDec("N 47 37.76"), sexToDec("W 3 24.92"));
+const grandsSables    = new L.LatLng(sexToDec("N 47 38.215"), sexToDec("W 3 24.99"));
+const portMelite      = new L.LatLng(sexToDec("N 47 38.54"), sexToDec("W 3 25.70"));
+
+const fortBloque  = new L.LatLng(sexToDec("N 47 44.10"), sexToDec("W 3 30.30"));
+const couregan    = new L.LatLng(sexToDec("N 47 42.53"), sexToDec("W 3 28.49"));
+const kerroch     = new L.LatLng(sexToDec("N 47 42.17"), sexToDec("W 3 27.74"));
+const perello     = new L.LatLng(sexToDec("N 47 41.90"), sexToDec("W 3 26.61"));
+const kerguelen   = new L.LatLng(sexToDec("N 47 41.98"), sexToDec("W 3 24.55"));
+
+const drakesBay   = new L.LatLng(sexToDec("N 37 59.73"), sexToDec("W 122 58.40"));
+const anaho       = new L.LatLng(sexToDec("S 8 49.32"), sexToDec("W 140 03.90"));
+
+const porzLehr   = new L.LatLng(sexToDec("N 47 24.02"), sexToDec("W 2 59.28"));
+
+
+const PLACES_ZOOM_POSITIONS = [
+    { latlng: zaKerran, txt: 'Local Passe-Coque', content: '12<sup><small>bis</small></sup> Z.A. de Kerran<br/>56470 Saint-Philibert', link: 'http://passe-coque.com' },
+    { latlng: portStNic, txt: 'Port St Nicolas, Groix', content: 'Un beau mouillage de beau temps dans le sud de Groix', link: './port.st.nicolas.html' },
+    { latlng: locMaria, txt: 'Locmaria, Groix', content: '' },
+    { latlng: sablesRouges, txt: 'Les Sables Rouges, Groix', content: '' },
+    { latlng: grandsSables, txt: 'Les Grands Sables, Groix', content: 'Une plage convexe, &agrave; Groix', link: './grands.sables.html' },
+    { latlng: portMelite, txt: 'Port M&eacute;lite, Groix', content: '' },
+
+    { latlng: fortBloque, txt: 'Fort Bloqu&eacute;', content: '' },
+    { latlng: couregan, txt: 'Cour&eacute;gan', content: '' },
+    { latlng: kerroch, txt: 'Kerroch', content: '' },
+    { latlng: perello, txt: 'Perello', content: '' },
+    { latlng: kerguelen, txt: 'Kerguelen', content: '' },
+
+    { latlng: drakesBay, txt: 'Drakes Bay', content: 'Pr&egrave;s de Point Reyes', link: './drakes.bay.html' },
+
+    { latlng: porzLehr, txt: 'Portz Ler', content: '', link: 'http://olivierld.w3spaces.com' },
+    { latlng: anaho, txt: 'Baie d\'Anaho', content: 'Archipel des Marquises,<br/>&Icirc;le de Nuku-Hiva', link: './anaho.html'}
+];
+
+initPlaces();
+
+window.onload = () => {
+    // initPlaces();
+    console.log("Loaded !")
+};
+
+</script>
 </html>
