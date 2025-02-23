@@ -1,0 +1,84 @@
+<div class="boat-card" header="Passages">
+
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'anita-conti-01');" title="Projet">Project</button>
+        <button class="tablinks" onclick="openTab(event, 'anita-conti-02');">Details</button>
+        <!--button class="tablinks" onclick="openTab(event, 'anita-conti-03'); setAuto('slide-show-passage', document.getElementById('passage-slider'));">Photos</button-->
+        <button class="tablinks" onclick="openTab(event, 'anita-conti-04');">Contact</button>
+        <!--button class="tablinks" onclick="openTab(event, 'anita-conti-05');">Nous soutenir</button-->
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="anita-conti-01" class="tab-section" style="display: block;">
+
+            <!--div style="vertical-align: middle;"><img src="/images/construction.cone.png" height="26"> <b>Projets Low Tech&nbsp;!</b> <img src="/images/construction.cone.png" height="30"></div-->
+            <div class="txt-img-div-2">
+                <!--iframe src="https://akirodic.com/p/jellyfish/" style="width: 80%; height: 100%;"></iframe-->
+                <img src="./anita.conti/anita-conti-l.jpeg" style="width: 80%; margin: auto; margin-top: 5px;">
+                <div style="padding: 14px;">
+                    <h2>In Anita Conti's wake</h2>
+                    . . .
+                </div>
+            </div>
+        </div>
+
+        <div id="anita-conti-02" class="tab-section" style="display: none;">
+            <h2>Details</h2>
+            <div class="project-content" style="display: grid; grid-template-columns: 100%;">
+                <div style="overflow: auto;">
+                    . . .
+                </div>
+            </div>
+        </div>
+
+        <!--div id="anita-conti-03" class="tab-section" style="display: none;" onload="">
+            <div>
+                <div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+                    <label class="switch switch-element" style="margin-top: 0.5em;">
+                      <input id="passage-slider" type="checkbox" onchange="setAuto('slide-show-passage', this);" checked>
+                      <span class="slider round"></span>
+                    </label>
+                    <span class="switch-element">Auto-Scroll</span>
+                </div>		
+
+                <slide-show id="slide-show-passage"
+                            width="600"
+                            height="340"
+                            slideclick="onSlideShowClick"
+                            style="line-height: 1em;"
+                            title="Cliquez pour agrandir">
+                    <slide-show-image src="./passages/passages.001.jpg" title="1" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.002.jpg" title="2" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.003.jpg" title="3" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.004.jpg" title="4" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.005.jpg" title="5" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.006.jpg" title="6" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.007.jpg" title="7" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./passages/passages.008.jpg" title="8" desc="Cliquer pour agrandir"></slide-show-image>
+                </slide-show>
+            </div>
+        </div -->
+
+        <div id="anita-conti-04" class="tab-section" style="display: none;">
+            <h2>More info...</h2>
+            <div style="display: grid; grid-template-columns: 100%;">
+                <div>
+                    Contact : . . .<br/>
+                </div>
+            </div>
+        </div>
+
+        <!--div id="anita-conti-05" class="tab-section" style="display: none;">
+            <h2>Nous soutenir financi&egrave;rement</h2>
+            <div style="display: grid; grid-template-columns: 100%;">
+                <div style="display: grid; grid-template-columns: 100%;">
+                    <div>
+                        Faire un don par <a href="https://www.helloasso.com/associations/passe-coque-l-association-des-passeurs-d-ecoute/collectes/passages" target="HA">Hello Asso</a>.<br/>
+                        <img src="./passages/PassagesQRCode.png" style="width: 25vw;">
+                    </div>
+                </div>
+            </div>
+        </div-->
+    </div>
+
+</div>

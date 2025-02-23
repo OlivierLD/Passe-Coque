@@ -566,6 +566,26 @@ function decToSex(val, ns_ew) {
     return s;
 }
 
+let scrollHere = (parent) => {
+    console.log('Scroll Here invoked'); // scroll-margin-top may not be appropriate here
+    let href = parent.href.substring(parent.href.indexOf("#") + 1);
+    // Now look for the tab-section to scroll in
+    let ref = parent.parentNode;
+    while (ref !== undefined && !ref.classList.contains('tab-section')) {
+        console.log(`Classlist of ${ref.nodeName}: ${ref.classList}`);
+        ref = ref.parentNode;
+    }
+    let currentDialog = document.getElementById('info-tx-dialog');
+    // currentDialog.scrollTo(0, -60);
+    let anchor = document.querySelectorAll(`a[name="${href}"]`);
+    anchor[0].scrollIntoView();
+    // currentDialog.style.marginTop = '280px';
+    currentDialog.scrollIntoView();
+    // document.getElementById('current-content').scrollTo(0, -60);
+    // debugger;
+    return event.preventDefault();
+}
+
 /** 
  * Turn "N 47 40.66" into 47.677667
  * Warning: No deg sign, no min sign.
