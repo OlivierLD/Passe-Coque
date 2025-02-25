@@ -382,6 +382,7 @@ function publishAlmanac(string $stationName,
     return $content;
 }
 
+// TODO Add 1 month, 2 months, 3 months, 6 months...
 function publishStationDuration(string $stationName, int $year, ?int $month=null) : void {
     global $VERBOSE, $lang;
 

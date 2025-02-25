@@ -2969,3 +2969,41 @@ let jumpTo = (page, extraPrm) => {
         window.location.assign(newUrl); // Same window
     }
 };
+
+// Filters ?
+function searchProjects() {
+    let projectContainer = document.getElementById('project-container');
+    let projectArray = projectContainer.querySelectorAll("div.boat-frame");
+
+    let valueToLookFor = document.getElementById("search-field").value.trim();
+    if (valueToLookFor.trim().length > 0) {
+        console.log(`Looking for "${valueToLookFor}"`);
+        // produceSearchList(valueToLookFor);
+        projectArray.forEach(prjNode => {
+            console.log(`Scanning project ${prjNode.getAttribute('id')}...`);
+            let keywords = prjNode.getAttribute('keywords');
+            let matching = false;
+            if (keywords && keywords.length > 0) {
+                keywordsArray = keywords.split(';');
+                keywordsArray.forEach(kw => {
+                    if (kw.trim().length > 0) {
+                        if (valueToLookFor.match(kw.trim()) || kw.trim().toUpperCase().includes(valueToLookFor.toUpperCase())) {
+                            console.log(`-  "${valueToLookFor}" matches "${kw.trim()}"`);
+                            matching = true;
+                        }
+                    }
+                });
+            }
+            if (!matching) {
+                prjNode.style.display = 'none'; 
+            } else {
+                prjNode.style.display = 'inline'; // Restore, in case of previous filter
+            }
+        });
+    } else {
+        console.log("Nothing to look for...");
+        projectArray.forEach(prjNode => {
+            prjNode.style.display = 'inline'; 
+        });
+    }
+}
