@@ -2970,12 +2970,30 @@ let jumpTo = (page, extraPrm) => {
     }
 };
 
+function filterWasPressed(event) {
+    // debugger;
+    // console.log(event.key);
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        // event.preventDefault();
+        searchProjects();
+    }
+}
+
 // Filters ?
 function searchProjects() {
-    let projectContainer = document.getElementById('project-container');
+    filterProjectsOn('project-container', 'nb-prj');
+    filterProjectsOn('project-container-expired', 'nb-prj-exp');
+}
+
+function filterProjectsOn(divId, nbDivId) {
+    let projectContainer = document.getElementById(divId);
     let projectArray = projectContainer.querySelectorAll("div.boat-frame");
 
     let valueToLookFor = document.getElementById("search-field").value.trim();
+
+    let nbPrjSelected = 0;
+
     if (valueToLookFor.trim().length > 0) {
         console.log(`Looking for "${valueToLookFor}"`);
         // produceSearchList(valueToLookFor);
@@ -2998,12 +3016,17 @@ function searchProjects() {
                 prjNode.style.display = 'none'; 
             } else {
                 prjNode.style.display = 'inline'; // Restore, in case of previous filter
+                nbPrjSelected += 1;
             }
         });
     } else {
         console.log("Nothing to look for...");
         projectArray.forEach(prjNode => {
             prjNode.style.display = 'inline'; 
+            nbPrjSelected += 1;
         });
     }
+    // Update project number
+    document.getElementById(nbDivId).innerHTML = (currentLang == 'FR') ? `${nbPrjSelected} projet(s) selectionn&eacute;(s).` :
+                                                                         `${nbPrjSelected} project(s) selected.`;
 }

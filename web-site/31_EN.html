@@ -22,6 +22,13 @@
 
             <hr style="margin: 10px 0 30px 0;"/>
             Discover the projects Passe&#8209;Coque has initiated or followed since its creation (<i>most recents on top</i>):
+            <hr style="margin: 10px 0 30px 0;"/>
+
+            <div id="filter" style="text-align: left;">
+                <i>Filter (on project's name) </i>
+                <input type="search" size="30" class="search-item" placeholder="Filter on name or theme..." id="search-field" title="Enter filter on name. Supports RegExp." onkeydown="filterWasPressed(event);">
+                <button class="search-item" id="search-button" onclick="searchProjects();" title="Search Projects...">🔎</button>
+            </div>
 
             <!--
                 Ordre (reverse):
@@ -46,25 +53,26 @@
                 La tête à Toto
                 . . .
             -->
+            <div id="nb-prj" style="text-align: left;"></div>
             <div id="project-container" class="project-slides">
                 <!--
                     pix: 376x376
                 -->
-                <div id="tx-35" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'In Anita Conti\'s wake');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-35" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'In the wake of Anita Conti');" onmouseover="mouseOnTxPix(this);" keywords="anita; conti;">
                     <div class="boat-image-container" style="background-color: white;">
                         <img src="./anita.conti/anita-conti-l.jpeg" width="100%" style="margin-top:0; z-index: -1;">
                     </div>
-                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">In Anita Conti's wake<br/>Boat: La R&ecirc;veuse</span>
+                    <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">In the wake of Anita Conti<br/>Boat: La R&ecirc;veuse</span>
                 </div>
 
-                <div id="tx-34" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Passages');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-34" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Passages');" onmouseover="mouseOnTxPix(this);" keywords="lorient; theatre; passage;">
                     <div class="boat-image-container" style="background-color: white;">
                         <img src="./passages/passages.003.jpg" height="100%" style="margin-top:0; z-index: -1;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Project Passages</span>
                 </div>
 
-                <div id="tx-33" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Passe-Coque Trophy');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-33" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Passe-Coque Trophy');" onmouseover="mouseOnTxPix(this);" keywords="passe; coque; troph">
                     <div class="boat-image-container" style="background-color: white;">
                         <!--img src="./images/trophy.png" height="100%" style="margin-top:0; z-index: -1;"-->
                         <img src="./logos/pc-trophy.png" style="width: 50%; margin: auto; margin-top: 5px; z-index: -1;">
@@ -72,7 +80,7 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Passe-Coque Trophy</span>
                 </div>
 
-                <div id="tx-32" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Jericho!');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-32" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Jericho!');" onmouseover="mouseOnTxPix(this);" keywords="jericho; sauver; carter; acier; trompette">
                     <div class="boat-image-container" style="background-color: white; background-image: url(/images/boats/jericho/jericho.png); background-size: 100%; background-repeat: no-repeat;">
                         <!--img src="/images/boats/jericho/jericho.png" width="100%" style="margin-top:0; z-index: -1;"-->
                         <img src="./images/boats/jericho/jericho-2-2.jpeg" width="100%" style="margin-top:0; z-index: -1;">
@@ -81,7 +89,7 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Jericho!</span>
                 </div>
 
-                <div id="tx-31" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Projet Arp&egrave;ges');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-31" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Projet Arp&egrave;ges');" onmouseover="mouseOnTxPix(this);" keywords="arpege; arpège;">
                     <div class="boat-image-container" style="background-color: white; background-image: url(/images/boats/arpege.webp); background-size: 100%; background-repeat: no-repeat;">
                         <!--img src="/images/boats/arpege.webp" width="100%" style="margin-top:0; z-index: -1;"-->
                         <h2 class="not-on-small-screens" style="color: blue;">Several Arp&egrave;ges for a choral navigation!</h2>
@@ -89,28 +97,28 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Project Arp&egrave;ges</span>
                 </div>
 
-                <div id="tx-30" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'De Cap en Cap');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-30" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'De Cap en Cap');" onmouseover="mouseOnTxPix(this);" keywords="cap; benoiton; nomadict; gin; fizz">
                     <div class="boat-image-container" style="background-color: white;">
                         <img src="/images/boats/nomadict/nomadict.00.jpg" width="100%" style="margin-top:0;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">De Cap en Cap<br/>Boat: Nomadict</span>
                 </div>
 
-                <div id="tx-29" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Les Jeannettes');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-29" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Les Jeannettes');" onmouseover="mouseOnTxPix(this);" keywords="jeannette; solidaire; shadok">
                     <div class="boat-image-container" style="background-color: white;">
                         <img src="/shadok/shadok.01.png" width="100%" style="margin-top:0;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Les Jeannettes<br/>Solidarity Sailing</span>
                 </div>
 
-                <div id="tx-26" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'La t&ecirc;te &agrave; Toto');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-26" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'La t&ecirc;te &agrave; Toto');" onmouseover="mouseOnTxPix(this);" keywords="tete; toto; emission; zero">
                     <div class="boat-image-container">
                         <img src="/logos/la.tete.a.toto.jpeg" width="100%" style="margin-top:0;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">La T&ecirc;te &agrave; Toto<br/>Zero emission.</span>
                 </div>
 
-                <div id="tx-25" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'PHILOVENT');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-25" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'PHILOVENT');" onmouseover="mouseOnTxPix(this);" keywords="sculling; philippe; benoiton;">
                     <div class="boat-image-container">
                         <!--img src="/gag/gag.png" width="100%" style="margin-top:0;"-->
                         <img src="/gag/philippe.png" width="100%" style="margin-top:0;">
@@ -127,7 +135,7 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">WANTED&nbsp;! A Muscadet for the National 2024&nbsp;!</span>
                 </div-->
 
-                <div id="tx-20" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Low Tech Projects');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-20" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Low Tech Projects');" onmouseover="mouseOnTxPix(this);" keywords="low; tech; no-tech; no tech; raspberry;">
                     <div class="boat-image-container">
                         <img src="/images/pyramids.jpeg" width="100%">
                         <!--div style="color: orangered; font-size: 2.5em; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">Projets Low-Tech</div-->
@@ -135,28 +143,28 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Low-Tech projects</span>
                 </div>
 
-                <div id="tx-09" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Listen to the sea');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-09" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Listen to the sea');" onmouseover="mouseOnTxPix(this);" keywords="deaf; handicap; melkart; hearing">
                     <div class="boat-image-container">
                         <img src="./logos/logo.tiago.png" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Project "Entendre la mer"<br/>Boat: Melkart, Evasion 32</span>
                 </div>
 
-                <div id="tx-18" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-18" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="greta; school; lycee">
                     <div class="boat-image-container">
                         <img src="/images/boats/kelt620.jpeg" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Relations with<br/>high-schools and GRETA</span>
                 </div>
 
-                <div id="tx-16" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-16" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="isse; selection">
                     <div class="boat-image-container">
                         <img src="/images/boats/selection.png" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Isse'O<br/>Boat: Imagine, Selection&nbsp;37</span>
                 </div>
 
-                <div id="tx-24" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-24" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="voile; mag; arlequin; saudade; fx; crecy;">
                     <div class="boat-image-container">
                         <img src="/images/boats/voile.mag/voile.mag.01.jpeg" width="100%" style="margin-top: 8%;">
                         <!--div style="color: orangered; font-size: 2.5em; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">Projets Low-Tech</div-->
@@ -164,7 +172,7 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Super-Arlequin<br/>Voile Magazine</span>
                 </div>
 
-                <div id="tx-22" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-22" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="jolly; jumper; first; handicap; solidaire">
                     <div class="boat-image-container">
                         <img src="/images/boats/jolly.jumper.01.jpg" width="100%">
                         <!--div style="color: orangered; font-size: 2.5em; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">Projets Low-Tech</div-->
@@ -172,49 +180,49 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">First 325<br/>Jolly Jumper</span>
                 </div>
 
-                <div id="tx-03" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-03" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="cap; melvan; karate">
                     <div class="boat-image-container">
                         <img src="/cap.melvan/cap.melvan.png" width="100%" style="margin-top: 15%;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Cap Melvan<br/>Boat: Karate 33</span>
                 </div>
 
-                <div id="tx-02" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-02" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="passpartout; voyage; patrimoine">
                     <div class="boat-image-container">
                         <img src="/images/boats/passpartout.sq.png" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Voyages en Patrimoine<br/>Boat: Passpartout</span>
                 </div>
 
-                <div id="tx-08" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-08" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="felicie; afri; can">
                     <div class="boat-image-container">
                         <img src="/afri.can/felicie.african.jpg" width="100%" style="margin-top: 15%;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Afri'can<br/>Boat: F&eacute;licie</span>
                 </div>
 
-                <div id="tx-01" class="boat-image-plus-text boat-frame project-frame"onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-01" class="boat-image-plus-text boat-frame project-frame"onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="nav; solidaire; prothese;">
                     <div class="boat-image-container">
                         <img src="/nav.sol/Nav.Sol.home.png" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Nav'Solidaire<br/>Boat:&nbsp;<!--F&eacute;licie-->La R&ecirc;veuse</span>
                 </div>
 
-                <div id="tx-06" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-06" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="atlantide; pompier">
                     <div class="boat-image-container">
                         <img src="/images/boats/atlantide.sq.png" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Firemen association<br/>Boat: Atlantide</span>
                 </div>
 
-                <div id="tx-05" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-05" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="pordin; nancq; carter; 37">
                     <div class="boat-image-container">
                         <img src="/images/boats/pordin.jpg" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Pordin-Nancq<br/>Boat: Carter 37</span>
                 </div>
 
-                <div id="tx-07" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-07" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="grand; sud; horn; bene">
                     <div class="boat-image-container">
                         <img src="/images/la.cardinale.jpg" width="100%" style="margin-top: 15%;">
                     </div>
@@ -225,12 +233,13 @@
             <hr style="margin: 10px 0 30px 0;"/>
             <h2>Completed Projects</h2>
 
+            <div id="nb-prj-exp" style="text-align: left;"></div>
             <div id="project-container-expired" class="project-slides">
                 <!--
                     pix: 376x376
                 -->
 
-                <div id="tx-23" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Project Hublow');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-23" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Project Hublow');" onmouseover="mouseOnTxPix(this);" keywords="hublow; tiny; house">
                     <div class="boat-image-container">
                         <img src="/images/transmit/hublow.png" width="100%" style="margin-top: 8%;">
                         <!--div style="color: orangered; font-size: 2.5em; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">Projets Low-Tech</div-->
@@ -238,35 +247,35 @@
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Hublow - Unusual Light Habitat</span>
                 </div>
 
-                <div id="tx-04" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Project WATTer');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-04" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Project WATTer');" onmouseover="mouseOnTxPix(this);" keywords="watter; wind; mill;">
                     <div class="boat-image-container">
                         <img src="/images/boats/la.reveuse/la.reveuse.1.jpg" width="100%" style="margin-top: 15%;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">WATTer<br/>Boat: La R&ecirc;veuse</span>
                 </div>
 
-                <div id="tx-27" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'F&ecirc;tes Maritimes de Brest - 2024');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-27" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'F&ecirc;tes Maritimes de Brest - 2024');" onmouseover="mouseOnTxPix(this);" keywords="brest; maritime; 2024">
                     <div class="boat-image-container" style="background-color: white;">
                         <img src="/logos/brest-2024.svg" width="100%" style="margin-top:0;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">F&ecirc;tes Maritimes de Brest - 2024</span>
                 </div>
 
-                <div id="tx-28" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Rubi\'s Cup - 2024');" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-28" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this, 'Rubi\'s Cup - 2024');" onmouseover="mouseOnTxPix(this);" keywords="rubi; cup; groix; port; tudy; 2024">
                     <div class="boat-image-container" style="background-color: white;">
                         <img src="./images/rubis.cup.2024.webp" width="100%" style="margin-top:0;">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Rubi's Cup - 2024</span>
                 </div>
 
-                <div id="tx-17" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-17" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="cap; martinique; benoiton; philippe">
                     <div class="boat-image-container">
                         <img src="/images/philippe.benoiton.png" width="100%">
                     </div>
                     <span style="position: relative; display: block; bottom: 4px; line-height: 1.1em;">Cap Martinique 2024<br/>with Philippe Benoiton</span>
                 </div>
 
-                <div id="tx-21" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);">
+                <div id="tx-21" class="boat-image-plus-text boat-frame project-frame" onclick="clickOnTxPix(this);" onmouseover="mouseOnTxPix(this);" keywords="national; muscadet; 2024">
                     <div class="boat-image-container">
                         <img src="/images/boats/wanted.mumu.png" width="100%">
                     </div>
