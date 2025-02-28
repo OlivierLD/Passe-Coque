@@ -281,7 +281,7 @@ let clack = (origin) => {
 
 	let contentName = `/${originId}_${currentLang}.html`; // From the origin !!
     // Specific content rule(s)
-	if (false && originId === "62") {  // Not used...
+	if (false && originId === "62") {  // Not used... But couyld be.
 		contentName = "carrousel.html";
 	} else if (originId === "22" || originId === "23") { // Menu 2, special management, see below (ONE page only)
         contentName = `21_${currentLang}.html`; // 21, 22 & 23, same doc, different anchor (hashtag).
@@ -291,6 +291,9 @@ let clack = (origin) => {
         contentName = `/7_${currentLang}.html`; // Bypass regular behavior...
     } else if (originId === "68") {
         // Fill out agenda content
+    } else if (originId === "10") {
+        // Finder!
+
     } else if (originId === "8") { 
         contentName = `/64_${currentLang}.html`; // Bypass regular behavior...
     }
@@ -310,6 +313,9 @@ let clack = (origin) => {
 						} else */ 
                         if (false && originId === "23") { // Not used, an example of a dialog. Content inserted in the <dialog>
 							document.getElementById("dialog-content").innerHTML = doc;
+							showAboutDialog();
+                        } else if (originId === "10") { // The finder
+                            document.getElementById("dialog-content").innerHTML = doc; // '<div>Akeu Coucou</div>';
 							showAboutDialog();
 						} else {
 							contentPlaceHolder.innerHTML = doc;
@@ -442,6 +448,8 @@ let updateMenu = () => { // Multilang aspect.
 	// document.querySelectorAll("#_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 	document.querySelectorAll("#ms_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " Espace Membres" : " Members Space"));
 	document.querySelectorAll("#bs_8").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " La boutique" : " The shop"));
+    // No 9, Navigation works for both languages
+	document.querySelectorAll("#bs_10").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " Recherche..." : " Search..."));
 };
 
 let switchLanguage = () => {
@@ -3029,4 +3037,183 @@ function filterProjectsOn(divId, nbDivId) {
     // Update project number
     document.getElementById(nbDivId).innerHTML = (currentLang == 'FR') ? `${nbPrjSelected} projet(s) selectionn&eacute;(s).` :
                                                                          `${nbPrjSelected} project(s) selected.`;
+}
+
+// For the global filters
+const KEYWORDS = [
+	{
+		name: 'Meteo',
+		keywords: [ 'meteo', 'météo' ],
+		url: '/tech.and.nav/meteo.php',
+		comment: 'Sites de previsions meteo.'
+	},
+	{
+		name: 'Marees',
+		keywords: [ 'maree', 'marée', 'almanac' ],
+		url: '/tech.and.nav/tides.es6/leaflet.tide.stations.html',
+		comment: 'Marées dans le monde.'
+	},
+	{
+		name: 'Publication d\'almanachs',
+		keywords: [ 'astro' , 'maree', 'marée', 'almanac' ],
+		url: '/?nav-to=7&goto=almanacs',
+		comment: 'Divers almanachs.'
+	},
+	{
+		name: 'Vie de l\'asso',
+		keywords: [ 'asso' , 'vie asso', 'vie de l\'asso' ],
+		url: '/?nav-to=68',
+		comment: ''
+	},
+	// Projet(s) ?
+	{
+		name: 'Projets',
+		keywords: [ 'projet', 'projects' ],
+		url: '/?nav-to=31',
+		comment: 'Tous les projets'
+	},
+	{
+		name: 'Low-Tech projects',
+		keywords: [ 'low' , 'tech', 'raspberry', 'no tech', 'no-tech', 'low-tech' ],
+		url: '/?nav-to=31&tx=20',
+		comment: 'Plusieurs projets Low-Tech.'
+	},
+	{
+		name: 'Projet Jericho',
+		keywords: [ 'boat', 'bateau', 'jericho', 'carter', 'acier', 'steel' ],
+		url: '/?nav-to=31&tx=32',
+		comment: 'Carter.'
+	},
+	{
+		name: 'Projet La Tête à Toto',
+		keywords: [ 'low' , 'tech', 'raspberry', 'no tech', 'no-tech', 'low-tech', 'zero', 'emission', 'tete', 'tête', 'toto' ],
+		url: '/?nav-to=31&tx=26',
+		comment: 'Zero emission.'
+	},
+	{
+		name: 'Projet Entendre la Mer',
+		keywords: [ 'handicap' , 'entendre', 'listen', 'the sea', 'la mer', 'tiago', 'evasion', 'melkart' ],
+		url: '/?nav-to=31&tx=09',
+		comment: ''
+	},
+	{
+		name: 'Anita Conti',
+		keywords: [ 'anita' , 'conti', 'reveuse', 'rêveuse', 'marseille', 'sillage', 'wake' ],
+		url: '/?nav-to=31&tx=35',
+		comment: 'Dans le sillage d\'Anita Conti'
+	},
+	// Bateau(x) ?
+	{
+		name: 'La Flotte',
+		keywords: [ 'bateau', 'boat', 'flotte', 'fleet' ],
+		url: '/?nav-to=4',
+		comment: 'Tous les bateaux'
+	},
+	{
+		name: 'Eh\'Tak',
+		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'eh\'tak', 'shipman', 'shipman 28' ],
+		url: '/?nav-to=4&boat-id=eh-tak',
+		comment: 'Shipman 28.'
+	},
+	{
+		name: 'Le Melkart',
+		keywords: [ 'handicap' , 'entendre', 'listen', 'the sea', 'la mer', 'tiago', 'evasion', 'melkart' ],
+		url: '/?nav-to=4&boat-id=melkart',
+		comment: 'Evasion 32'
+	},
+	{
+		name: 'Pordin Nancq',
+		keywords: [ 'boat', 'bateau', 'pordin', 'pordin-nancq' , 'carter', 'carter 37' ],
+		url: '/?nav-to=4&boat-id=pordin-nancq',
+		comment: 'Carter 37.'
+	}
+];
+
+// "Enter" in the field ()not the button)
+function filterWasPressed(event) {
+    // debugger;
+    // console.log(event.key);
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        // event.preventDefault();
+        findIt();
+    }
+}
+
+// Filters ?
+function findIt() {
+    filterOn();
+}
+
+function createListElement(name, url, comment) {
+	let li = document.createElement('li');
+	let a = document.createElement('a');
+	a.href = url;
+	// a.target = '_blank';
+	a.appendChild(document.createTextNode(`${name} - ${comment}`));
+	li.appendChild(a);
+
+	return li;
+}
+
+function filterOn() {
+    let valueToLookFor = document.getElementById("search-field").value.trim();
+
+    let nbItemsSelected = 0;
+
+	let foundElements = [];
+
+    if (valueToLookFor.trim().length > 0) {
+        console.log(`Looking for "${valueToLookFor}"`);
+        // produceSearchList(valueToLookFor);
+        KEYWORDS.forEach(searchItem => {
+            console.log(`Scanning ${searchItem.name}...`);
+            let keywordsArray = searchItem.keywords;
+            let matching = false;
+            if (keywordsArray.length > 0) {
+                keywordsArray.forEach(kw => {
+                    if (kw.trim().length > 0) {
+                        if (valueToLookFor.match(kw.trim()) || kw.trim().toUpperCase().includes(valueToLookFor.toUpperCase())) {
+                            console.log(`-  "${valueToLookFor}" matches "${kw.trim()}"`);
+                            matching = true;
+                        }
+                    }
+                });
+            }
+            if (!matching) {
+                // Nope
+            } else {
+                foundElements.push(createListElement(searchItem.name, searchItem.url, searchItem.comment));
+                nbItemsSelected += 1;
+            }
+        });
+    } else {
+        console.log("Nothing to look for...");
+		// C'est un peu vague...
+		// Display all the site
+
+		foundElements.push(createListElement('Passe-Coque', '/', 'Le site de Passe-Coque'));
+        nbItemsSelected += 1;
+    }
+
+	// Append foundElements
+	if (nbItemsSelected > 0) {
+		let elementList = document.createElement('ul');
+		foundElements.forEach(child => {
+			elementList.appendChild(child);
+		});
+		let suggestedList = document.getElementById('suggested-list');
+		suggestedList.innerHTML = '';
+		while (suggestedList.childElementCount > 0) {
+			suggestedList.removeChild(suggestedList.childNodes[0]);
+		}
+		suggestedList.appendChild(elementList);
+	} else {
+		let suggestedList = document.getElementById('suggested-list');
+		while (suggestedList.childElementCount > 0) {
+			suggestedList.removeChild(suggestedList.childNodes[0]);
+		}
+		suggestedList.innerHTML = 'Rien trouv&eacute;...';
+	}
+
 }
