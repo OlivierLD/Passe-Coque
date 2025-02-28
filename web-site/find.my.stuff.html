@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- 
+	Hublow
+-->
+<head>
+	<meta charset="UTF-8">
+	<title>Passe-Coque - Finder (WiP)</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="icon" type="image/png" href="./logos/LOGO_PC_no_txt.png">
+
+	<link rel="stylesheet" href="./passe-coque.css" type="text/css"/>
+	<style type="text/css">
+		.div-bg {
+			height: 100%;
+			width: 100%;
+			background-image: url('./logos/LOGO_PC_no_txt.png');
+			background-color: rgba(255, 255, 255, 0.6);
+			background-blend-mode: lighten;
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			/* top: 50px;
+			left: 150px;
+			width: 90%;
+			height: 90%; */
+			position: absolute;
+			/* opacity: 0.10; */
+		}
+    </style>
+
+</head>
+	
+<body>
+	<div class="div-bg">
+		<h1>What are you looking for?</h1>
+		M&eacute;t&eacute;o ? Mar&eacute;es ? Les projets (un projet precis ?) ? La vie de l'asso ? Les actualit&eacute;s ? La flotte (un bateau precis ?)
+
+		<div id="filter" style="text-align: left;">
+			<i>Dites-nous&nbsp;: </i>
+			<input type="search" size="30" class="search-item" placeholder="Recherche par nom ou th&egrave;me..." id="search-field" title="Enter something. Supports RegExp." onkeydown="filterWasPressed(event);">
+			<button class="search-item" id="search-button" onclick="findIt();" title="Search the site...">🔎</button>
+		</div>
+
+		<div id="suggested-list">
+
+		</div>
+
+		<hr/>
+		<address>&copy; Passe-Coque, 2025</address>
+	</div>
+</body>
+
+<script type="text/javascript">
+
+const KEYWORDS = [
+	{
+		name: 'Meteo',
+		keywords: [ 'meteo', 'météo' ],
+		url: '/tech.and.nav/meteo.php',
+		comment: 'Sites de previsions meteo.'
+	},
+	{
+		name: 'Marees',
+		keywords: [ 'maree', 'marée', 'almanac' ],
+		url: '/tech.and.nav/tides.es6/leaflet.tide.stations.html',
+		comment: 'Marées dans le monde.'
+	},
+	{
+		name: 'Publication d\'almanachs',
+		keywords: [ 'astro' , 'maree', 'marée', 'almanac' ],
+		url: '/?nav-to=7&goto=almanacs',
+		comment: 'Divers almanachs.'
+	},
+	{
+		name: 'Vie de l\'asso',
+		keywords: [ 'asso' , 'vie asso', 'vie de l\'asso' ],
+		url: '/?nav-to=68',
+		comment: ''
+	},
+	// Projet(s) ?
+	{
+		name: 'Projets',
+		keywords: [ 'projet', 'projects' ],
+		url: '/?nav-to=31',
+		comment: 'Tous les projets'
+	},
+	{
+		name: 'Low-Tech projects',
+		keywords: [ 'low' , 'tech', 'raspberry', 'no tech', 'no-tech', 'low-tech' ],
+		url: '/?nav-to=31&tx=26',
+		comment: 'Plusieurs projets Low-Tech.'
+	},
+	/// Bateau(x) ?
+	{
+		name: 'La Flotte',
+		keywords: [ 'bateau', 'boat', 'flotte', 'fleet' ],
+		url: '/?nav-to=4',
+		comment: 'Tous les bateaux'
+	},
+{
+		name: 'Eh\'Tak',
+		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'eh\'tak', 'shipman', 'shipman 28' ],
+		url: '/?nav-to=4&boat-id=eh-tak',
+		comment: 'Shipman 28.'
+	}
+];
+
+// "Enter" in the field ()not the button)
+function filterWasPressed(event) {
+    // debugger;
+    // console.log(event.key);
+    if (event.key === "Enter") {
+        // Cancel the default action, if needed
+        // event.preventDefault();
+        findIt();
+    }
+}
+
+// Filters ?
+function findIt() {
+    filterOn();
+}
+
+function createListElement(name, url, comment) {
+	let li = document.createElement('li');
+	let a = document.createElement('a');
+	a.href = url;
+	a.target = '_blank';
+	a.appendChild(document.createTextNode(`${name} - ${comment}`));
+	li.appendChild(a);
+
+	return li;
+}
+
+function filterOn() {
+    let valueToLookFor = document.getElementById("search-field").value.trim();
+
+    let nbItemsSelected = 0;
+
+	let foundElements = [];
+
+    if (valueToLookFor.trim().length > 0) {
+        console.log(`Looking for "${valueToLookFor}"`);
+        // produceSearchList(valueToLookFor);
+        KEYWORDS.forEach(searchItem => {
+            console.log(`Scanning ${searchItem.name}...`);
+            let keywordsArray = searchItem.keywords;
+            let matching = false;
+            if (keywordsArray.length > 0) {
+                keywordsArray.forEach(kw => {
+                    if (kw.trim().length > 0) {
+                        if (valueToLookFor.match(kw.trim()) || kw.trim().toUpperCase().includes(valueToLookFor.toUpperCase())) {
+                            console.log(`-  "${valueToLookFor}" matches "${kw.trim()}"`);
+                            matching = true;
+                        }
+                    }
+                });
+            }
+            if (!matching) {
+                // Nope
+            } else {
+                foundElements.push(createListElement(searchItem.name, searchItem.url, searchItem.comment));
+                nbItemsSelected += 1;
+            }
+        });
+    } else {
+        console.log("Nothing to look for...");
+		// C'est un peu vague...
+		// Display all the site
+
+		foundElements.push(createListElement('Passe-Coque', '/', 'Le site de Passe-Coque'));
+        nbItemsSelected += 1;
+    }
+
+	// Append foundElements
+	if (nbItemsSelected > 0) {
+		let elementList = document.createElement('ul');
+		foundElements.forEach(child => {
+			elementList.appendChild(child);
+		});
+		let suggestedList = document.getElementById('suggested-list');
+		suggestedList.innerHTML = '';
+		while (suggestedList.childElementCount > 0) {
+			suggestedList.removeChild(suggestedList.childNodes[0]);
+		}
+		suggestedList.appendChild(elementList);
+	} else {
+		let suggestedList = document.getElementById('suggested-list');
+		while (suggestedList.childElementCount > 0) {
+			suggestedList.removeChild(suggestedList.childNodes[0]);
+		}
+		suggestedList.innerHTML = 'Rien trouv&eacute;...';
+	}
+
+}
+
+window.onload = () => {
+	console.log("Loaded!");
+};
+
+</script>
+
+</html>    
