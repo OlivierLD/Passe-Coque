@@ -513,6 +513,7 @@ window.onload = () => {
 	 * - nav-to   Menu point (ex: 31 for Projects, 4 for the fleet, 62 for actu, etc)
 	 * - tx       Project number
 	 * - boat-id  for the fleet, id of the boat.
+	 * - who      for team members
 	 */
 
 	let userLang = getQueryParameterByName('lang');
@@ -603,6 +604,13 @@ window.onload = () => {
 			// 	// Bof !
 			// }
 			clickOnBoatPix(el, boatName);
+		}
+		let who = getQueryParameterByName('who');  // A team member id ?
+		if (who) {
+			// It's up to the user to set the page on the right id/nav-to (like 21 here)
+			let el = document.createElement("div"); 
+			el.id = `${who}`;
+			aboutSomeone(el);
 		}
 	}
 

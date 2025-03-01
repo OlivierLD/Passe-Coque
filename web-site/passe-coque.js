@@ -17,6 +17,8 @@ let showAboutDialog = () => {
     }
 };
 
+// let aboutDialogOpened = true;
+
 let closeAboutDialog = () => {
     let aboutDialog = document.getElementById("about-dialog");
     // If welcome content
@@ -51,7 +53,6 @@ let closeAboutDialog = () => {
                 if (dialogTitle) {
                     dialogTitle[0].innerText = '';
                 }
-            
             }
         };
         // window.setTimeout(() => {
@@ -60,6 +61,8 @@ let closeAboutDialog = () => {
             }
         //}, rotWaitTime);
     } else {
+        // debugger;
+        // console.log("No Welcome message, Closing.")
         if (aboutDialog.close !== undefined) {
             aboutDialog.close();
             aboutDialog.style.display = 'none';
@@ -188,7 +191,9 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
             }
             aboutDialog.style.display = 'none';
         } else {
-            closeAboutDialog();
+            if (aboutDialog.style.display !== 'none' && aboutDialog.querySelectorAll('.welcome-message').length > 0) { // Not closed already
+                closeAboutDialog();
+            }
         }
     }, timeout);
 };
@@ -3039,23 +3044,23 @@ function filterProjectsOn(divId, nbDivId) {
                                                                          `${nbPrjSelected} project(s) selected.`;
 }
 
-// For the global filters
+// For the global filters, in search (in the menu)
 const KEYWORDS = [
 	{
 		name: 'Meteo',
-		keywords: [ 'meteo', 'météo' ],
+		keywords: [ 'meteo', 'météo', 'weather', 'forecast', 'prevision', 'prévision' ],
 		url: '/tech.and.nav/meteo.php',
 		comment: 'Sites de previsions meteo.'
 	},
 	{
 		name: 'Marees',
-		keywords: [ 'maree', 'marée', 'almanac' ],
+		keywords: [ 'maree', 'marée', 'almanac', 'tide', 'tidal' ],
 		url: '/tech.and.nav/tides.es6/leaflet.tide.stations.html',
 		comment: 'Marées dans le monde.'
 	},
 	{
 		name: 'Publication d\'almanachs',
-		keywords: [ 'astro' , 'maree', 'marée', 'almanac' ],
+		keywords: [ 'astro' , 'maree', 'marée', 'almanac', 'publication', 'publish' ],
 		url: '/?nav-to=7&goto=almanacs',
 		comment: 'Divers almanachs.'
 	},
@@ -3073,16 +3078,58 @@ const KEYWORDS = [
 		comment: 'Tous les projets'
 	},
 	{
-		name: 'Low-Tech projects',
-		keywords: [ 'low' , 'tech', 'raspberry', 'no tech', 'no-tech', 'low-tech' ],
-		url: '/?nav-to=31&tx=20',
-		comment: 'Plusieurs projets Low-Tech.'
+		name: 'Anita Conti',
+		keywords: [ 'anita' , 'conti', 'reveuse', 'rêveuse', 'marseille', 'lorient', 'fecamp', 'fécamp', 'sillage', 'wake' ],
+		url: '/?nav-to=31&tx=35',
+		comment: 'Dans le sillage d\'Anita Conti'
+	},
+	{
+		name: 'Passages',
+		keywords: [ 'theatre' , 'theater', 'théatre', 'lorient', '56', 'hydrophone', 'radio', 'balise', 'sauvegarde' ],
+		url: '/?nav-to=31&tx=34',
+		comment: 'Projet Passages'
+	},
+	{
+		name: 'Passe-Coque Trophy',
+		keywords: [ 'trophy', 'passe', 'coque', 'passe-coque', 'passe coque' ],
+		url: '/?nav-to=31&tx=33',
+		comment: 'Projet Passe-Coque Trophy'
 	},
 	{
 		name: 'Projet Jericho',
 		keywords: [ 'boat', 'bateau', 'jericho', 'carter', 'acier', 'steel' ],
 		url: '/?nav-to=31&tx=32',
-		comment: 'Carter.'
+		comment: 'un Carter à restaurer.'
+	},
+	{
+		name: 'Plusieurs Arpèges',
+		keywords: [ 'arpège', 'arpege', 'choral' ],
+		url: '/?nav-to=31&tx=31',
+		comment: 'Projet Arpèges'
+	},
+	{
+		name: 'De Cap en Cap',
+		keywords: [ 'cap', 'benoiton', 'gin', 'fizz', 'nomadict', 'difficulte', 'difficulté', 'jeune' ],
+		url: '/?nav-to=31&tx=30',
+		comment: 'Projet De Cap en Cap'
+	},
+	{
+		name: 'Les Jeannettes',
+		keywords: [ 'solidaire', 'social', 'artistique', 'jeannette', 'shadok' ],
+		url: '/?nav-to=31&tx=29',
+		comment: 'Projet Les Jeannettes'
+	},
+	{
+		name: 'Rubi\'s Cup 2024',
+		keywords: [ '' ],
+		url: '/?nav-to=31&tx=28',
+		comment: 'Projet Rubi\'s Cup'
+	},
+	{
+		name: 'Fêtes Maritimes, Brest 2024',
+		keywords: [ 'fete', 'fête', 'maritime', 'brest', '2024' ],
+		url: '/?nav-to=31&tx=27',
+		comment: 'Projet Brest 2024'
 	},
 	{
 		name: 'Projet La Tête à Toto',
@@ -3091,16 +3138,112 @@ const KEYWORDS = [
 		comment: 'Zero emission.'
 	},
 	{
-		name: 'Projet Entendre la Mer',
-		keywords: [ 'handicap' , 'entendre', 'listen', 'the sea', 'la mer', 'tiago', 'evasion', 'melkart' ],
-		url: '/?nav-to=31&tx=09',
+		name: 'Projet Philovent',
+		keywords: [ 'godille', 'scull', 'benoiton' ],
+		url: '/?nav-to=31&tx=25',
+		comment: 'Pour Philippe'
+	},
+	{
+		name: 'Refit du Super-Arlequin "Saudade"',
+		keywords: [ 'super', 'arlequin', 'saudade', 'magazine', 'voile magazine', 'fx', 'crecy' ],
+		url: '/?nav-to=31&tx=24',
+		comment: 'Projet porté par Voile Magazine'
+	},
+	{
+		name: 'Hublow',
+		keywords: [ 'tiny house', 'tiny', 'habitat', 'insolite', 'hublow' ],
+		url: '/?nav-to=31&tx=23',
+		comment: 'A l\'origine de Flow'
+	},
+	{
+		name: 'Jolly Jumper',
+		keywords: [ 'handicap', 'handivoile', 'ffv', 'jolly jumper', 'jolly', 'jumper', 'sables d\'olonne' ],
+		url: '/?nav-to=31&tx=22',
 		comment: ''
 	},
 	{
-		name: 'Anita Conti',
-		keywords: [ 'anita' , 'conti', 'reveuse', 'rêveuse', 'marseille', 'sillage', 'wake' ],
-		url: '/?nav-to=31&tx=35',
-		comment: 'Dans le sillage d\'Anita Conti'
+		name: 'National Muscadet 2024',
+		keywords: [ 'national', 'muscadet', '2024' ],
+		url: '/?nav-to=31&tx=21',
+		comment: ''
+	},
+	{
+		name: 'Low-Tech projects',
+		keywords: [ 'low' , 'tech', 'raspberry', 'no tech', 'no-tech', 'low-tech' ],
+		url: '/?nav-to=31&tx=20',
+		comment: 'Plusieurs projets Low-Tech.'
+	},
+	{
+		name: 'GRETA',
+		keywords: [ 'greta', 'lycee', 'lycée' ],
+		url: '/?nav-to=31&tx=18',
+		comment: 'Relations avec les Lycées et GRETA'
+	},
+	{
+		name: 'Cap Martinique',
+		keywords: [ 'cap', 'martinique', 'benoiton', 'philippe' ],
+		url: '/?nav-to=31&tx=17',
+		comment: 'Avec Philippe Benoiton'
+	},
+	{
+		name: 'Isse\'O',
+		keywords: [ 'handicap', 'insertion', 'inclusion', 'professionel', 'social' ],
+		url: '/?nav-to=31&tx=16',
+		comment: 'Inclusion sociale et professionnelle des personnes en situation de handicap par la pratique de la voile'
+	},
+	{
+		name: 'Projet Entendre la Mer',
+		keywords: [ 'handicap' , 'entendre', 'listen', 'the sea', 'la mer', 'tiago', 'evasion', 'melkart' ],
+		url: '/?nav-to=31&tx=09',
+		comment: 'A bord de Melkart'
+	},
+	{
+		name: 'Afri\'Can',
+		keywords: [ 'prothese', 'prothèse', 'felicie', 'félicie' ],
+		url: '/?nav-to=31&tx=08',
+		comment: 'Projet Afri\'Can'
+	},
+	{
+		name: 'Objectif Grand Sud',
+		keywords: [ 'cardinale', 'chili', 'argentine', 'puerto williams', 'horn', 'antarctique', 'bernard', 'ravignan' ],
+		url: '/?nav-to=31&tx=07',
+		comment: 'À bord de "La Cardinale"'
+	},
+	{
+		name: 'Asso Pompiers',
+		keywords: [ 'asso', 'pompier', 'etel' ],
+		url: '/?nav-to=31&tx=06',
+		comment: ''
+	},
+	{
+		name: 'Pordin-Nancq',
+		keywords: [ 'carter', 'carter 37', 'pordin', 'pordin-nancq', 'pordin nancq' ],
+		url: '/?nav-to=31&tx=05',
+		comment: 'Project Pordin-Nancq, Carter 37'
+	},
+	{
+		name: 'WATTer',
+		keywords: [ 'watt', 'watter', 'reveuse', 'rêveuse' ],
+		url: '/?nav-to=31&tx=04',
+		comment: 'Projet WATTer, avec La Rêveuse'
+	},
+	{
+		name: 'Cap Melvan',
+		keywords: [ 'cap', 'meklvan', 'karate', 'karaté' ],
+		url: '/?nav-to=31&tx=03',
+		comment: ''
+	},
+	{
+		name: 'Voyages en Patrimoine',
+		keywords: [ 'passpartout', 'patrimoine' ],
+		url: '/?nav-to=31&tx=02',
+		comment: ''
+	},
+	{
+		name: 'Nav\'Solidaire',
+		keywords: [ 'nav', 'solidaire', 'prothese', 'prothèse', 'afrique', 'gambie', 'senegal', ,'sénégal' ],
+		url: '/?nav-to=31&tx=01',
+		comment: 'À bord de "La Rêveuse"'
 	},
 	// Bateau(x) ?
 	{
@@ -3111,7 +3254,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Eh\'Tak',
-		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'eh\'tak', 'shipman', 'shipman 28' ],
+		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'eh\'tak', 'shipman', 'shipman 28', 'etel' ],
 		url: '/?nav-to=4&boat-id=eh-tak',
 		comment: 'Shipman 28.'
 	},
@@ -3125,8 +3268,316 @@ const KEYWORDS = [
 		name: 'Pordin Nancq',
 		keywords: [ 'boat', 'bateau', 'pordin', 'pordin-nancq' , 'carter', 'carter 37' ],
 		url: '/?nav-to=4&boat-id=pordin-nancq',
-		comment: 'Carter 37.'
+		comment: 'Le bateau, Carter 37.'
+	},
+	{
+		name: 'Anao',
+		keywords: [ 'boat', 'bateau', 'folie douce', 'anao' ],
+		url: '/?nav-to=4&boat-id=anao',
+		comment: 'Le bateau, Folie Douce'
+	},
+	{
+		name: 'Ar Mor Van',
+		keywords: [ 'boat', 'bateau', 'mor van', 'kelt 620' ],
+		url: '/?nav-to=4&boat-id=ar-mor-van',
+		comment: 'Le bateau, Kelt 620'
+	},
+	{
+		name: 'Araben',
+		keywords: [ 'boat', 'bateau', 'araben', 'mauric', 'one off' ],
+		url: '/?nav-to=4&boat-id=araben',
+		comment: 'Le bateau, One off Mauric'
+	},
+	{
+		name: 'Atlantide',
+		keywords: [ 'boat', 'bateau', 'atlantide', 'gibsea', '33' ],
+		url: '/?nav-to=4&boat-id=atlantide',
+		comment: 'Le bateau, GibSea 33'
+	},
+	{
+		name: 'Avel Mad',
+		keywords: [ 'boat', 'bateau', 'avel mad', 'mousquetaire', 'herbulot' ],
+		url: '/?nav-to=4&boat-id=avel-mad',
+		comment: 'Le bateau, Mousquetaire'
+	},
+	{
+		name: 'Bémol III',
+		keywords: [ 'boat', 'bateau', 'bemol', 'sun rise' ],
+		url: '/?nav-to=4&boat-id=bemol',
+		comment: 'Le bateau, Sun Rise 35'
+	},
+	{
+		name: 'Babou',
+		keywords: [ 'boat', 'bateau', 'babou', 'catamaran', 'flying phantom' ],
+		url: '/?nav-to=4&boat-id=babou',
+		comment: 'Le bateau, Flying Phantom'
+	},
+	{
+		name: 'Coevic 2',
+		keywords: [ 'boat', 'bateau', 'coevic', 'mirage 28', 'lorient' ],
+		url: '/?nav-to=4&boat-id=coevic-2',
+		comment: 'Le bateau, Mirage 28'
+	},
+	{
+		name: 'Coraxy',
+		keywords: [ 'boat', 'bateau', 'coraxy', 'guy', 'cognac', 'harlé', 'harle' ],
+		url: '/?nav-to=4&boat-id=coraxy',
+		comment: 'Le bateau, Cognac'
+	},
+	{
+		name: 'Félicie',
+		keywords: [ 'boat', 'bateau', 'felicie', 'félicie', 'presles' ],
+		url: '/?nav-to=4&boat-id=felicie',
+		comment: 'Le bateau, One off Presles'
+	},
+	{
+		name: 'Gwenillig',
+		keywords: [ 'boat', 'bateau', 'gwenellig', 'Eygthene 24', 'bernard', 'bene', 'benny' ],
+		url: '/?nav-to=4&boat-id=gwenillig',
+		comment: 'Le bateau, Eygthene 24'
+	},
+	{
+		name: 'Ia Orana',
+		keywords: [ 'boat', 'bateau', 'ia orana', 'iaorana', 'milord' ],
+		url: '/?nav-to=4&boat-id=ia-orana',
+		comment: 'Le bateau, Milord'
+	},
+	{
+		name: 'Iapix',
+		keywords: [ 'boat', 'bateau', 'iapix', 'offshore 35' ],
+		url: '/?nav-to=4&boat-id=iapix',
+		comment: 'Le bateau, Offshore 35'
+	},
+	{
+		name: 'Imagine',
+		keywords: [ 'boat', 'bateau', 'imagine', 'selection', '37' ],
+		url: '/?nav-to=4&boat-id=imagine',
+		comment: 'Le bateau, Selection 37'
+	},
+	{
+		name: 'Jolly Jumper',
+		keywords: [ 'boat', 'bateau', 'jolly', 'jumper', 'first 325', 'sables d\'olonne' ],
+		url: '/?nav-to=4&boat-id=jolly-jumper',
+		comment: 'Le bateau, First 325'
+	},
+	{
+		name: 'Jules Verne',
+		keywords: [ 'boat', 'bateau', 'jules', 'verne', 'sir 520' ],
+		url: '/?nav-to=4&boat-id=jules-verne',
+		comment: 'Le bateau, SIR 520'
+	},
+	{
+		name: 'L\'Heure Bleue',
+		keywords: [ 'boat', 'bateau', 'heure bleue', 'arpege', 'arpège' ],
+		url: '/?nav-to=4&boat-id=heure-bleue',
+		comment: 'Le bateau, Arpège'
+	},
+	{
+		name: 'La Rêveuse',
+		keywords: [ 'boat', 'bateau', 'reveuse', 'rêveuse', 'damien 40', 'acier' ],
+		url: '/?nav-to=4&boat-id=la.reveuse',
+		comment: 'Le bateau, Damien 40'
+	},
+	{
+		name: 'Lady of Solent',
+		keywords: [ 'boat', 'bateau', 'lady of solent', 'contessa', 'contessa 35' ],
+		url: '/?nav-to=4&boat-id=los',
+		comment: 'Le bateau, Contessa 35'
+	},
+	{
+		name: 'Lohengrin',
+		keywords: [ 'boat', 'bateau', 'lohengrin', 'ketch', 'acier' ],
+		url: '/?nav-to=4&boat-id=lohengrin',
+		comment: 'Le bateau, Ketch en acier'
+	},
+	{
+		name: 'Ma Enez',
+		keywords: [ 'boat', 'bateau', 'ma enez', 'symphonie', 'alain' ],
+		url: '/?nav-to=4&boat-id=ma-enez',
+		comment: 'Le bateau, Symphonie'
+	},
+	{
+		name: 'Manu Oviri',
+		keywords: [ 'boat', 'bateau', 'manu', 'oviri', 'manu oviri', 'comanche', 'comanche 32', 'etel', 'regis', 'régis' ],
+		url: '/?nav-to=4&boat-id=manu-oviri',
+		comment: 'Le bateau, Comanche 32'
+	},
+	{
+		name: 'Melvan',
+		keywords: [ 'boat', 'bateau', 'melvan', 'karate', 'karate 33', 'karaté', 'karaté 33' ],
+		url: '/?nav-to=4&boat-id=melvan',
+		comment: 'Le bateau, Karaté 33'
+	},
+	{
+		name: 'Mirella',
+		keywords: [ 'boat', 'bateau', 'mirfella', 'maica', 'maica 12.50' ],
+		url: '/?nav-to=4&boat-id=mirella',
+		comment: 'Le bateau, Maica 12.50'
+	},
+	{
+		name: 'Nomadict',
+		keywords: [ 'boat', 'bateau', 'nomadict', 'gin fizz', 'gin', 'fizz' ],
+		url: '/?nav-to=4&boat-id=nomadict',
+		comment: 'Le bateau, Gin Fizz'
+	},
+	{
+		name: 'Passpartout',
+		keywords: [ 'boat', 'bateau', 'passpartout', 'lorient', 'acier' ],
+		url: '/?nav-to=4&boat-id=passpartout',
+		comment: 'Le bateau, One off, en acier'
+	},
+	{
+		name: 'Penny Lane',
+		keywords: [ 'boat', 'bateau', 'panny lane', 'arpege', 'arpège' ],
+		url: '/?nav-to=4&boat-id=penny-lane',
+		comment: 'Le bateau, Apège'
+	},
+	{
+		name: 'Remora',
+		keywords: [ 'boat', 'bateau', 'remora', 'arcachonnais' ],
+		url: '/?nav-to=4&boat-id=remora',
+		comment: 'Le bateau, Arcachonnais'
+	},
+	{
+		name: 'Rozen an Avel',
+		keywords: [ 'boat', 'bateau', 'rozen an avel', 'arpege', 'arpège' ],
+		url: '/?nav-to=4&boat-id=rozen-an-avel',
+		comment: 'Le bateau, Arpège'
+	},
+	{
+		name: 'Saigane',
+		keywords: [ 'boat', 'bateau', 'saigane', 'dufour', 'dufour 2800' ],
+		url: '/?nav-to=4&boat-id=saigane',
+		comment: 'Le bateau, Dufour 2800'
+	},
+	{
+		name: 'Saudade',
+		keywords: [ 'boat', 'bateau', 'arlequin', 'super', 'super arlequin', 'voile mag', 'voile magazine', 'fx', 'crecy' ],
+		url: '/?nav-to=4&boat-id=saudade',
+		comment: 'Le bateau, Super Arlequin'
+	},
+	{
+		name: 'Stiren ar Mor',
+		keywords: [ 'boat', 'bateau', 'stiren', 'stiren ar mor', 'ghibli', 'michel' ],
+		url: '/?nav-to=4&boat-id=stiren',
+		comment: 'Le bateau, Ghibli'
+	},
+	{
+		name: 'Taapuna',
+		keywords: [ 'boat', 'bateau', 'taapuna', 'edel', 'edel 660' ],
+		url: '/?nav-to=4&boat-id=taapuna',
+		comment: 'Le bateau, Edel 660'
+	},
+	{
+		name: 'Tokad 2',
+		keywords: [ 'boat', 'bateau', 'tokad', 'neptune', 'neptune 99' ],
+		url: '/?nav-to=4&boat-id=tokad-2',
+		comment: 'Le bateau, Neptune 99'
+	},
+	{
+		name: 'Trehudal',
+		keywords: [ 'boat', 'bateau', 'trehudal', 'nicholson', 'nicholson 33' ],
+		url: '/?nav-to=4&boat-id=trehudal',
+		comment: 'Le bateau, Nicholson 33'
+	},
+	{
+		name: 'Tri Yann',
+		keywords: [ 'boat', 'bateau', 'tri yann', 'trimaran', 'allegro' ],
+		url: '/?nav-to=4&boat-id=tri-yann',
+		comment: 'Le bateau, Trimaran Allegro'
+	},
+	{
+		name: 'Twist Again',
+		keywords: [ 'boat', 'bateau', 'twist again', 'twist', 'again', 'jod', 'jod 35' ],
+		url: '/?nav-to=4&boat-id=twist-again',
+		comment: 'Le bateau, JOD 35'
+	},
+	{
+		name: 'Velona',
+		keywords: [ 'boat', 'bateau', 'velona', 'old gaffer' ],
+		url: '/?nav-to=4&boat-id=velona',
+		comment: 'Le bateau, Old Gaffer'
+	},
+	{
+		name: 'Wanita Too',
+		keywords: [ 'boat', 'bateau', 'wanita', 'wanita too', 'first class', 'first class 12' ],
+		url: '/?nav-to=4&boat-id=wanita',
+		comment: 'Le bateau, First Class 12'
+	},
+	{
+		name: 'Zéphir',
+		keywords: [ 'boat', 'bateau', 'zephir', 'zéphir', 'lucas', 'birvidic' ],
+		url: '/?nav-to=4&boat-id=zephir',
+		comment: 'Le bateau, Birvidic 700'
+	},
+    // Team members ?
+	{
+		name: 'Pierre-Jean',
+		keywords: [ 'pierre-jean', 'pierre', 'jean', 'pierre jean', 'jannin', 'president', 'président', 'ceo' ],
+		url: '/?nav-to=21&who=pj',
+		comment: 'Pierre-Jean Jannin, président de Passe-Coque'
+	},
+    {
+		name: 'Alain',
+		keywords: [ 'alain', 'hahusseau', 'directgeur', 'director', 'technique', 'technic', 'technical' ],
+		url: '/?nav-to=21&who=alain',
+		comment: 'Alain Hahusseau, directeur technique de Passe-Coque'
+	},
+    {
+		name: 'Anne',
+		keywords: [ 'anne', 'auroux', 'communication', 'comm' ],
+		url: '/?nav-to=21&who=anne',
+		comment: 'Anne Auroux, Communication'
+	},
+    {
+		name: 'Bernard',
+		keywords: [ 'objectif', 'grand', 'sud', 'cardinale', 'grand', 'large' ],
+		url: '/?nav-to=21&who=bernard',
+		comment: 'Bernard de Ravignan, expert Grand Large'
+	},
+    {
+		name: 'Catherine',
+		keywords: [ 'secretaire', 'secretary', 'catherine', 'laguerre' ],
+		url: '/?nav-to=21&who=catherine',
+		comment: 'Catherine Laguerre'
+	},
+    {
+		name: 'Guy & Gab',
+		keywords: [ 'guy', 'gab', 'boat', 'club', 'boat club', 'boat-club' ],
+		url: '/?nav-to=21&who=gng',
+		comment: ''
+	},
+    {
+		name: 'Jeff',
+		keywords: [ 'jeff', 'jean francois', 'jean françois', 'comm', 'hublow', 'flow', 'eco village', 'eco-village' ],
+		url: '/?nav-to=21&who=jeff',
+		comment: 'Jean-François Allais, Eco Village'
+	},
+    {
+		name: 'Michel',
+		keywords: [ 'michel', 'lemeni', 'leméni', 'photo' ],
+		url: '/?nav-to=21&who=michel',
+		comment: 'Michel Leméni, photos'
+	},
+    {
+		name: 'Olivier',
+		keywords: [ 'olivier', 'le diouris', 'diouris', 'tech', 'web', 'raspberry' ],
+		url: '/?nav-to=21&who=olivier',
+		comment: 'Olivier Le Diouris, web, tech, no-tech, low-tech, etc.'
+	},
+    {
+		name: 'Régis',
+		keywords: [ 'régis', 'regis', 'germain', 'greta', 'tresorier', 'trésorier', 'cfo' ],
+		url: '/?nav-to=21&who=regis',
+		comment: 'Régis Germain, trésorier de Passe-Coque'
+	},
+    {
+		name: 'Stéphane',
+		keywords: [ 'stephane', 'stéphane', 'menuet', 'ffv' ],
+		url: '/?nav-to=21&who=stephane',
+		comment: 'Stéphane Menuet, monde sportif, course au large'
 	}
+
 ];
 
 // "Enter" in the field ()not the button)
@@ -3183,7 +3634,12 @@ function filterOn() {
             if (!matching) {
                 // Nope
             } else {
-                foundElements.push(createListElement(searchItem.name, searchItem.url, searchItem.comment));
+                let url = searchItem.url;
+                if (searchItem.url.startsWith("/") && (searchItem.url.includes("nav-to=") || searchItem.url.includes("tx=") || searchItem.url.includes("who="))) { // boat-id, etc...
+                    url += `&lang=${currentLang}`;
+                }
+
+                foundElements.push(createListElement(searchItem.name, url, searchItem.comment));
                 nbItemsSelected += 1;
             }
         });
@@ -3192,7 +3648,7 @@ function filterOn() {
 		// C'est un peu vague...
 		// Display all the site
 
-		foundElements.push(createListElement('Passe-Coque', '/', 'Le site de Passe-Coque'));
+		foundElements.push(createListElement('Passe-Coque', `/?lang=${currentLang}`, 'Le site de Passe-Coque'));
         nbItemsSelected += 1;
     }
 
