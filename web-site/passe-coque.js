@@ -3070,6 +3070,36 @@ const KEYWORDS = [
 		url: '/?nav-to=68',
 		comment: ''
 	},
+	{
+		name: 'Adhésion',
+		keywords: [ 'adherer' , 'adhérer', 'adhesion', 'adhésion', 'subscribe', 'join' ],
+		url: '/?nav-to=51',
+		comment: 'Rejoignez l\'asso Passe-Coque'
+	},
+	{
+		name: 'Formations / Trainings',
+		keywords: [ 'formation', 'training', 'boutique', 'store', 'shop' ],
+		url: '/?nav-to=64',
+		comment: 'Boutique, et catalogue des formations'
+	},
+	{
+		name: 'Assemblées générales',
+		keywords: [ 'assemblee generale', 'assemblée générale', 'general meeting' ],
+		url: '/?nav-to=67',
+		comment: 'Accessibles par votre espace membre'
+	},
+	{
+		name: 'Actualités',
+		keywords: [ 'actualite', 'actualité', 'news' ],
+		url: '/?nav-to=62',
+		comment: 'Toute l\'actualité'
+	},
+	{
+		name: 'Boat Club',
+		keywords: [ 'boat club', 'boat-club' ],
+		url: '/boat-club/?nav-to=1',
+		comment: 'Boat-Club Passe-Coque'
+	},
 	// Projet(s) ?
 	{
 		name: 'Projets',
@@ -3545,7 +3575,7 @@ const KEYWORDS = [
 		name: 'Guy & Gab',
 		keywords: [ 'guy', 'gab', 'boat', 'club', 'boat club', 'boat-club' ],
 		url: '/?nav-to=21&who=gng',
-		comment: ''
+		comment: 'Développement du Boat Club'
 	},
     {
 		name: 'Jeff',
