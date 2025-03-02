@@ -938,7 +938,8 @@ const BG_IMAGES =
   "/images/slideshow.01.png",
   "/images/slideshow.02.png",
   "/images/slideshow.03.png",
-  "/images/slideshow.04.png" ];  
+  "/images/slideshow.04.png",
+  "/images/slideshow.05.png" ];  
 
 const BG_INTERVAL = 5000; // in ms
 
@@ -2983,7 +2984,7 @@ let jumpTo = (page, extraPrm) => {
     }
 };
 
-function filterWasPressed(event) {
+function projectFilterWasPressed(event) {
     // debugger;
     // console.log(event.key);
     if (event.key === "Enter") {
@@ -3610,7 +3611,7 @@ const KEYWORDS = [
 
 ];
 
-// "Enter" in the field ()not the button)
+// "Enter" in the field (not the button)
 function filterWasPressed(event) {
     // debugger;
     // console.log(event.key);
@@ -3689,17 +3690,21 @@ function filterOn() {
 			elementList.appendChild(child);
 		});
 		let suggestedList = document.getElementById('suggested-list');
-		suggestedList.innerHTML = '';
-		while (suggestedList.childElementCount > 0) {
-			suggestedList.removeChild(suggestedList.childNodes[0]);
-		}
-		suggestedList.appendChild(elementList);
+        if (suggestedList) {
+            suggestedList.innerHTML = '';
+            while (suggestedList.childElementCount > 0) {
+                suggestedList.removeChild(suggestedList.childNodes[0]);
+            }
+            suggestedList.appendChild(elementList);
+        }
 	} else {
 		let suggestedList = document.getElementById('suggested-list');
-		while (suggestedList.childElementCount > 0) {
-			suggestedList.removeChild(suggestedList.childNodes[0]);
-		}
-		suggestedList.innerHTML = 'Rien trouv&eacute;...';
+        if (suggestedList) {
+            while (suggestedList.childElementCount > 0) {
+                suggestedList.removeChild(suggestedList.childNodes[0]);
+            }
+            suggestedList.innerHTML = 'Rien trouv&eacute;...';
+        }
 	}
 
 }
