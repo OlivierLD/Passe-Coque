@@ -297,8 +297,16 @@ let clack = (origin) => {
     } else if (originId === "68") {
         // Fill out agenda content
     } else if (originId === "10") {
-        // Finder!
-
+        // Finder! Remove teh welcome class ?
+        let aboutDialog = document.getElementById("about-dialog");
+        if (aboutDialog) {
+            aboutDialog.classList.remove('welcome-dialog');
+            // reset title
+            let dialogTitle = document.querySelectorAll('.dialog-title'); // By its class
+            if (dialogTitle) {
+                dialogTitle[0].innerText = '';
+            }
+        }
     } else if (originId === "8") { 
         contentName = `/64_${currentLang}.html`; // Bypass regular behavior...
     }
@@ -2198,8 +2206,15 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                     THE_BOATS = THE_FLEET; // Using the backup list
                     populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                 } else {
+                    // response.text().then(txt => {
+                    //     console.log(txt);
+                    //     THE_BOATS = JSON.parse(txt);
+
+                    // }, (error, errmess) => {
+                    //     console.log(`${error}, ${errmess}`);
+                    // });
                     response.json().then(json => {
-                        console.log(`data loaded, ${json.length} boat(s).`);
+                        console.log(`data loaded, ${json.length} boat(s) from DB.`);
                         THE_BOATS = json;
                         populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                     }, (error, errmess) => {
@@ -3309,7 +3324,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Ar Mor Van',
-		keywords: [ 'boat', 'bateau', 'mor van', 'kelt 620' ],
+		keywords: [ 'boat', 'bateau', 'mor van', 'kelt 620', 'greta', 'lycee', 'lycée' ],
 		url: '/?nav-to=4&boat-id=ar-mor-van',
 		comment: 'Le bateau, Kelt 620'
 	},
@@ -3321,7 +3336,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Atlantide',
-		keywords: [ 'boat', 'bateau', 'atlantide', 'gibsea', '33' ],
+		keywords: [ 'boat', 'bateau', 'atlantide', 'gibsea', '33', 'pompier' ],
 		url: '/?nav-to=4&boat-id=atlantide',
 		comment: 'Le bateau, GibSea 33'
 	},

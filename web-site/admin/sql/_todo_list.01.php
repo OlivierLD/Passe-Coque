@@ -39,7 +39,8 @@ try {
       } */
 
       * {
-        line-height: 1em;
+        font-size: 18px;
+        line-height: 1em; 
       }
 
       tr > td {
