@@ -1414,6 +1414,13 @@ let THE_BOATS = null;
 // This is a backup. Used if the json fetch fails...
 const THE_FLEET = [
     {
+        name: "Coquina",
+        id: "coquina",
+        pix: "/images/godille/coquina.02.jpeg",
+        type: "Canot voile-aviron",
+        category: NONE,
+        base: "-"
+    },{
         name: "Penny Lane",
         id: "penny-lane",
         pix: "/images/boats/penny.lane/penny.lane.12.jpg",
