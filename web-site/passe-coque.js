@@ -947,7 +947,8 @@ const BG_IMAGES =
   "/images/slideshow.02.png",
   "/images/slideshow.03.png",
   "/images/slideshow.04.png",
-  "/images/slideshow.05.png" ];  
+  "/images/slideshow.05.png",
+  "/images/la.mer.jpg" ];  
 
 const BG_INTERVAL = 5000; // in ms
 
