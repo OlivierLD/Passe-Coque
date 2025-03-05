@@ -1414,6 +1414,13 @@ let THE_BOATS = null;
 // This is a backup. Used if the json fetch fails...
 const THE_FLEET = [
     {
+        name: "Nuage",
+        id: "nuage",
+        pix: "/images/boats/nuage/Soling.02.jpeg",
+        type: "Soling",
+        category: NONE,
+        base: "-"
+    },{
         name: "Coquina",
         id: "coquina",
         pix: "/images/godille/coquina.02.jpeg",
@@ -3304,6 +3311,18 @@ const KEYWORDS = [
 		keywords: [ 'bateau', 'boat', 'flotte', 'fleet' ],
 		url: '/?nav-to=4',
 		comment: 'Tous les bateaux'
+	},
+	{
+		name: 'Nuage',
+		keywords: [ 'boat', 'bateau', 'nuage', 'soling', 'erik' ],
+		url: '/?nav-to=4&boat-id=nuage',
+		comment: 'Soling'
+	},
+	{
+		name: 'Coquina',
+		keywords: [ 'boat', 'bateau', 'coquina', 'nathaniel', 'herreschoff' , 'vivier', 'godille', 'aviron', 'etel' ],
+		url: '/?nav-to=4&boat-id=coquina',
+		comment: 'Canot voile aviron'
 	},
 	{
 		name: 'Eh\'Tak',

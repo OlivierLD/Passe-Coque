@@ -1,0 +1,72 @@
+<!-- Absolute locations for resources like images... -->
+<div class="boat-card">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'coquina-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'coquina-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'coquina-03');">Divers</button>
+        <button class="tablinks" onclick="openTab(event, 'coquina-04');">Contact</button>
+        <button class="tablinks" onclick="openTab(event, 'coquina-05');">Programme</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="coquina-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="./images/godille/coquina.02.jpeg" style="width: 60%;">
+                <div style="padding: 14px;">
+                    <!--h2>Eh'Tak</h2-->
+                    Coquina<br/>
+                    <ul>
+                        <li>Construit chez Skol Ar Mor</li> 
+                        <li>Plan N. Herreschoff  (revu par F. Vivier)</li>
+                        <li>Construction bord&eacute; franc, en m&eacute;lèze et ch&ecirc;ne.</li> 
+                        <li>Gr&eacute;ement cat ketch</li>
+                        <!-- Armement s&eacute;curit&eacute;: ligne de mouillage, pompe manuelle, compas, 2 avirons -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="coquina-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="coquina-slide-show"
+                        width="710"
+                        height="400"
+                        style="line-height: 1em;"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./images/godille/coquina.01.jpeg" title="Coquina - 1"></slide-show-image>
+                <slide-show-image src="./images/godille/coquina.02.jpeg" title="Coquina - 2"></slide-show-image>
+                <slide-show-image src="./images/godille/coquina.03.jpeg" title="Coquina - 3"></slide-show-image>
+                <slide-show-image src="./images/godille/coquina.04.jpeg" title="Coquina - 4"></slide-show-image>
+                <slide-show-image src="./images/godille/coquina.05.jpeg" title="Coquina - 5"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="coquina-03" class="tab-section" style="display: none;">
+            <h2>Diverses informations, travaux en cours, etc...</h2>
+            <div>
+                (&Agrave; suivre...)
+            </div>
+        </div>
+
+        <div id="coquina-04" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            <!--
+            R&eacute;f&eacute;rent : Jean-Fran&ccedil;ois Allais.<br/>
+            T&eacute;l : +33 6 35 59 18 80<br/>
+            Email : jeff[@]passeurdecoute.fr<br/>
+            -->
+            R&eacute;f&eacute;rent : Olivier Le Diouris<br/>
+            Email : olivier@lediouris.net<br/>
+            <!-- Disponibilit&eacute; Boat Club&nbsp;: OUI -->
+        </div>
+
+        <div id="coquina-05" class="tab-section" style="display: none;">
+            <h2>Programme du bateau</h2>
+            <ul>
+                <li>
+                    &Agrave; suivre...
+                </li>
+            </ul>
+            <hr/>
+        </div>
+    </div>
+</div>

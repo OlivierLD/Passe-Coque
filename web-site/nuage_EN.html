@@ -1,0 +1,57 @@
+<!-- Absolute locations for resources like images... -->
+<div class="boat-card">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'nuage-01');" title="Sommaire">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'nuage-02');">Pictures</button>
+        <button class="tablinks" onclick="openTab(event, 'nuage-03');">Misc</button>
+        <button class="tablinks" onclick="openTab(event, 'nuage-04');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="nuage-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="./images/boats/nuage/Soling.02.jpeg" style="width: 60%;">
+                <div style="padding: 14px;">
+                    <!--h2>Eh'Tak</h2-->
+                    Nuage, Soling<br/>
+                    <ul>
+                        <li>Designed by Jan Hermann Linge</li> 
+                        <li>LOA : 8,20 meters</li> 
+                        <li>BOA : 1,90 meters. </li> 
+                        <li>Launched in 1963.</li> 
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="nuage-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="nuage-slide-show"
+                        width="710"
+                        height="400"
+                        style="line-height: 1em;"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="./images/boats/nuage/Soling.01.jpeg" title="Nuage - 1"></slide-show-image>
+                <slide-show-image src="./images/boats/nuage/Soling.02.jpeg" title="Nuage - 2"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="nuage-03" class="tab-section" style="display: none;">
+            <h2>Misc infos, ongoing work, etc...</h2>
+            <div>
+                (&Agrave; suivre...)
+            </div>
+        </div>
+
+        <div id="nuage-04" class="tab-section" style="display: none;">
+            <h2>More infos...</h2>
+            <!--
+            R&eacute;f&eacute;rent : Jean-Fran&ccedil;ois Allais.<br/>
+            T&eacute;l : +33 6 35 59 18 80<br/>
+            Email : jeff[@]passeurdecoute.fr<br/>
+            -->
+            Referent : &Eacute;rik Catala<br/>
+            <!-- Disponibilit&eacute; Boat Club&nbsp;: OUI -->
+        </div>
+
+    </div>
+</div>
