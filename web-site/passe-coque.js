@@ -423,6 +423,19 @@ let clack = (origin) => {
 }
 
 let updateMenu = () => { // Multilang aspect.
+
+    // Tooltips
+    document.querySelectorAll(".this-tooltiptext").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Besoin d'aide&nbsp;?" : "Need Help?"));
+    document.querySelectorAll("#_7").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Espace Membres" : "Member Space"));
+    document.querySelectorAll("#_7-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Member Space"));
+    document.querySelectorAll("#_8").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "La boutique" : "The store"));
+    document.querySelectorAll("#_8-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "La boutique" : "The store"));
+    document.querySelectorAll("#_9").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Outils de Navigation" : "Navigation tools"));
+    document.querySelectorAll("#_9-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Outils de Navigation" : "Navigation tools"));
+    document.querySelectorAll("#_10").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Besoin d'aide ?" : "Finder"));
+    document.querySelectorAll("#_10-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Besoin d'aide ?" : "Finder"));
+
+    // Others
     document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
 
     // "_11", Qr Code, no update needed.
