@@ -3128,7 +3128,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Assemblées générales',
-		keywords: [ 'assemblee generale', 'assemblée générale', 'general meeting' ],
+		keywords: [ 'assemblee generale', 'assemblée générale', 'general meeting', 'ag' ],
 		url: '/?nav-to=67',
 		comment: 'Accessibles par votre espace membre'
 	},
