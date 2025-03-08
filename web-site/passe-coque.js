@@ -1435,10 +1435,10 @@ const THE_FLEET = [
         category: NONE,
         base: "-"
     },{
-        name: "Coquina",
+        name: "Bay Watch",
         id: "coquina",
         pix: "/images/godille/coquina.02.jpeg",
-        type: "Canot voile-aviron",
+        type: "Coquina, Canot voile-aviron",
         category: NONE,
         base: "-"
     },{
