@@ -78,6 +78,10 @@
 	margin: 3px 10px 3px 3px;
 	box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;
 }
+
+.help-bot:hover {
+	cursor: pointer;
+}
 	</style>
 	<script type="text/javascript" src="/qrcode.js"></script>
 	<script type="text/javascript" src="/passe-coque.js"></script>
@@ -240,7 +244,7 @@
 						<li><a href="javascript:void(0)" onclick="clack(this);" id="_61">Contact</a></li>
 					</ul>
 				</li>
-				<li class="this-tooltip" style="display: flex; align-items: center;">
+				<li class="this-tooltip" style="display: flex; /*align-items: center;*/">
 					<span class="this-tooltiptext-top" id="_7-label">Espace Membres</span>
 					<a href="javascript:void(0)" onclick="clack(this);" id="_7" title="Espace Membres">
 						<svg style="margin: 0 0 -5px 0;" class="" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -248,7 +252,7 @@
 						</svg>
 					</a>
 				</li>
-				<li class="this-tooltip" style="display: flex; align-items: center;">
+				<li class="this-tooltip" style="display: flex; /*align-items: center;*/ margin-top: -8px;">
 					<span class="this-tooltiptext-top" id="_8-label">Boutique</span>
 					<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this); closeNav();" id="_8" title="Boutique">
 						<!--img src="./images/shop.png" style="width: 32px;"--><!--span id="_8">La boutique</span-->
@@ -258,16 +262,19 @@
 						</svg>
 					</a>
 				</li>
-				<li class="this-tooltip" style="display: flex; align-items: center;">
+				<li class="this-tooltip" style="display: flex; /*align-items: center;*/ margin-top: -8px;">
 					<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack(this); closeNav();" id="_9" title="Outils de Navigation">
 						<span class="this-tooltiptext-top" id="_9-label">Outils de Navigation</span>
 						<img src="./images/small.boat.svg" style="width: 32px; vertical-align: top;">
 					</a>
 				</li>
 
-				<li class="this-tooltip" style="display: flex; align-items: center;">
+				<li class="this-tooltip" style="display: flex; /*align-items: center;*/">
 					<span class="this-tooltiptext-top" id="_10-label">Besoin d'aide&nbsp;?</span>
-					<a href="javascript:void(0)" class="active-link" style="margin-top: 0px;" onclick="clack(this); closeNav();" id="_10" title="Besoin d'aide ?">🔎</a>
+					<a href="javascript:void(0)" class="active-link" style="margin-top: 0px;" onclick="clack(this); closeNav();" id="_10" title="Besoin d'aide ?">
+						<!-- 🔎 -->
+						<img src="./images/drowning.svg" style="width: 32px;">
+					</a>
 				</li>
 
 				<li><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px; margin-left: 30px;"></image></a></li>
@@ -385,7 +392,10 @@
 			</div>
 			<li class="this-tooltip" style="display: flex; align-items: center;">
 				<span class="this-tooltiptext">Besoin d'aide&nbsp;?</span>
-				<a href="javascript:void(0)" class="active-link" style="margin-top: 0px;" onclick="clack(this); closeNav();" id="_10" title="Finder">🔎 <span id="bs_10"> Recherche...</span></a>
+				<a href="javascript:void(0)" class="active-link" style="margin-top: 0px;" onclick="clack(this); closeNav();" id="_10" title="Finder"><!-- 🔎  -->
+					<img src="./images/drowning.svg" style="width: 32px;">
+					<span id="bs_10"> Recherche...</span>
+				</a>
 			</li>
 		</div>
 	</div>
