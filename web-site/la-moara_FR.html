@@ -1,0 +1,44 @@
+
+<div style="height: 600px; overflow-y: auto;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'la-moara-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'la-moara-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'la-moara-03');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="la-moara-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <img src="/images/boats/la.moara/la.plaque.jpeg" width="80%">
+                <div style="padding: 14px;">
+                    <h2>La Moara</h2>
+                    Plate, bas&eacute;e &agrave; St Philibert<br/>
+                    <ul>
+                        <li>Chantier Ezan, voir <a href="https://www.letelegramme.fr/morbihan/saint-philibert-56470/spansaint-philibertspan-chantier-naval-les-ezan-rois-de-la-plate-3166052.php" target="TB">ici</a>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h2>Le Bateau</h2>
+                <div>
+                    . . .
+                </div>
+            </div>
+        </div>
+
+        <div id="la-moara-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="la-moara-slide-show"
+                        width="400"
+                        height="340"
+                        style="line-height: 1em;">
+                <slide-show-image src="/images/boats/la.moara/la.plaque.jpeg" title="La Plaque !"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="la-moara-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            R&eacute;f&eacute;rent : Pierre-Jean JANNIN<br/>
+            Disponibilit&eacute; Boat Club&nbsp;: - 
+        </div>
+    </div>
+</div>
