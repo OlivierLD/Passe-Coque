@@ -3202,8 +3202,14 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Rubi\'s Cup 2024',
-		keywords: [ '' ],
+		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'cooking' ],
 		url: '/?nav-to=31&tx=28',
+		comment: 'Projet Rubi\'s Cup'
+	},
+	{
+		name: 'Rubi\'s Cup 2025',
+		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'cooking' ],
+		url: '/?nav-to=31&tx=36',
 		comment: 'Projet Rubi\'s Cup'
 	},
 	{
