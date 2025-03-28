@@ -235,7 +235,7 @@ try {
                                  "<td>" . $deltaDeclSun .  "</td>" .
                                  "<td>" . Utils::decToSex($ac->getMoonGHA()) .  "</td>" .
                                  "<td>" . $deltaGHAMoon .  "</td>" .
-                                 "<td>" . Utils::decToSex($ac->getSunRA(), Utils::$NONE) .  "</td>" .
+                                 "<td>" . Utils::decToSex($ac->getMoonRA(), Utils::$NONE) .  "</td>" .
                                  "<td>" . Utils::decToSex($ac->getMoonDecl(), Utils::$NS) .  "</td>" .
                                  "<td>" . $deltaDeclMoon .  "</td>" .
                                  "<td>" . sprintf("%.04f&apos;", ($ac->getMoonHp() / 60)) .  "</td>" .

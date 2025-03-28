@@ -63,6 +63,7 @@ try {
 
 <?php
 // Original code from https://www.geeksforgeeks.org/php-send-attachment-email/
+// also see https://www.w3schools.in/php/examples/send-email-with-attachment
 
 require __DIR__ . "/../../php/db.cred.php";
 
@@ -126,11 +127,11 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		die('Name is too short or empty!');
 	}
 	*/
-	//Get uploaded file data using $_FILES array
+	// Get uploaded file data using $_FILES array
 	$tmp_name = $_FILES['attachment']['tmp_name']; // get the temporary file name of the file on the server
 	$name	  = $_FILES['attachment']['name'];     // get the name of the file
 	$size	  = $_FILES['attachment']['size'];     // get size of the file for size validation
-	$type	  = $_FILES['attachment']['type'];     // get type of the file
+	$type	  = $_FILES['attachment']['type'];     // get type of the file. application/octet-stream ?
 	$error	  = $_FILES['attachment']['error'];    // get the error (if any)
 
 	//validate form field for attaching the file
