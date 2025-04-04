@@ -3134,6 +3134,12 @@ const KEYWORDS = [
 		comment: 'Boutique, et catalogue des formations'
 	},
 	{
+		name: 'Nav Astro, Sextant',
+		keywords: [ 'formation', 'training', 'sextant', 'astro', 'nav', 'celestial' ],
+		url: '/?nav-to=68',
+		comment: 'Tout en bas de la page'
+	},
+	{
 		name: 'Assemblées générales',
 		keywords: [ 'assemblee generale', 'assemblée générale', 'general meeting', 'ag' ],
 		url: '/?nav-to=67',
@@ -3208,7 +3214,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Rubi\'s Cup 2025',
-		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'cooking' ],
+		keywords: [ 'rubi', 'godille', 'port', 'tudy' ],
 		url: '/?nav-to=31&tx=36',
 		comment: 'Projet Rubi\'s Cup'
 	},
@@ -3660,7 +3666,7 @@ const KEYWORDS = [
 	},
     {
 		name: 'Olivier',
-		keywords: [ 'olivier', 'le diouris', 'diouris', 'tech', 'web', 'raspberry' ],
+		keywords: [ 'olivier', 'le diouris', 'diouris', 'tech', 'web', 'raspberry', 'astro', 'sextant' ],
 		url: '/?nav-to=21&who=olivier',
 		comment: 'Olivier Le Diouris, web, tech, no-tech, low-tech, etc.'
 	},
@@ -3714,7 +3720,7 @@ function filterOn() {
 	let foundElements = [];
 
     if (valueToLookFor.trim().length > 0) {
-        console.log(`Looking for "${valueToLookFor}"`);
+        console.log(`Looking for "${valueToLookFor}", among ${KEYWORDS.lemgth} items.`);
         // produceSearchList(valueToLookFor);
         KEYWORDS.forEach(searchItem => {
             console.log(`Scanning ${searchItem.name}...`);
