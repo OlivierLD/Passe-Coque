@@ -688,6 +688,14 @@ window.onload = () => {
 			el.id = `${who}`;
 			aboutSomeone(el);
 		}
+		let where = getQueryParameterByName('where'); // An anchor ?
+		if (where) {
+			window.setTimeout(() => {
+				console.log(`Scrolling to ${where}`);
+				scrollToGivenAnchor(where);
+			}, 1000); // Wait a bit for the page to load
+			// scrollToGivenAnchor(where);
+		}
 	}
 
 	// A Test: Query match ?

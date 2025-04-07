@@ -647,6 +647,13 @@ function flyToZoom(idx) {
     map.flyTo(ZOOM_POSITIONS[idx].latlng);
 }
 
+let scrollToGivenAnchor = (hashtag) => {
+    const anchor = document.querySelector(`a[name='${hashtag}']`);
+    anchor.scrollIntoView();
+    // 2e couche
+    window.scrollBy(0, -92); // 92: menu thickness
+};
+
 
 let initBoatClubBases = () => {
 
@@ -2539,7 +2546,7 @@ let fillOutActu = filter => {
                         eventDiv.innerHTML = generateFetchMessage(event.content, response); // `Fetching ${event.content}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
                     } else {
                         response.text().then(doc => {
-                            console.log(`${event.content} code data loaded, length: ${doc.length} (${doc}).`);
+                            // console.log(`${event.content} code data loaded, length: ${doc.length} (${doc}).`);
                             eventDiv.innerHTML = doc;
                         });
                     }
@@ -3152,6 +3159,12 @@ const KEYWORDS = [
 		comment: 'Toute l\'actualité'
 	},
 	{
+		name: 'Fabuleuse Armada',
+		keywords: [ 'armada', 'fabuleuse', 'handicap' ],
+		url: '/?nav-to=62&where=armada-2024',
+		comment: 'La Fabuleuse Armada, 2025'
+	},
+	{
 		name: 'Boat Club',
 		keywords: [ 'boat club', 'boat-club' ],
 		url: '/boat-club/?nav-to=1',
@@ -3359,7 +3372,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Eh\'Tak',
-		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'eh\'tak', 'shipman', 'shipman 28', 'etel' ],
+		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'ehtak', 'eh\'tak', 'shipman', 'shipman 28', 'etel' ],
 		url: '/?nav-to=4&boat-id=eh-tak',
 		comment: 'Shipman 28.'
 	},
