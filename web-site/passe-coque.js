@@ -3631,13 +3631,13 @@ const KEYWORDS = [
     // Team members ?
 	{
 		name: 'Pierre-Jean',
-		keywords: [ 'pierre-jean', 'pierre', 'jean', 'pierre jean', 'jannin', 'president', 'président', 'ceo' ],
+		keywords: [ 'pj', 'pierre-jean', 'pierre', 'jean', 'pierre jean', 'jannin', 'president', 'président', 'ceo' ],
 		url: '/?nav-to=21&who=pj',
 		comment: 'Pierre-Jean Jannin, président de Passe-Coque'
 	},
     {
 		name: 'Alain',
-		keywords: [ 'alain', 'hahusseau', 'directgeur', 'director', 'technique', 'technic', 'technical' ],
+		keywords: [ 'alain', 'hahusseau', 'directgeur', 'director', 'technique', 'technic', 'technical', 'cto' ],
 		url: '/?nav-to=21&who=alain',
 		comment: 'Alain Hahusseau, directeur technique de Passe-Coque'
 	},
@@ -3649,13 +3649,13 @@ const KEYWORDS = [
 	},
     {
 		name: 'Bernard',
-		keywords: [ 'objectif', 'grand', 'sud', 'cardinale', 'grand', 'large' ],
+		keywords: [ 'bene', 'benny', 'objectif', 'grand', 'sud', 'cardinale', 'grand', 'large' ],
 		url: '/?nav-to=21&who=bernard',
 		comment: 'Bernard de Ravignan, expert Grand Large'
 	},
     {
 		name: 'Catherine',
-		keywords: [ 'secretaire', 'secretary', 'catherine', 'laguerre' ],
+		keywords: [ 'kasha', 'secretaire', 'secretary', 'catherine', 'laguerre' ],
 		url: '/?nav-to=21&who=catherine',
 		comment: 'Catherine Laguerre'
 	},
@@ -3782,7 +3782,9 @@ function filterOn() {
             while (suggestedList.childElementCount > 0) {
                 suggestedList.removeChild(suggestedList.childNodes[0]);
             }
-            suggestedList.appendChild(elementList);
+            suggestedList.appendChild(  // Results
+                elementList
+            );
         }
 	} else {
 		let suggestedList = document.getElementById('suggested-list');
@@ -3790,7 +3792,7 @@ function filterOn() {
             while (suggestedList.childElementCount > 0) {
                 suggestedList.removeChild(suggestedList.childNodes[0]);
             }
-            suggestedList.innerHTML = 'Rien trouv&eacute;...';
+            suggestedList.innerHTML = (currentLang === 'FR') ? 'Rien trouv&eacute;...' : 'Nothing was found...';
         }
 	}
 
