@@ -3366,7 +3366,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Coquina',
-		keywords: [ 'boat', 'bateau', 'coquina', 'nathaniel', 'herreschoff' , 'vivier', 'godille', 'aviron', 'etel' ],
+		keywords: [ 'boat', 'bateau', 'coquina', 'nathaniel', 'herreshoff' , 'vivier', 'godille', 'aviron', 'etel', 'cat', 'ketch' ],
 		url: '/?nav-to=4&boat-id=coquina',
 		comment: 'Canot voile aviron'
 	},
@@ -3778,14 +3778,14 @@ function filterOn() {
 		});
 		let suggestedList = document.getElementById('suggested-list');
         if (suggestedList) {
-            suggestedList.innerHTML = '';
-            while (suggestedList.childElementCount > 0) {
-                suggestedList.removeChild(suggestedList.childNodes[0]);
-            }
+            suggestedList.innerHTML = currentLang === 'FR' ? '<h3>R&eacute;sultats</h3>' : 'Results';
+            // while (suggestedList.childElementCount > 0) {
+            //     suggestedList.removeChild(suggestedList.childNodes[0]);
+            // }
             suggestedList.appendChild(  // Results
                 elementList
             );
-        }
+        } // else not found ?
 	} else {
 		let suggestedList = document.getElementById('suggested-list');
         if (suggestedList) {
