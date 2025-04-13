@@ -1904,11 +1904,11 @@ const INFO_SECTION = [{
             date: "Jan-2025",
             title: "Agenda 2025",
             content: "/actu/agenda2025.html"
-        }, {
+        }/* , {
             date: "Jan-2024",
             title: "Agenda 2024",
             content: "/actu/agenda2024.html"
-        }]
+        }*/ ]
     },
     {   
         section: "2025",
@@ -2165,8 +2165,8 @@ const NEXT_EVENTS = [ // oldest to newest.
         date_from: '2025-04-18',
         date_to: '2025-04-21',
         content: {
-            fr: 'Du 18 au 21 avril 2025, Spi Ouest-France.',
-            en: 'April 18 to 21, 2025, Spi Ouest-France.'
+            fr: 'Du 18 au 21 avril 2025, Spi Ouest-France, La Trinit&eacute;.',
+            en: 'April 18 to 21, 2025, Spi Ouest-France, La Trinit&eacute;.'
         }
     }, {
         date_from: '2025-05-09',
@@ -2193,8 +2193,8 @@ const NEXT_EVENTS = [ // oldest to newest.
         date_from: '2025-06-27',
         date_to: '2025-06-30',
         content: {
-            fr: 'Du 27 au 30 juin 2025, Rubi\'s Cup.',
-            en: 'June 27 to 30, 2025, Rubi\'s Cup.'
+            fr: 'Du 27 au 30 juin 2025, Rubi\'s Cup, &agrave; Groix.',
+            en: 'June 27 to 30, 2025, Rubi\'s Cup, in Groix.'
         }
     }
 ];
@@ -3124,7 +3124,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Vie de l\'asso',
-		keywords: [ 'asso' , 'vie asso', 'vie de l\'asso' ],
+		keywords: [ 'asso' , 'vie asso', 'vie de l\'asso', 'bourse', 'bourses', 'chantier', 'bricolage', 'bricoler', 'equipier', 'équipier', 'convoyage', 'agenda', 'planning' ],
 		url: '/?nav-to=68',
 		comment: ''
 	},
@@ -3154,7 +3154,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Actualités',
-		keywords: [ 'actualite', 'actualité', 'news' ],
+		keywords: [ 'actualite', 'actualité', 'news', 'agenda', 'planning', 'events', 'event' ],
 		url: '/?nav-to=62',
 		comment: 'Toute l\'actualité'
 	},
@@ -3166,7 +3166,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Boat Club',
-		keywords: [ 'boat club', 'boat-club' ],
+		keywords: [ 'boat club', 'boat-club', 'club' ],
 		url: '/boat-club/?nav-to=1',
 		comment: 'Boat-Club Passe-Coque'
 	},
@@ -3785,7 +3785,7 @@ function filterOn() {
             suggestedList.appendChild(  // Results
                 elementList
             );
-        } // else not found ?
+        } // else suggested-list not found ?
 	} else {
 		let suggestedList = document.getElementById('suggested-list');
         if (suggestedList) {
