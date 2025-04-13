@@ -425,6 +425,7 @@ let clack = (origin) => {
 let updateMenu = () => { // Multilang aspect.
 
     // Tooltips
+    document.querySelectorAll("#_1-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Retour accueil" : "Back to Home Page"));
     document.querySelectorAll(".this-tooltiptext").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Besoin d'aide&nbsp;?" : "Need Help?"));
     document.querySelectorAll("#_7").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Espace Membres" : "Member Space"));
     document.querySelectorAll("#_7-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Member Space"));
@@ -3028,6 +3029,11 @@ let resumeScroll = () => {
     keepScrolling = true;
 };
 
+// let mouseOnTop = (el) => {
+//     console.log(`Mouse on ${el.id}`);
+//     // el.style.cursor = 'pointer';
+// }
+
 // Jump to somewhere else in the same site...
 let jumpTo = (page, extraPrm) => {
     let origin = window.location.origin;
@@ -3154,7 +3160,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Actualités',
-		keywords: [ 'actualite', 'actualité', 'news', 'agenda', 'planning', 'events', 'event' ],
+		keywords: [ 'actualite', 'actualité', 'news', 'agenda', 'planning', 'events', 'event', 'spi', 'ouest', 'ouest france', 'ouest-france', 'rubi' ],
 		url: '/?nav-to=62',
 		comment: 'Toute l\'actualité'
 	},
