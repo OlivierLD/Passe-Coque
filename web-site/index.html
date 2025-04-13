@@ -56,6 +56,10 @@
   z-index: 1;
 }
 
+/* .this-tooltip:hover {
+	  cursor: wait;
+} */
+
 .this-tooltip:hover .this-tooltiptext {
   visibility: visible;
   margin-left: -160px;
@@ -167,10 +171,12 @@
 				<!--a href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;"><img src="/logo.only.png" style="width: 80px; padding: 0px 20px;" title="Passe&#8209;Coque"/></a-->
 				<!--a href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;"><img src="/logos/LOGO_PC_rvb.png" style="height: 80px; padding: 0px 20px;" title="Passe&#8209;Coque"/></a-->
 				<!--a href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;"><img src="/logos/LOGO_PC_no_txt.png" style="height: 80px; padding: 0px 20px;" title="Passe&#8209;Coque"/></a-->
-				<a class="this-tooltip" href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;">
-					<span class="this-tooltiptext-top" id="_1-label">Retour accueil</span>
-					<img src="/logos/logo.02.png" style="height: 80px; padding: 0px 20px;" title="Accueil Passe&#8209;Coque"/>
-				</a>
+				<span class="this-tooltip" style="display: flex; /*align-items: center;*/">
+					<span class="this-tooltiptext-top" id="_1-label" style="margin-top: 100px; margin-left: 50px; font-weight: bold;">Retour accueil</span>
+					<a href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;">
+						<img src="/logos/logo.02.png" style="height: 80px; padding: 0px 20px;" title="Accueil Passe&#8209;Coque"/>
+					</a>
+				</span>
 			</div>
 			<div style="height: 100%; padding: 20px 0px;">
 				<!--span style="font-weight: bold;">Passe&#8209;Coque</span-->
@@ -437,7 +443,7 @@
 		<div>
 			<small style="padding-left: 10px; font-style: italic; color: white;">&copy; 2024, Passe&#8209;Coque</small>
 			<div class="this-tooltip help-bot">
-				<span class="this-tooltiptext"><!--Need help?&#13;-->Besoin d'aide&nbsp;?</span>
+				<span class="this-tooltiptext" style="font-weight: bold;"><!--Need help?&#13;-->Besoin d'aide&nbsp;?</span>
 				<img src="./icons/bot.svg" 
 				     style="height: 25px; padding-left: 10px; padding-top: 6px;" 
 					 onclick="clack(this); closeNav();" id="_10"/>
