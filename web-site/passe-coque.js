@@ -460,7 +460,7 @@ let updateMenu = () => { // Multilang aspect.
 	document.querySelectorAll("#_5").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Nous soutenir&nbsp;" : "Support us&nbsp;"));
 	document.querySelectorAll("#_51").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Adh&eacute;rer" : "Join us"));
 	document.querySelectorAll("#_52").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Faire un don" : "Make a donation"));
-	document.querySelectorAll("#_53").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Inverstir dans l'Eco-Village" : "Invest in the Eco-Village"));
+	document.querySelectorAll("#_53").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Investir dans l'Eco-Village" : "Invest in the Eco-Village"));
 
 	document.querySelectorAll("#_6").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "En savoir plus&nbsp;" : "Know more&nbsp;"));
 	document.querySelectorAll("#_61").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Contact" : "Contact"));
@@ -3135,6 +3135,12 @@ const KEYWORDS = [
 		comment: ''
 	},
 	{
+		name: 'Le Chantier',
+		keywords: [ 'chantier', 'bricolage', 'bricoler', 'shipyard', 'saint', 'philibert' ],
+		url: '/?nav-to=32',
+		comment: 'À Saint Philibert'
+	},
+	{
 		name: 'Adhésion',
 		keywords: [ 'adherer' , 'adhérer', 'adhesion', 'adhésion', 'subscribe', 'join' ],
 		url: '/?nav-to=51',
@@ -3176,12 +3182,18 @@ const KEYWORDS = [
 		url: '/boat-club/?nav-to=1',
 		comment: 'Boat-Club Passe-Coque'
 	},
+	{
+		name: 'Boat Club',
+		keywords: [ 'boat club', 'boat-club', 'club' ],
+		url: '/?nav-to=33',
+		comment: 'Description du Boat-Club Passe-Coque'
+	},
 	// Projet(s) ?
 	{
 		name: 'Projets',
 		keywords: [ 'projet', 'projects' ],
 		url: '/?nav-to=31',
-		comment: 'Tous les projets'
+		comment: 'Tous les projets Passe-Coque'
 	},
 	{
 		name: 'Anita Conti',
@@ -3263,7 +3275,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Hublow',
-		keywords: [ 'tiny house', 'tiny', 'habitat', 'insolite', 'hublow' ],
+		keywords: [ 'tiny house', 'tiny', 'habitat', 'leger', 'léger', 'insolite', 'hublow', 'brio', 'jeff', 'flow' ],
 		url: '/?nav-to=31&tx=23',
 		comment: 'A l\'origine de Flow'
 	},
@@ -3275,7 +3287,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'National Muscadet 2024',
-		keywords: [ 'national', 'muscadet', '2024' ],
+		keywords: [ 'national', 'muscadet', '2024', 'lorient' ],
 		url: '/?nav-to=31&tx=21',
 		comment: ''
 	},
@@ -3673,7 +3685,7 @@ const KEYWORDS = [
 	},
     {
 		name: 'Jeff',
-		keywords: [ 'jeff', 'jean francois', 'jean françois', 'comm', 'hublow', 'flow', 'eco village', 'eco-village' ],
+		keywords: [ 'jeff', 'jean francois', 'jean françois', 'comm', 'hublow', 'flow', 'eco village', 'eco-village', 'brio' ],
 		url: '/?nav-to=21&who=jeff',
 		comment: 'Jean-François Allais, Eco Village'
 	},
