@@ -297,7 +297,7 @@ let clack = (origin) => {
     } else if (originId === "68") {
         // Fill out agenda content
     } else if (originId === "10") {
-        // Finder! Remove teh welcome class ?
+        // Finder! Remove the welcome class ?
         let aboutDialog = document.getElementById("about-dialog");
         if (aboutDialog) {
             aboutDialog.classList.remove('welcome-dialog');
