@@ -433,8 +433,8 @@ let updateMenu = () => { // Multilang aspect.
     document.querySelectorAll("#_8-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "La boutique" : "The store"));
     document.querySelectorAll("#_9").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Outils de Navigation" : "Navigation tools"));
     document.querySelectorAll("#_9-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Outils de Navigation" : "Navigation tools"));
-    document.querySelectorAll("#_10").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Besoin d'aide ?" : "Finder"));
-    document.querySelectorAll("#_10-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Besoin d'aide ?" : "Finder"));
+    document.querySelectorAll("#_10").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Besoin d'aide ?" : "Need Help?"));
+    document.querySelectorAll("#_10-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Besoin d'aide ?" : "Need Help?"));
 
     // Others
     document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
@@ -3136,7 +3136,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Le Chantier',
-		keywords: [ 'chantier', 'bricolage', 'bricoler', 'shipyard', 'saint', 'philibert' ],
+		keywords: [ 'chantier', 'bricolage', 'bricoler', 'travail', 'travaux', 'shipyard', 'saint', 'philibert' ],
 		url: '/?nav-to=32',
 		comment: 'À Saint Philibert'
 	},
