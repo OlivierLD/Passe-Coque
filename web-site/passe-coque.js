@@ -110,7 +110,7 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
     let dynamicContentContainer = document.getElementById("dialog-content");
 
     if (dialogTitle) {
-        dialogTitle[0].innerText = title; // Can be several dialogs... take the first one.
+        dialogTitle[0].innerHTML = title; // Can be several dialogs... take the first one.
     }
 
     let contentName = `${content}_${currentLang}.html`; // Like 'tx-01_FR.html'
@@ -1168,7 +1168,7 @@ let clickOnTxPix = (origin, title = '') => {
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
     if (dialogTitle) {
-        dialogTitle[dialogTitle.length - 1].innerText = title; // Can be several dialogs... take the last.
+        dialogTitle[dialogTitle.length - 1].innerHTML = title; // Can be several dialogs... take the last.
         dialogTitle[dialogTitle.length - 1].title = origin.id; // Bonus !
     }
 
@@ -1255,7 +1255,7 @@ let clickOnBoatPix = (origin, name = '', pathPrefix = '') => {
     let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
     let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
     if (dialogTitle && dialogTitle.length > 0) {
-        dialogTitle[dialogTitle.length - 1].innerText = name; // Can be several dialogs... take the last.
+        dialogTitle[dialogTitle.length - 1].innerHTML = name; // Can be several dialogs... take the last.
     }
 
     let contentName = `${pathPrefix}${origin.id}_${currentLang}.html`; // Like 'tx-01_FR.html'
@@ -3142,9 +3142,15 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Adhésion',
-		keywords: [ 'adherer' , 'adhérer', 'adhesion', 'adhésion', 'subscribe', 'join' ],
+		keywords: [ 'asso', 'association', 'adherer' , 'adhérer', 'adhesion', 'adhésion', 'subscribe', 'join', 'cotisation', 'fee', 'don', 'gift', 'membre', 'membership' ],
 		url: '/?nav-to=51',
 		comment: 'Rejoignez l\'asso Passe-Coque'
+	},
+	{
+		name: 'Faire un don',
+		keywords: [ 'join', 'cotisation', 'fee', 'don', 'gift' ],
+		url: '/?nav-to=52',
+		comment: 'Soutenez l\'asso Passe-Coque'
 	},
 	{
 		name: 'Formations / Trainings',
@@ -3239,13 +3245,13 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Rubi\'s Cup 2024',
-		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'cooking' ],
+		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'cooking', 'sculling' ],
 		url: '/?nav-to=31&tx=28',
 		comment: 'Projet Rubi\'s Cup'
 	},
 	{
 		name: 'Rubi\'s Cup 2025',
-		keywords: [ 'rubi', 'godille', 'port', 'tudy' ],
+		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'sculling' ],
 		url: '/?nav-to=31&tx=36',
 		comment: 'Projet Rubi\'s Cup'
 	},
@@ -3384,7 +3390,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Coquina',
-		keywords: [ 'boat', 'bateau', 'coquina', 'nathaniel', 'herreshoff' , 'vivier', 'godille', 'aviron', 'etel', 'cat', 'ketch' ],
+		keywords: [ 'boat', 'bateau', 'coquina', 'nathaniel', 'herreshoff' , 'vivier', 'godille', 'aviron', 'etel', 'cat', 'ketch', 'sculling' ],
 		url: '/?nav-to=4&boat-id=coquina',
 		comment: 'Canot voile aviron'
 	},
@@ -3783,7 +3789,6 @@ function filterOn() {
         console.log("Nothing to look for...");
 		// C'est un peu vague...
 		// Display all the site
-
 		foundElements.push(createListElement('Passe-Coque', `/?lang=${currentLang}`, 'Le site de Passe-Coque'));
         nbItemsSelected += 1;
     }
@@ -3796,7 +3801,7 @@ function filterOn() {
 		});
 		let suggestedList = document.getElementById('suggested-list');
         if (suggestedList) {
-            suggestedList.innerHTML = currentLang === 'FR' ? '<h3>R&eacute;sultats</h3>' : 'Results';
+            suggestedList.innerHTML = (currentLang === 'FR') ? '<h3>R&eacute;sultats</h3>' : '<h3>Results</h3>';
             // while (suggestedList.childElementCount > 0) {
             //     suggestedList.removeChild(suggestedList.childNodes[0]);
             // }
