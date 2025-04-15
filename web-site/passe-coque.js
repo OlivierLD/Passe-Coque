@@ -198,7 +198,6 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
     }, timeout);
 };
 
-
 let openNav = () => {
     // console.log("Opening Hamburger Menu");
     // alert("Opening Hamburger Menu");
@@ -227,7 +226,6 @@ let hideSection = (id) => {
 	document.getElementById(id).style.opacity = 0;
 	document.getElementById(id).style.height = 0;
 };
-
 
 const COLLAPSED_LINE = "&#9658;&nbsp;";
 const EXPANDED_LINE = "&#9660;&nbsp;";
@@ -581,6 +579,7 @@ function makeMarker(markerData) {
      .addTo(markerData.map)
      .bindPopup(`<b>${markerData.title}</b>`);
 }
+
 function decToSex(val, ns_ew) {
     let absVal = Math.abs(val);
     let intValue = Math.floor(absVal);
@@ -3130,7 +3129,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Vie de l\'asso',
-		keywords: [ 'asso' , 'vie asso', 'vie de l\'asso', 'bourse', 'bourses', 'chantier', 'bricolage', 'bricoler', 'equipier', 'équipier', 'convoyage', 'agenda', 'planning' ],
+		keywords: [ 'asso' , 'vie asso', 'vie de l\'asso', 'bourse', 'bourses', 'chantier', 'bricolage', 'bricoler', 'equipier', 'équipier', 'convoyage', 'agenda', 'planning', 'statut', 'status' ],
 		url: '/?nav-to=68',
 		comment: ''
 	},
@@ -3139,6 +3138,12 @@ const KEYWORDS = [
 		keywords: [ 'chantier', 'bricolage', 'bricoler', 'travail', 'travaux', 'shipyard', 'saint', 'philibert' ],
 		url: '/?nav-to=32',
 		comment: 'À Saint Philibert'
+	},
+	{
+		name: 'Passe-Coque',
+		keywords: [ 'asso', 'association', 'status', 'statut' ],
+		url: '/?nav-to=67',
+		comment: 'Status de l\'association, à partir de votre espace membres'
 	},
 	{
 		name: 'Adhésion',
