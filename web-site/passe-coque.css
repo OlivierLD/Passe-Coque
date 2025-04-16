@@ -642,6 +642,10 @@ a.active-link:hover {
     cursor: pointer;
 }
   
+span.expand-collapse {
+    color: blue;
+}
+
 span.expand-collapse:hover {
     /* color: cyan; */
     cursor: pointer;
