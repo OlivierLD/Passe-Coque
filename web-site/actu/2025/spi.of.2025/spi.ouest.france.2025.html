@@ -379,42 +379,42 @@ compass-rose .day {
         <div id="help-content" style="max-height: 390px; overflow-y: scroll;">
             <!-- About content -->
             <div style="margin-top: 15px;">
-                A simple Leaflet and WebComponents interface to visualize and replay data logged when sailing.<br/><br/>
-                <i>Featuring</i>:
+                <span id="dialog-01">A simple Leaflet and WebComponents interface to visualize and replay data logged when sailing.</span><br/><br/>
+                <i id="dialog-02">Featuring</i>:
                 <ul>
-                    <li>LeafLet Map API</li>
-                    <li>WebComponents</li>
-                    <li>HTML5/CSS3/ES6</li>
-                    <li>...and so on!</li>
+                    <li id="dialog-03">LeafLet Map API</li>
+                    <li id="dialog-04">WebComponents</li>
+                    <li id="dialog-05">HTML5/CSS3/ES6</li>
+                    <li id="dialog-06">...and so on!</li>
                 </ul>
             </div>
             <hr/>
             <div style="margin-top: 15px;">
-                Map is draggable.
+                <span id="dialog-07">Map is draggable.</span>
                 <br/>
-                Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)
+                <span id="dialog-08">Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)</span>
                 <!--br/>
                 Click on the markers on the chart to display pictures.
                 <br/>
                 Click on the pictures to enlarge them. -->
                 <br/>
-                Use the links on the right to move from place to place (experimental).
+                <span id="dialog-09">Use the links on the right to move from place to place (experimental).</span>
                 <br/>
-                Try the "REPLAY" button to replay what was logged (zoom when replaying..., it's worth it).
+                <span id="dialog-10">Try the "REPLAY" button to replay what was logged (zoom when replaying..., it's worth it).</span>
                 <br/>
-                Use the slider to scroll accross the logged data.
+                <span id="dialog-11">Use the slider to scroll accross the logged data.</span>
             </div>
         </div>
         <hr style="margin-top: 15px; margin-bottom: 5px;"/>
-        <i>OlivSoft never stops</i>
+        <i>Passe-Coque never stops</i>
     </div>
 </dialog>
     
 <div id="page-header">
     <div style="display: grid; grid-template-columns: auto auto auto;">
         <div>
-            <h1 style="padding-left: 10px;"><a href="https://spi.ouest-france.fr/">Spi Ouest-France 2025</a> - Replay Logged Data</h1>
-            On board Pordin-Nancq, Carter 37. April 2025.
+            <h1 style="padding-left: 10px;"><a href="https://spi.ouest-france.fr/" target="SOF">Spi Ouest-France 2025</a> - <span id="txt-01">Replay Logged Data</span></h1>
+            <span id="txt-02">On board Pordin-Nancq, Carter 37. April 2025.</span>
         </div>
         <div style="text-align: right; padding-right: 20px;">
             <img src="/images/drowning.gif"
@@ -442,6 +442,7 @@ compass-rose .day {
         <option value="3">20-Avr-2025 - Manche 2</option>
         <option value="4">21-Avr-2025 - Manche 1</option>
     </select>
+    <br/>
     <span id="curr-point" style="margin: 10px;"></span> 
     <span id="point-card" style="margin: 10px;"></span>
     <br/>
@@ -533,18 +534,20 @@ compass-rose .day {
       </div>
 
       <div>
-        <span style="margin-left: 10px;">Fly to:</span>
+        <span id="txt-04" style="margin-left: 10px;">Fly to:</span>
         <ul>
-            <li><a class="list-link" href="#" onclick="flyToZoom(0);">Port-Tudy</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(1);">L'&icirc;le aux souris</a></li>
-            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Port de G&acirc;vres</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(0);">Rond Garmin</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(1);">Bugalet</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(2);">Sud Quiberon</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(3);">Nord Quiberon</a></li>
+            <li><a class="list-link" href="#" onclick="flyToZoom(4);">Arriv&eacute;e Spi</a></li>
         </ul>
       </div>
     </div>
 </div>
 
 <hr/>
-<span>Slide show - Images are clickable</span>
+<span id="txt-03">Slide show - Images are clickable</span>
 <div id="slide-show-container" 
      class="body-pix">
     <slide-show id="slide-show-02"
@@ -560,6 +563,8 @@ compass-rose .day {
         <slide-show-image src="./spof.06.jpeg" title="Spi Ouest France"></slide-show-image>
         <slide-show-image src="./spof.07.jpeg" title="Spi Ouest France"></slide-show-image>
         <slide-show-image src="./spof.08.jpeg" title="Spi Ouest France"></slide-show-image>
+        <slide-show-image src="./spof.09.jpeg" title="Spi Ouest France"></slide-show-image>
+        <slide-show-image src="./spof.10.jpeg" title="Spi Ouest France"></slide-show-image>
     </slide-show>
 </div>
 <hr/>
@@ -568,7 +573,7 @@ compass-rose .day {
 
 <div style="color: silver;">
   OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...<br/>
-  <i style="color: silver;">OlivSoft never stops</i>
+  <i style="color: silver;">Passe-Coque never stops</i>
 </div>
 
 <script type="text/javascript">
@@ -638,9 +643,11 @@ compass-rose .day {
     let latlngs; // To be populated from JSON.
 
     const ZOOM_POSITIONS = [  
-        new L.LatLng(47.64386764, -3.44712982474), // Port-Tudy
-        new L.LatLng(47.70252172, -3.3581809011), // Ile aux souris
-        new L.LatLng(47.7005875080, -3.35065864163) // Gavres
+        new L.LatLng(47.5, -3.004833),      // Rond Garmin
+        new L.LatLng(47.519667, -3.090833), // Bugalet
+        new L.LatLng(47.467000, -3.038667), // Sud Quiberon
+        new L.LatLng(47.493000, -3.043833), // Nord Quiberon
+        new L.LatLng(47.555833, -3.010417)  // Arrivee Spi
     ];
 
     function flyToZoom(idx) {
@@ -650,7 +657,33 @@ compass-rose .day {
     }
 
     // Used as an example, See "// markers" below. Used to hold pictures.
-    const ALL_MARKERS = [[], [], []];
+    const ALL_MARKERS = [[{ // One
+        "latitude": 47.5,
+        "longitude": -3.004833,
+        "name": "Rond Garmin",
+        "content": "Zone de d&eacute;part IRC 3"
+    }, {
+        "latitude": 47.519667,
+        "longitude": -3.090833,
+        "name": "Bugalet",
+        "content": "Marque parcours c&ocirc;tier"
+    }, {
+        "latitude": 47.467000,
+        "longitude":  -3.038667,
+        "name": "Sud Quiberon",
+        "content": "Marque parcours c&ocirc;tier"
+    }, {
+        "latitude": 47.493000, 
+        "longitude": -3.043833,
+        "name": "Nord Quiberon",
+        "content": "Marque parcours c&ocirc;tier"
+    }, {
+        "latitude": 47.555833, 
+        "longitude": -3.010417,
+        "name": "Arriv&eacute;e Spi",
+        "content": "Arriv&eacute;e !"
+    }], 
+    [], []];
 
 
     // TODO Choose the track
@@ -764,7 +797,7 @@ compass-rose .day {
         let idx = parseInt(dd.value);
         console.log(`Now loading track ${TRACK_DATA[idx]}`);
         trackData = TRACK_DATA[idx];
-        markers = ALL_MARKERS[idx];
+        markers = ALL_MARKERS[0];  // Always the same, this time. [idx];
         // Remove existing markers
         currentMarkers.forEach(mark => map.removeLayer(mark));
         currentMarkers = []; // Reset
@@ -972,9 +1005,93 @@ compass-rose .day {
         window.open(src, '_blank'); // This is an example
     }
 
+    let switchLanguage = (lang) => {
+        if (lang === "FR") {
+            document.getElementById('txt-01').innerHTML = "Rejouer les donn&eacute;es";
+            document.getElementById('txt-02').innerHTML = "&Agrave; bord Pordin-Nancq, Carter 37. Avril 2025.";
+
+            document.getElementById('cancel-path').innerHTML = "Annuler";
+            document.getElementById('stop-path').innerHTML = "Pause";
+            document.getElementById('resume-path').innerHTML = "Reprendre";
+            document.getElementById('start-path').innerHTML = "Rejouer";
+
+            document.getElementById('txt-03').innerHTML = "Diapos - Cliquer pour agrandir";
+            document.getElementById('txt-04').innerHTML = "Aller &agrave; :";
+
+            document.getElementById('dialog-01').innerHTML = "Une simple interface Leaflet &amp; WebComponents pour visualiser des donn&eacute;es enregistr&eacute;es en naviguant.";
+            document.getElementById('dialog-02').innerHTML = "Qui comporte ";
+            document.getElementById('dialog-03').innerHTML = "LeafLet Map API";
+            document.getElementById('dialog-04').innerHTML = "WebComponents";
+            document.getElementById('dialog-05').innerHTML = "HTML5/CSS3/ES6";
+            document.getElementById('dialog-06').innerHTML = "...etc !";
+            document.getElementById('dialog-07').innerHTML = "On peut draguer la carte.";
+            document.getElementById('dialog-08').innerHTML = "Pour zoomer, utilisez les +/- sur la carte (ou double-click, et MAJ + double-click)";
+            document.getElementById('dialog-09').innerHTML = "Utilisez les liens 'Aller &agrave;' pour aller de marque en marque (experimental).";
+            document.getElementById('dialog-10').innerHTML = "Essayez le bouton \"Rejouer\" pour rejouer les donn&eacute;es (zoomez en rejouant, &ccedil;a vaut le coup).";
+            document.getElementById('dialog-11').innerHTML = "Utilisez le slider pour faire d&eacute;filer les donn&eacute;es.";
+
+        } else { // EN
+            document.getElementById('txt-01').innerHTML = "Replay Logged Data";
+            document.getElementById('txt-02').innerHTML = "On board Pordin-Nancq, Carter 37. April 2025.";
+
+            document.getElementById('cancel-path').innerHTML = "Cancel";
+            document.getElementById('stop-path').innerHTML = "Pause";
+            document.getElementById('resume-path').innerHTML = "Resume";
+            document.getElementById('start-path').innerHTML = "Replay";
+            
+            document.getElementById('txt-03').innerHTML = "Slide show - Images are clickable";
+            document.getElementById('txt-04').innerHTML = "Fly to:";
+
+            document.getElementById('dialog-01').innerHTML = "A simple Leaflet and WebComponents interface to visualize and replay data logged when sailing.";
+            document.getElementById('dialog-02').innerHTML = "Featuring";
+            document.getElementById('dialog-03').innerHTML = "LeafLet Map API";
+            document.getElementById('dialog-04').innerHTML = "WebComponents";
+            document.getElementById('dialog-05').innerHTML = "HTML5/CSS3/ES6";
+            document.getElementById('dialog-06').innerHTML = "...and so on!";
+            document.getElementById('dialog-07').innerHTML = "Map is draggable.";
+            document.getElementById('dialog-08').innerHTML = "Zoom in and out using the +/- on the chart (or double-click, and shift + double-click)";
+            document.getElementById('dialog-09').innerHTML = "Use the links on the right to move from place to place (experimental).";
+            document.getElementById('dialog-10').innerHTML = "Try the \"REPLAY\" button to replay what was logged (zoom when replaying..., it's worth it).";
+            document.getElementById('dialog-11').innerHTML = "Use the slider to scroll accross the logged data.";
+        }
+    }
+
+    let getQueryParameterByName = (name, url) => {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) {
+            return null;
+        }
+        if (!results[2]) {
+            return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    };
+
     window.onload = () => {
-      console.log("Page Loaded!");
-      loadPathData();
+        console.log("Page Loaded!");
+        loadPathData();
+
+        let userLang = getQueryParameterByName('lang');
+        if (!userLang) { 
+            let browserUserLang = navigator.language || navigator.userLanguage; 
+            console.log("The browser's language is: " + browserUserLang);
+            if (browserUserLang) {
+                if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
+                    userLang = 'FR';
+                } else {
+                    userLang = 'EN';
+                    console.log("We'll speak english");
+                }
+            }
+        }
+        if (userLang && userLang === 'FR') { // Default is EN
+            switchLanguage(userLang);
+        }
     };
 
 </script>
