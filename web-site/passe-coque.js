@@ -1737,7 +1737,7 @@ const THE_FLEET = [
         id: "coevic-2",
         pix: "/images/boats/coevic-2.png",
         type: "Mirage 28",
-        category: NONE,
+        category: EX_BOAT,
         base: "Lorient"
     },
     { 
@@ -3144,6 +3144,12 @@ const KEYWORDS = [
 		keywords: [ 'asso', 'association', 'status', 'statut' ],
 		url: '/?nav-to=67',
 		comment: 'Status de l\'association, à partir de votre espace membres'
+	},
+	{
+		name: 'Passe-Coque',
+		keywords: [ 'todo', 'list', 'travaux', 'bateau', 'work', 'boats' ],
+		url: '/?nav-to=67',
+		comment: 'TODO Lists, travaux à faire sur les bateaux, à partir de votre espace membres'
 	},
 	{
 		name: 'Adhésion',
