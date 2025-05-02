@@ -8,7 +8,7 @@
  +-->
 <head>
 
-  <title>Leaflet Analysis</title>
+  <title>Spi Ouest-France 2025. Leaflet Analysis</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -414,7 +414,7 @@ compass-rose .day {
     <div style="display: grid; grid-template-columns: auto auto auto;">
         <div>
             <h1 style="padding-left: 10px;"><a href="https://spi.ouest-france.fr/" target="SOF">Spi Ouest-France 2025</a> - <span id="txt-01">Replay Logged Data</span></h1>
-            <span id="txt-02">On board Pordin-Nancq, Carter 37. April 2025.</span>
+            <span id="txt-02">On board Pordin-Nancq, Carter 37. April 2025. Pictures and data.</span>
         </div>
         <div style="text-align: right; padding-right: 20px;">
             <img src="/images/drowning.gif"
@@ -432,7 +432,32 @@ compass-rose .day {
     </div>
 </div>
 
+<hr/>
+
+<span id="txt-03">Slide show - Images are clickable</span>
+<div id="slide-show-container" 
+     class="body-pix">
+    <slide-show id="slide-show-02"
+                width="800"
+                height="600"
+                slideclick="onSlideShowClick"
+                style="padding: 10px;">
+        <slide-show-image src="./spof.01.jpeg" title="Spi Ouest France, Didier, Charles"></slide-show-image>
+        <slide-show-image src="./spof.02.jpeg" title="Spi Ouest France, rond Garmin"></slide-show-image>
+        <slide-show-image src="./spof.03.jpeg" title="Spi Ouest France, la sortie"></slide-show-image>
+        <slide-show-image src="./spof.04.jpeg" title="Spi Ouest France, downwind"></slide-show-image>
+        <slide-show-image src="./spof.05.jpeg" title="Spi Ouest France, retour"></slide-show-image>
+        <slide-show-image src="./spof.06.jpeg" title="Spi Ouest France, &ccedil;a sort !"></slide-show-image>
+        <slide-show-image src="./spof.07.jpeg" title="Spi Ouest France, SNSM"></slide-show-image>
+        <slide-show-image src="./spof.08.jpeg" title="Spi Ouest France, spi horizon"></slide-show-image>
+        <slide-show-image src="./spof.09.jpeg" title="Spi Ouest France, CEO !"></slide-show-image>
+        <slide-show-image src="./spof.10.jpeg" title="Spi Ouest France, Pordin-Nancq"></slide-show-image>
+    </slide-show>
+</div>
+<hr/>
+
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
+<h2 id="data-title">Data</h2>
 <div id="top-div" style="margin: 5px; display: grid; grid-template-columns: auto 120px 120px 120px 120px;">
   <div>
     <select id="track-drop-down" class="custom-select" onchange="reloadTrack(this);">
@@ -545,29 +570,6 @@ compass-rose .day {
       </div>
     </div>
 </div>
-
-<hr/>
-<span id="txt-03">Slide show - Images are clickable</span>
-<div id="slide-show-container" 
-     class="body-pix">
-    <slide-show id="slide-show-02"
-                width="800"
-                height="600"
-                slideclick="onSlideShowClick"
-                style="padding: 10px;">
-        <slide-show-image src="./spof.01.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.02.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.03.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.04.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.05.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.06.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.07.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.08.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.09.jpeg" title="Spi Ouest France"></slide-show-image>
-        <slide-show-image src="./spof.10.jpeg" title="Spi Ouest France"></slide-show-image>
-    </slide-show>
-</div>
-<hr/>
 
 <hr/>
 
@@ -1007,15 +1009,16 @@ compass-rose .day {
 
     let switchLanguage = (lang) => {
         if (lang === "FR") {
-            document.getElementById('txt-01').innerHTML = "Rejouer les donn&eacute;es";
-            document.getElementById('txt-02').innerHTML = "&Agrave; bord Pordin-Nancq, Carter 37. Avril 2025.";
+            document.getElementById("data-title").innerHTML = "Donn&eacute;es";
+            document.getElementById('txt-01').innerHTML = "Photos et Donn&eacute;es enregistr&eacute;es";
+            document.getElementById('txt-02').innerHTML = "&Agrave; bord Pordin-Nancq, Carter 37. Avril 2025. Photos et donn&eacute;es.";
 
             document.getElementById('cancel-path').innerHTML = "Annuler";
             document.getElementById('stop-path').innerHTML = "Pause";
             document.getElementById('resume-path').innerHTML = "Reprendre";
             document.getElementById('start-path').innerHTML = "Rejouer";
 
-            document.getElementById('txt-03').innerHTML = "Diapos - Cliquer pour agrandir";
+            document.getElementById('txt-03').innerHTML = "Diapos - Cliquer dessus pour agrandir";
             document.getElementById('txt-04').innerHTML = "Aller &agrave; :";
 
             document.getElementById('dialog-01').innerHTML = "Une simple interface Leaflet &amp; WebComponents pour visualiser des donn&eacute;es enregistr&eacute;es en naviguant.";
@@ -1031,8 +1034,9 @@ compass-rose .day {
             document.getElementById('dialog-11').innerHTML = "Utilisez le slider pour faire d&eacute;filer les donn&eacute;es.";
 
         } else { // EN
-            document.getElementById('txt-01').innerHTML = "Replay Logged Data";
-            document.getElementById('txt-02').innerHTML = "On board Pordin-Nancq, Carter 37. April 2025.";
+            document.getElementById("data-title").innerHTML = "Data";
+            document.getElementById('txt-01').innerHTML = "Pictures and Logged Data RFeplay";
+            document.getElementById('txt-02').innerHTML = "On board Pordin-Nancq, Carter 37. April 2025. Pictures and data.";
 
             document.getElementById('cancel-path').innerHTML = "Cancel";
             document.getElementById('stop-path').innerHTML = "Pause";
