@@ -3581,7 +3581,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Penny Lane',
-		keywords: [ 'boat', 'bateau', 'panny lane', 'arpege', 'arpège' ],
+		keywords: [ 'boat', 'bateau', 'panny lane', 'arpege', 'arpège', 'penny', 'lane', 'penny-lane' ],
 		url: '/?nav-to=4&boat-id=penny-lane',
 		comment: 'Le bateau, Apège'
 	},
