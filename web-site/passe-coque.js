@@ -1435,6 +1435,13 @@ let THE_BOATS = null;
 // This is a backup. Used if the json fetch fails...
 const THE_FLEET = [
     {
+        name: "Jericho",
+        id: "jericho",
+        pix: "/images/boats/jericho/jericho-3.jpg",
+        type: "Cotre bermudien",
+        category: NONE,
+        base: "St Philibert"
+    },{
         name: "La Moara",
         id: "la-moara",
         pix: "/images/boats/la.moara/la.plaque.jpeg",
@@ -3583,7 +3590,7 @@ const KEYWORDS = [
 		name: 'Penny Lane',
 		keywords: [ 'boat', 'bateau', 'panny lane', 'arpege', 'arpège', 'penny', 'lane', 'penny-lane' ],
 		url: '/?nav-to=4&boat-id=penny-lane',
-		comment: 'Le bateau, Apège'
+		comment: 'Le bateau, Arpège'
 	},
 	{
 		name: 'Remora',
