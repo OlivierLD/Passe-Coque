@@ -3419,6 +3419,12 @@ const KEYWORDS = [
 		comment: 'Shipman 28.'
 	},
 	{
+		name: 'Jericho',
+		keywords: [ 'boat', 'bateau', 'jericho', 'carter', 'acier', 'steel' ],
+		url: '/?nav-to=4&boat-id=jericho',
+		comment: 'Le bateau, un Carter à restaurer.'
+	},
+	{
 		name: 'Le Melkart',
 		keywords: [ 'handicap' , 'entendre', 'listen', 'the sea', 'la mer', 'tiago', 'evasion', 'melkart' ],
 		url: '/?nav-to=4&boat-id=melkart',

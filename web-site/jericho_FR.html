@@ -1,7 +1,8 @@
 <div class="boat-card">
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'jericho-01');" title="Sommaire">Sommaire</button>
-        <button class="tablinks" onclick="openTab(event, 'jericho-02');">Programme</button>
+        <button class="tablinks" onclick="openTab(event, 'jericho-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'jericho-03');">Programme</button>
     </div>
 
     <div class="pcc-dialog-tab-content">
@@ -43,6 +44,25 @@
             </div>
         </div>
         <div id="jericho-02" class="tab-section" style="display: none;">
+            <slide-show id="eh-tak-slide-show-03"
+                        width="534"
+                        height="400"
+                        style="line-height: 1em;"
+                        slideclick="onSlideShowClick">
+                <slide-show-image src="/images/boats/jericho/jericho-2-2.jpeg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-2.jpg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-3.jpeg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-3.jpg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-4.2.jpg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-4.jpeg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-4.jpg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-5.jpg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-5.jpeg" title="Jericho"></slide-show-image>
+                <slide-show-image src="/images/boats/jericho/jericho-6.jpg" title="Jericho"></slide-show-image>
+            </slide-show>
+
+        </div>
+        <div id="jericho-03" class="tab-section" style="display: none;">
             <h2>Programme du bateau</h2>
             <ul>
                 <li>
