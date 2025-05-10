@@ -225,6 +225,7 @@ if (isset($_POST['operation'])) {
                                    '<option value="CLUB"' . ($table[4]=== 'CLUB' ? ' selected' : '') . '>CLUB</option>' . 
                                    '<option value="EX_BOAT"' . ($table[4]=== 'EX_BOAT' ? ' selected' : '') . '>EX_BOAT</option>' . 
                                    '<option value="TO_GRAB"' . ($table[4]=== 'TO_GRAB' ? ' selected' : '') . '>TO_GRAB</option>' . 
+                                   '<option value="FOR_SALE"' . ($table[4]=== 'FOR_SALE' ? ' selected' : '') . '>FOR_SALE</option>' . 
                                  '</select></td><tr>' . PHP_EOL);
       echo('<tr><td>Base</td><td><input type="text" name="base" value="' . urldecode($table[5]) . '" size="40"></td></tr>' . PHP_EOL);
       echo('<tr><td>Image (read-only)</td><td><img src="' . $table[2] . '"></td></tr>' . PHP_EOL);
@@ -262,6 +263,7 @@ if (isset($_POST['operation'])) {
             <option value="CLUB">CLUB</option>
             <option value="EX_BOAT">EX_BOAT</option>
             <option value="TO_GRAB">TO_GRAB</option>
+            <option value="FOR_SALE">FOR_SALE</option>
           </select>
         </td>
       <tr>

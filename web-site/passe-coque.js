@@ -1430,6 +1430,7 @@ const NONE = "NONE"; // 1;
 const CLUB = "CLUB"; // 2;
 const EX_BOAT = "EX_BOAT"; // 3;
 const TO_GRAB = "TO_GRAB"; // 4;
+const FOR_SALE = "FOR_SALE"; // 5;
 
 let THE_BOATS = null;
 // This is a backup. Used if the json fetch fails...
@@ -1768,7 +1769,7 @@ const THE_FLEET = [
         id: "imagine",
         pix: "/images/boats/selection.png",
         type: "Selection&nbsp;37",
-        category: NONE,
+        category: FOR_SALE,
         base: "Ouistreham"
     },
     { 
@@ -2225,6 +2226,10 @@ let updateFilter = radio => {
             console.log("&agrave; saisir");
             fillOutFleet(TO_GRAB);
             break;
+        case '5':
+            console.log("&agrave; vendre");
+            fillOutFleet(FOR_SALE);
+            break;
         default:
             break;
     }
@@ -2353,6 +2358,9 @@ let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
             } else if (boat.category === TO_GRAB) {
                 badge.classList.add("badge-grab");
                 badge.innerHTML = '<span>🤩</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
+            } else if (boat.category === FOR_SALE) {
+                badge.classList.add("badge-for-sale");
+                badge.innerHTML = '<span>👍🏻</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
             }
             div.appendChild(badge);
         }
