@@ -119,7 +119,7 @@
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'anita-conti-01');" title="Projet">Projet</button>
         <button class="tablinks" onclick="openTab(event, 'anita-conti-02');">D&eacute;tails</button>
-        <button class="tablinks" onclick="openTab(event, 'anita-conti-03'); setAuto('slide-show-ac-1', document.getElementById('ac-slider-1'));">Actualit&eacute;s</button>
+        <button class="tablinks" onclick="openTab(event, 'anita-conti-03'); /*setAuto('slide-show-ac-1', document.getElementById('ac-slider-1'));*/">Actualit&eacute;s</button>
         <button class="tablinks" onclick="openTab(event, 'anita-conti-04');">Contact</button>
         <!--button class="tablinks" onclick="openTab(event, 'anita-conti-05');">Nous soutenir</button-->
     </div>
@@ -143,6 +143,11 @@
                     " Il faut cesser de piller l'oc&eacute;an ", " Nous devons penser aux g&eacute;n&eacute;rations &agrave; venir "...
                     Une femme exceptionnelle qui avait pressenti la n&eacute;cessit&eacute; du d&eacute;veloppement durable de la mer..
                 <!--/div-->
+            </div>
+            <hr/>
+            <div style="text-align: right; margin-right: 15%;">
+                <a href="https://www.facebook.com/profile.php?id=61575153872044" target="FB" title="FaceBook"><img src="/logos/facebook.png" width="40" style="vertical-align: middle;"></a>
+                <a href="https://www.instagram.com/danslesillagedanitaconti/" target="Insta" title="Instagram"><img src="/logos/instagram.jpg" width="40" style="vertical-align: middle;"></a>
             </div>
         </div>
 
@@ -188,7 +193,10 @@
 
         <div id="anita-conti-03" class="tab-section" style="display: none;" onload="">
             <h2>Actualit&eacute;s</h2>
-            Mai 2025, &agrave; Houat &agrave; bord du "<a href="https://leenanhead56.wixsite.com/leenanhead/medias" target="LH">Leenan Head</a>".
+            <iframe src="./anita.conti/A la rencontre de pêcheurs dans le sillage d’Anita Conti(5).pdf" style="width: 100%; height: 500px; border: none;"></iframe><br/>
+            Le m&ecirc;me document, dans un <a href="./anita.conti/A la rencontre de pêcheurs dans le sillage d’Anita Conti(5).pdf" target="PDF">autre onglet</a>.<br/>
+            <br/>
+            Mai 2025, &agrave; Houat &agrave; bord du "<a href="https://leenanhead56.wixsite.com/leenanhead/medias" target="LH">Leenan Head</a>".<br/>
             <div>
                 <div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
                     <label class="switch switch-element" style="margin-top: 0.5em;">
@@ -196,8 +204,10 @@
                       <span class="slider round"></span>
                     </label>
                     <span class="switch-element">Auto-Scroll</span>
+                </div>
+                <div style="font-size: small;">
+                    Cliquez les photos pour les agrandir !
                 </div>		
-
                 <slide-show id="slide-show-ac-1"
                             width="456"
                             height="340"
@@ -215,6 +225,10 @@
                 </slide-show>
 
                 <!-- Carrousel ? -->
+                <div style="margin-top: 10px; margin-bottom: -70px; font-size: small;">
+                    Mettez la souris sur le carrousel pour l'arr&ecirc;ter, cliquez les photos pour les agrandir !
+                </div>
+
                 <section id="slideshow" style="margin-left: 0px;">
                     <div class="entire-content">
                     <div class="content-carrousel">
@@ -274,6 +288,7 @@
                 <!-- End Carrousel -->
 
             </div>
+            <hr/>
         </div>
 
         <div id="anita-conti-04" class="tab-section" style="display: none;">
