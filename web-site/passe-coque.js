@@ -3235,7 +3235,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Passages',
-		keywords: [ 'theatre' , 'theater', 'théatre', 'lorient', '56', 'hydrophone', 'radio', 'balise', 'sauvegarde' ],
+		keywords: [ 'theatre' , 'theater', 'théatre', 'lorient', '56', 'hydrophone', 'radio', 'balise', 'sauvegarde', 'passage', 'passages' ],
 		url: '/?nav-to=31&tx=34',
 		comment: 'Projet Passages'
 	},
