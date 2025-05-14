@@ -3229,7 +3229,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Anita Conti',
-		keywords: [ 'anita' , 'conti', 'reveuse', 'rêveuse', 'marseille', 'lorient', 'fecamp', 'fécamp', 'sillage', 'wake' ],
+		keywords: [ 'anita' , 'conti', 'reveuse', 'rêveuse', 'marseille', 'lorient', 'fecamp', 'fécamp', 'sillage', 'wake', 'leenan', 'head' ],
 		url: '/?nav-to=31&tx=35',
 		comment: 'Dans le sillage d\'Anita Conti'
 	},
@@ -3241,7 +3241,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Passe-Coque Trophy',
-		keywords: [ 'trophy', 'passe', 'coque', 'passe-coque', 'passe coque' ],
+		keywords: [ 'trophy', 'trophée', 'trophe', 'passe', 'coque', 'passe-coque', 'passe coque' ],
 		url: '/?nav-to=31&tx=33',
 		comment: 'Projet Passe-Coque Trophy'
 	},
@@ -3265,7 +3265,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Les Jeannettes',
-		keywords: [ 'solidaire', 'social', 'artistique', 'jeannette', 'shadok' ],
+		keywords: [ 'solidaire', 'social', 'artistique', 'jeannette', 'shadok', 'victime', 'violence' ],
 		url: '/?nav-to=31&tx=29',
 		comment: 'Projet Les Jeannettes'
 	},
@@ -3391,7 +3391,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Voyages en Patrimoine',
-		keywords: [ 'passpartout', 'patrimoine' ],
+		keywords: [ 'passpartout', 'patrimoine', 'voyage' ],
 		url: '/?nav-to=31&tx=02',
 		comment: ''
 	},
