@@ -2360,7 +2360,7 @@ let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
                 badge.innerHTML = '<span>🤩</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
             } else if (boat.category === FOR_SALE) {
                 badge.classList.add("badge-for-sale");
-                badge.innerHTML = '<span>👍🏻</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
+                badge.innerHTML = '<span><img src="./logos/for.sale.png" style="width: 36px;"></span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
             }
             div.appendChild(badge);
         }
