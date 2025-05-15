@@ -1426,10 +1426,10 @@ let onImageClick = (origin) => {
     window.open(origin.src);
 };
 
-const NONE = "NONE"; // 1;
-const CLUB = "CLUB"; // 2;
-const EX_BOAT = "EX_BOAT"; // 3;
-const TO_GRAB = "TO_GRAB"; // 4;
+const NONE = "NONE";         // 1;
+const CLUB = "CLUB";         // 2;
+const EX_BOAT = "EX_BOAT";   // 3;
+const TO_GRAB = "TO_GRAB";   // 4;
 const FOR_SALE = "FOR_SALE"; // 5;
 
 let THE_BOATS = null;

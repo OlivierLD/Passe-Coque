@@ -1,9 +1,125 @@
+<style type="text/css">
+
+/* Q: Where is the carrousel's vertical axis */
+
+:root {
+    --bg-transp: 0.75;
+    --translate-z: 310px; /* Slide width, minimum */
+}
+
+/** {
+    margin: 0;
+    padding: 0;
+}*/
+
+/* 3D Slideshow */
+
+#slideshow {
+    margin: 0 auto;
+    padding-top: 50px;
+    height: 700px;
+    width: 100%;
+    /*background-color: #202525;*/
+    box-sizing: border-box;
+}
+
+.entire-content {
+    margin: auto;
+    width: 190px;
+    perspective: 1000px;
+    position: relative;
+    padding-top: 20px;
+}
+
+.content-carrousel {
+    width: 100%;
+    position: absolute;
+    /*float: right;*/
+    animation: rotar 15s infinite linear;
+    transform-style: preserve-3d;
+}
+
+.content-carrousel:hover {
+    animation-play-state: paused;
+    cursor: pointer;
+}
+
+.content-carrousel figure {
+    width: 150%;
+    height: 400px;
+    border: 1px solid #3b444b;
+    overflow: hidden;
+    position: absolute;
+}
+
+/* 
+    Degree step: 40 = 360 / 9  (9 = nb slides) 
+                    51 ~= 360 / 7 (7 = nb slides) => 0, 51, 102, 153, etc...
+*/
+.content-carrousel figure:nth-child(1) {
+    transform: rotateY(0deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(2) {
+    transform: rotateY(51deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(3) {
+    transform: rotateY(102deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(4) {
+    transform: rotateY(153deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(5) {
+    transform: rotateY(204deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(6) {
+    transform: rotateY(255deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(7) {
+    transform: rotateY(306deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(8) {
+    transform: rotateY(357deg) translateZ(var(--translate-z));
+}
+
+.shadow {
+    position: absolute;
+    box-shadow: 0px 0px 20px 0px #000;
+    border-radius: 1px;
+}
+
+.content-carrousel img {
+    image-rendering: auto;
+    transition: all 300ms;
+    width: 100%;
+    height: 100%;
+}
+
+.content-carrousel img:hover {
+    transform: scale(1.2);
+    transition: all 300ms;
+}
+
+@keyframes rotar {
+    from {
+        transform: rotateY(0deg);
+    } to {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Display WebComponents */
+.black-frame {
+    padding: 3px;
+    margin: 1px;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+.centered {
+    text-align: center;
+}
+               
+</style>
+
 <div class="boat-card" header="Passages">
 
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'anita-conti-01');" title="Projet">Project</button>
         <button class="tablinks" onclick="openTab(event, 'anita-conti-02');">Details</button>
-        <!--button class="tablinks" onclick="openTab(event, 'anita-conti-03'); setAuto('slide-show-passage', document.getElementById('passage-slider'));">Photos</button-->
+        <button class="tablinks" onclick="openTab(event, 'anita-conti-03'); /*setAuto('slide-show-ac-1', document.getElementById('ac-slider-1'));*/">News</button>
         <button class="tablinks" onclick="openTab(event, 'anita-conti-04');">Contact</button>
         <!--button class="tablinks" onclick="openTab(event, 'anita-conti-05');">Nous soutenir</button-->
     </div>
@@ -12,13 +128,25 @@
         <div id="anita-conti-01" class="tab-section" style="display: block;">
 
             <!--div style="vertical-align: middle;"><img src="/images/construction.cone.png" height="26"> <b>Projets Low Tech&nbsp;!</b> <img src="/images/construction.cone.png" height="30"></div-->
-            <div class="txt-img-div-2">
+            <h2>In Anita Conti's wake</h2>
+            <div> <!-- class="txt-img-div-2" -->
                 <!--iframe src="https://akirodic.com/p/jellyfish/" style="width: 80%; height: 100%;"></iframe-->
-                <img src="./anita.conti/books.jpeg" style="width: 80%; margin: auto; margin-top: 5px;">
-                <div style="padding: 14px;">
-                    <h2>In Anita Conti's wake</h2>
-                    . . .
-                </div>
+                <img src="./anita.conti/books.jpeg" style="width: 50%; margin: 10px;" align="left">
+                <!--div style="padding: 14px;"-->
+                    A crew sets sail, following in the footsteps of Anita Conti...
+                    Can we use the world's seas? ... as a source of food, energy, or minerals? Maritime spaces... as a place for 
+                    sporting, recreational, or boating activities without addressing their short- or medium-term impact?
+                    Anita Conti, a pioneer in oceanography, sounded the alarm more than 50 years ago, denouncing the negative 
+                    impacts of overexploitation of the sea and overfishing on the marine ecosystem. She warned of the risks of 
+                    ecosystem destabilization and significant losses of marine biodiversity.<br/>
+                    "We must stop plundering the ocean," "We must think of future generations"... 
+                    An exceptional woman who foresaw the need for sustainable development of the sea.
+                <!--/div-->
+            </div>
+            <hr/>
+            <div style="text-align: right; margin-right: 15%;">
+                <a href="https://www.facebook.com/profile.php?id=61575153872044" target="FB" title="FaceBook"><img src="/logos/facebook.png" width="40" style="vertical-align: middle;"></a>
+                <a href="https://www.instagram.com/danslesillagedanitaconti/" target="Insta" title="Instagram"><img src="/logos/instagram.jpg" width="40" style="vertical-align: middle;"></a>
             </div>
         </div>
 
@@ -26,44 +154,150 @@
             <h2>Details</h2>
             <div class="project-content" style="display: grid; grid-template-columns: 100%;">
                 <div style="overflow: auto;">
-                    . . .
+                    A crew sets sail, following in the footsteps of Anita Conti, to retrace the journey of this oceanographer renowned for her work and commitment.<br/>
+                    The crew will retrace her journey and, from port to port, highlight the initiatives that can give everyone the opportunity, 
+                    on a daily basis, to actively contribute to preserving the marine environment.<br/>
+                    <h2>Why?</h2>
+                    Because the sea and the uses we make of it have a direct impact on the future of our planet and on the possibility 
+                    for us and future generations to live there peacefully.<br/>
+                    <h2>With whom / for whom?</h2>
+                    Sailors, fishermen, and artisans, directly involved in both our food self-sufficiency and the maintenance of marine balances. 
+                    Consumers (current or future) who have the power to act. When informed, they can help change our consumption habits.
+                    <h2>How?</h2>
+                    On the French coasts initially, then in the northern seas of Europe or along the coasts of North Africa, 
+                    we will meet artisanal fishermen, their distribution networks and all the actors who support them in promoting 
+                    their production (fishing methods, marketing circuits, redevelopment of sailing fishing, etc.). 
+                    The project will show consumers and younger people (pupils / students / learners, etc.) the link between the 
+                    act of consumption and the development of more sustainable fishing. It will highlight the relevance and 
+                    possibility of consuming products from responsible fishing. The project includes moments of navigation 
+                    and times for visits and meetings. The journey begins with a trip aboard a century-old sailing herring boat 
+                    between the Gulf of Morbihan and the city of Lorient, which saw Anita's first baths and which houses a complete 
+                    and consultable archive. The project is being developed with Laurent Girault Conti, Anita Conti's adopted son.
+
+                    <h2>The crew, 5 members:</h2>
+                    <ul>
+                        <li>C&eacute;line VROMANDT, Technical Coordinator - Agricultural Engineer; Project Manager</li>
+                        <li>&Eacute;milie PETITBON, Project Manager in the Marine Industry; Head of a Consumer Cooperative</li>
+                        <li>Pauline REIGNER, Naval Architect, involved in developing the role of women at sea</li>
+                        <li>Laurent GIRAULT CONTI, Anita Conti's adopted son, project sponsor</li>
+                        <li>M&eacute;lanie DE GROOT, Crew Member, Journalist, Director, Onboard Reporter</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!--div id="anita-conti-03" class="tab-section" style="display: none;" onload="">
+                <div id="anita-conti-03" class="tab-section" style="display: none;" onload="">
+            <h2>News</h2>
+            <div class="normal-lh">
+                <ul>
+                    <li><a href="#RAP" onclick="scrollHere(this);">Meeting the fishermen</a></li>
+                    <li><a href="#Houat-2025" onclick="scrollHere(this);">In Houat on board the Leenan Head</a></li>
+                </ul>
+            </div>
+            <a name="RAP">Meeting the fishermen</a><br/>
+            <iframe src="./anita.conti/A la rencontre de pêcheurs dans le sillage d’Anita Conti(5).pdf" style="width: 100%; height: 500px; border: none;"></iframe><br/>
+            Same document, in <a href="./anita.conti/A la rencontre de pêcheurs dans le sillage d’Anita Conti(5).pdf" target="PDF">another tab</a>.<br/>
+            <br/>
+            <a name="Houat-2025">May 2025, in Houat</a> on board the "<a href="https://leenanhead56.wixsite.com/leenanhead/medias" target="LH">Leenan Head</a>".<br/>
             <div>
                 <div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
                     <label class="switch switch-element" style="margin-top: 0.5em;">
-                      <input id="passage-slider" type="checkbox" onchange="setAuto('slide-show-passage', this);" checked>
+                      <input id="ac-slider-1" type="checkbox" onchange="setAuto('slide-show-ac-1', this);"> <!-- checked -->
                       <span class="slider round"></span>
                     </label>
                     <span class="switch-element">Auto-Scroll</span>
+                </div>
+                <div style="font-size: small;">
+                    Click the pictures to enlarge them!
                 </div>		
-
-                <slide-show id="slide-show-passage"
-                            width="600"
+                <slide-show id="slide-show-ac-1"
+                            width="456"
                             height="340"
                             slideclick="onSlideShowClick"
                             style="line-height: 1em;"
                             title="Cliquez pour agrandir">
-                    <slide-show-image src="./passages/passages.001.jpg" title="1" desc="Cliquer pour agrandir"></slide-show-image>
-                    <slide-show-image src="./passages/passages.002.jpg" title="2" desc="Cliquer pour agrandir"></slide-show-image>
-                    <slide-show-image src="./passages/passages.003.jpg" title="3" desc="Cliquer pour agrandir"></slide-show-image>
-                    <slide-show-image src="./passages/passages.004.jpg" title="4" desc="Cliquer pour agrandir"></slide-show-image>
-                    <slide-show-image src="./passages/passages.005.jpg" title="5" desc="Cliquer pour agrandir"></slide-show-image>
-                    <slide-show-image src="./passages/passages.006.jpg" title="6" desc="Cliquer pour agrandir"></slide-show-image>
-                    <slide-show-image src="./passages/passages.007.jpg" title="7" desc="Cliquer pour agrandir"></slide-show-image>
-                    <slide-show-image src="./passages/passages.008.jpg" title="8" desc="Cliquer pour agrandir"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.01.jpeg" title="1" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.02.jpeg" title="2" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.03.jpeg" title="3" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.04.jpeg" title="4" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.05.jpeg" title="5" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.06.jpeg" title="6" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.07.jpeg" title="7" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./anita.conti/houat.08.jpeg" title="8" desc="Click to enlarge"></slide-show-image>
                 </slide-show>
+
+                <!-- Carrousel ? -->
+                <div style="margin-top: 10px; margin-bottom: -70px; font-size: small;">
+                    Put the mouse on the carousel to stop it, click the pictures to enlarge them!
+                </div>
+
+                <section id="slideshow" style="margin-left: 0px;">
+                    <div class="entire-content">
+                    <div class="content-carrousel">
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-01" style="margin-top: 70px; margin-bottom: 105px;">
+                                <img src="./anita.conti/ac-01.jpeg" onclick="onSlideShowClick(this.src);"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-02" style="margin-top: 110px; margin-bottom: 115px;">
+                                <img src="./anita.conti/ac-03.jpeg" onclick="onSlideShowClick(this.src);"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-03" style="margin-top: 110px; margin-bottom: 205px;">
+                                <img src="./anita.conti/ac-04.jpeg" onclick="onSlideShowClick(this.src);"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-04" style="margin-top: 110px; margin-bottom: 205px;">
+                                <img src="./anita.conti/ac-07.jpeg" onclick="onSlideShowClick(this.src);"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-05" style="margin-top: 110px; margin-bottom: 205px;">
+                                <img src="./anita.conti/ac-11.jpeg" onclick="onSlideShowClick(this.src);"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-06" style="margin-top: 110px; margin-bottom: 205px;">
+                                <img src="./anita.conti/ac-02.jpeg" onclick="onSlideShowClick(this.src);"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-07" style="margin-top: 110px; margin-bottom: 205px;">
+                                <img src="./anita.conti/ac-06.jpeg" onclick="onSlideShowClick(this.src);"/>
+                            </div>
+                        </div>
+                        </figure>
+                    </div>
+                    </div>
+                </section>
+
+                <!-- End Carrousel -->
+
             </div>
-        </div -->
+            <hr/>
+        </div>
 
         <div id="anita-conti-04" class="tab-section" style="display: none;">
             <h2>More info...</h2>
             <div style="display: grid; grid-template-columns: 100%;">
                 <div>
-                    Contact : . . .<br/>
+                    Contact: 06 73 49 17 67 / equipageanitaconti@gmail.com
                 </div>
             </div>
         </div>
