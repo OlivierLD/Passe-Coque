@@ -84,7 +84,7 @@ h1 {
                 <li><a href="_help_requests.01.php?option=admin" target="admin">Gestion des demandes d'aide (convoyages, bricolages, ...)</a></li>
                 <li><a href="_todo_list.01.php" target="admin">Gestion des TODO Lists (travaux sur les bateaux)</a></li>
                 <li>
-                    <a href="_free_sql.php" target="MySQL">Free SQL (Careful! WiP)</a>
+                    <a href="_free_sql.php" target="MySQL">Free SQL (Careful! WiP)</a> (Try 'SHOW TABLES', or 'DESC &lt;TableName&gt;')
                     <ul>
                         <li><a href="_free_sql.php?stmt=SELECT+*+FROM+THE_FLEET+F+%0D%0AWHERE+F.ID+NOT+IN+%28SELECT+BOAT_ID+FROM+REFERENTS%29+AND%0D%0A+F.CATEGORY+%3C%3E+%27EX_BOAT%27%3B" target="MySQL">Boats with no referent</a></li>
                         <li><a href="_free_sql.php?stmt=SELECT+*+FROM+BOATS_AND_REFERENTS%3B" target="MySQL">Boats and referents</a></li>
