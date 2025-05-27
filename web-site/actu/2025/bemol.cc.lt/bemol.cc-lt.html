@@ -651,7 +651,28 @@ compass-rose .day {
     }
 
     // Used as an example, See "// markers" below. Used to hold pictures.
-    const ALL_MARKERS = [[], [], []];
+    const ALL_MARKERS = [{ 
+        "latitude": 47.86531953376869,
+        "longitude": -3.919312738823313,
+        "name": "C'est parti !",
+        "content": "On quitte la Baie de Concarneau (click to enlarge)\n<br/>\n<a href=\"./cc-lt.01.jpeg\" target=\"_blank\"><img src=\"./cc-lt.01.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, { 
+        "latitude": 47.84042335058819,
+        "longitude": -3.919312738823313,
+        "name": "On nous suit ?",
+        "content": "(click to enlarge)\n<br/>\n<a href=\"./cc-lt.12.jpeg\" target=\"_blank\"><img src=\"./cc-lt.12.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, { 
+        "latitude": 47.6530539057251,
+        "longitude": -3.424200735703409,
+        "name": "Devant Port-Tudy",
+        "content": "Pen Duick I et Pen Duick III sortent de Port-Tudy (click to enlarge)\n<br/>\n<a href=\"./cc-lt.13.jpeg\" target=\"_blank\"><img src=\"./cc-lt.13.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }, { 
+        "latitude": 47.5268131666507,
+        "longitude": -3.0522268754618476,
+        "name": "En Baie de Quiberon",
+        "content": "(click to enlarge)\n<br/>\n<a href=\"./cc-lt.03.jpeg\" target=\"_blank\"><img src=\"./cc-lt.03.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>" +
+                   "<br/>\n<a href=\"./cc-lt.10.jpeg\" target=\"_blank\"><img src=\"./cc-lt.10.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+    }];
 
 
     // TODO Choose the track
@@ -660,7 +681,7 @@ compass-rose .day {
      ];
 
     let trackData = TRACK_DATA[0];
-    let markers = ALL_MARKERS[0];
+    let markers = ALL_MARKERS;
 
     let currentMarkers = [];
 
