@@ -8,7 +8,7 @@
  +-->
 <head>
 
-  <title>Bemol. Concarneau - La Trinit&eacute;. Leaflet Analysis</title>
+  <title>Eh'Tak. Etel - La Trinit&eacute;. Leaflet Analysis</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +16,6 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-  <script type="module" src="/webcomponents/SlideShow.js"></script>
 
   <style type="text/css">
     
@@ -413,8 +411,8 @@ compass-rose .day {
 <div id="page-header">
     <div style="display: grid; grid-template-columns: 80% auto;">
         <div>
-            <h1 id="txt-00" style="padding-left: 10px;">Concarneau - La Trinit&eacute;, on board B&eacute;mol III - <span id="txt-01">Replay Logged Data</span></h1>
-            <span id="txt-02">May 2025. Pictures and data.</span>
+            <h1 id="txt-00" style="padding-left: 10px;">&Eacute;tel - Saint Philibert, on board Eh'Tak - <span id="txt-01">Replay Logged Data</span></h1>
+            <span id="txt-02">29 May 2025.</span>
         </div>
         <div style="text-align: right; padding-right: 20px;">
             <img src="/images/drowning.gif"
@@ -426,41 +424,12 @@ compass-rose .day {
 </div>
 <hr/>
 <div id="text">
-    B&eacute;mol III was in Concarneau since a couple of months.<br/>
-    It is now back in La Trinit&eacute;.<br/>
-    Wind was blowing from the North-East (East-North-East to North-North-East), 15-20 knots.<br/>
-    Very unstable, in force direction, full main, 1 reef, 2 reefs, full main..., full genoa, 3 turns, 7 turns... Etc!<br/>
-    We had a problem with the engine's cooling system, so we had to sail all the way back.<br/>
-    Alain picked us up with the zodiac at the Tr&eacute;ho, thanks to him!<br/>
+    Eh'Tak has to leave &Eacute;tel for two months.<br/>
+    It is now back in Saint Philibert.<br/>
+    Wind was very low, we were motoring most of the time.<br/>
+    Tide was supposed to be high in &Eacute;tel at 07:15 this morning, but it was still flooding at 08:00!<br/>
 </div>
 
-<hr/>
-
-<span id="txt-03">Slide show - Images are clickable</span>
-<div id="slide-show-container" 
-     class="body-pix">
-    <slide-show id="slide-show-02"
-                width="800"
-                height="600"
-                slideclick="onSlideShowClick"
-                style="padding: 10px;">
-        <slide-show-image src="./cc-lt.01.jpeg" title="Les bronz&eacute;s font du bateau"></slide-show-image>
-        <slide-show-image src="./cc-lt.12.jpeg" title="On nous suit ?"></slide-show-image>
-        <slide-show-image src="./cc-lt.13.jpeg" title="Devant Port-Tudy" desc="Pen-Duick I et Pen-Duick III sortent de Port-Tudy"></slide-show-image>
-        <slide-show-image src="./cc-lt.15.jpeg" title="Entre Groix et Lorient"></slide-show-image>
-        <slide-show-image src="./cc-lt.14.jpeg" title="On arrive &agrave; Quiberon"></slide-show-image>
-        <slide-show-image src="./cc-lt.03.jpeg" title="En Baie de Quiberon"></slide-show-image>
-        <!--slide-show-image src="./cc-lt.05.jpeg" title="En avant"></slide-show-image-->
-        <!--slide-show-image src="./cc-lt.06.jpeg" title="En avant"></slide-show-image>
-        <slide-show-image src="./cc-lt.07.jpeg" title="En avant"></slide-show-image>
-        <slide-show-image src="./cc-lt.08.jpeg" title="En avant"></slide-show-image>
-        <slide-show-image src="./cc-lt.09.jpeg" title="En avant"></slide-show-image-->
-        <slide-show-image src="./cc-lt.10.jpeg" title="2 ris GV, 5 tours Genois"></slide-show-image>
-        <!--slide-show-image src="./cc-lt.11.jpeg" title="En avant"></slide-show-image-->
-        <slide-show-image src="./cc-lt.02.jpeg" title="Alain vient nous chercher au Tr&eacute;ho"></slide-show-image>
-        <slide-show-image src="./cc-lt.04.jpeg" title="Alain vient nous chercher"></slide-show-image>
-    </slide-show>
-</div>
 <hr/>
 
 <!--div id="mapid" style="width: 600px; height: 400px;"></div-->
@@ -652,32 +621,16 @@ compass-rose .day {
 
     // Used as an example, See "// markers" below. Used to hold pictures.
     const ALL_MARKERS = [{ 
-        "latitude": 47.86531953376869,
-        "longitude": -3.919312738823313,
-        "name": "C'est parti !",
-        "content": "On quitte la Baie de Concarneau (click to enlarge)\n<br/>\n<a href=\"./cc-lt.01.jpeg\" target=\"_blank\"><img src=\"./cc-lt.01.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
-    }, { 
-        "latitude": 47.84042335058819,
-        "longitude": -3.919312738823313,
-        "name": "On nous suit ?",
-        "content": "(click to enlarge)\n<br/>\n<a href=\"./cc-lt.12.jpeg\" target=\"_blank\"><img src=\"./cc-lt.12.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
-    }, { 
-        "latitude": 47.6530539057251,
-        "longitude": -3.424200735703409,
-        "name": "Devant Port-Tudy",
-        "content": "Pen Duick I et Pen Duick III sortent de Port-Tudy (click to enlarge)\n<br/>\n<a href=\"./cc-lt.13.jpeg\" target=\"_blank\"><img src=\"./cc-lt.13.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
-    }, { 
-        "latitude": 47.5268131666507,
-        "longitude": -3.0522268754618476,
-        "name": "En Baie de Quiberon",
-        "content": "(click to enlarge)\n<br/>\n<a href=\"./cc-lt.03.jpeg\" target=\"_blank\"><img src=\"./cc-lt.03.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>" +
-                   "<br/>\n<a href=\"./cc-lt.10.jpeg\" target=\"_blank\"><img src=\"./cc-lt.10.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+        "latitude": 47.45639189677485,
+        "longitude": -3.039688580611255,
+        "name": "La Teignouse dans la brume",
+        "content": "(click to enlarge)\n<br/>\n<a href=\"./la.teignouse.jpeg\" target=\"_blank\"><img src=\"./la.teignouse.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
     }];
 
 
     // TODO Choose the track
     const TRACK_DATA = [ 
-        './cc-lt.nmea.json'
+        './eh.tak.02.nmea.json'
      ];
 
     let trackData = TRACK_DATA[0];
@@ -993,15 +946,13 @@ compass-rose .day {
     let switchLanguage = (lang) => {
         if (lang === "FR") {
             document.getElementById("data-title").innerHTML = "Donn&eacute;es";
-            document.getElementById('text').innerHTML = "B&eacute;mol III &eacute;tait &agrave; Concarneau depuis quelques mois.<br/>" +
-                                                        "Il est maintenant de retour &agrave; La Trinit&eacute;.<br/>" +
-                                                        "Le vent soufflait du nord-est (ENE &agrave; NNE), 15-20 n&oelig;uds.<br/>" +
-                                                        "Tr&egrave;s variable en force et direction, grand voile haute, 1 ris, 2 ris, grand voile haute..., g&eacute;nois plein, 3 tours, 7 tours... Etc !<br/>" +
-                                                        "On a eu un souci avec le refroidissement du moteur, on a donc &eacute;t&eacute; &agrave; la voile durant tout le trajet.<br/>" +
-                                                        "Alain est venu nous chercher au Tr&eacute;ho avec le Zodiac, merci &agrave; lui !<br/>";
-            document.getElementById('txt-00').innerHTML = "Concarneau - La Trinit&eacute;, &agrave; bord de B&eacute;mol III - <span id=\"txt-01\">Rejouer les donn&eacute;es enregistr&eacute;es</span>";
-            document.getElementById('txt-01').innerHTML = "Photos et Donn&eacute;es enregistr&eacute;es";
-            document.getElementById('txt-02').innerHTML = "Mai 2025. Photos et donn&eacute;es.";
+            document.getElementById('text').innerHTML = "Eh'Tak doit quitter &Eacute;tel pour deux mois.<br/>" +
+                                                        "Il est maintenant de retour &agrave; Saint-Philibert.<br/>" +
+                                                        "Le vent &eacute;tait tr&egrave;s faible, on &eacute;tait au moteur presque tout le temps.<br/>" +
+                                                        "La mar&eacute;e &eacute;tait cens&eacute;e &ecirc;tre haute &agrave; &Eacute;tel &agrave; 07:15 ce matin, mais on avait encore un courant de flot &agrave; 08:00 !<br/>";
+            document.getElementById('txt-00').innerHTML = "&Eacute;tel - Saint Philibert, &agrave; bord d'Eh'Tak - <span id=\"txt-01\">Rejouer les donn&eacute;es enregistr&eacute;es</span>";
+            document.getElementById('txt-01').innerHTML = "Donn&eacute;es enregistr&eacute;es";
+            document.getElementById('txt-02').innerHTML = "29 Mai 2025.";
 
             document.getElementById('cancel-path').innerHTML = "Annuler";
             document.getElementById('stop-path').innerHTML = "Pause";
@@ -1025,15 +976,13 @@ compass-rose .day {
 
         } else { // EN
             document.getElementById("data-title").innerHTML = "Data";
-            document.getElementById('text').innerHTML = "B&eacute;mol III was in Concarneau since a couple of months.<br/>" +
-                                                        "It is now back in La Trinit&eacute;.<br/>" +
-                                                        "Wind was blowing from the North-East (East-North-East to North-North-East), 15-20 knots.<br/>" +
-                                                        "Very unstable, in force direction, full main, 1 reef, 2 reefs, full main..., full genoa, 3 turns, 7 turns... Etc!<br/>" +
-                                                        "We had a problem with the engine's cooling system, so we had to sail all the way back.<br/>" +
-                                                        "Alain picked us up with the zodiac at the Tr&eacute;ho, thanks to him!<br/>";
-            document.getElementById('txt-00').innerHTML = "Concarneau - La Trinit&eacute;, on board B&eacute;mol III - <span id=\"txt-01\">Pictures and Logged Data Replay</span>";
-            document.getElementById('txt-01').innerHTML = "Pictures and Logged Data Replay";
-            document.getElementById('txt-02').innerHTML = "May 2025. Pictures and data.";
+            document.getElementById('text').innerHTML = "Eh'Tak has to leave &Eacute;tel for two months.<br/>" +
+                                                        "It is now back in Saint Philibert.<br/>" +
+                                                        "Wind was very low, we were motoring most of the time.<br/>" +
+                                                        "Tide was supposed to be high in &Eacute;tel at 07:15 this morning, but it was still flooding at 08:00!<br/>";
+            document.getElementById('txt-00').innerHTML = "&Eacute; - Saint-Philibert, on board Eh'Tak - <span id=\"txt-01\">Logged Data Replay</span>";
+            document.getElementById('txt-01').innerHTML = "Logged Data Replay";
+            document.getElementById('txt-02').innerHTML = "May 29, 2025.";
 
             document.getElementById('cancel-path').innerHTML = "Cancel";
             document.getElementById('stop-path').innerHTML = "Pause";
