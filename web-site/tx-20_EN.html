@@ -9,7 +9,8 @@
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'low-tech-01');" title="Summary">Summary</button>
         <button class="tablinks" onclick="openTab(event, 'low-tech-02');">Resources</button>
-        <button class="tablinks" onclick="openTab(event, 'low-tech-03');">Contact</button>
+        <button class="tablinks" onclick="openTab(event, 'low-tech-03');">Details</button>
+        <button class="tablinks" onclick="openTab(event, 'low-tech-04');">Contact</button>
     </div>
 
     <div class="pcc-dialog-tab-content">
@@ -123,7 +124,7 @@
         </div>
 
         <div id="low-tech-03" class="tab-section" style="display: none;">
-            <h2>Plus d'infos...</h2>
+            <h2>More infos...</h2>
             <div style="display: grid; grid-template-columns: 50% 50%;">
                 <div class="normal-line-height">
                     This project involves a substantial amount of code...<br/>
@@ -132,10 +133,9 @@
                     <a href="https://github.com/OlivierLD/ROB/blob/master/README.md" target="ROB">ROBERT</a> (<b>R</b>aspberry <b>O</b>n <b>B</b>oard for <b>E</b>mbarked <b>R</b>esearch and <b>T</b>echnology).<br/>
                     If you're not familiar with all this, please keep sat down! We'll see how to put all this to work
                     without having to worry about it.
-                    <br/><br/>
-                    Contact : <a href="mailto:olivier@lediouris.net?subject=Low-Tech%20Projects">olivier@lediouris.net</a>
+                    <br/>
                 </div>
-                <img src="./low-tech/nautile.jpg">
+                <img src="./low-tech/nautile.jpg" title="Illustration Arthur Le Diouris">
             </div>
             <div class="normal-line-height">
                 <h3>A note about Open Source</h3>
@@ -147,6 +147,14 @@
                 Or, you ask nicely 😊!
             </div>
             <hr/>
+        </div>
+
+        <div id="low-tech-04" class="tab-section" style="display: none;">
+            <div style="margin: 20px">
+                <div class="normal-line-height">
+                    Contact : <a href="mailto:olivier@lediouris.net?subject=Projets%20Low-Tech">olivier@lediouris.net</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
