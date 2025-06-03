@@ -3349,7 +3349,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Projet Entendre la Mer',
-		keywords: [ 'handicap' , 'entendre', 'listen', 'the sea', 'la mer', 'tiago', 'evasion', 'melkart' ],
+		keywords: [ 'handicap' , 'entendre', 'listen', 'the sea', 'la mer', 'tiago', 'evasion', 'melkart', 'malentendant', 'sourd', 'deaf' ],
 		url: '/?nav-to=31&tx=09',
 		comment: 'A bord de Melkart'
 	},
