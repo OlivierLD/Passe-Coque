@@ -431,6 +431,8 @@ let updateMenu = () => { // Multilang aspect.
     document.querySelectorAll("#_8-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "La boutique" : "The store"));
     document.querySelectorAll("#_9").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Outils de Navigation" : "Navigation tools"));
     document.querySelectorAll("#_9-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Outils de Navigation" : "Navigation tools"));
+    document.querySelectorAll("#_9bis").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "La caisse &agrave; glingues" : "Tool Box"));
+    document.querySelectorAll("#_9bis-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "La caisse &agrave; glingues" : "Tool Box"));
     document.querySelectorAll("#_10").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Besoin d'aide ?" : "Need Help?"));
     document.querySelectorAll("#_10-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Besoin d'aide ?" : "Need Help?"));
 
@@ -473,6 +475,8 @@ let updateMenu = () => { // Multilang aspect.
 	// document.querySelectorAll("#_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Espace Membres" : "Members Space"));
 	document.querySelectorAll("#ms_7").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " Espace Membres" : " Members Space"));
 	document.querySelectorAll("#bs_8").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " La boutique" : " The shop"));
+	document.querySelectorAll("#bs_9").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " Navigation" : " Navigation"));
+	document.querySelectorAll("#bs_9bis").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " Bo&icirc;te &agrave; outils" : " Tool Box"));
     // No 9, Navigation works for both languages
 	document.querySelectorAll("#bs_10").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? " Recherche..." : " Search..."));
 };
@@ -1847,7 +1851,7 @@ const THE_TEAM = [
             fr: "Olivier<br/>Web / High &amp; Low-Tech",
             en: "Olivier<br/>Web / High &amp; Low-Tech"
         }
-    }, {
+    }, /* {
         id: "jeff",
         boss: false,
         image: "/images/the.team/jeff.png",
@@ -1855,7 +1859,7 @@ const THE_TEAM = [
             fr: "Jeff<br/>D&eacute;veloppement de l'Eco-Village",
             en: "Jeff<br/>Eco-Village Development"
         }
-    }, {
+    }, */ {
         id: "alain",
         boss: false,
         image: "/images/the.team/alain.2.jpg",
@@ -3325,7 +3329,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Low-Tech projects',
-		keywords: [ 'low' , 'tech', 'raspberry', 'no tech', 'no-tech', 'low-tech' ],
+		keywords: [ 'low' , 'tech', 'raspberry', 'no tech', 'no-tech', 'low-tech', 'opensource', 'open', 'source' ],
 		url: '/?nav-to=31&tx=20',
 		comment: 'Plusieurs projets Low-Tech.'
 	},
