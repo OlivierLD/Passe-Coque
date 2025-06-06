@@ -2355,7 +2355,7 @@ let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
             badge.classList.add("badge");
             if (boat.category === EX_BOAT) {
                 badge.classList.add("badge-old");
-                badge.innerHTML = '<span style="font-size: 2.0em; background: transparent;">😢</span>'; // "Old<br/>boat";
+                badge.innerHTML = '<span style="font-size: 2.0em; background: transparent;">👋</span>'; // "Old<br/>boat";
             } else if (boat.category === CLUB) {
                 badge.classList.add("badge-pc");
                 badge.innerHTML = '<span>😎</span>'; // "PC<br/>Club";
