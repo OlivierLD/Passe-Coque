@@ -52,7 +52,28 @@
                                 <li><a href="https://www.youtube.com/watch?v=yX3zEX14-r8" target="_blank">vid&eacute;o</a></li>
                                 <li><a href="https://www.instructables.com/Make-a-Viking-Sun-Compass/" target="_blank">instructable</a></li>
                                 <li><a href="https://horde-viking.com/blogs/blog-viking/comment-naviguaient-les-vikings" target="_blank">Viking Compass, Sun Stone...</a></li>
-                                <li><a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/ChartComponents" target="git">Some Java code to produce one Viking Sun Compass</a></li>
+                                <li>
+                                    <a href="https://github.com/OlivierLD/ROB/tree/master/raspberry-sailor/Swing/ChartComponents" target="git">Some Java code to produce one Viking Sun Compass</a>.<br/>
+                                    <pre style="font-family: 'Courier New', Courier, monospace; line-height: 1em;">
+# run the class app.samples.VikingSunCompass                                        
+$ java -jar VikingSunCompass.jar -help  
+
+Usage is :
+  java [-DdeltaT=67.53] app.samples.VikingSunCompass &lt;name value&gt;
+  names can be:
+    -lat  for latitude, a decimal, in decimal degrees (default is 38)
+    -size for the frame size (width = height), an integer, in pixels (default is 750)
+    -help for help (you're on it)
+Example:
+  java app.samples.VikingSunCompass -lat 37.5 -size 600
+
+This will generate image files (png) in the current directory.
+
+ The length of the pole (pivot) is at the bottom left of the generated images
+ The direction of the rose is the elevated pole (north if your latitude is north, south if your latitude is south).
+
+                                    </pre>
+                                </li>
                             </ul>
                             I need to find the articles, but Robin Knock-Johnston would have crossed the Atlantic with a Viking Sun Compass...
                         </li>
