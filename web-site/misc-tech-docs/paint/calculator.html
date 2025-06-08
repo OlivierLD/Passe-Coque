@@ -59,12 +59,23 @@
 		display: none;
 	}
 } 
+
+.MathJax {
+	font-size: 1.3em !important;
+}
     </style>
 
 	<!--script type="module" src="../../webcomponents/SlideShow.js"></script-->
 	<!-- For LaTex -->
     <script type="text/x-mathjax-config">
-		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']]
+			},
+			commonHTML: {
+				scale: 130
+			}
+		});
 	</script>
 	<!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
 	<script type="text/javascript" 
@@ -128,8 +139,8 @@ let calculate = (hullType) => {
 	Un calculateur on-line, bas&eacute; sur le document de <a href="https://www.soromap.com/PartageWeb/PDF/Catalogue_Peintures_Vernis_Soromap_2021.pdf#page=286" target="SOROMAP">SOROMAP</a>.
 
 	<h3>Calculateur de peinture</h3>
-	<p>
-		$ Quantite = \frac{surface-a-couvrir}{pouvoir-couvrant * 0.8} $
+	<p> <!-- style='font-size: 14px;'> -->
+		$ Quantité = \frac{surface-à-couvrir}{pouvoir-couvrant * 0.8} $
 	</p>
 	<p>Entrez les dimensions de votre bateau, le type de peinture et le nombre de couches souhait&eacute;es.</p>
 	<div class="postit">
