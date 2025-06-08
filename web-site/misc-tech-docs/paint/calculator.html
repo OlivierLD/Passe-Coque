@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque - How-To, Tutoriels</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../../fonts/font.01.css">
+	<link rel="stylesheet" href="../../fonts/font.02.css">
+
+	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
+
+	<link rel="stylesheet" href="../../low-tech/low-tech.css" type="text/css"/>
+	<style type="text/css">
+.postit {
+    background: #f7f7e7;
+    padding: 5px;
+}
+
+.slide {
+	max-width: 800px; 
+	max-height: 500px;
+	padding: 10px;
+}
+
+.slide-show {
+	display: grid; 
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; 
+	overflow: auto;
+}
+
+.screen-shot {
+	width: 50%; 
+	text-align: center;
+}
+
+@media screen and (width <= 800px) {
+    .slide {
+		max-width: 600px; 
+		max-height: 375px;
+		padding: 10px;
+	}
+	.screen-shot {
+		width: 90%; 
+		text-align: center;
+	}
+}
+
+@media print {
+	.slide-show {
+		display: grid; 
+		grid-template-columns: auto; 
+		overflow: auto;
+	}
+	.not-printed {
+		display: none;
+	}
+} 
+    </style>
+
+	<!--script type="module" src="../../webcomponents/SlideShow.js"></script-->
+	<!-- For LaTex -->
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+	<script type="text/javascript" 
+			async
+  			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+	<script type="text/javascript">
+
+let calculate = (hullType) => {
+	let lht = parseFloat(document.getElementById('lht').value);
+	let lfl = parseFloat(document.getElementById('lfl').value);
+	let width = parseFloat(document.getElementById('width').value);
+	let fb = parseFloat(document.getElementById('fb').value);
+	let te = parseFloat(document.getElementById('te').value);
+	let coats = parseInt(document.getElementById('coats').value);
+	let pc = parseFloat(document.getElementById('pc').value);
+
+	if (isNaN(lht) || isNaN(lfl) || isNaN(width) || isNaN(te) || isNaN(fb) || isNaN(coats)) {
+		document.getElementById('results').innerHTML = "Veuillez entrer des valeurs valides.";
+		return;
+	}
+
+	// Calcul de la sfcOV en m²
+	let sfcOV, sfcOM, sfcDeck;
+	switch (hullType) {
+		case 1: // Forme 1
+			sfcOV = (lfl * (width + te)) * coats;
+			break;
+		case 2: // Forme 2
+			sfcOV = 0.75 * (lfl * (width + te)) * coats;
+			break;
+		case 3: // Forme 3
+			sfcOV = 0.5 * (lfl * (width + te)) * coats;
+			break;
+		default:
+			document.getElementById('results').innerHTML = "Type de coque inconnu.";
+			return;
+	}
+	sfcOM = (lht + width) * fb * 2 * coats;
+	sfcDeck = 0.75 * (lht * width) * coats;
+
+	htmlContent = 
+		`Surface totale &agrave; peindre&nbsp;: <br/>&OElig;uvres vives&nbsp;: ${sfcOV.toFixed(2)} m²` + 
+		`<br/>&OElig;uvres mortes&nbsp;: ${sfcOM.toFixed(2)} m²` + 
+		`<br/>Pont : ${sfcDeck.toFixed(2)} m²<br/>` +
+		`<b>Quantit&eacute; de peinture n&eacute;cessaire&nbsp;:</b> <br/>` +
+		`&OElig;uvres vives&nbsp;: ${(sfcOV / (pc * 0.8)).toFixed(2)} litre(s)` + 
+		`<br/>&OElig;uvres mortes&nbsp;: ${(sfcOM / (pc * 0.8)).toFixed(2)} litre(s)` + 
+		`<br/>Pont : ${(sfcDeck / (pc * 0.8)).toFixed(2)} litre(s)`;
+
+	document.getElementById('results').innerHTML = htmlContent;
+
+};
+	</script>
+</head>
+	
+<body>
+
+	<h4><img src="../../logos/logo.02.png" style="width: 100px; vertical-align: middle;" title="Passe&#8209;Coque"/>Passe-Coque Tutoriels</h4>
+	<h2>Combien de peinture pour mon bateau ?</h2>
+	Un calculateur on-line, bas&eacute; sur le document de <a href="https://www.soromap.com/PartageWeb/PDF/Catalogue_Peintures_Vernis_Soromap_2021.pdf#page=286" target="SOROMAP">SOROMAP</a>.
+
+	<h3>Calculateur de peinture</h3>
+	<p>
+		$ Quantite = \frac{surface-a-couvrir}{pouvoir-couvrant * 0.8} $
+	</p>
+	<p>Entrez les dimensions de votre bateau, le type de peinture et le nombre de couches souhait&eacute;es.</p>
+	<div class="postit">
+		<table>
+			<tr>
+				<td><label for="lht">Longueur hors tout (m) :</label></td>
+				<td><input type="number" id="lht" name="lht" required></td>
+
+				<td><label for="lfl">Longueur flottaison (m) :</label></td>
+				<td><input type="number" id="lfl" name="lfl" required></td>
+			</tr>
+			<tr>
+				<td><label for="width">Largeur (m) :</label></td>
+				<td><input type="number" id="width" name="width" required></td>
+
+				<td><label for="fb">Franc bord (m) :</label></td>
+				<td><input type="number" id="fb" name="fb" required></td>
+			</tr>
+			<tr>
+				<td><label for="height">Tirant d'eau (m) :</label></td>
+				<td><input type="number" id="te" name="te" required></td>
+
+				<td><label for="coats">Nombre de couches :</label></td>
+				<td><input type="number" id="coats" name="coats" value="1" min="1"></td>
+			</tr>
+			<tr>
+				<td><label for="pc">Pouvoir couvrant (m² / l) :</label></td>
+				<td><input type="number" id="pc" name="pc" required></td>
+
+			</tr>
+		</table>
+		
+	</div>
+
+	<div style="display: grid; grid-template-columns: 50% 50%; gap: 10px;">
+		<img src="./shape.01.png" alt="Forme de bateau" style="width: 100%; max-width: 600px; height: auto;"/>
+		<div style="text-align: left; vertical-align: middle;">
+			<button onclick="calculate(1);">Calculer</button>
+		</div>
+		<img src="./shape.02.png" alt="Forme de bateau" style="width: 100%; max-width: 600px; height: auto;"/>
+		<div style="text-align: left; vertical-align: middle;">
+			<button onclick="calculate(2);">Calculer</button>
+		</div>
+		<img src="./shape.03.png" alt="Forme de bateau" style="width: 100%; max-width: 600px; height: auto;"/>
+		<div style="text-align: left; vertical-align: middle;">
+			<button onclick="calculate(3);">Calculer</button>
+		</div>
+
+	</div>
+	<div class="postit">
+		<h3>R&eacute;sultats</h3>
+		<!--p></p-->
+		<div id="results">
+			Le r&eacute;sultat du calcul sera affich&eacute; ici.
+		</div>
+	</div>
+	<hr/>
+	<i>&copy; 2025, Passe-Coque</i>
+</body>
+</html>
