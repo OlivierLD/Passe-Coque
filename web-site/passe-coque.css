@@ -1363,6 +1363,11 @@ button.search-item {
         /* background-image: radial-gradient(white, silver, black); */
         aspect-ratio: 1 / 1;  /* THAT is a cool one... */
     }    
+    .project-image {
+        display: flex;
+        justify-content: center; /* (centers the image horizontally in the div container) */
+        align-items: center; /* (centers the image vertically in the div container) */
+    }
     .prev, .next, .text {
         font-size: 11px
     }
