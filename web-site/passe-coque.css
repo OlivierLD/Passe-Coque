@@ -174,7 +174,7 @@ div.tooltip:hover span {
 
 .boat-image-container {
     min-height: 20px;
-    background-color: black;
+    /* background-color: black; */
     /* background-image: radial-gradient(white, silver, black); */
     aspect-ratio: 1 / 1;  /* THAT is a cool one... */
 }
@@ -1359,7 +1359,7 @@ button.search-item {
     }    
     .boat-image-container {
         /* min-height: 280px; */
-        background-color: black;
+        /* background-color: black; */
         /* background-image: radial-gradient(white, silver, black); */
         aspect-ratio: 1 / 1;  /* THAT is a cool one... */
     }    
