@@ -3094,7 +3094,7 @@ function filterProjectsOn(divId, nbDivId) {
         // produceSearchList(valueToLookFor);
         projectArray.forEach(prjNode => {
             console.log(`Scanning project ${prjNode.getAttribute('id')}...`);
-            let keywords = prjNode.getAttribute('keywords');
+            let keywords = prjNode.getAttribute('keywords'); // Not standard attribute.
             let matching = false;
             if (keywords && keywords.length > 0) {
                 keywordsArray = keywords.split(';');
