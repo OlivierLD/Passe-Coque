@@ -1444,6 +1444,13 @@ let THE_BOATS = null;
 // This is a backup. Used if the json fetch fails...
 const THE_FLEET = [
     {
+        name: "Tanikel",
+        id: "tanikel",
+        pix: "/images/boats/tanikel/01.jpg",
+        type: "Delph 32",
+        category: NONE,
+        base: "La Ciotat"
+    },{
         name: "Jericho",
         id: "jericho",
         pix: "/images/boats/jericho/jericho-3.jpg",
@@ -3433,6 +3440,12 @@ const KEYWORDS = [
 		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'ehtak', 'eh\'tak', 'shipman', 'shipman 28', 'etel' ],
 		url: '/?nav-to=4&boat-id=eh-tak',
 		comment: 'Shipman 28.'
+	},
+	{
+		name: 'Tanikel',
+		keywords: [ 'delph 32', 'ciotat', 'tanikel' ],
+		url: '/?nav-to=4&boat-id=tanikel',
+		comment: 'Delph 32'
 	},
 	{
 		name: 'Jericho',
