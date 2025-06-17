@@ -2219,6 +2219,13 @@ const NEXT_EVENTS = [ // oldest to newest.
             fr: 'Du 27 au 30 juin 2025, Rubi\'s Cup, &agrave; Groix.',
             en: 'June 27 to 30, 2025, Rubi\'s Cup, in Groix.'
         }
+    }, {
+        date_from: '2025-10-04',
+        date_to: '2025-10-04',
+        content: {
+            fr: 'Samedi 4 octobre au matin, AG Passe-Coque, salle du Mousker &agrave; St Philibert.',
+            en: 'Saturday October 4 in the morning, General Assembly, salle du Mousker in St Philibert.'
+        }
     }
 ];
 
