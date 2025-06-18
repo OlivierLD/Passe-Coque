@@ -232,6 +232,7 @@ if ($current_lang == "FR") {
         <li><a href="../admin/sql/_help_requests.01.php?option=request" target="admin">Demander de l'aide (convoyages, bricolages, ...)</a></li>
         <li><a href="../admin/sql/_todo_list.01.php?option=no-empty" target="admin">G&eacute;rer les TODO lists</a></li>
         <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
+        <li>Faire scanner ce <a href="../QRCode.equipier.jour.png" target="QRCode">QR Code</a> &agrave; vos &eacute;quipiers d'un jour</li>
       </ul>
       <?php
     } else {
@@ -353,7 +354,8 @@ if ($current_lang == "FR") {
       <ul>
         <li><a href="../admin/sql/_reservations.01.php" target="admin">Manage the reservations</a></li>
         <li><a href="../admin/sql/_help_requests.01.php?option=request" target="admin">Ask for help (deliveries, workshop, ...)</a></li>
-        <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Apprendre comment vous faire un blog</a></li>
+        <li><a href="../misc-tech-docs/make.a.blog.html" target="tech-doc">Learn how to make a blog</a></li>
+        <li>Have your one-day crew scan this <a href="../QRCode.equipier.jour.png" target="QRCode">QR Code</a></li>
       </ul>
       <?php
     } else {

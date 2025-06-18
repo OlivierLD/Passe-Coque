@@ -1483,7 +1483,7 @@ const THE_FLEET = [
         id: "penny-lane",
         pix: "/images/boats/penny.lane/penny.lane.12.jpg",
         type: "Arp&egrave;ge",
-        category: CLUB,
+        category: FOR_SALE,
         base: "-"
     }, {
         name: "Lady of Solent",
@@ -1784,7 +1784,7 @@ const THE_FLEET = [
         id: "imagine",
         pix: "/images/boats/selection.png",
         type: "Selection&nbsp;37",
-        category: FOR_SALE,
+        category: NONE,
         base: "Ouistreham"
     },
     { 
