@@ -1506,8 +1506,14 @@ const THE_FLEET = [
         type: "Shipman 28",
         category: CLUB,
         base: "&Eacute;tel"
-    },
-    {
+    }, {        
+        name: "Le Brio",
+        id: "le-brio",
+        pix: "/images/boats/dummy.boat.jpg",
+        type: "Brio",
+        category: EX_BOAT,
+        base: "Saint Philibert"
+    }, {
         name: "Pordin-Nancq",
         id: "pordin-nancq",
         pix: "/images/boats/pordin.jpg",
@@ -3447,6 +3453,12 @@ const KEYWORDS = [
 		keywords: [ 'boat', 'bateau', 'eh tak', 'eh-tak' , 'ehtak', 'eh\'tak', 'shipman', 'shipman 28', 'etel' ],
 		url: '/?nav-to=4&boat-id=eh-tak',
 		comment: 'Shipman 28.'
+	},
+	{
+		name: 'Le Brio',
+		keywords: [ 'boat', 'bateau', 'brio', 'flow', 'hublow', 'jeff', 'flow', 'tiny house', 'tiny', 'habitat', 'leger', 'léger', 'insolite' ],
+		url: '/?nav-to=4&boat-id=brio',
+		comment: 'Brio, a l\'origine du project Hublow.'
 	},
 	{
 		name: 'Tanikel',
