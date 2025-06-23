@@ -1,5 +1,10 @@
 <!-- Absolute locations for resources like images... -->
 <div class="boat-card">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
     <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'eh-tak-01');" title="Sommaire">Sommaire</button>
         <button class="tablinks" onclick="openTab(event, 'eh-tak-02');">Photos</button>
@@ -425,7 +430,15 @@
                     <a href="javascript:void(0)" title="Summer 2025" onclick="showHideSection(this, 'summer-2025');"><span class="expand-collapse">&#9658;&nbsp;</span>&Eacute;t&eacute; 2025</a>
                     <div id="summer-2025" class="sub-section">
                         <!-- Content Summer 2025 -->
-                         &Eacute;t&eacute; 2025, Eh'Tak est de retour &agrave; l'eau, tout beau et pr&ecirc;t pour la saison !<br/>
+                        23 juin 2025, Eh'Tak est de retour &agrave; l'eau, tout beau et pr&ecirc;t pour la saison !<br/>
+                        <div style="text-align: center;">
+                            <img src="/images/boats/ehtak/sortie.de.leau.2025/06.jpeg" style="width: 50%; height: auto;" alt="Retour &agrave; l'eau" onclick="onImageClick(this, '_blank');" title="Click to enlarge"></img>
+                        </div>
+                        Il est sur coffre <a href="./tech.and.nav/charts/eh.tak.crach.html" target="_blank">&agrave; Crac'h</a>.<br/>
+                        <iframe src="./tech.and.nav/charts/eh.tak.crach.html" style="width: 800px; height: 600px; border: none;"></iframe>
+                        <div style="vertical-align: top;">
+                            <div id="mapid" class="map-content" style="box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
+                        </div>
                     </div>
                     <hr/>
                     (&Agrave; suivre...)

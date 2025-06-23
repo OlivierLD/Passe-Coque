@@ -1429,9 +1429,13 @@ let onMouseOverImage = (origin) => {
     console.log(`onMouseOverImage : ${origin}`);
 };
 
-let onImageClick = (origin) => {
+let onImageClick = (origin, target) => {
     console.log(`onImageClick : ${JSON.stringify(origin)}`);
-    window.open(origin.src);
+    if (target === undefined || target === null) {
+        window.open(origin.src);
+    } else {
+        window.open(origin.src, target);
+    }
 };
 
 const NONE = "NONE";         // 1;
