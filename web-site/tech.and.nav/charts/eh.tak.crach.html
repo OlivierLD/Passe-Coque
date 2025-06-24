@@ -92,17 +92,25 @@ body {
 
     let tooltip = null;
 
-
 	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
 	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-				// 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
 
     const tiles = L.tileLayer(mbUrl, {
 		maxZoom: 19,
 		attribution: mbAttr
 	}).addTo(map);
 
-    L.circle([47.60397663425903, -3.0234906077384953], {radius: 50}).addTo(map);
+    // const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	// 	maxZoom: 19,
+	// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	// }).addTo(map);
+
+    L.circle([47.60397663425903, -3.0234906077384953], { color: 'red',
+                                                         fillColor: '#f03',
+                                                         fillOpacity: 0.25,
+                                                         radius: 50
+                                                       }).addTo(map);
+
 
     map.addEventListener('mousemove', (event) => {
         // let lat = Math.round(event.latlng.lat * 100000) / 100000;
@@ -126,11 +134,6 @@ body {
 
     });
 
-    // const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	// 	maxZoom: 19,
-	// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	// }).addTo(map);
-
 
     // Used as an example, See "// markers" below. Used to hold pictures.
     const ALL_MARKERS = [{ 
@@ -138,7 +141,7 @@ body {
         "longitude": -3.0234906077384953,
         "name": "Sur coffre ici !",
         "content": "(click to enlarge)\n<br/>\n<a href=\"/images/boats/ehtak/sortie.de.leau.2025/06.jpeg\" target=\"_blank\"><img src=\"/images/boats/ehtak/sortie.de.leau.2025/06.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
-        // "<img src='/images/boats/ehtak/sortie.de.leau.2025/06.jpeg'>"
+                   // "<img src='/images/boats/ehtak/sortie.de.leau.2025/06.jpeg'>"
     }];
 
     let markers = ALL_MARKERS; // Used to hold markers.
