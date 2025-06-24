@@ -87,20 +87,58 @@ body {
         return s;
     }
 
-    let map = L.map('mapid').setView([47.60418496238821, -3.023769774881657], 16); 
+    // let map = L.map('mapid').setView([47.60418496238821, -3.023769774881657], 16); 
+    let map = L.map('mapid').setView([47.60397663425903, -3.0234906077384953], 16); 
 
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    let tooltip = null;
+
+
+	let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+	let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+				// 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+    const tiles = L.tileLayer(mbUrl, {
 		maxZoom: 19,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		attribution: mbAttr
 	}).addTo(map);
+
+    L.circle([47.60397663425903, -3.0234906077384953], {radius: 50}).addTo(map);
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        console.log(`Mouse now in ${lat}/${lng}`);
+        if (tooltip != null) {
+            map.removeLayer(tooltip);
+        }
+        tooltip = L.tooltip()
+                        .setLatLng(L.latLng([lat, lng]))
+                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                        .addTo(map);
+
+    });
+
+    // const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	// 	maxZoom: 19,
+	// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	// }).addTo(map);
 
 
     // Used as an example, See "// markers" below. Used to hold pictures.
     const ALL_MARKERS = [{ 
-        "latitude": 47.60418496238821,
-        "longitude": -3.023769774881657,
+        "latitude": 47.60397663425903,
+        "longitude": -3.0234906077384953,
         "name": "Sur coffre ici !",
-        "content": ""
+        "content": "(click to enlarge)\n<br/>\n<a href=\"/images/boats/ehtak/sortie.de.leau.2025/06.jpeg\" target=\"_blank\"><img src=\"/images/boats/ehtak/sortie.de.leau.2025/06.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
+        // "<img src='/images/boats/ehtak/sortie.de.leau.2025/06.jpeg'>"
     }];
 
     let markers = ALL_MARKERS; // Used to hold markers.
@@ -108,7 +146,7 @@ body {
         markers.forEach(mark => {
             oneMark = L.marker([(mark.latitude), (mark.longitude)], { title: mark.name });
             oneMark.addTo(map)
-                    .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
+                   .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
         });
     }
 
