@@ -747,30 +747,10 @@ compass-rose .day {
 
     // Used as an example, See "// markers" below. Used to hold pictures.
     const ALL_MARKERS = [[{ // One
-        "latitude": 47.5,
-        "longitude": -3.004833,
-        "name": "Rond Garmin",
-        "content": "Zone de d&eacute;part IRC 3"
-    }, {
-        "latitude": 47.519667,
-        "longitude": -3.090833,
-        "name": "Bugalet",
-        "content": "Marque parcours c&ocirc;tier"
-    }, {
-        "latitude": 47.467000,
-        "longitude":  -3.038667,
-        "name": "Sud Quiberon",
-        "content": "Marque parcours c&ocirc;tier"
-    }, {
-        "latitude": 47.493000, 
-        "longitude": -3.043833,
-        "name": "Nord Quiberon",
-        "content": "Marque parcours c&ocirc;tier"
-    }, {
-        "latitude": 47.555833, 
-        "longitude": -3.010417,
-        "name": "Arriv&eacute;e Spi",
-        "content": "Arriv&eacute;e !"
+        "latitude": 47.38468597646925,
+        "longitude": -2.948509535272024,
+        "name": "Uninvited guest...",
+        "content": "(click to enlarge)\n<br/>\n<a href=\"./gouelle.jpeg\" target=\"_blank\"><img src=\"./gouelle.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
     }], 
     [], []];
 
@@ -783,7 +763,7 @@ compass-rose .day {
      ];
 
     let trackData = TRACK_DATA[0];
-    let markers = null; // ALL_MARKERS[0];
+    let markers = ALL_MARKERS[0];
 
     let currentMarkers = [];
 
@@ -884,7 +864,7 @@ compass-rose .day {
         let idx = parseInt(dd.value);
         console.log(`Now loading track ${TRACK_DATA[idx]}`);
         trackData = TRACK_DATA[idx];
-        markers = null; // ALL_MARKERS[0];  // Always the same, this time. [idx];
+        markers = ALL_MARKERS[0];  // Always the same, this time. [idx];
         // Remove existing markers
         currentMarkers.forEach(mark => map.removeLayer(mark));
         currentMarkers = []; // Reset
@@ -1178,9 +1158,9 @@ compass-rose .day {
                 }
             }
         }
-        if (userLang && userLang === 'FR') { // Default is EN
-            switchLanguage(userLang);
-        }
+        // if (userLang && userLang === 'FR') { // Default is EN
+        //     switchLanguage(userLang);
+        // }
     };
 
 </script>
