@@ -3266,6 +3266,12 @@ const KEYWORDS = [
 		comment: 'Dans le sillage d\'Anita Conti'
 	},
 	{
+		name: 'Voiles Vagabondes',
+		keywords: [ 'vagabonde', 'lawyer', 'juriste' ],
+		url: '/?nav-to=31&tx=38',
+		comment: 'Projet Voiles Vagabondes'
+	},
+	{
 		name: 'Passages',
 		keywords: [ 'theatre' , 'theater', 'théatre', 'lorient', '56', 'hydrophone', 'radio', 'balise', 'sauvegarde', 'passage', 'passages' ],
 		url: '/?nav-to=31&tx=34',
