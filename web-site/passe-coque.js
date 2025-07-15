@@ -184,7 +184,7 @@ let showDialogOnLoad = (title, content) => { // Use the about-dialog for message
 
     let timeout = HOW_LONG + (howManyLines > 2 ? ((howManyLines - 2) * 1000) : 0); // TODO howManyLines is set asynchronously...
     console.log(`Timeout: ${timeout} ms`);
-    window.setTimeout(() => { 
+    window.setTimeout(() => {
         if (false) {
             if (aboutDialog.close) {
                 aboutDialog.close();
@@ -305,11 +305,11 @@ let clack = (origin) => {
                 dialogTitle[0].innerText = '';
             }
         }
-    } else if (originId === "8") { 
+    } else if (originId === "8") {
         contentName = `/64_${currentLang}.html`; // Bypass regular behavior...
     }
 	let contentPlaceHolder = document.getElementById("current-content");
-    
+
 	fetch(contentName)
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
@@ -321,7 +321,7 @@ let clack = (origin) => {
 						// Some specific cases here
 						/* if (origin.id === "1") { // Move this higher. No need to load 1_xx.html ?..
 							document.location.reload();
-						} else */ 
+						} else */
                         if (false && originId === "23") { // Not used, an example of a dialog. Content inserted in the <dialog>
 							document.getElementById("dialog-content").innerHTML = doc;
 							showAboutDialog();
@@ -339,11 +339,11 @@ let clack = (origin) => {
                                     let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : '03');
                                     const anchor = document.querySelector(`a[name='${hashtag}']`);
                                     anchor.scrollIntoView();
-                                
+
                                     /*
                                     const rectOverflow = overflow.getBoundingClientRect();
                                     const rectAnchor = anchor.getBoundingClientRect();
-    
+
                                     let scroll_top = rectAnchor.top - rectOverflow.top;
                                     console.log(`rectAnchor.top: ${rectAnchor.top}, rectOverflow.top: ${rectOverflow.top} => ${scroll_top}`);
                                     // Set the scroll position of the overflow container
@@ -370,7 +370,7 @@ let clack = (origin) => {
                             //     const overflow = document.getElementById('action-container');
                             //     let hashtag = (originId === "31") ? '01' : ((originId === "32") ? '02' : '03');
                             //     const anchor = document.querySelector(`a[name='${hashtag}']`);
-                                
+
                             //     const rectOverflow = overflow.getBoundingClientRect();
                             //     const rectAnchor = anchor.getBoundingClientRect();
 
@@ -510,11 +510,11 @@ let switchLanguage = () => {
 };
 
 let generateFetchMessage = (contentName, response) => {
-    let mess = (currentLang === 'FR') ? 'Cette page est en cours de d&eacute;veloppement...<br/>Disponible prochainement.' : 
+    let mess = (currentLang === 'FR') ? 'Cette page est en cours de d&eacute;veloppement...<br/>Disponible prochainement.' :
                                         'This page is being developped...<br/>Available soon.';
-    let message = `<div style='margin: 10px;'><div style='display: none;'>Message :<br/> Fetching ${contentName}...<br/>Data Response: ${response.status} - ${response.statusText}</div>` + 
-    `<div style="width: 100%; text-align: center;"><img src="/images/the.shipyard.jpg" width="100%"></div>` + 
-    `<div style='border: 3px solid orange; border-radius: 10px; text-align: center; display: grid; grid-template-columns: auto auto auto;'>` + 
+    let message = `<div style='margin: 10px;'><div style='display: none;'>Message :<br/> Fetching ${contentName}...<br/>Data Response: ${response.status} - ${response.statusText}</div>` +
+    `<div style="width: 100%; text-align: center;"><img src="/images/the.shipyard.jpg" width="100%"></div>` +
+    `<div style='border: 3px solid orange; border-radius: 10px; text-align: center; display: grid; grid-template-columns: auto auto auto;'>` +
     `<div style="display: flex; align-items: center; margin: auto;"><img src="/images/construction.cone.png" height="52"></div> <div><b>${mess}</b></div> <div style="display: flex; align-items: center; margin: auto;"><img src="/images/construction.cone.png" height="52"></div></div></div>`;
     return message;
 };
@@ -527,7 +527,7 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
             message = mess.message;
         }
     }
-    let text = (currentLang === 'FR') ? 'Erreur de chargement...<br/>Est-ce que le serveur est en route ?<br/>Voyez votre administrateur.' : 
+    let text = (currentLang === 'FR') ? 'Erreur de chargement...<br/>Est-ce que le serveur est en route ?<br/>Voyez votre administrateur.' :
                                         'Load error...<br/>Is the server running?<br/>See your admin.';
     let content = `<div style='margin: 10px;'><pre>Fetch Error for ${contentName}: ${(error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - ')} </pre><div style='border: 3px solid red; border-radius: 10px; text-align: center;'><b>${text}</b></div></div>`;
     return content;
@@ -624,7 +624,7 @@ let scrollHere = (parent) => {
     return event.preventDefault();
 }
 
-/** 
+/**
  * Turn "N 47 40.66" into 47.677667
  * Warning: No deg sign, no min sign.
  */
@@ -690,8 +690,8 @@ let initBoatClubBases = () => {
                 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 
     const base_layer = L.tileLayer(mbUrl, {
-        id: 'mapbox.streets', 
-        // attribution: mbAttr, 
+        id: 'mapbox.streets',
+        // attribution: mbAttr,
         opacity: 1.0
     }).addTo(map);
 
@@ -735,12 +735,12 @@ let initBoatClubBases = () => {
     makeMarker({
         position: kerran,
         map: map,
-        title: 'ZA de Kerran'});                                                                                        
+        title: 'ZA de Kerran'});
     makeMarker({
         position: gavres,
         map: map,
-        title: 'G&acirc;vres'});                                                                                        
-    
+        title: 'G&acirc;vres'});
+
     let tooltip = null;
 
     if (false) { // Position  (lat-lng) of the mouse
@@ -785,17 +785,17 @@ let clack_pcc = (origin) => {
 	if (originId === "21" || originId === "22") { // Menu 2, special management, see below (ONE page only)
         contentName = `${path}2_${currentLang}.html`; // 21 & 22, same doc, different anchor (hashtag).
     } else if  (originId === "41" || originId === "42") { // TODO Remove this...
-        contentName = `${path}4_${currentLang}.html`; 
+        contentName = `${path}4_${currentLang}.html`;
     } else if  (originId === "43") {                      // TODO Remove this...
         contentName = `${path}6_${currentLang}.html`;  // Member Space
     } else if  (originId === "51" || originId === "52") {  // TODO Remove this...
-        contentName = `${path}5_${currentLang}.html`; 
-    // } else if  (originId === "6") { 
+        contentName = `${path}5_${currentLang}.html`;
+    // } else if  (originId === "6") {
     //   contentName = `${path}6_${currentLang}.html`;   // Member Space
     }
 
     let contentPlaceHolder = document.getElementById("current-content");
-    
+
 	fetch(contentName)
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
@@ -809,14 +809,14 @@ let clack_pcc = (origin) => {
                         let hashtag = null;
                         let overflow = null;
 
-                        if (originId === "21" || originId === "22") { 
-                            hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX'); 
+                        if (originId === "21" || originId === "22") {
+                            hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX');
                             overflow = document.getElementById('pcc-2');
-                        } else if (originId === "41" || originId === "42") { 
-                            hashtag = (originId === "41") ? '01' : ((originId === "42") ? '02' : 'XX'); 
+                        } else if (originId === "41" || originId === "42") {
+                            hashtag = (originId === "41") ? '01' : ((originId === "42") ? '02' : 'XX');
                             overflow = document.getElementById('pcc-4');
-                        } else if (originId === "51" || originId === "52") { 
-                            hashtag = (originId === "51") ? '01' : ((originId === "52") ? '02' : 'XX'); 
+                        } else if (originId === "51" || originId === "52") {
+                            hashtag = (originId === "51") ? '01' : ((originId === "52") ? '02' : 'XX');
                             overflow = document.getElementById('pcc-5');
                         }
 
@@ -824,10 +824,10 @@ let clack_pcc = (origin) => {
                             // let nbTry = 0;
                             let scrollToAnchor = () => {
                                 // const overflow = document.getElementById('pcc-2');
-                                // let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX'); 
+                                // let hashtag = (originId === "21") ? '01' : ((originId === "22") ? '02' : 'XX');
                                 const anchor = document.querySelector(`a[name='${hashtag}']`);
                                 anchor.scrollIntoView();
-                                
+
                                 /*
                                 const rectOverflow = overflow.getBoundingClientRect();
                                 const rectAnchor = anchor.getBoundingClientRect();
@@ -946,7 +946,7 @@ let switchLanguagePCC = () => {
 	clack_pcc(el);
 };
 
-const BG_IMAGES = 
+const BG_IMAGES =
 /*[
 	"../backgrounds/la.licorne.jpeg",
 	"../backgrounds/next_wave.jpg"
@@ -960,7 +960,7 @@ const BG_IMAGES =
 // [ "./photos.michel.01/quille.coraxy.jpg",
 //   "./photos.michel.02/01.jpg",
 //   "./photos.michel.02/02.jpg",
-//   "./photos.michel.02/03.jpg" ];  
+//   "./photos.michel.02/03.jpg" ];
 
 [ "/images/houat.jpg",
   "/images/mouillage.01.jpg",
@@ -972,7 +972,7 @@ const BG_IMAGES =
   "/images/slideshow.03.png",
   "/images/slideshow.04.png",
   "/images/slideshow.05.png",
-  "/images/la.mer.jpg" ];  
+  "/images/la.mer.jpg" ];
 
 const BG_INTERVAL = 5000; // in ms
 
@@ -1054,7 +1054,7 @@ function handleTouchMove(evt) {
     yDown = null;
 }
 
-// const BG_INTERVAL = 2 * 60 * 1000; // in ms. 
+// const BG_INTERVAL = 2 * 60 * 1000; // in ms.
 let secondLeft = BG_INTERVAL / 1000;
 
 let aboutDiv = undefined;
@@ -1143,10 +1143,10 @@ let getQueryParameterByName = (name, url) => {
 
 let qrcode;
 
-let makeCode = (url, location) => {    
+let makeCode = (url, location) => {
 	if (url === undefined) {
 		url = document.location.href;
-	} 
+	}
     console.log(`QR Code for ${url}`);
 	let docLoc = url;
 	let toDisplay = docLoc; // .substring(0, docLoc.lastIndexOf('/')) + "/" + url; // document.location + url;
@@ -1251,7 +1251,7 @@ let clickOnBoatPix = (origin, name = '', pathPrefix = '') => {
             THE_FLEET.forEach(element => { // Use THE_FLEET, getTheBoats might not have been invoked yet...
                 if (element.id === origin.id) {
                     name = element.name;
-                }	
+                }
             });
         } catch (err) {
             console.log(err);
@@ -1402,7 +1402,7 @@ let aboutSomeone = (who) => {
         });
 
     let topOfCard = window.scrollY; // pageYOffset; // who.getBoundingClientRect().top;
-    
+
     // window.scrollTo(0, 0); // Scroll on top, for Safari and others...
     let marginTop = `${topOfCard.toFixed(0)}px`;
     console.log(`Dialog top margin: ${marginTop}`);
@@ -1454,6 +1454,13 @@ const THE_FLEET = [
         type: "Delph 32",
         category: NONE,
         base: "La Ciotat"
+    },{
+        name: "Shadok",
+        id: "shadok",
+        pix: "/shadok/shadok.01.png",
+        type: "Via 42",
+        category: NONE,
+        base: "Port St Louis du Rh&ocirc;ne"
     },{
         name: "Jericho",
         id: "jericho",
@@ -1510,7 +1517,7 @@ const THE_FLEET = [
         type: "Shipman 28",
         category: CLUB,
         base: "&Eacute;tel"
-    }, {        
+    }, {
         name: "Le Brio",
         id: "le-brio",
         pix: "/images/boats/dummy.boat.jpg",
@@ -1557,7 +1564,7 @@ const THE_FLEET = [
     //     category: NONE,
     //     base: "Lorient"
     // },
-    { 
+    {
         name: "Wanita Too",
         id: "wanita",
         pix: "/images/boats/wanita.too.sq.png",
@@ -1565,7 +1572,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "Saint-Malo"
     },
-    { 
+    {
         name: "Atlantide",
         id: "atlantide",
         pix: "/images/boats/atlantide.sq.png",
@@ -1573,7 +1580,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "--"
     },
-    { 
+    {
         name: "Iapyx",
         id: "iapyx",
         pix: "/images/boats/iapyx.sq.png",
@@ -1581,7 +1588,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "--"
     },
-    { 
+    {
         name: "Ar Mor Van",
         id: "ar-mor-van",
         pix: "/images/boats/kelt620.jpeg",
@@ -1589,7 +1596,7 @@ const THE_FLEET = [
         category: NONE,
         base: "&Eacute;tel"
     },
-    { 
+    {
         name: "Twist Again",
         id: "twist-again",
         pix: "/images/boats/twist.again.sq.png",
@@ -1597,7 +1604,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "Saint&#8209;Philibert"
     },
-    { 
+    {
         name: "Ia Orana",
         id: "ia-orana",
         pix: "/images/boats/ia.orana.sq.png",
@@ -1629,7 +1636,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Saint&nbsp;Brieuc"
     },
-    { 
+    {
         name: "Tri Yann",
         id: "tri-yann",
         pix: "/images/boats/tri.yann.png",
@@ -1637,7 +1644,7 @@ const THE_FLEET = [
         category: CLUB,
         base: "Saint&#8209;Philibert"
     },
-    { 
+    {
         name: "Rozen an Avel",
         id: "rozen-an-avel",
         pix: "/images/boats/rozen.an.avel.jpeg",
@@ -1645,7 +1652,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Saint&#8209;Philibert"
     },
-    { 
+    {
         name: "Avel Mad",
         id: "avel-mad",
         pix: "/images/boats/avel.mad.sq.png",
@@ -1653,7 +1660,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "Le&nbsp;Bono"
     },
-    { 
+    {
         name: "F&eacute;licie",
         id: "felicie",
         pix: "/images/boats/felicie.sq.png",
@@ -1661,7 +1668,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "Dakar"
     },
-    { 
+    {
         name: "La R&ecirc;veuse",
         id: "la.reveuse",
         pix: "/images/boats/la.reveuse.sq.png",
@@ -1669,7 +1676,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Arzal"
     },
-    { 
+    {
         name: "Tokad 2",
         id: "tokad-2",
         pix: "/images/boats/tokad.2.sq.png",
@@ -1677,7 +1684,7 @@ const THE_FLEET = [
         category: CLUB,
         base: "Le&nbsp;Crouesty"
     },
-    { 
+    {
         name: "Taapuna",
         id: "taapuna",
         pix: "/images/boats/taapuna.png",
@@ -1685,7 +1692,7 @@ const THE_FLEET = [
         category: CLUB,
         base: "Rivi&egrave;re de Saint&#8209;Philibert"
     },
-    { 
+    {
         name: "L'heure bleue",
         id: "heure-bleue",
         pix: "/images/boats/lheure.bleue.jpeg",
@@ -1693,7 +1700,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Golfe&nbsp;du&nbsp;Morbihan"
     },
-    { 
+    {
         name: "Jolly Jumper",
         id: "jolly-jumper",
         pix: "/images/boats/jolly.jumper.01.jpg",
@@ -1701,7 +1708,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Les&nbsp;Sables&nbsp;d'Olonne"
     },
-    { 
+    {
         name: "Passpartout",
         id: "passpartout",
         pix: "/images/boats/passpartout.sq.png",
@@ -1709,7 +1716,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Lorient"
     },
-    { 
+    {
         name: "Melvan",
         id: "melvan",
         pix: "/images/boats/melvan.sq.png",
@@ -1717,7 +1724,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Toulon"
     },
-    { 
+    {
         name: "Saigane",
         id: "saigane",
         pix: "/images/boats/saigane/saigane.jpg",
@@ -1725,7 +1732,7 @@ const THE_FLEET = [
         category: CLUB,
         base: "Port&nbsp;Blanc"
     },
-    { 
+    {
         name: "Anao",
         id: "anao",
         pix: "/images/boats/anao.jpeg",
@@ -1733,7 +1740,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "&Eacute;tel"
     },
-    { 
+    {
         name: "Trehudal",
         id: "trehudal",
         pix: "/images/boats/trehudal.png",
@@ -1741,7 +1748,7 @@ const THE_FLEET = [
         category: CLUB,
         base: "La&nbsp;Trinit&eacute;"
     },
-    { 
+    {
         name: "Jules Verne",
         id: "jules-verne",
         pix: "/images/boats/jules.verne.sq.png",
@@ -1749,7 +1756,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Locmariaquer"
     },
-    { 
+    {
         name: "Remora",
         id: "remora",
         pix: "/images/boats/remora.sq.png",
@@ -1757,7 +1764,7 @@ const THE_FLEET = [
         category: TO_GRAB,
         base: "Saint&#8209;Philibert"
     },
-    { 
+    {
         name: "Stiren ar Mor",
         id: "stiren",
         pix: "/images/boats/stiren.er.mor.png",
@@ -1765,7 +1772,7 @@ const THE_FLEET = [
         category: NONE,
         base: "La&nbsp;Trinit&eacute;"
     },
-    { 
+    {
         name: "Coevic 2",
         id: "coevic-2",
         pix: "/images/boats/coevic-2.png",
@@ -1773,7 +1780,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "Lorient"
     },
-    { 
+    {
         name: "Ma Enez",
         id: "ma-enez",
         pix: "/images/boats/ma.enez.png",
@@ -1781,7 +1788,7 @@ const THE_FLEET = [
         category: NONE,
         base: "La&nbsp;Trinit&eacute;"
     },
-    { 
+    {
         name: "Saudade",
         id: "saudade",
         pix: "/images/boats/saudade.png",
@@ -1789,7 +1796,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Le&nbsp;Bono"
     },
-    { 
+    {
         name: "Imagine",
         id: "imagine",
         pix: "/images/boats/selection.png",
@@ -1797,7 +1804,7 @@ const THE_FLEET = [
         category: NONE,
         base: "Ouistreham"
     },
-    { 
+    {
         name: "Gwenillig",
         id: "gwenillig",
         pix: "/images/boats/gwenillig.png",
@@ -1805,7 +1812,7 @@ const THE_FLEET = [
         category: CLUB,
         base: "--"
     },
-    { 
+    {
         name: "Lohengrin",
         id: "lohengrin",
         pix: "/images/boats/lohengrin/lohengrin.png",
@@ -1813,7 +1820,7 @@ const THE_FLEET = [
         category: EX_BOAT,
         base: "Arzal"
     },
-    { 
+    {
         name: "Nomadict",
         id: "nomadict",
         pix: "/images/boats/nomadict/nomadict.00.jpg",
@@ -1821,7 +1828,7 @@ const THE_FLEET = [
         category: TO_GRAB,
         base: "Concarneau"
     },
-    { 
+    {
         name: "Velona",
         id: "velona",
         pix: "/images/boats/velona/velona.00.jpg",
@@ -1829,7 +1836,7 @@ const THE_FLEET = [
         category: TO_GRAB,
         base: "Hennebont"
     },
-    { 
+    {
         name: "B&eacute;mol III",
         id: "bemol",
         pix: "/images/boats/sun-rise-35-sous-spi.jpg",
@@ -1943,7 +1950,7 @@ const INFO_SECTION = [{
             content: "/actu/agenda2024.html"
         }*/ ]
     },
-    {   
+    {
         section: "2025",
         content: [
             {
@@ -1952,7 +1959,7 @@ const INFO_SECTION = [{
                 content: "/actu/2025/news.01.html"
             }
         ]
-    },    
+    },
     {
         section: "2024",
         content: [{
@@ -2017,7 +2024,7 @@ const INFO_SECTION = [{
             content: "/actu/2024/new.site.html"
         }]
     },
-    { 
+    {
         section: "2023",
         content: [{
                 date: "Oct-2023",
@@ -2042,7 +2049,7 @@ const INFO_SECTION = [{
             }
         ]
     },
-    {   
+    {
         section: "2022",
         content: [
             {
@@ -2057,7 +2064,7 @@ const INFO_SECTION = [{
             }
         ]
     },
-    {   
+    {
         section: "2021",
         content: [
             {
@@ -2067,7 +2074,7 @@ const INFO_SECTION = [{
             }
         ]
     },
-    {   
+    {
         section: "2020",
         content: [
             {
@@ -2077,7 +2084,7 @@ const INFO_SECTION = [{
             }
         ]
     },
-    {   
+    {
         section: "2019",
         content: [
             {
@@ -2113,7 +2120,7 @@ const NEXT_EVENTS = [ // oldest to newest.
     {
         date_from: '2024-05-01',
         date_to: '2024-05-01',
-        content: { 
+        content: {
             fr: '1<sup>er</sup>Mai.',
             en: 'May 1st, 2024.'
         }
@@ -2282,8 +2289,8 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                 if (response.status !== 200) { // There is a problem...
                     try {
                         // Use a custom alert
-                        let errContent = (currentLang === 'FR') ? 
-                                        `Erreur &agrave; l'ex&eacute;cution de ${boatData}: ${response.statusText}.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur.` : 
+                        let errContent = (currentLang === 'FR') ?
+                                        `Erreur &agrave; l'ex&eacute;cution de ${boatData}: ${response.statusText}.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur.` :
                                         `Error executing ${boatData}: ${response.statusText}.<br/>Using backup data instead.<br/>See your admin.`;
                         showCustomAlert(errContent);
                     } catch (err) {
@@ -2362,7 +2369,7 @@ let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
         // div.style = "padding: 10px; z-index: 1; max-height: 420px; max-width: 300px;"; // See below. Make this class
         div.classList.add("boat-frame");
         // div.title = boat.name;
-        div.onclick = function() { clickOnBoatPix(this, boat.name, pathPrefix); }; 
+        div.onclick = function() { clickOnBoatPix(this, boat.name, pathPrefix); };
         div.onmouseover = function() { mouseOnTxPix(this); };
         let imgContainer = document.createElement('div');
         imgContainer.classList.add("boat-image-container");
@@ -2373,7 +2380,7 @@ let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
         imgContainer.appendChild(img);
         div.appendChild(imgContainer);
         // Name and type
-        let span = document.createElement('span'); 
+        let span = document.createElement('span');
         span.style = "position: relative; display: block; bottom: 4px; line-height: 1.1em;";
         span.innerHTML = `${boat.name}<br/>${boat.type}, ${boat.base}`;
         div.appendChild(span);
@@ -2425,7 +2432,7 @@ let fillOutTheTeam = (containerId = 'team-container') => {
     // 1 - The boss on top
     THE_TEAM.forEach(member => {
         if (member.boss === true) {
-            newList.push(member); 
+            newList.push(member);
         } else {
             member.rnd = Math.random();
             listToSort.push(member);
@@ -2460,7 +2467,7 @@ let fillOutTheTeam = (containerId = 'team-container') => {
         div.id = tm.id;  // Team member div
         div.classList.add("image-plus-text");
         // div.title = boat.name;
-        div.onclick = function() { aboutSomeone(this); }; 
+        div.onclick = function() { aboutSomeone(this); };
 
         let img = document.createElement('img');
         img.src = tm.image;
@@ -2468,7 +2475,7 @@ let fillOutTheTeam = (containerId = 'team-container') => {
         div.appendChild(img);
 
         // Label
-        let div2 = document.createElement('div'); 
+        let div2 = document.createElement('div');
         div2.style = "line-height: 1.2em;";
         div2.innerHTML =  currentLang === 'FR' ? tm.label.fr : tm.label.en;
         div.appendChild(div2);
@@ -2535,16 +2542,16 @@ let interval = undefined;
 function setAuto(id, cb) {
     console.log(`setAuto for ${id}, slider ${cb.id}, ${cb.checked}`);
     if (cb.checked) {
-        interval = setInterval(() => { 
+        interval = setInterval(() => {
             try {
                 if (document.getElementById(id).offsetParent !== null) { // Check visibility
-                    document.getElementById(id)._forward(); 
+                    document.getElementById(id)._forward();
                 } else {
-                    clearInterval(interval);        
+                    clearInterval(interval);
                 }
             } catch (err) {
                 console.log(err);
-                clearInterval(interval);        
+                clearInterval(interval);
             }
         }, 5000);
     } else {
@@ -2628,7 +2635,7 @@ let fillOutActu = filter => {
 let fillOutNextEvents = () => {
     console.log("Ah!!");
     // let container = document.getElementById('next-events-container');
-    let ne = generateNextEvents(); 
+    let ne = generateNextEvents();
     let list = document.getElementById('next-event-list');
     // Remove all childs
     while (list.firstChild) {
@@ -2941,8 +2948,8 @@ let onResetPswdResponse = (iframe) => {
 /**
  * For the messages in both 1_xx.html and 61_xx.html
  * Same field ids.
- * 
- * @param {*} evt 
+ *
+ * @param {*} evt
  * @returns true if OK, false otherwise (to prevent submit)
  */
 let checkFields = (evt) => {
@@ -2950,7 +2957,7 @@ let checkFields = (evt) => {
     let errMess = [];
 
     let lastName, firstName, fullName;
-    
+
     if (document.getElementById('last-name')) { // Several possible origins...
         lastName = document.getElementById('last-name').value;
         firstName = document.getElementById('first-name').value;
@@ -3040,21 +3047,21 @@ let onPartnerSlidesLoad = () => {
                         if (scrollMargin > max) {
                             // scrollMargin = 0;
                             inc = -1;
-                            sleep(2000).then(() => { 
+                            sleep(2000).then(() => {
                                 console.log('Resuming after sleep...'); // Wow !
-                                scrollDiv(scrollMargin);                        
+                                scrollDiv(scrollMargin);
                             });
                         } else if (scrollMargin < 0) {
                             inc = 1;
-                            sleep(2000).then(() => { 
+                            sleep(2000).then(() => {
                                 console.log('Resuming after sleep...'); // Wow !
-                                scrollDiv(scrollMargin);                        
+                                scrollDiv(scrollMargin);
                             });
                         } else {
-                            scrollDiv(scrollMargin);                        
+                            scrollDiv(scrollMargin);
                         }
                     } else {
-                        scrollDiv(scrollMargin); // For resumeScroll.                       
+                        scrollDiv(scrollMargin); // For resumeScroll.
                     }
                 }, timeout);
             } else {
@@ -3083,7 +3090,7 @@ let resumeScroll = () => {
 // Jump to somewhere else in the same site...
 let jumpTo = (page, extraPrm) => {
     let origin = window.location.origin;
-    let newUrl = origin + `?lang=${currentLang}&nav-to=${page}&${extraPrm}` 
+    let newUrl = origin + `?lang=${currentLang}&nav-to=${page}&${extraPrm}`
     console.log(`Going to ${newUrl}`);
     // debugger;
     if (false) {
@@ -3136,7 +3143,7 @@ function filterProjectsOn(divId, nbDivId) {
                 });
             }
             if (!matching) {
-                prjNode.style.display = 'none'; 
+                prjNode.style.display = 'none';
             } else {
                 prjNode.style.display = 'inline'; // Restore, in case of previous filter
                 nbPrjSelected += 1;
@@ -3145,7 +3152,7 @@ function filterProjectsOn(divId, nbDivId) {
     } else {
         console.log("Nothing to look for...");
         projectArray.forEach(prjNode => {
-            prjNode.style.display = 'inline'; 
+            prjNode.style.display = 'inline';
             nbPrjSelected += 1;
         });
     }
@@ -3475,6 +3482,12 @@ const KEYWORDS = [
 		keywords: [ 'delph 32', 'ciotat', 'tanikel' ],
 		url: '/?nav-to=4&boat-id=tanikel',
 		comment: 'Delph 32'
+	},
+	{
+		name: 'Shadok',
+		keywords: [ 'solidaire', 'social', 'artistique', 'jeannette', 'shadok', 'victime', 'violence' ],
+		url: '/?nav-to=4&boat-id=shadok',
+		comment: 'Via 42'
 	},
 	{
 		name: 'Jericho',
