@@ -2,7 +2,7 @@
 <!--
     Admin Index.
     To log in OVH MySQL Admin:
-    Username passecc128 
+    Username passecc128
     Database name passecc128
     Found password: zcDmf7e53eTs
     Server address passecc128.mysql.db
@@ -17,7 +17,7 @@
     <style>
 * {
     font-family: 'Courier New', Courier, monospace;
-}        
+}
 h1 {
     /* text-stroke: 2px orange; */ /* Might not be supported */
     font-size: 3em;
@@ -63,7 +63,7 @@ h1 {
                             <ul>
                                 <li><a href="_the_fleet.01.php" target="MySQL">Passe-Coque Fleet Management</a></li>
                                 <li><a href="_referents.01.php" target="MySQL">Passe-Coque Referents Management</a></li>
-                                <li><a href="_members.projects.referents.php" target="MySQL">Passe-Coque Members' Status (Members, Boat Referents, Project Leaders)</a></li>
+                                <li><a href="_members.projects.referents.php" target="MySQL">Passe-Coque Members' Status (Members, Boat Referents, Project Leaders). View only.</a></li>
                             </ul>
                         </li>
                         <li>
@@ -81,6 +81,13 @@ h1 {
                         </li>
                     </ul>
                 </li>
+                <li>
+                    The Projects
+                    <ul>
+                        <li><a href="_projects.01.php" target="MySQL">Passe-Coque Projects Management</a></li>
+                        <li><a href="_projects.03.php" target="MySQL">Passe-Coque Projects Owners Management</a></li>
+                    </ul>
+                </li>
                 <li><a href="_help_requests.01.php?option=admin" target="admin">Gestion des demandes d'aide (convoyages, bricolages, ...)</a></li>
                 <li><a href="_todo_list.01.php" target="admin">Gestion des TODO Lists (travaux sur les bateaux)</a></li>
                 <li>
@@ -96,7 +103,7 @@ h1 {
                         <li><a href="_free_sql.php?stmt=SELECT+EMAIL%2C+CONCAT%28FIRST_NAME%2C+%27+%27%2C+LAST_NAME%29+AS+NAME%2C+IF%28NEWS_LETTER_OK%2C+%27YES%21%27%2C+%27No+news+letter%27%29%2C+SAILING_EXPERIENCE+FROM+PASSE_COQUE_MEMBERS+WHERE+TARIF+IS+NULL+AND+NEWS_LETTER_OK+%3D+FALSE%3B" target="MySQL">Members with no Tarifs...</a>
                         <li>. . .</li>
                     </ul>
-                </li>        
+                </li>
             </ul>
         </li>
     </ul>
