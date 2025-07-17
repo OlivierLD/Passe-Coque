@@ -1,47 +1,47 @@
 # TODO list on Eh'Tak
-- Couvercles coffres carré, à retailler correctement
-- Placard avant babord, refixer la serrure
-- Remettre le stick sur la barre
-- Une chaine dans les fonds, c'est quoi ce truc ?
-- Rassembler le matos (sac à outils !)
-- Entretien moteur, log ?
-- Étanchéité capot AV - à vérifier.
+- Couvercles coffres carré, à retailler correctement ✅
+- Placard avant babord, refixer la serrure ✅
+- Remettre le stick sur la barre ✅
+- Une chaine dans les fonds, c'est quoi ce truc ? ✅
+- Rassembler le matos (sac à outils !) ✅
+- Entretien moteur, log ? ✅
+- Étanchéité capot AV - à vérifier. ✅
 - Révision survie ?
 - Hiloires cockpit & mains courantes, enlever peinture, remettre vernis.
-- Refixer l'évier !
-- Tableau de bord moteur..., besoin d'amour.
-- Rideaux carré, à nettoyer
-- Gaz : à mettre en place
-- Bâches à bloches
+- Refixer l'évier ! ✅
+- Tableau de bord moteur..., besoin d'amour. ✅
+- Rideaux carré, à nettoyer ✅
+- Gaz : à mettre en place ✅
+- Bâches à bloches. En route.
 
 Prochaine sortie de l'eau:
-- Anode hélice
-- Antifouling - à gratter
-- Peinture coque, œuvres mortes.
+- Anode hélice ✅
+- Antifouling - à gratter ✅
+- Peinture coque, œuvres mortes. ✅
 
-- Lumière cuisine.
+- Lumière cuisine. ✅
 - Feux de route ?
 - 220 V à bord ?
 
 ### Old list
 
-- WD40 cadena descente
-- Couture rabans
-- Poser dame de nage
-- Nav: Règle de Cras, compas, crayon, compas de relèvements, journal de bord.
+- WD40 cadena descente ✅
+- Couture rabans ✅
+- Poser dame de nage ✅
+- Nav: Règle de Cras, compas, crayon, compas de relèvements, journal de bord. ✅
 
 
 
-TODO next:  
+## TODO next:
 Réparations
 - Chaise moteur annexe (balcon AR) à nettoyer ✅
-- Vis capot descente
+- Vis capot descente ✅
 - Réchaud !
     - Installer ✅
-    - Connecter
+    - Connecter ✅
 - Batterie service, à changer ✅
 - WD40 clips capote ✅
-- Panneau AV moteur diesel, à réparer
+- Panneau AV moteur diesel, à réparer ✅
 - Refixer fils électriques sous les listons
 - Un taquet à changer sur le roof
 
@@ -60,6 +60,6 @@ Vérifications
 - Feu de tête de mat
 - Hale-bas de tangon
 - Gréement de spi
-- Amure GV - une estrope.
+- Amure GV - une estrope. ✅
 
 ---
