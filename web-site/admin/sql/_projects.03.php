@@ -103,12 +103,14 @@ if (isset($_POST['operation'])) {
       $sql = 'SELECT PO.PROJECT_ID,
                      PO.OWNER_EMAIL,
                      PRJ.PROJECT_NAME,
-                     CONCAT(MEM.FIRST_NAME, \' \', MEM.LAST_NAME) AS FULL_NAME
+                     CONCAT(MEM.FIRST_NAME, \' \', UPPER(MEM.LAST_NAME)) AS FULL_NAME
               FROM PROJECT_OWNERS PO,
                    PROJECTS PRJ,
                    PASSE_COQUE_MEMBERS MEM
               WHERE (UPPER(PO.PROJECT_ID) LIKE UPPER(\'%' . $prj_id . '%\') AND
-                     UPPER(PO.OWNER_EMAIL) LIKE UPPER(\'%' . $ref_name . '%\')) AND
+                     (UPPER(PO.OWNER_EMAIL) LIKE UPPER(\'%' . $ref_name . '%\') OR
+                      UPPER(MEM.FIRST_NAME) LIKE UPPER(\'%' . $ref_name . '%\') OR
+                      UPPER(MEM.LAST_NAME) LIKE UPPER(\'%' . $ref_name . '%\'))) AND
                     PO.PROJECT_ID = PRJ.PROJECT_ID AND
                     PO.OWNER_EMAIL = MEM.EMAIL
               ORDER BY 1;';
@@ -171,7 +173,7 @@ if (isset($_POST['operation'])) {
           <td valign="top">Project (part of ID):</td><td><input type="text" name="prj-id" size="40"></td>
         </tr>
         <tr>
-          <td valign="top">Referent (part of email):</td><td><input type="text" name="ref-name" size="40"></td>
+          <td valign="top">Referent (part of email, first or last name):</td><td><input type="text" name="ref-name" size="40"></td>
         </tr>
         <tr>
           <td colspan="2" style="text-align: center;"><input type="submit" value="Query"></td>
