@@ -2237,6 +2237,20 @@ const NEXT_EVENTS = [ // oldest to newest.
             en: 'June 27 to 30, 2025, Rubi\'s Cup, in Groix.'
         }
     }, {
+        date_from: '2025-07-24',
+        date_to: '2025-07-24',
+        content: {
+            fr: '24 juillet 2025, ap&eacute;ro-ponton &agrave; 17:00 &agrave; Port Deun (St Philibert) avec le Parc Naturel R&eacute;gional et la commune.',
+            en: 'July 24, 2025, dock-drink at 5pm in Port-Deun (St Philibert) with the PRN and the city.'
+        }
+    }, {
+        date_from: '2025-09-23',
+        date_to: '2025-09-28',
+        content: {
+            fr: 'Du 23 au 28 septembre 2025, Grand Pavois de La Rochelle. "La R&ecirc;veuse" avec les Conti ou "Saudade" avec Voiles Mag, les bateaux Passe-Coque vous attendent pour cette prochaine édition du salon nautique international à flot, du 23 au 28 septembre 2025 !',
+            en: 'September 23 to 28, 2025, Grand Pavois in La Rochelle. "La R&ecirc;veuse" with her crew or Saudade with Voiles Mag, the Passe-Coque  fleet expects you for the next edition of the international boat-show, September 23 to 28, 2025!'
+        }
+    }, {
         date_from: '2025-10-04',
         date_to: '2025-10-04',
         content: {
