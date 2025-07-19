@@ -86,7 +86,7 @@ if (!isset($_SESSION['USER_NAME'])) {
 
 function populateProjectOptions($projectsArray, $projectId) {
   foreach ($projectsArray as $project) {
-    echo '<option value="' . $project->id . '"' . ($project->id == $projectId ? ' selected' : '') . '>' . $project->id . ', ' . $project->name . ' (' . $project->description . ') </option>' . PHP_EOL;
+    echo '<option value="' . $project->id . '"' . ($project->id == $projectId ? ' selected' : '') . '>' . $project->id . ', ' . $project->name . ($project->description !== null ? ' (' . $project->description . ')' : '') . '</option>' . PHP_EOL;
   }
 }
 
@@ -235,7 +235,7 @@ if (isset($_POST['operation'])) {
     }
     echo "</table>" . PHP_EOL;
     ?>
-      <input type="submit" value="Update" name="update"> <input type="submit" value="Delete" name="delete">
+      <!--input type="submit" value="Update" name="update"--> <input type="submit" value="Delete" name="delete">
     </form>
     <?php
     // On ferme !

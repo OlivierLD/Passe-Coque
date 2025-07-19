@@ -53,10 +53,10 @@ function getProjects(string $dbhost, string $username, string $password, string 
         $projectIdx = 0;
         while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
             $projects[$projectIdx] = new Project();
-            $projects[$boatIndex]->id = $table[0];
-            $projects[$boatIndex]->name = $table[1];
-            $projects[$boatIndex]->description = $table[3];
-            $boatIndex++;
+            $projects[$projectIdx]->id = $table[0];
+            $projects[$projectIdx]->name = $table[1];
+            $projects[$projectIdx]->description = $table[3];
+            $projectIdx++;
         }
         // On ferme !
         $link->close();

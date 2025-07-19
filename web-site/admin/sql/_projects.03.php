@@ -24,7 +24,7 @@ try {
     <meta charset="ISO-8859-1"-->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Referents - Members, Fleet</title>
+    <title>Referents - Members, Projects</title>
     <style type="text/css">
       * {
         font-family: 'Courier New'
@@ -36,7 +36,7 @@ try {
     </style>
   </head>
   <body>
-    <h1>PHP / MySQL. Passe-Coque Referents. Depends on Members and Fleet</h1>
+    <h1>PHP / MySQL. Passe-Coque Projects. Depends on Members and Projects</h1>
 
     <?php
 // phpinfo();
@@ -100,11 +100,17 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
 
-      $sql = 'SELECT PROJECT_ID,
-                     OWNER_EMAIL
-              FROM PROJECT_OWNERS
-              WHERE (UPPER(PROJECT_ID) LIKE UPPER(\'%' . $prj_id . '%\') AND
-                     UPPER(OWNER_EMAIL) LIKE UPPER(\'%' . $ref_name . '%\'))
+      $sql = 'SELECT PO.PROJECT_ID,
+                     PO.OWNER_EMAIL,
+                     PRJ.PROJECT_NAME,
+                     CONCAT(MEM.FIRST_NAME, \' \', MEM.LAST_NAME) AS FULL_NAME
+              FROM PROJECT_OWNERS PO,
+                   PROJECTS PRJ,
+                   PASSE_COQUE_MEMBERS MEM
+              WHERE (UPPER(PO.PROJECT_ID) LIKE UPPER(\'%' . $prj_id . '%\') AND
+                     UPPER(PO.OWNER_EMAIL) LIKE UPPER(\'%' . $ref_name . '%\')) AND
+                    PO.PROJECT_ID = PRJ.PROJECT_ID AND
+                    PO.OWNER_EMAIL = MEM.EMAIL
               ORDER BY 1;';
 
       echo('Performing query <code>' . $sql . '</code><br/>');
@@ -126,12 +132,12 @@ if (isset($_POST['operation'])) {
 
 
       echo "<table>";
-      echo "<tr><th>Project ID</th><th>Project Owner</th><th>-</th></tr>";
-      //             0             1                  2                 3                 4                 5               6
+      echo "<tr><th>Project</th><th>Project Owner</th><th>-</th></tr>";
+
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" .
-            urldecode($table[0]) . "</td><td>" . urldecode($table[1]) . "</td><td><td>" . "<a href='./_projects.04.php?tx-id=" . $table[0] . "&owner=" . $table[1] . "'>Edit</a>" . //  target='RefUpdate'
+            urldecode($table[0]) . ', ' . $table[2] . "</td><td>" . urldecode($table[1]) . ' - ' . $table[3] . "</td><td><td>" . "<a href='./_projects.04.php?tx-id=" . $table[0] . "&owner=" . $table[1] . "'>Edit</a>" . //  target='RefUpdate'
           "</td></tr>\n"
         );
       }
