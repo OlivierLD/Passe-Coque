@@ -3282,7 +3282,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Anita Conti',
-		keywords: [ 'anita' , 'conti', 'reveuse', 'rêveuse', 'marseille', 'lorient', 'fecamp', 'fécamp', 'sillage', 'wake', 'leenan', 'head' ],
+		keywords: [ 'anita' , 'conti', 'reveuse', 'rêveuse', 'marseille', 'lorient', 'fecamp', 'fécamp', 'sillage', 'wake', 'leenan', 'head', 'durable', 'peche', 'pêche' ],
 		url: '/?nav-to=31&tx=35',
 		comment: 'Dans le sillage d\'Anita Conti'
 	},
