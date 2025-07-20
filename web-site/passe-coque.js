@@ -1801,7 +1801,7 @@ const THE_FLEET = [
         id: "imagine",
         pix: "/images/boats/selection.png",
         type: "Selection&nbsp;37",
-        category: NONE,
+        category: EX_BOAT,
         base: "Ouistreham"
     },
     {
@@ -2248,7 +2248,7 @@ const NEXT_EVENTS = [ // oldest to newest.
         date_to: '2025-09-28',
         content: {
             fr: 'Du 23 au 28 septembre 2025, Grand Pavois de La Rochelle. "La R&ecirc;veuse" avec les Conti ou "Saudade" avec Voiles Mag, les bateaux Passe-Coque vous attendent pour cette prochaine édition du salon nautique international à flot, du 23 au 28 septembre 2025 !',
-            en: 'September 23 to 28, 2025, Grand Pavois in La Rochelle. "La R&ecirc;veuse" with her crew or Saudade with Voiles Mag, the Passe-Coque  fleet expects you for the next edition of the international boat-show, September 23 to 28, 2025!'
+            en: 'September 23 to 28, 2025, Grand Pavois in La Rochelle. "La R&ecirc;veuse" with her crew or Saudade with Voiles Mag, the Passe-Coque fleet expects you for the next edition of the international boat-show, September 23 to 28, 2025!'
         }
     }, {
         date_from: '2025-10-04',
