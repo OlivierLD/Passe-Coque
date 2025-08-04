@@ -17,6 +17,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
+  <!--link rel="stylesheet" href="../../../passe-coque.css" /-->
+  <!--script src="../../../passe-coque.js"></script-->
+
+
   <script type="module" src="/webcomponents/SlideShow.js"></script>
 
   <style type="text/css">
@@ -383,6 +387,7 @@ compass-rose .day {
 /* Q: Where is the carrousel's vertical axis */
 
 :root {
+    --slider-scale: 0.5;
     --bg-transp: 0.75;
     --translate-z: 310px; /* Slide width, minimum */
 }
@@ -497,6 +502,78 @@ compass-rose .day {
     margin-bottom: 205px; */
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+/* For the switch (slider) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: calc(var(--slider-scale) * 60px);
+    height: calc(var(--slider-scale) * 34px);
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: calc(var(--slider-scale) * 26px);
+    width: calc(var(--slider-scale) * 26px);
+    left: calc(var(--slider-scale) * 4px);
+    bottom: calc(var(--slider-scale) * 4px);
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196f3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(calc(var(--slider-scale) * 26px));
+    -ms-transform: translateX(calc(var(--slider-scale) * 26px));
+    transform: translateX(calc(var(--slider-scale) * 26px));
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: calc(var(--slider-scale) * 34px);
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Switch grid */
+.switch-container {
+    display: grid;
+    grid-template-columns: calc(var(--slider-scale) * 80px) 200px;
+    width: 500px;
+}
+
+.switch-element {
+    place-self: flex-start;
 }
 
   </style>
@@ -715,9 +792,17 @@ compass-rose .day {
 
     <div id="navigation-01" class="tab-section" style="display: block; padding-top: 20px;">
 
+
         <span id="txt-03">Round trip to Houat - Images are clickable</span>
         <div id="slide-show-container"
             class="body-pix">
+            <div class="switch-container" style="margin-left: 30px; margin-top: 10px;" title="Scroll through slides">
+                <label class="switch switch-element" style="margin-top: 0.5em;">
+                    <input id="houat-slider" type="checkbox" onchange="setAuto('slide-show-01', this);">
+                    <span class="slider round"></span>
+                </label>
+                <span class="switch-element" style="margin-top: 0.6em; font-size: 1rem;">Slides Auto-Scroll</span>
+            </div>
             <slide-show id="slide-show-01"
                         width="800"
                         height="600"
@@ -734,13 +819,13 @@ compass-rose .day {
             </slide-show>
         </div>
 
-        <div style="margin-top: 20px;">
+        <div style="padding-top: 20px;">
             <!-- Carrousel ? -->
-            <div style="margin-top: 10px; margin-bottom: -70px; font-size: small;">
+            <div style="/*margin-top: 10px;*/ margin-bottom: -20px; margin-left: 10px; font-size: small; color: cyan;">
                 Mettez la souris sur le carrousel pour l'arr&ecirc;ter, cliquez les photos pour les agrandir&nbsp;!
             </div>
 
-            <section id="slideshow" style="margin-left: 0px;">
+            <section id="slideshow" class="body-pix" style="margin-left: 0px;">
                 <div class="entire-content">
                     <div class="content-carrousel">
                         <figure class="shadow">
@@ -1242,18 +1327,40 @@ compass-rose .day {
         window.open(src, '_blank'); // This is an example
     }
 
+    let interval = undefined;
+
+    function setAuto(id, cb) {
+        console.log(`setAuto for ${id}, slider ${cb.id}, ${cb.checked}`);
+        if (cb.checked) {
+            interval = setInterval(() => {
+                try {
+                    if (document.getElementById(id).offsetParent !== null) { // Check visibility
+                        document.getElementById(id)._forward();
+                    } else {
+                        clearInterval(interval);
+                    }
+                } catch (err) {
+                    console.log(err);
+                    clearInterval(interval);
+                }
+            }, 5000);
+        } else {
+            clearInterval(interval);
+        }
+    }
+
     let switchLanguage = (lang) => {
         if (lang === "FR") {
             document.getElementById("data-title").innerHTML = "Donn&eacute;es";
             document.getElementById('txt-01').innerHTML = "Photos et Donn&eacute;es enregistr&eacute;es";
-            document.getElementById('txt-02').innerHTML = "&Agrave; bord d'Eh Tak', Shipman 28. Juillet 2025. Photos et donn&eacute;es.";
+            document.getElementById('txt-02').innerHTML = "&Agrave; bord d'Eh'Tak, Shipman 28. Juillet 2025. Photos et donn&eacute;es.";
 
             document.getElementById('cancel-path').innerHTML = "Annuler";
             document.getElementById('stop-path').innerHTML = "Pause";
             document.getElementById('resume-path').innerHTML = "Reprendre";
             document.getElementById('start-path').innerHTML = "Rejouer";
 
-            document.getElementById('txt-03').innerHTML = "Aller-Retour &agrave; Houat - Cliquer dessus pour agrandir";
+            document.getElementById('txt-03').innerHTML = "Aller-Retour &agrave; Houat - Cliquer sur les photos pour les agrandir";
             document.getElementById('txt-04').innerHTML = "Aller &agrave; :";
 
             document.getElementById('dialog-01').innerHTML = "Une simple interface Leaflet &amp; WebComponents pour visualiser des donn&eacute;es enregistr&eacute;es en naviguant.";
@@ -1271,7 +1378,7 @@ compass-rose .day {
         } else { // EN
             document.getElementById("data-title").innerHTML = "Data";
             document.getElementById('txt-01').innerHTML = "Pictures and Logged Data Replay";
-            document.getElementById('txt-02').innerHTML = "On board d'Eh Tak', Shipman 28. July 2025. Pictures and data.";
+            document.getElementById('txt-02').innerHTML = "On board Eh'Tak, Shipman 28. July 2025. Pictures and data.";
 
             document.getElementById('cancel-path').innerHTML = "Cancel";
             document.getElementById('stop-path').innerHTML = "Pause";

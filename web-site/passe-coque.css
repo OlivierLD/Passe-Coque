@@ -450,7 +450,7 @@ div.tooltip:hover span {
     overflow-y: auto;
 }
 
-  /* For the switch (slider) */
+/* For the switch (slider) */
 .switch {
     position: relative;
     display: inline-block;
