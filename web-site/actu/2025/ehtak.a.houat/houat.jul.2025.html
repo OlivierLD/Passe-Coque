@@ -378,6 +378,127 @@ compass-rose .day {
         margin-top: 2vh;
     }
 }
+
+/* For the carrousel */
+/* Q: Where is the carrousel's vertical axis */
+
+:root {
+    --bg-transp: 0.75;
+    --translate-z: 310px; /* Slide width, minimum */
+}
+
+/** {
+    margin: 0;
+    padding: 0;
+}*/
+
+/* 3D Slideshow */
+
+#slideshow {
+    margin: 0 auto;
+    padding-top: 50px;
+    height: 700px;
+    width: 100%;
+    /*background-color: #202525;*/
+    box-sizing: border-box;
+}
+
+.entire-content {
+    margin: auto;
+    width: 190px;
+    perspective: 1000px;
+    position: relative;
+    padding-top: 20px;
+}
+
+.content-carrousel {
+    width: 100%;
+    position: absolute;
+    /*float: right;*/
+    animation: rotar 15s infinite linear;
+    transform-style: preserve-3d;
+}
+
+.content-carrousel:hover {
+    animation-play-state: paused;
+    cursor: pointer;
+}
+
+.content-carrousel figure {
+    width: 150%;
+    height: 380px; /* This is the height of the pictures */
+    border: 1px solid #3b444b;
+    overflow: hidden;
+    position: absolute;
+}
+
+/*
+    Degree step: 40 = 360 / 9  (9 = nb slides)
+                    51 ~= 360 / 7 (7 = nb slides) => 0, 51, 102, 153, etc...
+*/
+.content-carrousel figure:nth-child(1) {
+    transform: rotateY(0deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(2) {
+    transform: rotateY(51deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(3) {
+    transform: rotateY(102deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(4) {
+    transform: rotateY(153deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(5) {
+    transform: rotateY(204deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(6) {
+    transform: rotateY(255deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(7) {
+    transform: rotateY(306deg) translateZ(var(--translate-z));
+} .content-carrousel figure:nth-child(8) {
+    transform: rotateY(357deg) translateZ(var(--translate-z));
+}
+
+.shadow {
+    position: absolute;
+    box-shadow: 0px 0px 20px 0px #000;
+    border-radius: 1px;
+}
+
+.content-carrousel img {
+    image-rendering: auto;
+    transition: all 300ms;
+    width: 100%;
+    height: 100%;
+}
+
+.content-carrousel img:hover {
+    transform: scale(1.2);
+    transition: all 300ms;
+}
+
+@keyframes rotar {
+    from {
+        transform: rotateY(0deg);
+    } to {
+        transform: rotateY(360deg);
+    }
+}
+
+.black-frame {
+    padding: 3px;
+    margin: 1px;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* for the images in the carrousel */
+.carrousel-img {
+    /* margin-top: 110px;
+    margin-bottom: 205px; */
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
   </style>
 
   <!--script type="module" src="/webcomponents/widgets/slideshow/SlideShow.js"></script-->
@@ -585,14 +706,18 @@ compass-rose .day {
                 </div>
             </div>
         </div>
+
+        <div style="color: silver;">
+            OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...<br/>
+        </div>
+
     </div>
 
-    <div id="navigation-01" class="tab-section" style="display: block;">
+    <div id="navigation-01" class="tab-section" style="display: block; padding-top: 20px;">
 
         <span id="txt-03">Round trip to Houat - Images are clickable</span>
         <div id="slide-show-container"
             class="body-pix">
-            <!-- Try a caroussel ? -->
             <slide-show id="slide-show-01"
                         width="800"
                         height="600"
@@ -609,13 +734,79 @@ compass-rose .day {
             </slide-show>
         </div>
 
+        <div style="margin-top: 20px;">
+            <!-- Carrousel ? -->
+            <div style="margin-top: 10px; margin-bottom: -70px; font-size: small;">
+                Mettez la souris sur le carrousel pour l'arr&ecirc;ter, cliquez les photos pour les agrandir&nbsp;!
+            </div>
+
+            <section id="slideshow" style="margin-left: 0px;">
+                <div class="entire-content">
+                    <div class="content-carrousel">
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-01" class="carrousel-img" style="/*margin-top: 70px; margin-bottom: 105px;*/">
+                                <img src="./01.jpeg" onclick="onSlideShowClick(this.src);" title="On vient d'arriver"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-02" class="carrousel-img" style="/*margin-top: 110px; margin-bottom: 115px;*/">
+                                <img src="./04.jpeg" onclick="onSlideShowClick(this.src);" title="Vu du sentier c&ocirc;tier"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-03" class="carrousel-img" style="/*margin-top: 110px; margin-bottom: 205px;*/">
+                                <img src="06.jpeg" onclick="onSlideShowClick(this.src);" title="Retour au bateau"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-04" class="carrousel-img" style="/*margin-top: 110px; margin-bottom: 205px;*/">
+                                <img src="07.jpeg" onclick="onSlideShowClick(this.src);" title="Le plus beau !"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-05" class="carrousel-img" style="/*margin-top: 110px; margin-bottom: 205px;*/">
+                                <img src="13.jpeg" onclick="onSlideShowClick(this.src);" title="C'est parti !"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-06" class="carrousel-img" style="/*margin-top: 110px; margin-bottom: 205px;*/">
+                                <img src="../../../images/boats/ehtak/st-phil.lt.01.jpeg" onclick="onSlideShowClick(this.src);" title="Le Grand Pelligron"/>
+                            </div>
+                        </div>
+                        </figure>
+                        <figure class="shadow">
+                        <div class="black-frame centered" style="background-color: rgba(0, 0, 0, var(--bg-transp));">
+                            <div id="ss-07" class="carrousel-img" style="/*margin-top: 110px; margin-bottom: 205px;*/">
+                                <img src="15.jpeg" onclick="onSlideShowClick(this.src);" title="Mouill&eacute; &agrave; Portz Ler"/>
+                            </div>
+                        </div>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            <!-- End Carrousel -->
+
+        </div>
+
     </div>
 
-</div>
+    <div>
+        <hr/>
+        <i style="color: silver;">Passe-Coque never stops</i>
+    </div>
 
-<div style="color: silver;">
-  OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...<br/>
-  <i style="color: silver;">Passe-Coque never stops</i>
 </div>
 
 <script type="text/javascript">
