@@ -3661,7 +3661,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Mirella',
-		keywords: [ 'boat', 'bateau', 'mirfella', 'maica', 'maica 12.50' ],
+		keywords: [ 'boat', 'bateau', 'mirella', 'maica', 'maica 12.50' ],
 		url: '/?nav-to=4&boat-id=mirella',
 		comment: 'Le bateau, Maica 12.50'
 	},
