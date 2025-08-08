@@ -1543,7 +1543,7 @@ const THE_FLEET = [
     {
         name: "Coraxy",
         id: "coraxy",
-        pix: "/images/boats/coraxy.png",
+        pix: "/images/coraxy/coraxy.png",
         type: "Cognac",
         category: NONE,
         base: "Saint&#8209;Philibert"
