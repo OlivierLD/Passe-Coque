@@ -747,8 +747,7 @@ span.expand-collapse:hover {
     /* margin-top: -150px; */
     text-align: center;
     display: grid;
-    grid-template-areas:
-        'left center right';
+    grid-template-areas: 'left center right';
     grid-gap: 0;
     padding: 0;
 }
