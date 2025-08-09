@@ -20,7 +20,7 @@
   <script type="module" src="/webcomponents/SlideShow.js"></script>
 
   <style type="text/css">
-    
+
 .list-link {
   color: white;
   font-size: 20px;
@@ -80,7 +80,7 @@ dialog[open] {
 	border-radius: 10px;
 	/*width: 800px;*/
 	margin-left: 30px;
-	margin-top: 10px; 
+	margin-top: 10px;
     position: absolute;
 	z-index: 1001;
 	box-shadow: 2px 2px 4px grey, 0 0 25px white, 0 0 7px cyan;
@@ -101,8 +101,8 @@ dialog[open] {
 }
 
 #whatzat {
-    width: 40px; 
-    border: 2px solid silver; 
+    width: 40px;
+    border: 2px solid silver;
     border-radius: 50%;
 }
 
@@ -117,7 +117,7 @@ html {
 }
 
 body {
-    font-family: "Source Code Pro", "Courier New", Helvetica, Geneva; 
+    font-family: "Source Code Pro", "Courier New", Helvetica, Geneva;
     font-weight: bold;
     background-color: rgba(192, 192, 192, 0.35);
 }
@@ -153,7 +153,7 @@ button:hover, button:focus {
 }
 
 button:disabled {
-    background: silver;  
+    background: silver;
 }
 
 compass-rose .day {
@@ -323,7 +323,7 @@ compass-rose .day {
 }
 
 .page-content {
-    display: grid; 
+    display: grid;
     grid-template-columns: 58% 42%;
 }
 
@@ -335,7 +335,7 @@ compass-rose .day {
 /* "Small" screens */
 @media screen and (width <= 800px) {
     .page-content {
-        display: grid; 
+        display: grid;
         grid-template-columns: 100%;
     }
     .map-content {
@@ -352,7 +352,7 @@ compass-rose .day {
   <script type="module" src="/webcomponents/AnalogDisplay.js"></script>
   <script type="module" src="/webcomponents/CompassRose.js"></script>
   <script type="module" src="/webcomponents/DirectionDisplay.js"></script>
-  
+
 </head>
 <body>
 
@@ -369,7 +369,7 @@ compass-rose .day {
                 </span>
               </td>
               <td>
-                <span class="dialog-header-close" onclick="closeAboutDialog();">&times</span>
+                <span class="dialog-header-close" onclick="closeAboutDialog();" role="button">&times</span>
               </td>
             </tr>
         </table>
@@ -409,7 +409,7 @@ compass-rose .day {
         <i>Passe-Coque never stops</i>
     </div>
 </dialog>
-    
+
 <div id="page-header">
     <div style="display: grid; grid-template-columns: 80% auto;">
         <div>
@@ -418,8 +418,8 @@ compass-rose .day {
         </div>
         <div style="text-align: right; padding-right: 20px;">
             <img src="/images/drowning.gif"
-                 id="whatzat" 
-                 title="Heeeeeeelp !!" 
+                 id="whatzat"
+                 title="Heeeeeeelp !!"
                  onclick="showAboutDialog();"/>
         </div>
     </div>
@@ -437,7 +437,7 @@ compass-rose .day {
 <hr/>
 
 <span id="txt-03">Slide show - Images are clickable</span>
-<div id="slide-show-container" 
+<div id="slide-show-container"
      class="body-pix">
     <slide-show id="slide-show-02"
                 width="800"
@@ -475,13 +475,13 @@ compass-rose .day {
         <option value="4">21-Avr-2025 - Manche 1</option>
     </select-->
     <br/>
-    <span id="curr-point" style="margin: 10px;"></span> 
+    <span id="curr-point" style="margin: 10px;"></span>
     <span id="point-card" style="margin: 10px;"></span>
     <br/>
-    <span id="point-origin" style="margin: 10px; font-size: 10px;"></span>    
+    <span id="point-origin" style="margin: 10px; font-size: 10px;"></span>
     <br/>
-    <!--span style="margin: 10px; font-size: 12px; font-style: italic;">Scroll down the page for pictures</span-->  
-  </div> 
+    <!--span style="margin: 10px; font-size: 12px; font-style: italic;">Scroll down the page for pictures</span-->
+  </div>
   <button id="start-path" onclick="/*pathIdx = INIT_PATH_IDX;*/ /* 0; */ drive();">Replay</button>
   <button id="cancel-path" onclick="cancelDrive();" disabled>Cancel</button>
   <button id="stop-path" onclick="stopDriving();" disabled>Pause</button>
@@ -493,7 +493,7 @@ compass-rose .day {
     <output name="padding" id="sliderValue01" style="color: black;">0</output>
 </div>
 
-<!-- 
+<!--
  | TODO: BSP Over time, SOG, TWS, etc.
  | On a given interval (full, 1 hour, etc)
  -->
@@ -512,7 +512,7 @@ compass-rose .day {
       <div style="border: 2px solid black; border-radius: 5px;">
         <div style="padding-left: 10px; color: black; text-align: left; font-style: italic;">Position</div>
         <div id="curr-pos" style="width: 98%; height: 80px; padding: 2px; margin-top: -0px;" title="Cursor's position">&nbsp;<br/>&nbsp;</div>
-      </div>  
+      </div>
       <div id="displays" style="text-align: center; border: 2px solid rgba(0, 0, 255, 0.5); border-radius: 5px;" title="All data below&#13;available when REPLAYing">
           <div style="padding-left: 10px; color: blue; text-align: left; font-style: italic;">Replay Status</div>
           <div id="UTC-date" style="text-align: center;" title="UTC Date">&nbsp;</div>
@@ -646,7 +646,7 @@ compass-rose .day {
 
     let latlngs; // To be populated from JSON.
 
-    const ZOOM_POSITIONS = [  
+    const ZOOM_POSITIONS = [
     ];
 
     function flyToZoom(idx) {
@@ -656,22 +656,22 @@ compass-rose .day {
     }
 
     // Used as an example, See "// markers" below. Used to hold pictures.
-    const ALL_MARKERS = [{ 
+    const ALL_MARKERS = [{
         "latitude": 47.86531953376869,
         "longitude": -3.919312738823313,
         "name": "C'est parti !",
         "content": "On quitte la Baie de Concarneau (click to enlarge)\n<br/>\n<a href=\"./cc-lt.01.jpeg\" target=\"_blank\"><img src=\"./cc-lt.01.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
-    }, { 
+    }, {
         "latitude": 47.84042335058819,
         "longitude": -3.919312738823313,
         "name": "On nous suit ?",
         "content": "(click to enlarge)\n<br/>\n<a href=\"./cc-lt.12.jpeg\" target=\"_blank\"><img src=\"./cc-lt.12.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
-    }, { 
+    }, {
         "latitude": 47.6530539057251,
         "longitude": -3.424200735703409,
         "name": "Devant Port-Tudy",
         "content": "Pen Duick I et Pen Duick III sortent de Port-Tudy (click to enlarge)\n<br/>\n<a href=\"./cc-lt.13.jpeg\" target=\"_blank\"><img src=\"./cc-lt.13.jpeg\" width=\"256\" height=\"auto\" alt=\"Click to enlarge\"/></a>"
-    }, { 
+    }, {
         "latitude": 47.5268131666507,
         "longitude": -3.0522268754618476,
         "name": "En Baie de Quiberon",
@@ -681,7 +681,7 @@ compass-rose .day {
 
 
     // TODO Choose the track
-    const TRACK_DATA = [ 
+    const TRACK_DATA = [
         './cc-lt.nmea.json'
      ];
 
@@ -1044,7 +1044,7 @@ compass-rose .day {
             document.getElementById('stop-path').innerHTML = "Pause";
             document.getElementById('resume-path').innerHTML = "Resume";
             document.getElementById('start-path').innerHTML = "Replay";
-            
+
             document.getElementById('txt-03').innerHTML = "Slide show - Images are clickable";
             // document.getElementById('txt-04').innerHTML = "Fly to:";
 
@@ -1083,8 +1083,8 @@ compass-rose .day {
         loadPathData();
 
         let userLang = getQueryParameterByName('lang');
-        if (!userLang) { 
-            let browserUserLang = navigator.language || navigator.userLanguage; 
+        if (!userLang) {
+            let browserUserLang = navigator.language || navigator.userLanguage;
             console.log("The browser's language is: " + browserUserLang);
             if (browserUserLang) {
                 if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {

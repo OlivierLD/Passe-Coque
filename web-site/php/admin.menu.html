@@ -2,7 +2,7 @@
 <!--
     Index.
     To log in OVH MySQL Admin:
-    Username passecc128 
+    Username passecc128
     Database name passecc128
     Found password: zcDmf7e53eTs
     Server address passecc128.mysql.db
@@ -15,7 +15,7 @@
     <style>
 * {
     font-family: 'Courier New', Courier, monospace;
-}        
+}
 h1 {
     /* text-stroke: 2px orange; */ /* Might not be supported */
     font-size: 3em;
@@ -30,18 +30,19 @@ h1 {
 
     <div style="text-align: left; padding: 20px; background: white; color: red;">
         Mot de passe oubli&eacute;, ou &agrave; cr&eacute;er ? Cliquez <a href="#" onclick="document.getElementById('pswd-reset-request').style.display = 'block';">ICI</a>.
-        <!-- 
-            Reset or create password for a given email address 
+        <!--
+            Reset or create password for a given email address
 
             submit a form that will send you an email, from which you will be able to set or reset the password.
          +-->
          <div id="pswd-reset-request" style="display: none; color: black; padding: 5px; border: 1px solid silver; border-radius: 5px;">
             <div style="width: 100%; background: silver; display: grid; grid-template-columns: auto auto;">
                 <span style="margin-left: 10px;">Requ&ecirc;te de cr&eacute;ation ou de remplacement de mot de passe</span>
-                <span style="text-align: right; margin-right: 10px; font-size: 1.2rem;" 
-                      onmouseover="this.style.cursor='pointer'; this.style.color='white';" 
-                      onmouseout="this.style.cursor='normal'; this.style.color='black';" 
-                      onclick="document.getElementById('pswd-reset-request').style.display = 'none';">&times;</span>
+                <span style="text-align: right; margin-right: 10px; font-size: 1.2rem;"
+                      onmouseover="this.style.cursor='pointer'; this.style.color='white';"
+                      onmouseout="this.style.cursor='normal'; this.style.color='black';"
+                      onclick="document.getElementById('pswd-reset-request').style.display = 'none';"
+                      role="button">&times;</span>
             </div>
             <iframe name="reset-response" style="display: none;" onload="onResetPswdResponse(this);"></iframe>
             <div>
@@ -69,9 +70,9 @@ h1 {
             </form>
         </div>
     </div>
-    <iframe src="/php/members.php?lang=FR" 
-            name="iframe_ms" 
-            frameBorder="0" 
+    <iframe src="/php/members.php?lang=FR"
+            name="iframe_ms"
+            frameBorder="0"
             style="width: 98%; height: 400px; border: 1px solid silver; border-radius: 5px;">
     </iframe>
 

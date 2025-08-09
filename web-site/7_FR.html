@@ -1,7 +1,7 @@
 <div style="margin-top: -10px;">
 
     <!-- Espace Membres -->
-    
+
     <!--div class="container">
         <img src="/images/partager.png" width="100%">
         <div class="text-block" style="display: none;">
@@ -10,16 +10,16 @@
     </div-->
 
     <div style="text-align: left; padding: 20px; background: white;">
-        <h2 style="display: flex; align-items: center;"> 
+        <h2 style="display: flex; align-items: center;">
             <svg class="" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg><span> Espace Membres</span>
         </h2>
         <div>
-            Cet espace vous permet d'acc&eacute;der &agrave; des donn&eacute;es concernant votre adh&eacute;sion &agrave; l'association, ainsi que ce &agrave; quoi vous avez acc&egrave;s. 
-            Pour acc&eacute;der &agrave; cet espace, vous devez &ecirc;tre membre de l'association Passe-Coque. 
-            &Agrave; ce titre, vous pouvez alors demander la cr&eacute;ation (ou le remplacement) d'un mot de passe, qui sera associ&eacute; &agrave; votre email. 
-            Voir le <a href="#new-pswd">lien ci-dessous</a> pour effectuer cette demande. 
+            Cet espace vous permet d'acc&eacute;der &agrave; des donn&eacute;es concernant votre adh&eacute;sion &agrave; l'association, ainsi que ce &agrave; quoi vous avez acc&egrave;s.
+            Pour acc&eacute;der &agrave; cet espace, vous devez &ecirc;tre membre de l'association Passe-Coque.
+            &Agrave; ce titre, vous pouvez alors demander la cr&eacute;ation (ou le remplacement) d'un mot de passe, qui sera associ&eacute; &agrave; votre email.
+            Voir le <a href="#new-pswd">lien ci-dessous</a> pour effectuer cette demande.
             Avec votre email et le mot de passe associ&eacute;, vous pourrez alors acc&eacute;der &agrave; votre Espace Membre.
         </div>
 
@@ -27,17 +27,19 @@
         Retour <a href="/php/members.php?lang=FR" target="iframe_ms">Menu</a>.
         <div style="text-align: left; background: white; color: black;">
             Mot de passe oubli&eacute;, ou &agrave; cr&eacute;er ? Cliquez <a style="scroll-margin-top: 100px;" name="new-pswd" href="#" onclick="document.getElementById('pswd-reset-request').style.display = 'block';">ICI</a>.
-            <!-- 
-                Reset or create password for a given email address 
+            <!--
+                Reset or create password for a given email address
 
                 submit a form that will send you an email, from which you will be able to set or reset the password.
              +-->
              <div id="pswd-reset-request" style="display: none; padding: 5px; border: 1px solid silver; border-radius: 5px;">
                 <div style="width: 100%; background: silver; display: grid; grid-template-columns: auto auto;">
                     <span style="margin-left: 10px;">Requ&ecirc;te de cr&eacute;ation ou de remplacement de mot de passe</span>
-                    <span style="text-align: right; margin-right: 10px; font-size: 1.2rem;" 
-                          onmouseover="this.style.cursor='pointer'; this.style.color='white';" 
-                          onmouseout="this.style.cursor='normal'; this.style.color='black';" 
+                    <span style="text-align: right; margin-right: 10px; font-size: 1.2rem;"
+                          role="button"
+                          aria-label="Close Dialog"
+                          onmouseover="this.style.cursor='pointer'; this.style.color='white';"
+                          onmouseout="this.style.cursor='normal'; this.style.color='black';"
                           onclick="document.getElementById('pswd-reset-request').style.display = 'none';">&times;</span>
                 </div>
                 <iframe name="reset-response" style="display: none;" onload="onResetPswdResponse(this);"></iframe>
@@ -79,6 +81,5 @@
     <div style="height: 60vh;">
         <!-- For the anchor to show up on top -->
     </div>
-    
+
 </div>
-  

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!-- 
+<!--
 	Warning: This page must NOT contain any language sensitive data !!!
 -->
 <head>
@@ -30,21 +30,21 @@
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 </head>
-	
+
 <body style="background: white;">
 
 	<dialog id="info-tx-dialog" class="shadow-menu pcc-dialog" style="display: none;">
 		<div class="dialog-header">
 			<span class="dialog-title"> <!-- Empty Title --> </span>
 			<div class="close-place">
-				<span class="dialog-header-close" onclick="closeInfoTxDialog();">&times</span>
+				<span class="dialog-header-close" onclick="closeInfoTxDialog();" role="button" aria-label="Close Dialog">&times</span>
 			</div>
 		</div>
 		<div id="dialog-tx-content" class="pcc-dialog-content">
 			<!-- Content goes here -->
 		</div>
 	</dialog>
-	
+
 	<!--div style="position: fixed; top: 0; z-index: -10; display: grid; grid-template-columns: 33% 33% 33%;">
 		<img src="/images/boats/anao.jpeg" style="width: 100%; height: auto; opacity: 0.5;">
 		<img src="/images/boats/atlantide.sq.png" style="width: 100%; height: auto; opacity: 0.5;">
@@ -164,11 +164,11 @@
 			</a>
 		</div>
 		<!--h1 style="width: 100%;"><span id="hamburger" style="cursor: pointer;" onclick="openNav()" onmouseover="openNav()" title="Hamburger">&nbsp; <img src="/logo.transp.png" style="width: 48px; padding: 14px 10px;" title="Passe&#8209;Coque"/></span> <span id="my-name">Passe&#8209;Coque </span></h1-->
-		
+
 		<div id="side-nav" class="sidenav" onmouseleave="closeNav()"> <!-- Restored... -->
 			<div style="width: 100%; display: grid; grid-template-columns: auto auto; margin-bottom: 20px;">
 				<a href="javascript:void(0)" class="active-link switch-lang" style="text-align: left;" onclick="switchLanguagePCC()"><image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px;"></image></a>
-				<a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav();">&times;</a>
+				<a href="javascript:void(0)" id="close-nav-button" class="closebtn" onclick="closeNav();" role="button" aria-label="Close Dialog">&times;</a>
 			</div>
 			<a href="javascript:void(0)" class="active-link" style="margin-top: 10px;" onclick="clack_pcc(this); closeNav();" id="_1"><span id="home-label">Accueil</span></a>
 
@@ -219,14 +219,14 @@
 	<div id="current-content" class="text-content" style="margin-left: -8px;">
 		<!-- Everything, content goes here -->
 	</div>
-	
+
 	<div style="width: 100%; position: fixed; bottom: 0; left: 0; background: rgba(0, 0, 0, 0.85);">
 		<div>
 			<small style="padding-left: 10px; font-style: italic; color: white;">&copy; 2024, Passe&#8209;Coque</small>
 		</div>
 	</div>
 
-</body>    
+</body>
 <script type="text/javascript">
 
 
@@ -235,12 +235,12 @@ window.onload = () => {
 	console.log(`${window.location.href} loaded !`);
 
 	let userLang = getQueryParameterByName('lang');
-	if (userLang) { 
+	if (userLang) {
 		if (userLang === 'EN') {
 			switchLanguagePCC();
 		}
 	} else {
-		let browserUserLang = navigator.language || navigator.userLanguage; 
+		let browserUserLang = navigator.language || navigator.userLanguage;
 		console.log("The browser's language is: " + browserUserLang);
 		if (browserUserLang) {
 			if (browserUserLang.substring(0, 2).toUpperCase() === 'FR') {
