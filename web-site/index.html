@@ -649,6 +649,14 @@ window.onload = () => {
 		switchLanguage();
 	}
 
+	// ARIA Tags.. (WiP)
+	document.querySelectorAll('[aria-label="Close Dialog"]').forEach(el => {
+		console.log(`Setting ARIA label for ${el.id}`);
+		el.setAttribute('aria-label', userLang === 'EN' ? 'Close Dialog' : 'Fermer la fen&ecirc;tre');
+	});
+
+
+
 	// Check OffscreenCanvas availability (for JS compatibility)
 	try {
 		if (OffscreenCanvas) {
