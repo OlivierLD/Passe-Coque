@@ -3,6 +3,7 @@
 <!--
 	Main Index.
 	Warning: This page must NOT contain any language sensitive data !!!
+	         (Some exceptions. See updateMenu() in passe-coque.js)
 
 	Designed by Jeff
 	Coded by Oliv
@@ -306,7 +307,12 @@
 					</a>
 				</li>
 
-				<li><a href="javascript:void(0)" onclick="switchLanguage();"><image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px; margin-left: 30px;"></image></a></li>
+				<li class="this-tooltip" style="display: flex; /*align-items: center;*/">
+					<span class="this-tooltiptext-top" id="_lang-flag-label">Switch to English</span>
+					<a href="javascript:void(0)" onclick="switchLanguage();" id="_lang-flag">
+						<image id="lang-flag" src="/us_uk_flag.png" alt="US/UK Flag" title="Switch to English" style="width: 27px; margin-left: 30px;"></image>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>

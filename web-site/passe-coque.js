@@ -420,7 +420,7 @@ let clack = (origin) => {
             });
 }
 
-let updateMenu = () => { // Multilang aspect.
+let updateMenu = () => { // Multilang aspect, in index.html.
 
     // Tooltips
     document.querySelectorAll("#_1-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Retour accueil" : "Back to Home Page"));
@@ -435,6 +435,7 @@ let updateMenu = () => { // Multilang aspect.
     document.querySelectorAll("#_9bis-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "La caisse &agrave; glingues" : "Tool Box"));
     document.querySelectorAll("#_10").forEach(elmt =>  elmt.title = (currentLang === "FR" ? "Besoin d'aide ?" : "Need Help?"));
     document.querySelectorAll("#_10-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Besoin d'aide ?" : "Need Help?"));
+    document.querySelectorAll("#_lang-flag-label").forEach(elmt =>  elmt.innerHTML = (currentLang === "FR" ? "Switch to English" : "En fran&ccedil;ais"));
 
     // Others
     document.querySelectorAll("#home-label").forEach(elmt => elmt.innerHTML = (currentLang === "FR" ? "Accueil" : "Home"));
@@ -3288,7 +3289,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Voiles Vagabondes',
-		keywords: [ 'vagabonde', 'lawyer', 'juriste' ],
+		keywords: [ 'vagabonde', 'lawyer', 'juriste', 'engage', 'engagee', 'engagé', 'engagée', 'voiles', 'vagabondes', 'voiles vagabondes', 'voile' ],
 		url: '/?nav-to=31&tx=38',
 		comment: 'Projet Voiles Vagabondes'
 	},
