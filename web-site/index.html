@@ -6,6 +6,8 @@
 
 	Designed by Jeff
 	Coded by Oliv
+
+	Good resource to validate the code: https://validator.w3.org/nu/, https://validator.w3.org/nu/?doc=http%3A%2F%2Fpasse-coque.com
 -->
 <head>
 	<meta charset="UTF-8">
@@ -110,7 +112,7 @@
 	<div class="dialog-header">
 		<span class="dialog-title"> <!-- Empty Title --> </span>
 		<div class="close-place">
-            <span class="dialog-header-close" onclick="closeAboutDialog();" role="button" aria-label="Close Dialog">&times</span>
+            <span class="dialog-header-close" onclick="closeAboutDialog();" role="button" aria-label="Close Dialog" title="Close Dialog">&times;</span>
         </div>
 	</div>
 	<div id="dialog-content" class="pcc-dialog-content">
@@ -122,7 +124,7 @@
 	<div class="dialog-header">
 		<span class="dialog-title"> <!-- Empty Title --> </span>
 		<div class="close-place">
-            <span class="dialog-header-close" onclick="closeInfoTxDialog();" role="button" aria-label="Close Dialog">&times</span>
+            <span class="dialog-header-close" onclick="closeInfoTxDialog();" role="button" aria-label="Close Dialog" title="Close Dialog">&times;</span>
         </div>
 	</div>
 	<div id="dialog-tx-content" class="pcc-dialog-content">
@@ -134,7 +136,7 @@
     <div class="dialog-header">
       <span>Message</span>
 	  <div class="close-place">
-		<span class="dialog-header-close" onclick="closeInfoTxDialog();" role="button" aria-label="Close Dialog">&times</span>
+		<span class="dialog-header-close" onclick="closeInfoTxDialog();" role="button" aria-label="Close Dialog" title="Close Dialog">&times;</span>
 	  </div>
     </div>
     <div id="custom-alert-content">
@@ -651,7 +653,7 @@ window.onload = () => {
 
 	// ARIA Tags.. (WiP)
 	document.querySelectorAll('[aria-label="Close Dialog"]').forEach(el => {
-		console.log(`Setting ARIA label for ${el.id}`);
+		console.log(`Setting ARIA label for ${el.innerHTML}`);
 		el.setAttribute('aria-label', userLang === 'EN' ? 'Close Dialog' : 'Fermer la fen&ecirc;tre');
 	});
 
@@ -752,8 +754,11 @@ window.onload = () => {
 	if (true) {
 		let navigateTo = getQueryParameterByName('nav-to');  // TODO boat-id, tx ?
 		if (! navigateTo) { // In order not to have too many popups
-			console.log("Showing dialog on load");
-			showDialogOnLoad("Welcome !", "welcome");
+			let withPopup = getQueryParameterByName('popup');
+			if (withPopup !== 'no') {
+				console.log("Showing dialog on load");
+				showDialogOnLoad("Welcome !", "welcome");
+			}
 		}
 	}
 };

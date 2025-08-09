@@ -45,7 +45,7 @@
 dialog {
     border-radius: 5px;
     border: 2px solid navy;
-}        
+}
 dialog#generated-curve-dialog {
     z-index: 500;
     min-width: 400px;
@@ -79,7 +79,7 @@ button.search-item {
     margin: 0 2px 0 2px;
 }
     </style>
-    <!-- 
+    <!--
     <link rel="stylesheet" href="leaflet/leaflet.css" />
     <script src="leaflet/leaflet.js"></script>
     -->
@@ -113,7 +113,7 @@ console.log(mess);
 let listContent = "<pre>";
 Object.keys(tideStations).sort().forEach(station => {
     listContent += `${decodeURIComponent(station)}, ${tideEngine.decToSex(tideStations[station].latitude, 'NS')  + '/' +
-                        tideEngine.decToSex(tideStations[station].longitude, 'EW')} \n`; 
+                        tideEngine.decToSex(tideStations[station].longitude, 'EW')} \n`;
 });
 listContent += "</pre>";
 
@@ -124,13 +124,13 @@ while (selectList.length > 0) {
 }
 
 let topEl = document.createElement("option");
-topEl.textContent = "Select Station:"; 
+topEl.textContent = "Select Station:";
 topEl.value = "0";
 selectList.appendChild(topEl);
 
 Object.keys(tideStations).sort((a, b) => Intl.Collator().compare(decodeURIComponent(a), decodeURIComponent(b))).forEach(station => {
     let el = document.createElement("option");
-    el.textContent = decodeURIComponent(station); 
+    el.textContent = decodeURIComponent(station);
     el.value = station;
     selectList.appendChild(el);
 });
@@ -150,7 +150,7 @@ console.log("Done with inner Module");
 <dialog id="generated-curve-dialog">
     <div class="dialog-header">
         <span>Tide Curve</span>
-        <span class="dialog-header-close" onclick="closeGeneratedDialog();">&times</span>
+        <span class="dialog-header-close" onclick="closeGeneratedDialog();">&times;</span>
     </div>
     <div style="text-align: left; max-height: 400px; overflow-y: scroll;">
         <div id="generated-graph">
@@ -180,10 +180,10 @@ console.log("Done with inner Module");
             <div id="tide-table" style="max-height: 80px; overflow-y: scroll;"></div>
         </div>
     </div>
-</dialog>    
-    
+</dialog>
 
-<h2>Tide Stations</h2>    
+
+<h2>Tide Stations</h2>
 OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a><br/>
 See also <a href="https://www.horaire-maree.fr/" target="maree-fr">www.horaire-maree.fr</a>, official reference.
 <table>
@@ -199,8 +199,8 @@ See also <a href="https://www.horaire-maree.fr/" target="maree-fr">www.horaire-m
                 <select id="station-list" class="custom-select"></select>
             </div>
             <div style="margin-top: 5px;">
-                <button onclick="go(PAN);" title="Click to pan">Pan</button>            
-                <button onclick="go(FLY);" title="Click to fly">Fly</button>            
+                <button onclick="go(PAN);" title="Click to pan">Pan</button>
+                <button onclick="go(FLY);" title="Click to fly">Fly</button>
             </div>
             <hr/>
             <div id="search-zone">
@@ -359,7 +359,7 @@ function showGeneratedDialog(station, width, startDate) { // The date to start f
         let brestData = getCurveData(tideStationBrest, width, startDate);
         let coeffInBrest = tideEngine.default.getCoeffInBrest(tideStationBrest, brestData.tideTable); // <= Send the tide table for Brest !!
 
-        // Example: 
+        // Example:
         // console.log(`${data.tideTable[0].type}: at ${dateFmt.formatDate(data.tideTable[0].at, 'd-m-y H:i')}, ${data.tideTable[0].wh} ${data.tideTable[0].unit}`)
         let tableContent = "<pre>";
         let coeffIdx = 0;
@@ -423,14 +423,14 @@ function showGeneratedDialog(station, width, startDate) { // The date to start f
 					thickness: 3,
 					x: x,
 					values: y // Same cardinality as x
-				}, 
+				},
                 { // Base Height
                    name: "Base height",
                    lineColor: 'red',
                    fillColor: null,
                    thickness: 2,
                    x: [minX, maxX],
-                   values: [ tideStation.baseHeight, tideStation.baseHeight] 
+                   values: [ tideStation.baseHeight, tideStation.baseHeight]
                 },
                 { // Now
                     name: "Now",
@@ -461,7 +461,7 @@ function showGeneratedDialog(station, width, startDate) { // The date to start f
 function closeGeneratedDialog() {
     let graphDialog = document.getElementById("generated-curve-dialog");
     if (graphDialog.close !== undefined) {
-        graphDialog.close();    
+        graphDialog.close();
     } else {
         graphDialog.style.display = 'none';
     }
@@ -555,14 +555,14 @@ function produceSearchList(pattern) {
         // Look for partial match
         if (decodeURIComponent(stationObj.fullName).toUpperCase().includes(pattern.toUpperCase())) {
             foundOne = true;
-            foundStation.push(stationObj); 
+            foundStation.push(stationObj);
         }
         // Add regex match if not found above
         if (!foundOne) {
             let regexPattern = new RegExp(pattern, 'gi');
             let match = regexPattern.test(decodeURIComponent(stationObj.fullName));
             if (match) {
-                foundStation.push(stationObj); 
+                foundStation.push(stationObj);
             }
         }
     });
@@ -611,7 +611,7 @@ function changeWidth(graphId, dir) {
         graphWidthIdx = Math.min(graphWidthIdx + 1, WIDTH.length - 1);
     } else if (dir === ' ') { // Reset
         graphWidthIdx = ONE_DAY;
-    } 
+    }
     graph.width = WIDTH[graphWidthIdx];
     document.getElementById('graph-witdh').innerText = (graphWidthIdx === 0 ? 'one day' : (graphWidthIdx === 1 ? 'one week' : 'one month'));
     if (dir !== ' ' && graphWidthIdx !== prevGraphWidthIdx) {
@@ -678,7 +678,7 @@ window.onload = () => {
         L.marker([stationObj.latitude, stationObj.longitude])
             .addTo(map)
             .bindPopup(popupContent)
-            .bindTooltip(`${decodeURIComponent(station)}`);                                
+            .bindTooltip(`${decodeURIComponent(station)}`);
     });
     console.log("Markers loaded!");
 
