@@ -3257,12 +3257,6 @@ const KEYWORDS = [
 		comment: 'Toute l\'actualité'
 	},
 	{
-		name: 'Fabuleuse Armada',
-		keywords: [ 'armada', 'fabuleuse', 'handicap' ],
-		url: '/?nav-to=62&where=armada-2024',
-		comment: 'La Fabuleuse Armada, 2025'
-	},
-	{
 		name: 'Boat Club',
 		keywords: [ 'boat club', 'boat-club', 'club' ],
 		url: '/boat-club/?nav-to=1',
@@ -3280,6 +3274,12 @@ const KEYWORDS = [
 		keywords: [ 'projet', 'projects' ],
 		url: '/?nav-to=31',
 		comment: 'Tous les projets Passe-Coque'
+	},
+	{
+		name: 'Fabuleuse Armada',
+		keywords: [ 'armada', 'fabuleuse', 'handicap' ],
+		url: '/?nav-to=62&where=armada-2024',
+		comment: 'La Fabuleuse Armada, 2025'
 	},
 	{
 		name: 'Anita Conti',
@@ -3337,7 +3337,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Rubi\'s Cup 2025',
-		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'sculling' ],
+		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'sculling', 'touline', 'cooking' ],
 		url: '/?nav-to=31&tx=36',
 		comment: 'Projet Rubi\'s Cup'
 	},
