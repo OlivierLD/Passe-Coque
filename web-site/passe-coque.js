@@ -420,6 +420,62 @@ let clack = (origin) => {
             });
 }
 
+let specialClack = (clackName) => {
+    let originId = '';
+    if (typeof(clackName) === 'string') {
+        originId = clackName.replace('_', '');
+    } else {
+        console.log(`clack: Click on ${clackName.innerText}, id ${clackName.id}`);
+        originId = clackName.id.replace('_', '');
+    }
+    currentContext = originId;
+
+	let contentName = `/${originId}_${currentLang}.html`; // From the origin !!
+
+    let contentPlaceHolder = document.getElementById("current-content");
+
+    // TODO Set the content
+    let dynamicContentContainer = DIALOG_OPTION ? document.getElementById("dialog-tx-content") : document.getElementById("info-tx");
+    let dialogTitle = document.querySelectorAll('.dialog-title'); // dialog-title
+    if (dialogTitle && dialogTitle.length > 0) {
+        dialogTitle[dialogTitle.length - 1].innerHTML = name; // Can be several dialogs... take the last.
+    }
+
+    console.log(`onclick, loading ${contentName}`);
+    fetch(contentName)
+        .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
+            console.log(`Data Response: ${response.status} - ${response.statusText}`);
+            if (response.status !== 200) { // There is a problem...
+                dynamicContentContainer.innerHTML = generateFetchMessage(contentName, response); // `Fetching ${contentName}...<br/> Data Response: ${response.status} - ${response.statusText}<br/><b>En d&eacute;veloppement...<br/>Disponible prochainement.</b>`;
+            } else {
+                response.text().then(doc => {
+                    console.log(`${contentName} code data loaded, length: ${doc.length}.`);
+                    dynamicContentContainer.innerHTML = doc;
+                });
+            }
+        },
+        (error, errmess) => {
+            console.log("Ooch");
+            let message;
+            if (errmess) {
+                let mess = JSON.parse(errmess);
+                if (mess.message) {
+                    message = mess.message;
+                }
+            }
+            console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+            // Plus tard...
+            dynamicContentContainer.innerHTML = generateFetchErrorMessage(contentName, error, errmess); // `<b>${contentName} ${currentLang === 'FR' ? ' introuvable...<br/>Bient&ocirc;t dispo !' : ' not found...<br/>Avai;able soon!'}</b>`;
+        });
+
+    // dynamicContentContainer.innerHTML = content;
+    if (DIALOG_OPTION) {
+        showInfoTxDialog();
+    } else {
+        dynamicContentContainer.style.display = 'block';
+    }
+}
+
 let updateMenu = () => { // Multilang aspect, in index.html.
 
     // Tooltips
