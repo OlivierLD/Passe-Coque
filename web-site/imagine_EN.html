@@ -1,27 +1,64 @@
 <div class="boat-card">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/selection.png" width="300px">
-        <div style="padding: 14px;">
-            <h2>Imagine</h2>
-            Selection&nbsp;37
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'imagine-01');" title="Sommaire">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'imagine-02');">Pictures</button>
+        <button class="tablinks" onclick="openTab(event, 'imagine-03');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="imagine-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/selection.png" width="300px">
+                <div style="padding: 14px;">
+                    <h2>Imagine</h2>
+                    Selection&nbsp;37
+                </div>
+            </div>
+            <!--div style="font-weight: bold; color: blue; border: 1px solid blue; border-radius: 5px; padding: 10px; margin: 10px; box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;">
+                Imagine is for sale, 6,000 &euro;, in Ouistreham.<br/>
+                Contact <a href="mailto:contact@passe-coque.com?subject=Vente%20Imagine">Passe-Coque</a> for details.
+            </div-->
+            <div>
+                <h2>The boat</h2>
+                The Selection&nbsp;37 sailboat is a racing-cruising monohull, built by the Jeanneau shipyard. This sailboat, designed by naval architect Michel Joubert, measures 10.87 m long.
+                Production started in 1984 and ended in 1991. 250 examples of the boat were produced.
+                It was designed for the Tour de France under sail (which Jimmy <!--Pahun -->, Pordin Nancq's referent, won 3 times!)
+                Imagine was built in 85.
+                It is under construction in Ouistreham until the end of spring 2024
+            </div>
+            <hr/>
         </div>
-    </div>
-    <!--div style="font-weight: bold; color: blue; border: 1px solid blue; border-radius: 5px; padding: 10px; margin: 10px; box-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px silver;">
-        Imagine is for sale, 6,000 &euro;, in Ouistreham.<br/>
-        Contact <a href="mailto:contact@passe-coque.com?subject=Vente%20Imagine">Passe-Coque</a> for details.
-    </div-->
-    <div>
-        <h2>The boat</h2>
-        The Selection&nbsp;37 sailboat is a racing-cruising monohull, built by the Jeanneau shipyard. This sailboat, designed by naval architect Michel Joubert, measures 10.87 m long. 
-        Production started in 1984 and ended in 1991. 250 examples of the boat were produced.
-        It was designed for the Tour de France under sail (which Jimmy <!--Pahun -->, Pordin Nancq's referent, won 3 times!)
-        Imagine was built in 85.
-        It is under construction in Ouistreham until the end of spring 2024
-    </div>
-    <div>
-        <h2>More info...</h2>
-        Referent: Thibault Bailleul<br/>
-        Email: bailleule@msn.com<br/>
-        Tel: +33 6 67 88 81 68
+
+        <div id="imagine-02" class="tab-section" style="display: none;">
+            <div>
+                <h2>Pictures</h2>
+                <slide-show id="imagine-slide-show-01"
+                            width="711"
+                            height="400"
+                            style="line-height: 1em;"
+                            slideclick="onSlideShowClick">
+                    <slide-show-image src="./images/boats/imagine/01.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/02.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/03.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/04.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/05.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/06.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/07.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/08.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/09.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/10.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                    <slide-show-image src="./images/boats/imagine/11.jpeg" title="Imagine" desc="Click to enlarge"></slide-show-image>
+                </slide-show>
+            </div>
+        </div>
+
+        <div id="imagine-03" class="tab-section" style="display: none;">
+            <div>
+                <h2>More info...</h2>
+                Referent: Thibault Bailleul<br/>
+                Email: bailleule@msn.com<br/>
+                Tel: +33 6 67 88 81 68
+            </div>
+        </div>
     </div>
 </div>
