@@ -17,7 +17,7 @@ try {
 ?>
 <html lang="en">
   <!--
-   ! A Form to Update the REFERENTS table, leads to an update form.
+   ! A Form to Update the PROJECT_OWNERS table, leads to an update form.
    +-->
   <head>
     <!--meta charset="UTF-8">

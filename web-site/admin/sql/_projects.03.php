@@ -139,7 +139,7 @@ if (isset($_POST['operation'])) {
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
           "<tr><td>" .
-            urldecode($table[0]) . ', ' . $table[2] . "</td><td>" . urldecode($table[1]) . ' - ' . $table[3] . "</td><td><td>" . "<a href='./_projects.04.php?tx-id=" . $table[0] . "&owner=" . $table[1] . "'>Edit</a>" . //  target='RefUpdate'
+            urldecode($table[0]) . ', ' . $table[2] . "</td><td>" . urldecode($table[1]) . ' - ' . $table[3] . "</td><td>" . "<a href='./_projects.04.php?tx-id=" . $table[0] . "&owner=" . $table[1] . "'>Edit</a>" . //  target='RefUpdate'
           "</td></tr>\n"
         );
       }
