@@ -51,7 +51,7 @@ class ShortProject {
     public $name;
 }
 
-function getProjectList(string $dbhost, string $username, string $password, string $database, bool $verbose = false): array {
+function getProjectList(string $dbhost, string $username, string $password, string $database, bool $verbose = false, string $filter): array {
   try {
       $link = new mysqli($dbhost, $username, $password, $database);
 
@@ -64,7 +64,7 @@ function getProjectList(string $dbhost, string $username, string $password, stri
               echo("[Connected.] ");
           }
       }
-      $sql = "SELECT PROJECT_ID, PROJECT_NAME FROM PROJECTS;";
+      $sql = "SELECT PROJECT_ID, PROJECT_NAME FROM PROJECTS WHERE UPPER(PROJECT_ID) LIKE UPPER('%" . $filter . "%') OR UPPER(PROJECT_NAME) LIKE UPPER('%" . $filter . "%');";
       if ($verbose) {
           echo('[Performing instruction [' . $sql . ']] ');
       }
@@ -104,7 +104,7 @@ class ShortMember {
     public $name;
 }
 
-function getMemberList(string $dbhost, string $username, string $password, string $database, bool $verbose = false): array {
+function getMemberList(string $dbhost, string $username, string $password, string $database, bool $verbose = false, string $filter): array {
     try {
         $link = new mysqli($dbhost, $username, $password, $database);
 
@@ -117,7 +117,11 @@ function getMemberList(string $dbhost, string $username, string $password, strin
                 echo("Connected.<br/>" . PHP_EOL);
             }
         }
-        $sql = "SELECT EMAIL, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS NAME FROM PASSE_COQUE_MEMBERS;";
+        $sql = "SELECT EMAIL, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS NAME
+                FROM PASSE_COQUE_MEMBERS
+                WHERE UPPER(EMAIL) LIKE UPPER('%" . $filter . "%')
+                   OR UPPER(FIRST_NAME) LIKE UPPER('%" . $filter . "%')
+                   OR UPPER(LAST_NAME) LIKE UPPER('%" . $filter . "%');";
         if ($verbose) {
             echo('[Performing instruction [' . $sql . ']] <br/>' . PHP_EOL);
         }
@@ -229,7 +233,7 @@ if (isset($_POST['operation'])) {
       ?> <!-- Member creation form -->
 
       <!--form action="./_projects.donors.php" method="get"-->
-      <form action="#" method="post">
+      <form action="<?php echo(basename(__FILE__)); ?>" method="post">
         <input type="hidden" name="operation" value="create">
         <input type="submit" value="Create New Project Donor or Contributor">
       </form>
@@ -306,7 +310,7 @@ if (isset($_POST['operation'])) {
       $link->close();
       echo("Closed DB<br/>".PHP_EOL);
       ?>
-    <form action="#" method="get">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="get">
       <input type="submit" value="Query Form">
     </form>
       <?php
@@ -317,15 +321,33 @@ if (isset($_POST['operation'])) {
 
   }  else if ($operation == 'create') {
     echo "Create a new Project Donor or Contributor. <br/>" . PHP_EOL;
+
+    $prjFilter = $_POST['prj-filter'] ?? '';
+    $memberFilter = $_POST['member-filter'] ?? '';
+
     // Display a form to create a new entry, with members, and projects
     try {
-      $prjList = getProjectList($dbhost, $username, $password, $database); // For the drop-down list
-      $memberList = getMemberList($dbhost, $username, $password, $database, false); // For the drop-down list
+      $prjList = getProjectList($dbhost, $username, $password, $database, false, $prjFilter); // For the drop-down list
+      $memberList = getMemberList($dbhost, $username, $password, $database, false, $memberFilter); // For the drop-down list
     } catch (Throwable $e) {
       echo "Captured Throwable for connection (get Lists) : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
 
     ?>
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
+      <input type="hidden" name="operation" value="create"> <!-- Same as before, re-submit -->
+      <table>
+        <tr>
+          <th>Filter on Member</th><th>Filter on Project</th>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><input type="text" name="member-filter" placeholder="Filter on Member" value="<?php echo $memberFilter ?>"></td>
+          <td style="text-align: center;"><input type="text" name="prj-filter" placeholder="Filter on project" value="<?php echo $prjFilter ?>"></td>
+        <tr>
+          <td colspan="2" style="text-align: center;"><input type="submit" value="Filter"></td>
+        </tr>
+      </table>
+    </form>
     <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="insert">
       <table>
@@ -393,7 +415,7 @@ if (isset($_POST['operation'])) {
       $link->close();
       echo("Closed DB<br/>".PHP_EOL);
       ?>
-    <form action="#" method="get">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="get">
       <input type="submit" value="Query Form">
     </form>
 
@@ -405,7 +427,7 @@ if (isset($_POST['operation'])) {
   }
 } else { // Then display the query form
     ?>
-    <form action="#" method="post">
+    <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
         <tr>
