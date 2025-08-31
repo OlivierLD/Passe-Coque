@@ -17,7 +17,7 @@ try {
 ?>
 <html lang="en">
   <!--
-   ! Access to the PROJECT_DONORS Table
+   ! Access to the PROJECTS_DONORS View and PROJECT_CONTRIBUTORS Table.
    +-->
   <head>
     <!--meta charset="UTF-8">
@@ -66,7 +66,7 @@ function getProjectList(string $dbhost, string $username, string $password, stri
       }
       $sql = "SELECT PROJECT_ID, PROJECT_NAME FROM PROJECTS;";
       if ($verbose) {
-          echo('[Performing instruction ['.$sql.']] ');
+          echo('[Performing instruction [' . $sql . ']] ');
       }
 
       $result = mysqli_query($link, $sql);
@@ -119,7 +119,7 @@ function getMemberList(string $dbhost, string $username, string $password, strin
         }
         $sql = "SELECT EMAIL, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS NAME FROM PASSE_COQUE_MEMBERS;";
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
+            echo('[Performing instruction [' . $sql . ']] <br/>' . PHP_EOL);
         }
 
         $result = mysqli_query($link, $sql);
@@ -290,7 +290,7 @@ if (isset($_POST['operation'])) {
         echo("Connected.<br/>");
       }
       $sql = 'DELETE FROM PROJECT_CONTRIBUTORS WHERE (PROJECT_ID = \'' . ($prj_id) . '\' AND DONOR_EMAIL = \'' . ($owner) . '\')';
-      echo('Performing query <code>' . $sql . '</code><br/>');
+      echo('Performing statement <code>' . $sql . '</code><br/>');
 
       if (true) { // Do perform ?
         if ($link->query($sql) === TRUE) {
@@ -309,7 +309,6 @@ if (isset($_POST['operation'])) {
     <form action="#" method="get">
       <input type="submit" value="Query Form">
     </form>
-
       <?php
 
     } catch (Throwable $e) {
@@ -337,7 +336,7 @@ if (isset($_POST['operation'])) {
             <?php
       echo('<select name="tx-id">');
       foreach($prjList as $project) {
-        echo('<option value="' . $project->id . '">' . $project->id . ', ' .$project->name . '</option>');
+        echo('<option value="' . $project->id . '">' . $project->id . ', ' . $project->name . '</option>');
       }
       echo ('</select>');
             ?>
@@ -378,7 +377,7 @@ if (isset($_POST['operation'])) {
       }
       $sql = 'INSERT INTO PROJECT_CONTRIBUTORS (PROJECT_ID, DONOR_EMAIL)
               VALUES (\'' . ($prj_id) . '\', \'' . ($owner) . '\')';
-      echo('Performing query <code>' . $sql . '</code><br/>');
+      echo('Performing statement <code>' . $sql . '</code><br/>');
 
       if (true) { // Do perform ?
         if ($link->query($sql) === TRUE) {

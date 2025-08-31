@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Passe&#8209;Coque - Solar Light?</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+	<link rel="icon" type="image/png" href="../../logos/LOGO_PC_no_txt.png">
+	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
+	<link rel="stylesheet" href="../../fonts/font.01.css">
+	<link rel="stylesheet" href="../../fonts/font.02.css">
+
+	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
+
+	<link rel="stylesheet" href="../low-tech.css" type="text/css"/>
+	<style type="text/css">
+* {
+	line-height: normal;
+}
+
+.postit {
+    background: #f7f7e7;
+    padding: 15px;
+	border: 1px solid black;
+	border-radius: 6px;
+}
+
+.slide {
+	max-width: 800px;
+	max-height: 500px;
+	padding: 10px;
+}
+
+.slide-show {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+	overflow: auto;
+}
+
+.screen-shot {
+	width: 50%;
+	text-align: center;
+}
+
+@media screen and (width <= 800px) {
+    .slide {
+		max-width: 600px;
+		max-height: 375px;
+		padding: 10px;
+	}
+	.screen-shot {
+		width: 90%;
+		text-align: center;
+	}
+}
+
+@media print {
+	.slide-show {
+		display: grid;
+		grid-template-columns: auto;
+		overflow: auto;
+	}
+	.not-printed {
+		display: none;
+	}
+}
+    </style>
+
+	<script type="module" src="../webcomponents/SlideShow.js"></script>
+	<!-- For LaTex -->
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
+	<script type="text/javascript"
+			async
+  			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+</head>
+
+<body>
+
+	<h4><img src="../../logos/logo.02.png" style="width: 50px; vertical-align: middle;" title="Passe&#8209;Coque"/> Un tuto Passe-Coque</h4>
+	<div>
+		Un feu de mouillage solaire ? C'est possible, et pas si cher que &ccedil;a !<br/>
+		<img src="./solar.light.jpeg" style="width: 30%; float: right; margin: 30px;" title="Feu de mouillage solaire" />
+		L'avantage est que ce feu est autonome, pas besoin de le recharger, il se recharge tout seul en
+		&eacute;nergie solaire. <br/>
+		On en trouve dans toutes les jardineries, magasins de bricolage, etc...<br/>
+	</div>
+	<p>
+		Comme c'est fait pour &ecirc;tre &agrave; l'ext&eacute;rieur, c'est suffisament &eacute;tanche pour aller sur un bateau !<br/>
+		Sur la photo, le feu est dans un tube en PVC fixe sur le balcon arri&egrave;re, de fa&ccedil;on &agrave; ce qu'on puisse le rentrer, il n'est pas fix&eacute; en permanence dehors.
+	</p>
+	<hr/>
+	<i>&copy; 2025, Passe-Coque</i>
+</body>
+</html>
