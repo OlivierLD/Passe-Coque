@@ -199,6 +199,9 @@ if (isset($_POST['operation'])) {
       $prj_id = $_POST['prj-id'];
       $member_name = $_POST['member-name'];
 
+      $prj_id = trim(str_replace(" ", "%", $prj_id));
+      $member_name = trim(str_replace(" ", "%", $member_name));
+
       // $link = mysqli_init();  // Mandatory ?
 
       echo("Will connect on ".$database." ...<br/>");
@@ -427,6 +430,10 @@ if (isset($_POST['operation'])) {
   }
 } else { // Then display the query form
     ?>
+    <div>
+      Filter relations between people and projects (Joker character is '%').<br/>
+      Keep fields below empty means no filter (returns the full list).
+    </div>
     <form action="<?php echo(basename(__FILE__)); ?>" method="post">
       <input type="hidden" name="operation" value="query">
       <table>
