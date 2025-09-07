@@ -3525,6 +3525,12 @@ const KEYWORDS = [
 		comment: 'Tous les bateaux'
 	},
 	{
+		name: 'La Moara',
+		keywords: [ 'boat', 'bateau', 'moara', 'plate', 'riguidel' ],
+		url: '/?nav-to=4&boat-id=la-moara',
+		comment: 'Plate de Saint Philibert'
+	},
+	{
 		name: 'Nuage',
 		keywords: [ 'boat', 'bateau', 'nuage', 'soling', 'erik' ],
 		url: '/?nav-to=4&boat-id=nuage',
