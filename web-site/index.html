@@ -739,13 +739,16 @@ window.onload = () => {
 			el.id = `${who}`;
 			aboutSomeone(el);
 		}
-		let where = getQueryParameterByName('where'); // An anchor ?
-		if (where) {
-			window.setTimeout(() => {
-				console.log(`Scrolling to ${where}`);
-				scrollToGivenAnchor(where);
-			}, 1000); // Wait a bit for the page to load
-			// scrollToGivenAnchor(where);
+		if (false) { // Moved in 'clack'.
+			let where = getQueryParameterByName('where'); // An anchor ?
+			if (where) {
+				// debugger;
+				window.setTimeout(() => {
+					console.log(`Scrolling to ${where}`);
+					scrollToGivenAnchor(where);
+				}, 1000); // Wait a bit for the page to load
+				// scrollToGivenAnchor(where);
+			}
 		}
 	}
 

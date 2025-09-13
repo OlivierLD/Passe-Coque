@@ -387,6 +387,7 @@ let clack = (origin) => {
                                     }, 500);
                                 } else if (originId === "62") {
                                     window.setTimeout(() => {
+                                        // debugger;
                                         fillOutActu(null); // Populate default (full) news list
                                     }, 500);
                                 } else if (originId === "68") {
@@ -418,6 +419,21 @@ let clack = (origin) => {
 				// Plus tard...
 				contentPlaceHolder.innerHTML = generateFetchErrorMessage(contentName, error, errmess);
             });
+
+    // Scroll somewhere in the loaded data ?
+    if (true) {
+        console.log(`clack: Checking for 'where' parameter...`);
+        let where = getQueryParameterByName('where'); // An anchor ?
+        if (where) {
+            window.setTimeout(() => {
+                // debugger;
+                console.log(`Scrolling to ${where}...`);
+                scrollToGivenAnchor(where);
+            }, 3000); // Wait a bit for the page to load
+            // scrollToGivenAnchor(where);
+        }
+    }
+
 }
 
 let specialClack = (clackName) => {
@@ -710,7 +726,11 @@ function flyToZoom(idx) {
 
 let scrollToGivenAnchor = (hashtag) => {
     const anchor = document.querySelector(`a[name='${hashtag}']`);
-    anchor.scrollIntoView();
+    if (anchor) {
+        anchor.scrollIntoView();
+    } else {
+        console.log(`scrollToGivenAnchor: Anchor ${hashtag} not found.`);
+    }
     // 2e couche
     window.scrollBy(0, -92); // 92: menu thickness
 };
@@ -2311,8 +2331,8 @@ const NEXT_EVENTS = [ // oldest to newest.
         date_from: '2025-10-04',
         date_to: '2025-10-04',
         content: {
-            fr: 'Samedi 4 octobre au matin, AG Passe-Coque, salle du Mousker &agrave; St Philibert.',
-            en: 'Saturday October 4 in the morning, General Assembly, salle du Mousker in St Philibert.'
+            fr: 'Samedi 4 octobre &agrave; 10:00 du matin, AG Passe-Coque, salle du Mousker &agrave; St Philibert.',
+            en: 'Saturday October 4 at 10:00 in the morning, General Assembly, salle du Mousker in St Philibert.'
         }
     }
 ];
@@ -2675,6 +2695,7 @@ let fillOutActu = filter => {
                             eventDiv.innerHTML = doc;
                         });
                     }
+                    console.log("-- Done with fetch");
                 },
                 (error, errmess) => {
                     console.log("Ooch");
@@ -2693,6 +2714,7 @@ let fillOutActu = filter => {
         });
         container.appendChild(sectionDiv);
     });
+    console.log(`Done with Displaying ${newList.length} section(s).`);
 
     // Slideshows, onclick on images...
     try {
