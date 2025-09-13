@@ -155,7 +155,7 @@ if ($current_lang == "FR") {
   // echo "<div style='font-size: 3em; line-height: 1em;'>Cette page est en cours de d&eacute;veloppement...</div>" . PHP_EOL;
     ?>
 
-    <!-- 
+    <!--
       Menu sections depend on:
       - default (PC member)
       - $bcMember
@@ -268,7 +268,8 @@ if ($current_lang == "FR") {
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
         <li><a href="../admin/sql/_todo_list.01.php" target="admin">G&eacute;rer les TODO lists (toutes)</a></li>
-      </ul>  
+        <li><a href="../admin/sql/_todo_list.02.php" target="admin">TODO lists : t&acirc;ches par personne</a></li>
+      </ul>
       <?php
     } else {
       ?>
@@ -281,7 +282,7 @@ if ($current_lang == "FR") {
 } else {
   // echo "<div style='font-size: 3em; line-height: 1em;'>This page is being developped...</div>" . PHP_EOL;
     ?>
-    <!-- 
+    <!--
       Menu sections depend on:
       - default (PC member)
       - $bcMember
@@ -391,7 +392,7 @@ if ($current_lang == "FR") {
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
         <li><a href="../admin/sql/_todo_list.01.php" target="admin">Manage (all) TODO lists</a></li>
-      </ul>  
+      </ul>
       <?php
     } else {
       ?>
@@ -416,6 +417,6 @@ if ($current_lang == "FR") {
       </table>
     </form>
     <hr/>
-    </div>   
-  </body>        
+    </div>
+  </body>
 </html>
