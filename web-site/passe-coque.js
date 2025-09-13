@@ -429,7 +429,7 @@ let clack = (origin) => {
                 // debugger;
                 console.log(`Scrolling to ${where}...`);
                 scrollToGivenAnchor(where);
-            }, 3000); // Wait a bit for the page to load
+            }, 3000); // Wait a bit for the page to load. TODO Try async ?...
             // scrollToGivenAnchor(where);
         }
     }
@@ -3333,6 +3333,12 @@ const KEYWORDS = [
 		keywords: [ 'actualite', 'actualité', 'news', 'agenda', 'planning', 'events', 'event', 'spi', 'ouest', 'ouest france', 'ouest-france', 'rubi' ],
 		url: '/?nav-to=62',
 		comment: 'Toute l\'actualité'
+	},
+	{
+		name: 'News Letters',
+		keywords: [ 'actualite', 'actualité', 'news', 'letter', 'newsletter', 'news-letter', 'news-letters', 'newsletters', 'semaphore', 'sémaphore' ],
+		url: '/?nav-to=62&where=news-letters',
+		comment: 'Toute les news-letters'
 	},
 	{
 		name: 'Boat Club',

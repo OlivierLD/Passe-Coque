@@ -32,7 +32,7 @@ try {
 	<link rel="stylesheet" href="../../fonts/font.02.css">
 	<!--link rel="stylesheet" href="./passe-coque.menu.css"-->
 	<link rel="stylesheet" href="../../passe-coque.css" type="text/css"/>
-    
+
     <style type="text/css">
       /* * {
         font-family: 'Courier New'
@@ -40,7 +40,7 @@ try {
 
       * {
         font-size: 18px;
-        line-height: 1em; 
+        line-height: 1em;
       }
 
       tr > td {
@@ -69,7 +69,7 @@ try {
       body {
         background: transparent;
       }
- 
+
       input[type=button], input[type=submit], input[type=reset] {
         padding: 8px 16px;
         text-decoration: none;
@@ -109,7 +109,7 @@ try {
     const validateForm = () => { // Used below ?
         // Empty
     };
-  </script>    
+  </script>
 
   <body>
     <!--h1>PHP / MySQL. TODO lists</h1-->
@@ -196,7 +196,7 @@ if ($VERBOSE) {
     echo("UserID: [" . $userId . "], Admin Priv: [" . ($adminPriv ? 'yes' : 'no') . "]<br/>" . PHP_EOL);
 }
 
-if ($operation == 'list') { 
+if ($operation == 'list') {
     if ($option == null || $option == 'no-empty') {
         // List the boats
         $title = ($lang == 'FR') ? "Liste des bateaux" : "Boat list";
@@ -216,8 +216,8 @@ if ($operation == 'list') {
                 if ($option == 'no-empty') {
                     $todolist = getBoatsTODOList($dbhost, $username, $password, $database, $userId, $boat[0], $VERBOSE);
                     if ($VERBOSE) {
-                        echo ("Boat $boat[0], " . count($todolist) . 
-                              " item(s) in the list, user $userId, ref-email(s): $boat[4], strpos says: " . 
+                        echo ("Boat $boat[0], " . count($todolist) .
+                              " item(s) in the list, user $userId, ref-email(s): $boat[4], strpos says: " .
                               ((strpos($boat[3], $userId) === false) ? "No" : "Yes") . "<br/>" . PHP_EOL);
                     }
                     if (count($todolist) == 0) {
@@ -235,7 +235,7 @@ if ($operation == 'list') {
             echo ("</ol>" . PHP_EOL);
         }
     } else if ($option == 'for-boat') {
-        $boat_id = $_GET['boat-id']; 
+        $boat_id = $_GET['boat-id'];
         $contact = $_GET['ref'];
         $completedOnly = false;
         if (isset($_GET['completed-option'])) {
@@ -256,13 +256,13 @@ if ($operation == 'list') {
             } catch (Throwable $e) {
                 echo "Captured Throwable for str_contains/strpos : " . $e->getMessage() . "<br/>" . PHP_EOL;
             }
-        }                        
+        }
 
         $canModify = ($adminPriv || // $userId == $contact);  // contains
                                     (strpos($contact, $userId) !== false));
         if ($VERBOSE) {
             echo ("Can Modify => [" . ($canModify ? 'yes' : 'no') . "]<br/>" . PHP_EOL);
-        }                        
+        }
 
         echo ("<h3>" . ($lang == 'FR' ? "TODO list pour $boatName" : "TODO list for $boatName") . "</h3>" . PHP_EOL);
         echo ("<hr/>" . PHP_EOL);
@@ -293,7 +293,7 @@ if ($operation == 'list') {
                         <input type="hidden" name="boat-id" value="<?php echo $boat_id; ?>">
                         <input type="hidden" name="ref" value="<?php echo $contact; ?>">
 
-                        <input type="checkbox" name="completed-option" value="restricted" <?php echo($completedOnly ? "checked" : ""); ?> onChange="this.form.submit()"> 
+                        <input type="checkbox" name="completed-option" value="restricted" <?php echo($completedOnly ? "checked" : ""); ?> onChange="this.form.submit()">
                         <?php echo($lang == 'FR' ? "'&Agrave; faire' ou 'En cours' seulement." : "Non completed nor canceled only.") ?>
                     </form>
                 </div>
@@ -313,7 +313,7 @@ if ($operation == 'list') {
             <?php
 
             echo ("<table>" . PHP_EOL);
-            echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th></tr>" . PHP_EOL);
+            echo ("<tr><th>Description</th><th>Cr&eacute;&eacute;e le</th><th>Status</th><th>Modifi&eacute;e le</th><th>Assign&eacute; &agrave;</th></tr>" . PHP_EOL);
             foreach ($todoLines as $line) {
                 $display = true;
                 if ($completedOnly) {
@@ -342,8 +342,9 @@ if ($operation == 'list') {
                             break;
                     }
 
-                    echo (  "<td class='big-column'><pre>$line[2]</pre></td><td>$line[3]</td><td><b style='color: " . $color . ";'>" . translateStatus($lang, $line[4]) . "</b></td><td>$line[5]</td>" . PHP_EOL);
-                    //                                   |                      |                                                      |                                                |
+                    echo (  "<td class='big-column'><pre>$line[2]</pre></td><td>$line[3]</td><td><b style='color: " . $color . ";'>" . translateStatus($lang, $line[4]) . "</b></td><td>$line[5]</td><td>$line[6]</td>" . PHP_EOL);
+                    //                                   |                      |                                                      |                                                |                |
+                    //                                   |                      |                                                      |                                                |                Assigned to
                     //                                   |                      |                                                      |                                                Last Updated
                     //                                   |                      |                                                      Status
                     //                                   |                      Created
@@ -361,9 +362,9 @@ if ($operation == 'list') {
                             <input type="submit" value="<?php echo(($lang != 'FR') ? "Edit" : "Modifier"); ?>">
                         </form>
         <?php
-                        echo ("</td>" . PHP_EOL); 
+                        echo ("</td>" . PHP_EOL);
                         echo ("<td>" . PHP_EOL);
-        ?>                 
+        ?>
                         <form action="<?php echo basename(__FILE__); ?>" method="post">
                             <input type="hidden" name="operation" value="delete-line">
                             <input type="hidden" name="lang" value="<?php echo($lang); ?>">
@@ -372,7 +373,7 @@ if ($operation == 'list') {
                             <input type="hidden" name="line-id" value="<?php echo($line[1]); ?>">
                             <input type="submit" value="<?php echo(($lang != 'FR') ? "Delete" : "Supprimer"); ?>">
                         </form>
-        <?php                
+        <?php
                         echo("</td>" . PHP_EOL);
                     }
                     echo ("</tr>" . PHP_EOL);
@@ -392,14 +393,14 @@ if ($operation == 'list') {
                 <input type="hidden" name="boat-id" value="<?php echo($boat_id); ?>">
                 <input type="submit" value="<?php echo(($lang != 'FR') ? "Create an element" : "Cr&eacute;er un &eacute;l&eacute;ment"); ?>">
             </form>
-<?php            
+<?php
         }
         echo ("<hr/>" . PHP_EOL);
     }
 } else if ($operation == "csv-list") { // UNUSED !!! Dedicated to another php file.
 
     // ------- CSV-LIST -----
-    $boat_id = $_GET['boat-id']; 
+    $boat_id = $_GET['boat-id'];
     $contact = $_GET['ref'];
     $completedOnly = false;
     if (isset($_GET['completed-option'])) {
@@ -420,20 +421,20 @@ if ($operation == 'list') {
         } catch (Throwable $e) {
             echo "Captured Throwable for str_contains/strpos : " . $e->getMessage() . "<br/>" . PHP_EOL;
         }
-    }                        
+    }
 
-    $delimiter = ";"; //","; 
-    $filename = "todo_" . $boat_id . "_" . date('Y-m-d') . ".csv"; 
-     
-    // Create a file pointer 
-    $f = fopen('php://memory', 'w'); 
-     
-    // Set column headers 
-    $fields = array('TASK', 
-                    'CREATED', 
-                    'STATUS', 
-                    'UPDATED'); 
-    fputcsv($f, $fields, $delimiter); 
+    $delimiter = ";"; //",";
+    $filename = "todo_" . $boat_id . "_" . date('Y-m-d') . ".csv";
+
+    // Create a file pointer
+    $f = fopen('php://memory', 'w');
+
+    // Set column headers
+    $fields = array('TASK',
+                    'CREATED',
+                    'STATUS',
+                    'UPDATED');
+    fputcsv($f, $fields, $delimiter);
 
     if (count($todoLines) == 0) {
         echo ((($lang == 'FR') ? "Rien sur la TODO list de $boatName..." : "Nothing on the TODO list for $boatName...") . "<br/>" . PHP_EOL);
@@ -453,20 +454,20 @@ if ($operation == 'list') {
                 $lineData = array(utf8_encode($line[2]), // Description
                                   utf8_encode($line[3]), // Created
                                   utf8_encode(translateStatus($lang, $line[4])), // Status
-                                  utf8_encode($line[5])  // Updated 
-                                  ); 
-                fputcsv($f, $lineData, $delimiter); 
+                                  utf8_encode($line[5])  // Updated
+                                  );
+                fputcsv($f, $lineData, $delimiter);
             }
         }
-        // Move back to beginning of file 
-        fseek($f, 0); 
-        
-        // Set headers to download file rather than displayed 
-        header('Content-Type: text/csv'); 
-        header('Content-Disposition: attachment; filename="' . $filename . '";'); 
-        
-        // output all remaining data on a file pointer 
-        fpassthru($f); 
+        // Move back to beginning of file
+        fseek($f, 0);
+
+        // Set headers to download file rather than displayed
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+        // output all remaining data on a file pointer
+        fpassthru($f);
     }
     // ------- End of CSV-LIST ----
 
@@ -481,6 +482,7 @@ if ($operation == 'list') {
         echo ("Got " . count($line) . " fields.<br/>" . PHP_EOL);
     }
     if (count($line) > 0) {
+        $memberList = getMembers($dbhost, $username, $password, $database, $VERBOSE); // For the drop-down list
 ?>
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="update-line">
@@ -506,9 +508,25 @@ if ($operation == 'list') {
                                 <option value="IN_PROGRESS"<?php echo('IN_PROGRESS' == $line[4] ? "selected" : ""); ?>><?php echo translateStatus($lang, 'IN_PROGRESS'); ?></option>
                                 <option value="CANCELED"<?php echo('CANCELED' == $line[4] ? "selected" : ""); ?>><?php echo translateStatus($lang, 'CANCELED'); ?></option>
                                 <option value="COMPLETED"<?php echo('COMPLETED' == $line[4] ? "selected" : ""); ?>><?php echo translateStatus($lang, 'COMPLETED'); ?></option>
-                            </select>    
+                            </select>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Assigned to <!--(<?php echo (count($memberList) . " value(s))"); ?>--></td>
+                        <td>
+                            <!-- ?php echo($line[6]); ? -->
+
+                            <select name="assigned-to">
+                                <option value=""<?php echo("" == $line[6] ? " selected" : ""); ?>>-- <?php echo(($lang == 'FR') ? "Aucun" : "None"); ?> --</option>
+<?php
+                                foreach ($memberList as $member) {
+                                    echo ("<option value='$member->email'" . ($member->email == $line[6] ? " selected" : "") . ">$member->firstName $member->lastName ($member->email)</option>" . PHP_EOL);
+                                }
+?>
+                            </select>
+                        </td>
+                    </tr>
+
                 </table>
 
                 <input type="submit" value="<?php echo(($lang != 'FR') ? "Update" : "Mettre &agrave; jour"); ?>">
@@ -587,13 +605,14 @@ if ($operation == 'list') {
     $ref = $_POST["ref"];
     $boatId = $_POST["boat-id"];
     $lineId = $_POST["line-id"];
+    $assignee = $_POST["assigned-to"];
 
     $newStatus  = $_POST["status"];
     $newDescription = $_POST["description"];
 
     // The update
     // echo ("Will update line $lineId, Desc [$newDescription], Status [$newStatus]" . PHP_EOL);
-    $sql = "UPDATE TODO_LISTS SET LINE_DESC = '" . str_replace("'", "\'", $newDescription) . "', LINE_STATUS = '$newStatus', LAST_UPDATED = CURRENT_TIMESTAMP
+    $sql = "UPDATE TODO_LISTS SET LINE_DESC = '" . str_replace("'", "\'", $newDescription) . "', LINE_STATUS = '$newStatus', LAST_UPDATED = CURRENT_TIMESTAMP, ASSIGNED_TO = " . (strlen($assignee) > 0 ? "'" . str_replace("'", "\'", $assignee) . "'" : 'NULL') . "
             WHERE LINE_ID = $lineId;";
     try {
         echo("SQL: [" . $sql . "]<br/>" . PHP_EOL);
@@ -629,5 +648,5 @@ if ($operation == 'list') {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
 }
 ?>
-  </body>        
+  </body>
 </html>

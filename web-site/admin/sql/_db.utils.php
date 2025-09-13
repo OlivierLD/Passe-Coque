@@ -225,7 +225,7 @@ function getMembers(string $dbhost, string $username, string $password, string $
                 echo("Connected.<br/>" . PHP_EOL);
             }
         }
-        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF FROM PASSE_COQUE_MEMBERS;";
+        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF FROM PASSE_COQUE_MEMBERS ORDER BY 2, 3, 1;";
         if ($verbose) {
             echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }
@@ -772,7 +772,7 @@ function getDistinctBoatsWithReferents(string $dbhost, string $username, string 
 }
 
 function getBoatsTODOList(string $dbhost, string $username, string $password, string $database, string $userId, string $boatId, bool $verbose=false) : array {
-    $sql = "SELECT BOAT_ID, LINE_ID, LINE_DESC, unix_timestamp(CREATION_DATE), LINE_STATUS, unix_timestamp(LAST_UPDATED)
+    $sql = "SELECT BOAT_ID, LINE_ID, LINE_DESC, unix_timestamp(CREATION_DATE), LINE_STATUS, unix_timestamp(LAST_UPDATED), ASSIGNED_TO
             FROM TODO_LISTS
             WHERE BOAT_ID = '$boatId'
             ORDER BY LINE_ID;";
@@ -810,6 +810,7 @@ function getBoatsTODOList(string $dbhost, string $username, string $password, st
             $lineData[3] = date("Y-M-d H:i:s",$table[3]); // CREATION_DATE
             $lineData[4] = $table[4]; // LINE_STATUS
             $lineData[5] = ($table[5] != null && $table[5] != '') ? date("Y-M-d H:i:s",$table[5]) : $table[5]; // LAST_UPDATED
+            $lineData[6] = $table[6]; // ASSIGNED_TO
 
             $lines[$index] = $lineData;
             $index++;
@@ -827,11 +828,11 @@ function getBoatsTODOList(string $dbhost, string $username, string $password, st
 }
 
 function getTODOListLine(string $dbhost, string $username, string $password, string $database, int $lineId, bool $verbose=false) : array {
-    $sql = "SELECT BOAT_ID, LINE_ID, LINE_DESC, unix_timestamp(CREATION_DATE), LINE_STATUS, unix_timestamp(LAST_UPDATED)
+    $sql = "SELECT BOAT_ID, LINE_ID, LINE_DESC, unix_timestamp(CREATION_DATE), LINE_STATUS, unix_timestamp(LAST_UPDATED), ASSIGNED_TO
             FROM TODO_LISTS
             WHERE LINE_ID = $lineId;";
 
-    $line = array(); // On line only
+    $line = array(); // One line only
 
     try {
         if ($verbose) {
@@ -862,6 +863,7 @@ function getTODOListLine(string $dbhost, string $username, string $password, str
             $line[3] = date("Y-M-d H:i:s", $table[3]); // CREATION_DATE
             $line[4] = $table[4]; // LINE_STATUS
             $line[5] = $table[5]; // LAST_UPDATED
+            $line[6] = $table[6]; // ASSIGNED_TO
 
             // echo ("Could be null: ($table[5])");
             if ($table[5] != null & $table[5] != '') {
