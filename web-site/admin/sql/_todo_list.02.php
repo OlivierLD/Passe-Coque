@@ -370,7 +370,6 @@ if ($operation == 'list') {
             $nbTasks = $line[5];
 
             $struct[$who][$boat][$status] = $nbTasks;
-
         }
         // var_dump($struct);
         foreach($struct as $who => $boats) {
@@ -385,7 +384,6 @@ if ($operation == 'list') {
             }
             echo("<hr/>" . PHP_EOL);
         }
-
     }
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
