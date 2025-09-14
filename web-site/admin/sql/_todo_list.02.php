@@ -343,21 +343,50 @@ if ($operation == 'list') {
     }
 
     // Array $lines is now populated
-    echo ("<table>" . PHP_EOL);
-    echo("<tr><th>Person</th><th>Boat</th><th>Status</th><th>Number of tasks</th></tr>" . PHP_EOL);
-    foreach($lines as $line) {
-        echo("<tr>" . PHP_EOL);
-        echo("<td>" . $line[0] . ", " . $line[1] . "</td>" . PHP_EOL);
+    if (false) {
+        echo ("<table>" . PHP_EOL);
+        echo("<tr><th>Person</th><th>Boat</th><th>Status</th><th>Number of tasks</th></tr>" . PHP_EOL);
+        foreach($lines as $line) {
+            echo("<tr>" . PHP_EOL);
+            echo("<td>" . $line[0] . ", " . $line[1] . "</td>" . PHP_EOL);
 
-        // $url = "_todo_list.01.php?option=for-boat&boat-id=$line[0]&lang=$lang"; // &ref=dummy@home.com
-        // echo("<a href='$url'><b>" . (($lang == 'FR') ? "Voir les t&acirc;ches" : "See tasks") . "</b></a><br/>" . PHP_EOL);
+            // $url = "_todo_list.01.php?option=for-boat&boat-id=$line[0]&lang=$lang"; // &ref=dummy@home.com
+            // echo("<a href='$url'><b>" . (($lang == 'FR') ? "Voir les t&acirc;ches" : "See tasks") . "</b></a><br/>" . PHP_EOL);
 
-        echo("<td>" . $line[3] . "</td>" . PHP_EOL);
-        echo("<td>"  . translateStatus($lang, $line[4]) . "</td>" . PHP_EOL);
-        echo("<td>" . $line[5] . "</td>" . PHP_EOL);
-        echo("</tr>" . PHP_EOL);
+            echo("<td>" . $line[3] . "</td>" . PHP_EOL);
+            echo("<td>"  . translateStatus($lang, $line[4]) . "</td>" . PHP_EOL);
+            echo("<td>" . $line[5] . "</td>" . PHP_EOL);
+            echo("</tr>" . PHP_EOL);
+        }
+        echo ("</table>" . PHP_EOL);
     }
-    echo ("</table>" . PHP_EOL);
+    if (true) {
+        $struct = array();
+
+        foreach($lines as $line) {
+            $who = $line[1]; // $line[0] . " " .
+            $boat = $line[3];
+            $status = $line[4];
+            $nbTasks = $line[5];
+
+            $struct[$who][$boat][$status] = $nbTasks;
+
+        }
+        // var_dump($struct);
+        foreach($struct as $who => $boats) {
+            echo("<h3>" . $who . "</h3>" . PHP_EOL);
+            foreach($boats as $boat => $statuses) {
+                echo("<h4>Sur " . $boat . "</h4>" . PHP_EOL);
+                echo("<ul>" . PHP_EOL);
+                foreach($statuses as $status => $nbTasks) {
+                    echo("<li>" . translateStatus($lang, $status) . " : " . $nbTasks . "</li>" . PHP_EOL);
+                }
+                echo("</ul>" . PHP_EOL);
+            }
+            echo("<hr/>" . PHP_EOL);
+        }
+
+    }
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
 }
