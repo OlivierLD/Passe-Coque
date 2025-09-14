@@ -267,8 +267,14 @@ if ($current_lang == "FR") {
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
-        <li><a href="../admin/sql/_todo_list.01.php" target="admin">G&eacute;rer les TODO lists (toutes)</a></li>
-        <li><a href="../admin/sql/_todo_list.02.php" target="admin">TODO lists : t&acirc;ches par personne</a></li>
+        <li>
+          TODO Lists
+          <ul>
+            <li><a href="../admin/sql/_todo_list.01.php" target="admin">G&eacute;rer les TODO lists (toutes)</a></li>
+            <li><a href="../admin/sql/_todo_list.02.php" target="admin">T&acirc;ches par bateau et par personne</a></li>
+            <li><a href="../admin/sql/_todo_list.02.php?operation=per-assignee" target="admin">T&acirc;ches par personne</a></li>
+          </ul>
+        </li>
       </ul>
       <?php
     } else {

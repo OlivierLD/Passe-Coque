@@ -279,7 +279,85 @@ if ($operation == 'list') {
         echo("</li>" . PHP_EOL);
     }
     echo ("</ul>" . PHP_EOL);
+} else if ($operation == 'per-assignee') {
+    // Tasks per assignee
+    echo ("<h2>" . (($lang == 'FR') ? "T&acirc;ches par personne" : "Tasks per person") . " (WiP)</h2>" . PHP_EOL);
 
+    $sql = "SELECT ASSIGNED_TO AS OWNER,
+                   CONCAT(PASSE_COQUE_MEMBERS.FIRST_NAME, ' ', UPPER(PASSE_COQUE_MEMBERS.LAST_NAME)) AS NAME,
+                   TODO_LISTS.BOAT_ID,
+                   THE_FLEET.BOAT_NAME,
+                   LINE_STATUS,
+                   COUNT(LINE_STATUS) AS TASKS
+            FROM TODO_LISTS, PASSE_COQUE_MEMBERS, THE_FLEET
+            WHERE ASSIGNED_TO IS NOT NULL
+              AND PASSE_COQUE_MEMBERS.EMAIL = TODO_LISTS.ASSIGNED_TO
+              AND TODO_LISTS.BOAT_ID = THE_FLEET.ID
+            GROUP BY ASSIGNED_TO, BOAT_ID, LINE_STATUS
+            ORDER BY ASSIGNED_TO, BOAT_ID, LINE_STATUS;";
+
+    $lines = array();
+    $index = 0;
+
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>" . PHP_EOL);
+            }
+        }
+
+        if ($verbose) {
+            echo ("Executing [" . $sql . "]<br/>" . PHP_EOL);
+        }
+        $result = mysqli_query($link, $sql);
+        if ($verbose) {
+            echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
+        }
+        while ($table = mysqli_fetch_array($result)) {
+            $lineData = array();
+            $lineData[0] = $table[0]; // OWNER (email)
+            $lineData[1] = $table[1]; // OWNER NAME
+            $lineData[2] = $table[2]; // BOAT_ID
+            $lineData[3] = $table[3]; // BOAT_NAME
+            $lineData[4] = $table[4]; // STATUS
+            $lineData[5] = $table[5]; // TASK COUNT
+
+            $lines[$index] = $lineData;
+            $index++;
+        }
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+        echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+
+    // Array $lines is now populated
+    echo ("<table>" . PHP_EOL);
+    echo("<tr><th>Person</th><th>Boat</th><th>Status</th><th>Number of tasks</th></tr>" . PHP_EOL);
+    foreach($lines as $line) {
+        echo("<tr>" . PHP_EOL);
+        echo("<td>" . $line[0] . ", " . $line[1] . "</td>" . PHP_EOL);
+
+        // $url = "_todo_list.01.php?option=for-boat&boat-id=$line[0]&lang=$lang"; // &ref=dummy@home.com
+        // echo("<a href='$url'><b>" . (($lang == 'FR') ? "Voir les t&acirc;ches" : "See tasks") . "</b></a><br/>" . PHP_EOL);
+
+        echo("<td>" . $line[3] . "</td>" . PHP_EOL);
+        echo("<td>"  . translateStatus($lang, $line[4]) . "</td>" . PHP_EOL);
+        echo("<td>" . $line[5] . "</td>" . PHP_EOL);
+        echo("</tr>" . PHP_EOL);
+    }
+    echo ("</table>" . PHP_EOL);
 } else {
     echo ("Unknown operation [" . $operation . "]" . PHP_EOL);
 }
