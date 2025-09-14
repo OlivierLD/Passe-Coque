@@ -475,14 +475,32 @@ if ($operation == 'list') {
     $boatId = $_POST['boat-id'];
     $lineId = $_POST['line-id'];
     $ref = $_POST['ref'];
+    $nameFilter = $_POST['name-filter'] ?? '';
     // Retrieve from DB, populate form
     $line = getTODOListLine($dbhost, $username, $password, $database, $lineId, $VERBOSE);
 
     if ($VERBOSE) {
         echo ("Got " . count($line) . " fields.<br/>" . PHP_EOL);
     }
+
+    echo("<h3>" . (($lang == 'FR') ? "Modification d'un &eacute;l&eacute;ment de la TODO liste" : "Edit an element in the task List") . "</h3>" . PHP_EOL);
+    // Filter on names ?
+    ?>
+    <form action="<?php echo basename(__FILE__); ?>" method="post" style="float: right;">
+        <input type="hidden" name="operation" value="edit-line">
+        <input type="hidden" name="lang" value="<?php echo($lang); ?>">
+        <input type="hidden" name="ref" value="<?php echo($ref); ?>">
+        <input type="hidden" name="boat-id" value="<?php echo($boatId); ?>">
+        <input type="hidden" name="line-id" value="<?php echo($lineId); ?>">
+
+        <input type="text" name="name-filter" value="<?php echo($nameFilter); ?>" placeholder="<?php echo(($lang == 'FR') ? 'Filtrer par nom, email' : 'Filter by name, email'); ?>">
+        <input type="submit" value="<?php echo(($lang == 'FR') ? 'Filtrer' : 'Filter'); ?>">
+
+    </form>
+
+    <?php
     if (count($line) > 0) {
-        $memberList = getMembers($dbhost, $username, $password, $database, $VERBOSE); // For the drop-down list
+        $memberList = getMembers($dbhost, $username, $password, $database, $nameFilter, $VERBOSE); // For the drop-down list
 ?>
             <form action="<?php echo basename(__FILE__); ?>" method="post">
                 <input type="hidden" name="operation" value="update-line">

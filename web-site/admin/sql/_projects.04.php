@@ -181,7 +181,7 @@ if (isset($_POST['operation'])) {
   echo("Update record for $ref_id and $prj_id ...<br/>" . PHP_EOL);
 
   $projectsArray = getProjects($dbhost, $username, $password, $database, $VERBOSE);
-  $membersArray = getMembers($dbhost, $username, $password, $database, $VERBOSE);
+  $membersArray = getMembers($dbhost, $username, $password, $database, '', $VERBOSE);
 
   if ($VERBOSE) {
     foreach ($projectsArray as $project) {
@@ -249,7 +249,7 @@ if (isset($_POST['operation'])) {
   // Display the form to create the record
   $projectArray = getProjects($dbhost, $username, $password, $database, $VERBOSE);
   // echo("Projects OK...<br/>" . PHP_EOL);
-  $membersArray = getMembers($dbhost, $username, $password, $database, $VERBOSE);
+  $membersArray = getMembers($dbhost, $username, $password, $database, '', $VERBOSE);
   // echo("Members OK...<br/>" . PHP_EOL);
   ?>
   <form action="#" method="post">

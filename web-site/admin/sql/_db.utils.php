@@ -212,7 +212,7 @@ function getBoatsJSON(string $dbhost, string $username, string $password, string
     return null;
 }
 
-function getMembers(string $dbhost, string $username, string $password, string $database, bool $verbose): array {
+function getMembers(string $dbhost, string $username, string $password, string $database, string $filter='', bool $verbose=false): array {
     try {
         $link = new mysqli($dbhost, $username, $password, $database);
 
@@ -225,7 +225,12 @@ function getMembers(string $dbhost, string $username, string $password, string $
                 echo("Connected.<br/>" . PHP_EOL);
             }
         }
-        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF FROM PASSE_COQUE_MEMBERS ORDER BY 2, 3, 1;";
+        $sql = "SELECT EMAIL, FIRST_NAME, LAST_NAME, TELEPHONE, TARIF
+                FROM PASSE_COQUE_MEMBERS
+                WHERE UPPER(FIRST_NAME) LIKE UPPER('%" . $filter . "%')
+                   OR UPPER(LAST_NAME) LIKE UPPER('%" . $filter . "%')
+                   OR UPPER(EMAIL) LIKE UPPER('%" . $filter . "%')
+                ORDER BY 2, 3, 1;";
         if ($verbose) {
             echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
         }

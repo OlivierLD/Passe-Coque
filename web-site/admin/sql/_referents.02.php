@@ -110,21 +110,21 @@ if (isset($_POST['operation'])) {
     // echo("Update:" . $_POST['update'] . ", Delete:" . $_POST['delete'] . " <br/>" . PHP_EOL); // Two Submit buttons
 
     try {
-      $ref_email = $_POST['ref-id']; 
-      $boat_id = $_POST['boat-id']; 
-      $telephone = $_POST['telephone']; 
+      $ref_email = $_POST['ref-id'];
+      $boat_id = $_POST['boat-id'];
+      $telephone = $_POST['telephone'];
 
       // $link = mysqli_init();  // Mandatory ?
-    
+
       $link = new mysqli($dbhost, $username, $password, $database);
-    
+
       if ($link->connect_errno) {
         echo("Oops, errno:" . $link->connect_errno . "...<br/>");
         die("Connection failed: " . $conn->connect_error);
       } else {
         echo("Connected.<br/>");
       }
-    
+
       if (isset($_POST['update'])) {  // TODO urlencode ?
 
         // echo ("Update for $email ... <br/>");
@@ -134,7 +134,7 @@ if (isset($_POST['operation'])) {
                'WHERE EMAIL = \'' . $ref_email . '\' AND BOAT_ID = \'' . $boat_id . '\'';
         // echo ("Update Stmt: $sql ; <br/>");
       } else if (isset($_POST['delete'])) { // operation = update, delete is set.
-        $sql = 'DELETE FROM REFERENTS 
+        $sql = 'DELETE FROM REFERENTS
                 WHERE EMAIL = \'' . $ref_email . '\' AND BOAT_ID = \'' . $boat_id . '\'';
       } else if ($operation === 'insert') {
         $sql = 'INSERT INTO REFERENTS ' .
@@ -144,7 +144,7 @@ if (isset($_POST['operation'])) {
         $sql = '';
       }
       echo('Performing query <code>' . $sql . '</code><br/>');
-    
+
       if (true) { // Do perform ?
         if ($link->query($sql) === TRUE) {
           echo "OK. Operation performed successfully<br/>" . PHP_EOL;
@@ -154,7 +154,7 @@ if (isset($_POST['operation'])) {
       } else {
         echo "Stby<br/>" . PHP_EOL;
       }
-    
+
       // On ferme !
       $link->close();
       echo("Closed DB<br/>".PHP_EOL);
@@ -180,7 +180,7 @@ if (isset($_POST['operation'])) {
   $boat_id = $_GET['boat-id'];
 
   $boatsArray = getBoats($dbhost, $username, $password, $database, $VERBOSE);
-  $membersArray = getMembers($dbhost, $username, $password, $database, $VERBOSE);
+  $membersArray = getMembers($dbhost, $username, $password, $database, '', $VERBOSE);
 
   if ($VERBOSE) {
     foreach ($boatsArray as $boat) {
@@ -190,20 +190,20 @@ if (isset($_POST['operation'])) {
 
   try {
     $link = new mysqli($dbhost, $username, $password, $database);
-    
+
     if ($link->connect_errno) {
       echo("Oops, errno:".$link->connect_errno."...<br/>");
       die("Connection failed: " . $conn->connect_error);
     } else {
       echo("Connected.<br/>");
     }
-  
+
     $sql = 'SELECT EMAIL, BOAT_ID, TELEPHONE FROM BOATS_AND_REFERENTS WHERE EMAIL = \'' . $ref_id . '\' AND BOAT_ID = \'' . $boat_id . '\';';
     //             |      |        |
     //             0      1        2
 
     echo('Performing query <code>' . $sql . '</code><br/>');
-        
+
     // $result = mysql_query($sql, $link);
     $result = mysqli_query($link, $sql);
     echo ("Returned " . $result->num_rows . " row(s)<br/>");
@@ -248,7 +248,7 @@ if (isset($_POST['operation'])) {
 } else if ($create_record) {
   // Display the form to create the record
   $boatsArray = getBoats($dbhost, $username, $password, $database, $VERBOSE);
-  $membersArray = getMembers($dbhost, $username, $password, $database, $VERBOSE);
+  $membersArray = getMembers($dbhost, $username, $password, $database, '', $VERBOSE);
   ?>
   <form action="#" method="post">
     <input type="hidden" name="operation" value="insert">
@@ -283,6 +283,6 @@ if (isset($_POST['operation'])) {
   // WHAT ??
   echo "What ??";
 }
-    ?>        
-  </body>        
+    ?>
+  </body>
 </html>
