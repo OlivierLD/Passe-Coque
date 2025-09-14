@@ -1,7 +1,7 @@
 <?php
 // Must be on top
 $timeout = 300;  // In seconds
-$applyTimeout = false; // Change at will
+$applyTimeout = false; // Change at will, or with QSParam 'verbose=y
 
 try {
   if (!isset($_SESSION)) {
@@ -172,6 +172,11 @@ if (isset($_SESSION['USER_NAME'])) {
     $userId = $_SESSION['USER_NAME'];
 }
 
+if (!isset($_SESSION['USER_NAME'])) {
+  echo ("<button onclick='window.open(\"https://passe-coque.com/php/admin.menu.html\");'>Authenticate</button><br/>" . PHP_EOL);
+  die ("You are not connected! Please log in first!");
+}
+
 $currentYear = date("Y");
 // echo("Current year is " . $currentYear . ", next will be " . ($currentYear + 1) . "<br/>");
 $currentMonth = date("m");
@@ -198,7 +203,7 @@ if ($operation == 'list') {
 
     // List the tasks
     $title = ($lang == 'FR') ? "Liste des t&acirc;ches par bateau et par personne" : "Task list, by boat and by person";
-    echo ("<h2>" . $title . "</h2>" . PHP_EOL);
+    echo ("<h2>" . $title . " (WiP)</h2>" . PHP_EOL);
 
     // La suite...
 
@@ -258,9 +263,8 @@ if ($operation == 'list') {
     } catch (Throwable $e) {
         echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
+
     // Array $lines is now populated
-
-
     echo ("<ul>" . PHP_EOL);
     foreach($lines as $line) {
         echo("<li>" . PHP_EOL);
