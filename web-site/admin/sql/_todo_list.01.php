@@ -236,7 +236,7 @@ if ($operation == 'list') {
         }
     } else if ($option == 'for-boat') {
         $boat_id = $_GET['boat-id'];
-        $contact = $_GET['ref'];
+        $contact = $_GET['ref'] ?? '';
         $completedOnly = false;
         if (isset($_GET['completed-option'])) {
             $completedValue = $_GET['completed-option'];

@@ -202,7 +202,7 @@ if ($VERBOSE) {
 if ($operation == 'list') {
 
     // List the tasks
-    $title = ($lang == 'FR') ? "Liste des t&acirc;ches par bateau et par personne" : "Task list, by boat and by person";
+    $title = ($lang == 'FR') ? "Liste des t&acirc;ches, par bateau et par personne" : "Task list, by boat and by person";
     echo ("<h2>" . $title . " (WiP)</h2>" . PHP_EOL);
 
     // La suite...
@@ -268,7 +268,11 @@ if ($operation == 'list') {
     echo ("<ul>" . PHP_EOL);
     foreach($lines as $line) {
         echo("<li>" . PHP_EOL);
-        echo("<b>Boat:</b> " . $line[1] . " (ID: " . $line[0] . ")<br/>" . PHP_EOL);
+        echo("<b>Boat:</b> " . $line[1] . " (ID: " . $line[0] . ") " . PHP_EOL);
+
+        $url = "_todo_list.01.php?option=for-boat&boat-id=$line[0]&lang=$lang"; // &ref=dummy@home.com
+        echo("<a href='$url'><b>" . (($lang == 'FR') ? "Voir les t&acirc;ches" : "See tasks") . "</b></a><br/>" . PHP_EOL);
+
         echo("<b>Assigned to:</b> " . $line[5] . " (" . $line[2] . ")<br/>" . PHP_EOL);
         echo("<b>Status:</b> " . translateStatus($lang, $line[3]) . "<br/>" . PHP_EOL);
         echo("<b>Number of tasks:</b> " . $line[4] . "<br/>" . PHP_EOL);
