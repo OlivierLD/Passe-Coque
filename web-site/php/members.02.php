@@ -265,7 +265,7 @@ if ($current_lang == "FR") {
       En tant qu'<i>administrateur</i>, vous pouvez aussi utiliser ceci :<br/>
       Mais attention, <a href="https://www.youtube.com/watch?v=guuYU74wU70&t=15s" target="YT">With great power comes great responsibility</a>.
       <ul>
-        <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
+        <li><a href="../admin/sql/" target="admin">Admin Menu</a> (Gestion des membres, du Boat Club, de la flotte, des r&eacute;f&eacute;rents, etc)</li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
         <li>
           TODO Lists
@@ -395,9 +395,17 @@ if ($current_lang == "FR") {
       As an <i>administrator</i>, you can also use those:<br/>
       But remember, <a href="https://www.youtube.com/watch?v=guuYU74wU70&t=15s" target="YT">With great power comes great responsibility</a>. Be careful.
       <ul>
-        <li><a href="../admin/sql/" target="admin">Admin Menu</a></li>
+        <li><a href="../admin/sql/" target="admin">Admin Menu</a> (Members management, Boat Club, the Fleet, Referent management, etc)</li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
-        <li><a href="../admin/sql/_todo_list.01.php" target="admin">Manage (all) TODO lists</a></li>
+        <li>
+          TODO Lists
+          <ul>
+            <li><a href="../admin/sql/_todo_list.01.php" target="admin">TODO lists management (all of them)</a></li>
+            <li><a href="../admin/sql/_todo_list.02.php" target="admin">Tasks, per boat and per person</a></li>
+            <li><a href="../admin/sql/_todo_list.02.php?operation=per-assignee" target="admin">Tasks, per person</a></li>
+          </ul>
+        </li>
+
       </ul>
       <?php
     } else {
