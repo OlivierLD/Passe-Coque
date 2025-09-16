@@ -7,6 +7,7 @@
     <div class="tab" style="margin-top: 30px; padding-top: 0px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
         <button class="tablinks tab-active" onclick="openTab(event, 'navigation-01');" title="Meteo">Marine Weather</button>
         <button class="tablinks" onclick="openTab(event, 'navigation-02');">Tides</button>
+        <button class="tablinks" onclick="openTab(event, 'navigation-03');">Almanacs</button>
     </div>
 
     <div class="pcc-dialog-tab-content">
@@ -30,7 +31,7 @@
                         <li><a href="https://www.meteo-marine.com/consulter/atlantique/" target="_bank">Atlantic Weather Forecast</a></li>
                         <li><a href="https://portail.ping-info-nautique.fr/" target="_blank">PING</a></li>
                         <li><a href="https://ocean.weather.gov/Atl_tab.php" target="NOAA">Ocean Prediciton Center</a></li>
-                    </ul>  
+                    </ul>
                     <hr/>
                     And more soon...
                 </div>
@@ -44,9 +45,25 @@
                     <ul>
                         <li><a href="/tech.and.nav/tides.es6/leaflet.tide.stations.html" target="_blank">Tides in the world, sauce Passe-Coque</a></li>
                         <li><a href="https://www.horaire-maree.fr/" target="FR">horaire-mar&eacute;e.fr</a></li>
-                    </ul>        
+                    </ul>
                 </div>
 
+            </div>
+        </div>
+        <div id="navigation-03" class="tab-section" style="display: none;">
+            <div style="color: black; background-image: url(./images/erdeven.birvideaux.jpeg); background-size: 100%; background-repeat: no-repeat; background-position: center bottom;">
+
+                <div class="transp-box">
+                    <h1>Almanac Publication</h1>
+                    <ul>
+                        <li>
+                            Tides an Nautical Almanacs, accessibles from your
+                            <a href="#" onclick="/*clack_pcc('_6');*/ clack('_7');">Member Space <svg style="margin: -5px 0;" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						    </svg><span id="members-space" style="display: none;"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <hr/>
