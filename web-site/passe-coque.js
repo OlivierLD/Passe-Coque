@@ -2328,18 +2328,18 @@ const NEXT_EVENTS = [ // oldest to newest.
             en: 'September 23 to 28, 2025, Grand Pavois in La Rochelle. "La R&ecirc;veuse" with her crew or Saudade with Voiles Mag, the Passe-Coque fleet expects you for the next edition of the international boat-show, September 23 to 28, 2025!'
         }
     }, {
-        date_from: '2025-10-04',
-        date_to: '2025-10-04',
+        date_from: '2025-10-11',
+        date_to: '2025-10-11',
         content: {
-            fr: 'Samedi 4 octobre &agrave; 10:00 du matin, AG Passe-Coque, salle du Mousker &agrave; St Philibert.',
-            en: 'Saturday October 4 at 10:00 in the morning, General Assembly, salle du Mousker in St Philibert.'
+            fr: 'Samedi 11 octobre &agrave; 10:00 du matin, AG Passe-Coque, salle du Mousker &agrave; St Philibert.',
+            en: 'Saturday October 11 at 10:00 in the morning, General Assembly, salle du Mousker in St Philibert.'
         }
     }, {
         date_from: '2025-11-22',
         date_to: '2025-11-22',
         content: {
             fr: 'Samedi 22 Novembre &agrave; Ingrandes sur Loire, remise des prix de la <a href="/?lang=FR&nav-to=62&where=tombola" target="tombola">Tombola des Conties</a> !',
-            en: 'Saturday November 22, General Assembly, <a href="/?lang=EN&nav-to=62&where=tombola" target="tombola">Tombola des Conties</a>!'
+            en: 'Saturday November 22, in Ingrande sur Loire, <a href="/?lang=EN&nav-to=62&where=tombola" target="tombola">Tombola des Conties</a>!'
         }
     }
 ];
