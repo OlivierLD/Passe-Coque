@@ -1,30 +1,51 @@
-<div class="boat-card" header="Voyages en Patrimoine">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/passpartout.jpeg" width="100%">
-        <div style="padding: 14px;">
-            <h2>Voyages en Patrimoine</h2>
-            <h3>Dans le sillage des &eacute;toiles</h3>
-            Embarquez avec nous pour vivre une exp&eacute;dition &agrave; la voile.<br/>
-            Une curiosit&eacute; voyageuse.<br/>
-        </div>
-    </div>
-    <div>
-        D&eacute;couvrir et apprendre en s'ouvrant aux autres et en se questionnant sur ce qui nous entoure. 
-        C'est tout cela, l'aventure Voyage en Patrimoine. Nous allons &agrave; la rencontre des chercheurs et des 
-        habitants de diff&eacute;rents pays pour vous parler de culture et de sciences, s'&eacute;merveiller, et surtout, 
-        d&eacute;velopper sa curiosit&eacute;.
+<div class="boat-card" header="Voyage en Patrimoine">
 
-        <ul>
-            <li>Un programme &eacute;ducatif agr&eacute;&eacute; &Eacute;ducation Nationale</li>
-            <li>Un magazine pour les particuliers</li>
-            <li>Des animations pour les &eacute;tablissements culturels</li>
-        </ul>
-    </div>
-    <div>
-        <h2>Plus d'infos...</h2>
-        R&eacute;f&eacute;rents et porteurs du projet : Marine Prevet et Wencelas Gasse</br/>
-        Email : contact@voyageenpatrimoine.fr<br/>
-        Site web : <a href="https://voyageenpatrimoine.fr" target="ext">https://voyageenpatrimoine.fr</a><br/>
-        <a href="https://www.facebook.com/story.php?story_fbid=790652596422331&id=100064327946932" target="FB" title="FaceBook"><img src="/logos/facebook.png" width="40" style="vertical-align: middle;"></a>
+    <div style="min-height: 400px; overflow-y: auto;">
+        <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+            <button class="tablinks tab-active" onclick="openTab(event, 'vep-01');" title="Sommaire">Sommaire</button>
+            <button class="tablinks" onclick="openTab(event, 'vep-02');" title="Actualit&eacute;s">Actualit&eacute;s</button>
+            <button class="tablinks" onclick="openTab(event, 'vep-03');" title="Soutenir le projet">Contacts</button>
+        </div>
+
+        <div style="min-height: 300px; max-height: 450px; overflow-y: auto;">
+            <div id="vep-01" class="tab-section" style="display: block;">
+
+                <div style="display: grid; grid-template-columns: auto auto;">
+                    <img src="/images/boats/passpartout.jpeg" width="100%">
+                    <div style="padding: 14px;">
+                        <h2>Voyage en Patrimoine</h2>
+                        <h3>Dans le sillage des &eacute;toiles</h3>
+                        Embarquez avec nous pour vivre une exp&eacute;dition &agrave; la voile.<br/>
+                        Une curiosit&eacute; voyageuse.<br/>
+                    </div>
+                </div>
+                <div>
+                    D&eacute;couvrir et apprendre en s'ouvrant aux autres et en se questionnant sur ce qui nous entoure.
+                    C'est tout cela, l'aventure Voyage en Patrimoine. Nous allons &agrave; la rencontre des chercheurs et des
+                    habitants de diff&eacute;rents pays pour vous parler de culture et de sciences, s'&eacute;merveiller, et surtout,
+                    d&eacute;velopper sa curiosit&eacute;.
+
+                    <ul>
+                        <li>Un programme &eacute;ducatif agr&eacute;&eacute; &Eacute;ducation Nationale</li>
+                        <li>Un magazine pour les particuliers</li>
+                        <li>Des animations pour les &eacute;tablissements culturels</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="vep-02" class="tab-section" style="display: none;">
+                <a href="./passpartout/passpartout.01.jpeg" target="_blank"><img src="./passpartout/passpartout.01.jpeg" width="80%" title="Click to enlarge"></a>
+            </div>
+
+            <div id="vep-03" class="tab-section" style="display: none;">
+                <div>
+                    <h2>Plus d'infos...</h2>
+                    R&eacute;f&eacute;rents et porteurs du projet : Marine Prevet et Wencelas Gasse</br/>
+                    Email : contact@voyageenpatrimoine.fr<br/>
+                    Site web : <a href="https://voyageenpatrimoine.fr" target="ext">https://voyageenpatrimoine.fr</a><br/>
+                    <a href="https://www.facebook.com/story.php?story_fbid=790652596422331&id=100064327946932" target="FB" title="FaceBook"><img src="/logos/facebook.png" width="40" style="vertical-align: middle;"></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

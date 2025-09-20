@@ -1,29 +1,50 @@
-<div class="boat-card" header="Voyages en Patrimoine">
-    <div style="display: grid; grid-template-columns: auto auto;">
-        <img src="/images/boats/passpartout.jpeg" width="100%">
-        <div style="padding: 14px;">
-            <h2>Voyages en Patrimoine</h2>
-            <h3>In the wake of the stars</h3>
-            Embark with us to experience a sailing expedition.<br/>
-            A traveling curiosity.<br/>
+<div class="boat-card" header="Voyage en Patrimoine">
+
+    <div style="min-height: 400px; overflow-y: auto;">
+        <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+            <button class="tablinks tab-active" onclick="openTab(event, 'vep-01');" title="Sommaire">Summary</button>
+            <button class="tablinks" onclick="openTab(event, 'vep-02');" title="Actualit&eacute;s">News</button>
+            <button class="tablinks" onclick="openTab(event, 'vep-03');" title="Soutenir le projet">Contacts</button>
         </div>
-    </div>
-    <div>
-        Discover and learn by opening up to others and questioning what surrounds us. 
-        This is all that, the Heritage Travel adventure. We are going to meet researchers and people 
-        from different countries to talk to you about culture and science, to be amazed, and above all, 
-        to develop your curiosity.
-        <ul>
-            <li>An educational program approved by National Education (this is French)</li>
-            <li>A magazine for individuals</li>
-            <li>Activities for cultural establishments</li>
-        </ul>
-    </div>
-    <div>
-        <h2>More info...</h2>
-        R&eacute;f&eacute;rents et porteurs du projet : Marine Prevet et Wencelas Gasse</br/>
-        Email : contact@voyageenpatrimoine.fr<br/>
-        Site web : <a href="https://voyageenpatrimoine.fr" target="ext">https://voyageenpatrimoine.fr</a><br/>
-        <a href="https://www.facebook.com/story.php?story_fbid=790652596422331&id=100064327946932" target="FB" title="FaceBook"><img src="/logos/facebook.png" width="40" style="vertical-align: middle;"></a>
+
+        <div style="min-height: 300px; max-height: 450px; overflow-y: auto;">
+            <div id="vep-01" class="tab-section" style="display: block;">
+
+                <div style="display: grid; grid-template-columns: auto auto;">
+                    <img src="/images/boats/passpartout.jpeg" width="100%">
+                    <div style="padding: 14px;">
+                        <h2>Voyage en Patrimoine</h2>
+                        <h3>In the wake of the stars</h3>
+                        Embark with us to experience a sailing expedition.<br/>
+                        A traveling curiosity.<br/>
+                    </div>
+                </div>
+                <div>
+                    Discover and learn by opening up to others and questioning what surrounds us.
+                    This is all that, the Heritage Travel adventure. We are going to meet researchers and people
+                    from different countries to talk to you about culture and science, to be amazed, and above all,
+                    to develop your curiosity.
+                    <ul>
+                        <li>An educational program approved by National Education (this is French)</li>
+                        <li>A magazine for individuals</li>
+                        <li>Activities for cultural establishments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="vep-02" class="tab-section" style="display: none;">
+                <a href="./passpartout/passpartout.01.jpeg" target="_blank"><img src="./passpartout/passpartout.01.jpeg" width="80%" title="Click to enlarge"></a>
+            </div>
+
+            <div id="vep-03" class="tab-section" style="display: none;">
+                <div>
+                    <h2>More info...</h2>
+                    Referents anbd project leaders : Marine Prevet et Wencelas Gasse</br/>
+                    Email : contact@voyageenpatrimoine.fr<br/>
+                    Site web : <a href="https://voyageenpatrimoine.fr" target="ext">https://voyageenpatrimoine.fr</a><br/>
+                    <a href="https://www.facebook.com/story.php?story_fbid=790652596422331&id=100064327946932" target="FB" title="FaceBook"><img src="/logos/facebook.png" width="40" style="vertical-align: middle;"></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

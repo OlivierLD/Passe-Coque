@@ -3541,7 +3541,7 @@ const KEYWORDS = [
 		comment: ''
 	},
 	{
-		name: 'Voyages en Patrimoine',
+		name: 'Voyage en Patrimoine',
 		keywords: [ 'passpartout', 'patrimoine', 'voyage' ],
 		url: '/?nav-to=31&tx=02',
 		comment: ''
