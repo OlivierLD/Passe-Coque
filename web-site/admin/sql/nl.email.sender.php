@@ -99,7 +99,7 @@ if (!isset($_SESSION['USER_NAME'])) {
 	  }
 	}
 }
-	
+
 
 if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 
@@ -109,7 +109,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	$from_email		 = 'contact@passe-coque.com'; // 'sender@abc.com';    // from mail, sender email address
 	// Recipient, from DB
 	// $recipient_email = 'olivier.lediouris@gmail.com'; // 'recipient@xyz.com'; // recipient email address
-	
+
 	// Load POST data from HTML form
 	$sender_name    = $_POST["sender_name"];  // sender name
 	$reply_to_email = $_POST["sender_email"]; // sender email, it will be used in "reply-to" header
@@ -145,67 +145,67 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	$headers = "MIME-Version: 1.0\r\n";              // Defining the MIME version
 	$headers .= "From:".$from_email."\r\n";          // Sender Email
 	$headers .= "Reply-To: ".$reply_to_email."\r\n"; // Email address to reach back
-	$headers .= "Content-Type: multipart/mixed;";    // Defining Content-Type
+	$headers .= "Content-Type: multipart/mixed;";    // Defining Content-Type. Or application/pdf ?
 	$headers .= "boundary = $boundary\r\n";          // Defining the Boundary
-			
+
 	// Loop on recepients
 	try {
 
 		$link = new mysqli($dbhost, $username, $password, $database);
-    
+
 		if ($link->connect_errno) {
 		  echo("Oops, errno:".$link->connect_errno."...<br/>");
 		  die("Connection failed: " . $conn->connect_error);
 		} else {
 		  // echo("Connected.<br/>");
 		}
-	  
-		$sql = 'SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK ' . 
-		       'FROM PASSE_COQUE_MEMBERS ' . 
+
+		$sql = 'SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK ' .
+		       'FROM PASSE_COQUE_MEMBERS ' .
 			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here, and below...
 // 		   '      AND (LAST_NAME LIKE \'%Le%Diouris%\') ' .
 //			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\' ' .
-//			   '        OR LAST_NAME LIKE \'%Allais%\' ' . 
+//			   '        OR LAST_NAME LIKE \'%Allais%\' ' .
 //			   '        OR FIRST_NAME LIKE \'%Pierre-Jean%\')' .
-			   '  AND NEWS_LETTER_OK = TRUE;'; 
-		
+			   '  AND NEWS_LETTER_OK = TRUE;';
+
 		echo('Performing query <code>'.$sql.'</code><br/>');
-	  
+
 		// $result = mysql_query($sql, $link);
 		$result = mysqli_query($link, $sql);
 		echo ("Will send " . $result->num_rows . " email(s)<br/>");
 
 		set_time_limit($result->num_rows); // 1 second per email
-	  
+
 		while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
 		  // echo "table contains ". count($table) . " entry(ies).<br/>";
 		  $active = ($table[3]/* === true*/) ? "Yes" : "No";
 		  $nl_id = $table[0];
 		  $subscriber_email = $table[0];
 
-		  $footer = "<br/><hr/><p>"; 
+		  $footer = "<br/><hr/><p>";
 		  $footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
 		  $footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
 		  $footer .= "<a href='http://www.passe-coque.com/php/unsubscribe.php?subscriber-id=$nl_id'>Se d&eacute;sabonner / Unsubscribe</a><br/>"; // Use the real ID
 		  $footer .= "</p>";
 		  $fmt_message = str_replace("\n", "\n<br/>", $message);
 		  $fmt_message .= $footer;
-	  
+
 		  // plain text, or html
 		  $body = "--$boundary\r\n";
 		  // $body .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
 		  $body .= "Content-Type: text/html; charset=UTF-8\r\n"; // To allow HTML artifacts, like links and Co.
 		  $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
 		  $body .= chunk_split(base64_encode($fmt_message));
-			  
+
 		  // attachment
 		  $body .= "--$boundary\r\n";
-		  $body .="Content-Type: $type; name=".$name."\r\n";
+		  $body .="Content-Type: $type; name=".$name."\r\n"; // TODO Display this type, to see what this is
 		  $body .="Content-Disposition: attachment; filename=".$name."\r\n";
 		  $body .="Content-Transfer-Encoding: base64\r\n";
 		  $body .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
 		  $body .= $encoded_content; // Attaching the encoded file with email
-	  
+
 		  // TODO Bcc in the headers (see https://stackoverflow.com/questions/9525415/php-email-sending-bcc)
 		  $sentMailResult = mail($subscriber_email, $subject, $body, $headers);
 
@@ -215,9 +215,9 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 		  } else {
 			  echo "There was a problem for $subscriber_email ...<br/>";
 			  die("Sorry but the email to $subscriber_email could not be sent. Please go back and try again!");
-		  }	  
+		  }
 		}
-		
+
 		// On ferme !
 		$link->close();
 		// echo("Closed DB<br/>".PHP_EOL);
@@ -249,7 +249,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 			</div>
 			<div class="form-group">
 				<input class="pc-button" type="submit" name="button" value="Send"/>
-			</div>		 
+			</div>
 		</form>
 	</div>
 	<?php
