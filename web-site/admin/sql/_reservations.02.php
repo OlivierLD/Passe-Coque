@@ -49,6 +49,14 @@ try {
       }
     </style>
 	<script type="text/javascript" src="/passe-coque.js"></script>
+
+    <script type="text/javascript">
+        let enableExtraCrewNumber = (rb) => {
+            console.log(`enableExtraCrewNumber: ${rb}`);
+            document.getElementById('extra-crew-number').disabled = !rb;
+            document.getElementById('extra-crew-message').style.display = (rb ? 'inline-block' : 'none');
+        };
+    </script>
   </head>
 
   <script type="text/javascript">
@@ -57,7 +65,7 @@ try {
 
         let dateFrom = new Date(document.getElementById('from-date').value);
         let dateTo = new Date(document.getElementById('to-date').value);
-        
+
         console.log(`Validation requested for ${dateFrom} and ${dateTo}`);
         if (dateTo < dateFrom) {
             let message = `Mauvaise chronologie, ${dateTo} est anterieur a ${dateFom}`;
@@ -68,7 +76,7 @@ try {
         }
         // return (dateFrom <= dateTo);
     };
-  </script>    
+  </script>
 
   <?php
     $lang = 'FR';
@@ -91,13 +99,13 @@ try {
   ?>
 
   <body>
-    <?php 
+    <?php
     if ($lang != 'FR') {
-    ?>    
+    ?>
     <h2>Make a reservation</h2>
     <?php
     } else {
-    ?>    
+    ?>
     <h2>Faire une r&eacute;servation</h2>
     <?php
     }
@@ -176,7 +184,7 @@ function getBoatDetails(string $dbhost, string $username, string $password, stri
             echo("Will connect on ".$database." ...<br/>");
         }
         $link = new mysqli($dbhost, $username, $password, $database);
-    
+
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
             die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
@@ -201,7 +209,7 @@ function getBoatDetails(string $dbhost, string $username, string $password, stri
             $details[$index]->boatType = $table[2];
             $details[$index]->boatBase = $table[3];
             $index++;
-        }        
+        }
         // On ferme !
         $link->close();
         if ($verbose) {
@@ -228,9 +236,9 @@ function composeEmailToReferent(BoatDetailRef $boatDetails, Member $requester, M
     }
 
     if ($lang == 'FR') {
-        $messContent = 
+        $messContent =
         "Bonjour " . $refDetails->firstName . ",\n" .
-        "L'adh&eacute;rent " . $requester->firstName . ' ' . $requester->lastName . " souhaite r&eacute;server le bateau \"" . $boatDetails->boatName . "\" du " . $from . " au " . $to . ".\n\n" . 
+        "L'adh&eacute;rent " . $requester->firstName . ' ' . $requester->lastName . " souhaite r&eacute;server le bateau \"" . $boatDetails->boatName . "\" du " . $from . " au " . $to . ".\n\n" .
         "Nous vous invitons à prendre contact avec " . $requester->firstName . ' ' . $requester->lastName . " dans les meilleurs d&eacute;lais afin de confirmer ou annuler la r&eacute;servation.\n" .
         "La mise &agrave; jour du planning est disponible depuis votre espace Admin.\n\n" .
         "Voici les coordonn&eacute;es de " . $requester->firstName . ' ' . $requester->lastName . " :\n" .
@@ -238,9 +246,9 @@ function composeEmailToReferent(BoatDetailRef $boatDetails, Member $requester, M
         "- T&eacute;l&eacute;phone au " . $requester->telephone . "\n\n" .
         "- L'&eacute;quipe Passe-Coque";
     } else {
-        $messContent = 
+        $messContent =
         "Hello " . $refDetails->firstName . ",\n" .
-        "The member " . $requester->firstName . ' ' . $requester->lastName . " wants to book the boat \"" . $boatDetails->boatName . "\" from " . $from . " to " . $to . ".\n\n" . 
+        "The member " . $requester->firstName . ' ' . $requester->lastName . " wants to book the boat \"" . $boatDetails->boatName . "\" from " . $from . " to " . $to . ".\n\n" .
         "Please get in touch with " . $requester->firstName . ' ' . $requester->lastName . " at your earliest convenience in order to confirm or cancel the reservation.\n" .
         "Updating the planning can be done fromn your Admin space.\n\n" .
         "Here is how to reach " . $requester->firstName . ' ' . $requester->lastName . " :\n" .
@@ -254,11 +262,11 @@ function composeEmailToReferent(BoatDetailRef $boatDetails, Member $requester, M
 function composeEmailToRequester(array $boatDetails, Member $requester, string $from, string $to, string $dbhost, string $username, string $password, string $database, string $lang='FR', bool $verbose=false): string {
     $messContent = "";
     if ($lang == 'FR') {
-        $messContent = 
+        $messContent =
         "Bonjour " . $requester->firstName . ", \n" .
         "Votre demande de réservation pour le voilier \"" . $boatDetails[0]->boatName . "\" au départ de " . $boatDetails[0]->boatBase . " du " . $from . " au " . $to . " a été enregistrée.\n" .
         "Un email de demande de confirmation a été envoyé au" . (count($boatDetails) > 1 ? "x" : "") . " référent" . (count($boatDetails) > 1 ? "s" : "") . " du bateau :\n";
-        
+
         foreach($boatDetails as $detail) {
             $ref = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $verbose);
             $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", téléphone : " . ($ref[0]->telephone != null ? $ref[0]->telephone : "--") . "\n");
@@ -266,11 +274,11 @@ function composeEmailToRequester(array $boatDetails, Member $requester, string $
         $messContent .= "En cas d'absence de réponse, vous pouvez également nous envoyer un email à : pcc@passe-coque.com.\n\n" .
                        "- L'équipe Passe-Coque\n";
     } else {
-        $messContent = 
+        $messContent =
         "Hello " . $requester->firstName . ", \n" .
         "Your reservation request for the boat \"" . $boatDetails[0]->boatName . "\" starting in " . $boatDetails[0]->boatBase . " from " . $from . " to " . $to . " has been recorded.\n" .
         "A confirmation request has been sent to the referent" . (count($boatDetails) > 1 ? "s" : "") . " of the boat:\n";
-        
+
         foreach($boatDetails as $detail) {
             $ref = getMember($dbhost, $username, $password, $database, $detail->referentEmail, $verbose);
             $messContent .= ("- " . $ref[0]->firstName . " " . $ref[0]->lastName . ", email " . $ref[0]->email . ", telephone : " . ($ref[0]->telephone != null ? $ref[0]->telephone : "--") . "\n");
@@ -298,19 +306,19 @@ if (isset($_POST['operation'])) {
         // https://www.geeksforgeeks.org/comparing-two-dates-in-php/
 
         if (false) { // Just a test
-            $date1 = "2011-10-26"; 
-            $date2 = "2011-10-24"; 
-              
-            // Use strtotime() function to convert 
-            // date into dateTimestamp 
-            $dateTimestamp1 = strtotime($date1); 
-            $dateTimestamp2 = strtotime($date2); 
-              
-            // Compare the timestamp date  
+            $date1 = "2011-10-26";
+            $date2 = "2011-10-24";
+
+            // Use strtotime() function to convert
+            // date into dateTimestamp
+            $dateTimestamp1 = strtotime($date1);
+            $dateTimestamp2 = strtotime($date2);
+
+            // Compare the timestamp date
             if ($dateTimestamp1 > $dateTimestamp2) {
-                echo "$date1 is later than $date2 <br/>"; 
+                echo "$date1 is later than $date2 <br/>";
             } else {
-                echo "$date1 is older than $date2 <br/>"; 
+                echo "$date1 is older than $date2 <br/>";
             }
             echo("<hr/>" . PHP_EOL);
         }
@@ -366,13 +374,13 @@ if (isset($_POST['operation'])) {
                     // 3-2 Emails
                     $details = getBoatDetails($dbhost, $username, $password, $database, $boatId, $VERBOSE);
                     $member = getMember($dbhost, $username, $password, $database, $userId, $VERBOSE); // Requester
-                    
+
                     // 3-2-1 Referent(s) and PCC
                     if ($lang != 'FR') {
-                        $message = $member[0]->firstName . " " . $member[0]->lastName . "($userId) wants to reserve \"" . $details[0]->boatName . "\" from " . $fromDate . " to " . $toDate . 
+                        $message = $member[0]->firstName . " " . $member[0]->lastName . "($userId) wants to reserve \"" . $details[0]->boatName . "\" from " . $fromDate . " to " . $toDate .
                                 ". As a referent of the boat your insight is required.";
                     } else {
-                        $message = $member[0]->firstName . " " . $member[0]->lastName . " ($userId) veut r&eacute;server \"" . $details[0]->boatName . "\" du " . $fromDate . " au " . $toDate . 
+                        $message = $member[0]->firstName . " " . $member[0]->lastName . " ($userId) veut r&eacute;server \"" . $details[0]->boatName . "\" du " . $fromDate . " au " . $toDate .
                                 ". En tant que r&eacute;f&eacute;rent du bateau, votre intervention est requise.";
                     }
                     foreach ($details as $detail) {
@@ -383,7 +391,7 @@ if (isset($_POST['operation'])) {
                         } catch (Throwable $e) {
                             echo "Captured Throwable for composeEmailToReferent : " . $e->getMessage() . "<br/>" . PHP_EOL;
                         }
-                    } 
+                    }
                     sendEmail("pcc@passe-coque.com", "Reservation Boat Club", $message, $lang, false, false, false);
                     // 3-2-2 Requester.
                     try {
@@ -396,7 +404,7 @@ if (isset($_POST['operation'])) {
                     }
 
                     if ($lang != 'FR') {
-                        // sendEmail($userId, "Your Boat Club Reservation", 
+                        // sendEmail($userId, "Your Boat Club Reservation",
                         //         "Hello " . $member[0]->firstName . ",<br/>" .
                         //         "Your reservation request for the " . $details[0]->boatType . " \"" . $details[0]->boatName . "\" based in " . $details[0]->boatBase . " from $fromDate to $toDate has been recorded successfully!\n" .
                         //         "The referent of the boat can be contacted at the following email address: $detail->referentEmail \n" .
@@ -416,7 +424,7 @@ if (isset($_POST['operation'])) {
                         <a href="<?php echo(basename(__FILE__) . "?lang=EN") ?>">Back</a>.
                         <?php
                     } else {
-                        // sendEmail($userId, "Votre R&eacute;servation au Boat Club", 
+                        // sendEmail($userId, "Votre R&eacute;servation au Boat Club",
                         //         "Bonjour " . $member[0]->firstName . ",<br/>" .
                         //         "Votre demande de r&eacute;servation pour le " . $details[0]->boatType . " \"" . $details[0]->boatName . "\" bas&eacute; &agrave; " . $details[0]->boatBase . " du $fromDate au $toDate a bien &eacute;t&eacute; enregistr&eacute;e !\n" .
                         //         "Le r&eacute;f&eacute;rent du bateau peut &ecirc;tre contact&eacute; &agrave; l'adresse email suivante : $detail->referentEmail \n" .
@@ -439,7 +447,7 @@ if (isset($_POST['operation'])) {
                     if ($admin) {
                         ?>
                         <a href="_reservations.01.php">Query Reservation Screen</a>
-                        <?php                                   
+                        <?php
                     }
                 } else {
                     if ($lang != 'FR') {
@@ -453,13 +461,13 @@ if (isset($_POST['operation'])) {
                 // Membership problem
                 // TODO check $status->errNo (1 or 2)
                 if ($lang != 'FR') {
-                    echo("There is a membership problem for $userId : " . $status->errMess . ". Click the button below to subscribe!<br/>" . PHP_EOL); 
+                    echo("There is a membership problem for $userId : " . $status->errMess . ". Click the button below to subscribe!<br/>" . PHP_EOL);
                     ?>
                     <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Join the boat&nbsp;club</button-->
                     <a href="https://passe-coque.com/boat-club/?lang=EN&nav-to=4" target="_PARENT">Join the boat&nbsp;club</a>
                     <?php
                 } else {
-                    echo("Probl&egrave;me d'adh&eacute;sion pour $userId : " . $status->errMess . ". Cliquez le bouton pour adh&eacute;rer !<br/>" . PHP_EOL); 
+                    echo("Probl&egrave;me d'adh&eacute;sion pour $userId : " . $status->errMess . ". Cliquez le bouton pour adh&eacute;rer !<br/>" . PHP_EOL);
                     ?>
                     <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Adh&eacute;rer au boat&nbsp;club</button-->
                     <a href="https://passe-coque.com/boat-club/?lang=FR&nav-to=4" target="_PARENT">Adh&eacute;rer au boat&nbsp;club</a>
@@ -480,7 +488,7 @@ if (isset($_POST['operation'])) {
 
     // Display Booking form
 
-    $boatsArray = getBoats($dbhost, $username, $password, $database, $VERBOSE);     
+    $boatsArray = getBoats($dbhost, $username, $password, $database, $VERBOSE);
     // Filter list on 'CLUB'
     $boatsOfTheClub = array();
     $nbClub = 0;
@@ -493,7 +501,7 @@ if (isset($_POST['operation'])) {
 ?>
 <p>
 <?php echo(($lang != 'FR') ? "Please fill out the following form:" : "Merci de remplir le formulaire suivant :"); ?>
-</p>    
+</p>
 
 <!-- Booking form -->
 <form action="<?php echo basename(__FILE__); ?>"  onsubmit="return validateForm();" method="post">
@@ -517,17 +525,17 @@ if (isset($_POST['operation'])) {
                         }
                     }
                     ?>
-                </select>    
+                </select>
             </td>
         </tr>
         <tr><td><?php echo(($lang != 'FR') ? "From" : "Date de d&eacute;but"); ?></td><td><input type="date" id="from-date" name="from-date" required></td></tr>
         <tr><td><?php echo(($lang != 'FR') ? "To" : "Date de fin"); ?></td><td><input type="date" id="to-date" name="to-date" required></td></tr>
         <tr>
             <td style="vertical-align: top;">
-                <?php 
-                echo(($lang != 'FR') ? 
-                    "Project (navigation zone)<br/>Crew list (first and last name of each crew member)<br/>Comments, questions..." : 
-                    "Projet (zone de navigation)<br/>Liste d'&eacute;quipage (nom et pr&eacute;nom de chacun)<br/>Commentaires, questions..."); 
+                <?php
+                echo(($lang != 'FR') ?
+                    "Project (navigation zone)<br/>Crew list (first and last name of each crew member)<br/>Comments, questions..." :
+                    "Projet (zone de navigation)<br/>Liste d'&eacute;quipage (nom et pr&eacute;nom de chacun)<br/>Commentaires, questions...");
                  ?>
             </td>
             <td>
@@ -540,15 +548,30 @@ Projet et Zone de navigation :&#13;
 - . . .&#13;
 &#13;
 Questions & commentaires :&#13;
-On va partir avec la marée, on reviendra si on y pense.                
+On va partir avec la marée, on reviendra si on y pense.
                </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo(($lang != 'FR') ? "Would you accept extra crew members?" : "Acceptez-vous des &eacute;quipiers suppl&eacute;mentaires ?"); ?>
+            </td>
+            <td>
+                <input type="radio" id="extra-crew-yes" name="extra-crew" value="yes" onchange="enableExtraCrewNumber(true)" checked>
+                <label for="extra-crew-yes"><?php echo(($lang != 'FR') ? "Yes" : "Oui"); ?></label>
+                <input type="radio" id="extra-crew-no" name="extra-crew" value="no" onchange="enableExtraCrewNumber(false)">
+                <label for="extra-crew-no"><?php echo(($lang != 'FR') ? "No" : "Non"); ?></label>
+                <div id="extra-crew-message" style="display: inline-block; margin-left: 10px;">
+                    <?php echo(($lang != 'FR') ? " - How many?" : " - Combien ?"); ?>
+                    <input type="number" id="extra-crew-number" name="extra-crew-number" value="1" min="1" max="6" style="width: 50px;">
+                </div>
             </td>
         </tr>
     </table>
     <div id="submit-message"></div>
 
     <input type="submit" value="<?php echo(($lang != 'FR') ? "Submit reservation" : "Soumettre votre r&eacute;servation"); ?>">
-</form>    
+</form>
 
 <?php
 
@@ -556,5 +579,5 @@ On va partir avec la marée, on reviendra si on y pense.
 
 ?>
   <hr/>
-  </body>    
+  </body>
 </html>
