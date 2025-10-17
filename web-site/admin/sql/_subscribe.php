@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
     Boat Club Subscription request backend.
 
@@ -53,6 +53,9 @@ if (isset($_POST['email'])) {
 if (isset($_GET['email'])) {
     $email = $_GET['email'];
 }
+if (isset($_POST['phone'])) {
+    $phone = $_POST['phone'];
+}
 if (isset($_POST['motivations'])) {
     $motivations = $_POST['motivations'];
 }
@@ -78,7 +81,7 @@ if (isset($_FILES['attachment'])) {
 }
 
 if ($VERBOSE) {
-    echo ("Subscribe Data: email [$email], read the chart [$check], motivations [$motivations] <br/>" . PHP_EOL);
+    echo ("Subscribe Data: email [$email] ([$phone]), read the chart [$check], motivations [$motivations] <br/>" . PHP_EOL);
 }
 
 // Read the chart ?
@@ -124,7 +127,7 @@ if ($check != 'on') {
         // If all good, send email
         if ($ok) {
             // TODO Translate that one.
-            $message = "$email a soumis une demande d'inscription au BoatClub, avec ces motivations :\n<hr/>$motivations\n<hr/>\n&Agrave; valider.";
+            $message = "$email ($phone) a soumis une demande d'inscription au BoatClub, avec ces motivations :\n<hr/>$motivations\n<hr/>\n&Agrave; valider.";
             if (strlen($name) > 0) { // WiP... Attach that one to the email to the club
                 echo("File to attach:" . $name);
             } else {

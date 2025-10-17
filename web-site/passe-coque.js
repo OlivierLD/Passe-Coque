@@ -2869,7 +2869,7 @@ let closeCustomAlert = () => {
 // window.alert = showCustomAlert;  // Not in window.onload !
 
 let subscriptionOKMessage = () => {
-    let mess = "Votre requ&ecirc;te a &eacute;t&eacute; envoy&eacute;e,\nvous &ecirc;tes en copie (v&eacute;rifiez vos spams...).";
+    let mess = "Votre requête a été envoyée,\nvous êtes en copie du mail (vérifiez vos spams...).";
     if (currentLang !== 'FR') {
         mess = "Your request has been sent,\nyou're cc'd (check your spams...)."
     }
