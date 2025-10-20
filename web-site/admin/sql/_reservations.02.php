@@ -127,7 +127,17 @@ class BoatDetailRef {
     public $boatBase;
 }
 
-function bookTheBoat(string $dbhost, string $username, string $password, string $database, string $userId, string $boatId, string $fromDate, string $toDate, string $comments, bool $verbose, string $lang) : void {
+function bookTheBoat(string $dbhost,
+                     string $username,
+                     string $password,
+                     string $database,
+                     string $userId,
+                     string $boatId,
+                     string $fromDate,
+                     string $toDate,
+                     string $comments,
+                     bool $verbose,
+                     string $lang) : void {
     $sql = "INSERT INTO BC_RESERVATIONS (EMAIL, BOAT_ID, FROM_DATE, TO_DATE, MISC_COMMENT) VALUES
     ('$userId', '$boatId', STR_TO_DATE('$fromDate', '%Y-%m-%d'), STR_TO_DATE('$toDate', '%Y-%m-%d'), '$comments');";
 
@@ -299,6 +309,9 @@ if (isset($_POST['operation'])) {
         $toDate = $_POST['to-date'];
         $comments = $_POST['comment-area'];
 
+        $acceptExtraCrew = ($_POST['extra-crew'] == 'yes');
+        $nbExtraCrew = $_POST['extra-crew-number'];
+
         // 0 - Check chronology
         $dateFrom = strtotime($fromDate);
         $dateTo = strtotime($toDate);
@@ -370,6 +383,9 @@ if (isset($_POST['operation'])) {
                     }
                     // 3-1 Book
                     $escapedComment = str_replace("'", "\'", $comments); // Escape !!
+
+                    // TODO Manage Extra Crew Members !!
+
                     bookTheBoat($dbhost, $username, $password, $database, $userId, $boatId, $fromDate, $toDate, $escapedComment, $VERBOSE, $lang);
                     // 3-2 Emails
                     $details = getBoatDetails($dbhost, $username, $password, $database, $boatId, $VERBOSE);

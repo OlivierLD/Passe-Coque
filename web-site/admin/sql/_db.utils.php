@@ -1,7 +1,7 @@
 <?php
 /**
  * Several utilities, functions and classes
- * used in several places.
+ * used all over the place (in several places).
  */
 
 class Boat {
