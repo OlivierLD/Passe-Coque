@@ -950,7 +950,7 @@ span.expand-collapse:hover {
 
 .pix-strip {
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;
+    grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;
     /* grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;  */
     margin-right: 20px;
 }
@@ -1332,7 +1332,7 @@ button.search-item {
     .pix-strip {
         display: grid;
         /* grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px 200px;  */
-        grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;
+        grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;
         margin-right: 20px;
     }
 
