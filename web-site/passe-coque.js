@@ -1900,7 +1900,7 @@ const THE_FLEET = [
     {
         name: "Nomadict",
         id: "nomadict",
-        pix: "/images/boats/nomadict/nomadict.00.jpg",
+        pix: "/images/boats/nomadict/01.jpg",
         type: "Gin Fizz",
         category: TO_GRAB,
         base: "Concarneau"

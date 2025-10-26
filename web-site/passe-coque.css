@@ -974,7 +974,7 @@ span.expand-collapse:hover {
     margin-top: 0px;
 }
 .pcc-dialog-tab-content {
-    height: 400px;
+    height: 95%;
     overflow-y: auto;
 }
 
