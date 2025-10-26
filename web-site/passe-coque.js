@@ -755,7 +755,7 @@ let initBoatClubBases = () => {
         { latlng: laTrinite, txt: 'La Trinit&eacute;, Trehudal (Nichlson 33)' },
         { latlng: lesSables, txt: 'Les Sables d\'Olonne, Jolly Jumper (First 325)' },
         { latlng: laRochelle, txt: 'La Rochelle, . . .' },
-        { latlng: concarneau, txt: 'Concarneau, Nomadict (Gin Fizz)' },
+        { latlng: concarneau, txt: 'Concarneau, Nomaddict (Gin Fizz)' },
         { latlng: kerran, txt: 'ZA de Kerran, le local.' } // ,
         // { latlng: gavres, txt: 'Gâvres, Eh\'Tak (Shipman 28).' }
     ];
@@ -1898,7 +1898,7 @@ const THE_FLEET = [
         base: "Arzal"
     },
     {
-        name: "Nomadict",
+        name: "Nomaddict",
         id: "nomadict",
         pix: "/images/boats/nomadict/01.jpg",
         type: "Gin Fizz",
@@ -3764,8 +3764,8 @@ const KEYWORDS = [
 		comment: 'Le bateau, Maica 12.50'
 	},
 	{
-		name: 'Nomadict',
-		keywords: [ 'boat', 'bateau', 'nomadict', 'gin fizz', 'gin', 'fizz' ],
+		name: 'Nomaddict',
+		keywords: [ 'boat', 'bateau', 'nomadict', 'nomaddict', 'gin fizz', 'gin', 'fizz' ],
 		url: '/?nav-to=4&boat-id=nomadict',
 		comment: 'Le bateau, Gin Fizz'
 	},
