@@ -968,6 +968,8 @@ span.expand-collapse:hover {
     /* overflow: auto; */
 }
 .pcc-dialog-content {
+    /* height: 95%; */
+    min-height: 400px;
     max-height: 500px;
     /* max-height: 400px;  */
     overflow: auto;
@@ -975,6 +977,7 @@ span.expand-collapse:hover {
 }
 .pcc-dialog-tab-content {
     height: 95%;
+    max-height: 500px;
     overflow-y: auto;
 }
 
@@ -1351,6 +1354,7 @@ button.search-item {
         display: none;
     }
     .pcc-dialog-content {
+        min-height: 400px;
         max-height: 80vh;
         /* max-height: 400px;  */
         overflow: auto;
