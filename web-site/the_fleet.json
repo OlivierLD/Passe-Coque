@@ -31,7 +31,7 @@
         "category": "CLUB",
         "base": "&Eacute;tel"
     },
-    { 
+    {
         "name": "Wanita Too",
         "id": "wanita",
         "pix": "/images/boats/wanita.too.sq.png",
@@ -39,7 +39,7 @@
         "category": "NONE",
         "base": "Saint-Malo"
     },
-    { 
+    {
         "name": "Atlantide",
         "id": "atlantide",
         "pix": "/images/boats/atlantide.sq.png",
@@ -47,7 +47,7 @@
         "category": "EX_BOAT",
         "base": "--"
     },
-    { 
+    {
         "name": "Iapyx",
         "id": "iapyx",
         "pix": "/images/boats/iapyx.sq.png",
@@ -55,7 +55,7 @@
         "category": "EX_BOAT",
         "base": "--"
     },
-    { 
+    {
         "name": "Ar Mor Van",
         "id": "ar-mor-van",
         "pix": "/images/boats/kelt620.jpeg",
@@ -63,7 +63,7 @@
         "category": "NONE",
         "base": "&Eacute;tel"
     },
-    { 
+    {
         "name": "Twist Again",
         "id": "twist-again",
         "pix": "/images/boats/twist.again.sq.png",
@@ -71,7 +71,7 @@
         "category": "EX_BOAT",
         "base": "Saint&#8209;Philibert"
     },
-    { 
+    {
         "name": "Ia Orana",
         "id": "ia-orana",
         "pix": "/images/boats/ia.orana.sq.png",
@@ -103,7 +103,7 @@
         "category": "NONE",
         "base": "Saint&nbsp;Brieuc"
     },
-    { 
+    {
         "name": "Tri Yann",
         "id": "tri-yann",
         "pix": "/images/boats/tri.yann.png",
@@ -111,7 +111,7 @@
         "category": "NONE",
         "base": "Saint&#8209;Philibert"
     },
-    { 
+    {
         "name": "Rozen an Avel",
         "id": "rozen-an-avel",
         "pix": "/images/boats/rozen.an.avel.jpeg",
@@ -119,7 +119,7 @@
         "category": "NONE",
         "base": "Saint&#8209;Philibert"
     },
-    { 
+    {
         "name": "Avel Mad",
         "id": "avel-mad",
         "pix": "/images/boats/avel.mad.sq.png",
@@ -127,7 +127,7 @@
         "category": "EX_BOAT",
         "base": "Le&nbsp;Bono"
     },
-    { 
+    {
         "name": "F&eacute;licie",
         "id": "felicie",
         "pix": "/images/boats/felicie.sq.png",
@@ -135,7 +135,7 @@
         "category": "EX_BOAT",
         "base": "Dakar"
     },
-    { 
+    {
         "name": "La R&ecirc;veuse",
         "id": "la.reveuse",
         "pix": "/images/boats/la.reveuse.sq.png",
@@ -143,7 +143,7 @@
         "category": "NONE",
         "base": "Arzal"
     },
-    { 
+    {
         "name": "Tokad 2",
         "id": "tokad-2",
         "pix": "/images/boats/tokad.2.sq.png",
@@ -151,7 +151,7 @@
         "category": "CLUB",
         "base": "Le&nbsp;Crouesty"
     },
-    { 
+    {
         "name": "Taapuna",
         "id": "taapuna",
         "pix": "/images/boats/taapuna.png",
@@ -159,7 +159,7 @@
         "category": "CLUB",
         "base": "Rivi&egrave;re de Saint&#8209;Philibert"
     },
-    { 
+    {
         "name": "L'heure bleue",
         "id": "heure-bleue",
         "pix": "/images/boats/lheure.bleue.jpeg",
@@ -167,7 +167,7 @@
         "category": "NONE",
         "base": "Golfe&nbsp;du&nbsp;Morbihan"
     },
-    { 
+    {
         "name": "Jolly Jumper",
         "id": "jolly-jumper",
         "pix": "/images/boats/jolly.jumper.01.jpg",
@@ -175,7 +175,7 @@
         "category": "NONE",
         "base": "Les&nbsp;Sables&nbsp;d'Olonne"
     },
-    { 
+    {
         "name": "Passpartout",
         "id": "passpartout",
         "pix": "/images/boats/passpartout.sq.png",
@@ -183,7 +183,7 @@
         "category": "NONE",
         "base": "Lorient"
     },
-    { 
+    {
         "name": "Melvan",
         "id": "melvan",
         "pix": "/images/boats/melvan.sq.png",
@@ -191,7 +191,7 @@
         "category": "NONE",
         "base": "Toulon"
     },
-    { 
+    {
         "name": "Saigane",
         "id": "saigane",
         "pix": "/images/boats/saigane/saigane.jpg",
@@ -199,7 +199,7 @@
         "category": "CLUB",
         "base": "Port&nbsp;Blanc"
     },
-    { 
+    {
         "name": "Anao",
         "id": "anao",
         "pix": "/images/boats/anao.jpeg",
@@ -207,7 +207,7 @@
         "category": "EX_BOAT",
         "base": "&Eacute;tel"
     },
-    { 
+    {
         "name": "Trehudal",
         "id": "trehudal",
         "pix": "/images/boats/trehudal.png",
@@ -215,7 +215,7 @@
         "category": "CLUB",
         "base": "La&nbsp;Trinit&eacute;"
     },
-    { 
+    {
         "name": "Jules Verne",
         "id": "jules-verne",
         "pix": "/images/boats/jules.verne.sq.png",
@@ -223,7 +223,7 @@
         "category": "NONE",
         "base": "Locmariaquer"
     },
-    { 
+    {
         "name": "Remora",
         "id": "remora",
         "pix": "/images/boats/remora.sq.png",
@@ -231,7 +231,7 @@
         "category": "TO_GRAB",
         "base": "Saint&#8209;Philibert"
     },
-    { 
+    {
         "name": "Stiren ar Mor",
         "id": "stiren",
         "pix": "/images/boats/stiren.er.mor.png",
@@ -239,7 +239,7 @@
         "category": "NONE",
         "base": "La&nbsp;Trinit&eacute;"
     },
-    { 
+    {
         "name": "Coevic 2",
         "id": "coevic-2",
         "pix": "/images/boats/coevic-2.png",
@@ -247,7 +247,7 @@
         "category": "NONE",
         "base": "Lorient"
     },
-    { 
+    {
         "name": "Ma Enez",
         "id": "ma-enez",
         "pix": "/images/boats/ma.enez.png",
@@ -255,7 +255,7 @@
         "category": "NONE",
         "base": "La&nbsp;Trinit&eacute;"
     },
-    { 
+    {
         "name": "Saudade",
         "id": "saudade",
         "pix": "/images/boats/saudade.png",
@@ -263,7 +263,7 @@
         "category": "NONE",
         "base": "Le&nbsp;Bono"
     },
-    { 
+    {
         "name": "Imagine",
         "id": "imagine",
         "pix": "/images/boats/selection.png",
@@ -271,7 +271,7 @@
         "category": "NONE",
         "base": "Ouistreham"
     },
-    { 
+    {
         "name": "Gwenillig",
         "id": "gwenillig",
         "pix": "/images/boats/gwenillig.png",
@@ -279,7 +279,7 @@
         "category": "NONE",
         "base": "--"
     },
-    { 
+    {
         "name": "Lohengrin",
         "id": "lohengrin",
         "pix": "/images/boats/lohengrin/lohengrin.png",
@@ -287,15 +287,15 @@
         "category": "EX_BOAT",
         "base": "Arzal"
     },
-    { 
-        "name": "Nomadict",
+    {
+        "name": "Nomaddict",
         "id": "nomadict",
         "pix": "/images/boats/nomadict/nomadict.00.jpg",
         "type": "Gin Fizz",
         "category": "TO_GRAB",
         "base": "Concarneau"
     },
-    { 
+    {
         "name": "Velona",
         "id": "velona",
         "pix": "/images/boats/velona/velona.00.jpg",
@@ -303,7 +303,7 @@
         "category": "TO_GRAB",
         "base": "Hennebont"
     },
-    { 
+    {
         "name": "Bemol",
         "id": "bemol",
         "pix": "/images/boats/sun-rise-35-sous-spi.jpg",
