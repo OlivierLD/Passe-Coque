@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="https://mapy.com/">
+	<trk>
+		<name>Lorient - Les Sables-d&apos;Olonne</name>
+		<trkseg>
+			<trkpt lat="47.743676" lon="-3.356026">
+				<ele>5.000000</ele>
+				<time>2025-09-19T08:45:33Z</time>
+			</trkpt>
+			<trkpt lat="47.692898" lon="-3.370222">
+				<ele>-19.000000</ele>
+				<time>2025-09-19T10:13:20Z</time>
+			</trkpt>
+			<trkpt lat="47.691062" lon="-3.370414">
+				<ele>-21.000000</ele>
+				<time>2025-09-19T10:14:38Z</time>
+			</trkpt>
+			<trkpt lat="47.690207" lon="-3.370505">
+				<ele>-16.000000</ele>
+				<time>2025-09-19T10:15:12Z</time>
+			</trkpt>
+			<trkpt lat="47.659902" lon="-3.359613">
+				<ele>5.000000</ele>
+				<time>2025-09-19T10:36:17Z</time>
+			</trkpt>
+			<trkpt lat="47.617866" lon="-3.359364">
+				<ele>-7.000000</ele>
+				<time>2025-09-19T11:07:42Z</time>
+			</trkpt>
+			<trkpt lat="47.617679" lon="-3.359385">
+				<ele>2.000000</ele>
+				<time>2025-09-19T11:07:50Z</time>
+			</trkpt>
+			<trkpt lat="47.573482" lon="-3.346190">
+				<ele>25.000000</ele>
+				<time>2025-09-19T11:43:34Z</time>
+			</trkpt>
+			<trkpt lat="47.573313" lon="-3.346075">
+				<ele>4.000000</ele>
+				<time>2025-09-19T11:43:37Z</time>
+			</trkpt>
+			<trkpt lat="47.452674" lon="-3.306808">
+				<ele>-3.000000</ele>
+				<time>2025-09-19T13:16:12Z</time>
+			</trkpt>
+			<trkpt lat="47.426343" lon="-3.301514">
+				<ele>-15.000000</ele>
+				<time>2025-09-19T13:45:20Z</time>
+			</trkpt>
+			<trkpt lat="47.426131" lon="-3.301484">
+				<ele>-4.000000</ele>
+				<time>2025-09-19T13:45:25Z</time>
+			</trkpt>
+			<trkpt lat="47.425956" lon="-3.301422">
+				<ele>6.000000</ele>
+				<time>2025-09-19T13:45:31Z</time>
+			</trkpt>
+			<trkpt lat="47.409474" lon="-3.296419">
+				<ele>1.000000</ele>
+				<time>2025-09-19T13:56:44Z</time>
+			</trkpt>
+			<trkpt lat="47.406856" lon="-3.295516">
+				<ele>14.000000</ele>
+				<time>2025-09-19T13:58:33Z</time>
+			</trkpt>
+			<trkpt lat="47.406666" lon="-3.295485">
+				<ele>8.000000</ele>
+				<time>2025-09-19T13:58:39Z</time>
+			</trkpt>
+			<trkpt lat="47.293153" lon="-3.245089">
+				<ele>7.000000</ele>
+				<time>2025-09-19T15:31:23Z</time>
+			</trkpt>
+			<trkpt lat="47.292991" lon="-3.244965">
+				<ele>1.000000</ele>
+				<time>2025-09-19T15:31:33Z</time>
+			</trkpt>
+			<trkpt lat="47.261584" lon="-3.191346">
+				<ele>0.000000</ele>
+				<time>2025-09-19T16:12:43Z</time>
+			</trkpt>
+			<trkpt lat="47.261452" lon="-3.191161">
+				<ele>9.000000</ele>
+				<time>2025-09-19T16:12:51Z</time>
+			</trkpt>
+			<trkpt lat="47.231656" lon="-3.109838">
+				<ele>6.000000</ele>
+				<time>2025-09-19T17:50:48Z</time>
+			</trkpt>
+			<trkpt lat="46.714723" lon="-2.453177">
+				<ele>-2.000000</ele>
+				<time>2025-09-20T08:35:53Z</time>
+			</trkpt>
+			<trkpt lat="46.714665" lon="-2.452896">
+				<ele>3.000000</ele>
+				<time>2025-09-20T08:36:01Z</time>
+			</trkpt>
+			<trkpt lat="46.500579" lon="-1.795076">
+				<ele>1.000000</ele>
+				<time>2025-09-20T15:36:13Z</time>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>
+
