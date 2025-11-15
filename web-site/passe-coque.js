@@ -2341,6 +2341,20 @@ const NEXT_EVENTS = [ // oldest to newest.
             fr: 'Samedi 22 Novembre &agrave; Ingrandes sur Loire, remise des prix de la <a href="/?lang=FR&nav-to=62&where=tombola" target="tombola">Tombola des Conties</a> !',
             en: 'Saturday November 22, in Ingrande sur Loire, <a href="/?lang=EN&nav-to=62&where=tombola" target="tombola">Tombola des Conties</a>!'
         }
+    }, {
+        date_from: '2025-11-26',
+        date_to: '2025-11-30',
+        content: {
+            fr: 'Du 26 au 30 novembre 2025, <a href="https://www.parisnauticshow.com/?mtm_campaign=search-notoriete&gad_source=1&gad_campaignid=22683937914&gbraid=0AAAABAKicoUV5Jp-fPIIhwb3lgP9Mx8Xd&gclid=Cj0KCQiA5uDIBhDAARIsAOxj0CEO40yq2YiF9kOs42yBkIJzsJdXaqYDDf0OsVAPAmnLXgGt_9_FstgaAljSEALw_wcB" target="PNS">Paris Nautic Show</a>, Parc des Expositions du Bourget',
+            en: 'November 26 to 30, 2025, <a href="https://www.parisnauticshow.com/?mtm_campaign=search-notoriete&gad_source=1&gad_campaignid=22683937914&gbraid=0AAAABAKicoUV5Jp-fPIIhwb3lgP9Mx8Xd&gclid=Cj0KCQiA5uDIBhDAARIsAOxj0CEO40yq2YiF9kOs42yBkIJzsJdXaqYDDf0OsVAPAmnLXgGt_9_FstgaAljSEALw_wcB" target="PNS">Paris Nautic Show</a>, at the Parc des Expositions du Bourget'
+        }
+    }, {
+        date_from: '2025-11-28',
+        date_to: '2025-11-28',
+        content: {
+            fr: '28 novembre, remise du Prix du Voilier de l\'Ann&eacute;e 2025, lors du Paris Nautic Show.',
+            en: 'November 28, award ceremony for the 2025 Sailboat of the Year, during the Paris Nautic Show.'
+        }
     }
 ];
 

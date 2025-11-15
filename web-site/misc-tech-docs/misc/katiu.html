@@ -90,7 +90,7 @@
             <li>Cable USB (USB-A vers USB-C), alimentation (5V), adaptateur 12V-5V (genre allume-cigare)</li>
             <li>
 				&Eacute;cran, interface HDMI, id&eacute;alement en 12V ou 5V.<br/>
-				Comme par exemple <a href="https://www.kubii.com/fr/ecrans-supports/4595-2332-raspberry-pi-monitor-3272496323674.html?gad_source=1&gad_campaignid=22525551262&gbraid=0AAAAApc7Y9k47X1K1V5rmLRxa6-uVX0la&gclid=CjwKCAjw04HIBhB8EiwA8jGNbVSXHA6f8Io2MTyOfGiKiQKJWVr8sTqw40M-Tn_dsnvAG60nK192gxoCXFkQAvD_BwE#/couleur-rouge_blanc" target="Kubii">celui-ci</a>, &agrave; 120 &euro;.
+				Comme par exemple <a href="https://www.kubii.com/fr/ecrans-supports/4595-2332-raspberry-pi-monitor-3272496323674.html?gad_source=1&gad_campaignid=22525551262&gbraid=0AAAAApc7Y9k47X1K1V5rmLRxa6-uVX0la&gclid=CjwKCAjw04HIBhB8EiwA8jGNbVSXHA6f8Io2MTyOfGiKiQKJWVr8sTqw40M-Tn_dsnvAG60nK192gxoCXFkQAvD_BwE#/couleur-rouge_blanc" target="Kubii">celui-ci</a>, &agrave; 120 &euro; (qui inclut des hauts-parleurs).
 			</li>
             <li>
                 Clavier &amp; souris. Il y en a de toutes sortes et de toutes tailles, de wireless &agrave; USB-A...<br/>
@@ -108,14 +108,34 @@
             <li>
                 Operating System:
                 <ul>
-                    <li><a href="https://www.raspberrypi.com/software/operating-systems/" target="RPi">Raspberry Pi OS</a>, 32 ou 64 bits, selon le mod&egrave;le de RPi5 choisi</li>
-                    <li><a href="https://twisteros.com/" target="TwisterOS">Twister OS</a></li>
+                    <li>
+						<a href="https://www.raspberrypi.com/software/operating-systems/" target="RPi">Raspberry Pi OS</a>, 32 ou 64 bits, selon le mod&egrave;le de RPi5 choisi.<br/>
+						Attention aux compatibilit&eacute;s (Bookworm OK, trixie might have issues with the JDKs...)
+					</li>
+                    <li><a href="https://twisteros.com/" target="TwisterOS">Twister OS</a> ?</li>
+					<li>
+						JRE (and JDK), version 11 to 17.<br/>
+						<code>sudo apt install default-jdk</code>
+					</li>
 					<li>
 						Windows and DOS emulators:
 						<ul>
+							<li><code>sudo apt update && sudo apt full-upgrade -y</code></li>
+							<li>Optional: <code>sudo apt-get dist-upgrade</code></li>
 							<li>dosbox, with a <code>sudo apt install dosbox</code></li>
-							<li>wine, with a <code>sudo apt install wine</code></li>
-							<li>To check out: <a href="https://github.com/Botspot/bvm" targe="BVM">BotSpot VM</a></li>
+							<li>wine (might have limits..., Windows NT, 10), with a <br/>
+								<code>sudo apt install wine winetricks -y</code>
+							</li>
+							<li>
+								To check out: <a href="https://github.com/Botspot/bvm" targe="BVM">BotSpot VM</a>.
+								Requires KVM. Install KVM, as explained <a href="https://pidora.ca/kvm-on-raspberry-pi-run-multiple-virtual-machines-like-a-pro/" target="_blank">here</a>,
+								with:
+								<pre style="font-family: 'Courier New', Courier, monospace;">
+sudo apt update && sudo apt upgrade -y
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager -y
+								</pre>
+								This soft is in beta... Seems to be quite demanding.
+							</li>
 						</ul>
 					</li>
                 </ul>
