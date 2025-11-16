@@ -212,7 +212,8 @@ if ($current_lang == "FR") {
       ?>
       En tant que <i>membre du Boat Club</i>, vous pouvez aussi :
       <ul>
-        <li><a href="../admin/sql/_reservations.02.php" target="admin">Faire une r&eacute;servation</a></li>
+        <!--li><a href="../admin/sql/_reservations.02.php" target="admin">Faire une r&eacute;servation</a></li-->
+        <li><a href="https://passe-coque.com/boat-club/?lang=FR&nav-to=5" target="admin">Faire une r&eacute;servation</a></li>
       </ul>
       <?php
     } else {
@@ -267,6 +268,7 @@ if ($current_lang == "FR") {
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a> (Gestion des membres, du Boat Club, de la flotte, des r&eacute;f&eacute;rents, etc)</li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
+        <li><a href="../admin/web/see.planning.2.html?admin=true" target="admin">Voir le planning des r&eacute;servations (mode Admin)</a></li>
         <li>
           TODO Lists
           <ul>
@@ -343,7 +345,8 @@ if ($current_lang == "FR") {
       ?>
       As a <i>Boat Club member</i>, you can also:
       <ul>
-        <li><a href="../admin/sql/_reservations.02.php" target="admin">Make a reservation</a></li>
+        <!--li><a href="../admin/sql/_reservations.02.php" target="admin">Make a reservation</a></li-->
+        <li><a href="https://passe-coque.com/boat-club/?lang=FR&nav-to=5" target="admin">Make a reservation</a></li>
       </ul>
       <?php
     } else {
@@ -397,6 +400,7 @@ if ($current_lang == "FR") {
       <ul>
         <li><a href="../admin/sql/" target="admin">Admin Menu</a> (Members management, Boat Club, the Fleet, Referent management, etc)</li>
         <li><a href="../admin/sql/nl.email.sender.php" target="admin">News Letter emailing</a></li>
+        <li><a href="../admin/web/see.planning.2.html?admin=true" target="admin">See the reservation planning (admin mode)</a></li>
         <li>
           TODO Lists
           <ul>

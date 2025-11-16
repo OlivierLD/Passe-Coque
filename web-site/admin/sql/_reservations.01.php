@@ -166,10 +166,10 @@ if (isset($_POST['operation'])) {
                     <textarea name="comment" rows="10" cols="80" placeholder="Your comments go here"><?php echo($res->comment); ?></textarea>
                 </td>
             </tr>
-          </table>  
+          </table>
           <input type="submit" name="table-operation" value="Update">
           <input type="submit" name="table-operation" value="Delete">
-        </form>    
+        </form>
         <?php
     } else if ($operation == 'update') {
         // var_dump($_POST);
@@ -200,7 +200,7 @@ if (isset($_POST['operation'])) {
                     echo ("Reservation conflict:<br/>" . PHP_EOL);
                     echo ($boatAvailability->message);
                     $proceed = false;
-                }   
+                }
             }
 
             if ($proceed) {
@@ -233,7 +233,10 @@ if (isset($_POST['operation'])) {
                     }
                     $message .= "<br/>- L'&eacute;quipe du Passe-Coque Club.<br/>";
 
-                    echo("Sending message:<br/>" . $message . "<br/>");
+                    echo("Sending message to " . $owner . ":<br/>" .
+                         "----------------<br/>" .
+                         $message .
+                         "<br/>----------------<br/>");
 
                     sendEmail($owner, "Boat Club Passe-Coque", $message, "FR");
                 }
@@ -251,14 +254,14 @@ if (isset($_POST['operation'])) {
         ?>
         <a href="<?php echo basename(__FILE__); ?>">Back to Query</a>
         <?php
-    } else { 
+    } else {
         echo ("Un-managed operation [$operation]<br/>" . PHP_EOL);
     }
 } else { // Starting form
 ?>
 <!-- Display date widgets -->
 <form action="<?php echo basename(__FILE__); ?>" method="get">
-    Go to 
+    Go to
   <select name="year">
     <option value="2024"<?php echo(($currentYear == 2024) ? ' selected' : ''); ?>>2024</option>
     <option value="2025"<?php echo(($currentYear == 2025) ? ' selected' : ''); ?>>2025</option>
@@ -279,7 +282,7 @@ if (isset($_POST['operation'])) {
     <option value="12"<?php echo(($currentMonth == 12) ? ' selected' : ''); ?>>December</option>
   </select>
   <input type="submit" value="Go">
-</form>    
+</form>
 
 <?php
 
@@ -305,7 +308,7 @@ if (isset($_POST['operation'])) {
 
     // echo ("<h2>Reservation Planning for " . $MONTHS[$currentMonth - 1] . " " . $currentYear . " (3 months)</h2>");
 
-    $boatsArray = getBoats($dbhost, $username, $password, $database, $VERBOSE);     
+    $boatsArray = getBoats($dbhost, $username, $password, $database, $VERBOSE);
 
     // Filter list on 'CLUB'
     $boatsOfTheClub = array();
@@ -323,7 +326,7 @@ if (isset($_POST['operation'])) {
     $from = $MONTHS[$currentMonth - 1] . " " . $currentYear;
 
     $firstDayOfMonth = $currentYear . "-" . $currentMonth . "-" . "01";
-    
+
     $span = 3; // 3 months
     $currentMonth += ($span - 1);
     while ($currentMonth > 12) {
@@ -365,7 +368,7 @@ if (isset($_POST['operation'])) {
                         "<input type='hidden' name='email' value='" . $reservation->owner . "'>" .
                         "<input type='hidden' name='boat-id' value='" . $reservation->boat . "'>" .
                         "<input type='hidden' name='res-date' value='" . $reservation->resDate . "'>" .
-                        (($adminPriv || $isReferent) ? 
+                        (($adminPriv || $isReferent) ?
                         "<input type='submit' value='Edit'>" :
                         "(Not allowed to Edit)") .
                         "</form>";
@@ -379,5 +382,5 @@ if (isset($_POST['operation'])) {
     echo("<hr/>" . PHP_EOL);
 }
 ?>
-  </body>        
+  </body>
 </html>

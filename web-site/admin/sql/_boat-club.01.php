@@ -105,20 +105,20 @@ if ($operation != '') {
 
   if ($operation == 'query') { // Then do the query
     try {
-      $name = $_POST['full-name']; 
+      $name = $_POST['full-name'];
 
       // $link = mysqli_init();  // Mandatory ?
-    
+
       echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
-    
+
       if ($link->connect_errno) {
         echo("Oops, errno:".$link->connect_errno."...<br/>");
         die("Connection failed: " . $conn->connect_error);
       } else {
         echo("Connected.<br/>");
       }
-    
+
       $sql = 'SELECT
           PCM.EMAIL,
           CONCAT(
@@ -130,31 +130,31 @@ if ($operation != '') {
           BC.MEMBER_LEVEL,
           BC.FEE_AMOUNT,
           DATE_FORMAT(BC.LAST_FEE_UPDATE, \'%d-%b-%Y\')
-      FROM 
+      FROM
           PASSE_COQUE_MEMBERS PCM,
           BOAT_CLUB_MEMBERS BC
-      WHERE 
-           (UPPER(PCM.FIRST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
-            UPPER(PCM.LAST_NAME) LIKE UPPER(\'%' . $name . '%\') OR 
+      WHERE
+           (UPPER(PCM.FIRST_NAME) LIKE UPPER(\'%' . $name . '%\') OR
+            UPPER(PCM.LAST_NAME) LIKE UPPER(\'%' . $name . '%\') OR
             UPPER(PCM.EMAIL) LIKE UPPER(\'%' . $name . '%\')) AND
            (PCM.EMAIL = BC.EMAIL)
       ORDER BY 2;';
-      
+
       echo('Performing query <code>' . $sql . '</code><br/>');
-    
+
       // $result = mysql_query($sql, $link);
       $result = mysqli_query($link, $sql);
       echo ("Returned " . $result->num_rows . " row(s)<br/>");
-    
+
       echo("<h2>Passe-Coque Boat Club Members</h2>");
 
-      ?> 
+      ?>
       <!-- Member creation form -->
 
       <form action="<?php echo basename(__FILE__); ?>" method="post">
         <input type="hidden" name="operation" value="new-member">
         <input type="submit" value="Create New Boat Club Member">
-      </form> 
+      </form>
 
       <?php
 
@@ -163,13 +163,13 @@ if ($operation != '') {
       echo "<tr><th>Email</th><th>Name</th><th>Enrolled</th><th>Level</th><th>Amount</th><th>Renewed</th><th>-</th></tr>";
       while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
         echo(
-          "<tr><td>" . 
+          "<tr><td>" .
             /*urldecode*/($table[0]) . // Email
-          "</td><td>" .  
+          "</td><td>" .
             /*utf8_encode*/($table[1]) . // Name (full)
-          "</td><td>" .  
+          "</td><td>" .
             $table[2] . // Enrolled
-          "</td><td>" . 
+          "</td><td>" .
             $table[3] . // Level
           "</td><td>" .
             $table[4] . // Amount
@@ -178,10 +178,10 @@ if ($operation != '') {
           "</td><td>" .
             "<a href='./_boat-club.01.php?operation=edit&id=" . $table[0] . "'>Edit</a>" .
           "</td></tr>\n"
-        ); 
+        );
       }
       echo "</table>";
-      
+
       // On ferme !
       $link->close();
       echo("Closed DB<br/>".PHP_EOL);
@@ -233,10 +233,10 @@ if ($operation != '') {
           </td>
         </tr>
         <tr><td>Fee Amount</td><td><input type="number" name="fee-amount" min="0" step="0.01"></td></tr>
-      </table>  
+      </table>
       <input type="submit" value="Subscribe">
-    </form>    
-      
+    </form>
+
     <?php
 
   } else if ($operation == 'create') {
@@ -248,17 +248,17 @@ if ($operation != '') {
     try {
       echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
-    
+
       if ($link->connect_errno) {
         echo("Oops, errno:".$link->connect_errno."...<br/>");
         die("Connection failed: " . $conn->connect_error);
       } else {
         echo("Connected.<br/>");
       }
-    
+
       $sql = 'INSERT INTO BOAT_CLUB_MEMBERS (EMAIL, MEMBER_LEVEL, FEE_AMOUNT)
       VALUES (\'' .$email . '\', \'' . $level . '\', ' . $amount . ');';
-      
+
       echo('Performing query <code>' . $sql . '</code><br/>');
 
       if (true) { // Do perform ?
@@ -270,7 +270,7 @@ if ($operation != '') {
       } else {
         echo "Stby<br/>" . PHP_EOL;
       }
-    
+
       // On ferme !
       $link->close();
       echo("Closed DB<br/>".PHP_EOL);
@@ -298,14 +298,14 @@ if ($operation != '') {
     try {
     echo("Will connect on ".$database." ...<br/>");
     $link = new mysqli($dbhost, $username, $password, $database);
-  
+
     if ($link->connect_errno) {
       echo("Oops, errno:".$link->connect_errno."...<br/>");
       die("Connection failed: " . $conn->connect_error);
     } else {
       echo("Connected.<br/>");
     }
-  
+
     $sql = 'SELECT
         BC.EMAIL,
         CONCAT(
@@ -317,47 +317,47 @@ if ($operation != '') {
         BC.MEMBER_LEVEL,
         BC.FEE_AMOUNT,
         DATE_FORMAT(BC.LAST_FEE_UPDATE, \'%Y-%m-%d\')
-    FROM 
+    FROM
         PASSE_COQUE_MEMBERS PCM,
         BOAT_CLUB_MEMBERS BC
-    WHERE 
+    WHERE
          PCM.EMAIL = \'' . $email . '\' AND
          (PCM.EMAIL = BC.EMAIL);';
-    
+
     echo('Performing query <code>' . $sql . '</code><br/>');
-  
+
     // $result = mysql_query($sql, $link);
     $result = mysqli_query($link, $sql);
     echo ("Returned " . $result->num_rows . " row(s)<br/>");
-  
+
     ?>
     <h2>Passe-Coque Boat Club Members Update</h2>
     <form action='<?php echo basename(__FILE__); ?>' method='post'>
-    <?php  
+    <?php
     echo("<input type='hidden' name='operation' value='update'>");
     echo("<input type='hidden' name='email' value='$email'>");
     echo "<table>";
     while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
       echo(
-        "<tr>" . 
-          "<td>Email</td><td>" . urldecode($table[0]) . "</td>" .  
+        "<tr>" .
+          "<td>Email</td><td>" . urldecode($table[0]) . "</td>" .
         "</tr><tr>" .
-          "<td>Full Name</td><td>" . utf8_encode($table[1]) . "</td>" .  
+          "<td>Full Name</td><td>" . utf8_encode($table[1]) . "</td>" .
         "</tr><tr>" .
-          "<td>Enrolled</td><td><input type='date' name='enrolled' value='" . ($table[2]) . "'></td>" .  
+          "<td>Enrolled</td><td><input type='date' name='enrolled' value='" . ($table[2]) . "'></td>" .
         "</tr><tr>" .
           "<td>Level</td><td>" .
             "<select name='level'>" .
               "<option value='CREW'" . ($table[3] == 'CREW' ? ' selected' : '') . ">CREW</option>" .
               "<option value='SKIPPER'" . ($table[3] == 'SKIPPER' ? ' selected' : '') . ">SKIPPER</option>" .
               "<option value='NONE'" . ($table[3] == 'NONE' ? ' selected' : '') . ">NONE</option>" .
-            "</select>" . 
-          "</td>" .  
+            "</select>" .
+          "</td>" .
         "</tr><tr>" .
-          "<td>Amount</td><td><input type='number' name='amount' value='" . ($table[4]) . "' min='0' step='0.01'></td>" .  
+          "<td>Amount</td><td><input type='number' name='amount' value='" . ($table[4]) . "' min='0' step='0.01'></td>" .
         "</tr><tr>" .
-          "<td>Renewed</td><td><input type='date' name='renewed' value='" . ($table[5]) . "'></td>" .  
-        "</tr>" . PHP_EOL); 
+          "<td>Renewed</td><td><input type='date' name='renewed' value='" . ($table[5]) . "'></td>" .
+        "</tr>" . PHP_EOL);
     }
     ?>
       </table>
@@ -396,26 +396,26 @@ if ($operation != '') {
     try {
       echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
-    
+
       if ($link->connect_errno) {
         echo("Oops, errno:".$link->connect_errno."...<br/>");
         die("Connection failed: " . $conn->connect_error);
       } else {
         echo("Connected.<br/>");
       }
-    
+
       if ($task == 'update') {
         $sql = 'UPDATE BOAT_CLUB_MEMBERS ' .
                 'SET ENROLLED = STR_TO_DATE(\'' .$enrolled . '\', \'%Y-%m-%d\'), ' .
                     'MEMBER_LEVEL = \'' . $level . '\', ' .
-                    'FEE_AMOUNT = ' . $amount . ', ' . 
+                    'FEE_AMOUNT = ' . $amount . ', ' .
                     'LAST_FEE_UPDATE = ' . (strlen(trim($renewed)) == 0 ? 'NULL' : 'STR_TO_DATE(\'' .$renewed . '\', \'%Y-%m-%d\')') . ' ' .
               'WHERE EMAIL = \'' . $email . '\';';
       } else if ($task == 'delete') {
         $sql = 'DELETE FROM BOAT_CLUB_MEMBERS ' .
               'WHERE EMAIL = \'' . $email . '\';';
       }
-      
+
       echo('Performing query <code>' . $sql . '</code><br/>');
 
       if (true) { // Do perform ?
@@ -446,7 +446,7 @@ if ($operation != '') {
       <ol>
         <li>Go to the <a href="./_members.01.php">Passe-Coque Members List</a></li>
         <li>choose the Passe-Coque member you want to add to the Boat Club</li>
-        <li>and click 'Subscribe'</li>
+        <li>and click 'Subscribe' (if the 'Subscribe' button is not here, check the member's 'Tarif')</li>
       </ol>
 
     <?php
@@ -467,7 +467,7 @@ if ($operation != '') {
       </table>
     </form>
     <?php
-}  
-    ?>        
-  </body>        
+}
+    ?>
+  </body>
 </html>
