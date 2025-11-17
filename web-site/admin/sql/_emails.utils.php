@@ -25,8 +25,10 @@ function sendEmail(string $destinationEmail, string $subject, string $emailConte
         // $headers .= "Reply-To: ".$dest_email."\r\n";       // Email address to reach back
         $headers .= "Reply-To: ".$from_email."\r\n";       // Email address to reach back
         if ($ccBoard) {
-            $headers .= "CC: catherine.laguerre@hotmail.com, olivier.lediouris@gmail.com\r\n"; // Optional
-            // $headers .= "CC: olivier.lediouris@gmail.com\r\n"; // Optional
+            $headers .= "CC: pcc@passe-coque.com, contact@passe-coque.com, catherine.laguerre@hotmail.com, olivier.lediouris@gmail.com\r\n"; // Optional
+            // $headers .= "CC: pcc@passe-coque.com, contact@passe-coque.com, olivier.lediouris@gmail.com\r\n"; // Optional
+        } else {
+            $headers .= "CC: pcc@passe-coque.com, contact@passe-coque.com\r\n";
         }
         $headers .= "Content-Type: multipart/mixed;";    // Defining Content-Type
         $headers .= "boundary = $boundary\r\n";          // Defining the Boundary
