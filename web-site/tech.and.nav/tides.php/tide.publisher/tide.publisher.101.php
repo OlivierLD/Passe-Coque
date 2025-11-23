@@ -89,6 +89,10 @@ table {
         page-break-before: always;
     }
 
+    tr {
+        print-color-adjust: exact; /* For background colors to be printed */
+    }
+
     .doc-section {
         page-break-inside: avoid;
     }
@@ -150,6 +154,7 @@ if ($browserLang == 'fr') {
     // leave it to English
 }
 
+// Translations, each record is "key" => array("EN" => "text in English", "FR" => "text en Français")
 $translations = array(
     "go-back" => array("EN" => "Go Back", "FR" => "Retour"),
     "choose-station" => array("EN" => "Choose your tide station", "FR" => "Choisissez la station"),
@@ -186,7 +191,7 @@ $translations = array(
     "scale-slider" => array("EN" => "Scale Slider", "FR" => "Échelle"),
     "calc-completed" => array("EN" => "Calculation completed", "FR" => "Calcul terminé"),
     "special-prms" => array("EN" => "Special parameters?", "FR" => "Des paramètres spéciaux ?"),
-    "distinguish" => array("EN" => "Highlight the days where the tide is", "FR" => "Distinguer les jours où la marée est"),
+    "distinguish" => array("EN" => "Highlight the days where the tide is...", "FR" => "Distinguer les jours où la marée est..."),
     "distinguish-legend" => array("EN" => "Legend: Days where the tide is", "FR" => "Légende : Les jours où la marée est"),
     "high" => array("EN" => "High", "FR" => "Haute"),
     "low" => array("EN" => "Low", "FR" => "Basse"),
@@ -277,8 +282,9 @@ $NS = 1;
 $EW = 2;
 
 function isDateBetween(DateTime $dateToCheck, DateTime $fromDate, DateTime $toDate) : bool {
-    // echo ("Is  [" . $dateToCheck->format("H:i") . "] between " . $fromDate->format("H:i"). " and " .$toDate->format("H:i") . "?<br/>" . PHP_EOL);
-
+    if (false) {
+        echo ("Is  [" . $dateToCheck->format("H:i") . "] between " . $fromDate->format("H:i"). " and " .$toDate->format("H:i") . "?<br/>" . PHP_EOL);
+    }
     $result = false;
     if ($dateToCheck >= $fromDate && $dateToCheck <= $toDate) {
         $result = true;
@@ -399,9 +405,11 @@ function publishAlmanac(string $stationName,
                     $tideData = $monthTable[$arrayKeys[$colCounter]]["tide.data"];
                     $moonPhase = $monthTable[$arrayKeys[$colCounter]]["moon.phase"];
 
-                    $bgColor = '';
+                    $bgColor = ''; // $bgColor = ' background-color: lime;';
                     if ($extraPrms) {
-                        // echo("Processing extra prms for type " . $tideType . " between " . $fromTime . " and " .$toTime . "<br/>" . PHP_EOL);
+                        if (false) {
+                            echo("Processing extra prms for type " . $tideType . " between " . $fromTime . " and " .$toTime . "<br/>" . PHP_EOL);
+                        }
                         $highlightDay = false;
                         if ($tideType == "high-tide") {
                             for ($k=0; $k<count($tideData); $k++) {
@@ -411,7 +419,9 @@ function publishAlmanac(string $stationName,
                                     $tideDateTime = DateTime::createFromFormat("H:i", $tideTime); // The same day
                                     if (isDateBetween($tideDateTime, $fromDateTime, $toDateTime)) {
                                         $highlightDay = true;
-                                        // echo ("--> Highlighting day " . $dateTime->format("Y-m-d") . "<br/>" . PHP_EOL);
+                                        if (false) {
+                                            echo ("--> Highlighting day " . $dateTime->format("Y-m-d") . "<br/>" . PHP_EOL);
+                                        }
                                     }
                                 }
                             }
@@ -426,7 +436,9 @@ function publishAlmanac(string $stationName,
                                     $tideDateTime = DateTime::createFromFormat("H:i", $tideTime); // The same day
                                     if (isDateBetween($tideDateTime, $fromDateTime, $toDateTime)) {
                                         $highlightDay = true;
-                                        // echo ("--> Highlighting day " . $dateTime->format("Y-m-d") . "<br/>" . PHP_EOL);
+                                        if (false) {
+                                            echo ("--> Highlighting day " . $dateTime->format("Y-m-d") . "<br/>" . PHP_EOL);
+                                        }
                                     }
                                 }
                             }
@@ -436,7 +448,9 @@ function publishAlmanac(string $stationName,
                         }
                         // $bgColor = ' background-color: lime;';
                     }
-                    // echo ("Processing day " . $dateTime->format("Y-m-d") . " with bgColor=[" . $bgColor . "]<br/>" . PHP_EOL);
+                    if (false) {
+                        echo ("Processing day " . $dateTime->format("Y-m-d") . " with bgColor=[" . $bgColor . "]<br/>" . PHP_EOL);
+                    }
 
                     $content .= ("<td style='vertical-align: top;$bgColor;'>" . PHP_EOL);
                     // Inner table
