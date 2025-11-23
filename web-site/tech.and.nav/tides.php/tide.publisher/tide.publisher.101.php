@@ -387,7 +387,7 @@ function publishAlmanac(string $stationName,
                         translateDate($lang, DateTime::createFromFormat("Y-m", sprintf("%04d-%02d", $year, $month)), $DATE_FMT_FULL_MONTH_YEAR) . "</span><br/>" . PHP_EOL);
 
         if ($extraPrms) {
-            $content .= ("<span style='font-size: 1.2rem; background-color: yellow;'>" .
+            $content .= ("<span style='font-size: 1.2rem; background-color: yellow; print-color-adjust: exact;'>" .
                             translate($lang, "distinguish-legend") . " " .
                             ( $tideType == "high-tide" ? translate($lang, "high") : translate($lang, "low") ) . " " .
                             translate($lang, "between") . " " . $fromDateTime->format("H:i") . " " .
