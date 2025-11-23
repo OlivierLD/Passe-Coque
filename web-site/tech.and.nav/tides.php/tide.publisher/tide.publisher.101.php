@@ -104,13 +104,13 @@ table {
     .print-only {  /* overrides the one in main.css */
         display: block;
     }
-	
+
     #result-to-publish {
 		display: block;
         /* color: black; */
         max-height: none;
 	}
-} 
+}
 
     </style>
     <script type="text/javascript">
@@ -119,7 +119,15 @@ function setDocScale(e) {
     document.body.style.setProperty("--doc-scale", v);
 }
 
-    </script>        
+function specialOptions(cb) {
+    let displayDiv = document.getElementById("special-prm-table");
+    if (cb.checked) {
+        displayDiv.style.display = "block";
+    } else {
+        displayDiv.style.display = "none";
+    }
+}
+    </script>
 </head>
 
 <body style="background-color: rgba(255, 255, 255, 0.2); background-image: none;"> <!-- background="bground.jpg" style="min-height: 900px;"> -->
@@ -132,7 +140,7 @@ ini_set('memory_limit', '-1'); // Required for reloadOneStation (or its equivale
 
 $VERBOSE = false;
 
-$lang = "EN"; 
+$lang = "EN";
 // Get it from the browser
 $browserLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 echo "Browser Language: [" . $browserLang . "]<br/>";
@@ -176,7 +184,14 @@ $translations = array(
     "feet" => array("EN" => "feet", "FR" => "pieds"),
     "knots" => array("EN" => "knots", "FR" => "nœuds"),
     "scale-slider" => array("EN" => "Scale Slider", "FR" => "Échelle"),
-    "calc-completed" => array("EN" => "Calculation completed", "FR" => "Calcul terminé")
+    "calc-completed" => array("EN" => "Calculation completed", "FR" => "Calcul terminé"),
+    "special-prms" => array("EN" => "Special parameters?", "FR" => "Des paramètres spéciaux ?"),
+    "distinguish" => array("EN" => "Highlight the days where the tide is", "FR" => "Distinguer les jours où la marée est"),
+    "distinguish-legend" => array("EN" => "Legend: Days where the tide is", "FR" => "Légende : Les jours où la marée est"),
+    "high" => array("EN" => "High", "FR" => "Haute"),
+    "low" => array("EN" => "Low", "FR" => "Basse"),
+    "between" => array("EN" => "Between", "FR" => "Entre"),
+    "and" => array("EN" => "and", "FR" => "et")
 );
 
 function translate (string $lang, string $textId) : string {
@@ -261,19 +276,41 @@ function getCoeffData (BackEndSQLiteTideComputer $backend, Constituents $constit
 $NS = 1;
 $EW = 2;
 
+function isDateBetween(DateTime $dateToCheck, DateTime $fromDate, DateTime $toDate) : bool {
+    // echo ("Is  [" . $dateToCheck->format("H:i") . "] between " . $fromDate->format("H:i"). " and " .$toDate->format("H:i") . "?<br/>" . PHP_EOL);
+
+    $result = false;
+    if ($dateToCheck >= $fromDate && $dateToCheck <= $toDate) {
+        $result = true;
+    }
+    return $result;
+}
+
 /**
  * Publish for one month
  */
-function publishAlmanac(string $stationName, 
-                        int $year, 
-                        int $month, 
-                        BackEndSQLiteTideComputer $backend, 
-                        Constituents $constituentsObject, 
-                        array $stationsData) : string {
+function publishAlmanac(string $stationName,
+                        int $year,
+                        int $month,
+                        BackEndSQLiteTideComputer $backend,
+                        Constituents $constituentsObject,
+                        array $stationsData,
+                        ?string $tideType=null,
+                        ?string $fromTime=null,
+                        ?string $toTime=null) : string {
 
-    global $VERBOSE, $lang;        
+    global $VERBOSE, $lang;
     global $DATE_FMT_DOW_DAY_MONTH_YEAR, $DATE_FMT_FULL_MONTH_YEAR;
     global $NS, $EW;
+
+    $fromDateTime = null;
+    $toDateTime = null;
+    $extraPrms = false;
+    if ($fromTime != null && $toTime != null) {
+        $extraPrms = true;
+        $fromDateTime = DateTime::createFromFormat("H:i", $fromTime);
+        $toDateTime = DateTime::createFromFormat("H:i", $toTime);
+    }
 
     $content = "";
 
@@ -287,7 +324,7 @@ function publishAlmanac(string $stationName,
             $content .= ($stationName . " IS a current station.<br/>" . PHP_EOL);
             // TODO Honk ?
         }
-        // Tide for one month 
+        // Tide for one month
         $nbDaysThisMonth = TideUtilities::getNbDays($year, $month);
         if ($VERBOSE) {
             echo("Will process tide for one month:" . $year . ", " . $month . ", " . $nbDaysThisMonth . " days.<br/>" . PHP_EOL);
@@ -316,11 +353,11 @@ function publishAlmanac(string $stationName,
                 // $context2 = $ac->getContext();
 
                 // $semiDiamSun = sprintf("%.04f", ($context2->SDsun / 60));
-                // $sunHP = sprintf("%.04f", ($context2->HPsun / 60)); 
-                // $semiDiamMoon = sprintf("%.04f", ($context2->SDmoon / 60)); 
+                // $sunHP = sprintf("%.04f", ($context2->HPsun / 60));
+                // $semiDiamMoon = sprintf("%.04f", ($context2->SDmoon / 60));
                 // var_dump($ac->getMoonPhase());
-                $moonPhaseAngle = $ac->getMoonPhase()->phase; 
-                // $moonPhase = sprintf("%.02f %%, ", $context2->k_moon) . $ac->getMoonPhaseStr(); 
+                $moonPhaseAngle = $ac->getMoonPhase()->phase;
+                // $moonPhase = sprintf("%.02f %%, ", $context2->k_moon) . $ac->getMoonPhaseStr();
                 $phaseIndex = floor($moonPhaseAngle / (360 / 28.5)) + 1;
                 if ($phaseIndex > 28) {
                     $phaseIndex = 28;
@@ -336,12 +373,20 @@ function publishAlmanac(string $stationName,
         $arrayKeys = array_keys($monthTable);
         // Dsplay Table for 1 month...
         $content .= ("<p>" . PHP_EOL);
-        $content .= ("<span style='font-size: 1.5rem;'><b>" . $theTideStation->getFullName() . "</b>, " . 
-                        decToSex($theTideStation->getLatitude(), "NS") . " / " . decToSex($theTideStation->getLongitude(), "EW") . ", TZ : " . 
-                        $theTideStation->getTimeZone() . ", " . translate($lang, "base-height") . " : " . 
+        $content .= ("<span style='font-size: 1.5rem;'><b>" . $theTideStation->getFullName() . "</b>, " .
+                        decToSex($theTideStation->getLatitude(), "NS") . " / " . decToSex($theTideStation->getLongitude(), "EW") . ", TZ : " .
+                        $theTideStation->getTimeZone() . ", " . translate($lang, "base-height") . " : " .
                         $theTideStation->getBaseHeight() . " " . translate($lang, $theTideStation->getDisplayUnit()) . "<span><br/>" . PHP_EOL);
-        $content .= ("<span style='font-size: 2.0rem; font-style: italic; font-weight: bold;'>" . 
+        $content .= ("<span style='font-size: 2.0rem; font-style: italic; font-weight: bold;'>" .
                         translateDate($lang, DateTime::createFromFormat("Y-m", sprintf("%04d-%02d", $year, $month)), $DATE_FMT_FULL_MONTH_YEAR) . "</span><br/>" . PHP_EOL);
+
+        if ($extraPrms) {
+            $content .= ("<span style='font-size: 1.2rem; background-color: yellow;'>" .
+                            translate($lang, "distinguish-legend") . " " .
+                            ( $tideType == "high-tide" ? translate($lang, "high") : translate($lang, "low") ) . " " .
+                            translate($lang, "between") . " " . $fromDateTime->format("H:i") . " " .
+                            translate($lang, "and") . " " . $toDateTime->format("H:i") . "</span><br/>" . PHP_EOL);
+        }
         $content .= ("<table>" . PHP_EOL);
         $colCounter = 0;
         $nbCol = 4;
@@ -349,22 +394,63 @@ function publishAlmanac(string $stationName,
             $content .= ("<tr>" . PHP_EOL);
             for ($j=0; $j<$nbCol; $j++) {
                 if ($colCounter < count($arrayKeys)) {
-                    $dateTime = DateTime::createFromFormat("Y-m-d", $arrayKeys[$colCounter]); // , $tz); 
-                    $content .= ("<td style='vertical-align: top;'>" . PHP_EOL);
+                    $dateTime = DateTime::createFromFormat("Y-m-d", $arrayKeys[$colCounter]); // , $tz);
+
+                    $tideData = $monthTable[$arrayKeys[$colCounter]]["tide.data"];
+                    $moonPhase = $monthTable[$arrayKeys[$colCounter]]["moon.phase"];
+
+                    $bgColor = '';
+                    if ($extraPrms) {
+                        // echo("Processing extra prms for type " . $tideType . " between " . $fromTime . " and " .$toTime . "<br/>" . PHP_EOL);
+                        $highlightDay = false;
+                        if ($tideType == "high-tide") {
+                            for ($k=0; $k<count($tideData); $k++) {
+                                $highOrLow = $tideData[$k]->getType(); // HW/LW
+                                if ($highOrLow == "HW") {
+                                    $tideTime = $tideData[$k]->getCalendar()->format("H:i");
+                                    $tideDateTime = DateTime::createFromFormat("H:i", $tideTime); // The same day
+                                    if (isDateBetween($tideDateTime, $fromDateTime, $toDateTime)) {
+                                        $highlightDay = true;
+                                        // echo ("--> Highlighting day " . $dateTime->format("Y-m-d") . "<br/>" . PHP_EOL);
+                                    }
+                                }
+                            }
+                            if ($highlightDay) {
+                                $bgColor = ' background-color: yellow;';
+                            }
+                        } elseif ($tideType == "low-tide") {
+                            for ($k=0; $k<count($tideData); $k++) {
+                                $highOrLow = $tideData[$k]->getType(); // HW/LW
+                                if ($highOrLow == "LW") {
+                                    $tideTime = $tideData[$k]->getCalendar()->format("H:i");
+                                    $tideDateTime = DateTime::createFromFormat("H:i", $tideTime); // The same day
+                                    if (isDateBetween($tideDateTime, $fromDateTime, $toDateTime)) {
+                                        $highlightDay = true;
+                                        // echo ("--> Highlighting day " . $dateTime->format("Y-m-d") . "<br/>" . PHP_EOL);
+                                    }
+                                }
+                            }
+                            if ($highlightDay) {
+                                $bgColor = ' background-color: yellow;';
+                            }
+                        }
+                        // $bgColor = ' background-color: lime;';
+                    }
+                    // echo ("Processing day " . $dateTime->format("Y-m-d") . " with bgColor=[" . $bgColor . "]<br/>" . PHP_EOL);
+
+                    $content .= ("<td style='vertical-align: top;$bgColor;'>" . PHP_EOL);
                     // Inner table
                     $content .= ("<table>" . PHP_EOL);
                     $content .= (  "<tr><td colspan='6'><b>" . translateDate($lang, $dateTime, $DATE_FMT_DOW_DAY_MONTH_YEAR) . "</b></td></tr>" . PHP_EOL);
                     $content .= (  "<tr><th></th><th>" . translate($lang, "time") . "</th><th>" . translate($lang, "height") . "</th><th>" . translate($lang, "unit") . "</th><th>" . translate($lang, "coeff") . "</th></tr>" . PHP_EOL);
-                    $tideData = $monthTable[$arrayKeys[$colCounter]]["tide.data"];
-                    $moonPhase = $monthTable[$arrayKeys[$colCounter]]["moon.phase"];
 
                     for ($k=0; $k<count($tideData); $k++) {
                         $content .= ("<tr>" . PHP_EOL);
                         $content .= (  "<td><b>" . translate($lang, $tideData[$k]->getType()) . "</b></td>" .
                                 "<td>" . $tideData[$k]->getCalendar()->format("H:i") . "</td>" .
-                                "<td>" . sprintf("%.02f", $tideData[$k]->getValue()) . "</td>" . 
+                                "<td>" . sprintf("%.02f", $tideData[$k]->getValue()) . "</td>" .
                                 "<td>" . translate($lang, $tideData[$k]->getUnit()) . "</td>" .
-                                "<td style='text-align: center;'>" . ($tideData[$k]->getCoeff() != 0 ? sprintf("%02d", $tideData[$k]->getCoeff()) : "") . "</td>" . 
+                                "<td style='text-align: center;'>" . ($tideData[$k]->getCoeff() != 0 ? sprintf("%02d", $tideData[$k]->getCoeff()) : "") . "</td>" .
                                 ($k == 0 ? "<td rowspan='4'><img src='" . $moonPhase . "'/></td>" : "") . PHP_EOL);
                         $content .= ("<tr>" . PHP_EOL);
                     }
@@ -383,7 +469,7 @@ function publishAlmanac(string $stationName,
 }
 
 // TODO Add 1 month, 2 months, 3 months, 6 months...
-function publishStationDuration(string $stationName, int $year, ?int $month=null) : void {
+function publishStationDuration(string $stationName, int $year, ?int $month=null, ?string $tideType=null, ?string $fromTime=null, ?string $toTime=null) : void {
     global $VERBOSE, $lang;
 
     $backend = new BackEndSQLiteTideComputer();
@@ -435,12 +521,12 @@ function publishStationDuration(string $stationName, int $year, ?int $month=null
     // $month = (int)date("m");
     $content = "";
     if ($month != null) {
-        $content = publishAlmanac($stationName, $year, $month, $backend, $constituentsObject, $stationsData);
+        $content = publishAlmanac($stationName, $year, $month, $backend, $constituentsObject, $stationsData, $tideType, $fromTime, $toTime);
     } else {
         // One year, loop.
         $content = "";
         for ($m=1; $m<=12; $m++) {
-            $content .= publishAlmanac($stationName, $year, $m, $backend, $constituentsObject, $stationsData);
+            $content .= publishAlmanac($stationName, $year, $m, $backend, $constituentsObject, $stationsData, $tideType, $fromTime, $toTime);
             $content .= ("<div class='page-break'></div>" . PHP_EOL);
         }
     }
@@ -451,7 +537,7 @@ function publishStationDuration(string $stationName, int $year, ?int $month=null
     // echo ("<br/>");
     $now = DateTime::createFromFormat('U.u', $UTdate); // UTC
     echo(translate($lang, "calc-completed") .  " " . $now->format("d-M-Y H:i:s") . " (UTC).<br/>" . PHP_EOL);
-    echo("<hr/>" . PHP_EOL); 
+    echo("<hr/>" . PHP_EOL);
 
     echo("</div>" . PHP_EOL); // Close the screen-only div
     echo("<div id='result-to-publish' class='scaled'>" . PHP_EOL);
@@ -488,13 +574,14 @@ function blankScreen() : void {
     global $lang;
     ?>
     <h2><?php echo translate($lang, "choose-station"); ?></h2>
-    <form action="<?php echo basename(__FILE__); ?>" 
-          method="get" 
-          name="formStation" 
+    <form action="<?php echo basename(__FILE__); ?>"
+          method="get"
+          name="formStation"
           style="padding:0; margin:0">
         <input type="hidden" name="lang" value="<?php echo $lang; ?>">
-        
-        <?php echo translate($lang, "part-of-name"); ?>: <input type="text" size="40" name="pattern" placeholder="Name pattern" title="Joker is '%'.&#13;Enter '%' for all stations" required>
+
+        <?php echo translate($lang, "part-of-name"); ?>:
+        <input type="text" size="40" name="pattern" placeholder="Name pattern" title="Joker is '%'.&#13;Enter '%' for all stations" required>
         <br/>
         <input type="submit" value="Submit">
     </form>
@@ -536,7 +623,7 @@ function selectStationAndDuration(array $list) : void {
                 let message = "";
                 if (lang === 'FR') {
                     message = `Votre requête pour "${station}", sur une durée d'un ${(duration === 'YEAR') ? 'an' : 'mois'}, est en cours de traitement.\nSoyez patient, ça peut prendre du temps...`;
-                } else {    
+                } else {
                     message = `Your request for "${station}", on one ${(duration === 'YEAR') ? 'year' : 'month'}, is being processed.\nBe patient, it may take some time...`;
                 }
                 setTimeout(() => { // Non-blocking alert. TODO A custom dialog (with the header I want)
@@ -545,10 +632,10 @@ function selectStationAndDuration(array $list) : void {
             };
         </script>
 
-        <form action="<?php echo basename(__FILE__); ?>" 
+        <form action="<?php echo basename(__FILE__); ?>"
             onsubmit="sendAck(this);"
-            method="get" 
-            id="formStation" 
+            method="get"
+            id="formStation"
             style="padding:0; margin:0">
             <input type="hidden" name="lang" value="<?php echo $lang; ?>">
             <table>
@@ -600,6 +687,34 @@ function selectStationAndDuration(array $list) : void {
                         </select>
                     </td>
                 </tr>
+                <tr>
+                    <td><?php echo translate($lang, "special-prms"); ?></td><td><input name="extra-prm" type="checkbox" onchange="specialOptions(this);"></td>
+                </tr>
+                <tr id="special-prm-table" style="display: none;">
+                    <td colspan="2">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td colspan="2"><?php echo translate($lang, "distinguish") ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <select name="tide-type" form="formStation">
+                                        <option value="high-tide"><?php echo translate($lang, "high") ?></option>
+                                        <option value="low-tide"><?php echo translate($lang, "low") ?></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?php echo translate($lang, "between") ?> <input type="time" name="from-time" value="00:00">
+                                </td>
+                                <td>
+                                    <?php echo translate($lang, "and") ?> <input type="time" name="to-time" value="23:59">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
             </table>
             <div class="final-submit">
                 <input type="submit" value="Submit">
@@ -612,6 +727,21 @@ function selectStationAndDuration(array $list) : void {
 
 function selectDuration(string $stationName) : void {
     // Unused...
+}
+
+function checkChronology(string $fromTime, string $toTime) : void {
+    global $lang;
+
+    $fromDateTime = DateTime::createFromFormat("H:i", $fromTime);
+    $toDateTime = DateTime::createFromFormat("H:i", $toTime);
+
+    if ($fromDateTime >= $toDateTime) {
+        if ($lang == 'FR') {
+            echo("Le temps de début doit être antérieur au temps de fin.<br/>" . PHP_EOL);
+        } else {
+            echo("The from-time must be earlier than the to-time.<br/>" . PHP_EOL);
+        }
+    }
 }
 
 $stationName = null;
@@ -639,6 +769,7 @@ try {
 
     /**
      * URL Like http://.../tide.publisher.101.php?station-name=Port-Tudy&duration=MONTH&year=2024&month=12 optional &lang=FR
+     *          http://.../tide.publisher/tide.publisher.101.php?lang=FR&station-name=Port-Tudy%2C+France&duration=MONTH&year=2025&month=11&extra-prm=on&tide-type=high-tide&from-time=10%3A00&to-time=14%3A00
      */
 
     if (isset($_GET['station-name'])) {
@@ -648,16 +779,31 @@ try {
         $publishDuration = $_GET['duration']; // YEAR | MONTH
     }
     if (isset($_GET['year'])) {
-        $publishYear = $_GET['year']; 
+        $publishYear = $_GET['year'];
     }
     if (isset($_GET['month'])) {
-        $publishMonth = $_GET['month']; 
+        $publishMonth = $_GET['month'];
     }
     if (isset($_GET['pattern'])) {
-        $pattern = $_GET['pattern']; 
+        $pattern = $_GET['pattern'];
     }
     if (isset($_GET['lang'])) {
-        $lang = $_GET['lang']; 
+        $lang = $_GET['lang'];
+    }
+    // extra-prm=on&tide-type=high-tide&from-time=10%3A00&to-time=14%3A00
+    if (isset($_GET['extra-prm']) && $_GET['extra-prm'] == 'on') {
+        $extraPrm = true;
+        if (isset($_GET['tide-type'])) {
+            $tideType = $_GET['tide-type']; // high-tide | low-tide
+        }
+        if (isset($_GET['from-time'])) {
+            $fromTime = $_GET['from-time']; // HH:MM
+        }
+        if (isset($_GET['to-time'])) {
+            $toTime = $_GET['to-time']; // HH:MM
+        }
+    } else {
+        $extraPrm = false;
     }
 
 ?>
@@ -684,7 +830,14 @@ try {
     } else if ($stationName != null && $publishDuration != null) {
         $option = $PUBLISH;
     }
-    
+    // TODO from-to time, high/low tide
+    if ($extraPrm) {
+        // TODO Handle special parameters
+        // $tideType, $fromTime, $toTime
+        echo("Special parameters requested: " . $tideType . ", from " . $fromTime . " to " . $toTime . "<br/>" . PHP_EOL);
+        checkChronology($fromTime, $toTime);
+    }
+
     if ($option == -1) {
         echo ("WTF???<br/>" . PHP_EOL);
     } else if ($option == $BLANK_SCREEN) {
@@ -700,10 +853,21 @@ try {
         selectDuration($stationName); // Done in the above, probably useless.
     } else if ($option == $PUBLISH) {
         // like publishStationDuration("Port-Tudy", 2024, 12);
+        // With extraPrms if needed
         if ($publishDuration == 'MONTH') {
-            publishStationDuration($stationName, $publishYear, $publishMonth);
+            if ($extraPrm) {
+                echo("Special parameters will be applied.<br/>" . PHP_EOL);
+                publishStationDuration($stationName, $publishYear, $publishMonth, $tideType, $fromTime, $toTime);
+            } else {
+                publishStationDuration($stationName, $publishYear, $publishMonth);
+            }
         } else {
-            publishStationDuration($stationName, $publishYear);
+            if ($extraPrm) {
+                echo("Special parameters will be applied.<br/>" . PHP_EOL);
+                publishStationDuration($stationName, $publishYear, null, $tideType, $fromTime, $toTime);
+            } else {
+                publishStationDuration($stationName, $publishYear);
+            }
         }
     }
 
