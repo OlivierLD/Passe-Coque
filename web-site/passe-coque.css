@@ -1145,6 +1145,7 @@ span.expand-collapse:hover {
     grid-template-columns: 50% 50%;
 }
 .you-tube-video {
+    z-index: 10;
     width: 280px;
     height: 158px;
 }
@@ -1640,6 +1641,7 @@ button.search-item {
         margin: 20px;
     }
     .you-tube-video {
+        z-index: 10;
         width: 560px;
         height: 315px;
     }
@@ -1720,6 +1722,7 @@ button.search-item {
         grid-template-columns: 100%;
     }
     .you-tube-video {
+        z-index: 10;
         width: 280px;
         height: 158px;
     }
