@@ -3457,6 +3457,12 @@ const KEYWORDS = [
 		comment: 'Projet Rubi\'s Cup'
 	},
 	{
+		name: 'Shazzan, Patagonie',
+		keywords: [ 'shazzan', 'patagonie', 'patagonia', 'puerto montt' ],
+		url: '/?nav-to=31&tx=39',
+		comment: 'Projet Shazzan'
+	},
+	{
 		name: 'Rubi\'s Cup 2025',
 		keywords: [ 'rubi', 'godille', 'port', 'tudy', 'sculling', 'touline', 'cooking' ],
 		url: '/?nav-to=31&tx=36',
@@ -3717,7 +3723,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Shazzan',
-		keywords: [ 'boat', 'bateau', 'shazzan', 'patagonie', 'puerto montt', 'puerto mont', 'puerto', 'montt', 'alu', 'aluminium' ],
+		keywords: [ 'boat', 'bateau', 'shazzan', 'shazan', 'patagonie', 'patagonia', 'puerto montt', 'puerto mont', 'puerto', 'montt', 'alu', 'aluminium' ],
 		url: '/?nav-to=4&boat-id=shazzan',
 		comment: 'Le bateau, truc en alu'
 	},
