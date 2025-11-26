@@ -1520,6 +1520,7 @@ const CLUB = "CLUB";         // 2;
 const EX_BOAT = "EX_BOAT";   // 3;
 const TO_GRAB = "TO_GRAB";   // 4;
 const FOR_SALE = "FOR_SALE"; // 5;
+const PARTNERS = "PARTNERS"; // 6;
 
 let THE_BOATS = null;
 // This is a backup. Used if the json fetch fails...
@@ -1920,6 +1921,14 @@ const THE_FLEET = [
         type: "Sun Rise 35",
         category: CLUB,
         base: "Saint-Philibert"
+    },
+    {
+        name: "Shazzan",
+        id: "shazzan",
+        pix: "/images/boats/shazzan/01.jpeg",
+        type: "Coque Alu",
+        category: PARTNERS,
+        base: "Patagonie, Puerto Montt"
     }
 ];
 
@@ -2381,6 +2390,10 @@ let updateFilter = radio => {
             console.log("&agrave; vendre");
             fillOutFleet(FOR_SALE);
             break;
+        case '6':
+            console.log("Partenaires");
+            fillOutFleet(PARTNERS);
+            break;
         default:
             break;
     }
@@ -2512,6 +2525,9 @@ let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
             } else if (boat.category === FOR_SALE) {
                 badge.classList.add("badge-for-sale");
                 badge.innerHTML = '<span><img src="./logos/for.sale.png" style="width: 36px;"></span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
+            } else if (boat.category === PARTNERS) {
+                badge.classList.add("badge-partners");
+                badge.innerHTML = '<span>🤝</span>'; // (currentLang === 'FR') ? "&Agrave;<br/>saisir" : "Grab<br/>it!";
             }
             div.appendChild(badge);
         }
@@ -3698,6 +3714,12 @@ const KEYWORDS = [
 		keywords: [ 'boat', 'bateau', 'gwenellig', 'Eygthene 24', 'bernard', 'bene', 'benny' ],
 		url: '/?nav-to=4&boat-id=gwenillig',
 		comment: 'Le bateau, Eygthene 24'
+	},
+	{
+		name: 'Shazzan',
+		keywords: [ 'boat', 'bateau', 'shazzan', 'patagonie', 'puerto montt', 'puerto mont', 'puerto', 'montt', 'alu', 'aluminium' ],
+		url: '/?nav-to=4&boat-id=shazzan',
+		comment: 'Le bateau, truc en alu'
 	},
 	{
 		name: 'Ia Orana',

@@ -97,37 +97,37 @@ if (isset($_POST['operation'])) {
     // echo("Update:" . $_POST['update'] . ", Delete:" . $_POST['delete'] . " <br/>" . PHP_EOL); // Two Submit buttons
 
     try {
-      $boat_name = $_POST['boat-name']; 
-      $id = $_POST['id']; 
-      $pix_loc = $_POST['pix-loc']; 
-      $boat_type = $_POST['boat-type']; 
-      $category = $_POST['category']; 
-      $base = $_POST['base']; 
+      $boat_name = $_POST['boat-name'];
+      $id = $_POST['id'];
+      $pix_loc = $_POST['pix-loc'];
+      $boat_type = $_POST['boat-type'];
+      $category = $_POST['category'];
+      $base = $_POST['base'];
 
       // $link = mysqli_init();  // Mandatory ?
-    
+
       $link = new mysqli($dbhost, $username, $password, $database);
-    
+
       if ($link->connect_errno) {
         echo("Oops, errno:" . $link->connect_errno . "...<br/>");
         die("Connection failed: " . $conn->connect_error);
       } else {
         echo("Connected.<br/>");
       }
-    
+
       if (isset($_POST['update'])) {  // TODO urlencode ?
 
         // echo ("Update for $email ... <br/>");
 
         $sql = 'UPDATE THE_FLEET ' .
                'SET BOAT_NAME = \'' . str_replace("'", "\'", $boat_name) . '\', PIX_LOC = \'' . ($pix_loc) . '\', ' .
-                    'BOAT_TYPE = \'' . ($boat_type) . '\', ' . 
-                    'CATEGORY = \'' . ($category) . '\', ' . 
-                    'BASE = \'' . (trim(str_replace("'", "\'", $base))) . '\' ' . 
+                    'BOAT_TYPE = \'' . ($boat_type) . '\', ' .
+                    'CATEGORY = \'' . ($category) . '\', ' .
+                    'BASE = \'' . (trim(str_replace("'", "\'", $base))) . '\' ' .
                 'WHERE ID = \'' . $id . '\'';
         // echo ("Update Stmt: $sql ; <br/>");
       } else if (isset($_POST['delete'])) {
-        $sql = 'DELETE FROM THE_FLEET 
+        $sql = 'DELETE FROM THE_FLEET
                 WHERE ID = \'' . $id . '\'';
       } else if ($operation === 'insert') {
         $sql = 'INSERT INTO THE_FLEET ' .
@@ -139,7 +139,7 @@ if (isset($_POST['operation'])) {
       }
 
       echo('Performing query <code>' . $sql . '</code><br/>');
-    
+
       if (true) { // Do perform ?
         if ($link->query($sql) === TRUE) {
           echo "OK. Operation performed successfully<br/>" . PHP_EOL;
@@ -178,14 +178,14 @@ if (isset($_POST['operation'])) {
   $id = $_GET['id'];
   try {
     $link = new mysqli($dbhost, $username, $password, $database);
-    
+
     if ($link->connect_errno) {
       echo("Oops, errno:".$link->connect_errno."...<br/>");
       die("Connection failed: " . $conn->connect_error);
     } else {
       echo("Connected.<br/>");
     }
-  
+
     $sql = 'SELECT BOAT_NAME, ID, PIX_LOC, BOAT_TYPE, CATEGORY, BASE FROM THE_FLEET WHERE ID = \'' . $id . '\';';
     //             |          |   |        |          |         |
     //             |          |   |        |          |         5
@@ -196,7 +196,7 @@ if (isset($_POST['operation'])) {
     //             0
 
     echo('Performing query <code>' . $sql . '</code><br/>');
-        
+
     // $result = mysql_query($sql, $link);
     $result = mysqli_query($link, $sql);
     echo ("Returned " . $result->num_rows . " row(s)<br/>");
@@ -220,12 +220,13 @@ if (isset($_POST['operation'])) {
       echo('<tr><td>ID</td><td><input type="text" name="id" value="' . urldecode($table[1]) . '" size="40"></td></tr>' . PHP_EOL);
       echo('<tr><td>Picture Location</td><td><input type="text" name="pix-loc" value="' . $table[2] . '" size="40"></td></tr>' . PHP_EOL);
       echo('<tr><td>Boat Type</td><td><input type="text" name="boat-type" value="' . urldecode($table[3]) . '" size="40"></td></tr>' . PHP_EOL);
-      echo('<tr><td>Category</td><td><select name="category">'. 
-                                   '<option value="NONE"' . ($table[4]=== 'NONE' ? ' selected' : '') . '>NONE</option>' . 
-                                   '<option value="CLUB"' . ($table[4]=== 'CLUB' ? ' selected' : '') . '>CLUB</option>' . 
-                                   '<option value="EX_BOAT"' . ($table[4]=== 'EX_BOAT' ? ' selected' : '') . '>EX_BOAT</option>' . 
-                                   '<option value="TO_GRAB"' . ($table[4]=== 'TO_GRAB' ? ' selected' : '') . '>TO_GRAB</option>' . 
-                                   '<option value="FOR_SALE"' . ($table[4]=== 'FOR_SALE' ? ' selected' : '') . '>FOR_SALE</option>' . 
+      echo('<tr><td>Category</td><td><select name="category">'.
+                                   '<option value="NONE"' . ($table[4]=== 'NONE' ? ' selected' : '') . '>NONE</option>' .
+                                   '<option value="CLUB"' . ($table[4]=== 'CLUB' ? ' selected' : '') . '>CLUB</option>' .
+                                   '<option value="EX_BOAT"' . ($table[4]=== 'EX_BOAT' ? ' selected' : '') . '>EX_BOAT</option>' .
+                                   '<option value="TO_GRAB"' . ($table[4]=== 'TO_GRAB' ? ' selected' : '') . '>TO_GRAB</option>' .
+                                   '<option value="PARTNERS"' . ($table[4]=== 'PARTNERS' ? ' selected' : '') . '>PARTNERS</option>' .
+                                   '<option value="FOR_SALE"' . ($table[4]=== 'FOR_SALE' ? ' selected' : '') . '>FOR_SALE</option>' .
                                  '</select></td><tr>' . PHP_EOL);
       echo('<tr><td>Base</td><td><input type="text" name="base" value="' . urldecode($table[5]) . '" size="40"></td></tr>' . PHP_EOL);
       echo('<tr><td>Image (read-only)</td><td><img src="' . $table[2] . '"></td></tr>' . PHP_EOL);
@@ -276,6 +277,6 @@ if (isset($_POST['operation'])) {
   // WHAT ??
   echo "What ??";
 }
-    ?>        
-  </body>        
+    ?>
+  </body>
 </html>

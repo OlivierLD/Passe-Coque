@@ -296,7 +296,11 @@ div.tooltip:hover span {
 }
 .badge-for-sale {
     background: rgba(0, 255, 4, 0.25);
-} */
+}
+.badge-partners {
+    background: rgba(0, 255, 4, 0.25);
+}
+*/
 
 .pc-history {
     border: 1px solid rgb(168, 161, 161);
