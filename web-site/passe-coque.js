@@ -1926,7 +1926,7 @@ const THE_FLEET = [
         name: "Shazzan",
         id: "shazzan",
         pix: "/images/boats/shazzan/01.jpeg",
-        type: "Coque Alu",
+        type: "Ovni 435",
         category: PARTNERS,
         base: "Patagonie, Puerto Montt"
     }
