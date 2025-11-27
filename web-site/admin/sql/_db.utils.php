@@ -895,9 +895,11 @@ class MemberStatus {
     public static $PASSE_COQUE_AND_BOAT_CLUB_MEMBER = 0;
     public static $NO_PASSE_COQUE_MEMBER = 1;
     public static $NO_BOAT_CLUB_MEMBER = 2;
+    public static $PASSE_COQUE_FEE_EXPIRED = 3;
+    public static $PASSE_COQUE_CLUB_FEE_EXPIRED = 4;
 
     public $status;  // bool
-    public $errNo;   // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club
+    public $errNo;   // int. O: Passe-Coque & Boat-Club, 1: Not Passe-Coque, 2: Not Boat-Club, 3: Passe-Coque Fee expired, 4: Passe-Coque Club Fee expired
     public $errMess; // string
 }
 
@@ -945,10 +947,32 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
                 $memberStatus->status = false;
                 $memberStatus->errNo = MemberStatus::$NO_BOAT_CLUB_MEMBER;
                 $memberStatus->errMess = "Passe-Coque Member, but not Boat Club Member";
+                // Passe-Coque Cotisation date
+                $nbDaysSinceLastFee = daysSinceLastPCFee($dbhost, $username, $password, $database, $userId, $verbose);
+                if ($nbDaysSinceLastFee == -1 || $nbDaysSinceLastFee >= 365) {
+                    $memberStatus->status = false;
+                    $memberStatus->errNo = MemberStatus::$PASSE_COQUE_FEE_EXPIRED;
+                    $memberStatus->errMess = "Passe-Coque Membership fee expired ($nbDaysSinceLastFee days since last payment)";
+                } else {
+                    if ($verbose) {
+                        echo("Days since last Passe-Coque fee payment: " . $nbDaysSinceLastFee . "<br/>" . PHP_EOL);
+                    }
+                }
             } else {
                 $memberStatus->status = true;
                 $memberStatus->errNo = MemberStatus::$PASSE_COQUE_AND_BOAT_CLUB_MEMBER;
                 $memberStatus->errMess = "PC & BC";
+                // TODO Passe-Coque Club Cotisation Date
+                $nbDaysSinceLastClubFee = daysSinceLastBCFee($dbhost, $username, $password, $database, $userId, $verbose);
+                if ($nbDaysSinceLastClubFee >= 365) {
+                    $memberStatus->status = false;
+                    $memberStatus->errNo = MemberStatus::$PASSE_COQUE_CLUB_FEE_EXPIRED;
+                    $memberStatus->errMess = "Passe-Coque Boat-Club Membership fee expired ($nbDaysSinceLastClubFee days since last payment)";
+                } else {
+                    if ($verbose) {
+                        echo("Days since last Passe-Coque Boat-Club fee payment: " . $nbDaysSinceLastClubFee . "<br/>" . PHP_EOL);
+                    }
+                }
             }
         }
         // On ferme !
@@ -960,6 +984,101 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
       echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
     }
     return $memberStatus;
+}
+
+// Days sinc last Passe-Coque fee payment
+function daysSinceLastPCFee(string $dbhost, string $username, string $password, string $database, string $userId, bool $verbose) : int {
+    // Last fee date ?
+    $days_since_last_fee = -1;
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>" . PHP_EOL);
+            }
+        }
+        $sql = 'SELECT CONCAT(UPPER(M.LAST_NAME), \' \', M.FIRST_NAME),
+                    M.EMAIL,
+                    M.TARIF,
+                    (SELECT MAX(F.PERIOD) FROM MEMBERS_AND_FEES F WHERE M.EMAIL = F.EMAIL GROUP BY F.EMAIL)
+                FROM PASSE_COQUE_MEMBERS M
+                WHERE M.EMAIL = \'' . $userId . '\' AND
+                        M.TARIF IS NOT NULL
+                ORDER BY 1;';
+        // echo('Performing query <code>' . $sql . '</code><br/>');
+        $result = mysqli_query($link, $sql);
+        // echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        $now = date_create(date("Y-m-d"));
+        $days_since_last_fee = 0;
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result. Should be just 1
+            // The last date: more than one year ?
+            $last_fee = date_create(urldecode($table[3]));
+            // Diff
+            $diff = date_diff($last_fee, $now);
+            $days_since_last_fee = $diff->format("%a");
+        }
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+    return $days_since_last_fee;
+}
+
+// Days sinc last Passe-Coque Boat-Club fee payment
+function daysSinceLastBCFee(string $dbhost, string $username, string $password, string $database, string $userId, bool $verbose) : int {
+    // Last fee date ?
+    $days_since_last_fee = -1;
+    try {
+        if ($verbose) {
+            echo("Will connect on ".$database." ...<br/>");
+        }
+        $link = new mysqli($dbhost, $username, $password, $database);
+
+        if ($link->connect_errno) {
+            echo("Oops, errno:".$link->connect_errno."...<br/>");
+            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+        } else {
+            if ($verbose) {
+                echo("Connected.<br/>" . PHP_EOL);
+            }
+        }
+        $sql = 'SELECT M.LAST_FEE_UPDATE
+                FROM BOAT_CLUB_MEMBERS M
+                WHERE M.EMAIL = \'' . $userId . '\';';
+        // echo('Performing query <code>' . $sql . '</code><br/>');
+        $result = mysqli_query($link, $sql);
+        // echo ("Returned " . $result->num_rows . " row(s)<br/>");
+        $now = date_create(date("Y-m-d"));
+        $days_since_last_fee = 0;
+        while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result. Should be just 1
+            // The last date: more than one year ?
+            $last_fee = date_create(urldecode($table[0]));
+            if ($last_fee != null) {
+                // Diff
+                $diff = date_diff($last_fee, $now);
+                $days_since_last_fee = $diff->format("%a");
+            }
+        }
+        // On ferme !
+        $link->close();
+        if ($verbose) {
+            echo("Closed DB<br/>".PHP_EOL);
+        }
+    } catch (Throwable $e) {
+      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+    }
+    return $days_since_last_fee;
 }
 
 class HelpRequest {

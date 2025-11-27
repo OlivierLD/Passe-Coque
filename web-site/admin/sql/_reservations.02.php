@@ -366,7 +366,7 @@ if (isset($_POST['operation'])) {
                 var_dump($status);
             }
             echo "<br/>" . PHP_EOL;
-            if ($status->status) { // Passe-Coque (1) AND Boat-Club (2)
+            if ($status->status) { // Passe-Coque (1) AND Boat-Club (2), with up-to-date fees (3) and (4)
                 if ($VERBOSE) {
                     echo ("Status OK, checking $boatId's availability between $fromDate and $toDate .<br/>" . PHP_EOL);
                 }
@@ -475,19 +475,27 @@ if (isset($_POST['operation'])) {
                 }
             } else {
                 // Membership problem
-                // TODO check $status->errNo (1 or 2)
-                // Passe-Coque (1) AND Boat-Club (2)
+                // TODO check $status->errNo (1, 2, 3 or 4)
+                // 1 - Not Passe-Coque, 2 - Not Boat-Club, 3 - Passe-Coque fee expired, 4 - Boat-Club fee expired
                 if ($lang != 'FR') {
                     echo("There is a membership problem for $userId : " . $status->errMess . ". Click the button below to subscribe!<br/>" . PHP_EOL);
-                    echo("To make a reservation, you must be a member of Passe-Coque and of the Boat&nbsp;Club.<br/>" . PHP_EOL);
-                    if ($status->errNo == 1) {
-                        echo("You are not a member of Passe-Coque. Please join Passe-Coque first.<br/>" . PHP_EOL);
+                    echo("To make a reservation, you must be a member of Passe-Coque and of the Boat&nbsp;Club, with up-to-date membership.<br/>" . PHP_EOL);
+                    if ($status->errNo == 1 || $status->errNo == 3) {
+                        if ($status->errNo == 3) {
+                            echo("Your Passe-Coque membership has expired. Please renew your membership first.<br/>" . PHP_EOL);
+                        } else {
+                            echo("You are not a member of Passe-Coque. Please join Passe-Coque first.<br/>" . PHP_EOL);
+                        }
                         ?>
                         <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Join the boat&nbsp;club</button-->
                         <a href="https://passe-coque.com/?lang=EN&nav-to=51" target="_PARENT">Join Passe-Coque</a>
                         <?php
-                    } else if ($status->errNo == 2) {
-                        echo("You are a member of Passe-Coque, but not a member of the Boat&nbsp;Club. Please join the Boat&nbsp;Club first.<br/>" . PHP_EOL);
+                    } else if ($status->errNo == 2 || $status->errNo == 4) {
+                        if ($status->errNo == 4) {
+                            echo("Your Boat&nbsp;Club membership has expired. Please renew your membership first.<br/>" . PHP_EOL);
+                        } else {
+                            echo("You are a member of Passe-Coque, but not a member of the Boat&nbsp;Club. Please join the Boat&nbsp;Club first.<br/>" . PHP_EOL);
+                        }
                         ?>
                         <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Join the boat&nbsp;club</button-->
                         <a href="https://passe-coque.com/boat-club/?lang=EN&nav-to=4" target="_PARENT">Join the boat&nbsp;club</a>
@@ -499,14 +507,22 @@ if (isset($_POST['operation'])) {
                 } else {
                     echo("Probl&egrave;me d'adh&eacute;sion pour $userId : " . $status->errMess . ". Cliquez le bouton pour adh&eacute;rer !<br/>" . PHP_EOL);
                     echo("Pour soumettre une r&eacute;servation, vous devez &ecirc;tre membre de Passe-Coque et du Boat&nbsp;Club.<br/>" . PHP_EOL);
-                    if ($status->errNo == 1) {
-                        echo("Vous n'&ecirc;tes pas membre de Passe-Coque. Merci d'adh&eacute;rer.<br/>" . PHP_EOL);
+                    if ($status->errNo == 1 || $status->errNo == 3) {
+                        if ($status->errNo == 3) {
+                            echo("Votre adh&eacute;sion &agrave; Passe-Coque est expir&eacute;e. Merci de renouveler votre adh&eacute;sion avant de continuer.<br/>" . PHP_EOL);
+                        } else {
+                            echo("Vous n'&ecirc;tes pas membre de Passe-Coque. Merci d'adh&eacute;rer.<br/>" . PHP_EOL);
+                        }
                         ?>
                         <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Join the boat&nbsp;club</button-->
                         <a href="https://passe-coque.com/?lang=FR&nav-to=51" target="_PARENT">Adh&eacute;rer &agrave; Passe-Coque</a>
                         <?php
-                    } else if ($status->errNo == 2) {
-                        echo("Vous &ecirc;tes membre de Passe-Coque, mais pas du Boat&nbsp;Club. Merci d'adh&eacute;rer au Boat&nbsp;Club.<br/>" . PHP_EOL);
+                    } else if ($status->errNo == 2 || $status->errNo == 4) {
+                        if ($status->errNo == 4) {
+                            echo("Votre adh&eacute;sion au Boat&nbsp;Club est expir&eacute;e. Merci de renouveler votre adh&eacute;sion avant de continuer.<br/>" . PHP_EOL);
+                        } else {
+                            echo("Vous &ecirc;tes membre de Passe-Coque, mais pas du Boat&nbsp;Club. Merci d'adh&eacute;rer au Boat&nbsp;Club.<br/>" . PHP_EOL);
+                        }
                         ?>
                         <!--button onclick="clack_pcc('_4');" class="pc-button" style="margin: 5px;">Join the boat&nbsp;club</button-->
                         <a href="https://passe-coque.com/boat-club/?lang=FR&nav-to=4" target="_PARENT">Adh&eacute;rer au boat&nbsp;club</a>
