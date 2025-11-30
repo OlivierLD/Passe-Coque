@@ -2869,6 +2869,29 @@ let openTab = (evt, tabName) => {
     evt.currentTarget.className += " tab-active";
 };
 
+let openTab2 = (evt, tabName) => {
+    let tabLinks = document.getElementsByClassName("tablinks-2"); // Tabs/Buttons
+
+    for (let i=0; i<tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" tab-active-2", ""); // Reset
+    }
+    let divSections = document.querySelectorAll(".tab-section-2");
+
+    for (let i=0; i<divSections.length; i++) {
+        divSections[i].style.display = (divSections[i].id === tabName) ? 'block' : 'none';
+    }
+    evt.currentTarget.className += " tab-active-2";
+};
+
+let reloadIF = (id) => {
+    // console.log("Reloading iframe " + id);
+    let iframe = document.getElementById(id);
+    let src = iframe.src;
+    iframe.src = src + '';
+    return false;
+};
+
+
 let customAlertOpened = false;
 // TODO With 'Copy Message'option
 let showCustomAlert = (content, autoClose=true) => {

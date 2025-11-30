@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>De la couture !</title>
+    <link rel="icon" type="image/jpg" href="./hammerhead.png">
+    <style type="text/css">
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 40px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+h1 {
+    color: #007acc;
+}
+.tab {
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(241, 241, 241, 0.5);
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 12px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.tab-active {
+    background-color: #ccc;
+}
+.tablinks {
+    font-weight: bold;
+}
+.dialog-tab-content {
+    height: 95%;
+    max-height: 500px;
+    overflow-y: auto;
+}
+    </style>
+    <script type="text/javascript">
+let openTab = (evt, tabName) => {
+    let tabLinks = document.getElementsByClassName("tablinks"); // Tabs/Buttons
+
+    for (let i=0; i<tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" tab-active", ""); // Reset
+    }
+    let divSections = document.querySelectorAll(".tab-section");
+
+    for (let i=0; i<divSections.length; i++) {
+        divSections[i].style.display = (divSections[i].id === tabName) ? 'block' : 'none';
+    }
+    evt.currentTarget.className += " tab-active";
+};
+
+const DEBUG = false;
+
+    </script>
+</head>
+<body>
+  <h1>Recycler de chutes de voilerie et de sellerie</h1>
+  <div>
+
+    <div class="tab" style="margin-top: 30px; padding-top: 0px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'couture-01');" title="Meteo">Sac marin</button>
+        <button class="tablinks" onclick="openTab(event, 'couture-02');">Bailles &agrave; bouts</button>
+        <button class="tablinks" onclick="openTab(event, 'couture-03');">Poufs &amp; Co</button>
+    </div>
+
+    <div class="no-class">
+        <div id="couture-01" class="tab-section" style="display: block;">
+            <h2>Sac marin</h2>
+            <p>
+                Pour transporter les affaires de mer (cir&eacute;s et bottes).<br/>
+                Fabriqu&eacute; avec des chutes de simili-cuir (utilis&eacute; pour des coussins) et de Batyiline, pour laissr le contenu du sac respirer et s&eacute;cher.
+            </p>
+            <p>
+                Dimensions: 60 cm de long, 35 cm de diam&egrave;tre.<br/>
+            </p>
+            <div>
+                <img src="./bag.01.jpeg" width="50%">
+            </div>
+
+        </div>
+        <div id="couture-02" class="tab-section" style="display: none;">
+            <h2>Bailles &agrave; bouts</h2>
+            Des chutes de kevlar-carbone, avec le fond en Batyline. C'est du costaud !
+            <p>
+                <img src="./bab.02.jpeg" width="50%">
+                <img src="./bab.01.jpeg" width="50%">
+            </p>
+            <p>
+                Les pontets de fixation, imprim&eacute;s en 3D.<br./>
+                &Agrave; voir <a href="https://github.com/OlivierLD/3DPrinting/blob/master/OpenSCAD/BoatStuff/accastillage/pontet.baille.a.bouts.stl" target="github">ici</a>.
+            </p>
+
+        </div>
+        <div id="couture-03" class="tab-section" style="display: none;">
+            <h2>Pouf, bean-bags,...</h2>
+            <p>
+                Dimesions&nbsp;:<br/>
+                Hauteur 90cm<br/>
+                Diam&egrave;tre bas&nbsp;: 70cm<br/>
+                Diam&egrave;tre haut&nbsp;: 38cm<br/>
+            </p>
+            <p>
+                Pour s'asseoir confortablement sur le pont, ou dans le cockpit.<br/>
+                Rempli de billes de polystyr&egrave;ne expans&eacute; (4 sacs de 50 litres de Myrbilles, de chez <a href="https://tissusmyrtille.fr/" target="Myrtille">Myrtille</a>).
+            </p>
+            <p>
+                <img src="./pouf.01.jpeg" width="50%">
+                <img src="./pouf.02.jpeg" width="50%">
+            </p>
+        </div>
+    </div>
+
+    <hr/>
+    More soon...
+  </div>
+</body>
+</html>

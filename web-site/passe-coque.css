@@ -1032,6 +1032,10 @@ span.expand-collapse:hover {
     background-color: #ccc;
 }
 
+.tab button.tab-active-2 {
+    background-color: #ccc;
+}
+
 .blink_me {
     animation: blinker 0.5s linear infinite;
 }
@@ -1236,6 +1240,10 @@ span.expand-collapse:hover {
 }
 
 .tablinks {
+    font-weight: bold;
+}
+
+.tablinks-2 {
     font-weight: bold;
 }
 

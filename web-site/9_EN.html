@@ -43,7 +43,7 @@
             </div>
         </div>
         <div id="navigation-02" class="tab-section" style="display: none;">
-            <div style="color: black; background-image: url(./images/erdeven.birvideaux.jpeg); background-size: 100%; background-repeat: no-repeat; background-position: center bottom;">
+            <div style="color: black; background-image: url(./images/erdeven.birvideaux.jpeg); background-size: 100%; background-repeat: no-repeat; background-position: center bottom; display: grid; grid-template-columns: 50% 50%; min-height: 400px;">
 
                 <div class="transp-box">
                     <h1>Tides</h1>
@@ -51,6 +51,23 @@
                         <li><a href="/tech.and.nav/tides.es6/leaflet.tide.stations.html" target="_blank">Tides in the world, sauce Passe-Coque</a></li>
                         <li><a href="https://www.horaire-maree.fr/" target="FR">horaire-mar&eacute;e.fr</a></li>
                     </ul>
+                </div>
+
+                <div class="transp-box">
+                    <div class="tab" style="margin-top: 30px; padding-top: 0px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+                        <button class="tablinks-2 tab-active-2" onclick="openTab2(event, 'maree-sp');" title="Saint Philibert">Saint Philibert</button>
+                        <button class="tablinks-2" onclick="openTab2(event, 'maree-lt');">La Trinit&eacute;-sur-Mer</button>
+                    </div>
+                    <div style="height: 67%;">
+                        <div id="maree-sp" class="tab-section-2" style="display: block; width: 100%; height: 100%; border: none;" title="Mar&eacute;es de Saint-Philibert">
+                            <a href="" onclick="return reloadIF('st-phil');">Reload Tides in Saint-Philibert</a><br/>
+                            <iframe id="st-phil" src="https://www.horaire-maree.fr/maree/Saint-Philibert/" style="width: 100%; height: 100%; border: none;"></iframe>
+                        </div>
+                        <div id="maree-lt" class="tab-section-2" style="display: none; width: 100%; height: 100%; border: none;" title="Mar&eacute;es de La Trinit&eacute;-sur-Mer">
+                            <a href="" onclick="return reloadIF('la-trin');">Reload Tides in La Trinit&eacute;-sur-Mer</a><br/>
+                            <iframe id="la-trin" src="https://www.horaire-maree.fr/maree/LA_TRINITE-SUR-MER/" style="width: 100%; height: 100%; border: none;"></iframe>
+                        </div>
+                    </div>
                 </div>
 
             </div>
