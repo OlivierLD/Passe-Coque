@@ -1547,9 +1547,9 @@ const THE_FLEET = [
         category: NONE,
         base: "St Philibert"
     },{
-        name: "La Moara",
-        id: "la-maora",
-        pix: "/images/boats/la.maora/la.plaque.jpeg",
+        name: "La Maoa",
+        id: "la-maoa",
+        pix: "/images/boats/la.maoa/la.plaque.jpeg",
         type: "Plate",
         category: NONE,
         base: "St Philibert"
@@ -3619,9 +3619,9 @@ const KEYWORDS = [
 		comment: 'Tous les bateaux'
 	},
 	{
-		name: 'La Maora',
-		keywords: [ 'boat', 'bateau', 'maora', 'la-maora', 'plate', 'riguidel' ],
-		url: '/?nav-to=4&boat-id=la-maora',
+		name: 'La Maoa',
+		keywords: [ 'boat', 'bateau', 'maoa', 'la-maoa', 'plate', 'riguidel' ],
+		url: '/?nav-to=4&boat-id=la-maoa',
 		comment: 'Plate de Saint Philibert'
 	},
 	{

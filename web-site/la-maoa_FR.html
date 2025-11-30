@@ -1,0 +1,60 @@
+
+<div style="height: 600px; overflow-y: auto;">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'la-maora-01');" title="Sommaire">Sommaire</button>
+        <button class="tablinks" onclick="openTab(event, 'la-maora-02');">Photos</button>
+        <button class="tablinks" onclick="openTab(event, 'la-maora-03');">Contact</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content" style="height: 100%;">
+        <div id="la-maora-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+                <img src="/la.maoa/maora.png" width="60%">
+                <div style="padding: 14px;">
+                    <h2>La Maoa</h2>
+                    Plate, bas&eacute;e &agrave; St Philibert<br/>
+                    <ul>
+                        <li>Chantier Ezan, voir <a href="https://www.letelegramme.fr/morbihan/saint-philibert-56470/spansaint-philibertspan-chantier-naval-les-ezan-rois-de-la-plate-3166052.php" target="TB">ici</a>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h2>Le Bateau</h2>
+                <div>
+                    Construite &agrave; Saint Philibert dans le c&eacute;l&egrave;bre chantier EZAN, cette plate du golfe,
+                    anc&ecirc;tre du Gu&eacute;pard, &agrave; appartenu &agrave; Eug&egrave;ne Riguidel
+                    qui vient r&eacute;guli&egrave;rement voir l'&eacute;volution du chantier
+                    Passe-Coque en est devenu propri&eacute;taire au printemps dernier et, avec l'aide de Kevin Pahl,
+                    qui fut second de Mike Birch, va reprendre vie pour naviguer en baie de Quiberon avec nos
+                    Passeurs d'&eacute;coutes.
+                    Elle viendra bient&ocirc;t prendre son mouillage devant la chapelle de St Philibert et faire
+                    connaitre l'histoire maritime de notre commune.
+                    Nous avons bien sur besoin de tous ceux qui veulent aider &agrave; sa renaissance par leur
+                    participation au chantier ou plus simplement par leur don.
+                    rendez-vous sur www.passe-coque.com ou sur le <a href="" onclick="openTab(event, 'la-maora-03'); return false;">QR code joint</a>.
+                </div>
+            </div>
+        </div>
+
+        <div id="la-maora-02" class="tab-section" style="display: none; background: black; padding-top: 10px;">
+            <slide-show id="la-maora-slide-show"
+                        width="400"
+                        height="340"
+                        style="line-height: 1em;">
+                <slide-show-image src="/images/boats/la.maoa/la.plaque.jpeg" title="La Plaque !"></slide-show-image>
+                <slide-show-image src="/la.maoa/maora.png" title="Thibault & Co !"></slide-show-image>
+                <slide-show-image src="/la.maoa/maora.02.png" title="Au chantier"></slide-show-image>
+            </slide-show>
+        </div>
+
+        <div id="la-maora-03" class="tab-section" style="display: none;">
+            <h2>Plus d'infos...</h2>
+            R&eacute;f&eacute;rent : Pierre-Jean JANNIN<br/>
+            Disponibilit&eacute; Boat Club&nbsp;: -
+            <div>
+                Soutenir le projet sur <a href="https://www.helloasso.com/associations/passe-coque-l-association-des-passeurs-d-ecoute/collectes/la-maora-1" target="HA">Hello Asso</a> :<br/>
+                <img src="./la.maoa/qr.code.png" width="250px" style="float: left; margin: 10px;" title="QR Code"/></i>
+            </div>
+        </div>
+    </div>
+</div>
