@@ -1930,7 +1930,7 @@ const THE_FLEET = [
         pix: "/images/boats/shazzan/01.jpeg",
         type: "Ovni 435",
         category: PARTNERS,
-        base: "Patagonie, Puerto Montt"
+        base: "Patagonie, Puerto Williams"
     }
 ];
 
@@ -3483,7 +3483,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Shazzan, Patagonie',
-		keywords: [ 'shazzan', 'patagonie', 'patagonia', 'puerto montt' ],
+		keywords: [ 'shazzan', 'patagonie', 'patagonia', 'puerto williams' ],
 		url: '/?nav-to=31&tx=39',
 		comment: 'Projet Shazzan'
 	},
@@ -3748,9 +3748,9 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Shazzan',
-		keywords: [ 'boat', 'bateau', 'shazzan', 'shazan', 'patagonie', 'patagonia', 'puerto montt', 'puerto mont', 'puerto', 'montt', 'alu', 'aluminium' ],
+		keywords: [ 'boat', 'bateau', 'shazzan', 'shazan', 'patagonie', 'patagonia', 'puerto williams', 'puerto', 'williams', 'alu', 'aluminium' ],
 		url: '/?nav-to=4&boat-id=shazzan',
-		comment: 'Le bateau, truc en alu'
+		comment: 'Le bateau, OVNI 435'
 	},
 	{
 		name: 'Ia Orana',
