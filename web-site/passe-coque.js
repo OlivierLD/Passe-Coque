@@ -95,7 +95,9 @@ let generateNextEvents = () => {
         }
         return nextMeetings;
     } else {
-        return null;
+        let nextMeetings = [];
+        nextMeetings.push(currentLang === 'FR' ? "Rien de pr&eacute;vu" : "Nothing scheduled");
+        return nextMeetings;
     }
 };
 
@@ -1586,7 +1588,7 @@ const THE_FLEET = [
         id: "araben",
         pix: "/images/boats/voilieraraben/Araben 1.jpg",
         type: "Plan Mauric",
-        category: NONE,
+        category: PARTNERS,
         base: "Arzal"
     }, {
         name: "Eh'Tak",
