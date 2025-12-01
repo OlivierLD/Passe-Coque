@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>De la couture !</title>
     <link rel="icon" type="image/jpg" href="./hammerhead.png">
+    <!-- See this : https://www.w3schools.com/w3css/w3css_animate.asp -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <style type="text/css">
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -51,7 +53,9 @@ h1 {
     overflow-y: auto;
 }
     </style>
+    <script type="module" src="../../webcomponents/SlideShow.js"></script>
     <script type="text/javascript">
+
 let openTab = (evt, tabName) => {
     let tabLinks = document.getElementsByClassName("tablinks"); // Tabs/Buttons
 
@@ -66,11 +70,17 @@ let openTab = (evt, tabName) => {
     evt.currentTarget.className += " tab-active";
 };
 
+function onSlideShowClick(src) { // Declaration like let onslideShowClick = () => { does not work...
+    console.log(">> Client side!! Slide " + src + " was clicked.");
+    window.open(src, '_blank'); // This is an example
+};
+
+
 const DEBUG = false;
 
     </script>
 </head>
-<body>
+<body class="no-class">
   <h1>Recycler de chutes de voilerie et de sellerie</h1>
   <div>
 
@@ -81,28 +91,43 @@ const DEBUG = false;
     </div>
 
     <div class="no-class">
-        <div id="couture-01" class="tab-section" style="display: block;">
+        <div id="couture-01" class="w3-animate-opacity tab-section" style="display: block;">
             <h2>Sac marin</h2>
             <p>
                 Pour transporter les affaires de mer (cir&eacute;s et bottes).<br/>
                 Fabriqu&eacute; avec des chutes de simili-cuir (utilis&eacute; pour des coussins) et de Batyiline, pour laisser le contenu du sac respirer et s&eacute;cher.
             </p>
             <p>
-                Dimensions: 60 cm de long, 35 cm de diam&egrave;tre.<br/>
+                Dimensions : 60 cm de long, 35 cm de diam&egrave;tre.<br/>
             </p>
             <div>
-                <img src="./bag.01.jpeg" width="50%">
+                <slide-show id="the-bag-slide-show"
+                            class="w3-animate-zoom"
+                            width="500"
+                            height="375"
+                            slideclick="onSlideShowClick"
+                            style="line-height: 1em;">
+                    <slide-show-image src="./bag.01.jpeg" desc="Cliquer pour agrandir" title="Le Sac"></slide-show-image>
+                </slide-show>
+                <!--img class="w3-animate-zoom" src="./bag.01.jpeg" width="50%"-->
             </div>
 
         </div>
-        <div id="couture-02" class="tab-section" style="display: none;">
+        <div id="couture-02" class="w3-animate-opacity tab-section" style="display: none;">
             <h2>Bailles &agrave; bouts</h2>
             Des chutes de kevlar-carbone, avec le fond en Batyline. C'est du costaud !
             <p>
-                <img src="./bab.02.jpeg" width="50%">
-                <img src="./bab.01.jpeg" width="50%">
-                <img src="./bab.03.jpeg" width="50%" title="Les pontets">
-                <img src="./bab.04.jpeg" width="50%" title="En placce !">
+                <slide-show id="bab-slide-show"
+                            class="w3-animate-zoom"
+                            width="500"
+                            height="375"
+                            slideclick="onSlideShowClick"
+                            style="line-height: 1em;">
+                    <slide-show-image src="./bab.02.jpeg" desc="Cliquer pour agrandir" title="Bailles &agrave; bouts"></slide-show-image>
+                    <slide-show-image src="./bab.01.jpeg" desc="Cliquer pour agrandir" title="Le fond en Batyline"></slide-show-image>
+                    <slide-show-image src="./bab.03.jpeg" desc="Cliquer pour agrandir" title="Les pontets"></slide-show-image>
+                    <slide-show-image src="./bab.04.jpeg" desc="Cliquer pour agrandir" title="En place !"></slide-show-image>
+                </slide-show>
             </p>
             <p>
                 Dimensions&nbsp;:<br/>
@@ -114,7 +139,7 @@ const DEBUG = false;
             </p>
 
         </div>
-        <div id="couture-03" class="tab-section" style="display: none;">
+        <div id="couture-03" class="w3-animate-opacity tab-section" style="display: none;">
             <h2>Poufs, bean-bags,...</h2>
             <p>
                 Dimesions&nbsp;:<br/>
@@ -127,13 +152,21 @@ const DEBUG = false;
                 Rempli de billes de polystyr&egrave;ne expans&eacute; (4 sacs de 50 litres de Myrbilles, de chez <a href="https://tissusmyrtille.fr/" target="Myrtille">Myrtille</a>).
             </p>
             <p>
-                <img src="./pouf.01.jpeg" width="50%"><br/>
-                <img src="./pouf.02.jpeg" width="50%"><br/>
+                <slide-show id="pouf-slide-show"
+                            class="w3-animate-zoom"
+                            width="375"
+                            height="500"
+                            slideclick="onSlideShowClick"
+                            style="line-height: 1em;">
+                    <slide-show-image src="./pouf.01.jpeg" desc="Cliquer pour agrandir" title="One"></slide-show-image>
+                    <slide-show-image src="./pouf.02.jpeg" desc="Cliquer pour agrandir" title="Two"></slide-show-image>
+                </slide-show>
+                <hr/>
+                <h3>Patrons</h3>
                 <img src="./patron.pouf.png" width="50%"><br/>
                 &Agrave; essayer la prochaine fois&nbsp;:<br/>
                 <img src="./patron.pouf.02.png" width="50%"><br/>
                 avec une poign&eacute;e sur le dessus pour le transport.
-
             </p>
         </div>
     </div>
