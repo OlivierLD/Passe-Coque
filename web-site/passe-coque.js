@@ -3337,6 +3337,12 @@ const KEYWORDS = [
 		comment: 'Divers almanachs.'
 	},
 	{
+		name: 'Couture',
+		keywords: [ 'couture' , 'sewing', 'chutes', 'leftover' ],
+		url: '/tech.and.nav/couture.and.co/index.html',
+		comment: 'Recycler les chutes !'
+	},
+	{
 		name: 'Vie de l\'asso',
 		keywords: [ 'asso' , 'vie asso', 'vie de l\'asso', 'bourse', 'bourses', 'chantier', 'bricolage', 'bricoler', 'equipier', 'équipier', 'convoyage', 'agenda', 'planning', 'statut', 'status' ],
 		url: '/?nav-to=68',
