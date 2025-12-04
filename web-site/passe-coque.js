@@ -101,7 +101,12 @@ let generateNextEvents = () => {
     }
 };
 
-// Can be used for event list, and others (like going directly to a project or boat)
+/**
+ * Can be used for event list, and others (like going directly to a project or boat)
+ *
+ * @param {*} title like "Welcome!"
+ * @param {*} content like "welcome", that will fetch "welcome_FR.html" or "welcome_EN.html"
+ */
 let showDialogOnLoad = (title, content) => { // Use the about-dialog for message on load
     let aboutDialog = document.getElementById("about-dialog");
     // Add the class to show the spinnaker
@@ -2366,6 +2371,34 @@ const NEXT_EVENTS = [ // oldest to newest.
             fr: '28 novembre, remise du Prix du Voilier de l\'Ann&eacute;e 2025, lors du Paris Nautic Show.',
             en: 'November 28, award ceremony for the 2025 Sailboat of the Year, during the Paris Nautic Show.'
         }
+    }, {
+        date_from: '2026-01-15',
+        date_to: '2026-01-15',
+        content: {
+            fr: 'Jeudi 15 janvier - Les Herbiers (85) - Projection du film "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" de Fr&eacute;d&eacute;ric Brunquell, en pr&eacute;sence de 2 &eacute;quipi&egrave;res et de Laurent Girault Conti.',
+            en: 'Thursday January 15th - Les Herbiers (85) - Screening of the movie "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" by Fr&eacute;d&eacute;ric Brunquell, in presence of two crew members and Laurent Girault Conti.'
+        }
+    }, {
+        date_from: '2026-02-20',
+        date_to: '2026-02-20',
+        content: {
+            fr: 'Vendredi 20 f&eacute;vrier - Beaupr&eacute;au en Mauges (49)  - Projection du film "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" de Fr&eacute;d&eacute;ric Brunquell, en pr&eacute;sence de 2 &eacute;quipi&egrave;res et de Laurent Girault Conti.',
+            en: 'Friday February 20th - Beaupr&eacute;au en Mauges (49)  - Screening of the movie "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" by Fr&eacute;d&eacute;ric Brunquell, in presence of two crew members and Laurent Girault Conti.'
+        }
+    }, {
+        date_from: '2026-03-27',
+        date_to: '2026-03-27',
+        content: {
+            fr: 'Vendredi 27 mars - Lorient (56) - Pr&eacute;sentation du projet au "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" en pr&eacute;sence des &eacute;quipi&egrave;res.',
+            en: 'Friday March 27th - Lorient (56) - Presentation of the project at the "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" in presence of the crew members'
+        }
+    }, {
+        date_from: '2026-03-28',
+        date_to: '2026-03-29',
+        content: {
+            fr: 'Samedi 28 et Dimanche 29 Mars - Maison Glaz &agrave;à G&acirc;vres (à proximit&eacute; de Lorient- 56) - <b>Notre grand &eacute;v&egrave;nement de PRE-DÉPART !</b>',
+            en: 'Saturday March 28th and Sunday March 29th - Maison Glaz in G&acirc;vres (near Lorient- 56) - <b>Our big pre-start event!</b>'
+        }
     }
 ];
 
@@ -2413,7 +2446,7 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
 			    }
 		    }).then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
-                if (response.status !== 200) { // There is a problem...
+                if (response.status !== 200) { // Then there is a problem...
                     try {
                         // Use a custom alert
                         let errContent = (currentLang === 'FR') ?
