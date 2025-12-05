@@ -40,5 +40,11 @@ mysql> desc contacts;
 
 mysql>
 
-# TODO: import / export
+# import / export
+
+Drop db first, recreate, then
+mysql> source passecc128.2025.12.05.sql;
+
+
+
 

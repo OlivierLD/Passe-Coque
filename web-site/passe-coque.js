@@ -2461,17 +2461,21 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                     } catch (err) {
                         console.log(err);
                     }
+                    console.log(`Origin: Client Side`);
                     THE_BOATS = THE_FLEET; // Using the backup list
                     populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                 } else {
-                    if (false) { // For debug: get raw text from the response
+                    if (true) { // For debug: get raw text from the response
                         response.text().then(txt => {
                             console.log(txt);
                             try {
-                                THE_BOATS = JSON.parse(txt);
+                                let json = JSON.parse(txt);
+                                console.log(`Origin: ${json.origin}`);
+                                THE_BOATS = json.data;
                             } catch (err) {
                                 console.log(`Parsing error: ${err}`);
                                 showCustomAlert(txt, false, true);
+                                console.log(`Origin: Client Side`);
                                 THE_BOATS = THE_FLEET; // Using the backup list
                             }
                             populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
@@ -2481,7 +2485,8 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                     } else { // Default behavior, use JSON from THE_FLEET
                         response.json().then(json => {
                             console.log(`data loaded, ${json.length} boat(s) from DB.`);
-                            THE_BOATS = json;
+                            console.log(`Origin: ${json.origin}`);
+                            THE_BOATS = json.data;
                             populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                         }, (error, errmess) => {
                             console.log(`Response to JSON: ${error},\nUsing BACKUP list`);

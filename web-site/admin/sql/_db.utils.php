@@ -201,7 +201,7 @@ function getBoatsJSON(string $dbhost, string $username, string $password, string
             if ($link->connect_errno) {
                 echo("[Oops, errno:".$link->connect_errno."...] ");
                 // die("Connection failed: " . $link->connect_error);
-                throw $link->connect_error;
+                throw $link->connect_error; // Will be caught below
             }
         } catch (Throwable $e) {
             if ($verbose) {

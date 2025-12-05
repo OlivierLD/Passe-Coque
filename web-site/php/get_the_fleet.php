@@ -21,11 +21,12 @@ try {
     $pass = $password;
     $db = $database;
 
-    $hostname = gethostname();
+    $hostname = $_SERVER['SERVER_NAME']; // gethostname(); // TODO Find 'localhost'...
 
     // echo "[get_the_fleet.php] Hostname is " . $hostname . PHP_EOL;
 
-    if (false && str_starts_with( $hostname, "macbook")) { // To access local DB
+    // if (true && str_starts_with( $hostname, "macbook")) { // To access local DB
+    if ($hostname == "localhost") { // To access local DB
         // Local dev
         $user = "pc"; // DB_USER
         $pass = "pc"; // DB_PASSWORD
@@ -33,11 +34,14 @@ try {
         $host = "localhost"; // DB_HOST
     }
 
+    $origin = $hostname; // "$user@$host/$db";
+
     $data = getBoatsJSON($host, $user, $pass, $db, $VERBOSE);
     header('Content-Type: application/json; charset=utf-8');
     // echo json_encode($data); // This is for text (not json)
-    echo $data;
-    http_response_code(200);
+    // echo $data;
+    echo "{ \"origin\": \"$origin\", \"data\": $data }";   // TODO hostname ?
+    // http_response_code(200);  // Mmh ?
 } catch (Throwable $e) {
     echo "[Captured Throwable for get_the_fleet.php : " . $e . "] " . PHP_EOL;
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error - ' . $e, true, 500);
