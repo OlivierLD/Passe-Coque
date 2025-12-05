@@ -2448,33 +2448,47 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
                 if (response.status !== 200) { // Then there is a problem...
                     try {
-                        // Use a custom alert
-                        let errContent = (currentLang === 'FR') ?
-                                        `Erreur &agrave; l'ex&eacute;cution de ${boatData}: ${response.statusText}.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur.` :
-                                        `Error executing ${boatData}: ${response.statusText}.<br/>Using backup data instead.<br/>See your admin.`;
-                        showCustomAlert(errContent);
+                        response.text().then(txt => {
+                            console.log(`Error text: ${txt}`);
+                            // Use a custom alert
+                            let errContent = (currentLang === 'FR') ?
+                                            `Erreur &agrave; l'ex&eacute;cution de ${boatData}: ${response.statusText}.<br/>Le backup est utilis&eacute; &agrave; la place.<br/>Voyez votre administrateur.` :
+                                            `Error executing ${boatData}: ${response.statusText}.<br/>Using backup data instead.<br/>See your admin.`;
+                            showCustomAlert(errContent);
+                        }, (error, errmess) => {
+                            console.log(`${error}, ${errmess}`);
+                        });
                     } catch (err) {
                         console.log(err);
                     }
                     THE_BOATS = THE_FLEET; // Using the backup list
                     populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                 } else {
-                    // response.text().then(txt => {
-                    //     console.log(txt);
-                    //     THE_BOATS = JSON.parse(txt);
-
-                    // }, (error, errmess) => {
-                    //     console.log(`${error}, ${errmess}`);
-                    // });
-                    response.json().then(json => {
-                        console.log(`data loaded, ${json.length} boat(s) from DB.`);
-                        THE_BOATS = json;
-                        populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
-                    }, (error, errmess) => {
-                        console.log(`Response to JSON: ${error},\nUsing BACKUP list`);
-                        THE_BOATS = THE_FLEET; // Using the backup list
-                        populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
-                    });
+                    if (false) { // For debug: get raw text from the response
+                        response.text().then(txt => {
+                            console.log(txt);
+                            try {
+                                THE_BOATS = JSON.parse(txt);
+                            } catch (err) {
+                                console.log(`Parsing error: ${err}`);
+                                showCustomAlert(txt, false, true);
+                                THE_BOATS = THE_FLEET; // Using the backup list
+                            }
+                            populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
+                        }, (error, errmess) => {
+                            console.log(`${error}, ${errmess}`);
+                        });
+                    } else { // Default behavior, use JSON from THE_FLEET
+                        response.json().then(json => {
+                            console.log(`data loaded, ${json.length} boat(s) from DB.`);
+                            THE_BOATS = json;
+                            populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
+                        }, (error, errmess) => {
+                            console.log(`Response to JSON: ${error},\nUsing BACKUP list`);
+                            THE_BOATS = THE_FLEET; // Using the backup list
+                            populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
+                        });
+                    }
                 }
             },
             (error, errmess) => {
@@ -2929,9 +2943,9 @@ let reloadIF = (id) => {
 
 let customAlertOpened = false;
 // TODO With 'Copy Message'option
-let showCustomAlert = (content, autoClose=true) => {
+let showCustomAlert = (content, autoClose=true, preFmt=false) => {
     let customAlert = document.getElementById("custom-alert");
-    document.getElementById('custom-alert-content').innerHTML = `<pre>${content}</pre>`;
+    document.getElementById('custom-alert-content').innerHTML = preFmt ? content : `<pre>${content}</pre>`;
     if (customAlert.show !== undefined) {
         customAlert.style.display = 'inline'; // For Safari...
         customAlert.show();

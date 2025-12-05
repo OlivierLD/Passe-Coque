@@ -26,14 +26,43 @@ class Project {
     public $description;
 }
 
+function getConnected(string $dbhost, string $username, string $password, string $database, $verbose=false) {
+
+    $host = $dbhost;
+    $user = $username;
+    $pass = $password;
+    $db = $database;
+
+    $link = null;
+    try {
+        $link = new mysqli($host, $user, $pass, $db); // TODO Throwable not caught...
+        if ($link->connect_errno) {
+            // var_dump($link);
+            echo("[Oops, errno:".$link->connect_errno."...] ");
+            // die("Connection failed: " . $link->connect_error);
+            throw $link->connect_error; // Will be caught below
+        } else {
+            if ($verbose) {
+                echo("Connected with " . $host . ", " . $user . ", " . $pass . " on " . $db . "<br/>" . PHP_EOL);
+            }
+        }
+    } catch (Throwable $e) {
+        if ($verbose) {
+            echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
+        }
+        throw $e;
+    }
+    return $link;
+}
+
 function getProjects(string $dbhost, string $username, string $password, string $database, bool $verbose): array {
     try {
         $link = new mysqli($dbhost, $username, $password, $database);
 
         if ($link->connect_errno) {
             echo("[Oops, errno:".$link->connect_errno."...] ");
-            // die("Connection failed: " . $conn->connect_error);
-            throw $conn->connect_error;
+            // die("Connection failed: " . $link->connect_error);
+            throw $link->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -79,8 +108,8 @@ function getBoats(string $dbhost, string $username, string $password, string $da
 
         if ($link->connect_errno) {
             echo("[Oops, errno:".$link->connect_errno."...] ");
-            // die("Connection failed: " . $conn->connect_error);
-            throw $conn->connect_error;
+            // die("Connection failed: " . $link->connect_error);
+            throw $link->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -128,8 +157,8 @@ function getBoatName(string $dbhost, string $username, string $password, string 
 
         if ($link->connect_errno) {
             echo("[Oops, errno:".$link->connect_errno."...] ");
-            // die("Connection failed: " . $conn->connect_error);
-            throw $conn->connect_error;
+            // die("Connection failed: " . $link->connect_error);
+            throw $link->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -166,17 +195,34 @@ function getBoatName(string $dbhost, string $username, string $password, string 
 
 function getBoatsJSON(string $dbhost, string $username, string $password, string $database, bool $verbose): string {
     try {
-        $link = new mysqli($dbhost, $username, $password, $database);
-
-        if ($link->connect_errno) {
-            echo("[Oops, errno:".$link->connect_errno."...] ");
-            // die("Connection failed: " . $conn->connect_error);
-            throw $conn->connect_error;
-        } else {
+        $link = null;
+        try {
+            $link = getConnected($dbhost, $username, $password, $database, $verbose);
+            if ($link->connect_errno) {
+                echo("[Oops, errno:".$link->connect_errno."...] ");
+                // die("Connection failed: " . $link->connect_error);
+                throw $link->connect_error;
+            }
+        } catch (Throwable $e) {
             if ($verbose) {
-                echo("Connected.<br/>" . PHP_EOL);
+                echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
+            }
+            if (false) {
+                $link = getConnected(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE, $verbose);
+                if ($link->connect_errno) {
+                    echo("[Oops, errno:".$link->connect_errno."...] ");
+                    // die("Connection failed: " . $link->connect_error);
+                    throw $link->connect_error;
+                }
+            } else {
+                throw $e;
             }
         }
+        // } else {
+        if ($verbose) {
+            echo("Connected.<br/>" . PHP_EOL);
+        }
+
         $sql = "SELECT * FROM THE_FLEET;";
         if ($verbose) {
             echo('[Performing instruction ['.$sql.']] <br/>' . PHP_EOL);
@@ -218,8 +264,8 @@ function getMembers(string $dbhost, string $username, string $password, string $
 
         if ($link->connect_errno) {
             echo("[Oops, errno:".$link->connect_errno."...] ");
-            // die("Connection failed: " . $conn->connect_error);
-            throw $conn->connect_error;
+            // die("Connection failed: " . $link->connect_error);
+            throw $link->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -271,8 +317,8 @@ function getMember(string $dbhost, string $username, string $password, string $d
 
         if ($link->connect_errno) {
             echo("[Oops, errno:".$link->connect_errno."...] ");
-            // die("Connection failed: " . $conn->connect_error);
-            throw $conn->connect_error;
+            // die("Connection failed: " . $link->connect_error);
+            throw $link->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -319,8 +365,8 @@ function getBCMember(string $dbhost, string $username, string $password, string 
 
         if ($link->connect_errno) {
             echo("[Oops, errno:".$link->connect_errno."...] ");
-            // die("Connection failed: " . $conn->connect_error);
-            throw $conn->connect_error;
+            // die("Connection failed: " . $link->connect_error);
+            throw $link->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -397,7 +443,7 @@ function getReservations(string $dbhost, string $username, string $password, str
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -448,7 +494,7 @@ function getReservation(string $dbhost, string $username, string $password, stri
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -497,7 +543,7 @@ function checkBoatAvailability(string $dbhost, string $username, string $passwor
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -578,7 +624,7 @@ function getBoatAndReferentDetails(string $dbhost, string $username, string $pas
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -632,7 +678,7 @@ function getBoatsByReferent(string $dbhost, string $username, string $password, 
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -679,7 +725,7 @@ function getAllBoatsByReferent(string $dbhost, string $username, string $passwor
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -739,7 +785,7 @@ function getDistinctBoatsWithReferents(string $dbhost, string $username, string 
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -793,7 +839,7 @@ function getBoatsTODOList(string $dbhost, string $username, string $password, st
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -847,7 +893,7 @@ function getTODOListLine(string $dbhost, string $username, string $password, str
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -913,7 +959,7 @@ function checkMemberShip(string $dbhost, string $username, string $password, str
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -998,7 +1044,7 @@ function daysSinceLastPCFee(string $dbhost, string $username, string $password, 
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -1047,7 +1093,7 @@ function daysSinceLastBCFee(string $dbhost, string $username, string $password, 
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -1106,7 +1152,7 @@ function getAllHelpRequests(string $dbhost, string $username, string $password, 
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -1160,7 +1206,7 @@ function getHelpRequests(string $dbhost, string $username, string $password, str
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -1212,7 +1258,7 @@ function getHelpRequestById(string $dbhost, string $username, string $password, 
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -1263,7 +1309,7 @@ function getHelpRequestByUserId(string $dbhost, string $username, string $passwo
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
@@ -1311,8 +1357,8 @@ function executeSQL(string $dbhost, string $username, string $password, string $
 
         if ($link->connect_errno) {
             echo("Oops, errno:".$link->connect_errno."...<br/>");
-            die("Connection failed: " . $conn->connect_error); // TODO Throw an exception ?
-            // throw $conn->connect_error;
+            die("Connection failed: " . $link->connect_error); // TODO Throw an exception ?
+            // throw $link->connect_error;
         } else {
             if ($verbose) {
                 echo("Connected.<br/>" . PHP_EOL);
