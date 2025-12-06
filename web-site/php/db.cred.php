@@ -1,11 +1,11 @@
 <?php
 
-define("DB_SERVER", "localhost");
-// define("DB_USER", "root");
-//define("DB_PASSWORD", "!DonPedro123");
-define("DB_USER", "pc");
-define("DB_PASSWORD", "pc");
-define("DB_DATABASE", "pcDB");
+// define("DB_SERVER", "localhost");
+// // define("DB_USER", "root");
+// //define("DB_PASSWORD", "!DonPedro123");
+// define("DB_USER", "pc");
+// define("DB_PASSWORD", "pc");
+// define("DB_DATABASE", "pcDB");
 
 // use the above like this in your scripts:
 // $link = new mysqli(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
@@ -16,10 +16,15 @@ $password = "zcDmf7e53eTs";
 $database = "passecc128";
 $dbhost = "passecc128.mysql.db";
 
-// Locally
-// $username = "pc";
-// $password = "pc";
-// $database = "pc"; // "passecc128";
-// $dbhost = "localhost";
+$hostname = $_SERVER['SERVER_NAME']; // gethostname(); // Find 'localhost'...
+if ($hostname == "localhost") { // To access local DB
+    // Locally
+    $username = "pc";
+    $password = "pc";
+    $database = "pcDB"; // "passecc128";
+    $dbhost = "localhost";
+}
+
+
 
 ?>

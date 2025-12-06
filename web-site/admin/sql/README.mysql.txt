@@ -46,5 +46,9 @@ Drop db first, recreate, then
 mysql> source passecc128.2025.12.05.sql;
 
 
+TO LOOK INTO: Create View is translated by a
+CREATE ALGORITHM=UNDEFINED DEFINER=`passecc128`@`%` SQL SECURITY DEFINER VIEW `MEMBERS_AND_FEES`  AS SELECT `PCM`.`FIRST_NAME` AS
+that involves a username...
+
 
 

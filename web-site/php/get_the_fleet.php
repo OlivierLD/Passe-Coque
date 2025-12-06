@@ -21,7 +21,7 @@ try {
     $pass = $password;
     $db = $database;
 
-    $hostname = $_SERVER['SERVER_NAME']; // gethostname(); // TODO Find 'localhost'...
+    $hostname = $_SERVER['SERVER_NAME']; // gethostname(); // Find 'localhost'...
 
     // echo "[get_the_fleet.php] Hostname is " . $hostname . PHP_EOL;
 
@@ -37,11 +37,13 @@ try {
     $origin = $hostname; // "$user@$host/$db";
 
     $data = getBoatsJSON($host, $user, $pass, $db, $VERBOSE);
-    header('Content-Type: application/json; charset=utf-8');
+    // header('Content-Type: application/json; charset=utf-8');
     // echo json_encode($data); // This is for text (not json)
     // echo $data;
-    echo "{ \"origin\": \"$origin\", \"data\": $data }";   // TODO hostname ?
-    // http_response_code(200);  // Mmh ?
+    // Send data back to client
+    header('Content-Type: application/json; charset=utf-8');
+    http_response_code(200);  // Order is important. This is BEFORE the content.
+    echo "{ \"origin\": \"$origin\", \"data\": $data }";
 } catch (Throwable $e) {
     echo "[Captured Throwable for get_the_fleet.php : " . $e . "] " . PHP_EOL;
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error - ' . $e, true, 500);

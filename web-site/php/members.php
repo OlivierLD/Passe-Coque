@@ -71,9 +71,9 @@ if (isset($_POST['operation'])) {
   $operation = $_POST['operation'];
 }
 if (!($operation == 'logout')) {
-  if (isset($_SESSION['USER_NAME']) && 
+  if (isset($_SESSION['USER_NAME']) &&
       isset($_SESSION['DISPLAY_NAME']) &&
-      isset($_SESSION['ADMIN']) && 
+      isset($_SESSION['ADMIN']) &&
       isset($_SESSION['USER_ID'])) {
 
     // Redirect to members.02.php
@@ -123,19 +123,19 @@ if (isset($_POST['operation'])) {
       $form_password = $_POST['password'];
 
       // echo ("looking for credentials for $form_username ...<br/>");
-    
+
       // echo("Will connect on ".$database." ...<br/>");
       $link = new mysqli($dbhost, $username, $password, $database);
-    
+
       if ($link->connect_errno) {
         echo("Oops, DB Connection errno:".$link->connect_errno."...<br/>");
         die("Connection failed: " . $conn->connect_error);
       } else {
-        // echo("Connected.<br/>");
+        echo("Connected.<br/>" . PHP_EOL);
       }
-    
+
       // Last fee date ?
-      $sql = 'SELECT CONCAT(UPPER(M.LAST_NAME), \' \', M.FIRST_NAME), 
+      $sql = 'SELECT CONCAT(UPPER(M.LAST_NAME), \' \', M.FIRST_NAME),
                      M.EMAIL,
                      M.TARIF,
                     (SELECT MAX(F.PERIOD) from MEMBERS_AND_FEES F WHERE M.EMAIL = F.EMAIL GROUP BY F.EMAIL)
@@ -157,22 +157,22 @@ if (isset($_POST['operation'])) {
       }
       // Will return the days_since_last_fee. To be managed later (like if days_since_last_fee > 365)
       $_SESSION['DAYS_SINCE_LAST_FEE'] = $days_since_last_fee;
-      
+
       // Also Is a Referent ? Pswd, Full Name, Admin, BC Member, Referent, Project owner
-      $sql = "SELECT PCM.PASSWORD, " . 
-                    "CONCAT(PCM.FIRST_NAME, ' ', PCM.LAST_NAME), " . 
+      $sql = "SELECT PCM.PASSWORD, " .
+                    "CONCAT(PCM.FIRST_NAME, ' ', PCM.LAST_NAME), " .
                     "PCM.ADMIN_PRIVILEGES, " .
-                   "(SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC, " . 
+                   "(SELECT IF(COUNT(*) = 0, FALSE, TRUE) FROM BOAT_CLUB_MEMBERS BC WHERE BC.EMAIL = PCM.EMAIL) AS BC, " .
                    "(SELECT IF(COUNT(M.EMAIL) = 0, FALSE, TRUE) FROM PASSE_COQUE_MEMBERS M, THE_FLEET B, REFERENTS R WHERE R.BOAT_ID = B.ID /*AND B.CATEGORY = 'CLUB'*/ AND R.EMAIL = M.EMAIL AND M.EMAIL = '$form_username') AS REF, " .
                    "(SELECT IF(COUNT(P.OWNER_EMAIL) = 0, FALSE, TRUE) FROM PROJECT_OWNERS P WHERE P.OWNER_EMAIL = '$form_username') AS PRJ " .
-             "FROM PASSE_COQUE_MEMBERS PCM " . 
-             "WHERE PCM.EMAIL = '$form_username';"; 
+             "FROM PASSE_COQUE_MEMBERS PCM " .
+             "WHERE PCM.EMAIL = '$form_username';";
 
       if (false) {
         // echo('Performing query <code>'.$sql.'</code><br/>Pswd Length:' . strlen(trim($form_password)) );
         echo('Performing query <code>'.$sql.'</code><br/>' . PHP_EOL);
       }
-    
+
       // $result = mysql_query($sql, $link);
       $result = mysqli_query($link, $sql);
       // echo ("Returned " . $result->num_rows . " row(s)<br/>" . PHP_EOL);
@@ -204,7 +204,7 @@ if (isset($_POST['operation'])) {
           ?>
         </p>
         <a href="members.php">Log in again?</a><br/>
-        <?php    
+        <?php
       } else if ($result->num_rows > 1) {
         echo "More than one entry for $form_username, wierd...<br/>" . PHP_EOL;
       } else {
@@ -248,7 +248,7 @@ if (isset($_POST['operation'])) {
             echo "Referent: " . ($is_referent ? "Yes" : "No") . "<br/>" . PHP_EOL;
             echo "Projet leader : " . ($is_prj_owner ? "Yes" : "No") . "<br/>" . PHP_EOL;
           }
-          echo "<p style='line-height: normal;'>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . "<br/>" . PHP_EOL;    
+          echo "<p style='line-height: normal;'>" . (($current_lang == "FR") ? "Bienvenue" : "Welcome") . " " . $_SESSION['DISPLAY_NAME'] . "<br/>" . PHP_EOL;
           echo(($current_lang == "FR") ? "Vous pouvez maintenant acc&eacute;der &agrave; votre " : "You can now access your ");
           ?>
           <a href="members.02.php"><?php echo ($current_lang == "FR") ? "Menu" : "Menu" ?></a> <!-- LA SUITE ! -->
@@ -288,10 +288,14 @@ if (isset($_POST['operation'])) {
       $link->close();
       // echo("Closed DB<br/>".PHP_EOL);
     } catch (Throwable $e) {
-      echo "Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+      echo "-> Captured Throwable for connection : " . $e->getMessage() . "<br/>" . PHP_EOL;
+      echo "-> Connection prms: host [$dbhost] ($hostname), db [$database], user [$username]<br/>" . PHP_EOL;
+      echo "-> Stack trace: " . $e->getTraceAsString() . "<br/>" . PHP_EOL;
+      // echo "-> SESSION['USER_NAME']: [" . $_SESSION['USER_NAME'] . "]<br/>" . PHP_EOL;
+      var_dump($link);
     }
   } else if ($operation == 'logout') {
-    $currentUser = "unknown"; 
+    $currentUser = "unknown";
     if (isset($_SESSION['USER_NAME'])) {
       $currentUser = $_SESSION['USER_NAME'];
     }
@@ -319,7 +323,7 @@ if (isset($_POST['operation'])) {
   }
 } else { // No $_POST['operation'], then display the logging form
     ?>
-    <?php 
+    <?php
     if ($current_lang == "FR") {
       echo "<h3>Identifiez-vous au pr&eacute;alable</h3>" . PHP_EOL;
     } else {
@@ -349,12 +353,12 @@ if (isset($_POST['operation'])) {
             <?php
           }
           ?>
-          
+
         </tr>
       </table>
     </form>
     <?php
-}  
-    ?>        
-  </body>        
+}
+    ?>
+  </body>
 </html>

@@ -2461,35 +2461,36 @@ let getTheBoats = (filter, container, withBadge, pathPrefix) => {
                     } catch (err) {
                         console.log(err);
                     }
-                    console.log(`Origin: Client Side`);
+                    console.log(`=> Origin: Client Side`);
                     THE_BOATS = THE_FLEET; // Using the backup list
                     populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                 } else {
-                    if (true) { // For debug: get raw text from the response
+                    if (false) { // For debug: get raw text from the response
                         response.text().then(txt => {
                             console.log(txt);
                             try {
                                 let json = JSON.parse(txt);
-                                console.log(`Origin: ${json.origin}`);
+                                console.log(`=> Origin: ${json.origin}`);
                                 THE_BOATS = json.data;
                             } catch (err) {
                                 console.log(`Parsing error: ${err}`);
                                 showCustomAlert(txt, false, true);
-                                console.log(`Origin: Client Side`);
+                                console.log(`=> Origin: Client Side`);
                                 THE_BOATS = THE_FLEET; // Using the backup list
                             }
                             populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                         }, (error, errmess) => {
                             console.log(`${error}, ${errmess}`);
                         });
-                    } else { // Default behavior, use JSON from THE_FLEET
+                    } else { // Default behavior, use JSON from THE_FLEET if it fails.
                         response.json().then(json => {
                             console.log(`data loaded, ${json.length} boat(s) from DB.`);
-                            console.log(`Origin: ${json.origin}`);
+                            console.log(`=> Origin: ${json.origin}`);
                             THE_BOATS = json.data;
                             populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                         }, (error, errmess) => {
                             console.log(`Response to JSON: ${error},\nUsing BACKUP list`);
+                            console.log(`=> Origin: Client Side`);
                             THE_BOATS = THE_FLEET; // Using the backup list
                             populateBoatData(THE_BOATS, filter, container, withBadge, pathPrefix); // The actual display
                         });
@@ -2532,7 +2533,7 @@ let populateBoatData = (boatList, filter, container, withBadge, pathPrefix) => {
         // Filter here
         boatList.forEach(boat => {
             if (filter === null || boat.category == filter) {
-                console.log(`Filter ${filter}, adding ${boat.name}`);
+                // console.log(`Filter ${filter}, adding ${boat.name}`);
                 newList.push(boat);
             }
         });
