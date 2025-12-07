@@ -22,7 +22,7 @@
       margin: 0;
       padding: 0;
     }
-  
+
     .fax-container {
       display: grid;
       grid-template-columns: 450px 450px;
@@ -38,12 +38,12 @@
 
     .tooltip .tooltiptext {
       visibility: hidden;
-      width: 240px;
+      width: 600px;
       background-color: black;
       color: #fff;
-      text-align: center;
+      text-align: left;
       border-radius: 6px;
-      padding: 5px 0;
+      padding: 5px;
 
       /* Position the tooltip */
       position: absolute;
@@ -78,7 +78,7 @@
       let surfaceFaxesVisible = () => {
           let left = document.getElementById("left");
           return !(left.style.display === 'none');
-      };  
+      };
       let set500mbOpacity = val => {
         let fax500mb = document.getElementById("500mb");
         fax500mb.style.opacity = val;
@@ -195,14 +195,26 @@
 
   <canvas id="offscreen-backup" style="display: none;"></canvas> <!-- used to avoid refering to OffsecreenCanvas -->
 
-  <div id="top-content" style="display: grid; grid-template-columns: 50% 50%;">
+  <div id="top-content" style="display: grid; grid-template-columns: 60% 40%;">
     <div>
       <h2 class="tooltip">
-        Faxes from the Internet, North Atlantic.
-        <span class="tooltiptext">4 faxes, reworked<br/><i>on the <b>client</b> side</i>.</span>
+        NOAA Faxes from the Internet, North Atlantic.
+        <span class="tooltiptext">
+          4 faxes, reworked <i>on the <b>client</b> side</i>.<br/>
+          And Donald T. wants to cut the NOAA credits...
+        </span>
       </h2>
-      <h4>If you've been there before, do not hesitate to do a hard reload!</h4>
-      <h4>Si vous &ecirc;tes d&eacute;j&agrave; venu sur cette page, n'h&eacute;sitez pas &agrave; faire un hard reload !</h4>
+      <div style="display: grid; grid-template-columns: 50% 50%;">
+        <div>
+          <h4 style="margin: 0 5px 0 5px;">If you've been there before, do not hesitate to do a hard reload! (Ctrl+Shift+R or so)</h4>
+          <span>Make sure the dates on faxes are the expected ones...</span>
+        </div>
+        <div>
+          <h4 style="margin: 0 5px 0 5px;">Si vous &ecirc;tes d&eacute;j&agrave; venu sur cette page, n'h&eacute;sitez pas &agrave; faire un hard reload ! (genre Ctrl+Shift+R)</h4>
+          <span>Assurez vous que les dates des faxes sont les bonnes...</span>
+        </div>
+      </div>
+      <hr/>
       <div id="update-date"></div>
     </div>
     <div id="message-area" style="height: 100px; max-height: 100px; overflow: scroll; font-family: 'Courier New', Courier, monospace; border: 1px solid silver; border-radius: 5px; padding: 5px;" placeholder="Message area"></div>
@@ -276,7 +288,7 @@
             <button onclick="moveright('left')">&#x2192;</button><br><br>
             <button onclick="movedown('left')">&#x2193;</button>
           </div>
-          
+
           <div style="text-align:center; width:120px; padding: 30px; line-height: 0.4em; border: 2px solid red; border-radius: 50%; background-color: aqua;">
             <span>Surface, East</span><br/><br/>
             <button onclick="moveup('right')">&#x2191;</button><br><br>
@@ -390,6 +402,7 @@ let downloadToFileSystem = async (from, to) => {
     // XHR version
     let req = new XMLHttpRequest();
     req.open('GET', url);
+    req.setRequestHeader('Cache-Control', 'no-cache'); // After open, before send.
     req.onload = function() {
       if (req.status == 200) {
         console.log(`FaxDownload returned [${req.response}]`); // Optional
@@ -400,7 +413,7 @@ let downloadToFileSystem = async (from, to) => {
     };
     req.send();
 
-    if (false) {    
+    if (false) {
       // Fetch version
       fetch(url, {
         method: "GET",
@@ -457,25 +470,25 @@ let doYourJob = () => {
     leftFax.style.width = '600px';
     leftFax.style.height = 'auto';
     leftFax.style.transform = 'rotate(90deg)';
-    leftFax.style.left = '0px'; 
-    leftFax.style.top = '32px'; 
-    leftFax.style.opacity = '1.0'; 
+    leftFax.style.left = '0px';
+    leftFax.style.top = '32px';
+    leftFax.style.opacity = '1.0';
     leftFax.style.position = 'absolute';
 
     // Surface, right fax
     rightFax.style.width = '600px';
     rightFax.style.height = 'auto';
     rightFax.style.transform = 'rotate(90deg)';
-    rightFax.style.opacity = '1.0'; 
+    rightFax.style.opacity = '1.0';
     rightFax.style.left = '416px'; // '-188px'; // '-33px'; // -188px
-    rightFax.style.top = '32px'; 
+    rightFax.style.top = '32px';
     rightFax.style.position = 'absolute';
     rightFax.style.zIndex = '-1';
 
     // 500mb fax
     fax500mb.style.width = '919px';
     fax500mb.style.height = 'auto';
-    fax500mb.style.opacity = '1.0'; 
+    fax500mb.style.opacity = '1.0';
     fax500mb.style.left = '62px';
     fax500mb.style.top = '0px'; // '-537px'; // -575px
     fax500mb.style.position = 'absolute';
@@ -484,7 +497,7 @@ let doYourJob = () => {
     // Sea state fax
     faxSeaState.style.width = '917px';
     faxSeaState.style.height = 'auto';
-    faxSeaState.style.opacity = '1.0'; 
+    faxSeaState.style.opacity = '1.0';
     faxSeaState.style.left = '63px'; // '-388px';
     faxSeaState.style.top = '2px'; // '-594px'; // '-574px';
     faxSeaState.style.position = 'absolute';
@@ -734,14 +747,14 @@ window.onload = () => {
       console.log("All good. OffscreenCanvas is available.");
     } else {
       let mess = "Your browser seems not to be compatible with the recent versions of ES6 (aka JavaScript).\n" +
-                "Some features might not be available...\n\n" + 
+                "Some features might not be available...\n\n" +
                 "Votre navigateur semble ne pas \u00eatre compatible avec les r\u00e9centes versions d'ES6 (JavaScript).\n" +
                 "Certaines fonctionnalit\u00e9s peuvent ne pas \u00eatre disopnibles...";
       alert(mess);
     }
   } catch (err) {
     let mess = "Your browser seems not to be compatible with the recent versions of ES6 (aka JavaScript).\n" +
-                "Some features might not be available...\n\n" + 
+                "Some features might not be available...\n\n" +
                 "Votre navigateur semble ne pas \u00eatre compatible avec les r\u00e9centes versions d'ES6 (JavaScript).\n" +
                 "Certaines fonctionnalit\u00e9s peuvent ne pas \u00eatre disopnibles...";
     alert(mess);
@@ -758,7 +771,7 @@ window.onload = () => {
     }, 10);
   }
 
-  loadFaxes();  
+  loadFaxes();
 
   // Append random query string to image urls to avoid caching...
   let orig1 = document.getElementById('raw-left').src;
