@@ -1936,6 +1936,14 @@ const THE_FLEET = [
         type: "Ovni 435",
         category: PARTNERS,
         base: "Patagonie, Puerto Williams"
+    },
+    {
+        name: "Pen Kaled IV",
+        id: "pen-kaled",
+        pix: "/images/boats/pen.kaled/02.jpeg",
+        type: "Gin Fizz",
+        category: PARTNERS,
+        base: "-"
     }
 ];
 
@@ -3810,6 +3818,12 @@ const KEYWORDS = [
 		keywords: [ 'boat', 'bateau', 'shazzan', 'shazan', 'patagonie', 'patagonia', 'puerto williams', 'puerto', 'williams', 'alu', 'aluminium' ],
 		url: '/?nav-to=4&boat-id=shazzan',
 		comment: 'Le bateau, OVNI 435'
+	},
+	{
+		name: 'Pen Kaled IV',
+		keywords: [ 'boat', 'bateau', 'pen kaled', 'gin fizz' ],
+		url: '/?nav-to=4&boat-id=pen-kaled',
+		comment: 'Le bateau, Gin Fizz ketch'
 	},
 	{
 		name: 'Ia Orana',

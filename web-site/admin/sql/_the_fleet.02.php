@@ -264,6 +264,7 @@ if (isset($_POST['operation'])) {
             <option value="CLUB">CLUB</option>
             <option value="EX_BOAT">EX_BOAT</option>
             <option value="TO_GRAB">TO_GRAB</option>
+            <option value="PARTNERS">PARTNERS</option>
             <option value="FOR_SALE">FOR_SALE</option>
           </select>
         </td>

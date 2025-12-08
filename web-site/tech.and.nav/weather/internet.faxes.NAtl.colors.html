@@ -215,7 +215,9 @@
         </div>
       </div>
       <hr/>
-      <div id="update-date"></div>
+      <div id="update-date">
+        <!-- TODO Reload button here -->
+      </div>
     </div>
     <div id="message-area" style="height: 100px; max-height: 100px; overflow: scroll; font-family: 'Courier New', Courier, monospace; border: 1px solid silver; border-radius: 5px; padding: 5px;" placeholder="Message area"></div>
   </div>
@@ -727,7 +729,8 @@ let loadFaxes = async () => {
   console.log("Fourth fax downloaded, moving on.");
   appendMessage("Fourth fax downloaded, moving on.");
 
-  document.getElementById("update-date").innerHTML = `Just updated, on ${new Date()}`;
+  document.getElementById("update-date").innerHTML =
+    `Just updated, on ${new Date()} &nbsp;<button onclick="location.reload();">Reload</button>`;
   setTimeout(() => {  // Ugly !
     doYourJob();
   }, 1000);
