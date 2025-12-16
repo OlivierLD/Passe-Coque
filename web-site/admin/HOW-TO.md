@@ -88,7 +88,7 @@ pj.jannin@wmsmarine.com / tradlagWMS17
 
 Dans FileZilla:
 - Username: passecc
-- Password: PasseCoque123
+- Password: ************
 - Server: ftp.cluster030.hosting.ovh.net
 - Port 22 (ou 21)
 
