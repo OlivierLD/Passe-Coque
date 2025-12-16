@@ -1036,7 +1036,7 @@ let switchLanguagePCC = () => {
 	clack_pcc(el);
 };
 
-const BG_IMAGES =
+const BG_IMAGES = // 1500x429 -  ratio 1 / 3.5
 /*[
 	"../backgrounds/la.licorne.jpeg",
 	"../backgrounds/next_wave.jpg"
@@ -1062,6 +1062,8 @@ const BG_IMAGES =
   "/images/slideshow.03.png",
   "/images/slideshow.04.png",
   "/images/slideshow.05.png",
+  "/images/slideshow.shazzan.jpeg",
+  "/images/slideshow.la.cardinale.jpg",
   "/images/la.mer.jpg" ];
 
 const BG_INTERVAL = 5000; // in ms

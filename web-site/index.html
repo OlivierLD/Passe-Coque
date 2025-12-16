@@ -492,6 +492,8 @@ window.onload = () => {
 	// console.log("Loaded!");
 	console.log(`${window.location.href} loaded !`);
 
+	let who;
+
 	// Increment view counter, keep track, etc
 	function requestLogger(appCodeName, appName, product, appVersion, language,
 					       platform, userAgent, latitude, longitude) {
@@ -633,6 +635,7 @@ window.onload = () => {
 	 * - tx       Project number
 	 * - boat-id  for the fleet, id of the boat.
 	 * - who      for team members
+	 * - popup.   shwo welcome popup yes|no
 	 */
 
 	let userLang = getQueryParameterByName('lang');
@@ -732,7 +735,7 @@ window.onload = () => {
 			// }
 			clickOnBoatPix(el, boatName);
 		}
-		let who = getQueryParameterByName('who');  // A team member id ?
+		who = getQueryParameterByName('who');  // A team member id ?
 		if (who) {
 			// It's up to the user to set the page on the right id/nav-to (like 21 here)
 			let el = document.createElement("div");
@@ -763,10 +766,12 @@ window.onload = () => {
 	if (true) {
 		let navigateTo = getQueryParameterByName('nav-to');  // TODO boat-id, tx ?
 		if (! navigateTo) { // In order not to have too many popups
-			let withPopup = getQueryParameterByName('popup');
+			let withPopup = getQueryParameterByName('popup'); // .../?popup=no to avoid
 			if (withPopup !== 'no') {
-				console.log("Showing dialog on load");
-				showDialogOnLoad("Welcome !", "welcome");
+				if (who === undefined) {
+					console.log("Showing dialog on load");
+					showDialogOnLoad("Welcome !", "welcome");
+				}
 			}
 		}
 	}
