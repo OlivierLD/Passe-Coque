@@ -422,7 +422,11 @@ let clack = (origin) => {
                         message = mess.message;
                     }
                 }
-                console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+                console.debug("Failed to get code data..." +
+                    (error ? (typeof(error) === 'object' ? JSON.stringify(error, null, 2) : error) : ' - ') +
+                    ', ' +
+                    (message ? message : ' - ')
+                );
 				// Plus tard...
 				contentPlaceHolder.innerHTML = generateFetchErrorMessage(contentName, error, errmess);
             });
@@ -438,6 +442,8 @@ let clack = (origin) => {
                 scrollToGivenAnchor(where);
             }, 3000); // Wait a bit for the page to load. TODO Try async ?...
             // scrollToGivenAnchor(where);
+        } else {
+            console.log("No 'where' QS parameter.");
         }
     }
 
@@ -609,7 +615,7 @@ let generateFetchErrorMessage = (contentName, error, errmess) => {
     }
     let text = (currentLang === 'FR') ? 'Erreur de chargement...<br/>Est-ce que le serveur est en route ?<br/>Voyez votre administrateur.' :
                                         'Load error...<br/>Is the server running?<br/>See your admin.';
-    let content = `<div style='margin: 10px;'><pre>Fetch Error for ${contentName}: ${(error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - ')} </pre><div style='border: 3px solid red; border-radius: 10px; text-align: center;'><b>${text}</b></div></div>`;
+    let content = `<div style='margin: 10px;'><pre>Fetch Error for ${contentName}: ${(error ? (typeof(error) === 'object' ? JSON.stringify(error, null, 2) : error) : ' - ') + ', ' + (message ? message : ' - ')} </pre><div style='border: 3px solid red; border-radius: 10px; text-align: center;'><b>${text}</b></div></div>`;
     return content;
 };
 
@@ -965,7 +971,7 @@ let clack_pcc = (origin) => {
                         message = mess.message;
                     }
                 }
-                console.debug("Failed to get code data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
+                console.debug("Failed to get code data..." + (error ? (typeof(error) === 'object' ? JSON.stringify(error, null, 2) : error) : ' - ') + ', ' + (message ? message : ' - '));
 				// Plus tard...
 				contentPlaceHolder.innerHTML = generateFetchErrorMessage(contentName, error, errmess);
             });
