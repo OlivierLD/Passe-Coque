@@ -1082,7 +1082,10 @@ let startBGAnimation = (cb) => {
 				if (current_bg_image_index >= BG_IMAGES.length) {
 					current_bg_image_index = 0;
 				}
-				document.getElementById("bg-image").src = BG_IMAGES[current_bg_image_index];
+				let bgContainer = document.getElementById("bg-image");
+                if (bgContainer) {
+                    bgContainer.src = BG_IMAGES[current_bg_image_index];
+                }
 			}, BG_INTERVAL); // in ms.
 		}
 	} else { // Previous behavior
