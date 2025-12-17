@@ -1052,19 +1052,19 @@ const BG_IMAGES = // 1500x429 -  ratio 1 / 3.5
 //   "./photos.michel.02/02.jpg",
 //   "./photos.michel.02/03.jpg" ];
 
-[ "/images/houat.jpg",
-  "/images/mouillage.01.jpg",
-  "/images/mouillage.02.jpg",
-  "/images/sunset.jpg",
-  "/images/evo.png",
-  "/images/slideshow.01.png",
-  "/images/slideshow.02.png",
-  "/images/slideshow.03.png",
-  "/images/slideshow.04.png",
-  "/images/slideshow.05.png",
-  "/images/slideshow.shazzan.jpeg",
-  "/images/slideshow.la.cardinale.jpg",
-  "/images/la.mer.jpg" ];
+[ { src: "/images/houat.jpg", caption: "Houat, Treac'h er gouret" },
+  { src: "/images/mouillage.01.jpg", caption: "" },
+  { src: "/images/mouillage.02.jpg", caption: "" },
+  { src: "/images/sunset.jpg", caption: "" },
+  { src: "/images/evo.png", caption: "&Eacute;cole de voile Oc&eacute;ane" },
+  { src: "/images/slideshow.01.png", caption: "Birvidic &amp; J24, chenal de La Trinit&eacute; !" },
+  { src: "/images/slideshow.02.png", caption: "En Baie de Quiberon" },
+  { src: "/images/slideshow.03.png", caption: "Le chantier !" },
+  { src: "/images/slideshow.04.png", caption: "" },
+  { src: "/images/slideshow.05.png", caption: "" },
+  { src: "/images/slideshow.shazzan.jpeg", caption: "L'&Icirc;le des &Eacute;tats" },
+  { src: "/images/slideshow.la.cardinale.jpg", caption: "Pris de 'La Cardinale' au mouillage" },
+  { src: "/images/la.mer.jpg", caption: "" } ];
 
 const BG_INTERVAL = 5000; // in ms
 
@@ -1084,7 +1084,7 @@ let startBGAnimation = (cb) => {
 				}
 				let bgContainer = document.getElementById("bg-image");
                 if (bgContainer) {
-                    bgContainer.src = BG_IMAGES[current_bg_image_index];
+                    bgContainer.src = BG_IMAGES[current_bg_image_index].src;
                 }
 			}, BG_INTERVAL); // in ms.
 		}
@@ -1101,8 +1101,13 @@ let startBGAnimation = (cb) => {
             try {
                 let slideShowContainer = document.getElementById("bg-image");
                 if (slideShowContainer) {
-			        slideShowContainer.src = BG_IMAGES[current_bg_image_index];
+			        slideShowContainer.src = BG_IMAGES[current_bg_image_index].src;
                 } // else, on another page...
+                let titleContainer = document.getElementById("bg-title");
+                if (titleContainer) {
+                    titleContainer.innerHTML = BG_IMAGES[current_bg_image_index].caption;
+                    titleContainer.title = BG_IMAGES[current_bg_image_index].caption;
+                }
             } catch (err) {
                 console.log(`Managed error ${JSON.stringify(err)} (${err})`);
             }

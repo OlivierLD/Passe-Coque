@@ -16,7 +16,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--link rel="icon" type="image/png" href="./infinity.png"-->
+
 	<link rel="icon" type="image/png" href="./logos/LOGO_PC_no_txt.png">
+
 	<!--link rel="stylesheet" href="../css/stylesheet.css" type="text/css"/-->
 	<link rel="stylesheet" href="./fonts/font.01.css">
 	<link rel="stylesheet" href="./fonts/font.02.css">
@@ -189,7 +191,8 @@
 					<span class="this-tooltiptext-top" id="_1-label" style="margin-top: 100px; margin-left: 50px; font-weight: bold;">Retour accueil</span>
 					<!--a href="javascript:void(0)" onclick="clack(this);" id="_1" style="text-decoration: none;"-->
 					<a href="javascript:void(0)" onclick="window.location = `/?lang=${currentLang}`;" id="_1" style="text-decoration: none;">
-						<img src="/logos/logo.02.png" style="height: 80px; padding: 0px 20px;" title="Accueil Passe&#8209;Coque"/>
+						<!--img src="/logos/logo.02.png" style="height: 80px; padding: 0px 20px;" title="Accueil Passe&#8209;Coque"/-->
+						<img src="/logos/LogoNoel.png" style="height: 80px; padding: 0px 20px;" title="Accueil Passe&#8209;Coque"/>
 					</a>
 				</span>
 			</div>
@@ -599,6 +602,14 @@ window.onload = () => {
 	// ('meta[name="viewport"]').prop('content', 'width=400');
 
 	// debugger;
+	// try {
+	// 	document.getElementById("bg-image").src = BG_IMAGES[0].src;
+	// 	document.getElementById("bg-title").src = BG_IMAGES[0].caption;
+	// } catch (err) {
+	// 	console.log("Error setting initial BG image: " + err.message);
+	// }
+
+	// Start the background image slideshow
 	startBGAnimation();
 
 	// TODO Clean this up...
