@@ -646,7 +646,7 @@ window.onload = () => {
 	 * - tx       Project number
 	 * - boat-id  for the fleet, id of the boat.
 	 * - who      for team members
-	 * - popup.   shwo welcome popup yes|no
+	 * - popup.   show welcome popup yes|no
 	 */
 
 	let userLang = getQueryParameterByName('lang');
@@ -779,10 +779,10 @@ window.onload = () => {
 		if (! navigateTo) { // In order not to have too many popups
 			let withPopup = getQueryParameterByName('popup'); // .../?popup=no to avoid
 			if (withPopup !== 'no') {
-				if (who === undefined) {
+				// if (withPopup === undefined) {
 					console.log("Showing dialog on load");
 					showDialogOnLoad("Welcome !", "welcome");
-				}
+				// }
 			}
 		}
 	}
