@@ -1555,42 +1555,42 @@ const THE_FLEET = [
         type: "Delph 32",
         category: NONE,
         base: "La Ciotat"
-    },{
+    }, {
         name: "Shadok",
         id: "shadok",
         pix: "/shadok/shadok.01.png",
         type: "Via 42",
         category: NONE,
         base: "Port St Louis du Rh&ocirc;ne"
-    },{
+    }, {
         name: "Jericho",
         id: "jericho",
         pix: "/images/boats/jericho/jericho-3.jpg",
         type: "Cotre bermudien",
         category: NONE,
         base: "St Philibert"
-    },{
+    }, {
         name: "La Maoa",
         id: "la-maoa",
         pix: "/images/boats/la.maoa/la.plaque.jpeg",
         type: "Plate",
         category: NONE,
         base: "St Philibert"
-    },{
+    }, {
         name: "Nuage",
         id: "nuage",
         pix: "/images/boats/nuage/Soling.02.jpeg",
         type: "Soling",
         category: NONE,
         base: "-"
-    },{
+    }, {
         name: "Bay Watch",
         id: "coquina",
         pix: "/images/godille/coquina.02.jpeg",
         type: "Coquina, Canot voile-aviron",
         category: NONE,
         base: "-"
-    },{
+    }, {
         name: "Penny Lane",
         id: "penny-lane",
         pix: "/images/boats/penny.lane/penny.lane.12.jpg",
@@ -1602,7 +1602,7 @@ const THE_FLEET = [
         id: "los",
         pix: "/images/boats/lady.of.solent/los.10.png",
         type: "Contessa 35",
-        category: NONE,
+        category: FOR_SALE,
         base: "-"
     }, {
         name: "Araben",
@@ -1632,24 +1632,21 @@ const THE_FLEET = [
         type: "Carter 37",
         category: NONE,
         base: "Locmiqu&eacute;lic"
-    },
-    {
+    }, {
         name: "Zephir",
         id: "zephir",
         pix: "/images/boats/zephir/zephir.png",
         type: "Birvidic 700",
         category: NONE,
         base: "Kernevel"
-    },
-    {
+    }, {
         name: "Coraxy",
         id: "coraxy",
         pix: "/images/coraxy/coraxy.png",
         type: "Cognac",
         category: NONE,
         base: "Saint&#8209;Philibert"
-    },
-    {
+    }, {
         name: "Manu Oviri",
         id: "manu-oviri",
         pix: "/images/boats/manu-aviri.jpg",
@@ -1672,288 +1669,252 @@ const THE_FLEET = [
         type: "First Class 12",
         category: EX_BOAT,
         base: "Saint-Malo"
-    },
-    {
+    }, {
         name: "Atlantide",
         id: "atlantide",
         pix: "/images/boats/atlantide.sq.png",
         type: "Gib'Sea&nbsp;33",
         category: EX_BOAT,
         base: "--"
-    },
-    {
+    }, {
         name: "Iapyx",
         id: "iapyx",
         pix: "/images/boats/iapyx.sq.png",
         type: "Offshore&nbsp;35",
         category: EX_BOAT,
         base: "--"
-    },
-    {
+    }, {
         name: "Ar Mor Van",
         id: "ar-mor-van",
         pix: "/images/boats/kelt620.jpeg",
         type: "Ketl 620",
         category: NONE,
         base: "&Eacute;tel"
-    },
-    {
+    }, {
         name: "Twist Again",
         id: "twist-again",
         pix: "/images/boats/twist.again.sq.png",
         type: "JOD 35",
         category: EX_BOAT,
         base: "Saint&#8209;Philibert"
-    },
-    {
+    }, {
         name: "Ia Orana",
         id: "ia-orana",
         pix: "/images/boats/ia.orana.sq.png",
         type: "Milord",
         category: EX_BOAT,
         base: "--"
-    },
-    {
+    }, {
         name: "Melkart",
         id: "melkart",
         pix: "/images/boats/melkart/melkart.00.jpg",
         type: "Evasion 32",
         category: NONE,
         base: "&Eacute;tel"
-    },
-    {
+    }, {
         name: "Babou",
         id: "babou",
         pix: "/images/boats/babou.sq.png",
         type: "Flying Phantom",
         category: EX_BOAT,
         base: "Saint&#8209;Philibert"
-    },
-    {
+    }, {
         name: "Mirella",
         id: "mirella",
         pix: "/images/boats/mirella.png",
         type: "Maica 12,50",
         category: NONE,
         base: "Saint&nbsp;Brieuc"
-    },
-    {
+    }, {
         name: "Tri Yann",
         id: "tri-yann",
         pix: "/images/boats/tri.yann.png",
         type: "Trimaran Allegro",
         category: CLUB,
         base: "Saint&#8209;Philibert"
-    },
-    {
+    }, {
         name: "Rozen an Avel",
         id: "rozen-an-avel",
         pix: "/images/boats/rozen.an.avel.jpeg",
         type: "Arp&egrave;ge",
-        category: NONE,
+        category: EX_BOAT,
         base: "Saint&#8209;Philibert"
-    },
-    {
+    }, {
         name: "Avel Mad",
         id: "avel-mad",
         pix: "/images/boats/avel.mad.sq.png",
         type: "Mousquetaire",
         category: EX_BOAT,
         base: "Le&nbsp;Bono"
-    },
-    {
+    }, {
         name: "F&eacute;licie",
         id: "felicie",
         pix: "/images/boats/felicie.sq.png",
         type: "One off Presles",
         category: EX_BOAT,
         base: "Dakar"
-    },
-    {
+    }, {
         name: "La R&ecirc;veuse",
         id: "la.reveuse",
         pix: "/images/boats/la.reveuse.sq.png",
         type: "Damien 40",
         category: NONE,
         base: "Arzal"
-    },
-    {
+    }, {
         name: "Tokad 2",
         id: "tokad-2",
         pix: "/images/boats/tokad.2.sq.png",
         type: "Neptune 99",
         category: CLUB,
         base: "Le&nbsp;Crouesty"
-    },
-    {
+    }, {
         name: "Taapuna",
         id: "taapuna",
         pix: "/images/boats/taapuna.png",
         type: "Edel 660",
         category: CLUB,
         base: "Rivi&egrave;re de Saint&#8209;Philibert"
-    },
-    {
+    }, {
         name: "L'heure bleue",
         id: "heure-bleue",
         pix: "/images/boats/lheure.bleue.jpeg",
         type: "Arp&egrave;ge",
         category: NONE,
         base: "Golfe&nbsp;du&nbsp;Morbihan"
-    },
-    {
+    }, {
         name: "Jolly Jumper",
         id: "jolly-jumper",
         pix: "/images/boats/jolly.jumper.01.jpg",
         type: "First 325",
         category: NONE,
         base: "Les&nbsp;Sables&nbsp;d'Olonne"
-    },
-    {
+    }, {
         name: "Passpartout",
         id: "passpartout",
         pix: "/images/boats/passpartout.sq.png",
         type: "One off",
         category: NONE,
         base: "Lorient"
-    },
-    {
+    }, {
         name: "Melvan",
         id: "melvan",
         pix: "/images/boats/melvan.sq.png",
         type: "Karat&eacute;&nbsp;33",
         category: NONE,
         base: "Toulon"
-    },
-    {
+    }, {
         name: "Saigane",
         id: "saigane",
         pix: "/images/boats/saigane/saigane.jpg",
         type: "Dufour 2800",
         category: CLUB,
         base: "Port&nbsp;Blanc"
-    },
-    {
+    }, {
         name: "Anao",
         id: "anao",
         pix: "/images/boats/anao.jpeg",
         type: "Folie Douce",
         category: EX_BOAT,
         base: "&Eacute;tel"
-    },
-    {
+    }, {
         name: "Trehudal",
         id: "trehudal",
         pix: "/images/boats/trehudal.png",
         type: "Nicholson 33",
         category: CLUB,
         base: "La&nbsp;Trinit&eacute;"
-    },
-    {
+    }, {
         name: "Jules Verne",
         id: "jules-verne",
         pix: "/images/boats/jules.verne.sq.png",
         type: "Sir 520",
         category: NONE,
         base: "Locmariaquer"
-    },
-    {
+    }, {
         name: "Remora",
         id: "remora",
         pix: "/images/boats/remora.sq.png",
         type: "Arcachonnais",
         category: TO_GRAB,
         base: "Saint&#8209;Philibert"
-    },
-    {
+    }, {
         name: "Stiren ar Mor",
         id: "stiren",
         pix: "/images/boats/stiren.er.mor.png",
         type: "Ghibli",
         category: NONE,
         base: "La&nbsp;Trinit&eacute;"
-    },
-    {
+    }, {
         name: "Coevic 2",
         id: "coevic-2",
         pix: "/images/boats/coevic-2.png",
         type: "Mirage 28",
         category: EX_BOAT,
         base: "Lorient"
-    },
-    {
+    }, {
         name: "Ma Enez",
         id: "ma-enez",
         pix: "/images/boats/ma.enez.png",
         type: "Symphonie",
         category: NONE,
         base: "La&nbsp;Trinit&eacute;"
-    },
-    {
+    }, {
         name: "Saudade",
         id: "saudade",
         pix: "/images/boats/saudade.png",
         type: "Super Arlequin",
         category: NONE,
         base: "Le&nbsp;Bono"
-    },
-    {
+    }, {
         name: "Imagine",
         id: "imagine",
         pix: "/images/boats/selection.png",
         type: "Selection&nbsp;37",
         category: EX_BOAT,
         base: "Ouistreham"
-    },
-    {
+    }, {
         name: "Gwenillig",
         id: "gwenillig",
         pix: "/images/boats/gwenillig.png",
         type: "Eygthene 24",
         category: CLUB,
         base: "--"
-    },
-    {
+    }, {
         name: "Lohengrin",
         id: "lohengrin",
         pix: "/images/boats/lohengrin/lohengrin.png",
         type: "Ketch en Acier",
         category: EX_BOAT,
         base: "Arzal"
-    },
-    {
+    }, {
         name: "Nomaddict",
         id: "nomadict",
         pix: "/images/boats/nomadict/01.jpg",
         type: "Gin Fizz",
         category: TO_GRAB,
         base: "Concarneau"
-    },
-    {
+    }, {
         name: "Velona",
         id: "velona",
         pix: "/images/boats/velona/velona.00.jpg",
         type: "Classic Old Gaffer",
         category: TO_GRAB,
         base: "Hennebont"
-    },
-    {
+    }, {
         name: "B&eacute;mol III",
         id: "bemol",
         pix: "/images/boats/sun-rise-35-sous-spi.jpg",
         type: "Sun Rise 35",
         category: CLUB,
         base: "Saint-Philibert"
-    },
-    {
+    }, {
         name: "Shazzan",
         id: "shazzan",
         pix: "/images/boats/shazzan/01.jpeg",
         type: "Ovni 435",
         category: PARTNERS,
         base: "Patagonie, Puerto Williams"
-    },
-    {
+    }, {
         name: "Pen Kaled IV",
         id: "pen-kaled",
         pix: "/images/boats/pen.kaled/02.jpeg",
