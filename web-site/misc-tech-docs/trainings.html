@@ -21,44 +21,44 @@
 }
 
 .slide {
-	max-width: 800px; 
+	max-width: 800px;
 	max-height: 500px;
 	padding: 10px;
 }
 
 .slide-show {
-	display: grid; 
-	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto; 
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
 	overflow: auto;
 }
 
 .screen-shot {
-	width: 50%; 
+	width: 50%;
 	text-align: center;
 }
 
 @media screen and (width <= 800px) {
     .slide {
-		max-width: 600px; 
+		max-width: 600px;
 		max-height: 375px;
 		padding: 10px;
 	}
 	.screen-shot {
-		width: 90%; 
+		width: 90%;
 		text-align: center;
 	}
 }
 
 @media print {
 	.slide-show {
-		display: grid; 
-		grid-template-columns: auto; 
+		display: grid;
+		grid-template-columns: auto;
 		overflow: auto;
 	}
 	.not-printed {
 		display: none;
 	}
-} 
+}
     </style>
 
 	<script type="module" src="../webcomponents/SlideShow.js"></script>
@@ -67,12 +67,12 @@
 		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 	</script>
 	<!--script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script-->
-	<script type="text/javascript" 
+	<script type="text/javascript"
 			async
   			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 	</script>
 </head>
-	
+
 <body>
 
 	<h4><img src="../logos/logo.02.png" style="width: 100px; vertical-align: middle;" title="Passe&#8209;Coque"/>Passe-Coque. Formations (Low-tech &amp; No-tech)</h4>
@@ -81,6 +81,7 @@
 		<ul>
 			<li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/nav.astro.intro.html" target="navastro">Introduction &agrave; la navigation astronomique</a></li>
 			<li><a href="https://olivierld.github.io/web.stuff/nse/presentations/web/meteo.intro.html" target="meteo">Introduction &agrave; la m&eacute;t&eacute;o marine</a></li>
+			<li>Voir aussi <a href="https://olivierld.github.io/web.stuff/boat.stuff/grib.routing/grib.and.co.html" target="meteo">GRIB, routage, etc</a></li>
 			<li>Matelotage</li>
 			<li>Soudure</li>
 			<li>Godille</li>
