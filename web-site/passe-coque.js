@@ -3660,8 +3660,8 @@ const KEYWORDS = [
 		comment: ''
 	},
 	{
-		name: 'Voyage en Patrimoine',
-		keywords: [ 'passpartout', 'patrimoine', 'voyage' ],
+		name: 'Le Bivouac des Sciences',
+		keywords: [ 'passpartout', 'patrimoine', 'voyage', 'bivouac', 'science' ],
 		url: '/?nav-to=31&tx=02',
 		comment: ''
 	},
@@ -3902,7 +3902,7 @@ const KEYWORDS = [
 	},
 	{
 		name: 'Passpartout',
-		keywords: [ 'boat', 'bateau', 'passpartout', 'lorient', 'acier' ],
+		keywords: [ 'boat', 'bateau', 'passpartout', 'lorient', 'acier', 'bivouac', 'science' ],
 		url: '/?nav-to=4&boat-id=passpartout',
 		comment: 'Le bateau, One off, en acier'
 	},

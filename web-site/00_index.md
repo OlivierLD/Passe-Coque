@@ -1,6 +1,6 @@
 ## Resources Index
 
-> Warning: La liste n'est pas &agrave; jour !  
+> Warning: La liste n'est pas &agrave; jour !
 > &Ccedil;a vient...
 
 - Locate the menus and their corresponding page.
@@ -28,7 +28,7 @@
 | Prefix | Project |
 |:------:|:--------|
 | tx-01  | Nav'Solidaire |
-| tx-02  | Voyage en Patrimoine |
+| tx-02  | Voyage en Patrimoine / Bivouac des Sciences |
 | tx-03  | Cap Melvan |
 | tx-04  | WATTER |
 | tx-05  | Prodin Nancq |
