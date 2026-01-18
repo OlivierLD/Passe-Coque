@@ -2019,10 +2019,14 @@ const THE_TEAM = [
 const INFO_SECTION = [{
         section: "agenda",
         content: [{
+            date: "Jan-2026",
+            title: "Agenda 2026",
+            content: "/actu/agenda2026.html"
+        } /*, {
             date: "Jan-2025",
             title: "Agenda 2025",
             content: "/actu/agenda2025.html"
-        }/* , {
+        }, {
             date: "Jan-2024",
             title: "Agenda 2024",
             content: "/actu/agenda2024.html"

@@ -22,7 +22,7 @@ try {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../../passe-coque.css">
-	<title>Send NL-Email With Attachment</title>
+	<title>Send NL-Email, With Attachment</title>
     <style type="text/css">
         h3 {
             margin: 0 10px;
@@ -100,8 +100,15 @@ if (!isset($_SESSION['USER_NAME'])) {
 	}
 }
 
-
+// Sending process below...
 if (isset($_POST['button']) && isset($_FILES['attachment'])) {
+
+	$email_filter = $_POST['email_filter'] ?? '';
+	$do_send = false;
+	if (isset($_POST['send_email'])) {
+		$send_email_value = $_POST['send_email'];
+		$do_send = ($send_email_value == 'do_send');
+	}
 
 	// echo ("Top Loop<br/>");
 	echo ("<h2>Sending process initiated</h2>" . PHP_EOL);
@@ -162,7 +169,7 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 
 		$sql = 'SELECT EMAIL, FIRST_NAME, LAST_NAME, NEWS_LETTER_OK ' .
 		       'FROM PASSE_COQUE_MEMBERS ' .
-			   'WHERE EMAIL LIKE \'%\' ' .   // Possible restriction here, and below...
+			   'WHERE EMAIL LIKE \'%' . $email_filter . '%\'' . // Possible restriction here, and below...
 // 		   '      AND (LAST_NAME LIKE \'%Le%Diouris%\') ' .
 //			   '      AND (LAST_NAME LIKE \'%Le%Diouris%\' ' .
 //			   '        OR LAST_NAME LIKE \'%Allais%\' ' .
@@ -170,53 +177,60 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 			   '  AND NEWS_LETTER_OK = TRUE;';
 
 		echo('Performing query <code>'.$sql.'</code><br/>');
-
+		if (!$do_send) {
+			echo ("<strong>Test mode:</strong> not sending emails, only listing recepients.<br/>" . PHP_EOL);
+		}
 		// $result = mysql_query($sql, $link);
 		$result = mysqli_query($link, $sql);
-		echo ("Will send " . $result->num_rows . " email(s)<br/>");
+		echo (($do_send ? "Will" : "Would") . " send " . $result->num_rows . " email(s)<br/>");
 
 		set_time_limit($result->num_rows); // 1 second per email
 
 		while ($table = mysqli_fetch_array($result)) { // go through each row that was returned in $result
-		  // echo "table contains ". count($table) . " entry(ies).<br/>";
-		  $active = ($table[3]/* === true*/) ? "Yes" : "No";
-		  $nl_id = $table[0];
-		  $subscriber_email = $table[0];
+			// echo "table contains ". count($table) . " entry(ies).<br/>";
+			$active = ($table[3]/* === true*/) ? "Yes" : "No";
+			$nl_id = $table[0];
+			$subscriber_email = $table[0];
 
-		  $footer = "<br/><hr/><p>";
-		  $footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
-		  $footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
-		  $footer .= "<a href='http://www.passe-coque.com/php/unsubscribe.php?subscriber-id=$nl_id'>Se d&eacute;sabonner / Unsubscribe</a><br/>"; // Use the real ID
-		  $footer .= "</p>";
-		  $fmt_message = str_replace("\n", "\n<br/>", $message);
-		  $fmt_message .= $footer;
+			$footer = "<br/><hr/><p>";
+			$footer .= "<img src='http://www.passe-coque.com/logos/LOGO_PC_rvb.png' width='40'><br/>";  // The full URL of the image.
+			$footer .= "The <a href='http://www.passe-coque.com' target='PC'>Passe-Coque</a> web site<br/>"; // Web site
+			$footer .= "<a href='http://www.passe-coque.com/php/unsubscribe.php?subscriber-id=$nl_id'>Se d&eacute;sabonner / Unsubscribe</a><br/>"; // Use the real ID
+			$footer .= "</p>";
+			$fmt_message = str_replace("\n", "\n<br/>", $message);
+			$fmt_message .= $footer;
 
-		  // plain text, or html
-		  $body = "--$boundary\r\n";
-		  // $body .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
-		  $body .= "Content-Type: text/html; charset=UTF-8\r\n"; // To allow HTML artifacts, like links and Co.
-		  $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-		  $body .= chunk_split(base64_encode($fmt_message));
+			// plain text, or html
+			$body = "--$boundary\r\n";
+			// $body .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
+			$body .= "Content-Type: text/html; charset=UTF-8\r\n"; // To allow HTML artifacts, like links and Co.
+			$body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+			$body .= chunk_split(base64_encode($fmt_message));
 
-		  // attachment
-		  $body .= "--$boundary\r\n";
-		  $body .="Content-Type: $type; name=".$name."\r\n"; // TODO Display this type, to see what this is
-		  $body .="Content-Disposition: attachment; filename=".$name."\r\n";
-		  $body .="Content-Transfer-Encoding: base64\r\n";
-		  $body .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
-		  $body .= $encoded_content; // Attaching the encoded file with email
+			// attachment
+			$body .= "--$boundary\r\n";
+			$body .="Content-Type: $type; name=".$name."\r\n"; // TODO Display this type, to see what this is
+			$body .="Content-Disposition: attachment; filename=".$name."\r\n";
+			$body .="Content-Transfer-Encoding: base64\r\n";
+			$body .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
+			$body .= $encoded_content; // Attaching the encoded file with email
 
-		  // TODO Bcc in the headers (see https://stackoverflow.com/questions/9525415/php-email-sending-bcc)
-		  $sentMailResult = mail($subscriber_email, $subject, $body, $headers);
+			if ($do_send) {
+				// TODO Bcc in the headers (see https://stackoverflow.com/questions/9525415/php-email-sending-bcc)
+				$sentMailResult = mail($subscriber_email, $subject, $body, $headers);
 
-		  if ($sentMailResult) {
-			  echo "Email to $subscriber_email was sent successfully.<br/>" . PHP_EOL;
-			  // unlink($name); // delete the file after attachment sent.
-		  } else {
-			  echo "There was a problem for $subscriber_email ...<br/>";
-			  die("Sorry but the email to $subscriber_email could not be sent. Please go back and try again!");
-		  }
-		}
+				if ($sentMailResult) {
+					echo "Email to $subscriber_email was sent successfully.<br/>" . PHP_EOL;
+					// unlink($name); // delete the file after attachment sent.
+				} else {
+					echo "There was a problem for $subscriber_email ...<br/>";
+					die("Sorry but the email to $subscriber_email could not be sent. Please go back and try again!");
+				}
+			} else {
+				echo "Test: Email would be sent to $subscriber_email ($table[1] $table[2])<br/>" . PHP_EOL;
+			}
+
+		} // End while
 
 		// On ferme !
 		$link->close();
@@ -229,6 +243,8 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 	  echo ("<a href=''>Back !</a><br/>" . PHP_EOL);
 } else {
 ?>
+    <h2>Passe-Coque newsletter email sender</h2>
+	<hr/>
 	Choose the pdf containing the news letter, enter a message (the content of the email), and click the button!
 	<div style="display: flex; justify-content: center; margin-top: 10px;">
 		<form enctype="multipart/form-data" method="POST" action="" style="width: 500px;">
@@ -236,7 +252,17 @@ if (isset($_POST['button']) && isset($_FILES['attachment'])) {
 				<input class="form-control" type="text" name="sender_name" placeholder="Sender Name" required value="Passe-Coque Contact"/>
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="email" name="sender_email" placeholder="Recipient's Email Address" required value="contact@passe-coque.com"/>
+				<input class="form-control" type="email" name="sender_email" placeholder="Sender's Email Address" required value="contact@passe-coque.com"/>
+			</div>
+			<div style="border: 1px solid silver; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+				<strong>For tests</strong>: you can enter an email address filter here (joker character is '%').<br/>
+				Otherwise, the email will be sent to all newsletter subscribers.
+				<div class="form-group">
+					<input class="form-control" type="text" name="email_filter" placeholder="Email Address filter" value=""/>
+				</div>
+				<div class="form-group">
+					<span class="form-control"><input type="checkbox" name="send_email" value="do_send" checked/> Do send the emails - or not (would return the list of recepients, only; for test).</span>
+				</div>
 			</div>
 			<div class="form-group">
 				<input class="form-control" type="text" name="subject" placeholder="Subject" value="" required/> <!-- value was News Letter XXXX -->
