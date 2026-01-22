@@ -2374,29 +2374,29 @@ const NEXT_EVENTS = [ // oldest to newest.
         date_from: '2026-01-15',
         date_to: '2026-01-15',
         content: {
-            fr: 'Jeudi 15 janvier - Les Conties : Les Herbiers (85) - Projection du film "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" de Fr&eacute;d&eacute;ric Brunquell, en pr&eacute;sence de 2 &eacute;quipi&egrave;res et de Laurent Girault Conti.',
-            en: 'Thursday January 15th - Les Conties: Les Herbiers (85) - Screening of the movie "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" by Fr&eacute;d&eacute;ric Brunquell, in presence of two crew members and Laurent Girault Conti.'
+            fr: 'Jeudi 15 janvier - <b>Les Conties</b> : Les Herbiers (85) - Projection du film "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" de Fr&eacute;d&eacute;ric Brunquell, en pr&eacute;sence de 2 &eacute;quipi&egrave;res et de Laurent Girault Conti.',
+            en: 'Thursday January 15th - <b>Les Conties</b>: Les Herbiers (85) - Screening of the movie "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" by Fr&eacute;d&eacute;ric Brunquell, in presence of two crew members and Laurent Girault Conti.'
         }
     }, {
         date_from: '2026-02-20',
         date_to: '2026-02-20',
         content: {
-            fr: 'Vendredi 20 f&eacute;vrier - Les Conties : Beaupr&eacute;au en Mauges (49)  - Projection du film "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" de Fr&eacute;d&eacute;ric Brunquell, en pr&eacute;sence de 2 &eacute;quipi&egrave;res et de Laurent Girault Conti.',
-            en: 'Friday February 20th - Les Conties: Beaupr&eacute;au en Mauges (49)  - Screening of the movie "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" by Fr&eacute;d&eacute;ric Brunquell, in presence of two crew members and Laurent Girault Conti.'
+            fr: 'Vendredi 20 f&eacute;vrier - <b>Les Conties</b> : Beaupr&eacute;au en Mauges (49)  - Projection du film "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" de Fr&eacute;d&eacute;ric Brunquell, en pr&eacute;sence de 2 &eacute;quipi&egrave;res et de Laurent Girault Conti.',
+            en: 'Friday February 20th - <b>Les Conties</b>: Beaupr&eacute;au en Mauges (49)  - Screening of the movie "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" by Fr&eacute;d&eacute;ric Brunquell, in presence of two crew members and Laurent Girault Conti.'
         }
     }, {
         date_from: '2026-03-27',
         date_to: '2026-03-27',
         content: {
-            fr: 'Vendredi 27 mars - Lorient (56) - Les Conties : Pr&eacute;sentation du projet au "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" en pr&eacute;sence des &eacute;quipi&egrave;res.',
-            en: 'Friday March 27th - Lorient (56) - Les Conties: Presentation of the project at the "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" in presence of the crew members'
+            fr: 'Vendredi 27 mars - Lorient (56) - <b>Les Conties</b> : Pr&eacute;sentation du projet au "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" en pr&eacute;sence des &eacute;quipi&egrave;res.',
+            en: 'Friday March 27th - Lorient (56) - <b>Les Conties</b>: Presentation of the project at the "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" in presence of the crew members'
         }
     }, {
         date_from: '2026-03-28',
         date_to: '2026-03-29',
         content: {
-            fr: 'Samedi 28 et Dimanche 29 Mars - Les Conties : Maison Glaz &agrave; G&acirc;vres (&agrave; proximit&eacute; de Lorient- 56) - <b>Notre grand &eacute;v&egrave;nement de PRE-DÉPART !</b>',
-            en: 'Saturday March 28th and Sunday March 29th - Les Conties: Maison Glaz in G&acirc;vres (near Lorient- 56) - <b>Our big pre-start event!</b>'
+            fr: 'Samedi 28 et Dimanche 29 Mars - <b>Les Conties</b> : Maison Glaz &agrave; G&acirc;vres (&agrave; proximit&eacute; de Lorient- 56) - <b>Notre grand &eacute;v&egrave;nement de PRE-DÉPART !</b>',
+            en: 'Saturday March 28th and Sunday March 29th - <b>Les Conties</b>: Maison Glaz in G&acirc;vres (near Lorient- 56) - <b>Our big pre-start event!</b>'
         }
     }
 ];
