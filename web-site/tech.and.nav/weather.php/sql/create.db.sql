@@ -1,33 +1,37 @@
 --
 -- https://sqlite.org/docs.html
 --
+DROP TABLE DATA_TYPES;
+DROP TABLE WEATHER_DATA;
 -- Create data-type table
 CREATE TABLE DATA_TYPES (
-    name varchar2 PRIMARY KEY,
-    unit VARCHAR2 not null,
-    description VARCHAR2
+    NAME VARCHAR2 PRIMARY KEY,
+    UNIT VARCHAR2 NOT NULL,
+    DESCRIPTION VARCHAR2
 );
 -- Create data table
 CREATE TABLE WEATHER_DATA (
-    type varchar2,
-    data_date datetime not null,
-    value numeric not null,
-    constraint pk_data primary key (type, data_date),
-    constraint data_fk_type foreign key (type) references data_types(name) on delete cascade -- Works ??
+    TYPE VARCHAR2,
+    DATA_DATE DATETIME NOT NULL,
+    VALUE NUMERIC NOT_NULL,
+    CONSTRAINT PK_DATA PRIMARY KEY (TYPE, DATA_DATE),
+    CONSTRAINT DATA_FK_TYPE FOREIGN KEY (TYPE) REFERENCES DATA_TYPES(NAME) ON DELETE CASCADE
 );
-
 -- Init types
-BEGIN;
-INSERT INTO DATA_TYPES (name, unit, description) VALUES ('PRMSL', 'hPa',     'Pressure at Mean Sea Level');
-INSERT INTO DATA_TYPES (name, unit, description) VALUES ('AT',    char(186) || 'C', 'Air Temperature');
-INSERT INTO DATA_TYPES (name, unit, description) VALUES ('RH',    '%',       'Relative Humidity');
-INSERT INTO DATA_TYPES (name, unit, description) VALUES ('DEW-P', char(186) || 'C', 'Dew Point');
-INSERT INTO DATA_TYPES (name, unit, description) VALUES ('AH',    'g/m3',    'Absolute Humidity');
+ BEGIN;
+INSERT INTO DATA_TYPES (NAME, UNIT, DESCRIPTION) VALUES ('PRMSL', 'hPa',     'Pressure at Mean Sea Level');
+INSERT INTO DATA_TYPES (NAME, UNIT, DESCRIPTION) VALUES ('AT',    char(186) || 'C', 'Air Temperature');
+INSERT INTO DATA_TYPES (NAME, UNIT, DESCRIPTION) VALUES ('RH',    '%',       'Relative Humidity');
+INSERT INTO DATA_TYPES (NAME, UNIT, DESCRIPTION) VALUES ('DEW-P', char(186) || 'C', 'Dew Point');
+INSERT INTO DATA_TYPES (NAME, UNIT, DESCRIPTION) VALUES ('AH',    'g/m3',    'Absolute Humidity');
 COMMIT;
+
 
 -- Example...
 BEGIN;
-INSERT INTO WEATHER_DATA (type, data_date, value) VALUES ('PRMSL', datetime('now'), 1013.15);
+INSERT INTO WEATHER_DATA (TYPE, DATA_DATE, VALUE) VALUES ('PRMSL', DATETIME('now'), 1013.15);
+INSERT INTO WEATHER_DATA (TYPE, DATA_DATE, VALUE) VALUES ('PRMSL', DATETIME('now'), 1013.15);
+INSERT INTO WEATHER_DATA (TYPE, DATA_DATE, VALUE) VALUES ('AKEU', DATETIME('now'), 1234);
 .mode columns
 .headers on
 SELECT 'Data inserted, as an example:';

@@ -2,14 +2,14 @@
 /*
 To be invoked like here:
     to select:
-    curl -X GET "http://localhost/tech.and.nav/weather.php/weather.php" -H "accept: application/json"
+    curl -X GET "http://localhost/tech.and.nav/weather.php/weather.php?type=PRMSL&verbose=1" -H "accept: application/json"
     to insert:
-    curl -X POST "http://localhost/tech.and.nav/weather.php/weather.php" -H "accept: application/json" -d type=AT -d value=12
+    curl -X POST "http://localhost/tech.and.nav/weather.php/weather.php" -H "accept: application/json" -d '{ "type": "AT", "value": 12 }'
 
     from JavaScript:
 
-    let boatData = ".../weather.php";
-    fetch(boatData, {
+    let prmslData = ".../weather.php?type=PRMSL";
+    fetch(prmslData, {
         method: "GET",
         headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -28,23 +28,35 @@ To be invoked like here:
     FROM WEATHER_DATA
     WHERE TYPE='PRMSL' AND (unixepoch() - unixepoch(DATA_DATE)) < 604800
     ORDER BY DATA_DATE ASC;
+
+    select 'Type ' || type || ' has ' || count(*) || ' entries' as result from weather_data group by type;
 */
 
 ini_set('memory_limit', '-1'); // For no limit ...
 
+// TODO A FreeSQL...
 
-function getPRMSL_JSON(SQLite3 $database, bool $verbose): string {
+
+function getData_JSON(SQLite3 $database, string $type, bool $verbose): string {
     try {
-
-        $sql = "SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE " .
-               "FROM WEATHER_DATA " .
-               "WHERE TYPE='PRMSL' AND (unixepoch() - unixepoch(DATA_DATE)) < 604800 " .
-               "ORDER BY DATA_DATE ASC;";
+        if (false) {
+            $sql = "SELECT * FROM WEATHER_DATA;";
+        } else if (true) {
+            $sql = "SELECT DATA_DATE, VALUE " .
+                   "FROM WEATHER_DATA " .
+                   ($type === "ALL" ? "" : "WHERE TYPE='" . SQLite3::escapeString($type) . "' ") .
+                   "ORDER BY DATA_DATE ASC;";
+        } else {
+            $sql = "SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE " .
+                   "FROM WEATHER_DATA " .
+                   "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " (unixepoch() - unixepoch(DATA_DATE)) < 604800 " .
+                   "ORDER BY DATA_DATE ASC;";
+        }
         if ($verbose) {
-            echo('[Performing instruction ['.$sql.']] ' . PHP_EOL);
+            echo('[Performing statement [' . $sql . ']] ' . PHP_EOL);
         }
 
-        $results = $database->query($sql);
+        $results = $database->query($sql); // returns 'false' if problem...
 
         if ($verbose) {
             echo ("Query Returned" . PHP_EOL);
@@ -52,11 +64,16 @@ function getPRMSL_JSON(SQLite3 $database, bool $verbose): string {
 
         $json_result = "[";
         $first = true;
-        while ($row = $results->fetchArray()) { // TODO disply number of rows ?
+
+        if ($results === false) {
+            throw new Exception("Query [$sql] failed.");
+        }
+        while ($row = $results->fetchArray()) { // TODO display number of rows ?
             $dataDate = $row[0];
             $value = (float)$row[1];
 
-            $next_element = "{ \"". $dataDate . "\": " . $value . " }";
+            // str_replace to replace the space with T for JSON date-time format
+            $next_element = "{ \"". str_replace(" ","T", $dataDate) . "\": " . $value . " }";
             // echo $next_element . "<br/>" . PHP_EOL;
             $json_result = $json_result . ($first ? "" : ", ") . $next_element;
             $first = false;
@@ -72,13 +89,15 @@ function getPRMSL_JSON(SQLite3 $database, bool $verbose): string {
         return $json_result;
 
     } catch (Throwable $e) {
-        echo "[ Captured Throwable for connection : " . $e->getMessage() . "] " . PHP_EOL;
+        if ($verbose) {
+            echo "[ Captured Throwable for getPRMSL_JSON : " . $e->getMessage() . "] " . PHP_EOL;
+        }
         throw $e;
     }
     return null;
 }
 
-$VERBOSE = false; // Would generate an invalid JSON payload if true...
+$VERBOSE = false; // Would generate an invalid JSON payload if true... But still.
 $hostname = $_SERVER['SERVER_NAME'];
 
 if (true) {
@@ -97,21 +116,49 @@ try {
     $origin = $hostname; // "$user@$host/$db";
 
     if ($request_verb === 'GET') { // It's a query
-        $data = getPRMSL_JSON($db, $VERBOSE);
+        $type = "ALL";
+        if (isset($_GET['type'])) {
+            $type = $_GET['type'];
+            if ($VERBOSE) {
+                echo "Received type parameter: $type" . PHP_EOL;
+            }
+        }
+        $verbose = $VERBOSE;
+        if (isset($_GET['verbose'])) {
+            $verbose = $_GET['verbose'] === '1' || strtolower($_GET['verbose']) === 'true';
+            if ($VERBOSE) {
+                echo "Received verbose parameter: $verbose" . PHP_EOL;
+            }
+        }
+        $data = getData_JSON($db, $type, $verbose);
         // header('Content-Type: application/json; charset=utf-8');
         // echo json_encode($data); // This is for text (not json)
         // echo $data;
         // Send data back to client
         header('Content-Type: application/json; charset=utf-8');
         http_response_code(200);  // Order is important. This is BEFORE the content.
-        echo "{ \"origin\": \"$origin\", \"data\": $data }";
+        echo "{ \"origin\": \"$origin\", \"type\": \"$type\" , \"data\": $data }";
     } else if ($request_verb === 'POST') {
         // Create new entry(ies)
         if (isset($_POST)) {
-            // var_dump($_POST);
-            if (isset($_POST['type']) && isset($_POST['value'])) {
-                $type = $_POST['type'];
-                $value = (float)$_POST['value'];
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
+
+            if ($VERBOSE) {
+                echo "------------------------" . PHP_EOL;
+                echo "Received JSON data: " . $json . PHP_EOL;
+                // echo $data . PHP_EOL;
+                echo "------------------------" . PHP_EOL;
+            }
+
+            $type = $data['type'] ?? null;
+            $value = isset($data['value']) ? (float)$data['value'] : null;
+
+            // if called with -d type=AT -d value=12
+            // $type = $_POST['type'];
+            // $value = (float)$_POST['value'];
+
+            if ($type !== null && $value !== null) {
                 // Prepare insert
                 $stmt = $db->prepare('INSERT INTO WEATHER_DATA (TYPE, VALUE, DATA_DATE) VALUES (:type, :value, datetime("now"))');
                 $stmt->bindValue(':type', $type, SQLITE3_TEXT);
@@ -126,7 +173,7 @@ try {
                     throw new Exception("Failed to insert data.");
                 }
             } else {
-                throw new Exception("Missing 'type' or 'value' in POST data.");
+                throw new Exception("Missing 'type' and/or 'value' in POST data.");
             }
         } else {
             throw new Exception("POST method not implemented yet.");
