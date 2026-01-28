@@ -20,36 +20,62 @@ To be invoked like here:
 
         });
 
+    SQLite date functions, see https://www.sqlite.org/lang_datefunc.html
+
     select (unixepoch(datetime('now')) - unixepoch(data_date)) from weather_data;
     select (unixepoch() - unixepoch(data_date)) from weather_data;
+
     unixepoch: in seconds. One week = 7 * 24 * 60 * 60 = 604800 seconds
+    unixepoch does not work on OVH...
 
     SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE
     FROM WEATHER_DATA
     WHERE TYPE='PRMSL' AND (unixepoch() - unixepoch(DATA_DATE)) < 604800
     ORDER BY DATA_DATE ASC;
 
+    select data_date,
+           value
+    from weather_data
+    where type='PRMSL' and ((julianday() - julianday(data_date)) * 86400) < (6048007)
+    order by data_date asc;
+
     select 'Type ' || type || ' has ' || count(*) || ' entries' as result from weather_data group by type;
+
+    select data_date,
+           datetime('now'),
+           julianday(data_date),
+           julianday(),
+           (julianday() - julianday(data_date)) * 86400 as diff_in_seconds
+    from weather_data
+    where type='PRMSL'
+    order by data_date asc;
+
 */
 
 ini_set('memory_limit', '-1'); // For no limit ...
-
-// TODO A FreeSQL...
 
 
 function getData_JSON(SQLite3 $database, string $type, bool $verbose): string {
     try {
         if (false) {
             $sql = "SELECT * FROM WEATHER_DATA;";
-        } else if (true) {
+        } else if (false) {
+            $sql = "SELECT DATA_DATE, VALUE " .
+                   "FROM WEATHER_DATA " .
+                   ($type === "ALL" ? "" : "WHERE TYPE='" . SQLite3::escapeString($type) . "' ") .
+                   "ORDER BY DATA_DATE ASC;";
+        } else if (false) {
             $sql = "SELECT DATA_DATE, VALUE " .
                    "FROM WEATHER_DATA " .
                    ($type === "ALL" ? "" : "WHERE TYPE='" . SQLite3::escapeString($type) . "' ") .
                    "ORDER BY DATA_DATE ASC;";
         } else {
-            $sql = "SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE " .
+            // 86400 seconds in a day, 604800 seconds in a week
+            $sql = // "SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE " .
+                   "SELECT DATA_DATE, VALUE " .
                    "FROM WEATHER_DATA " .
-                   "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " (unixepoch() - unixepoch(DATA_DATE)) < 604800 " .
+                // "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " ((julianday() - julianday(DATA_DATE)) * 86400) < (6048007) " .
+                   "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " (julianday() - julianday(DATA_DATE)) < 7 " .
                    "ORDER BY DATA_DATE ASC;";
         }
         if ($verbose) {

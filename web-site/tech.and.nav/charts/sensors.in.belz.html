@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ | WiP.
+ | Available from http://leafletjs.com/
+ | Tutorials and examples at https://leafletjs.com/examples.html
+ | Note: No native way to change orientation
+ +-->
+<head>
+
+  <title>Belz, in Britanny</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/images/small.boat.png">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+  <style type="text/css">
+
+html {
+    width: fit-content;
+}
+
+body {
+    font-family: "Source Code Pro", "Courier New", Helvetica, Geneva;
+    font-weight: bold;
+    background-color: rgba(192, 192, 192, 0.35);
+}
+
+  </style>
+
+</head>
+<body>
+
+<h1>Belz - F 56550</h1>
+
+<div style="width: 100%;">
+  <div>
+    <div style="vertical-align: top;">
+      <div id="mapid" style="width: 1000px; height: 600px; box-shadow: 4px 4px 8px grey, 0 0 25px white, 0 0 7px cyan;"></div>
+    </div>
+</div>
+
+<hr/>
+
+<div style="color: silver;">
+  OpenSource JavaScript map API at <a href="https://leafletjs.com/" target="leaflet">leafletjs.com</a>. Zoom for details...<br/>
+  <i style="color: silver;">Passe-Coque never stops</i>
+</div>
+
+
+</body>
+<script type="text/javascript">
+
+    const VERBOSE = false;
+
+    if (Math.toDegrees === undefined) {
+        Math.toDegrees = (rad) => {
+            return rad * (180 / Math.PI);
+        }
+    }
+
+    if (Math.toRadians === undefined) {
+        Math.toRadians = (deg) => {
+            return deg * (Math.PI / 180);
+        }
+    }
+
+    function decToSex(val, ns_ew) {
+        let absVal = Math.abs(val);
+        let intValue = Math.floor(absVal);
+        let dec = absVal - intValue;
+        let i = intValue;
+        dec *= 60;
+        let min = dec.toFixed(4);
+        while (min.length < 7) {
+            min = '0' + min;
+        }
+        let s = i + "°" + min + "'";
+
+        if (val < 0) {
+            s += (ns_ew === 'NS' ? 'S' : 'W');
+        } else {
+            s += (ns_ew === 'NS' ? 'N' : 'E');
+        }
+        return s;
+    }
+
+    // Initial pos (center) and zoom.
+    // let map = L.map('mapid').setView([47.60418496238821, -3.023769774881657], 16);
+    let map = L.map('mapid').setView([47.67533597, -3.16968906], 13);
+
+    let tooltip = null;
+
+	// let mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+	// let mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+
+    let mbAttr = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+    let mbUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+    const tiles = L.tileLayer(mbUrl, {
+		maxZoom: 19,
+		attribution: mbAttr
+	}).addTo(map);
+
+    L.circle([47.677667, -3.135667], { color: 'red',
+                                       fillColor: '#f03',
+                                       fillOpacity: 0.25,
+                                       radius: 50
+                                    }).addTo(map);
+
+
+    map.addEventListener('mousemove', (event) => {
+        // let lat = Math.round(event.latlng.lat * 100000) / 100000;
+        // let lng = Math.round(event.latlng.lng * 100000) / 100000;
+        let lat = event.latlng.lat;
+        let lng = event.latlng.lng;
+        while (lng > 180) {
+            lng -= 360;
+        }
+        while (lng < -180) {
+            lng += 360;
+        }
+        console.log(`Mouse now in ${lat}/${lng}`);
+        if (tooltip != null) {
+            map.removeLayer(tooltip);
+        }
+        tooltip = L.tooltip()
+                        .setLatLng(L.latLng([lat, lng]))
+                        .setContent(`${decToSex(lat, "NS")}<br/>${decToSex(lng, "EW")}`)
+                        .addTo(map);
+
+    });
+
+
+    // Used as an example, See "// markers" below. Used to hold pictures.
+    const ALL_MARKERS = [];
+
+    let markers = ALL_MARKERS; // Used to hold markers.
+    if (true) {
+        markers.forEach(mark => {
+            oneMark = L.marker([(mark.latitude), (mark.longitude)], { title: mark.name });
+            oneMark.addTo(map)
+                   .bindPopup('<b>' + mark.name + '</b><br/>' + mark.content); // .openPopup();
+        });
+    }
+
+
+    // To draw in pixels, see https://leafletjs.com/examples/extending/extending-2-layers.html
+    // Also https://codepen.io/adelaide01/pen/EXMwbY
+
+    // let circle = null;
+    // let marker = null;
+    // let tooltip = null;
+
+    function lpad(s, w, len) {
+        let str = s;
+        while (str.length < len) {
+            str = w + str;
+        }
+        return str;
+    }
+
+    window.onload = () => {
+        console.log("Page Loaded!");
+    };
+
+</script>
+</html>

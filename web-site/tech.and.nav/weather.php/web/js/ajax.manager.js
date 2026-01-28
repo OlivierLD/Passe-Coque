@@ -139,7 +139,6 @@ async function getTheData() {
 		"pressure-map": prmslMap,
 		"temperature-map": airTempMap
 	};
-
 }
 
 function showCustomAlert(message) {
@@ -196,11 +195,11 @@ function fetchData(errCallback) {
 }
 
 const EVENT_FULL     = 'full';
-const EVENT_AT       = 'at';
+const EVENT_AT       = 'at';   // Air Temperature
 const EVENT_PRMSL    = 'prmsl';
 const EVENT_HUM      = 'hum';  // Relative
 const EVENT_DEW      = 'dew';
-const EVENT_AH       = 'ah';   // Absolute
+const EVENT_AH       = 'ah';   // Absolute humidity
 
 function onMessage(json) {
 	try {
