@@ -33,6 +33,14 @@ if (isset($_GET['lang'])) {
       <h1><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o (Faxes, GRIBs, etc...)" : "Weather Forecasts (Faxes, GRIBs, etc...)"); ?></h1>
       <hr/>
       <ul>
+          <li>
+              <?php echo( $lang == 'FR' ? "Un barographe en temps r&eacute;el est disponible " : "A barograph in real time is available "); ?>
+              <a href="/tech.and.nav/weather.php/web/instant.html" target="_blank"><?php echo( $lang == 'FR' ? "ici" : "here" ) ?></a>.<br/>
+              <?php echo( $lang == 'FR' ? "Les capteurs sont install&eacute;s &agrave; Belz (F 56550)." : "Sensors are located in Belz (F 56550).") ?><br/>
+          </li>
+      </ul>
+
+      <ul>
         <li><a href="./weather/internet.faxes.NAtl.colors.html" target="_blank"><?php echo( $lang == 'FR' ? "Faxes de l'Atlantique Nord, temps r&eacute;el, en couleurs." : "North Altantic faxes, real time, Colored version."); ?></a></li>
         <li><a href="https://olivierld.github.io/web.stuff/boat.stuff/weather/forecast.html" target="OlivLD"><?php echo( $lang == 'FR' ? "Plusieurs sites affichant des GRIBs." : "Several GRIB web sites."); ?></a></li>
       </ul>
@@ -47,7 +55,7 @@ if (isset($_GET['lang'])) {
         <li><a href="https://www.meteo-marine.com/consulter/atlantique/" target="_bank"><?php echo( $lang == 'FR' ? "M&eacute;t&eacute;o Marine Atlantique" : "Atlantic Marine Weather (in French)"); ?></a></li>
         <li><a href="https://portail.ping-info-nautique.fr/" target="_blank">PING</a></li>
         <li><a href="https://ocean.weather.gov/Atl_tab.php" target="NOAA">Ocean Prediciton Center</a></li>
-      </ul>  
+      </ul>
       <hr/>
       <?php echo( $lang == 'FR' ? "Et plus bient&ocirc;t..." : "And more soon..."); ?>
     </div>
