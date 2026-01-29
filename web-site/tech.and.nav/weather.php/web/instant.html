@@ -709,15 +709,21 @@
 		-webkit-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
 		-moz-box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
 		box-shadow: rgba(0, 0, 0, .55) 0 1px 6px;
-		}
+	}
 
-		button:hover, button:focus {
+	button:hover, button:focus {
 		border: 2px solid #dad9d8;
-		}
+	}
 
-		button:disabled {
-			background: silver;
-		}
+	button:disabled {
+		background: silver;
+	}
+
+	.cool-link:hover {
+		color: cyan;
+		text-shadow: 4px 4px 8px black, 0 0 25px white, 0 0 10px cyan;
+		cursor: pointer;
+	}
 
 	.mirror-upside-down {
 		display: block;
@@ -801,9 +807,9 @@
 									  value="01-01-1970-thursday"></calendar-display>
 					<div>
 						<div style="margin: 10px;">
-							Sensors are in <a href="/tech.and.nav/charts/sensors.in.belz.html" target="leaflets">Belz</a> (F 56550),
-							setting explained <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README_fr.md" target="git">in French</a>,
-							and <a href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README.md" target="git">in English</a>
+							Sensors are in <a class="cool-link" href="/tech.and.nav/charts/sensors.in.belz.html" target="leaflets">Belz</a> (F 56550),
+							setting explained <a class="cool-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README_fr.md" target="git">in French</a>,
+							and <a class="cool-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README.md" target="git">in English</a>
 						</div>
 						<table style="margin: auto; border: 1px solid silver; border-radius: 5px;">
 							<tr>
