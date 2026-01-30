@@ -154,6 +154,7 @@
 			// TODO Do it
 			const PRMSL_KEY = "pressure-map";  // As in the computer (long-trem-storage), see yaml.
 			const AIR_TEMP_KEY = "temperature-map"; // As in the computer (long-trem-storage), see yaml.
+			const REL_HUM_KEY = "rel-hum-map"; // As in the computer (long-trem-storage), see yaml.
 			let theMap = val[PRMSL_KEY];
 			if (theMap) {
 				if (VERBOSE) {
@@ -183,6 +184,21 @@
 				let thermograph = document.getElementById('thermograph-01');
 				prepareData(theMap, thermograph, -10, 50, 'Air Temp', 'navy', "nb-pts-at", "from-to-at");
 				document.getElementById("raw-data-temp").innerHTML = `<pre>${ JSON.stringify(theMap, null, 2) }</pre>`;
+			}
+			theMap = val[REL_HUM_KEY];
+			if (theMap) {
+				if (VERBOSE) {
+					let keys = Object.keys(theMap);
+					console.log(`The Map: ${ JSON.stringify(theMap) }, ${keys.length} elements.`);
+					for (let i=0; i<keys.length; i++) {
+						// console.log(`Key ${keys[i]}`);
+						let prmsl = theMap[keys[i]];  // To build the graph
+					}
+				}
+				//
+				let relhumgraph = document.getElementById('rhgraph-01');
+				prepareData(theMap, relhumgraph, -10, 110, 'Rel. Hum.', 'darkgray', "nb-pts-rh", "from-to-rh");
+				document.getElementById("raw-data-rh").innerHTML = `<pre>${ JSON.stringify(theMap, null, 2) }</pre>`; // TODO FIx that
 			}
 		});
 
@@ -460,6 +476,50 @@
 
 			theGraph.title = `${yValue.toFixed(1)} \xb0C`;
 		});
+
+		let rhgraph = document.getElementById('rhgraph-01');
+		rhgraph.setVGridLabelsCallback(val => {
+            // console.log(`VGridLabel: ${val}`);
+            // 0 to max, step 96
+			if ((val - startIdx) % 96 === 0) {
+				let i = (((val - startIdx) / 96) + firstWeekDayIdx) % 7;
+				let retVal = DAYS[i];
+				if (currentData) {
+					let keys = Object.keys(currentData);
+					if (keys.length > val) {
+						let theKey = keys[val];
+						if (theKey !== undefined) { // it's like "2023-11-12T05:37:48"
+							let month = parseInt(theKey.substring(5, 7)) - 1;
+							let day = theKey.substring(8, 10);
+							retVal = `${DAYS[i]} ${SHORT_MONTHS[month]} ${day}`;
+						} else {
+							console.log(`(RelHum) startIdx: ${startIdx}, val: ${val}, keys: ${keys.length} => theKey is undefined.`);
+						}
+					} else {
+						// val beyond length. Managed.
+					}
+				}
+				return retVal;
+			} else {
+				return "";
+			}
+        });
+		// MouseMove on the graph
+		rhgraph.addEventListener('mousemove', evt => {
+			let theGraph = evt.target;
+			let rect = theGraph.getBoundingClientRect();
+			let x = evt.clientX - rect.left; // x position within the element.
+			let y = evt.offsetY - rect.height + 2; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6, rect.height ?
+			let height = theGraph.height;
+			let minY = theGraph.data ? theGraph.data.minY : 0;
+			let maxY = theGraph.data ? theGraph.data.maxY : 0;
+			let deltaY = maxY - minY;
+			let correctedY = height - y;
+			let yValue = minY + ((correctedY / height) * deltaY);
+			// console.log(`MouseMove on graph: ${x}, ${y} => corrected: ${correctedY}, value ${yValue}`);
+
+			theGraph.title = `${yValue.toFixed(1)} %`;
+		});
 	};
 
   let displayErr = function(err) {
@@ -647,7 +707,7 @@
 		document.body.style.setProperty("--rotateX", v + "deg");
 	}
 
-	const TABS = ['tab-01', 'tab-02'];
+	const TABS = ['tab-01', 'tab-02', 'tab-03'];
 
 	function openTab(evt, tabNum) {
 		let tabLinks = document.getElementsByClassName("tablinks");
@@ -807,7 +867,7 @@
 									  value="01-01-1970-thursday"></calendar-display>
 					<div>
 						<div style="margin: 10px;">
-							Sensors are in <a class="cool-link" href="/tech.and.nav/charts/sensors.in.belz.html" target="leaflets">Belz</a> (F 56550),
+							Sensors are in <a class="cool-link" href="/tech.and.nav/charts/sensors.in.belz.html" target="leaflets">Belz</a> (F 56550), <!-- Also https://www.openstreetmap.org/#map=13/47.67157/-3.19084 -->
 							setting explained <a class="cool-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README_fr.md" target="git">in French</a>,
 							and <a class="cool-link" href="https://github.com/OlivierLD/ROB/blob/master/raspberry-sailor/RaspberryPythonServers/python/pure.python.bme280/README.md" target="git">in English</a>
 						</div>
@@ -932,9 +992,10 @@
 					<tr>
 						<td colspan="4">
 
-							<div class="tab" style="display: grid; grid-template-columns: 50% 50%;">
+							<div class="tab" style="display: grid; grid-template-columns: 33.33% 33.33% 33.33%;">
 								<button class="tablinks active" style="border-radius: 5px;" onclick="openTab(event, 0);">Barograph</button>
 								<button class="tablinks" style="border-radius: 5px;" onclick="openTab(event, 1);">Thermograph</button>
+								<button class="tablinks" style="border-radius: 5px;" onclick="openTab(event, 2);">Rel. Hum. Graph</button>
 							</div>
 
 							<div id="tab-01" style="display: block;">
@@ -972,15 +1033,36 @@
 											   label="Thermograph"
 											   title="Air Temp, UTC Dates"></graph-display>
 							</div>
+							<div id="tab-03" style="display: none;">
+
+								<span id="from-to-rh" style="float: left;"> - </span>
+								<span id="nb-pts-rh" style="float: right;">No point</span>
+								<br/>
+								<graph-display id="rhgraph-01"
+											   tabindex="-1"
+											   class="rhgraph special-pointer"
+											   width="800"
+										   	   height="200"
+											   padding="5"
+											   orientation="horizontal"
+											   value="0.0"
+											   vgrid="0:0.5"
+											   hgrid="0:10"
+											   label="Relative Humidity"
+											   title="Rel. Hum, UTC Dates"></graph-display>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="4" style="text-align: left;">
-							<div style="display: grid; grid-template-areas: 'left right'; grid-template-columns: 50% 50%;">
+							<div style="display: grid; grid-template-areas: 'left mid right'; grid-template-columns: 33.3% 33.3% 33.3%;">
 								<div id="raw-data-prmsl" style="grid-area: left; max-height: 100px; overflow: scroll; border: 1px solid cyan; border-radius: 5px;" title="PRMSL Data">
 									<pre>Empty</pre>
 								</div>
-								<div id="raw-data-temp" style="grid-area: right; max-height: 100px; overflow: scroll; border: 1px solid cyan; border-radius: 5px;" title="Air Temp Data">
+								<div id="raw-data-temp" style="grid-area: mid; max-height: 100px; overflow: scroll; border: 1px solid cyan; border-radius: 5px;" title="Air Temp Data">
+									<pre>Empty</pre>
+								</div>
+								<div id="raw-data-rh" style="grid-area: right; max-height: 100px; overflow: scroll; border: 1px solid cyan; border-radius: 5px;" title="Rel. Hum. Data">
 									<pre>Empty</pre>
 								</div>
 							</div>

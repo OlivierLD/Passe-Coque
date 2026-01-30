@@ -132,12 +132,19 @@ async function getTheData() {
 		let keys = Object.keys(entry);
 		airTempMap[keys[0]] = entry[keys[0]];
 	}
+	let rhMap = {}; // relHum
+	for (let i = 0; i < relHum.data.length; i++) {
+		let entry = relHum.data[i];
+		let keys = Object.keys(entry);
+		rhMap[keys[0]] = entry[keys[0]];
+	}
 
 	// debugger;
 	return {
 		"instant": instant,
 		"pressure-map": prmslMap,
-		"temperature-map": airTempMap
+		"temperature-map": airTempMap,
+		"rel-hum-map": rhMap
 	};
 }
 

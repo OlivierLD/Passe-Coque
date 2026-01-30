@@ -250,6 +250,7 @@ let showHideSection = (obj, id) => {
 
 var currentContext = "1"; // Default, Home page.
 
+// prefer getQueryParameterByName
 let getQSPrm = (prm) => {
 	let value;
 	let loc = document.location.toString();

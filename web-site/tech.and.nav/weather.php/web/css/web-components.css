@@ -598,3 +598,10 @@ compass-rose .gray-flat {
 	--abscissa-color: navy;
     --display-color: navy;
 }
+.trhgraph {
+    --display-background-gradient-from: white;
+    --display-background-gradient-to: white;
+    --grid-color: orange;
+	--abscissa-color: darkGray;
+    --display-color: darkGray;
+}
