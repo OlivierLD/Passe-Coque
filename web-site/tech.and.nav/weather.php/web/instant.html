@@ -167,7 +167,7 @@
 				}
 				//
 				let barograph = document.getElementById('barograph-01');
-				prepareData(theMap, barograph, 960, 1050, 'PRMSL', 'purple', "nb-pts-pr", "from-to-pr");
+				prepareData(theMap, barograph, 960, 1050, 'PRMSL', 'hPa', 'purple', "nb-pts-pr", "from-to-pr");
 				document.getElementById("raw-data-prmsl").innerHTML = `<pre>${ JSON.stringify(theMap, null, 2) }</pre>`;
 			}
 			theMap = val[AIR_TEMP_KEY];
@@ -182,7 +182,7 @@
 				}
 				//
 				let thermograph = document.getElementById('thermograph-01');
-				prepareData(theMap, thermograph, -10, 50, 'Air Temp', 'navy', "nb-pts-at", "from-to-at");
+				prepareData(theMap, thermograph, -10, 50, 'Air Temp', '\u00b0C', 'navy', "nb-pts-at", "from-to-at");
 				document.getElementById("raw-data-temp").innerHTML = `<pre>${ JSON.stringify(theMap, null, 2) }</pre>`;
 			}
 			theMap = val[REL_HUM_KEY];
@@ -197,7 +197,7 @@
 				}
 				//
 				let relhumgraph = document.getElementById('rhgraph-01');
-				prepareData(theMap, relhumgraph, -10, 110, 'Rel. Hum.', 'darkgray', "nb-pts-rh", "from-to-rh");
+				prepareData(theMap, relhumgraph, -10, 110, 'Rel. Hum.', '%', 'darkgray', "nb-pts-rh", "from-to-rh");
 				document.getElementById("raw-data-rh").innerHTML = `<pre>${ JSON.stringify(theMap, null, 2) }</pre>`; // TODO FIx that
 			}
 		});
@@ -206,7 +206,7 @@
 		let startIdx4 = -1; // First 00, 06, 12 or 18
 		let firstWeekDayIdx = 0;
 
-		const prepareData = (theMap, datagraph, graphMini, graphMaxi, graphLabel, graphLineColor, nbPtId, fromToId) => {
+		const prepareData = (theMap, datagraph, graphMini, graphMaxi, graphLabel, unit, graphLineColor, nbPtId, fromToId) => {
 
 			currentData = theMap;
 
@@ -371,7 +371,7 @@
 				datagraph.vgrid = valLabel;
 				datagraph.label = graphLabel + minMaxLabel;
 				if (nbPts > 0) {
-					datagraph.value = theMap[keys[nbPts - 1]].toFixed(1); // Last value of the list ?
+					datagraph.value = theMap[keys[nbPts - 1]].toFixed(1) + " " + unit; // Last value of the list ?
 				} else {
 					datagraph.value = value;
 				}
@@ -724,6 +724,32 @@
 		alert("REST Failed to get data..." + (error ? JSON.stringify(error, null, 2) : ' - ') + ', ' + (message ? message : ' - '));
 	};
 
+	const NO_DIALOG_MESSAGE = "Dialog tag not supported.";
+
+	let showHelpDialog = () => {
+		let aboutDialog = document.getElementById("help-dialog");
+		if (aboutDialog.show !== undefined) {
+			aboutDialog.style.display = 'inline';
+			aboutDialog.show();
+		} else {
+		alert(NO_DIALOG_MESSAGE);
+		aboutDialog.style.display = 'inline';
+		}
+	};
+
+	// let aboutDialogOpened = true;
+
+	let closeHelpDialog = () => {
+		let aboutDialog = document.getElementById("help-dialog");
+		// debugger;
+		if (aboutDialog.close !== undefined) {
+			aboutDialog.close();
+			aboutDialog.style.display = 'none';
+		} else {
+			// alert(NO_DIALOG_MESSAGE);
+			aboutDialog.style.display = 'none';
+		}
+	};
 	</script>
 	<style>
 	:root {
@@ -841,6 +867,45 @@
 		cursor: url('./images/crosshair.png') 19 20, auto; /* x, y from top left */
 	}
 
+	.dialog-header {
+		font-size: 24px;
+		font-weight: 700;
+	}
+
+	.dialog-title {
+		float: left;
+		display: block;
+	}
+	/* .dialog-header-close {
+		text-align: right;
+		margin-right: 10px;
+		aspect-ratio: 1 / 1;
+	} */
+
+	.close-place {
+		text-align: right;
+		/* margin: -36px 0; */
+	}
+
+	.dialog-header-close {
+		float: right;
+		margin-right: 10px;
+	}
+
+	.dialog-header-close:hover {
+		color: cyan;
+		cursor: pointer;
+	}
+
+	.pcc-dialog {
+		width: 800px;
+		margin-top: 40px;
+		z-index: 3;
+		position: absolute;
+		/* max-height: 600px;
+		overflow: auto; */
+	}
+
 	</style>
 
 </head>
@@ -855,10 +920,22 @@
 		</div>
 	</dialog>
 
+	<dialog id="help-dialog" class="pcc-dialog" style="display: none;">
+		<div class="dialog-header">
+			<span class="dialog-title">Help!</span>
+			<div class="close-place">
+				<span class="dialog-header-close" onclick="closeHelpDialog();" role="button" aria-label="Close Dialog" title="Close Dialog">&times;</span>
+			</div>
+		</div>
+		<div id="dialog-content" style="margin-top: 50px;">
+			Click the "Update Now" button to display or refresh the data.
+		</div>
+	</dialog>
+
 	<table style="margin: auto; border: 1px solid silver; border-radius: 5px;">
 		<tr>
 			<td style="text-align: left;">
-				<div style="display: grid; grid-template-columns: auto auto; grid-gap: 10px; align-items: center;">
+				<div style="display: grid; grid-template-columns: auto auto auto; grid-gap: 10px; align-items: center;">
 					<calendar-display id="calendar-01"
 									  class="calendar-02"
 									  title="Last update"
@@ -909,6 +986,9 @@
 								</td>
 							</tr>
 						</table>
+					</div>
+					<div>
+						<button onclick="showHelpDialog();">Help!</button>
 					</div>
 				</div>
 			</td>
