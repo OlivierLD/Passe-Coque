@@ -3394,6 +3394,13 @@ const KEYWORDS = [
 		comment: 'Divers almanachs.'
 	},
 	{
+		name: 'Barograph on line',
+		keywords: [ 'baro', 'barometer', 'barometre', 'baromètre' ],
+		url: 'tech.and.nav/weather.php/web/instant.html',
+        target: '_blank',
+		comment: 'Données météo.'
+	},
+	{
 		name: 'Couture',
 		keywords: [ 'couture' , 'sewing', 'chutes', 'leftover' ],
 		url: '/tech.and.nav/couture.and.co/index.html',
@@ -4081,11 +4088,13 @@ function findIt() {
     filterOn();
 }
 
-function createListElement(name, url, comment) {
+function createListElement(name, url, comment, target) {
 	let li = document.createElement('li');
 	let a = document.createElement('a');
 	a.href = url;
-	// a.target = '_blank';
+    if (target) {
+	    a.target = target;
+    }
 	a.appendChild(document.createTextNode(`${name} - ${comment}`));
 	li.appendChild(a);
 
@@ -4124,7 +4133,7 @@ function filterOn() {
                     url += `&lang=${currentLang}`;
                 }
 
-                foundElements.push(createListElement(searchItem.name, url, searchItem.comment));
+                foundElements.push(createListElement(searchItem.name, url, searchItem.comment, searchItem.target));
                 nbItemsSelected += 1;
             }
         });

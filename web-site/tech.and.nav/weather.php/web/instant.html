@@ -217,7 +217,7 @@
 				}
 				//
 				let relhumgraph = document.getElementById('rhgraph-01');
-				prepareData(theMap, relhumgraph, -10, 110, 'Rel. Hum.', '%', 'darkGray', "nb-pts-rh", "from-to-rh");
+				prepareData(theMap, relhumgraph, -1, 101, 'Rel. Hum.', '%', 'darkGray', "nb-pts-rh", "from-to-rh");
 				document.getElementById("raw-data-rh").innerHTML = `<pre>${ JSON.stringify(theMap, null, 2) }</pre>`; // TODO FIx that
 			}
 		});
@@ -441,7 +441,7 @@
 			let theGraph = evt.target;
 			let rect = theGraph.getBoundingClientRect();
 			let x = evt.clientX - rect.left; // x position within the element.
-			let y = evt.offsetY - rect.height - 4; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6, rect.height ?
+			let y = evt.offsetY - rect.height; // - 4; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6, rect.height ?
 			// console.log(`MouseMove on graph: ${x}, ${y}`);
 			let height = theGraph.height;
 			let minY = theGraph.data ? theGraph.data.minY : 0;
@@ -449,6 +449,10 @@
 			let deltaY = maxY - minY;
 			let correctedY = height - y;
 			let yValue = minY + ((correctedY / height) * deltaY);
+
+			if (VERBOSE) {
+				console.log(`Mouse moved x:${x}, y:${y}. min:${minY}, max:${maxY} => correctedY: ${correctedY}, yValue: ${yValue}`);
+			}
 
 			theGraph.title = `${yValue.toFixed(1)} hPa`;
 		});
@@ -485,7 +489,7 @@
 			let theGraph = evt.target;
 			let rect = theGraph.getBoundingClientRect();
 			let x = evt.clientX - rect.left; // x position within the element.
-			let y = evt.offsetY - rect.height + 2; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6, rect.height ?
+			let y = evt.offsetY - rect.height; // + 2; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6, rect.height ?
 			let height = theGraph.height;
 			let minY = theGraph.data ? theGraph.data.minY : 0;
 			let maxY = theGraph.data ? theGraph.data.maxY : 0;
@@ -493,6 +497,10 @@
 			let correctedY = height - y;
 			let yValue = minY + ((correctedY / height) * deltaY);
 			// console.log(`MouseMove on graph: ${x}, ${y} => corrected: ${correctedY}, value ${yValue}`);
+
+			if (VERBOSE) {
+				console.log(`Mouse moved x:${x}, y:${y}. min:${minY}, max:${maxY} => correctedY: ${correctedY}, yValue: ${yValue}`);
+			}
 
 			theGraph.title = `${yValue.toFixed(1)} \xb0C`;
 		});
@@ -529,7 +537,7 @@
 			let theGraph = evt.target;
 			let rect = theGraph.getBoundingClientRect();
 			let x = evt.clientX - rect.left; // x position within the element.
-			let y = evt.offsetY - rect.height + 2; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6, rect.height ?
+			let y = evt.offsetY - rect.height; // - 4; // evt.clientY - rect.top;  // y position within the element. // TODO The value is to big by ~6, rect.height ?
 			let height = theGraph.height;
 			let minY = theGraph.data ? theGraph.data.minY : 0;
 			let maxY = theGraph.data ? theGraph.data.maxY : 0;
@@ -537,6 +545,10 @@
 			let correctedY = height - y;
 			let yValue = minY + ((correctedY / height) * deltaY);
 			// console.log(`MouseMove on graph: ${x}, ${y} => corrected: ${correctedY}, value ${yValue}`);
+
+			if (VERBOSE) {
+				console.log(`Mouse moved x:${x}, y:${y}. min:${minY}, max:${maxY} => correctedY: ${correctedY}, yValue: ${yValue}`);
+			}
 
 			theGraph.title = `${yValue.toFixed(1)} %`;
 		});
