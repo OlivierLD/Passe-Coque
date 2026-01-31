@@ -30,7 +30,7 @@
 
 	<script type="text/javascript">
 
-	const VERBOSE = false;  // For debug...
+	let VERBOSE = false;  // For debug... Can be set by a QS parameter.
 
 	let status = 'tick';
 
@@ -88,8 +88,28 @@
 		document.getElementById('calendar-01').repaint();
 	}
 
+	let getQueryParameterByName = (name, url) => {
+		if (!url) {
+			url = window.location.href;
+		}
+		name = name.replace(/[\[\]]/g, "\\$&");
+		let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) {
+			return null;
+		}
+		if (!results[2]) {
+			return '';
+		}
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	};
 
 	window.onload = function() {
+
+		let verb = getQueryParameterByName('verbose');
+		if (verb) {
+			VERBOSE = verb.toLowerCase() === 'true';
+		}
 		// initAjax(false); // Continuously pings, a fetch() every 1 sec
 
 		// Subscribers here
@@ -197,7 +217,7 @@
 				}
 				//
 				let relhumgraph = document.getElementById('rhgraph-01');
-				prepareData(theMap, relhumgraph, -10, 110, 'Rel. Hum.', '%', 'darkgray', "nb-pts-rh", "from-to-rh");
+				prepareData(theMap, relhumgraph, -10, 110, 'Rel. Hum.', '%', 'darkGray', "nb-pts-rh", "from-to-rh");
 				document.getElementById("raw-data-rh").innerHTML = `<pre>${ JSON.stringify(theMap, null, 2) }</pre>`; // TODO FIx that
 			}
 		});
@@ -240,7 +260,7 @@
 				}
 			}
 			if (VERBOSE) {
-				console.log(`First midnight at ${startIdx}`);
+				console.log(`First midnight for ${graphLabel} at ${startIdx}`);
 			}
 			if (startIdx > -1) { // Found a midnight
 				startIdx4 = -1;
@@ -279,7 +299,7 @@
 				let valLabel = // "0:45"; // One label every 45 points
 							// `${startIdx}:96`;  // "0:96"; // One label every 96 point (24 * 4 = 96 : every day). See setVGridLabelsCallback function.
 							// Should be startIdx4 below... But not always in sync...
-							`${startIdx}:24`;  // "0:96"; // One label every 24 point (6 hours). See setVGridLabelsCallback function.
+							`${startIdx}:24`;  // "0:24"; // One label every 24 point (6 hours). See setVGridLabelsCallback function.
 
 				let value = ""; // To display, bottom right.
 
