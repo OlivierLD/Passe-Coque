@@ -1,12 +1,17 @@
 <?php
 /*
-To be invoked like here:
-    to select:
-    curl -X GET "http://localhost/tech.and.nav/weather.php/weather.php?type=PRMSL&verbose=1" -H "accept: application/json"
-    to insert:
-    curl -X POST "http://localhost/tech.and.nav/weather.php/weather.php" -H "accept: application/json" -d '{ "type": "AT", "value": 12 }'
+To be invoked as REST service, like here:
 
-    from JavaScript:
+to select:
+    curl -X GET "http://localhost/tech.and.nav/weather.php/weather.php?type=PRMSL&verbose=1" -H "accept: application/json"
+
+to insert:
+    curl -X POST "http://localhost/tech.and.nav/weather.php/weather.php" \
+         -H "accept: application/json" \
+         -H "Content-type: application/json; charset=UTF-8" \
+         -d '{ "type": "AT", "value": 12 }'
+
+from JavaScript:
 
     let prmslData = ".../weather.php?type=PRMSL";
     fetch(prmslData, {
@@ -123,7 +128,7 @@ function getData_JSON(SQLite3 $database, string $type, bool $verbose): string {
     return null;
 }
 
-$VERBOSE = false; // Would generate an invalid JSON payload if true... But still.
+$VERBOSE = false; // Would generate an invalid JSON payload if true... But still. See QS Prm 'verbose'
 $hostname = $_SERVER['SERVER_NAME'];
 
 if (true) {
@@ -212,6 +217,7 @@ try {
     // header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error - ' . $e, true, 500);
     header('Content-Type: application/json; charset=utf-8');
     http_response_code(500);
+    // Content
     echo "{ \"error\": \"Internal Server Error\", \"message\": \"" . $e->getMessage() . "\" }";
     // echo $e;
 }

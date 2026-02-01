@@ -1266,7 +1266,6 @@ button.search-item {
     border-radius: 0;
 }
 
-/**/
 /* End of Default Cell-Phone */
 
 /* On smaller screens, decrease text size */
@@ -1384,7 +1383,7 @@ button.search-item {
         /* min-height: 280px; */
         /* background-color: black; */
         /* background-image: radial-gradient(white, silver, black); */
-        aspect-ratio: 1 / 1;  /* THAT is a cool one... */
+        aspect-ratio: 1 / 1;  /* <= THAT is a cool one... */
     }
     .project-image {
         display: flex;
@@ -1555,7 +1554,7 @@ button.search-item {
     }
 }
 
-@media screen and (width >= 1350px) {
+@media screen and (width >= 1550px) {
 
     .scrolling-menu {
         display: block;
