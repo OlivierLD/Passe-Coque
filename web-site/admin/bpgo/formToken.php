@@ -1,9 +1,17 @@
 <?php include_once 'config.php'; ?>
 <?php
+// STEP 0 : the data request. Get data
+
+if (defined("PC_ITEM_AMOUNT")) {
+    $itemAmount = ((float)constant('PC_ITEM_AMOUNT')) * 100;
+} else {
+    $itemAmount = 10;
+}
+
 // STEP 1 : the data request. TODO Get those data
 $data = array(
     'orderId' => uniqid('order_'),
-    'amount' => 2500,                 // 2500 = 25.00 Euro
+    'amount' => $itemAmount,                 // 2500 = 25.00 Euro
     'currency' => 'EUR',
     'customer' => array(
         'email' => 'sample@example.com',

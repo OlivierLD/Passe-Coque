@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
 
+<?php
+
+$request_verb = $_SERVER['REQUEST_METHOD'];
+
+// Manage form submission
+if (isset($_POST)) {
+    $lang = $_POST["lang"];
+    $amount = $_POST["amount"];
+    $first_name = $_POST["firstName"];
+    $last_name = $_POST["lastName"];
+    $email = $_POST["email"];
+    // echo "POST request: $lang, $amount, $first_name, $last_name, $email <br/>" . PHP_EOL;
+
+    // Used by formToken.php
+    define('PC_ITEM_AMOUNT', $amount);
+    define('PC_LANG', $lang);
+    // TODO Others...
+
+} else {
+    echo "Request Verb : $request_verb <br/>" . PHP_EOL;
+}
+
+?>
+
+
 <?php include_once 'config.php'; ?>
 <?php include_once 'formToken.php'; ?>
 

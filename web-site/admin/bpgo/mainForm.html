@@ -27,8 +27,8 @@
                            phoneNumber' => '0615665555',
                            country' => 'FR'
                          +-->
-                        <input type="hidden" name="lang" value="--">
-                        <input type="hidden" name="amount" value="--">
+                        <input type="hidden" id="form-lang" name="lang" value="--">
+                        <input type="hidden" id="form-amount" name="amount" value="--">
                         <table>
                             <tr>
                                 <td id="firstName">Pr&eacute;nom</td>
@@ -82,7 +82,7 @@ let getQueryParameterByName = (name, url) => {
 };
 
 let translate = (lang) => {
-
+    // TODO
 }
 
 let showContent = (iframe) => {
@@ -103,6 +103,9 @@ window.onload = () => {
     document.getElementById('item-pix').src = image;
     document.getElementById('item-desc').innerText = item;
     document.getElementById('item-price').innerText = amount;
+
+    document.getElementById('form-lang').value = lang;
+    document.getElementById('form-amount').value = amount;
 
 };
 
