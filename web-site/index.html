@@ -767,11 +767,13 @@ window.onload = () => {
 	}
 
 	// A Test: Query match ?
-	let mediaQuery = "screen and (width >= 800px)";
-	// let mediaQuery = "(width >= 800px)";
-	// let mediaQuery = "(max-width: 600px)";
-	let mql = window.matchMedia(mediaQuery);
-	console.log(`Query ${mediaQuery}, Match: ${mql.matches}. Window.innerWidth: ${window.innerWidth}`);
+	if (false) {
+		let mediaQuery = "screen and (width >= 800px)";
+		// let mediaQuery = "(width >= 800px)";
+		// let mediaQuery = "(max-width: 600px)";
+		let mql = window.matchMedia(mediaQuery);
+		console.log(`Query ${mediaQuery}, Match: ${mql.matches}. Window.innerWidth: ${window.innerWidth}`);
+	}
 
 	// A message onload ? Like Welcome...
 	if (true) {

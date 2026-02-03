@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Place Order</title>
+        <link rel="stylesheet" href="/passe-coque.css" type="text/css" id="styleLink">
+    </head>
+    <body>
+
+        <h1 id="title-h1">Faire une commande</h1>
+        <div style="display: grid; grid-template-columns: 25% auto;">
+            <img src="" alt="Item" id="item-pix" style="width: 90%;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <div>
+                    <h2><span id="item-desc">Item</span>, <span id="item-price">Price</span> &euro;</h2>
+                    <!-- a form -->
+                    <form  action="/admin/bpgo/smartForm.php" method="post" onsubmit="showContent('iframe-id');" target="iframe-id">
+                        <!--
+                           Lang
+                           firstName lastName
+                           amount' => 2500,                 // 2500 = 25.00 Euro
+                           currency' => 'EUR',
+                           email' => 'sample@example.com',
+                           title' => 'M.',
+                           address' => '25 rue de l\'Innovation',
+                           zipCode' => '31000',
+                           city' => 'Testville',
+                           phoneNumber' => '0615665555',
+                           country' => 'FR'
+                         +-->
+                        <input type="hidden" name="lang" value="--">
+                        <input type="hidden" name="amount" value="--">
+                        <table>
+                            <tr>
+                                <td id="firstName">Pr&eacute;nom</td>
+                                <td><input type="text" name="firstName" size="30" placeholder="Prenom"></td>
+                            </tr>
+                            <tr>
+                                <td id="lastName">Nom</td>
+                                <td><input type="text" name="lastName" size="30" placeholder="Nom"></td>
+                            </tr>
+                            <tr>
+                                <td id="email">Adresse email</td>
+                                <td><input type="email" name="email" size="30" placeholder="your@email.com"></td>
+                            </tr>
+                        </table>
+
+                        <input type="submit" value="Commander" class="pc-button">
+
+                    </form>
+                </div>
+                <iframe name="iframe-id" id="iframe-id" style="display: none; border: 0;" onload=""></iframe>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+<script type="text/javascript">
+
+    // Gather name, address, etc...
+
+    // Invoke BPGO PaySystem
+    // let paymentFormUrl = "/admin/bpgo/smartForm.php";
+
+
+    // Send email to passe-coque
+
+let getQueryParameterByName = (name, url) => {
+    if (!url) {
+        url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) {
+        return null;
+    }
+    if (!results[2]) {
+        return '';
+    }
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
+let translate = (lang) => {
+
+}
+
+let showContent = (iframe) => {
+    console.log('Showing Content for ' + iframe);
+    let frame = document.getElementById(iframe);
+    frame.style.display = 'inline';
+    frame.style.height = '435px'; // frame.contentWindow.document.body.scrollHeight + "px";
+}
+
+window.onload = () => {
+    let lang = getQueryParameterByName('lang');
+    let image = getQueryParameterByName('img');
+    let item = getQueryParameterByName('item');
+    let amount = getQueryParameterByName('amount');
+
+    console.log(`Lang=${lang}, image:${image}, item:${item}, amount:${amount}`);
+
+    document.getElementById('item-pix').src = image;
+    document.getElementById('item-desc').innerText = item;
+    document.getElementById('item-price').innerText = amount;
+
+};
+
+</script>

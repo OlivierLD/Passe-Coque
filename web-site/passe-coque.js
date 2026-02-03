@@ -4172,3 +4172,19 @@ function filterOn() {
 	}
 
 }
+
+// Order methods, the shop.
+let placeOrder = (img, item, amount) => {
+
+    console.log(`Placing order, lang is ${currentLang}`);
+
+    // let paymentFormUrl = "/admin/bpgo/smartForm.php";
+    let paymentFormUrl = `/admin/bpgo/mainForm.html?lang=${currentLang}&img=${img}&item=${item}&amount=${amount}`;
+    // console.log(`Opening PCC target for ${newUrl}`);
+    // https://www.w3schools.com/jsref/met_win_open.asp
+    let ret = window.open(paymentFormUrl, "BPGO"); // The target prm seems to have a problem, sometimes. Put NO target in the origin href !...
+    if (!ret) {
+        console.log(">>> window.open failed ??");
+    }
+
+}

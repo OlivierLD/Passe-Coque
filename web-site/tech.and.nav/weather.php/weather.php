@@ -76,11 +76,13 @@ function getData_JSON(SQLite3 $database, string $type, bool $verbose): string {
                    "ORDER BY DATA_DATE ASC;";
         } else {
             // 86400 seconds in a day, 604800 seconds in a week
-            $sql = // "SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE " .
+            $dayInterval = "7";          // In days
+            $secondInterval = "6048007"; // In seconds
+            $sql = // "SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE " . // strftime : duration format. Does not work on OVH...
                    "SELECT DATA_DATE, VALUE " .
                    "FROM WEATHER_DATA " .
-                // "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " ((julianday() - julianday(DATA_DATE)) * 86400) < (6048007) " .
-                   "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " (julianday() - julianday(DATA_DATE)) < 7 " .
+                // "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " ((julianday() - julianday(DATA_DATE)) * 86400) < (" . $secondInterval . ") " .
+                   "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " (julianday() - julianday(DATA_DATE)) < " . $dayInterval . " " .
                    "ORDER BY DATA_DATE ASC;";
         }
         if ($verbose) {
