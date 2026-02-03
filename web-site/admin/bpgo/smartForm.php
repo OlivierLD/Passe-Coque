@@ -18,7 +18,9 @@ if (isset($_POST)) {
     define('PC_ITEM_AMOUNT', $amount);
     define('PC_LANG', $lang);
     // TODO Others...
-
+    define('PC_FIRST_NAME', $first_name);
+    define('PC_LAST_NAME', $last_name);
+    define('PC_EMAIL', $email);
 } else {
     echo "Request Verb : $request_verb <br/>" . PHP_EOL;
 }
@@ -53,6 +55,9 @@ STEPS :
     </script>
 </head>
 <body>
+    <?php
+echo 'Command for ' . PC_FIRST_NAME. ' ' . PC_LAST_NAME . '<br/>' . PHP_EOL;
+    ?>
     <!-- $formToken is generated in formToken.php -->
     <div class="kr-smart-form" kr-form-token="<?php echo $formToken; ?>" >
     </div>

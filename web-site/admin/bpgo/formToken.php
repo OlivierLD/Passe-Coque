@@ -1,12 +1,33 @@
 <?php include_once 'config.php'; ?>
 <?php
-// STEP 0 : the data request. Get data
+// STEP 0 : Get data
 
 if (defined("PC_ITEM_AMOUNT")) {
     $itemAmount = ((float)constant('PC_ITEM_AMOUNT')) * 100;
 } else {
     $itemAmount = 10;
 }
+if (defined('PC_FIRST_NAME')) {
+    $first_name = constant('PC_FIRST_NAME');
+} else {
+    $first_name = 'Test';
+}
+if (defined('PC_LAST_NAME')) {
+    $last_name = constant('PC_LAST_NAME');
+} else {
+    $last_name = 'Krypton';
+}
+if (defined('PC_EMAIL')) {
+    $email = constant('PC_EMAIL');
+} else {
+    $email = 'sample@example.com';
+}
+if (defined('PC_LANG')) {
+    $lang = strtolower(constant('PC_LANG'));
+} else {
+    $lang = 'fr';
+}
+
 
 // STEP 1 : the data request. TODO Get those data
 $data = array(
@@ -14,13 +35,13 @@ $data = array(
     'amount' => $itemAmount,                 // 2500 = 25.00 Euro
     'currency' => 'EUR',
     'customer' => array(
-        'email' => 'sample@example.com',
+        'email' => $email,
         'reference' => uniqid('customer_'),
         'billingDetails' => array(
-            'language' => 'fr',
+            'language' => $lang,
             'title' => 'M.',
-            'firstName' => 'Test',
-            'lastName' => 'Krypton',
+            'firstName' => $first_name,
+            'lastName' => $last_name,
             'category' => 'PRIVATE',
             'address' => '25 rue de l\'Innovation',
             'zipCode' => '31000',
