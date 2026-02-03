@@ -12,6 +12,7 @@ if (isset($_POST)) {
     $first_name = $_POST["firstName"];
     $last_name = $_POST["lastName"];
     $email = $_POST["email"];
+
     // echo "POST request: $lang, $amount, $first_name, $last_name, $email <br/>" . PHP_EOL;
 
     // Used by formToken.php
@@ -33,7 +34,7 @@ if (isset($_POST)) {
 
 <head>
 <!--
-'kr' below stands for krypton
+oliv -> 'kr' below stands for krypton
 
 STEPS :
 1 : load the JS librairy
@@ -56,7 +57,9 @@ STEPS :
 </head>
 <body>
     <?php
-echo 'Command for ' . PC_FIRST_NAME. ' ' . PC_LAST_NAME . '<br/>' . PHP_EOL;
+
+// echo 'Order for ' . PC_FIRST_NAME. ' ' . PC_LAST_NAME . '<br/>' . PHP_EOL;
+
     ?>
     <!-- $formToken is generated in formToken.php -->
     <div class="kr-smart-form" kr-form-token="<?php echo $formToken; ?>" >

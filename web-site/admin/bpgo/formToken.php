@@ -1,6 +1,6 @@
 <?php include_once 'config.php'; ?>
 <?php
-// STEP 0 : Get data
+// STEP 0 : Get DEFINED data
 
 if (defined("PC_ITEM_AMOUNT")) {
     $itemAmount = ((float)constant('PC_ITEM_AMOUNT')) * 100;
@@ -27,6 +27,8 @@ if (defined('PC_LANG')) {
 } else {
     $lang = 'fr';
 }
+
+// echo "Lang becomes $lang <br/>" . PHP_EOL;
 
 
 // STEP 1 : the data request. TODO Get those data

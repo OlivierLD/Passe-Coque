@@ -27,24 +27,24 @@
                            phoneNumber' => '0615665555',
                            country' => 'FR'
                          +-->
-                        <input type="hidden" id="form-lang" name="lang" value="--">
-                        <input type="hidden" id="form-amount" name="amount" value="--">
+                        <input type="hidden" id="form-lang" name="lang" value="--"> <!-- value updated onload -->
+                        <input type="hidden" id="form-amount" name="amount" value="--"> <!-- value updated onload -->
                         <table>
                             <tr>
                                 <td id="firstName">Pr&eacute;nom</td>
-                                <td><input type="text" name="firstName" size="30" placeholder="Prenom"></td>
+                                <td><input type="text" name="firstName" size="30" placeholder="Anakin" required></td>
                             </tr>
                             <tr>
                                 <td id="lastName">Nom</td>
-                                <td><input type="text" name="lastName" size="30" placeholder="Nom"></td>
+                                <td><input type="text" name="lastName" size="30" placeholder="Skywalker" required></td>
                             </tr>
                             <tr>
                                 <td id="email">Adresse email</td>
-                                <td><input type="email" name="email" size="30" placeholder="your@email.com"></td>
+                                <td><input type="email" name="email" size="30" placeholder="anakin@starwars.com" required></td>
                             </tr>
                         </table>
 
-                        <input type="submit" value="Commander" class="pc-button">
+                        <input type="submit" id="order-button" value="Commander" class="pc-button">
 
                     </form>
                 </div>
@@ -57,13 +57,12 @@
 </html>
 <script type="text/javascript">
 
-    // Gather name, address, etc...
+// Gather name, address, etc...
 
-    // Invoke BPGO PaySystem
-    // let paymentFormUrl = "/admin/bpgo/smartForm.php";
+// Invoke BPGO PaySystem,
+// let paymentFormUrl = "/admin/bpgo/smartForm.php";
 
-
-    // Send email to passe-coque
+// Send email to passe-coque
 
 let getQueryParameterByName = (name, url) => {
     if (!url) {
@@ -82,7 +81,13 @@ let getQueryParameterByName = (name, url) => {
 };
 
 let translate = (lang) => {
-    // TODO
+    if (lang !== 'FR') {
+        document.getElementById('title-h1').innerHTML = 'Place an Order';
+        document.getElementById('firstName').innerHTML = 'First Name';
+        document.getElementById('lastName').innerHTML = 'Last Name';
+        document.getElementById('email').innerHTML = 'Email Address';
+        document.getElementById('order-button').value = 'Place Order';
+    }
 }
 
 let showContent = (iframe) => {
@@ -106,6 +111,8 @@ window.onload = () => {
 
     document.getElementById('form-lang').value = lang;
     document.getElementById('form-amount').value = amount;
+
+    translate(lang);
 
 };
 
