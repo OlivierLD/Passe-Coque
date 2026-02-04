@@ -1943,6 +1943,22 @@ const THE_TEAM = [
             en: "Pierre-Jean<br/>CEO"
         }
     }, {
+        id: "pat-b",
+        boss: false,
+        image: "/images/the.team/minion.jpg",
+        label: {
+            fr: "Patrick<br/>Histoire et litt&eacute;rature maritime",
+            en: "Patrick<br/>History, and maritime litterature"
+        }
+    }, {
+        id: "tiago",
+        boss: false,
+        image: "/images/the.team/minion.jpg",
+        label: {
+            fr: "Tiago<br/>Ironman !",
+            en: "Tiago<br/>Ironman!"
+        }
+    }, {
         id: "regis",
         boss: false,
         image: "/images/the.team/regis.2.jpg",
@@ -4064,6 +4080,18 @@ const KEYWORDS = [
 		keywords: [ 'olivier', 'le diouris', 'diouris', 'tech', 'web', 'raspberry', 'astro', 'sextant' ],
 		url: '/?nav-to=21&who=olivier',
 		comment: 'Olivier Le Diouris, web, tech, no-tech, low-tech, etc.'
+	},
+    {
+		name: 'Patrick',
+		keywords: [ 'patrick', 'benoiton', 'histoire', 'litterature', 'littérature', 'nautique', 'maritime' ],
+		url: '/?nav-to=21&who=pat-b',
+		comment: 'Patrick Benoiton, Histoire et littérature maritime'
+	},
+    {
+		name: 'Tiago',
+		keywords: [ 'tiago', 'campos', 'soudure', 'soledring', 'ironman', 'metal', 'métal' ],
+		url: '/?nav-to=21&who=tiago',
+		comment: 'Tiago Campos, IronMan !'
 	},
     {
 		name: 'Régis',
