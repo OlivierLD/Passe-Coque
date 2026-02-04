@@ -1765,10 +1765,11 @@ const THE_FLEET = [
     }, {
         name: "La R&ecirc;veuse",
         id: "la.reveuse",
-        pix: "/images/boats/la.reveuse.sq.png",
+        // pix: "/images/boats/la.reveuse.sq.png",
+        pix: "/images/boats/la.reveuse/la.reveuse.5.jpg",
         type: "Damien 40",
         category: NONE,
-        base: "Arzal"
+        base: "Saint Philibert"
     }, {
         name: "Tokad 2",
         id: "tokad-2",
@@ -2410,11 +2411,11 @@ const NEXT_EVENTS = [ // oldest to newest.
             en: 'Friday February 20th - <b>Les Conties</b>: Beaupr&eacute;au en Mauges (49)  - Screening of the movie "<a href="https://www.youtube.com/watch?v=8mFzpbdIW80" target="YT">Anita Conti, l\'appel du Large</a>" by Fr&eacute;d&eacute;ric Brunquell, in presence of two crew members and Laurent Girault Conti.'
         }
     }, {
-        date_from: '2026-03-27',
-        date_to: '2026-03-27',
+        date_from: '2026-03-26',
+        date_to: '2026-03-26',
         content: {
-            fr: 'Vendredi 27 mars - Lorient (56) - <b>Les Conties</b> : Pr&eacute;sentation du projet au "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" en pr&eacute;sence des &eacute;quipi&egrave;res.',
-            en: 'Friday March 27th - Lorient (56) - <b>Les Conties</b>: Presentation of the project at the "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" in presence of the crew members'
+            fr: 'Jeudi 26 mars - Lorient (56) - <b>Les Conties</b> : Pr&eacute;sentation du projet au "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" en pr&eacute;sence des &eacute;quipi&egrave;res.',
+            en: 'Thursday March 26th - Lorient (56) - <b>Les Conties</b>: Presentation of the project at the "<a href="https://pecheursdumonde.org/" target="FPM">festival des p&ecirc;cheurs du monde</a>" in presence of the crew members'
         }
     }, {
         date_from: '2026-03-28',
