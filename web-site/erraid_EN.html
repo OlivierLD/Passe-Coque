@@ -1,0 +1,56 @@
+<div class="boat-card">
+    <div class="tab" style="margin-top: 30px; margin-bottom: 10px; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;"> <!-- TODO Improve the grid-template... -->
+        <button class="tablinks tab-active" onclick="openTab(event, 'erraid-01');" title="Sommaire">Summary</button>
+        <button class="tablinks" onclick="openTab(event, 'erraid-02');">Misc</button>
+        <button class="tablinks" onclick="openTab(event, 'erraid-03');">Program</button>
+    </div>
+
+    <div class="pcc-dialog-tab-content">
+        <div id="erraid-01" class="tab-section" style="display: block;">
+            <div style="display: grid; grid-template-columns: auto auto;">
+                <img src="/images/boats/erraid.jpeg" width="50%">
+                <div style="padding: 14px;">
+                    <h2>Erraid</h2>
+                    Aloes 18, based in Saint Philibert<br/>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li>Aloes 18</li>
+                    <li>...</li>
+                </ul>
+                <div>
+                    <h3>Equipement</h3>
+                    <div class="equipment-css">
+                        <span>...&nbsp;: <input type="checkbox" style="pointer-events: none;" checked></span>
+                    </div>
+                </div>
+                <div>
+                    <h2>The boat</h2>
+                    . . .
+                </div>
+            </div>
+        </div>
+
+        <div id="erraid-02" class="tab-section" style="display: none;">
+            <!--img src="./images/boats/bemol.3/cc-lt.03.jpeg" width="50%">
+            <br/-->
+            <h2>Plus d'infos...</h2>
+            Contact : Pierre-Jean JANNIN.<br/>
+            T&eacute;l : +33 6 37 61 07 73<br/>
+            Email : pj.jannin@passeurdecoute.fr<br/>
+            Disponibilit&eacute; Boat Club : NON
+        <hr/>
+        </div>
+
+        <div id="erraid-03" class="tab-section" style="display: none;">
+            <h2>Programme du bateau</h2>
+            <ul>
+                <li>
+                    ...
+                </li>
+            </ul>
+            <hr/>
+        </div>
+    </div>
+</div>
