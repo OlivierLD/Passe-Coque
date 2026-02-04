@@ -318,6 +318,7 @@ let clack = (origin) => {
     }
 	let contentPlaceHolder = document.getElementById("current-content");
 
+    console.log(`Fetching ${contentName}...`);
 	fetch(contentName)
             .then(response => {  // Warning... the NOT_FOUND error lands here, apparently.
                 console.log(`Data Response: ${response.status} - ${response.statusText}`);
