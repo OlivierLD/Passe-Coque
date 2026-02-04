@@ -13,6 +13,15 @@ if (isset($_POST)) {
     $last_name = $_POST["lastName"];
     $email = $_POST["email"];
 
+    $addr_1 = trim($_POST["addr-1"], " ");
+    $addr_2 = trim($_POST["addr-2"], " ");
+    $zipcode = $_POST["zip-code"];
+    $town = $_POST["town"];
+    $country = $_POST["country"];
+    $phone = $_POST["phone-num"];
+
+    $address = $addr_1 . ($addr_2 == "" ? "" : ", " . $addr_2);
+
     // echo "POST request: $lang, $amount, $first_name, $last_name, $email <br/>" . PHP_EOL;
 
     // Used by formToken.php
@@ -22,12 +31,16 @@ if (isset($_POST)) {
     define('PC_FIRST_NAME', $first_name);
     define('PC_LAST_NAME', $last_name);
     define('PC_EMAIL', $email);
+    define('PC_ADDRESS', $address);
+    define('PC_ZIP', $zipcode);
+    define('PC_TOWN', $town);
+    define('PC_COUNTRY', $country);
+    define('PC_PHONE', $phone);
 } else {
     echo "Request Verb : $request_verb <br/>" . PHP_EOL;
 }
 
 ?>
-
 
 <?php include_once 'config.php'; ?>
 <?php include_once 'formToken.php'; ?>

@@ -22,6 +22,33 @@ if (defined('PC_EMAIL')) {
 } else {
     $email = 'sample@example.com';
 }
+if (defined('PC_ADDRESS')) {
+    $address = constant('PC_ADDRESS');
+} else {
+    $address = '25 rue de l\'Innovation';
+}
+if (defined('PC_ZIP')) {
+    $zipcode = constant('PC_ZIP');
+} else {
+    $zipcode = '31000';
+}
+if (defined('PC_TOWN')) {
+    $town = constant('PC_TOWN');
+} else {
+    $town = 'Testville';
+}
+if (defined('PC_COUNTRY')) {
+    $country = constant('PC_COUNTRY');
+} else {
+    $country = 'FR';
+}
+if (defined('PC_PHONE')) {
+    $phone = constant('PC_PHONE');
+} else {
+    $phone = '+33 6 15 66 55 55';
+}
+
+
 if (defined('PC_LANG')) {
     $lang = strtolower(constant('PC_LANG'));
 } else {
@@ -34,7 +61,7 @@ if (defined('PC_LANG')) {
 // STEP 1 : the data request. TODO Get those data
 $data = array(
     'orderId' => uniqid('order_'),
-    'amount' => $itemAmount,                 // 2500 = 25.00 Euro
+    'amount' => $itemAmount,   // In cents. 2500 = 25.00 Euro(s)
     'currency' => 'EUR',
     'customer' => array(
         'email' => $email,
@@ -45,19 +72,19 @@ $data = array(
             'firstName' => $first_name,
             'lastName' => $last_name,
             'category' => 'PRIVATE',
-            'address' => '25 rue de l\'Innovation',
-            'zipCode' => '31000',
-            'city' => 'Testville',
-            'phoneNumber' => '0615665555',
-            'country' => 'FR'
+            'address' => $address,
+            'zipCode' => $zipcode,
+            'city' => $town,
+            'phoneNumber' => $phone,
+            'country' => $country
         )
- ),
- 'transactionOptions' => array(
+    ),
+    'transactionOptions' => array(
         'cardOptions' => array('retry' => 1)
- )
+    )
 );
 // STEP 3 : call the endpoint V4/Charge/CreatePayment with the json data.
-$response = post(SERVER."/api-payment/V4/Charge/CreatePayment", json_encode($data));
+$response = post(SERVER . "/api-payment/V4/Charge/CreatePayment", json_encode($data));
 // Check if there is errors.
 if ($response['status'] != 'SUCCESS') {
     // An error occurs, throw exception
@@ -69,13 +96,11 @@ if ($response['status'] != 'SUCCESS') {
 // var_dump($response);
 // echo ("----------------------------------------<br/>" . PHP_EOL);
 
-
 // Everything is fine, extract the formToken
 // STEP 4 : the answer with the creation of the formToken
 $formToken = $response['answer']['formToken'];
 
 // echo ("Returned formToken: " . $formToken . "<br/>" . PHP_EOL);
-
 
 function post($url, $data) {
 // STEP 2 : send data with curl command
