@@ -1266,6 +1266,11 @@ button.search-item {
     border-radius: 0;
 }
 
+div.bottom {
+  position: absolute;
+  bottom: 1px;
+}
+
 /* End of Default Cell-Phone */
 
 /* On smaller screens, decrease text size */
