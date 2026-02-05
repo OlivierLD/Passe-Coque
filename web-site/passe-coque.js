@@ -1946,7 +1946,7 @@ const THE_TEAM = [
     }, {
         id: "pat-b",
         boss: false,
-        image: "/images/the.team/minion.jpg",
+        image: "/images/the.team/pat-b.png",
         label: {
             fr: "Patrick<br/>Histoire et litt&eacute;rature maritime",
             en: "Patrick<br/>History, and maritime litterature"
