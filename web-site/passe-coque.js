@@ -3740,6 +3740,12 @@ const KEYWORDS = [
 		comment: 'Shipman 28.'
 	},
 	{
+		name: 'Erraid',
+		keywords: [ 'boat', 'bateau', 'erraid', 'aloes', 'aloes 18', 'st phil', 'philibert' ],
+		url: '/?nav-to=4&boat-id=erraid',
+		comment: 'Aloes 18'
+	},
+	{
 		name: 'Le Brio',
 		keywords: [ 'boat', 'bateau', 'brio', 'flow', 'hublow', 'jeff', 'flow', 'tiny house', 'tiny', 'habitat', 'leger', 'léger', 'insolite' ],
 		url: '/?nav-to=4&boat-id=brio',
