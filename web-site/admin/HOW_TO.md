@@ -70,7 +70,7 @@ $ php -S 127.0.0.1:8000
 ### Mises &agrave; jour du site
 Connexion OVH:
 <https://www.ovh.com/manager/#/web/hosting/passecc.cluster030.hosting.ovh.net>
-pj.jannin@wmsmarine.com / tradlagWMS17
+pj.jannin@wmsmarine.com / ******
 
 
 
