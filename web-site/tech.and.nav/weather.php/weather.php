@@ -81,8 +81,8 @@ function getData_JSON(SQLite3 $database, string $type, bool $verbose): string {
             $sql = // "SELECT strftime('%FT%T', DATA_DATE) AS DURATION, VALUE " . // strftime : duration format. Does not work on OVH...
                    "SELECT DATA_DATE, VALUE " .
                    "FROM WEATHER_DATA " .
-                // "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " ((julianday() - julianday(DATA_DATE)) * 86400) < (" . $secondInterval . ") " .
-                   "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " (julianday() - julianday(DATA_DATE)) < " . $dayInterval . " " .
+                // "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " ((julianday() - julianday(DATA_DATE)) * 86400) <= (" . $secondInterval . ") " .
+                   "WHERE " . ($type === "ALL" ? "" :  "TYPE='" . SQLite3::escapeString($type) . "' AND ") . " (julianday() - julianday(DATA_DATE)) <= " . $dayInterval . " " .
                    "ORDER BY DATA_DATE ASC;";
         }
         if ($verbose) {
