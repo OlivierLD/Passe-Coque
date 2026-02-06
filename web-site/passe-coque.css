@@ -1271,6 +1271,10 @@ div.bottom {
   bottom: 1px;
 }
 
+b {
+    line-height: inherit;
+}
+
 /* End of Default Cell-Phone */
 
 /* On smaller screens, decrease text size */
